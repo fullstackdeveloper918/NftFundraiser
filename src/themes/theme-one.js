@@ -12,24 +12,23 @@ import ModalSearch from '../components/Modal/ModalSearch';
 import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
 
-class ThemeOne extends Component {
-    render() {
-        return (
-            <div className="main">
-                <Header />
-                <Hero />
-                <Auctions />
-                <TopSeller />
-                <Collections />
-                <Explore />
-                <Work />
-                <Footer />
-                <ModalSearch />
-                <ModalMenu />
-                <Scrollup />
-            </div>
-        );
-    }
+
+const ThemeOne = () => {
+    return (
+        <div className="main">
+            <Header />
+            <Hero />
+            <Auctions />
+            <TopSeller />
+            <Collections />
+            <Explore />
+            <Work />
+            <Footer />
+            <ModalSearch />
+            <ModalMenu />
+            <Scrollup />
+        </div>
+    )
 }
 
 export default ThemeOne;

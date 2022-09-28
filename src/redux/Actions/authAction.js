@@ -1,28 +1,32 @@
-export const userLogin = createAsyncThunk(
-    'user/login',
-    async ({ email, username, role }, { rejectWithValue }) => {
-        try {
-            // configure header's Content-Type as JSON
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-            const { data } = await axios.post(
-                '{{nft}}api/profileUpdate',
-                { email, username, role },
-                config
-            )
-            // store user's token in local storage
-            localStorage.setItem('userToken', data.userToken)
-            return data
-        } catch (error) {
-            // return custom error message from API if any
-            if (error.response && error.response.data.message) {
-                return rejectWithValue(error.response.data.message)
-            } else {
-                return rejectWithValue(error.message)
-            }
+import axios from "axios";
+import { createOrganizationSuccess, registerSuccess, } from "../Slices/authSlice";
+
+export const Register = (params) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
         }
+        const res = await axios.post(`https://karmatic.inspiring-swirles.95-179-206-77.plesk.page/api/signup`,
+            params, config)
+        dispatch(registerSuccess(res));
+    } catch (e) {
+        return console.error(e.message);
     }
-)
+}
+
+export const CreateOrganizationAction = (params) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        const res = await axios.post(`https://karmatic.inspiring-swirles.95-179-206-77.plesk.page/api/organizationDetails`,
+            params, config)
+        dispatch(createOrganizationSuccess(res));
+    } catch (e) {
+        return console.error(e.message);
+    }
+}

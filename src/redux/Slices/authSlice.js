@@ -1,39 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit'
-// import { registerUser, userLogin } from './userActions'
-
-// initialize userToken from local storage
-const userToken = localStorage.getItem('userToken')
-    ? localStorage.getItem('userToken')
+// Slice
+const initialUser = localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user'))
     : null
-
-const initialState = {
-    loading: false,
-    userInfo: null,
-    userToken,
-    error: null,
-    success: false,
-}
-
 const authSlice = createSlice({
     name: 'user',
-    initialState,
-    reducers: {},
-    extraReducers: {
-        // login user
-        [userLogin.pending]: (state) => {
-            state.loading = true
-            state.error = null
-        },
-        [userLogin.fulfilled]: (state, { payload }) => {
-            state.loading = false
-            state.userInfo = payload
-            state.userToken = payload.userToken
-        },
-        [userLogin.rejected]: (state, { payload }) => {
-            state.loading = false
-            state.error = payload
-        },
-        // register user reducer...
+    initialState: {
+        user: initialUser,
     },
-})
-export default authSlice.reducer
+    reducers: {
+        registerSuccess: (state, action) => {
+            state.user = action.payload;
+            localStorage.setItem('user', JSON.stringify(action.payload))
+        },
+        createOrganizationSuccess: (state, action) => {
+            state.user = action.payload;
+            localStorage.setItem('user', JSON.stringify(action.payload))
+        },
+        // logoutSuccess: (state, action) =>  {
+        //   state.user = null;
+        // },
+    },
+});
+
+export const authReducer = authSlice.reducer
+
+export const {
+    registerSuccess,
+    createOrganizationSuccess
+} = authSlice.actions;
