@@ -1,21 +1,38 @@
 import { createSlice } from '@reduxjs/toolkit'
 // Slice
-const initialUser = localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user'))
+const userToken = localStorage.getItem('authToken')
+    // ? JSON.parse(localStorage.getItem('user'))
+    ? localStorage.getItem('authToken')
     : null
 const authSlice = createSlice({
     name: 'user',
     initialState: {
-        user: initialUser,
+        user: {},
+        userToken,
+        countries: [],
+        annualRevenue: [],
+        hereAbout: []
     },
     reducers: {
         registerSuccess: (state, action) => {
             state.user = action.payload;
-            localStorage.setItem('user', JSON.stringify(action.payload))
+            state.userToken = action.payload.data.data.auth_token;
+            localStorage.setItem('authToken', action.payload.data.data.auth_token)
         },
         createOrganizationSuccess: (state, action) => {
             state.user = action.payload;
-            localStorage.setItem('user', JSON.stringify(action.payload))
+        },
+
+        getCountryList: (state, action) => {
+            state.countries = action.payload;
+        },
+
+        getAnnualRevenueList: (state, action) => {
+            state.annualRevenue = action.payload;
+        },
+
+        getHearAboutList: (state, action) => {
+            state.hereAbout = action.payload;
         },
         // logoutSuccess: (state, action) =>  {
         //   state.user = null;
@@ -27,5 +44,8 @@ export const authReducer = authSlice.reducer
 
 export const {
     registerSuccess,
-    createOrganizationSuccess
+    createOrganizationSuccess,
+    getCountryList,
+    getAnnualRevenueList,
+    getHearAboutList
 } = authSlice.actions;

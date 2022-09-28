@@ -4,6 +4,9 @@ import { combineReducers } from '@reduxjs/toolkit'
 
 const reducer = combineReducers({
     user: authReducer,
+    countries: authReducer,
+    annualRevenue: authReducer,
+    hereAbout: authReducer,
 })
 
 const store = configureStore({

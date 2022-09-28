@@ -1,21 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Field, Form, Formik } from 'formik'
-import { CreateOrganizationAction } from '../../redux/Actions/authAction'
+import { AnnualRevenueList, CountryList, CreateOrganizationAction, HearAboutList } from '../../redux/Actions/authAction'
 import { useForm } from 'react-hook-form'
+import { Controller } from 'react-hook-form'
 
 const CreateOrganization = () => {
 
     const dispatch = useDispatch()
 
     const { user } = useSelector(state => state.user)
+    const { countries } = useSelector(state => state.countries)
+    const { annualRevenue } = useSelector(state => state.annualRevenue)
+    // debugger
+
+    // }
+    const { hereAbout } = useSelector(state => state.hereAbout)
+    // debugger
+    console.log(user, 'user')
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const OnSubmit = (data) => {
+        // const formData = new FormData()
+
+        // formData.append('image', data.image[0])
         dispatch(CreateOrganizationAction(data))
 
     }
+    useEffect(() => {
+        dispatch(CountryList())
+        dispatch(AnnualRevenueList())
+        dispatch(HearAboutList())
+    }, [])
 
     return (
         <section className="author-area">
@@ -35,13 +52,11 @@ const CreateOrganization = () => {
                                 <div className="col-12">
                                     <div className="form-group mt-3">
                                         <input
-                                            type="file"
                                             className="form-control"
+                                            type="file"
                                             name="image"
                                             placeholder="Select file"
                                             {...register("image")}
-
-
                                         />
                                     </div>
                                 </div>
@@ -56,7 +71,7 @@ const CreateOrganization = () => {
                                             // {...register("email")}
                                             aria-invalid={errors.organization_name ? "true" : "false"}
                                         />
-                                        {errors.organization_name?.type === 'required' && <p role="alert">Organization name is required</p>}
+                                        {errors.organization_name?.type === 'required' && <p style={{ color: 'red' }} role="alert">Organization name is required</p>}
                                     </div>
                                 </div>
                                 <div className="col-12">
@@ -70,35 +85,36 @@ const CreateOrganization = () => {
                                             // {...register("email")}
                                             aria-invalid={errors.url ? "true" : "false"}
                                         />
-                                        {errors.url?.type === 'required' && <p role="alert">Url is required</p>}
+                                        {errors.url?.type === 'required' && <p style={{ color: 'red' }} role="alert">Url is required</p>}
                                     </div>
                                 </div>
                                 <div className="col-12">
                                     <div className="form-group mt-3">
-                                        <input
-                                            type="select"
-                                            className="form-control"
-                                            name="country"
-                                            placeholder="Enter your Country"
-                                            {...register("country", { required: true })}
-                                            // {...register("email")}
-                                            aria-invalid={errors.country ? "true" : "false"}
-                                        />
-                                        {errors.copuntry?.type === 'required' && <p role="alert">Country is required</p>}
+
+                                        <select name="country"
+                                            {...register("country", { required: true })}>
+                                            {countries.data?.data?.map((option, key) => (
+
+                                                <option key={key.id} value={option.value} >
+                                                    {option.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">Country is required</p>}
                                     </div>
                                 </div>
                                 <div className="col-12">
                                     <div className="form-group mt-3">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="annual_revenue_range"
-                                            placeholder="Enter your range"
-                                            {...register("annual_revenue_range", { required: true })}
-                                            // {...register("email")}
-                                            aria-invalid={errors.annual_revenue_range ? "true" : "false"}
-                                        />
-                                        {errors.annual_revenue_range?.type === 'required' && <p role="alert">Range name is required</p>}
+                                        <select name="annual_revenue_range"
+                                            {...register("annual_revenue_range", { required: true })}>
+                                            {annualRevenue?.data?.data?.map((option, key) => (
+
+                                                <option key={key.id} value={option.value} >
+                                                    {option.title}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {errors.annual_revenue_range?.type === 'required' && <p style={{ color: 'red' }} role="alert">Range name is required</p>}
                                     </div>
                                 </div>
                                 <div className="col-12">
@@ -112,21 +128,21 @@ const CreateOrganization = () => {
                                             // {...register("email")}
                                             aria-invalid={errors.tax_id ? "true" : "false"}
                                         />
-                                        {errors.tax_id?.type === 'required' && <p role="alert">Id is required</p>}
+                                        {errors.tax_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Id is required</p>}
                                     </div>
                                 </div>
                                 <div className="col-12">
                                     <div className="form-group mt-3">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="hear_about"
-                                            placeholder="Enter your hear about"
-                                            {...register("hear_about", { required: true })}
-                                            // {...register("email")}
-                                            aria-invalid={errors.hear_about ? "true" : "false"}
-                                        />
-                                        {errors.hear_about?.type === 'required' && <p role="alert">Hear about is required</p>}
+                                        <select name="hear_about"
+                                            {...register("hear_about", { required: true })}>
+                                            {hereAbout?.data?.data?.map((option, key) => (
+
+                                                <option key={key} value={option.value} >
+                                                    {option.title}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {errors.hear_about?.type === 'required' && <p style={{ color: 'red' }} role="alert">Hear about is required</p>}
                                     </div>
                                 </div>
                                 <div className="col-12">
@@ -140,7 +156,7 @@ const CreateOrganization = () => {
                                             // {...register("email")}
                                             aria-invalid={errors.method_hear_details ? "true" : "false"}
                                         />
-                                        {errors.method_hear_details?.type === 'required' && <p role="alert">Hear details is required</p>}
+                                        {errors.method_hear_details?.type === 'required' && <p style={{ color: 'red' }} role="alert">Hear details is required</p>}
                                     </div>
                                 </div>
                                 <div className="col-12">
@@ -152,7 +168,7 @@ const CreateOrganization = () => {
                                     </div>
                                 </div>
                                 <div className="col-12">
-                                    <button className="btn w-100 mt-3 mt-sm-4" type="submit">Signup</button>
+                                    <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create</button>
                                 </div>
                                 <div className="col-12">
                                     <hr />
