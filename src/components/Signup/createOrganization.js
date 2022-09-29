@@ -24,9 +24,9 @@ const CreateOrganization = () => {
     console.log(user, 'user')
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [fileNames, setFileNames] = useState([]);
-    const handleDrop = acceptedFiles =>
-        setFileNames(acceptedFiles.map(file => file.name));
+    // const [fileNames, setFileNames] = useState([]);
+    // const handleDrop = acceptedFiles =>
+    //     setFileNames(acceptedFiles.map(file => file.name));
 
     const OnSubmit = (data) => {
         // debugger
@@ -43,12 +43,10 @@ const CreateOrganization = () => {
 
 
         dispatch(CreateOrganizationAction(formData))
-        if (data) {
-            swal("Registered!", "You have been registered!", "success");
-            // Redirect
-        }
 
     }
+
+
     useEffect(() => {
         dispatch(CountryList())
         dispatch(AnnualRevenueList())
@@ -219,8 +217,10 @@ const CreateOrganization = () => {
                                             type="file"
                                             name="image"
                                             placeholder="Select file"
-                                            {...register("image")}
+                                            {...register("image", { required: true })}
+                                            aria-invalid={errors.image ? "true" : "false"}
                                         />
+                                        {errors.image?.type === 'required' && <p style={{ color: 'red' }} role="alert">File is required</p>}
                                     </div>
                                 </div>
                                 <div className="col-12">

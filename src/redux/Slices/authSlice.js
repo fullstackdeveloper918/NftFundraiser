@@ -10,6 +10,7 @@ const authSlice = createSlice({
         user: {},
         userToken,
         countries: [],
+        message: {},
         annualRevenue: [],
         hereAbout: []
     },
@@ -18,6 +19,16 @@ const authSlice = createSlice({
             state.user = action.payload;
             state.userToken = action.payload.data.data.auth_token;
             localStorage.setItem('authToken', action.payload.data.data.auth_token)
+        },
+        loginSuccess: (state, action) => {
+            state.user = action.payload;
+            state.userToken = action.payload.data.data.auth_token;
+            localStorage.setItem('authToken', action.payload.data.data.auth_token)
+        },
+        forgotpasswordSuccess: (state, action) => {
+            state.user = action.payload;
+            state.message = action.payload.data.message
+
         },
         createOrganizationSuccess: (state, action) => {
             state.user = action.payload;
@@ -47,5 +58,7 @@ export const {
     createOrganizationSuccess,
     getCountryList,
     getAnnualRevenueList,
-    getHearAboutList
+    getHearAboutList,
+    loginSuccess,
+    forgotpasswordSuccess
 } = authSlice.actions;

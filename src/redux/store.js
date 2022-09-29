@@ -7,6 +7,8 @@ const reducer = combineReducers({
     countries: authReducer,
     annualRevenue: authReducer,
     hereAbout: authReducer,
+    login: authReducer,
+    forgotpassword: authReducer
 })
 
 const store = configureStore({

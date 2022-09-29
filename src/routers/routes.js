@@ -22,6 +22,7 @@ import Signup from "../themes/signup";
 import Contact from "../themes/contact";
 import CreateOrganization from "../components/Signup/createOrganization";
 import { createOrganization } from "../themes/create_Organization";
+import Forgot from "../themes/forgotpassword";
 
 
 const MyRouts = () => {
@@ -47,6 +48,7 @@ const MyRouts = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/create-organization" component={createOrganization} />
+          <Route exact path="/forgotpassword" component={Forgot} />
           <Route exact path="/contact" component={Contact} />
         </Switch>
       </Router>

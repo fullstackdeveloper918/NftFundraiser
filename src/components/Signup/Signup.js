@@ -24,9 +24,27 @@ const Signup = () => {
 
     const { user } = useSelector(state => state.user)
 
+    const socialData = [
+        {
+            id: "1",
+            link: "facebook",
+            icon: "fab fa-facebook-f"
+        },
+        {
+            id: "2",
+            link: "twitter",
+            icon: "fab fa-twitter"
+        },
+        {
+            id: "3",
+            link: "google-plus",
+            icon: "fab fa-google-plus-g"
+        }
+    ]
 
     return (
-        <section className="author-area">
+
+        < section className="author-area" >
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-8 col-lg-7">
@@ -37,8 +55,10 @@ const Signup = () => {
                             <p></p>
                         </div>
                         {/* Item Form */}
-                        <form onSubmit={handleSubmit(OnSubmit)}>
+
+                        <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
                             <div className="row">
+
                                 <div className="col-12">
                                     <div className="form-group mt-3">
                                         <input
@@ -50,8 +70,8 @@ const Signup = () => {
                                             // {...register("email")}
                                             aria-invalid={errors.email ? "true" : "false"}
                                         />
+                                        {errors.email && <p style={{ color: 'red' }} role="alert">{errors.email?.message}</p>}
                                     </div>
-                                    {errors.email && <p role="alert">{errors.email?.message}</p>}
                                 </div>
                                 <div className="col-12">
                                     <div className="form-group mt-3">
@@ -64,11 +84,12 @@ const Signup = () => {
                                             aria-invalid={errors.password ? "true" : "false"}
 
                                         />
-                                        {errors.password?.type === 'required' && <p role="alert">Password is required</p>}
+                                        {errors.password?.type === 'required' && <p style={{ color: 'red' }} role="alert">Password is required</p>}
                                     </div>
                                 </div>
                                 <div className="col-12">
                                     <div className="form-group mt-3">
+
                                         <input
                                             type="password"
                                             className="form-control"
@@ -79,9 +100,10 @@ const Signup = () => {
 
 
                                         />
-                                        {errors.confirm_password?.type === 'required' && <p role="alert">Confirm Password is required</p>}
+                                        {errors.confirm_password?.type === 'required' && <p style={{ color: 'red' }} role="alert">Confirm Password is required</p>}
                                     </div>
                                 </div>
+
                                 <div className="col-12">
                                     <div className="form-group mt-3">
                                         <div className="form-check form-check-inline">
@@ -96,29 +118,14 @@ const Signup = () => {
                                 <div className="col-12">
                                     <span className="d-block text-center mt-4">Already have an account? <Link to="/login">Login</Link></span>
                                 </div>
-                                <div className="col-12">
-                                    <hr />
-                                    <div className="other-option">
-                                        {/* <span className="d-block text-center mb-4">Or</span> */}
-                                        {/* Social Icons */}
-                                        <div className="social-icons d-flex justify-content-center">
-                                            {/* {this.state.data.map((item, idx) => { */}
-                                            {/* return ( */}
-                                            {/* <a key={`lsd_${idx}`} className={item.link} href="#"> */}
-                                            {/* <i className={item.icon} />
-                                            <i className={item.icon} /> */}
-                                            {/* </a> */}
-                                            {/* ); */}
-                                            {/* })} */}
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
+
     )
 }
 
