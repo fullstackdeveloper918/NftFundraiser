@@ -21,8 +21,7 @@ import Login from "../themes/login";
 import Signup from "../themes/signup";
 import Contact from "../themes/contact";
 import CreateOrganization from "../components/Signup/createOrganization";
-
-
+import ProjectForm from "../components/Project/projectForm";
 const MyRouts = () => {
   return (
     <div>
@@ -45,12 +44,17 @@ const MyRouts = () => {
           <Route exact path="/create" component={Create} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/create-organization" component={CreateOrganization} />
+          <Route
+            exact
+            path="/create-organization"
+            component={CreateOrganization}
+          />
           <Route exact path="/contact" component={Contact} />
+          <Route exact path="/projectForm" component={ProjectForm} />
         </Switch>
       </Router>
     </div>
-  )
-}
+  );
+};
 
-export default MyRouts
+export default MyRouts;

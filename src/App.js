@@ -1,7 +1,6 @@
-import React from 'react';
-
+import React from "react";
 // importing MyRouts where we located all of our theme
-import MyRouts from './routers/routes'
+import MyRouts from "./routers/routes";
 
 function App() {
   return (
