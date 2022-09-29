@@ -10,14 +10,17 @@ const Signup = () => {
 
     const history = useHistory()
     const dispatch = useDispatch()
+    const [status, setStatus] = useState('none');
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const OnSubmit = (data) => {
-        dispatch(Register(data))
-        if (data) {
+    const OnSubmit = async (data) => {
+        const success = await dispatch(Register(data))
+        if (success)
             history.push('/create-organization')
-        }
+
+
     }
+
 
     const { user } = useSelector(state => state.user)
 
@@ -34,7 +37,6 @@ const Signup = () => {
                             <p></p>
                         </div>
                         {/* Item Form */}
-
                         <form onSubmit={handleSubmit(OnSubmit)}>
                             <div className="row">
                                 <div className="col-12">
@@ -84,7 +86,7 @@ const Signup = () => {
                                     <div className="form-group mt-3">
                                         <div className="form-check form-check-inline">
                                             <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" />
-                                            <label className="form-check-label" htmlFor="inlineRadio1">I agree to <a href="#">Privacy Policy</a></label>
+                                            <label className="form-check-label" htmlFor="inlineRadio1">Remember Me</label>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +99,7 @@ const Signup = () => {
                                 <div className="col-12">
                                     <hr />
                                     <div className="other-option">
-                                        <span className="d-block text-center mb-4">Or</span>
+                                        {/* <span className="d-block text-center mb-4">Or</span> */}
                                         {/* Social Icons */}
                                         <div className="social-icons d-flex justify-content-center">
                                             {/* {this.state.data.map((item, idx) => { */}

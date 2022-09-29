@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Field, Form, Formik } from 'formik'
 import { AnnualRevenueList, CountryList, CreateOrganizationAction, HearAboutList } from '../../redux/Actions/authAction'
 import { useForm } from 'react-hook-form'
-import { Controller } from 'react-hook-form'
-
+import Dropzone from 'react-dropzone'
+import swal from 'sweetalert'
+import { Redirect } from 'react-router'
+// import { Widget } from "@uploadcare/react-widget";
+// import FileUpload from "react-material-file-upload";
+// import { uploadcare } from '../lib/uploadcare.min.js';
 const CreateOrganization = () => {
 
     const dispatch = useDispatch()
@@ -20,12 +24,29 @@ const CreateOrganization = () => {
     console.log(user, 'user')
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [fileNames, setFileNames] = useState([]);
+    const handleDrop = acceptedFiles =>
+        setFileNames(acceptedFiles.map(file => file.name));
 
     const OnSubmit = (data) => {
-        // const formData = new FormData()
+        // debugger
+        const formData = new FormData()
 
-        // formData.append('image', data.image[0])
-        dispatch(CreateOrganizationAction(data))
+        formData.append('image', data.image[0])
+        formData.append('organization_name', data.organization_name)
+        formData.append('url', data.url)
+        formData.append('country', data.country)
+        formData.append('annual_revenue_range', data.annual_revenue_range)
+        formData.append('tax_id', data.tax_id)
+        formData.append('hear_about', data.hear_about)
+        formData.append('method_heard_detail', data.method_heard_detail)
+
+
+        dispatch(CreateOrganizationAction(formData))
+        if (data) {
+            swal("Registered!", "You have been registered!", "success");
+            // Redirect
+        }
 
     }
     useEffect(() => {
@@ -33,6 +54,7 @@ const CreateOrganization = () => {
         dispatch(AnnualRevenueList())
         dispatch(HearAboutList())
     }, [])
+
 
     return (
         <section className="author-area">
@@ -49,17 +71,7 @@ const CreateOrganization = () => {
 
                         <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
                             <div className="row">
-                                <div className="col-12">
-                                    <div className="form-group mt-3">
-                                        <input
-                                            className="form-control"
-                                            type="file"
-                                            name="image"
-                                            placeholder="Select file"
-                                            {...register("image")}
-                                        />
-                                    </div>
-                                </div>
+
                                 <div className="col-12">
                                     <div className="form-group mt-3">
                                         <input
@@ -95,7 +107,7 @@ const CreateOrganization = () => {
                                             {...register("country", { required: true })}>
                                             {countries.data?.data?.map((option, key) => (
 
-                                                <option key={key.id} value={option.value} >
+                                                <option key={key.id} value={option.id} >
                                                     {option.name}
                                                 </option>
                                             ))}
@@ -109,7 +121,7 @@ const CreateOrganization = () => {
                                             {...register("annual_revenue_range", { required: true })}>
                                             {annualRevenue?.data?.data?.map((option, key) => (
 
-                                                <option key={key.id} value={option.value} >
+                                                <option key={key.id} value={option.id} >
                                                     {option.title}
                                                 </option>
                                             ))}
@@ -137,7 +149,7 @@ const CreateOrganization = () => {
                                             {...register("hear_about", { required: true })}>
                                             {hereAbout?.data?.data?.map((option, key) => (
 
-                                                <option key={key} value={option.value} >
+                                                <option key={key} value={option.id} >
                                                     {option.title}
                                                 </option>
                                             ))}
@@ -150,19 +162,71 @@ const CreateOrganization = () => {
                                         <input
                                             type="text"
                                             className="form-control"
-                                            name="method_hear_details"
-                                            placeholder="Enter your details"
-                                            {...register("method_hear_details", { required: true })}
+                                            name="method_hear_detail"
+                                            placeholder="Enter your Method Hear Detail"
+                                            {...register("method_heard_detail", { required: true })}
                                             // {...register("email")}
-                                            aria-invalid={errors.method_hear_details ? "true" : "false"}
+                                            aria-invalid={errors.method_heard_detail ? "true" : "false"}
                                         />
-                                        {errors.method_hear_details?.type === 'required' && <p style={{ color: 'red' }} role="alert">Hear details is required</p>}
+                                        {errors.method_heard_detail?.type === 'required' && <p style={{ color: 'red' }} role="alert">Hear detail is required</p>}
+                                    </div>
+                                </div>
+                                <div className="col-12">
+                                    <div className="form-group mt-3">
+                                        {/* <Dropzone
+                                            onDrop={handleDrop}
+                                            accept="image/*"
+                                            minSize={1024}
+                                            maxSize={3072000}
+                                        >
+                                            {({
+                                                getRootProps,
+                                                getInputProps,
+                                                isDragActive,
+                                                isDragAccept,
+                                                isDragReject
+                                            }) => {
+                                                const additionalClass = isDragAccept
+                                                    ? "accept"
+                                                    : isDragReject
+                                                        ? "reject"
+                                                        : "";
+
+                                                return (
+                                                    <div
+                                                        {...getRootProps({
+                                                            className: `dropzone ${additionalClass}`
+                                                        })}
+                                                    >
+                                                        <input {...getInputProps()} />
+                                                        <span>{isDragActive ? "📂" : "📁"}</span>
+                                                        <p>Drag'n'drop images, or click to select files</p>
+                                                    </div>
+                                                );
+                                            }}
+                                        </Dropzone> */}
+                                        {/* <FileUpload
+
+                                            className="form-control"
+                                            value={files}
+                                            name="image"
+                                            onChange={setFiles}
+                                            {...register("image")}
+                                        /> */}
+
+                                        <input
+                                            className="form-control"
+                                            type="file"
+                                            name="image"
+                                            placeholder="Select file"
+                                            {...register("image")}
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-12">
                                     <div className="form-group mt-3">
                                         <div className="form-check form-check-inline">
-                                            <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" defaultChecked />
+                                            <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" />
                                             <label className="form-check-label" htmlFor="inlineRadio1">Remember Me</label>
                                         </div>
                                     </div>
@@ -170,14 +234,7 @@ const CreateOrganization = () => {
                                 <div className="col-12">
                                     <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create</button>
                                 </div>
-                                <div className="col-12">
-                                    <hr />
-                                    <div className="other-option">
-                                        <span className="d-block text-center mb-4">Or</span>
-                                        {/* Social Icons */}
 
-                                    </div>
-                                </div>
                             </div>
                         </form>
                     </div>

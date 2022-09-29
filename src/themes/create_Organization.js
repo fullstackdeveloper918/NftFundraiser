@@ -12,7 +12,7 @@ export const createOrganization = () => {
     return (
         <div className="main">
             <Header />
-            <Breadcrumb title="Create Organization" subpage="Pages" page="createOrganization" />
+            {/* <Breadcrumb title="Create Organization" subpage="Pages" page="createOrganization" /> */}
             <CreateOrganizationSection />
             <Footer />
             <ModalSearch />

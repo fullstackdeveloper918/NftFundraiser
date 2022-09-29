@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createOrganizationSuccess, getAnnualRevenueList, getCountryList, getHearAboutList, registerSuccess, } from "../Slices/authSlice";
 
-const userToken = localStorage.getItem('authToken')
 export const Register = (params) => async dispatch => {
     try {
         const config = {
@@ -23,6 +22,7 @@ export const CreateOrganizationAction = (params) => async dispatch => {
         const token = localStorage.getItem('authToken')
         const config = {
             headers: {
+                // 'Content-Type': 'multipart/form-data',
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
             },
