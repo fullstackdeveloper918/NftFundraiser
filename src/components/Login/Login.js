@@ -2,40 +2,34 @@ import React, { Component } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginAction } from '../../redux/Actions/authAction';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import swal from 'sweetalert'
-// const initData = {
-//     pre_heading: "Login",
-//     heading: "Login to your Account",
-//     // content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit."
-// }
 
-// const socialData = [
-//     {
-//         id: "1",
-//         link: "facebook",
-//         icon: "fab fa-facebook-f"
-//     },
-//     {
-//         id: "2",
-//         link: "twitter",
-//         icon: "fab fa-twitter"
-//     },
-//     {
-//         id: "3",
-//         link: "google-plus",
-//         icon: "fab fa-google-plus-g"
-//     }
-// ]
 
 
 const Login = () => {
-
+    const history = useHistory()
     const dispatch = useDispatch()
 
-    const { Login } = useSelector(state => state.login)
-
+    const { user } = useSelector(state => {
+        // debugger
+        // console.log(login.authToken, 'login')
+        return state.login
+    })
+    console.log(user.status, 'login')
+    if (user?.status === 200) {
+        history.push('/')
+    }
+    const mesg = useSelector(state => {
+        // debugger
+        return state.user.message
+    })
+    console.log(mesg)
+    // if (login?.userToken) {
+    //     console.log('hello')
+    // }
+    // console.log(login?.status)
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const OnSubmit = (data) => {
@@ -80,7 +74,7 @@ const Login = () => {
                                             className="form-control"
                                             name="password"
                                             placeholder="Enter your Password"
-                                            {...register("password", { required: "password is required" })}
+                                            {...register("password", { required: { mesg } })}
                                             // {...register("email")}
                                             aria-invalid={errors.email ? "true" : "false"}
                                         />
@@ -102,20 +96,24 @@ const Login = () => {
                                     <span className="d-block text-center mt-4"><Link to="/forgotpassword">Forgot Password</Link></span>
                                 </div>
                                 <div className="col-12">
+                                    <span className="d-block text-center mt-4">If not registered?<Link to="/signup">Sign Up</Link></span>
+                                </div>
+                                <div className="col-12">
                                     <hr />
                                     <div className="other-option">
-                                        <span className="d-block text-center mb-4">Or</span>
+                                        {/* <span className="d-block text-center mb-4">Or</span> */}
                                         {/* Social Icons */}
-                                        {/* <div className="social-icons d-flex justify-content-center">
-                                            {this.state.data.map((item, idx) => {
+                                        <div className="social-icons d-flex justify-content-center">
+                                            {/* <i className="fa-brands fa-google"></i> */}
+                                            {/* {/* {this.state.data.map((item, idx) => {
                                                 return (
                                                     <a key={`lsd_${idx}`} className={item.link} href="#">
                                                         <i className={item.icon} />
                                                         <i className={item.icon} />
                                                     </a>
-                                                );
-                                            })}
-                                        </div> */}
+                                                ); */}
+                                            {/* })}  */}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

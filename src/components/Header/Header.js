@@ -1,7 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useSelect } from '@mui/base';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { logoutSuccess } from '../../redux/Slices/authSlice';
+import { isLogin, logout, TOKEN_KEY } from '../../routers/utils';
+import Login from '../Login/Login';
 
 const Header = () => {
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    const LogoutHandler = () => {
+        dispatch(logoutSuccess())
+        // dispatch(user())
+    }
+
+    const log = useSelector(state => {
+        // debugger
+        return state.user.userToken
+    })
+    console.log(log, 'user')
+    // useEffect(() => {
+    //     dispatch(user())
+    // })
     return (
         <header id="header">
             {/* Navbar */}
@@ -15,7 +36,7 @@ const Header = () => {
                     {/* Navbar */}
                     <ul className="navbar-nav items mx-auto">
                         <li className="nav-item dropdown">
-                            <a className="nav-link" href="/">Home</a>
+                            <Link to='/' className="nav-link">Home</Link>
                         </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Explore <i className="fas fa-angle-down ml-1" /></a>
@@ -71,19 +92,48 @@ const Header = () => {
                         </li>
                     </ul>
                     {/* Navbar Action Button */}
-                    <ul className="navbar-nav action">
-                        <li className="nav-item ml-3">
-                            <Link to="/signup" className="btn ml-md-auto btn-bordered-white"><i class="fa fa-user" />CREATOR</Link>
-                        </li>
-                    </ul>
-                    <ul className="navbar-nav action">
-                        <li className="nav-item ml-3">
-                            <Link to="/wallet-connect" className="btn ml-lg-auto btn-bordered-white"><i className="icon-wallet mr-md-2" />Wallet Connect</Link>
-                        </li>
-                    </ul>
+                    {log !== null ? (
+
+                        <div className="dropdown">
+                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i className="fa fa-solid fa-user"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><button type='button' class="dropdown-item" onClick={LogoutHandler} >Logout</button></li>
+
+                            </ul>
+                        </div>
+                    ) : (
+
+
+                        <><ul className="navbar-nav action">
+                            <li className="nav-item ml-3">
+                                <Link to="/signup" className="btn ml-md-auto btn-bordered-white"><i className="fa fa-user" />CREATOR</Link>
+                            </li>
+                        </ul><ul className="navbar-nav action">
+                                <li className="nav-item ml-3">
+                                    <Link to="/wallet-connect" className="btn ml-lg-auto btn-bordered-white"><i className="icon-wallet mr-md-2" />Wallet Connect</Link>
+                                </li>
+                            </ul></>
+                    )}
+
+
+
+
+
+
+                    {/* {!user?.status === 200 && ( */}
+
+
+
+
+
+                    {/* )} */}
+
+
                 </div>
             </nav>
-        </header>
+        </header >
     );
 };
 

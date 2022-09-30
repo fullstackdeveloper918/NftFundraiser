@@ -5,13 +5,14 @@ import { AnnualRevenueList, CountryList, CreateOrganizationAction, HearAboutList
 import { useForm } from 'react-hook-form'
 import Dropzone from 'react-dropzone'
 import swal from 'sweetalert'
-import { Redirect } from 'react-router'
+import { Redirect, useHistory } from 'react-router'
 // import { Widget } from "@uploadcare/react-widget";
 // import FileUpload from "react-material-file-upload";
 // import { uploadcare } from '../lib/uploadcare.min.js';
 const CreateOrganization = () => {
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const { user } = useSelector(state => state.user)
     const { countries } = useSelector(state => state.countries)
@@ -43,6 +44,10 @@ const CreateOrganization = () => {
 
 
         dispatch(CreateOrganizationAction(formData))
+        if (formData) {
+            swal("Registered!", "You have been registered!", "success");
+            history.push('/login')
+        }
 
     }
 

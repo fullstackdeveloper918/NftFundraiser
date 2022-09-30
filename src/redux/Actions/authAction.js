@@ -1,6 +1,9 @@
 import axios from "axios";
 import { createOrganizationSuccess, forgotpasswordSuccess, getAnnualRevenueList, getCountryList, getHearAboutList, loginSuccess, registerSuccess, } from "../Slices/authSlice";
 import swal from "sweetalert";
+import { Redirect, useHistory } from "react-router";
+// import { useNavigate } from 'react-router-dom';
+
 
 export const Register = (params) => async dispatch => {
     try {
@@ -17,7 +20,7 @@ export const Register = (params) => async dispatch => {
     }
 }
 
-export const LoginAction = (params) => async dispatch => {
+export const LoginAction = (params, history) => async dispatch => {
     try {
         const token = localStorage.getItem('authToken')
         const config = {
@@ -26,16 +29,21 @@ export const LoginAction = (params) => async dispatch => {
                 Authorization: `Bearer ${token}`
             },
         }
+
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/organization_signin`,
             params, config)
-        // debugger
-        // console.log(res?.status)
-        if (res?.status === 200) {
+        // console.log(res?.data?.message)
+        // if (res?.status === 200) {
 
-            dispatch(loginSuccess(res));
-        }
+        dispatch(loginSuccess(res));
+        // debugger
+        // <Redirect to={'/'} />
+        // console.log("loggedin")
+        // history.push('/')
+        // }
 
     } catch (e) {
+        // debugger
         return console.error(e.message);
     }
 }
@@ -50,7 +58,16 @@ export const ForgotPasswordAction = (params) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/forgot_pssword`,
             params, config)
         dispatch(forgotpasswordSuccess(res));
-        swal("Mail sent!", "Check your email!", "success");
+        setTimeout(function () {
+            swal({
+                title: "Mail Sent!",
+                text: "Check your email!",
+                type: "success"
+            }, function () {
+                window.location = ('/login');
+            });
+        }, 1000);
+        // swal("Mail sent!", "Check your email!", "success");
 
     } catch (e) {
         return console.error(e.message);
@@ -72,7 +89,16 @@ export const CreateOrganizationAction = (params) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createOrganizationDetails`,
             params, config)
         dispatch(createOrganizationSuccess(res));
-        swal("Registered!", "You have been registered!", "success");
+        // setTimeout(function () {
+        // swal({
+        //     title: "Mail Sent!",
+        //     text: "Check your email!",
+        //     type: "success"
+        // }, function () {
+        //     window.location = '/login';
+        // });
+        // }, 1000);
+        // swal("Registered!", "You have been registered!", "success");
     } catch (e) {
         return console.error(e.message);
     }

@@ -13,34 +13,20 @@ const Signup = () => {
     const [status, setStatus] = useState('none');
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const OnSubmit = async (data) => {
-        const success = await dispatch(Register(data))
-        if (success)
-            history.push('/create-organization')
+    const OnSubmit = (data) => {
+        dispatch(Register(data))
+        // if (success)
+        //     history.push('/create-organization')
 
 
     }
 
 
     const { user } = useSelector(state => state.user)
-
-    const socialData = [
-        {
-            id: "1",
-            link: "facebook",
-            icon: "fab fa-facebook-f"
-        },
-        {
-            id: "2",
-            link: "twitter",
-            icon: "fab fa-twitter"
-        },
-        {
-            id: "3",
-            link: "google-plus",
-            icon: "fab fa-google-plus-g"
-        }
-    ]
+    console.log(user, 'userrrr')
+    if (user?.status === 200) {
+        history.push('/create-organization')
+    }
 
     return (
 

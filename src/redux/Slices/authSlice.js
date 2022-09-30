@@ -9,6 +9,7 @@ const authSlice = createSlice({
     initialState: {
         user: {},
         userToken,
+        logout: {},
         countries: [],
         message: {},
         annualRevenue: [],
@@ -21,9 +22,16 @@ const authSlice = createSlice({
             localStorage.setItem('authToken', action.payload.data.data.auth_token)
         },
         loginSuccess: (state, action) => {
+            debugger
             state.user = action.payload;
+            state.message = action.payload.data.message
             state.userToken = action.payload.data.data.auth_token;
             localStorage.setItem('authToken', action.payload.data.data.auth_token)
+        },
+        logoutSuccess: (state, action) => {
+            localStorage.removeItem('authToken')
+            // state.logout = action.payload;
+            state.userToken = null
         },
         forgotpasswordSuccess: (state, action) => {
             state.user = action.payload;
@@ -60,5 +68,6 @@ export const {
     getAnnualRevenueList,
     getHearAboutList,
     loginSuccess,
-    forgotpasswordSuccess
+    forgotpasswordSuccess,
+    logoutSuccess
 } = authSlice.actions;

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // importing all the themes
 import ThemeOne from "../themes/theme-one";
@@ -20,15 +20,15 @@ import Create from "../themes/create";
 import Login from "../themes/login";
 import Signup from "../themes/signup";
 import Contact from "../themes/contact";
-import CreateOrganization from "../components/Signup/createOrganization";
 import { createOrganization } from "../themes/create_Organization";
 import Forgot from "../themes/forgotpassword";
+import PrivateRoute from "./privateRoutes";
 
 
 const MyRouts = () => {
   return (
     <div>
-      <Router>
+      <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ThemeOne} />
           <Route exact path="/explore-1" component={ExploreOne} />
@@ -45,13 +45,13 @@ const MyRouts = () => {
           <Route exact path="/author" component={Author} />
           <Route exact path="/wallet-connect" component={WalletConnect} />
           <Route exact path="/create" component={Create} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/create-organization" component={createOrganization} />
-          <Route exact path="/forgotpassword" component={Forgot} />
+          <PrivateRoute exact path="/login" component={Login} />
+          <PrivateRoute exact path="/signup" component={Signup} />
+          <PrivateRoute exact path="/create-organization" component={createOrganization} />
+          <PrivateRoute exact path="/forgotpassword" component={Forgot} />
           <Route exact path="/contact" component={Contact} />
         </Switch>
-      </Router>
+      </BrowserRouter>
     </div>
   )
 }
