@@ -10,19 +10,23 @@ const authSlice = createSlice({
         user: {},
         userToken,
         logout: {},
-        countries: [],
         message: {},
+        countries: [],
         annualRevenue: [],
         hereAbout: []
     },
     reducers: {
         registerSuccess: (state, action) => {
+            // debugger
             state.user = action.payload;
             state.userToken = action.payload.data.data.auth_token;
             localStorage.setItem('authToken', action.payload.data.data.auth_token)
         },
+        registerFail: (state, action) => {
+            // debugger
+            state.message = action.payload.response.data.message
+        },
         loginSuccess: (state, action) => {
-            debugger
             state.user = action.payload;
             state.message = action.payload.data.message
             state.userToken = action.payload.data.data.auth_token;
@@ -69,5 +73,5 @@ export const {
     getHearAboutList,
     loginSuccess,
     forgotpasswordSuccess,
-    logoutSuccess
+    logoutSuccess, registerFail
 } = authSlice.actions;

@@ -1,92 +1,224 @@
 import React, { Component } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import { CreateProjectAction } from '../../redux/Actions/projectAction';
 import AuthorProfile from "../AuthorProfile/AuthorProfile";
 
-class Create extends Component {
-    render() {
-        return (
-            <section className="author-area">
-                <div className="container">
-                    <div className="row justify-content-between">
-                        <div className="col-12 col-md-4">
-                            {/* Author Profile */}
-                            <AuthorProfile />
+const Create = () => {
+
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+
+    const OnSubmit = (data) => {
+        // debugger
+        const formData = new FormData()
+
+        formData.append('image', data.image[0])
+        formData.append('title', data.title)
+        formData.append('description', data.description)
+        formData.append('latitude', data.latitude)
+        formData.append('logitude', data.logitude)
+        formData.append('address', data.address)
+        formData.append('price', data.price)
+        formData.append('number_of_nft', data.number_of_nft)
+        formData.append('start_date', data.start_date)
+        formData.append('end_date', data.end_date)
+        formData.append('type', data.type)
+
+        dispatch(CreateProjectAction(formData))
+        // if (formData) {
+        //     swal("Created!", "Project created successfully!", "success");
+        //     // history.push('/login')
+        // }
+
+    }
+
+    return (
+        <section className="author-area">
+            <div className="container">
+                <div className="row justify-content-between">
+                    <div className="col-12 col-md-4">
+                        {/* Author Profile */}
+                        <AuthorProfile />
+                    </div>
+                    <div className="col-12 col-md-7">
+                        {/* Intro */}
+                        <div className="intro mt-5 mt-lg-0 mb-4 mb-lg-5">
+                            <div className="intro-content">
+                                <span>Get Started</span>
+                                <h3 className="mt-3 mb-0">Create Item</h3>
+                            </div>
                         </div>
-                        <div className="col-12 col-md-7">
-                            {/* Intro */}
-                            <div className="intro mt-5 mt-lg-0 mb-4 mb-lg-5">
-                                <div className="intro-content">
-                                    <span>Get Started</span>
-                                    <h3 className="mt-3 mb-0">Create Item</h3>
+                        {/* Item Form */}
+                        <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
+                            <div className="row">
+
+                                <div className="col-12">
+                                    <div className="form-group mt-3">
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="title"
+                                            placeholder="Item name"
+                                            {...register("title", { required: true })}
+                                            aria-invalid={errors.title ? "true" : "false"}
+                                        />
+                                        {errors.title?.type === 'required' && <p style={{ color: 'red' }} role="alert">Title is required</p>}
+
+                                    </div>
+                                </div>
+                                <div className="col-12">
+                                    <div className="form-group mt-3">
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="address"
+                                            placeholder="Address"
+                                            {...register("address", { required: true })}
+                                            aria-invalid={errors.address ? "true" : "false"}
+                                        />
+                                        {errors.address?.type === 'required' && <p style={{ color: 'red' }} role="alert">Address is required</p>}
+
+                                    </div>
+                                </div>
+                                <div className="col-12">
+                                    <div className="form-group">
+                                        <textarea
+                                            type="text"
+                                            className="form-control"
+                                            name="textarea"
+                                            placeholder="Description"
+                                            cols={30} rows={3}
+                                            {...register("description", { required: true })}
+                                            aria-invalid={errors.description ? "true" : "false"}
+                                        />
+                                        {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
+                                    </div>
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <div className="form-group">
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            name="latitude"
+                                            placeholder="Latitude"
+                                            {...register("latitude", { required: true })}
+                                            aria-invalid={errors.latitude ? "true" : "false"}
+                                        />
+                                        {errors.latitude?.type === 'required' && <p style={{ color: 'red' }} role="alert">latitude is required</p>}
+                                    </div>
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <div className="form-group">
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            name="logitude"
+                                            placeholder="Logitude"
+                                            {...register("logitude", { required: true })}
+                                            aria-invalid={errors.logitude ? "true" : "false"}
+                                        />
+                                        {errors.logitude?.type === 'required' && <p style={{ color: 'red' }} role="alert">logitude is required</p>}
+                                    </div>
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="price"
+                                            placeholder="Price"
+                                            {...register("price", { required: true })}
+                                            aria-invalid={errors.price ? "true" : "false"}
+                                        />
+                                        {errors.price?.type === 'required' && <p style={{ color: 'red' }} role="alert">Price is required</p>}
+                                    </div>
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <div className="form-group">
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            name="number_of_nft"
+                                            placeholder="Size"
+                                            {...register("number_of_nft", { required: true })}
+                                            aria-invalid={errors.number_of_nft ? "true" : "false"}
+                                        />
+                                        {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of nft is required</p>}
+                                    </div>
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <div className="form-group">
+                                        <input
+                                            type="date"
+                                            className="form-control"
+                                            name="start_date"
+                                            placeholder="Enter your start date"
+                                            {...register("start_date", { required: true })}
+                                            aria-invalid={errors.start_date ? "true" : "false"}
+                                        />
+                                        {errors.start_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">Start date is required</p>}
+                                    </div>
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <div className="form-group">
+                                        <input
+                                            type="date"
+                                            className="form-control"
+                                            name="end_date"
+                                            placeholder="Enter your end date"
+                                            {...register("end_date", { required: true })}
+                                            aria-invalid={errors.end_date ? "true" : "false"}
+                                        />
+                                        {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
+                                    </div>
+                                </div>
+                                <div className="col-12">
+                                    <div className="input-group form-group">
+                                        <div className="custom-file">
+                                            <input
+                                                type="file"
+                                                className="form-control"
+                                                id="inputGroupFile01"
+                                                placeholder='Choose fi;e'
+                                                {...register("image", { required: true })}
+                                                aria-invalid={errors.image ? "true" : "false"}
+                                            />
+                                            {errors.image?.type === 'required' && <p style={{ color: 'red' }} role="alert">File is required</p>}
+                                            {/* <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file</label> */}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-12">
+                                    <div className="form-group mt-3">
+                                        <div className="form-check form-check-inline">
+                                            <input className="form-check-input" type="radio" name="donation" id="donation" value="1"  {...register("type")} />
+                                            <label className="form-check-label" htmlFor="donation">Donation</label>
+                                        </div>
+                                        <div className="form-check form-check-inline">
+                                            <input className="form-check-input" type="radio" name="product_sale" id="product_sale" value='2' {...register("type")} />
+                                            <label className="form-check-label" htmlFor="product_sale">Product sale</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div className="col-12">
+                                    <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create Item</button>
                                 </div>
                             </div>
-                            {/* Item Form */}
-                            <form className="item-form card no-hover">
-                                <div className="row">
-                                    <div className="col-12">
-                                        <div className="input-group form-group">
-                                            <div className="custom-file">
-                                                <input type="file" className="custom-file-input" id="inputGroupFile01" />
-                                                <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <div className="form-group mt-3">
-                                            <input type="text" className="form-control" name="name" placeholder="Item Name" required="required" />
-                                        </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <div className="form-group">
-                                            <textarea className="form-control" name="textarea" placeholder="Description" cols={30} rows={3} defaultValue={""} />
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6">
-                                        <div className="form-group">
-                                            <input type="text" className="form-control" name="price" placeholder="Item Price" required="required" />
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6">
-                                        <div className="form-group">
-                                            <input type="text" className="form-control" name="royality" placeholder="Royality" required="required" />
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6">
-                                        <div className="form-group">
-                                            <input type="text" className="form-control" placeholder="Size" required="required" />
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6">
-                                        <div className="form-group">
-                                            <input type="text" className="form-control" name="copies" placeholder="No of Copies" required="required" />
-                                        </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <div className="form-group mt-3">
-                                            <div className="form-check form-check-inline">
-                                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" defaultChecked />
-                                                <label className="form-check-label" htmlFor="inlineRadio1">Put on Sale</label>
-                                            </div>
-                                            <div className="form-check form-check-inline">
-                                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" defaultValue="option2" />
-                                                <label className="form-check-label" htmlFor="inlineRadio2">Instant Sale Price</label>
-                                            </div>
-                                            <div className="form-check form-check-inline">
-                                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" defaultValue="option3" />
-                                                <label className="form-check-label" htmlFor="inlineRadio3">Unlock Purchased</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create Item</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </section>
-        );
-    }
+            </div>
+        </section>
+    );
+
 }
 
 export default Create;

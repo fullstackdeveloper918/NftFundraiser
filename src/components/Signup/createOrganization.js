@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import Dropzone from 'react-dropzone'
 import swal from 'sweetalert'
 import { Redirect, useHistory } from 'react-router'
+import Loader from '../Loader/loader'
 // import { Widget } from "@uploadcare/react-widget";
 // import FileUpload from "react-material-file-upload";
 // import { uploadcare } from '../lib/uploadcare.min.js';
@@ -17,20 +18,15 @@ const CreateOrganization = () => {
     const { user } = useSelector(state => state.user)
     const { countries } = useSelector(state => state.countries)
     const { annualRevenue } = useSelector(state => state.annualRevenue)
-    // debugger
 
     // }
     const { hereAbout } = useSelector(state => state.hereAbout)
-    // debugger
-    console.log(user, 'user')
+    // console.log(user, 'user')
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    // const [fileNames, setFileNames] = useState([]);
-    // const handleDrop = acceptedFiles =>
-    //     setFileNames(acceptedFiles.map(file => file.name));
+
 
     const OnSubmit = (data) => {
-        // debugger
         const formData = new FormData()
 
         formData.append('image', data.image[0])
@@ -41,7 +37,6 @@ const CreateOrganization = () => {
         formData.append('tax_id', data.tax_id)
         formData.append('hear_about', data.hear_about)
         formData.append('method_heard_detail', data.method_heard_detail)
-
 
         dispatch(CreateOrganizationAction(formData))
         if (formData) {

@@ -99,9 +99,11 @@ const Header = () => {
                                 <i className="fa fa-solid fa-user"></i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><button type='button' class="dropdown-item" onClick={LogoutHandler} >Logout</button></li>
+                                <li><button type='button' class="dropdown-item" onClick={LogoutHandler}><a href='/'>Logout</a></button></li>
 
+                                <li><button type='button' class="dropdown-item"><Link to='/projectlist'>Project List</Link></button></li>
                             </ul>
+
                         </div>
                     ) : (
 

@@ -1,7 +1,8 @@
 import axios from "axios";
-import { createOrganizationSuccess, forgotpasswordSuccess, getAnnualRevenueList, getCountryList, getHearAboutList, loginSuccess, registerSuccess, } from "../Slices/authSlice";
+import { createOrganizationSuccess, forgotpasswordSuccess, getAnnualRevenueList, getCountryList, getHearAboutList, loginSuccess, registerFail, registerSuccess, } from "../Slices/authSlice";
 import swal from "sweetalert";
 import { Redirect, useHistory } from "react-router";
+import { useState } from "react";
 // import { useNavigate } from 'react-router-dom';
 
 
@@ -16,7 +17,12 @@ export const Register = (params) => async dispatch => {
             params, config)
         dispatch(registerSuccess(res));
     } catch (e) {
-        return console.error(e.message);
+        // debugger
+        if (e?.response?.data) {
+
+            dispatch(registerFail(e))
+        }
+
     }
 }
 

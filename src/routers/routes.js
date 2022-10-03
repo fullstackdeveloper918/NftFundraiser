@@ -23,6 +23,7 @@ import Contact from "../themes/contact";
 import { createOrganization } from "../themes/create_Organization";
 import Forgot from "../themes/forgotpassword";
 import PrivateRoute from "./privateRoutes";
+import read from "../themes/read";
 
 
 const MyRouts = () => {
@@ -45,6 +46,7 @@ const MyRouts = () => {
           <Route exact path="/author" component={Author} />
           <Route exact path="/wallet-connect" component={WalletConnect} />
           <Route exact path="/create" component={Create} />
+          <Route exact path="/projectlist" component={read} />
           <PrivateRoute exact path="/login" component={Login} />
           <PrivateRoute exact path="/signup" component={Signup} />
           <PrivateRoute exact path="/create-organization" component={createOrganization} />

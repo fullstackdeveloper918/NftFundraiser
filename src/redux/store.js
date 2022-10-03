@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { authReducer } from '../redux/Slices/authSlice'
 import { combineReducers } from '@reduxjs/toolkit'
+import { projectReducer } from './Slices/projectSlice'
 
 const reducer = combineReducers({
     user: authReducer,
@@ -8,7 +9,10 @@ const reducer = combineReducers({
     annualRevenue: authReducer,
     hereAbout: authReducer,
     login: authReducer,
-    forgotpassword: authReducer
+    forgotpassword: authReducer,
+    errmessage: authReducer,
+    createproject: projectReducer,
+    getproject: projectReducer,
 })
 
 const store = configureStore({
