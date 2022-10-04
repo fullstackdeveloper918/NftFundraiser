@@ -13,6 +13,7 @@ const reducer = combineReducers({
     errmessage: authReducer,
     createproject: projectReducer,
     getproject: projectReducer,
+    projectdetails: projectReducer,
 })
 
 const store = configureStore({

@@ -37,7 +37,7 @@ const MyRouts = () => {
           <Route exact path="/explore-3" component={ExploreThree} />
           <Route exact path="/explore-4" component={ExploreFour} />
           <Route exact path="/auctions" component={Auctions} />
-          <Route exact path="/item-details" component={ItemDetails} />
+          <Route exact path="/item-details/:id" component={ItemDetails} />
           <Route exact path="/activity" component={Activity} />
           <Route exact path="/blog" component={Blog} />
           <Route exact path="/blog-single" component={BlogSingle} />
@@ -46,7 +46,6 @@ const MyRouts = () => {
           <Route exact path="/author" component={Author} />
           <Route exact path="/wallet-connect" component={WalletConnect} />
           <Route exact path="/create" component={Create} />
-          <Route exact path="/projectlist" component={read} />
           <PrivateRoute exact path="/login" component={Login} />
           <PrivateRoute exact path="/signup" component={Signup} />
           <PrivateRoute exact path="/create-organization" component={createOrganization} />

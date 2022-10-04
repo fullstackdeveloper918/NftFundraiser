@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createProjectSuccess, getProjectList } from "../Slices/projectSlice";
+import { createProjectSuccess, getProjectDetail, getProjectList } from "../Slices/projectSlice";
 
 export const CreateProjectAction = (params) => async dispatch => {
     // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
@@ -22,6 +22,27 @@ export const CreateProjectAction = (params) => async dispatch => {
     }
 }
 
+export const ProjectDetail = (id) => async dispatch => {
+    // debugger
+    const token = localStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+        }
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/project/details/${id.id}`,
+            config)
+        // console.log(res?.data?.data[0]?.image, 'proj')
+        console.log(res)
+        dispatch(getProjectDetail(res));
+    } catch (e) {
+        // debugger 
+        return console.error(e.message);
+    }
+}
+
 export const ProjectList = () => async dispatch => {
     const token = localStorage.getItem('authToken')
     try {
@@ -33,10 +54,10 @@ export const ProjectList = () => async dispatch => {
         }
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/project/list`,
             config)
-        // console.log(res, 'proj')
+        // console.log(res?.data?.data[0]?.image, 'proj')
         dispatch(getProjectList(res));
     } catch (e) {
-        debugger
+        // debugger 
         return console.error(e.message);
     }
 }

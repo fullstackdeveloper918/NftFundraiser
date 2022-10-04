@@ -40,7 +40,7 @@ const Signup = () => {
 
                     </div>
                     <div className="row justify-content-center">
-                        <div className="col-12 col-md-8 col-lg-7">
+                        <div className="col-12 col-md-8 co  l-lg-7">
                             {/* Intro */}
                             <div className="intro text-center">
                                 <span></span>
