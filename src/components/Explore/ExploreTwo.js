@@ -8,7 +8,7 @@ class ExploreTwo extends Component {
         data: {},
         exploreData: []
     }
-    componentDidMount(){
+    componentDidMount() {
         axios.get(`${BASE_URL}`)
             .then(res => {
                 this.setState({
@@ -17,7 +17,7 @@ class ExploreTwo extends Component {
                 })
                 // console.log(this.state.data)
             })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
     }
     render() {
         return (
@@ -62,7 +62,7 @@ class ExploreTwo extends Component {
                                                 </div>
                                                 <div className="card-bottom d-flex justify-content-between">
                                                     <span>{item.price}</span>
-                                                    <span>{item.count}</span>
+                                                    {/* <span>{item.count}</span> */}
                                                 </div>
                                                 <a className="btn btn-bordered-white btn-smaller mt-3" href="/wallet-connect"><i className="icon-handbag mr-2" />{item.btnText}</a>
                                             </div>

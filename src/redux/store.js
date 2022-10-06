@@ -12,7 +12,7 @@ const reducer = combineReducers({
     forgotpassword: authReducer,
     errmessage: authReducer,
     createproject: projectReducer,
-    getproject: projectReducer,
+    // getproject: projectReducer,
     projectdetails: projectReducer,
 })
 

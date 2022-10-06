@@ -4,8 +4,8 @@ import { BrowserRouter, BrowserRouter as Router, Route, Switch } from "react-rou
 // importing all the themes
 import ThemeOne from "../themes/theme-one";
 import ExploreOne from "../themes/explore-one";
-import ExploreTwo from "../themes/explore-two";
-import ExploreThree from "../themes/explore-three";
+import ExploreTwo from "../themes/project-list";
+import ReadProject from "../components/Explore/ProjectList";
 import ExploreFour from "../themes/explore-four";
 import Auctions from "../themes/auctions";
 import ItemDetails from "../themes/item-details";
@@ -24,6 +24,7 @@ import { createOrganization } from "../themes/create_Organization";
 import Forgot from "../themes/forgotpassword";
 import PrivateRoute from "./privateRoutes";
 import read from "../themes/read";
+import ProjectUpdate from "../themes/update";
 
 
 const MyRouts = () => {
@@ -33,8 +34,9 @@ const MyRouts = () => {
         <Switch>
           <Route exact path="/" component={ThemeOne} />
           <Route exact path="/explore-1" component={ExploreOne} />
-          <Route exact path="/explore-2" component={ExploreTwo} />
-          <Route exact path="/explore-3" component={ExploreThree} />
+          <Route exact path="/projectlist" component={ExploreTwo} />
+          <Route exact path="/updateproject/:id" component={ProjectUpdate} />
+          {/* <Route exact path="/projectlist" component={ExploreThree} /> */}
           <Route exact path="/explore-4" component={ExploreFour} />
           <Route exact path="/auctions" component={Auctions} />
           <Route exact path="/item-details/:id" component={ItemDetails} />

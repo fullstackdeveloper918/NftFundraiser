@@ -41,12 +41,12 @@ const Header = () => {
                         <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Explore <i className="fas fa-angle-down ml-1" /></a>
                             <ul className="dropdown-menu">
-                                <li className="nav-item"><Link to="/explore-1" className="nav-link">Explore Style 1</Link></li>
-                                <li className="nav-item"><Link to="/explore-2" className="nav-link">Project List</Link></li>
-                                <li className="nav-item"><Link to="/explore-3" className="nav-link">Explore Style 3</Link></li>
-                                <li className="nav-item"><Link to="/explore-4" className="nav-link">Explore Style 4</Link></li>
+                                {/* <li className="nav-item"><Link to="/explore-1" className="nav-link">Explore Style 1</Link></li> */}
+                                <li className="nav-item"><Link to="/projectlist" className="nav-link">Project List</Link></li>
+                                {/* <li className="nav-item"><Link to="/explore-3" className="nav-link">Explore Style 3</Link></li>
+                                <li className="nav-item"><Link to="/explore-4" className="nav-link">Explore Style 4</Link></li> */}
                                 <li className="nav-item"><Link to="/auctions" className="nav-link">Live Auctions</Link></li>
-                                <li className="nav-item"><Link to="/item-details" className="nav-link">Item Details</Link></li>
+                                {/* <li className="nav-item"><Link to="/item-details" className="nav-link">Item Details</Link></li> */}
                             </ul>
                         </li>
                         <li className="nav-item">

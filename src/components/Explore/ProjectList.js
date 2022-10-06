@@ -1,24 +1,30 @@
 import React, { Component, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ProjectList } from '../../redux/Actions/projectAction';
+import { DeleteProject } from './../../redux/Actions/projectAction';
 
 
-const ReadProject = () => {
+const GetAllProjects = () => {
 
     // const [projc, setProjc] = useState([])
     // console.log(projc, 'projc')
     const dispatch = useDispatch()
+
     const proj = useSelector(state => {
-        return state.getproject
-        // setProjc(proj)
+        return state.projectdetails
     })
+    useEffect(() => {
+        dispatch(ProjectList())
+    }, [dispatch])
 
-    // console.log(proj.projects, 'projects')
+    console.log(proj, 'projects')
 
-    useEffect((id) => {
-        dispatch(ProjectList(id))
-    }, [])
+    const deleteHandler = (id) => {
+
+        dispatch(DeleteProject(id))
+    }
 
     return (
         <section className="explore-area">
@@ -88,7 +94,8 @@ const ReadProject = () => {
                                                 <span>{item.price}</span>
                                                 <span>{item.count}</span>
                                             </div>
-                                            {/* <a className="btn btn-bordered-white btn-smaller mt-3" href="/wallet-connect"><i className="icon-handbag mr-2" />{item.btnText}</a> */}
+                                            <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a>
+                                            <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a>
                                         </div>
                                     </div>
                                 </div>
@@ -102,4 +109,4 @@ const ReadProject = () => {
 
 }
 
-export default ReadProject;
+export default GetAllProjects; 

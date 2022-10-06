@@ -7,14 +7,16 @@ import Footer from '../components/Footer/Footer';
 import ModalSearch from '../components/Modal/ModalSearch';
 import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
+import { Edit } from '@mui/icons-material';
+import EditProject from '../Edit/editProject';
 
-const Create = () => {
+const ProjectUpdate = () => {
 
     return (
         <div className="main">
             <Header />
-            <Breadcrumb title="Create" subpage="Pages" page="Create" />
-            <Creates />
+            {/* <Breadcrumb title="Create" subpage="Pages" page="Create" /> */}
+            <EditProject />
             <Footer />
             <ModalSearch />
             <ModalMenu />
@@ -24,4 +26,4 @@ const Create = () => {
 
 }
 
-export default Create;
+export default ProjectUpdate;

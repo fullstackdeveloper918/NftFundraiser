@@ -2,26 +2,25 @@ import React, { Component } from 'react';
 
 import Header from '../components/Header/Header';
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
-import Creates from '../components/Create/Create';
+import Explore from '../components/Explore/ProjectList';
 import Footer from '../components/Footer/Footer';
 import ModalSearch from '../components/Modal/ModalSearch';
 import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
+import GetAllProjects from '../components/Explore/ProjectList';
 
-const Create = () => {
-
+const ExploreTwo = () => {
     return (
         <div className="main">
             <Header />
-            <Breadcrumb title="Create" subpage="Pages" page="Create" />
-            <Creates />
+            {/* <Breadcrumb title="Projects" subpage="Explore" page="" /> */}
+            <GetAllProjects />
             <Footer />
             <ModalSearch />
             <ModalMenu />
             <Scrollup />
         </div>
     );
-
 }
 
-export default Create;
+export default ExploreTwo;
