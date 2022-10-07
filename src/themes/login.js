@@ -13,7 +13,6 @@ const Login = () => {
     return (
         <div className="main">
             <Header />
-            <Breadcrumb title="Login" subpage="Pages" page="Login" />
             <LoginSection />
             <Footer />
             <ModalSearch />

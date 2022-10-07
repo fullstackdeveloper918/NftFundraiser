@@ -14,7 +14,8 @@ const authSlice = createSlice({
         message: {},
         countries: [],
         annualRevenue: [],
-        hereAbout: []
+        hereAbout: [],
+        organization:false
     },
     reducers: {
         registerSuccess: (state, action) => {
@@ -43,8 +44,8 @@ const authSlice = createSlice({
         },
         createOrganizationSuccess: (state, action) => {
             state.user = action.payload;
+            state.organization = true
         },
-
         getCountryList: (state, action) => {
             state.countries = action.payload;
         },

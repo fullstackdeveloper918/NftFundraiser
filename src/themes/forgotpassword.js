@@ -14,7 +14,6 @@ const Forgot = () => {
     return (
         <div className="main">
             <Header />
-            <Breadcrumb title="Forgot Password" subpage="Pages" page="ForgotPassword" />
             <ForgotPassword />
             <Footer />
             <ModalSearch />

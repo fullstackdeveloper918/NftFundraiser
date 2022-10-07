@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ProjectList } from '../../redux/Actions/projectAction';
@@ -66,38 +67,48 @@ const GetAllProjects = () => {
                 </div>
                 <div className="row items explore-items h-auto">
                     {projects && projects.length?
-                     projects.map((item, idx) => {
+                     [...new Map(projects.map(item =>
+                        [item["title"], item])).values()].map((item, idx) => {
                         return (
-                            <div key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
+                            <Link key={`edth_${idx}`} to={`/item-details/${item.id}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
+                            <div>
                                 <div className="card">
                                     <div className="image-over">
-                                        <Link to={`/item-details/${item.id}`}>
-                                            <img className="card-img-top" src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt="" />
-                                        </Link>
+                                      <img className="card-img-top" src={item.image} alt={item.image.description} />
                                     </div>
                                     {/* Card Caption */}
                                     <div className="card-caption col-12 p-0">
                                         {/* Card Body */}
                                         <div className="card-body">
-                                            <a href="/item-details">
+                                            <a>
                                                 <h5 className="mb-0">{item.title}</h5>
                                             </a>
                                             <div className="seller d-flex align-items-center my-3">
                                                 <span>Owned By</span>
                                                 <a href="/author">
-                                                    <h6 className="ml-2 mb-0"> Arhaam </h6>
+                                                    <h6 className="ml-2 mb-0">{"bc1q...hx0wlh"}</h6>
                                                 </a>
                                             </div>
                                             <div className="card-bottom d-flex justify-content-between">
-                                                <span>{item.price}</span>
-                                                <span>1 of 1</span>
+                                                <span>{item.price} MATIC</span>
+                                                <span>{item.number_of_nft} NFTS</span>
+                                            </div>
+                                            <div>
+                                             {item.status == '1'?
+                                                <Button>Mint</Button>
+                                                : 
+                                                <div className='approval'>
+                                                    Waiting For Approval
+                                                </div>
+                                             }
                                             </div>
                                             {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
-                                            <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a>
+                                            {/* <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a> */}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            </Link>
                         )
                     }):
                       <div className="col-12 col-sm-6 col-lg-3">

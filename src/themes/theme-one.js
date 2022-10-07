@@ -19,10 +19,10 @@ const Home = () => {
             <Header />
             <Hero />
             <Auctions/>
-            <TopSeller />
+            {/* <TopSeller />
             <Collections />
             <Explore />
-            <Work />
+            <Work /> */}
             <Footer />
             <ModalSearch />
             <ModalMenu />

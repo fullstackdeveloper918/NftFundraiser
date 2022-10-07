@@ -8,3 +8,13 @@
     display: flex;
     gap: 8px;
 }
+
+.approval{
+    font-size: 10px;
+    background: #9b8bc1;
+    color: white;
+    padding: 8px;
+    width: 120px;
+    margin: 24px 0px 0px 0px;
+    border-radius: 12px;
+}

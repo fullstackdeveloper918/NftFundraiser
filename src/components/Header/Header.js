@@ -38,14 +38,14 @@ const Header = () => {
                         <li className="nav-item">
                             <Link to="/activity" className="nav-link">Activity</Link>
                         </li>
-                        <li className="nav-item dropdown">
+                        {/* <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Community <i className="fas fa-angle-down ml-1" /></a>
                             <ul className="dropdown-menu">
                                 <li className="nav-item"><Link to="/blog" className="nav-link">Blog</Link></li>
                                 <li className="nav-item"><Link to="/blog-single" className="nav-link">Blog Single</Link></li>
                                 <li className="nav-item"><Link to="/help-center" className="nav-link">Help Center</Link></li>
                             </ul>
-                        </li>
+                        </li> */}
                         {/* <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Pages <i className="fas fa-angle-down ml-1" /></a>
                             <ul className="dropdown-menu">

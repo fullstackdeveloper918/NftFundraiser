@@ -22,7 +22,7 @@ const projectSlice = createSlice({
             state.projects = action.payload;
         },
         createFail: (state, action) => {
-            // debugger
+            // 
             state.message = action.payload.response.data.message
         },
         getProjectDetail: (state, action) => {

@@ -58,11 +58,11 @@ const ForgotPassword = () => {
                                     <button className="btn w-100 mt-3 mt-sm-4" type="submit">Send Reset Link</button>
                                 </div>
 
-                                <div className="col-12">
+                                {/* <div className="col-12">
                                     <hr />
                                     <div className="other-option">
-                                        {/* Social Icons */}
-                                        {/* <div className="social-icons d-flex justify-content-center">
+                                        Social Icons
+                                        <div className="social-icons d-flex justify-content-center">
                                             {this.state.data.map((item, idx) => {
                                                 return (
                                                     <a key={`lsd_${idx}`} className={item.link} href="#">
@@ -71,9 +71,9 @@ const ForgotPassword = () => {
                                                     </a>
                                                 );
                                             })}
-                                        </div> */}
+                                        </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </form>
                     </div>

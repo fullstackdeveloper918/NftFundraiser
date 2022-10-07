@@ -37,15 +37,7 @@ export const LoginAction = (params, history) => async dispatch => {
 
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/organization_signin`,
             params, config)
-        // console.log(res?.data?.message)
-        // if (res?.status === 200) {
-
         dispatch(loginSuccess(res));
-        // 
-        // <Redirect to={'/'} />
-        // console.log("loggedin")
-        // history.push('/')
-        // }
 
     } catch (e) {
         // 
@@ -95,16 +87,6 @@ export const CreateOrganizationAction = (params) => async dispatch => {
             params, config)
 
         dispatch(createOrganizationSuccess(res));
-        // setTimeout(function () {
-        // swal({
-        //     title: "Mail Sent!",
-        //     text: "Check your email!",
-        //     type: "success"
-        // }, function () {
-        //     window.location = '/login';
-        // });
-        // }, 1000);
-        // swal("Registered!", "You have been registered!", "success");
     } catch (e) {
         return console.error(e.message);
     }

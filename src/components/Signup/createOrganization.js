@@ -12,7 +12,10 @@ const CreateOrganization = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const { user } = useSelector(state => state.user)
+    const organization = useSelector(state => {
+      
+      return state.user.organization
+    })
     const { countries } = useSelector(state => state.countries)
     const { annualRevenue } = useSelector(state => state.annualRevenue)
 
@@ -48,6 +51,10 @@ const CreateOrganization = () => {
         dispatch(HearAboutList())
     }, [])
 
+
+    if (organization) {
+        history.push('/')
+    }
 
     return (
         <section className="author-area">

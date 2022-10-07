@@ -24,7 +24,6 @@ import Forgot from "../themes/forgotpassword";
 import PrivateRoute from "./privateRoutes";
 import ProjectUpdate from "../themes/update";
 
-
 const MyRouts = () => {
   return (
     <div>
