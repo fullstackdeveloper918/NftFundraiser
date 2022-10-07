@@ -11,7 +11,8 @@ const projectSlice = createSlice({
         project: [],
         projects: [],
         projectdetails: [],
-        liveProjects:[]
+        liveProjects:[],
+        message: {},
     },
     reducers: {
         createProjectSuccess: (state, action) => {
@@ -19,6 +20,10 @@ const projectSlice = createSlice({
         },
         getProjectList: (state, action) => {
             state.projects = action.payload;
+        },
+        createFail: (state, action) => {
+            // debugger
+            state.message = action.payload.response.data.message
         },
         getProjectDetail: (state, action) => {
             state.projectdetails = action?.payload?.data?.data;
@@ -41,4 +46,5 @@ export const {
     getProjectDetail,
     publicLiveProjects,
     deleteProduct,
+    createFail
 } = projectSlice.actions;

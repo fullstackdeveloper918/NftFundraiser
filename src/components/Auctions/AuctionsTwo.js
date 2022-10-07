@@ -56,7 +56,7 @@ const LiveAuctions = () => {
                                             </a>
                                             <div className="card-bottom d-flex justify-content-between">
                                                 <span>{item.price} MATIC</span>
-                                                <span>{item.count} NFTS</span>
+                                                <span>{item.number_of_nft} NFTS</span>
                                             </div>
                                         </div>
                                     </div>

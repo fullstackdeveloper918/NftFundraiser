@@ -3,7 +3,8 @@ import { createProjectSuccess,
     deleteProduct, 
     getProjectDetail, 
     getProjectList,
-     publicLiveProjects } from "../Slices/projectSlice";
+    createFail,
+    publicLiveProjects } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const CreateProjectAction = (params) => async dispatch => {
@@ -23,7 +24,10 @@ export const CreateProjectAction = (params) => async dispatch => {
         dispatch(createProjectSuccess(res));
 
     } catch (e) {
-        return console.error(e.message);
+        if (e?.response?.data) {
+
+            dispatch(createFail(e))
+        }
     }
 }
 

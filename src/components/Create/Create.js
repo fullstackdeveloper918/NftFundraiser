@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import swal from 'sweetalert';
+import Swal from 'sweetalert2';
+// import state from 'sweetalert/typings/modules/state';
 import { CreateProjectAction } from '../../redux/Actions/projectAction';
 import AuthorProfile from "../AuthorProfile/AuthorProfile";
 
 const Create = () => {
 
     const dispatch = useDispatch()
+    const history = useHistory()
+
+    const message = useSelector(state => {
+        // debugger
+        return state.projectdetails.message
+    })
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const proj = useSelector(state => {
+        return state.createproject
+    })
 
     const OnSubmit = (data) => {
         // 
@@ -28,11 +41,15 @@ const Create = () => {
         formData.append('type', data.type)
 
         dispatch(CreateProjectAction(formData))
-        // if (formData) {
-        //     swal("Created!", "Project created successfully!", "success");
-        //     // history.push('/login')
-        // }
-
+        if (proj?.project?.data?.statusCode === 200) {
+            swal("Created!", "Project created successfully!", "success");
+            history.push('/projectlist')
+        } else {
+            {
+                message.length > 0 &&
+                swal("error!", message,)
+            }
+        }
     }
 
     return (
@@ -99,7 +116,7 @@ const Create = () => {
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
                                         <input
-                                            type="number"
+                                            type="text"
                                             className="form-control"
                                             name="latitude"
                                             placeholder="Latitude"
@@ -112,7 +129,7 @@ const Create = () => {
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
                                         <input
-                                            type="number"
+                                            type="text"
                                             className="form-control"
                                             name="logitude"
                                             placeholder="Logitude"

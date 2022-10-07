@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { ProjectDetail, ProjectList, UpdateProject } from '../redux/Actions/projectAction';
 import { getProjectDetail } from '../redux/Slices/projectSlice';
+import { useState } from 'react';
 
 const EditProject = () => {
+
+
     const id = useParams();
     console.log(id, "idd")
     const dispatch = useDispatch()
@@ -40,7 +43,7 @@ const EditProject = () => {
             setValue("start_date", projdetail.start_date)
             setValue("end_date", projdetail.end_date)
             setValue("type", projdetail.type)
-            setValue("image", projdetail.image[0])
+            setValue("image", projdetail.image)
         }
     }, [projdetail]);
 
@@ -72,7 +75,7 @@ const EditProject = () => {
     return (
         <section className="author-area">
             <div className="container">
-                <div className="row justify-content-between">
+                <div className="row justify-content-center">
 
                     <div className="col-12 col-md-7">
                         <div className="intro mt-5 mt-lg-0 mb-4 mb-lg-5">
@@ -125,7 +128,7 @@ const EditProject = () => {
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
                                         <input
-                                            type="number"
+                                            type="text"
                                             className="form-control"
                                             name="latitude"
                                             placeholder="Latitude"
@@ -136,7 +139,7 @@ const EditProject = () => {
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
                                         <input
-                                            type="number"
+                                            type="text"
                                             className="form-control"
                                             name="logitude"
                                             placeholder="Logitude"

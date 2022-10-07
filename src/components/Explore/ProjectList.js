@@ -85,14 +85,14 @@ const GetAllProjects = () => {
                                             <div className="seller d-flex align-items-center my-3">
                                                 <span>Owned By</span>
                                                 <a href="/author">
-                                                    <h6 className="ml-2 mb-0">{item.type}</h6>
+                                                    <h6 className="ml-2 mb-0"> Arhaam </h6>
                                                 </a>
                                             </div>
                                             <div className="card-bottom d-flex justify-content-between">
                                                 <span>{item.price}</span>
-                                                <span>{item.count}</span>
+                                                <span>1 of 1</span>
                                             </div>
-                                            <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a>
+                                            {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
                                             <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a>
                                         </div>
                                     </div>
