@@ -1,12 +1,12 @@
 import axios from "axios";
 import { createOrganizationSuccess, forgotpasswordSuccess, getAnnualRevenueList, getCountryList, getHearAboutList, loginSuccess, registerFail, registerSuccess, } from "../Slices/authSlice";
 import swal from "sweetalert";
-import { Redirect, useHistory } from "react-router";
-import { useState } from "react";
 // import { useNavigate } from 'react-router-dom';
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
-
-export const Register = (params) => async dispatch => {
+export const Register =  createAsyncThunk(
+    "auth/register",
+    async (params, thunkAPI) =>  {
     try {
         const config = {
             headers: {
@@ -15,16 +15,15 @@ export const Register = (params) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/signup`,
             params, config)
-        dispatch(registerSuccess(res));
+
+        thunkAPI.dispatch(registerSuccess(res));
+
     } catch (e) {
-        // debugger
         if (e?.response?.data) {
-
-            dispatch(registerFail(e))
+            thunkAPI.dispatch(registerFail(e))
         }
-
     }
-}
+})
 
 export const LoginAction = (params, history) => async dispatch => {
     try {
@@ -42,14 +41,14 @@ export const LoginAction = (params, history) => async dispatch => {
         // if (res?.status === 200) {
 
         dispatch(loginSuccess(res));
-        // debugger
+        // 
         // <Redirect to={'/'} />
         // console.log("loggedin")
         // history.push('/')
         // }
 
     } catch (e) {
-        // debugger
+        // 
         return console.error(e.message);
     }
 }
@@ -94,6 +93,7 @@ export const CreateOrganizationAction = (params) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createOrganizationDetails`,
             params, config)
+
         dispatch(createOrganizationSuccess(res));
         // setTimeout(function () {
         // swal({

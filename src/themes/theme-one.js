@@ -13,12 +13,12 @@ import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
 
 
-const ThemeOne = () => {
+const Home = () => {
     return (
         <div className="main">
             <Header />
             <Hero />
-            <Auctions />
+            <Auctions/>
             <TopSeller />
             <Collections />
             <Explore />
@@ -31,4 +31,4 @@ const ThemeOne = () => {
     )
 }
 
-export default ThemeOne;
+export default Home;

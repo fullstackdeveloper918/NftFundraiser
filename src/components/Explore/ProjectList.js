@@ -1,5 +1,4 @@
-import React, { Component, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ProjectList } from '../../redux/Actions/projectAction';
@@ -7,26 +6,25 @@ import { DeleteProject } from './../../redux/Actions/projectAction';
 
 
 const GetAllProjects = () => {
-
-    // const [projc, setProjc] = useState([])
     // console.log(projc, 'projc')
     const dispatch = useDispatch()
 
-    const proj = useSelector(state => {
-        return state.projectdetails
+    const projects = useSelector(state => {
+        return state.projectdetails.projects
     })
+
+    console.log(projects,'projects')
+
     useEffect(() => {
         dispatch(ProjectList())
     }, [dispatch])
 
-    console.log(proj, 'projects')
-
     const deleteHandler = (id) => {
-
         dispatch(DeleteProject(id))
     }
 
     return (
+        <>
         <section className="explore-area">
             <div className="container">
                 <div className="row justify-content-center">
@@ -35,7 +33,6 @@ const GetAllProjects = () => {
                         <div className="intro text-center mb-4">
                             <span>Explore</span>
                             <h3 className="mt-3 mb-0">Projects</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p>
                         </div>
                     </div>
                 </div>
@@ -67,10 +64,11 @@ const GetAllProjects = () => {
                         </div>
                     </div>
                 </div>
-                <div className="row items explore-items">
-                    {proj?.projects?.map((item, idx) => {
+                <div className="row items explore-items h-auto">
+                    {projects && projects.length?
+                     projects.map((item, idx) => {
                         return (
-                            <div key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item" data-groups={item.group}>
+                            <div key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
                                 <div className="card">
                                     <div className="image-over">
                                         <Link to={`/item-details/${item.id}`}>
@@ -100,11 +98,18 @@ const GetAllProjects = () => {
                                     </div>
                                 </div>
                             </div>
-                        );
-                    })}
+                        )
+                    }):
+                      <div className="col-12 col-sm-6 col-lg-3">
+                        <h2>
+                           No Projects Created Yet
+                        </h2>
+                      </div>
+                    }
                 </div>
             </div>
         </section>
+        </>
     );
 
 }

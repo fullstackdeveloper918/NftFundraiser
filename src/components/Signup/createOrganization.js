@@ -1,12 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Field, Form, Formik } from 'formik'
 import { AnnualRevenueList, CountryList, CreateOrganizationAction, HearAboutList } from '../../redux/Actions/authAction'
 import { useForm } from 'react-hook-form'
-import Dropzone from 'react-dropzone'
 import swal from 'sweetalert'
-import { Redirect, useHistory } from 'react-router'
-import Loader from '../Loader/loader'
+import { useHistory } from 'react-router'
 // import { Widget } from "@uploadcare/react-widget";
 // import FileUpload from "react-material-file-upload";
 // import { uploadcare } from '../lib/uploadcare.min.js';
@@ -39,13 +36,11 @@ const CreateOrganization = () => {
         formData.append('method_heard_detail', data.method_heard_detail)
 
         dispatch(CreateOrganizationAction(formData))
-        if (formData) {
-            swal("Registered!", "You have been registered!", "success");
-            history.push('/login')
-        }
-
+        // if (formData) {
+        //     swal("Registered!", "You have been registered!", "success");
+        //     history.push('/login')
+        // }
     }
-
 
     useEffect(() => {
         dispatch(CountryList())
@@ -133,7 +128,7 @@ const CreateOrganization = () => {
                                             type="text"
                                             className="form-control"
                                             name="tax_id"
-                                            placeholder="Enter your Id"
+                                            placeholder="Enter your EIN Number/Tax Id"
                                             {...register("tax_id", { required: true })}
                                             // {...register("email")}
                                             aria-invalid={errors.tax_id ? "true" : "false"}
@@ -157,11 +152,11 @@ const CreateOrganization = () => {
                                 </div>
                                 <div className="col-12">
                                     <div className="form-group mt-3">
-                                        <input
+                                        <textarea
                                             type="text"
                                             className="form-control"
                                             name="method_hear_detail"
-                                            placeholder="Enter your Method Hear Detail"
+                                            placeholder="Tell us How you Heard about us?(other)"
                                             {...register("method_heard_detail", { required: true })}
                                             // {...register("email")}
                                             aria-invalid={errors.method_heard_detail ? "true" : "false"}
@@ -223,18 +218,17 @@ const CreateOrganization = () => {
                                         {errors.image?.type === 'required' && <p style={{ color: 'red' }} role="alert">File is required</p>}
                                     </div>
                                 </div>
-                                <div className="col-12">
+                                {/* <div className="col-12">
                                     <div className="form-group mt-3">
                                         <div className="form-check form-check-inline">
                                             <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" />
                                             <label className="form-check-label" htmlFor="inlineRadio1">Remember Me</label>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="col-12">
                                     <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create</button>
                                 </div>
-
                             </div>
                         </form>
                     </div>

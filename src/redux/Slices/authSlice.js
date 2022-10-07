@@ -4,6 +4,7 @@ const userToken = localStorage.getItem('authToken')
     // ? JSON.parse(localStorage.getItem('user'))
     ? localStorage.getItem('authToken')
     : null
+
 const authSlice = createSlice({
     name: 'user',
     initialState: {
@@ -17,13 +18,12 @@ const authSlice = createSlice({
     },
     reducers: {
         registerSuccess: (state, action) => {
-            // debugger
             state.user = action.payload;
             state.userToken = action.payload.data.data.auth_token;
             localStorage.setItem('authToken', action.payload.data.data.auth_token)
         },
         registerFail: (state, action) => {
-            // debugger
+            // 
             state.message = action.payload.response.data.message
         },
         loginSuccess: (state, action) => {
@@ -32,9 +32,8 @@ const authSlice = createSlice({
             state.userToken = action.payload.data.data.auth_token;
             localStorage.setItem('authToken', action.payload.data.data.auth_token)
         },
-        logoutSuccess: (state, action) => {
+        logoutSuccess: (state) => {
             localStorage.removeItem('authToken')
-            // state.logout = action.payload;
             state.userToken = null
         },
         forgotpasswordSuccess: (state, action) => {

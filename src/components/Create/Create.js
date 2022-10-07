@@ -8,15 +8,11 @@ import AuthorProfile from "../AuthorProfile/AuthorProfile";
 const Create = () => {
 
     const dispatch = useDispatch()
-    const history = useHistory()
-
-
-
     const { register, handleSubmit, formState: { errors } } = useForm();
 
 
     const OnSubmit = (data) => {
-        // debugger
+        // 
         const formData = new FormData()
 
         formData.append('image', data.image[0])
@@ -42,17 +38,16 @@ const Create = () => {
     return (
         <section className="author-area">
             <div className="container">
-                <div className="row justify-content-between">
-                    <div className="col-12 col-md-4">
-                        {/* Author Profile */}
+                <div className="row justify-content-center">
+                    {/* <div className="col-12 col-md-4">
                         <AuthorProfile />
-                    </div>
-                    <div className="col-12 col-md-7">
+                    </div> */}
+                    <div className="col-14 col-md-9">
                         {/* Intro */}
                         <div className="intro mt-5 mt-lg-0 mb-4 mb-lg-5">
                             <div className="intro-content">
                                 <span>Get Started</span>
-                                <h3 className="mt-3 mb-0">Create Item</h3>
+                                <h3 className="mt-3 mb-0">Create NFT</h3>
                             </div>
                         </div>
                         {/* Item Form */}
@@ -79,7 +74,7 @@ const Create = () => {
                                             type="text"
                                             className="form-control"
                                             name="address"
-                                            placeholder="Address"
+                                            placeholder="Wallet Address"
                                             {...register("address", { required: true })}
                                             aria-invalid={errors.address ? "true" : "false"}
                                         />
@@ -146,7 +141,7 @@ const Create = () => {
                                             type="number"
                                             className="form-control"
                                             name="number_of_nft"
-                                            placeholder="Size"
+                                            placeholder="Number of NFT"
                                             {...register("number_of_nft", { required: true })}
                                             aria-invalid={errors.number_of_nft ? "true" : "false"}
                                         />
@@ -159,7 +154,7 @@ const Create = () => {
                                             type="date"
                                             className="form-control"
                                             name="start_date"
-                                            placeholder="Enter your start date"
+                                            placeholder="Enter your start date of Fundraiser"
                                             {...register("start_date", { required: true })}
                                             aria-invalid={errors.start_date ? "true" : "false"}
                                         />
@@ -172,7 +167,7 @@ const Create = () => {
                                             type="date"
                                             className="form-control"
                                             name="end_date"
-                                            placeholder="Enter your end date"
+                                            placeholder="Enter your end date Fundraiser"
                                             {...register("end_date", { required: true })}
                                             aria-invalid={errors.end_date ? "true" : "false"}
                                         />

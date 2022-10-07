@@ -1,36 +1,50 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector, } from 'react-redux'
 import { Register } from '../../redux/Actions/authAction'
-import { Redirect, useHistory } from 'react-router'
+import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import Loader from '../Loader/loader'
-import swal from 'sweetalert'
+import * as Yup from 'yup'
+import { yupResolver } from "@hookform/resolvers/yup";
 
-const Signup = () => {
+const formSchema = Yup.object().shape({
+    email: Yup.string()
+    .email()
+    .required("Email is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(4, "Password length should be at least 4 characters")
+      .max(12, "Password cannot exceed more than 12 characters"),
+    confirm_password: Yup.string()
+      .required("Confirm Password is required")
+      .min(4, "Password length should be at least 4 characters")
+      .max(12, "Password cannot exceed more than 12 characters")
+      .oneOf([Yup.ref("password")], "Passwords do not match")
+  });
 
-    const history = useHistory()
+
+const Signup = ({setStep}) => {
     const dispatch = useDispatch()
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register,watch, handleSubmit, formState: { errors } } = useForm({
+        mode: "onTouched",
+        resolver: yupResolver(formSchema)
+    });
 
     const OnSubmit = (data) => {
         dispatch(Register(data))
     }
 
-
     const { user } = useSelector(state => state.user)
 
-    console.log(user, 'userrrr')
     if (user?.status === 200) {
-        history.push('/create-organization')
+       setStep(prev=>prev+1)
     }
+
     const { errMessage } = useSelector(state => {
         return state?.errmessage?.message
     })
 
     return (
-
-
         < section className="author-area" >
             <div className="container">
 
@@ -76,7 +90,7 @@ const Signup = () => {
                                                 placeholder="Enter your Password"
                                                 {...register("password", { required: true })}
                                                 aria-invalid={errors.password ? "true" : "false"} />
-                                            {errors.password?.type === 'required' && <p style={{ color: 'red' }} role="alert">Password is required</p>}
+                                            {errors.password && <p style={{ color: 'red' }} role="alert">{errors.password.message}</p>}
                                         </div>
                                     </div>
                                     <div className="col-12">
@@ -87,20 +101,27 @@ const Signup = () => {
                                                 className="form-control"
                                                 name="confirm_password"
                                                 placeholder="Enter your Password Again"
-                                                {...register("confirm_password", { required: true })}
+                                                {...register("confirm_password",
+                                                 { required: true,
+                                                    validate: (val) => {
+                                                        if (watch('password') != val) {
+                                                          return "Your passwords do no match";
+                                                        }
+                                                  },
+                                                })}
                                                 aria-invalid={errors.confirm_password ? "true" : "false"} />
-                                            {errors.confirm_password?.type === 'required' && <p style={{ color: 'red' }} role="alert">Confirm Password is required</p>}
+                                            {errors.confirm_password && <p style={{ color: 'red' }} role="alert">{errors.confirm_password.message}</p>}
                                         </div>
                                     </div>
 
-                                    <div className="col-12">
+                                    {/* <div className="col-12">
                                         <div className="form-group mt-3">
                                             <div className="form-check form-check-inline">
                                                 <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" />
                                                 <label className="form-check-label" htmlFor="inlineRadio1">Remember Me</label>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="col-12">
                                         <button className="btn w-100 mt-3 mt-sm-4" type="submit">Next</button>
                                     </div>

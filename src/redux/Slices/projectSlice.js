@@ -10,26 +10,26 @@ const projectSlice = createSlice({
     initialState: {
         project: [],
         projects: [],
-        projectdetails: []
+        projectdetails: [],
+        liveProjects:[]
     },
     reducers: {
         createProjectSuccess: (state, action) => {
             state.project = action.payload;
         },
         getProjectList: (state, action) => {
-            state.projects = action?.payload?.data?.data;
+            state.projects = action.payload;
         },
         getProjectDetail: (state, action) => {
             state.projectdetails = action?.payload?.data?.data;
         },
+        publicLiveProjects: (state, action) => {
+            state.liveProjects = action.payload.data.data.data
+        },
         deleteProduct: (state, action) => {
             const { id } = action.payload?.data?.data;
-
             state.projects = state.projects.filter(item => item.id !== id)
-
         }
-
-
     },
 });
 
@@ -39,5 +39,6 @@ export const {
     createProjectSuccess,
     getProjectList,
     getProjectDetail,
-    deleteProduct
+    publicLiveProjects,
+    deleteProduct,
 } = projectSlice.actions;

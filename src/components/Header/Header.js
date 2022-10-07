@@ -1,28 +1,19 @@
-import { useSelect } from '@mui/base';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { logoutSuccess } from '../../redux/Slices/authSlice';
-import { isLogin, logout, TOKEN_KEY } from '../../routers/utils';
-import Login from '../Login/Login';
 
 const Header = () => {
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const LogoutHandler = () => {
         dispatch(logoutSuccess())
-        // dispatch(user())
     }
 
     const log = useSelector(state => {
-        // debugger
         return state.user.userToken
     })
-    console.log(log, 'user')
-    // useEffect(() => {
-    //     dispatch(user())
-    // })
+ 
     return (
         <header id="header">
             {/* Navbar */}
@@ -30,7 +21,7 @@ const Header = () => {
                 <div className="container header">
                     {/* Navbar Brand*/}
                     <a className="navbar-brand" href="/">
-                        <img className="navbar-brand-sticky" src="img/logo.png" alt="sticky brand-logo" />
+                        <img className="navbar-brand-sticky" src="/img/karmatica.png" alt="karmatica" />
                     </a>
                     <div className="ml-auto" />
                     {/* Navbar */}
@@ -41,12 +32,7 @@ const Header = () => {
                         <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Explore <i className="fas fa-angle-down ml-1" /></a>
                             <ul className="dropdown-menu">
-                                {/* <li className="nav-item"><Link to="/explore-1" className="nav-link">Explore Style 1</Link></li> */}
-                                <li className="nav-item"><Link to="/projectlist" className="nav-link">Project List</Link></li>
-                                {/* <li className="nav-item"><Link to="/explore-3" className="nav-link">Explore Style 3</Link></li>
-                                <li className="nav-item"><Link to="/explore-4" className="nav-link">Explore Style 4</Link></li> */}
                                 <li className="nav-item"><Link to="/auctions" className="nav-link">Live Auctions</Link></li>
-                                {/* <li className="nav-item"><Link to="/item-details" className="nav-link">Item Details</Link></li> */}
                             </ul>
                         </li>
                         <li className="nav-item">
@@ -60,7 +46,7 @@ const Header = () => {
                                 <li className="nav-item"><Link to="/help-center" className="nav-link">Help Center</Link></li>
                             </ul>
                         </li>
-                        <li className="nav-item dropdown">
+                        {/* <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Pages <i className="fas fa-angle-down ml-1" /></a>
                             <ul className="dropdown-menu">
                                 <li className="nav-item"><Link to="/authors" className="nav-link">Authors</Link></li>
@@ -70,19 +56,19 @@ const Header = () => {
                                 <li className="nav-item"><Link to="/login" className="nav-link">Login</Link></li>
                                 <li className="nav-item"><Link to="/signup" className="nav-link">Signup</Link></li>
                             </ul>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <Link to="/contact" className="nav-link">Contact</Link>
                         </li>
                     </ul>
                     {/* Navbar Icons */}
-                    <ul className="navbar-nav icons">
+                    {/* <ul className="navbar-nav icons">
                         <li className="nav-item">
                             <Link to="#" className="nav-link" data-toggle="modal" data-target="#search">
                                 <i className="fas fa-search" />
                             </Link>
                         </li>
-                    </ul>
+                    </ul> */}
                     {/* Navbar Toggler */}
                     <ul className="navbar-nav toggle">
                         <li className="nav-item">
@@ -98,19 +84,19 @@ const Header = () => {
                             <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i className="fa fa-solid fa-user"></i>
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <ul class="creator-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><button type='button' class="dropdown-item"><a href='/author'>Profile</a></button></li>
+                                <li><button type='button' class="dropdown-item"><a href='/projectlist'>My Projects</a></button></li>
                                 <li><button type='button' class="dropdown-item" onClick={LogoutHandler}><a href='/'>Logout</a></button></li>
-
-
                             </ul>
-
                         </div>
                     ) : (
-
-
                         <><ul className="navbar-nav action">
                             <li className="nav-item ml-3">
-                                <Link to="/signup" className="btn ml-md-auto btn-bordered-white"><i className="fa fa-user" />CREATOR</Link>
+                                <Link to="/signup" className="creator-button btn ml-md-auto btn-bordered-white">
+                                 <i className="fa fa-user" />
+                                 <div>CREATOR</div>
+                                </Link>
                             </li>
                         </ul><ul className="navbar-nav action">
                                 <li className="nav-item ml-3">
@@ -118,21 +104,8 @@ const Header = () => {
                                 </li>
                             </ul></>
                     )}
-
-
-
-
-
-
                     {/* {!user?.status === 200 && ( */}
-
-
-
-
-
                     {/* )} */}
-
-
                 </div>
             </nav>
         </header >

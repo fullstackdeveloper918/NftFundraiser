@@ -1,5 +1,10 @@
 import axios from "axios";
-import { createProjectSuccess, deleteProduct, getProjectDetail, getProjectList } from "../Slices/projectSlice";
+import { createProjectSuccess, 
+    deleteProduct, 
+    getProjectDetail, 
+    getProjectList,
+     publicLiveProjects } from "../Slices/projectSlice";
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const CreateProjectAction = (params) => async dispatch => {
     // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
@@ -23,7 +28,7 @@ export const CreateProjectAction = (params) => async dispatch => {
 }
 
 export const ProjectDetail = (id) => async dispatch => {
-    // debugger
+    // 
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -38,7 +43,7 @@ export const ProjectDetail = (id) => async dispatch => {
         // console.log(res)
         dispatch(getProjectDetail(res));
     } catch (e) {
-        // debugger 
+        //  
         return console.error(e.message);
     }
 }
@@ -57,15 +62,36 @@ export const ProjectList = () => async dispatch => {
             config)
 
         // console.log(res?.data?.data[0]?.image, 'proj')
-        await dispatch(getProjectList(res));
+        await dispatch(getProjectList(res.data?.data));
+
     } catch (e) {
-        // debugger 
         return console.error(e.message);
     }
 }
 
+
+export const getPublicLiveProjects = createAsyncThunk(
+    "auth/liveProjects",
+    async (cursor, thunkAPI) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=${cursor}`, config)
+
+            thunkAPI.dispatch(publicLiveProjects(res));
+
+        } catch (e) {
+            if (e?.response?.data) {
+                thunkAPI.dispatch()
+            }
+        }
+    })
+
 export const UpdateProject = (id, params) => async dispatch => {
-    // debugger
+    // 
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -77,17 +103,17 @@ export const UpdateProject = (id, params) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/update/${id.id}`,
             params, config)
-        // debugger
+        // 
         console.log(res, 'proj')
         await dispatch(getProjectDetail(res));
     } catch (e) {
-        // debugger 
+        //  
         return console.error(e.message);
     }
 }
 
 export const DeleteProject = (id) => async dispatch => {
-    // debugger
+    // 
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -98,11 +124,11 @@ export const DeleteProject = (id) => async dispatch => {
         }
         const res = await axios.delete(`${process.env.REACT_APP_BACKEND_API}api/projects/destroy/${id}`,
             config)
-        // debugger
+        // 
         console.log(res, 'proj')
         await dispatch(deleteProduct(res));
     } catch (e) {
-        // debugger 
+        //  
         return console.error(e.message);
     }
 }

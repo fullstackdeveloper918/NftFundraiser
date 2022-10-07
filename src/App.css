@@ -1,0 +1,10 @@
+.creator-dropdown{
+    min-width: 10rem !important;
+    left: -20px;
+    text-align: center;
+}
+
+.creator-button{
+    display: flex;
+    gap: 8px;
+}

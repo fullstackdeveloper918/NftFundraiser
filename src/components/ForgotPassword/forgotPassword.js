@@ -11,7 +11,7 @@ const ForgotPassword = () => {
 
     const dispatch = useDispatch()
     const { forgotpassword, message, statusCode } = useSelector(state => {
-        // debugger
+        // 
         return state.forgotpassword
     })
 

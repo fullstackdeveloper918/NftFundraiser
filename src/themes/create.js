@@ -13,7 +13,6 @@ const Create = () => {
     return (
         <div className="main">
             <Header />
-            <Breadcrumb title="Create" subpage="Pages" page="Create" />
             <Creates />
             <Footer />
             <ModalSearch />

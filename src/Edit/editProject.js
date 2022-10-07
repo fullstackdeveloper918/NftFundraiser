@@ -13,7 +13,7 @@ const EditProject = () => {
     const history = useHistory()
 
     const projdetail = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.projectdetails
     })
 
@@ -22,7 +22,7 @@ const EditProject = () => {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
     useEffect(() => {
-        // debugger
+        // 
         dispatch(ProjectDetail(id))
 
     }, [id])
@@ -45,7 +45,7 @@ const EditProject = () => {
     }, [projdetail]);
 
     const OnSubmit = (data) => {
-        // debugger
+        // 
         const formData = new FormData()
 
         formData.append('image', data.image[0])

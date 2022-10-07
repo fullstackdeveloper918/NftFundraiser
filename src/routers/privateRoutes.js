@@ -4,7 +4,7 @@ import { isLogin } from './utils';
 
 const PrivateRoute = ({ component: Component, restricted, ...rest }) => {
     // const isLog = isLogin()
-    // debugger
+    // 
     return (
 
         // Show the component only when the user is logged in

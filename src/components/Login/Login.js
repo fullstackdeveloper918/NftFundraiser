@@ -13,19 +13,19 @@ const Login = () => {
     const dispatch = useDispatch()
 
     const { user } = useSelector(state => {
-        // debugger
+        // 
         // console.log(login.authToken, 'login')
         return state.login
     })
-    console.log(user.status, 'login')
+    
     if (user?.status === 200) {
         history.push('/')
     }
+
     const mesg = useSelector(state => {
-        // debugger
+        // 
         return state.user.message
     })
-    console.log(mesg)
     // if (login?.userToken) {
     //     console.log('hello')
     // }
@@ -33,7 +33,7 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const OnSubmit = (data) => {
-        // debugger
+        // 
         dispatch(LoginAction(data))
 
     }

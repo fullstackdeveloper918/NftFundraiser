@@ -13,7 +13,6 @@ class Auctions extends Component {
         return (
             <div className="main">
                 <Header />
-                <Breadcrumb title="Auctions" subpage="Explore" page="Live Auctions" />
                 <LiveAuctions />
                 <Footer />
                 <ModalSearch />

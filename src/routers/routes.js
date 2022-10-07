@@ -20,10 +20,8 @@ import Create from "../themes/create";
 import Login from "../themes/login";
 import Signup from "../themes/signup";
 import Contact from "../themes/contact";
-import { createOrganization } from "../themes/create_Organization";
 import Forgot from "../themes/forgotpassword";
 import PrivateRoute from "./privateRoutes";
-import read from "../themes/read";
 import ProjectUpdate from "../themes/update";
 
 
@@ -50,7 +48,7 @@ const MyRouts = () => {
           <Route exact path="/create" component={Create} />
           <PrivateRoute exact path="/login" component={Login} />
           <PrivateRoute exact path="/signup" component={Signup} />
-          <PrivateRoute exact path="/create-organization" component={createOrganization} />
+          {/* <PrivateRoute exact path="/create-organization" component={createOrganization} /> */}
           <PrivateRoute exact path="/forgotpassword" component={Forgot} />
           <Route exact path="/contact" component={Contact} />
         </Switch>
