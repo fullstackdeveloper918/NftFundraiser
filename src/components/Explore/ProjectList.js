@@ -13,102 +13,102 @@ const GetAllProjects = () => {
         return state.projectdetails.projects
     })
 
-    console.log(projects,'projects')
+    console.log(projects, 'projects')
 
     useEffect(() => {
         dispatch(ProjectList())
     }, [dispatch])
 
-    const deleteHandler = (id) => {
-        dispatch(DeleteProject(id))
-    }
+    // const deleteHandler = (id) => {
+    //     dispatch(DeleteProject(id))
+    // }
 
     return (
         <>
-        <section className="explore-area">
-            <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-12 col-md-8 col-lg-7">
-                        {/* Intro */}
-                        <div className="intro text-center mb-4">
-                            <span>Explore</span>
-                            <h3 className="mt-3 mb-0">Projects</h3>
+            <section className="explore-area">
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-12 col-md-8 col-lg-7">
+                            {/* Intro */}
+                            <div className="intro text-center mb-4">
+                                <span>Explore</span>
+                                <h3 className="mt-3 mb-0">Projects</h3>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="row justify-content-center text-center">
-                    <div className="col-12">
-                        {/* Explore Menu */}
+                    <div className="row justify-content-center text-center">
+                        <div className="col-12">
+                            {/* Explore Menu */}
 
-                        <div className="explore-menu btn-group btn-group-toggle flex-wrap justify-content-center text-center mb-4" data-toggle="buttons">
-                            <label className="btn active d-table text-uppercase p-2">
-                                <input type="radio" defaultValue="all" defaultChecked className="explore-btn" />
-                                <span>All</span>
-                            </label>
-                            <label className="btn d-table text-uppercase p-2">
-                                <input type="radio" defaultValue="art" className="explore-btn" />
-                                <span>Art</span>
-                            </label>
-                            <label className="btn d-table text-uppercase p-2">
-                                <input type="radio" defaultValue="music" className="explore-btn" />
-                                <span>Music</span>
-                            </label>
-                            <label className="btn d-table text-uppercase p-2">
-                                <input type="radio" defaultValue="collectibles" className="explore-btn" />
-                                <span>Collectibles</span>
-                            </label>
-                            <label className="btn d-table text-uppercase p-2">
-                                <input type="radio" defaultValue="sports" className="explore-btn" />
-                                <span>Sports</span>
-                            </label>
+                            <div className="explore-menu btn-group btn-group-toggle flex-wrap justify-content-center text-center mb-4" data-toggle="buttons">
+                                <label className="btn active d-table text-uppercase p-2">
+                                    <input type="radio" defaultValue="all" defaultChecked className="explore-btn" />
+                                    <span>All</span>
+                                </label>
+                                <label className="btn d-table text-uppercase p-2">
+                                    <input type="radio" defaultValue="art" className="explore-btn" />
+                                    <span>Art</span>
+                                </label>
+                                <label className="btn d-table text-uppercase p-2">
+                                    <input type="radio" defaultValue="music" className="explore-btn" />
+                                    <span>Music</span>
+                                </label>
+                                <label className="btn d-table text-uppercase p-2">
+                                    <input type="radio" defaultValue="collectibles" className="explore-btn" />
+                                    <span>Collectibles</span>
+                                </label>
+                                <label className="btn d-table text-uppercase p-2">
+                                    <input type="radio" defaultValue="sports" className="explore-btn" />
+                                    <span>Sports</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="row items explore-items h-auto">
-                    {projects && projects.length?
-                     projects.map((item, idx) => {
-                        return (
-                            <div key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
-                                <div className="card">
-                                    <div className="image-over">
-                                        <Link to={`/item-details/${item.id}`}>
-                                            <img className="card-img-top" src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt="" />
-                                        </Link>
-                                    </div>
-                                    {/* Card Caption */}
-                                    <div className="card-caption col-12 p-0">
-                                        {/* Card Body */}
-                                        <div className="card-body">
-                                            <a href="/item-details">
-                                                <h5 className="mb-0">{item.title}</h5>
-                                            </a>
-                                            <div className="seller d-flex align-items-center my-3">
-                                                <span>Owned By</span>
-                                                <a href="/author">
-                                                    <h6 className="ml-2 mb-0"> Arhaam </h6>
-                                                </a>
+                    <div className="row items explore-items h-auto">
+                        {projects && projects.length ?
+                            projects.map((item, idx) => {
+                                return (
+                                    <div key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
+                                        <div className="card">
+                                            <div className="image-over">
+                                                <Link to={`/item-details/${item.id}`}>
+                                                    <img className="card-img-top" src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt="" />
+                                                </Link>
                                             </div>
-                                            <div className="card-bottom d-flex justify-content-between">
-                                                <span>{item.price}</span>
-                                                <span>1 of 1</span>
+                                            {/* Card Caption */}
+                                            <div className="card-caption col-12 p-0">
+                                                {/* Card Body */}
+                                                <div className="card-body">
+                                                    <a href="/item-details">
+                                                        <h5 className="mb-0">{item.title}</h5>
+                                                    </a>
+                                                    <div className="seller d-flex align-items-center my-3">
+                                                        <span>Owned By</span>
+                                                        <a href="/author">
+                                                            <h6 className="ml-2 mb-0"> Arhaam </h6>
+                                                        </a>
+                                                    </div>
+                                                    <div className="card-bottom d-flex justify-content-between">
+                                                        <span>{item.price}</span>
+                                                        <span>1 of 1</span>
+                                                    </div>
+                                                    {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
+                                                    {/* <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a> */}
+                                                </div>
                                             </div>
-                                            {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
-                                            <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a>
                                         </div>
                                     </div>
-                                </div>
+                                )
+                            }) :
+                            <div className="col-12 col-sm-6 col-lg-3">
+                                <h2>
+                                    No Projects Created Yet
+                                </h2>
                             </div>
-                        )
-                    }):
-                      <div className="col-12 col-sm-6 col-lg-3">
-                        <h2>
-                           No Projects Created Yet
-                        </h2>
-                      </div>
-                    }
+                        }
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
         </>
     );
 

@@ -8,3 +8,20 @@
     display: flex;
     gap: 8px;
 }
+::-webkit-calendar-picker-indicator {
+    filter: invert(1)
+            brightness(50%)
+            /* sepia(100%)
+            saturate(10000%)
+            hue-rotate(180deg) */
+}
+input[type="date"]::before{
+    color: var(--primary-p-color);
+    content: attr(placeholder) " : ";
+ }
+ input[type="date"]:focus::before {
+    content: "" !important;
+ }
+ .live-auctions-area .swiper-slide.item {
+    max-width: 300px;
+}
