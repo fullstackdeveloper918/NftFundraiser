@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createProjectSuccess, deleteProduct, getProjectDetail, getProjectList } from "../Slices/projectSlice";
+import { createFail, createProjectSuccess, deleteProduct, getProjectDetail, getProjectList } from "../Slices/projectSlice";
 
 export const CreateProjectAction = (params) => async dispatch => {
     // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
@@ -18,7 +18,10 @@ export const CreateProjectAction = (params) => async dispatch => {
         dispatch(createProjectSuccess(res));
 
     } catch (e) {
-        return console.error(e.message);
+        if (e?.response?.data) {
+
+            dispatch(createFail(e))
+        }
     }
 }
 

@@ -10,6 +10,7 @@ const projectSlice = createSlice({
     initialState: {
         project: [],
         projects: [],
+        message: {},
         projectdetails: []
     },
     reducers: {
@@ -18,6 +19,10 @@ const projectSlice = createSlice({
         },
         getProjectList: (state, action) => {
             state.projects = action?.payload?.data?.data;
+        },
+        createFail: (state, action) => {
+            // debugger
+            state.message = action.payload.response.data.message
         },
         getProjectDetail: (state, action) => {
             state.projectdetails = action?.payload?.data?.data;
@@ -39,5 +44,6 @@ export const {
     createProjectSuccess,
     getProjectList,
     getProjectDetail,
-    deleteProduct
+    deleteProduct,
+    createFail
 } = projectSlice.actions;
