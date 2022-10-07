@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 // Slice
-const userToken = localStorage.getItem('authToken')
-    // ? JSON.parse(localStorage.getItem('user'))
-    ? localStorage.getItem('authToken')
+const userToken = sessionStorage.getItem('authToken')
+    // ? JSON.parse(sessionStorage.getItem('user'))
+    ? sessionStorage.getItem('authToken')
     : null
 const projectSlice = createSlice({
     name: 'project',
@@ -11,7 +11,7 @@ const projectSlice = createSlice({
         project: [],
         projects: [],
         projectdetails: [],
-        liveProjects:[],
+        liveProjects: [],
         message: {},
     },
     reducers: {
@@ -31,7 +31,7 @@ const projectSlice = createSlice({
         publicLiveProjects: (state, action) => {
             state.liveProjects = action.payload.data.data.data
         },
-        deleteProduct: (state, action) => {
+        deleteProject: (state, action) => {
             const { id } = action.payload?.data?.data;
             state.projects = state.projects.filter(item => item.id !== id)
         }
@@ -45,6 +45,6 @@ export const {
     getProjectList,
     getProjectDetail,
     publicLiveProjects,
-    deleteProduct,
+    deleteProject,
     createFail
 } = projectSlice.actions;

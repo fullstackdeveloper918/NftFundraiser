@@ -2,7 +2,7 @@ import React, { Component, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { ProjectDetail } from '../../redux/Actions/projectAction';
+import { DeleteProject, ProjectDetail } from '../../redux/Actions/projectAction';
 import { getProjectDetail } from '../../redux/Slices/projectSlice';
 import { useState } from 'react';
 
@@ -99,11 +99,15 @@ const ItemDetails = () => {
     const projdetail = useSelector(state => {
         return state.projectdetails
     })
-    console.log(projdetail.projectdetails.address, 'proj')
+
 
     useEffect(() => {
         dispatch(ProjectDetail(id))
     }, [id])
+    
+    const deleteHandler = (id) => {
+        dispatch(DeleteProject(id))
+    }
 
 
     return (
@@ -180,10 +184,15 @@ const ItemDetails = () => {
 
                     <div className="col-12 col-lg-6">
                         <div className="content mt-5 mt-lg-0">
-                            <h3 className="m-0">{projdetail.projectdetails.title}  <Link to={`/updateproject/${projdetail.projectdetails.id}`} style={{ color: '#FFF' }}><i className="fa-solid fa-user-pen"></i></Link></h3>
+                            <div className='d-flex  align-items-center justify-content-between'>
+                                <h3 className="m-0">{projdetail.projectdetails.title}</h3>
 
+                                <div className='eddlbtton d-flex  align-items-center '>
+                                    <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={`/updateproject/${projdetail.projectdetails.id}`} style={{ color: '#FFF' }}>Edit</Link></a>
+                                    <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-2" onClick={() => deleteHandler(projdetail.projectdetails.id)} style={{ color: '#FFF' }}>Delete</a>
+                                </div>
 
-
+                            </div>
                             <p>{projdetail.projectdetails.description}</p>
                             <div className="owner d-flex align-items-center">
                                 <span>Owned By</span>
@@ -241,7 +250,7 @@ const ItemDetails = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
 
         </section >
     );

@@ -1,16 +1,19 @@
 import axios from "axios";
-import { createProjectSuccess, 
-    deleteProduct, 
-    getProjectDetail, 
+import {
+    createProjectSuccess,
+    deleteProduct,
+    getProjectDetail,
     getProjectList,
     createFail,
-    publicLiveProjects } from "../Slices/projectSlice";
+    publicLiveProjects,
+    deleteProject
+} from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const CreateProjectAction = (params) => async dispatch => {
-    // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
+    // sessionStorage.setItem('authToken', JSON.stringify(action.payload.dat
     try {
-        const token = localStorage.getItem('authToken')
+        const token = sessionStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -33,7 +36,7 @@ export const CreateProjectAction = (params) => async dispatch => {
 
 export const ProjectDetail = (id) => async dispatch => {
     // 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -53,7 +56,7 @@ export const ProjectDetail = (id) => async dispatch => {
 }
 
 export const ProjectList = () => async dispatch => {
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -96,7 +99,7 @@ export const getPublicLiveProjects = createAsyncThunk(
 
 export const UpdateProject = (id, params) => async dispatch => {
     // 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -118,7 +121,7 @@ export const UpdateProject = (id, params) => async dispatch => {
 
 export const DeleteProject = (id) => async dispatch => {
     // 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -130,7 +133,7 @@ export const DeleteProject = (id) => async dispatch => {
             config)
         // 
         console.log(res, 'proj')
-        await dispatch(deleteProduct(res));
+        await dispatch(deleteProject(res));
     } catch (e) {
         //  
         return console.error(e.message);

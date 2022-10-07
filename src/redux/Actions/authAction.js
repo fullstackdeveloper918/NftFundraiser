@@ -4,30 +4,30 @@ import swal from "sweetalert";
 // import { useNavigate } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-export const Register =  createAsyncThunk(
+export const Register = createAsyncThunk(
     "auth/register",
-    async (params, thunkAPI) =>  {
-    try {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/signup`,
-            params, config)
+    async (params, thunkAPI) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/signup`,
+                params, config)
 
-        thunkAPI.dispatch(registerSuccess(res));
+            thunkAPI.dispatch(registerSuccess(res));
 
-    } catch (e) {
-        if (e?.response?.data) {
-            thunkAPI.dispatch(registerFail(e))
+        } catch (e) {
+            if (e?.response?.data) {
+                thunkAPI.dispatch(registerFail(e))
+            }
         }
-    }
-})
+    })
 
 export const LoginAction = (params, history) => async dispatch => {
     try {
-        const token = localStorage.getItem('authToken')
+        const token = sessionStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export const ForgotPasswordAction = (params) => async dispatch => {
 export const CreateOrganizationAction = (params) => async dispatch => {
     // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
     try {
-        const token = localStorage.getItem('authToken')
+        const token = sessionStorage.getItem('authToken')
         const config = {
             headers: {
                 // 'Content-Type': 'multipart/form-data',

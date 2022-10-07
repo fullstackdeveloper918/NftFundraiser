@@ -1,15 +1,15 @@
-.creator-dropdown{
+.creator-dropdown {
     min-width: 10rem !important;
     left: -20px;
     text-align: center;
 }
 
-.creator-button{
+.creator-button {
     display: flex;
     gap: 8px;
 }
 
-.approval{
+.approval {
     font-size: 10px;
     background: #9b8bc1;
     color: white;
@@ -17,4 +17,24 @@
     width: 120px;
     margin: 24px 0px 0px 0px;
     border-radius: 12px;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(50%)
+        /* sepia(100%)
+            saturate(10000%)
+            hue-rotate(180deg) */
+}
+
+input[type="date"]::before {
+    color: var(--primary-p-color);
+    content: attr(placeholder) " : ";
+}
+
+input[type="date"]:focus::before {
+    content: "" !important;
+}
+
+.live-auctions-area .swiper-slide.item {
+    max-width: 300px;
 }

@@ -47,7 +47,7 @@ const Create = () => {
         } else {
             {
                 message.length > 0 &&
-                swal("error!", message,)
+                    swal("error!", message,)
             }
         }
     }
@@ -91,7 +91,7 @@ const Create = () => {
                                             type="text"
                                             className="form-control"
                                             name="address"
-                                            placeholder="Wallet Address"
+                                            placeholder="Address"
                                             {...register("address", { required: true })}
                                             aria-invalid={errors.address ? "true" : "false"}
                                         />
@@ -120,10 +120,11 @@ const Create = () => {
                                             className="form-control"
                                             name="latitude"
                                             placeholder="Latitude"
-                                            {...register("latitude", { required: true })}
+                                            {...register("latitude", { required: true, pattern: /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/ })}
                                             aria-invalid={errors.latitude ? "true" : "false"}
                                         />
                                         {errors.latitude?.type === 'required' && <p style={{ color: 'red' }} role="alert">latitude is required</p>}
+                                        {errors?.latitude?.type === "pattern" && <p style={{ color: 'red' }}>Enter valid latitude value</p>}
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-6">
@@ -133,10 +134,11 @@ const Create = () => {
                                             className="form-control"
                                             name="logitude"
                                             placeholder="Logitude"
-                                            {...register("logitude", { required: true })}
+                                            {...register("logitude", { required: true, pattern: /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/ })}
                                             aria-invalid={errors.logitude ? "true" : "false"}
                                         />
                                         {errors.logitude?.type === 'required' && <p style={{ color: 'red' }} role="alert">logitude is required</p>}
+                                        {errors?.logitude?.type === "pattern" && <p style={{ color: 'red' }}>Enter valid logitude value</p>}
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-6">
@@ -171,7 +173,7 @@ const Create = () => {
                                             type="date"
                                             className="form-control"
                                             name="start_date"
-                                            placeholder="Enter your start date of Fundraiser"
+                                            placeholder=" Start date"
                                             {...register("start_date", { required: true })}
                                             aria-invalid={errors.start_date ? "true" : "false"}
                                         />
@@ -184,7 +186,7 @@ const Create = () => {
                                             type="date"
                                             className="form-control"
                                             name="end_date"
-                                            placeholder="Enter your end date Fundraiser"
+                                            placeholder=" End date"
                                             {...register("end_date", { required: true })}
                                             aria-invalid={errors.end_date ? "true" : "false"}
                                         />
