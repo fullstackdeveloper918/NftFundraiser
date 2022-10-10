@@ -1,5 +1,6 @@
-import React,{ useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getPublicLiveProjects } from '../../redux/Actions/projectAction';
 
 const initData = {
@@ -76,15 +77,15 @@ const initData = {
 const AuctionsOne = () => {
 
     const dispatch = useDispatch()
- 
+
     const liveProjects = useSelector(state => {
         return state.projectdetails.liveProjects
     })
-   
+
     useEffect(() => {
         dispatch(getPublicLiveProjects(1))
     }, [dispatch])
-   
+
     return (
         <section className="live-auctions-area">
             <div className="container">
@@ -94,7 +95,7 @@ const AuctionsOne = () => {
                         <div className="intro d-flex justify-content-between align-items-end m-0">
                             <div className="intro-content">
                                 <span>Auctions</span>
-                                <h3 className="mt-3 mb-0">Live Auctions</h3>
+                                <h3 className="mt-3 mb-0">Newest Projects</h3>
                             </div>
                             <div className="intro-btn">
                                 <a className="btn content-btn" href="/auctions">View All</a>
@@ -111,9 +112,9 @@ const AuctionsOne = () => {
                                     <div key={`auc_${idx}`} className="swiper-slide item">
                                         <div className="card">
                                             <div className="image-over">
-                                                <a href="/item-details">
+                                                <Link to={`/item-details/${item.id}`}>
                                                     <img className="card-img-top" src={item.image} alt="" />
-                                                </a>
+                                                </Link>
                                             </div>
                                             {/* Card Caption */}
                                             <div className="card-caption col-12 p-0">

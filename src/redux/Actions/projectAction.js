@@ -9,6 +9,8 @@ import {
     deleteProject
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { Redirect } from 'react-router-dom';
+import swal from "sweetalert";
 
 export const CreateProjectAction = (params) => async dispatch => {
     // sessionStorage.setItem('authToken', JSON.stringify(action.payload.dat
@@ -25,10 +27,16 @@ export const CreateProjectAction = (params) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/store`,
             params, config)
         dispatch(createProjectSuccess(res));
+        if (res.status === 200) {
+            swal("Created!", "Project created successfully!", "success").then(function () {
+                window.location = "/projectlist";
+            });
+
+        }
 
     } catch (e) {
-        if (e?.response?.data) {
-
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message)
             dispatch(createFail(e))
         }
     }

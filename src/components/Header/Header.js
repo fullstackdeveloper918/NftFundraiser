@@ -13,7 +13,7 @@ const Header = () => {
     const log = useSelector(state => {
         return state.user.userToken
     })
- 
+
     return (
         <header id="header">
             {/* Navbar */}
@@ -32,7 +32,7 @@ const Header = () => {
                         <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Explore <i className="fas fa-angle-down ml-1" /></a>
                             <ul className="dropdown-menu">
-                                <li className="nav-item"><Link to="/auctions" className="nav-link">Live Auctions</Link></li>
+                                <li className="nav-item"><Link to="/auctions" className="nav-link">Newest Projects</Link></li>
                             </ul>
                         </li>
                         <li className="nav-item">
@@ -94,8 +94,8 @@ const Header = () => {
                         <><ul className="navbar-nav action">
                             <li className="nav-item ml-3">
                                 <Link to="/signup" className="creator-button btn ml-md-auto btn-bordered-white">
-                                 <i className="fa fa-user" />
-                                 <div>CREATOR</div>
+                                    <i className="fa fa-user" />
+                                    <div>CREATOR</div>
                                 </Link>
                             </li>
                         </ul><ul className="navbar-nav action">

@@ -22,7 +22,7 @@ const EditProject = () => {
 
     console.log(projdetail, "gfgfhghgghhgh")
 
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm();
 
     useEffect(() => {
         // 
@@ -65,12 +65,7 @@ const EditProject = () => {
 
         dispatch(UpdateProject(id, formData))
     }
-    // if (formData) {
-    //     swal("Created!", "Project created successfully!", "success");
-    //     // history.push('/login')
-    // }
-    // // 
-    //     }
+
 
     return (
         <section className="author-area">
@@ -86,6 +81,31 @@ const EditProject = () => {
                         </div>
                         <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
                             <div className="row">
+                                <div className="col-12">
+                                    <div className="input-group form-group">
+                                        <div >
+                                            <h6 className="text-center" >Image, Video, Audio, or 3D ModelFile</h6>
+                                            <p> types supported: JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100 MB</p>
+                                            <label htmlFor="upload-button">
+
+                                                <img src={
+                                                    watch('image') && watch('image').length < 0
+                                                        ? URL.createObjectURL(watch('image')[0])
+                                                        : projdetail.image
+                                                }
+                                                    alt="photo preview" width="200" height="200" />
+                                            </label>
+                                            <input
+                                                type="file"
+                                                id="upload-button"
+                                                {...register("image")}
+                                                style={{ display: "none" }}
+                                            />
+                                        </div>
+
+                                    </div>
+                                </div>
+
 
                                 <div className="col-12">
                                     <div className="form-group mt-3">
@@ -191,7 +211,7 @@ const EditProject = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className="col-12">
+                                {/* <div className="col-12">
                                     <div className="input-group form-group">
                                         <div className="custom-file">
                                             <input
@@ -202,7 +222,7 @@ const EditProject = () => {
                                             />
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="col-12">
                                     <div className="form-group mt-3">
                                         <div className="form-check form-check-inline">

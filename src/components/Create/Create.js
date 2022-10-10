@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import { DropzoneAreaBase, DropzoneDialogBase } from 'material-ui-dropzone';
+import React, { Component, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -6,26 +7,28 @@ import swal from 'sweetalert';
 import Swal from 'sweetalert2';
 // import state from 'sweetalert/typings/modules/state';
 import { CreateProjectAction } from '../../redux/Actions/projectAction';
-import AuthorProfile from "../AuthorProfile/AuthorProfile";
+
+
 
 const Create = () => {
+
 
     const dispatch = useDispatch()
     const history = useHistory()
 
     const message = useSelector(state => {
-        // 
         return state.projectdetails.message
     })
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm({});
+
 
     const proj = useSelector(state => {
         return state.createproject
     })
 
+
     const OnSubmit = (data) => {
-        // 
         const formData = new FormData()
 
         formData.append('image', data.image[0])
@@ -41,15 +44,7 @@ const Create = () => {
         formData.append('type', data.type)
 
         dispatch(CreateProjectAction(formData))
-        if (proj?.project?.data?.statusCode === 200) {
-            swal("Created!", "Project created successfully!", "success");
-            history.push('/projectlist')
-        } else {
-            {
-                message.length > 0 &&
-                    swal("error!", message,)
-            }
-        }
+
     }
 
     return (
@@ -70,6 +65,34 @@ const Create = () => {
                         {/* Item Form */}
                         <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
                             <div className="row">
+                                <div className="col-12">
+                                    <div className="input-group form-group">
+                                        <div >
+                                            <h6 className="text-center" >Image, Video, Audio, or 3D ModelFile</h6>
+                                            <p> types supported: JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100 MB</p>
+                                            <label htmlFor="upload-button">
+
+                                                <img src={
+                                                    watch('image') && watch('image').length
+                                                        ? URL.createObjectURL(watch('image')[0])
+                                                        : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                                                }
+                                                    alt="photo preview" width="200" height="200" />
+                                            </label>
+                                            <input
+                                                type="file"
+                                                id="upload-button"
+                                                {...register("image", { required: true })}
+                                                style={{ display: "none" }}
+                                                aria-invalid={errors.image ? "true" : "false"}
+                                            />
+                                            {errors.image?.type === 'required' && <p style={{ color: 'red' }} role="alert">File is required</p>}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
 
                                 <div className="col-12">
                                     <div className="form-group mt-3">
@@ -193,22 +216,7 @@ const Create = () => {
                                         {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
                                     </div>
                                 </div>
-                                <div className="col-12">
-                                    <div className="input-group form-group">
-                                        <div className="custom-file">
-                                            <input
-                                                type="file"
-                                                className="form-control"
-                                                id="inputGroupFile01"
-                                                placeholder='Choose fi;e'
-                                                {...register("image", { required: true })}
-                                                aria-invalid={errors.image ? "true" : "false"}
-                                            />
-                                            {errors.image?.type === 'required' && <p style={{ color: 'red' }} role="alert">File is required</p>}
-                                            {/* <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file</label> */}
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div className="col-12">
                                     <div className="form-group mt-3">
                                         <div className="form-check form-check-inline">
