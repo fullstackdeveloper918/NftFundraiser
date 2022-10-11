@@ -104,7 +104,7 @@ const ItemDetails = () => {
     useEffect(() => {
         dispatch(ProjectDetail(id))
     }, [id])
-    
+
     const deleteHandler = (id) => {
         dispatch(DeleteProject(id))
     }

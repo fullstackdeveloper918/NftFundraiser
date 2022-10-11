@@ -8,7 +8,7 @@ class Collections extends Component {
         data: {},
         collectionData: []
     }
-    componentDidMount(){
+    componentDidMount() {
         axios.get(`${BASE_URL}`)
             .then(res => {
                 this.setState({
@@ -17,7 +17,7 @@ class Collections extends Component {
                 })
                 // console.log(this.state.data)
             })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
     }
     render() {
         return (
@@ -44,12 +44,12 @@ class Collections extends Component {
                                     <div className="card no-hover text-center">
                                         <div className="image-over">
                                             <a href="/item-details">
-                                                <img className="card-img-top" src={item.img} alt="" />
+                                                <img className="card-img-top" src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="" />
                                             </a>
                                             {/* Seller */}
                                             <a className="seller" href="/item-details">
                                                 <div className="seller-thumb avatar-lg">
-                                                    <img className="rounded-circle" src={item.avatar} alt="" />
+                                                    <img className="rounded-circle" src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="" />
                                                 </div>
                                             </a>
                                         </div>

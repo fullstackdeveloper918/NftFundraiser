@@ -21,6 +21,9 @@ const projectSlice = createSlice({
         getProjectList: (state, action) => {
             state.projects = action.payload;
         },
+        getLatestProjectList: (state, action) => {
+            state.projects = action.payload;
+        },
         createFail: (state, action) => {
             // 
             state.message = action.payload.response.data.message
@@ -46,5 +49,6 @@ export const {
     getProjectDetail,
     publicLiveProjects,
     deleteProject,
-    createFail
+    createFail,
+    getLatestProjectList
 } = projectSlice.actions;

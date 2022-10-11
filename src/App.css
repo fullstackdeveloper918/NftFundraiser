@@ -38,3 +38,29 @@ input[type="date"]:focus::before {
 .live-auctions-area .swiper-slide.item {
     max-width: 300px;
 }
+/****bannercss******/
+.button-group div {
+    width: 100%;
+    max-width: 500px;
+}
+.button-group div p {
+    font-size: 16px;
+    width: 100%;
+}
+.button-group h3{
+    font-size: 24px;
+    line-height: 34px;
+}
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+@media (max-width:767px){
+    .button-group {
+        display: block !important;
+    }
+    .button-group div:nth-child(2) {
+        padding: 40px 0px 0px;
+    }
+}
+/****bannercss******/

@@ -11,6 +11,7 @@ import Footer from '../components/Footer/Footer';
 import ModalSearch from '../components/Modal/ModalSearch';
 import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
+import ExploreFour from './latestProjects';
 
 
 const Home = () => {
@@ -18,11 +19,16 @@ const Home = () => {
         <div className="main">
             <Header />
             <Hero />
-            <Auctions/>
-            {/* <TopSeller />
+
+            <Auctions type={"Latest Projects"} />
+            {/* <Auctions type={"Top Fundraisers"} /> */}
+            <Auctions type={"Recent Campaigns"} />
+
+            {/* <Auctions type={"Popular Connections"} /> */}
+            <TopSeller />
             <Collections />
-            <Explore />
-            <Work /> */}
+            {/* <Explore /> */}
+            <Work />
             <Footer />
             <ModalSearch />
             <ModalMenu />

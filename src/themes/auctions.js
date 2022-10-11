@@ -7,6 +7,7 @@ import Footer from '../components/Footer/Footer';
 import ModalSearch from '../components/Modal/ModalSearch';
 import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
+import ExploreFour from './latestProjects';
 
 class Auctions extends Component {
     render() {

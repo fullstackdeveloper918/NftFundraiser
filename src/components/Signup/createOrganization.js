@@ -13,8 +13,8 @@ const CreateOrganization = () => {
     const history = useHistory()
 
     const organization = useSelector(state => {
-      
-      return state.user.organization
+
+        return state.user.organization
     })
     const { countries } = useSelector(state => state.countries)
     const { annualRevenue } = useSelector(state => state.annualRevenue)

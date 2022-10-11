@@ -89,9 +89,9 @@ const EditProject = () => {
                                             <label htmlFor="upload-button">
 
                                                 <img src={
-                                                    watch('image') && watch('image').length < 0
+                                                    watch('image') && watch('image')?.length < 0
                                                         ? URL.createObjectURL(watch('image')[0])
-                                                        : projdetail.image
+                                                        : projdetail?.image
                                                 }
                                                     alt="photo preview" width="200" height="200" />
                                             </label>

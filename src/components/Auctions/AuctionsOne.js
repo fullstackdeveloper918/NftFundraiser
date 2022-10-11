@@ -9,81 +9,63 @@ const initData = {
     btnText: "View All"
 }
 
-// const data = [
-//     {
-//         id: "1",
-//         img: "/img/auction_1.jpg",
-//         date: "2021-12-09",
-//         title: "Virtual Worlds",
-//         seller_thumb: "/img/avatar_1.jpg",
-//         seller: "@Richard",
-//         price: "1.5 BNB",
-//         count: "1 of 1"
-//     },
-//     {
-//         id: "2",
-//         img: "/img/auction_2.jpg",
-//         date: "2021-10-05",
-//         title: "Collectibles",
-//         seller_thumb: "/img/avatar_2.jpg",
-//         seller: "@JohnDeo",
-//         price: "2.7 BNB",
-//         count: "1 of 1"
-//     },
-//     {
-//         id: "3",
-//         img: "/img/auction_3.jpg",
-//         date: "2021-09-15",
-//         title: "Arts",
-//         seller_thumb: "/img/avatar_3.jpg",
-//         seller: "@MKHblots",
-//         price: "2.3 BNB",
-//         count: "1 of 1"
-//     },
-//     {
-//         id: "4",
-//         img: "/img/auction_4.jpg",
-//         date: "2021-12-29",
-//         title: "Robotic Arts",
-//         seller_thumb: "/img/avatar_4.jpg",
-//         seller: "@RioArham",
-//         price: "1.8 BNB",
-//         count: "1 of 1"
-//     },
-//     {
-//         id: "5",
-//         img: "/img/auction_5.jpg",
-//         date: "2022-01-24",
-//         title: "Design Illusions",
-//         seller_thumb: "/img/avatar_5.jpg",
-//         seller: "@ArtNox",
-//         price: "1.7 BNB",
-//         count: "1 of 1"
-//     },
-//     {
-//         id: "6",
-//         img: "/img/auction_6.jpg",
-//         date: "2022-03-30",
-//         title: "Photography",
-//         seller_thumb: "/img/avatar_6.jpg",
-//         seller: "@Junaid",
-//         price: "3.5 BNB",
-//         count: "1 of 1"
-//     }
-// ]
 
 
+const projectTypesMap = {
+    "Latest Projects": 2,
+    "Recent Campaigns": 1
+}
 
-const AuctionsOne = () => {
+var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+};
 
+function success(pos) {
+    var crd = pos.coords;
+
+    console.log("Your current position is:");
+    console.log(`Latitude : ${crd.latitude}`);
+    console.log(`Longitude: ${crd.longitude}`);
+    console.log(`More or less ${crd.accuracy} meters.`);
+}
+function errors(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+const AuctionsOne = ({ type }) => {
     const dispatch = useDispatch()
 
     const liveProjects = useSelector(state => {
         return state.projectdetails.liveProjects
     })
 
+
     useEffect(() => {
-        dispatch(getPublicLiveProjects(1))
+        // if (navigator.geolocation) {
+        //     navigator.permissions
+        //         .query({ name: "geolocation" })
+        //         .then(function (result) {
+        //             if (result === "granted") {
+        //                 console.log(result);
+        //                 //If granted then you can directly call your function here
+        //                 navigator.geolocation.getCurrentPosition(success);
+        //             } else if (result === "prompt") {
+        //                 navigator.geolocation.getCurrentPosition(success, errors, options);
+        //             } else if (result === "denied") {
+        //                 //If denied then you have to show instructions to enable location
+        //             }
+        //             result.onchange = function () {
+        //                 console.log(result);
+        //             };
+        //         });
+        // } else {
+        //     alert("Sorry Not available!");
+        // }
+        dispatch(getPublicLiveProjects({
+            cursor: 1,
+            type: projectTypesMap[type],
+        }))
     }, [dispatch])
 
     return (
@@ -95,7 +77,7 @@ const AuctionsOne = () => {
                         <div className="intro d-flex justify-content-between align-items-end m-0">
                             <div className="intro-content">
                                 <span>Auctions</span>
-                                <h3 className="mt-3 mb-0">Newest Projects</h3>
+                                <h3 className="mt-3 mb-0">{type}</h3>
                             </div>
                             <div className="intro-btn">
                                 <a className="btn content-btn" href="/auctions">View All</a>
@@ -113,7 +95,7 @@ const AuctionsOne = () => {
                                         <div className="card">
                                             <div className="image-over">
                                                 <Link to={`/item-details/${item.id}`}>
-                                                    <img className="card-img-top" src={item.image} alt="" />
+                                                    <img className="card-img-top" src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt="" />
                                                 </Link>
                                             </div>
                                             {/* Card Caption */}

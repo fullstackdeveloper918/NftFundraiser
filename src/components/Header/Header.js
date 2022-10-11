@@ -31,9 +31,9 @@ const Header = () => {
                         </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Explore <i className="fas fa-angle-down ml-1" /></a>
-                            <ul className="dropdown-menu">
+                            {/* <ul className="dropdown-menu">
                                 <li className="nav-item"><Link to="/auctions" className="nav-link">Newest Projects</Link></li>
-                            </ul>
+                            </ul> */}
                         </li>
                         <li className="nav-item">
                             <Link to="/activity" className="nav-link">Activity</Link>

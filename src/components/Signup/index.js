@@ -1,19 +1,34 @@
-import { useState } from 'react' 
-import CreatorForm from './Signup'
-import CreateOrganization from './createOrganization'
+import { useState } from "react";
 
-const SignUp = ()=>{
-    const [step,setStep] = useState(0)
-    return (
-        <>
-          {step === 0 ?
-            <CreatorForm setStep={setStep}/>
-          :
-           <CreateOrganization/>
-          }
-        </>
+// import styles from "../styles/styles.module.scss";
+import FormCard from "./FormCard";
 
-    )
-}
+import Signup from './Signup'
+import CreateOrganization from './createOrganization';
 
-export default SignUp;
+const SignupIndex = () => {
+  const [formStep, setFormStep] = useState(0);
+
+  const nextFormStep = () => setFormStep((currentStep) => currentStep + 1);
+
+  const prevFormStep = () => setFormStep((currentStep) => currentStep - 1);
+
+  return (
+    <div>
+
+      <FormCard currentStep={formStep} prevFormStep={prevFormStep}>
+        {formStep >= 0 && (
+          <Signup formStep={formStep} nextFormStep={nextFormStep} />
+        )}
+        {formStep >= 1 && (
+          <CreateOrganization formStep={formStep} nextFormStep={nextFormStep} />
+        )}
+
+
+
+      </FormCard>
+    </div>
+  );
+};
+
+export default SignupIndex;

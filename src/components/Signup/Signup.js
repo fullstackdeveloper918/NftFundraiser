@@ -9,23 +9,23 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 const formSchema = Yup.object().shape({
     email: Yup.string()
-    .email()
-    .required("Email is required"),
+        .email()
+        .required("Email is required"),
     password: Yup.string()
-      .required("Password is required")
-      .min(4, "Password length should be at least 4 characters")
-      .max(12, "Password cannot exceed more than 12 characters"),
+        .required("Password is required")
+        .min(4, "Password length should be at least 4 characters")
+        .max(12, "Password cannot exceed more than 12 characters"),
     confirm_password: Yup.string()
-      .required("Confirm Password is required")
-      .min(4, "Password length should be at least 4 characters")
-      .max(12, "Password cannot exceed more than 12 characters")
-      .oneOf([Yup.ref("password")], "Passwords do not match")
-  });
+        .required("Confirm Password is required")
+        .min(4, "Password length should be at least 4 characters")
+        .max(12, "Password cannot exceed more than 12 characters")
+        .oneOf([Yup.ref("password")], "Passwords do not match")
+});
 
 
-const Signup = ({setStep}) => {
+const Signup = ({ setStep }) => {
     const dispatch = useDispatch()
-    const { register,watch, handleSubmit, formState: { errors } } = useForm({
+    const { register, watch, handleSubmit, formState: { errors } } = useForm({
         mode: "onTouched",
         resolver: yupResolver(formSchema)
     });
@@ -37,7 +37,7 @@ const Signup = ({setStep}) => {
     const { user } = useSelector(state => state.user)
 
     if (user?.status === 200) {
-       setStep(prev=>prev+1)
+        setStep(prev => prev + 1)
     }
 
     const { errMessage } = useSelector(state => {
@@ -102,13 +102,14 @@ const Signup = ({setStep}) => {
                                                 name="confirm_password"
                                                 placeholder="Enter your Password Again"
                                                 {...register("confirm_password",
-                                                 { required: true,
-                                                    validate: (val) => {
-                                                        if (watch('password') != val) {
-                                                          return "Your passwords do no match";
-                                                        }
-                                                  },
-                                                })}
+                                                    {
+                                                        required: true,
+                                                        validate: (val) => {
+                                                            if (watch('password') != val) {
+                                                                return "Your passwords do no match";
+                                                            }
+                                                        },
+                                                    })}
                                                 aria-invalid={errors.confirm_password ? "true" : "false"} />
                                             {errors.confirm_password && <p style={{ color: 'red' }} role="alert">{errors.confirm_password.message}</p>}
                                         </div>

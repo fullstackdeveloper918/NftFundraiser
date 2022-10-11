@@ -6,7 +6,7 @@ import ThemeOne from "../themes/theme-one";
 import ExploreOne from "../themes/explore-one";
 import ExploreTwo from "../themes/project-list";
 import ReadProject from "../components/Explore/ProjectList";
-import ExploreFour from "../themes/explore-four";
+import ExploreFour from "../themes/latestProjects";
 import Auctions from "../themes/auctions";
 import ItemDetails from "../themes/item-details";
 import Activity from "../themes/activity";

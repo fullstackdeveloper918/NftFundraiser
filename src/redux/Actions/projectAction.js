@@ -6,7 +6,8 @@ import {
     getProjectList,
     createFail,
     publicLiveProjects,
-    deleteProject
+    deleteProject,
+    getLatestProjectList
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -28,7 +29,7 @@ export const CreateProjectAction = (params) => async dispatch => {
             params, config)
         dispatch(createProjectSuccess(res));
         if (res.status === 200) {
-            swal("Created!", "Project created successfully!", "success").then(function () {
+            swal("success", res.data.message, 'success').then(function () {
                 window.location = "/projectlist";
             });
 
@@ -36,7 +37,7 @@ export const CreateProjectAction = (params) => async dispatch => {
 
     } catch (e) {
         if (e?.response?.data.message) {
-            swal('error', e.response.data.message)
+            swal('error', e.response.data.message, 'error')
             dispatch(createFail(e))
         }
     }
@@ -87,15 +88,14 @@ export const ProjectList = () => async dispatch => {
 
 export const getPublicLiveProjects = createAsyncThunk(
     "auth/liveProjects",
-    async (cursor, thunkAPI) => {
+    async (params, thunkAPI) => {
         try {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             }
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=${cursor}`, config)
-
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=1&latitude=&longitude=&search_keyword&type=${params?.type}`, config)
             thunkAPI.dispatch(publicLiveProjects(res));
 
         } catch (e) {
@@ -121,6 +121,12 @@ export const UpdateProject = (id, params) => async dispatch => {
         // 
         console.log(res, 'proj')
         await dispatch(getProjectDetail(res));
+        if (res.status === 200) {
+            swal("success", res.data.message, 'success').then(function () {
+                window.location = "/projectlist";
+            });
+
+        }
     } catch (e) {
         //  
         return console.error(e.message);
@@ -140,10 +146,37 @@ export const DeleteProject = (id) => async dispatch => {
         const res = await axios.delete(`${process.env.REACT_APP_BACKEND_API}api/projects/destroy/${id}`,
             config)
         // 
-        console.log(res, 'proj')
+        console.log(res.status, 'proj')
         await dispatch(deleteProject(res));
+        if (res.status === 200) {
+            swal("success", res.data.message, 'success').then(function () {
+                window.location = "/projectlist";
+            });
+
+        }
     } catch (e) {
         //  
         return console.error(e.message);
     }
 }
+
+export const LatestProjects = createAsyncThunk(
+    "auth/latestProjects",
+    async (params, thunkAPI) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=${params?.cursor}`,
+                config)
+
+
+            thunkAPI.dispatch(getLatestProjectList(res.data?.data));
+
+        } catch (e) {
+            return console.error(e.message);
+        }
+    })

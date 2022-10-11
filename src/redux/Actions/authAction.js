@@ -40,8 +40,9 @@ export const LoginAction = (params, history) => async dispatch => {
         dispatch(loginSuccess(res));
 
     } catch (e) {
-        // 
-        return console.error(e.message);
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
     }
 }
 

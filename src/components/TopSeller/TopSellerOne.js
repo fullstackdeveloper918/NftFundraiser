@@ -8,7 +8,7 @@ class TopSeller extends Component {
         data: {},
         sellerData: []
     }
-    componentDidMount(){
+    componentDidMount() {
         axios.get(`${BASE_URL}`)
             .then(res => {
                 this.setState({
@@ -17,7 +17,7 @@ class TopSeller extends Component {
                 })
                 // console.log(this.state.data)
             })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
     }
     render() {
         return (
@@ -29,7 +29,7 @@ class TopSeller extends Component {
                             <div className="intro m-0">
                                 <div className="intro-content">
                                     <span>{this.state.data.preHeading}</span>
-                                    <h3 className="mt-3 mb-0">{this.state.data.heading}</h3>
+                                    <h3 className="mt-3 mb-0">Top Fundraisers</h3>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@ class TopSeller extends Component {
                                     <div className="card no-hover">
                                         <div className="single-seller d-flex align-items-center">
                                             <a href="/author">
-                                                <img className="avatar-md rounded-circle" src={item.img} alt="" />
+                                                <img className="avatar-md rounded-circle" src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="" />
                                             </a>
                                             {/* Seller Info */}
                                             <div className="seller-info ml-3">

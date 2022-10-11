@@ -14,6 +14,7 @@ const reducer = combineReducers({
     createproject: projectReducer,
     // getproject: projectReducer,
     projectdetails: projectReducer,
+    latestprojects: projectReducer
 })
 
 const store = configureStore({
