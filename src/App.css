@@ -64,3 +64,32 @@ input[type="date"]:focus::before {
     }
 }
 /****bannercss******/
+
+/****footer***/
+.termsandconditions {
+    padding: 0px 0px 50px 30px;
+}
+.item-details-area .shape {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    line-height: 0;
+    direction: ltr;
+    overflow: hidden;
+    z-index: 0;
+}
+.item-details-area h3 {
+    padding: 20px 0px 0px 30px;
+}
+.item-details-area .row {
+    background: #101010;
+}
+@media (max-width:768px){
+.item-details-area h3 {
+    padding: 20px 0px 0px 10px;
+}
+.termsandconditions {
+    padding: 0px 0px 50px 10px;
+}
+}

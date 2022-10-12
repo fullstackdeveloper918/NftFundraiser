@@ -1,71 +1,34 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getPublicLiveProjects } from '../../redux/Actions/projectAction';
 
-const initData = {
-    pre_heading: "Auctions",
-    heading: "Live Auctions",
-    btnText: "View All"
-}
+
 
 
 
 const projectTypesMap = {
-    "Latest Projects": 2,
-    "Recent Campaigns": 1
+    "LatestProjects": 2,
+    "RecentCampaigns": 1
 }
 
-var options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
-};
 
-function success(pos) {
-    var crd = pos.coords;
-
-    console.log("Your current position is:");
-    console.log(`Latitude : ${crd.latitude}`);
-    console.log(`Longitude: ${crd.longitude}`);
-    console.log(`More or less ${crd.accuracy} meters.`);
-}
-function errors(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-}
 const AuctionsOne = ({ type }) => {
+
     const dispatch = useDispatch()
 
     const liveProjects = useSelector(state => {
-        return state.projectdetails.liveProjects
+        // debugger
+        // return state?.projectdetails?.liveProjects[type]
+        return state?.projectdetails?.liveProjects
     })
-
-
+    // console.log(liveProjects, 'liveeproj')
     useEffect(() => {
-        // if (navigator.geolocation) {
-        //     navigator.permissions
-        //         .query({ name: "geolocation" })
-        //         .then(function (result) {
-        //             if (result === "granted") {
-        //                 console.log(result);
-        //                 //If granted then you can directly call your function here
-        //                 navigator.geolocation.getCurrentPosition(success);
-        //             } else if (result === "prompt") {
-        //                 navigator.geolocation.getCurrentPosition(success, errors, options);
-        //             } else if (result === "denied") {
-        //                 //If denied then you have to show instructions to enable location
-        //             }
-        //             result.onchange = function () {
-        //                 console.log(result);
-        //             };
-        //         });
-        // } else {
-        //     alert("Sorry Not available!");
-        // }
         dispatch(getPublicLiveProjects({
             cursor: 1,
             type: projectTypesMap[type],
         }))
+
     }, [dispatch])
 
     return (
@@ -80,7 +43,7 @@ const AuctionsOne = ({ type }) => {
                                 <h3 className="mt-3 mb-0">{type}</h3>
                             </div>
                             <div className="intro-btn">
-                                <a className="btn content-btn" href="/auctions">View All</a>
+                                <a className="btn content-btn" href={`/all/${type}`}>View All</a>
                             </div>
                         </div>
                     </div>

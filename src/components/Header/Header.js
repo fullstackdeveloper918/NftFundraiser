@@ -25,20 +25,20 @@ const Header = () => {
                     </a>
                     <div className="ml-auto" />
                     {/* Navbar */}
-                    <ul className="navbar-nav items mx-auto">
+                    {/* <ul className="navbar-nav items mx-auto">
                         <li className="nav-item dropdown">
                             <Link to='/' className="nav-link">Home</Link>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link" href="#">Explore <i className="fas fa-angle-down ml-1" /></a>
-                            {/* <ul className="dropdown-menu">
+                        </li> */}
+                    {/* <li className="nav-item dropdown">
+                            <a className="nav-link" href="#">Explore <i className="fas fa-angle-down ml-1" /></a> */}
+                    {/* <ul className="dropdown-menu">
                                 <li className="nav-item"><Link to="/auctions" className="nav-link">Newest Projects</Link></li>
                             </ul> */}
-                        </li>
-                        <li className="nav-item">
+                    {/* </li> */}
+                    {/* <li className="nav-item">
                             <Link to="/activity" className="nav-link">Activity</Link>
-                        </li>
-                        {/* <li className="nav-item dropdown">
+                        </li> */}
+                    {/* <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Community <i className="fas fa-angle-down ml-1" /></a>
                             <ul className="dropdown-menu">
                                 <li className="nav-item"><Link to="/blog" className="nav-link">Blog</Link></li>
@@ -46,7 +46,7 @@ const Header = () => {
                                 <li className="nav-item"><Link to="/help-center" className="nav-link">Help Center</Link></li>
                             </ul>
                         </li> */}
-                        {/* <li className="nav-item dropdown">
+                    {/* <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Pages <i className="fas fa-angle-down ml-1" /></a>
                             <ul className="dropdown-menu">
                                 <li className="nav-item"><Link to="/authors" className="nav-link">Authors</Link></li>
@@ -57,10 +57,10 @@ const Header = () => {
                                 <li className="nav-item"><Link to="/signup" className="nav-link">Signup</Link></li>
                             </ul>
                         </li> */}
-                        <li className="nav-item">
+                    {/* <li className="nav-item">
                             <Link to="/contact" className="nav-link">Contact</Link>
-                        </li>
-                    </ul>
+                        </li> */}
+                    {/* </ul> */}
                     {/* Navbar Icons */}
                     {/* <ul className="navbar-nav icons">
                         <li className="nav-item">

@@ -15,7 +15,7 @@ const LatestProjects = () => {
         <div className="main">
             <Header />
             <Breadcrumb title="Explore" subpage="Explore" page="Explore Style 4" />
-            <AuctionsOne type="Latest Projects" />
+            <AuctionsOne type="LatestProjects" />
             <Footer />
             <ModalSearch />
             <ModalMenu />

@@ -12,6 +12,10 @@ const projectSlice = createSlice({
         projects: [],
         projectdetails: [],
         liveProjects: [],
+        // liveProjects: {
+        //     LatestProjects: {},
+        //     RecentCampaigns: {}
+        // },
         message: {},
     },
     reducers: {
@@ -21,6 +25,10 @@ const projectSlice = createSlice({
         getProjectList: (state, action) => {
             state.projects = action.payload;
         },
+        // getTopFundraiser: (state, action) => {
+        //     debugger
+        //     state.fundraiser = action.payload;
+        // },
         getLatestProjectList: (state, action) => {
             state.projects = action.payload;
         },
@@ -32,7 +40,10 @@ const projectSlice = createSlice({
             state.projectdetails = action?.payload?.data?.data;
         },
         publicLiveProjects: (state, action) => {
+            // debugger
+            // state.liveProjects['LatestProjects'] = action.payload.data.data.data
             state.liveProjects = action.payload.data.data.data
+            // state.liveProjects['R'] = action.payload.data.data.data
         },
         deleteProject: (state, action) => {
             const { id } = action.payload?.data?.data;
@@ -50,5 +61,5 @@ export const {
     publicLiveProjects,
     deleteProject,
     createFail,
-    getLatestProjectList
+    getLatestProjectList,
 } = projectSlice.actions;

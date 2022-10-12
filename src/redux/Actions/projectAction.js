@@ -7,7 +7,8 @@ import {
     createFail,
     publicLiveProjects,
     deleteProject,
-    getLatestProjectList
+    getLatestProjectList,
+    getTopFundraiser
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -88,14 +89,19 @@ export const ProjectList = () => async dispatch => {
 
 export const getPublicLiveProjects = createAsyncThunk(
     "auth/liveProjects",
-    async (params, thunkAPI) => {
+    async (params, thunkAPI, type) => {
         try {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             }
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=1&latitude=&longitude=&search_keyword&type=${params?.type}`, config)
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=&latitude=&longitude=&search_keyword=&type=${params?.type}`, config)
+            console.log(res, 'projres')
+            // thunkAPI.dispatch(publicLiveProjects({
+            //     res: res,
+            //     type: type
+            // }));
             thunkAPI.dispatch(publicLiveProjects(res));
 
         } catch (e) {
@@ -160,23 +166,3 @@ export const DeleteProject = (id) => async dispatch => {
     }
 }
 
-export const LatestProjects = createAsyncThunk(
-    "auth/latestProjects",
-    async (params, thunkAPI) => {
-        try {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=${params?.cursor}`,
-                config)
-
-
-            thunkAPI.dispatch(getLatestProjectList(res.data?.data));
-
-        } catch (e) {
-            return console.error(e.message);
-        }
-    })
