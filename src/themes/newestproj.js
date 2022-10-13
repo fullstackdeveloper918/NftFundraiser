@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
+
 import Header from '../components/Header/Header';
+import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
+import Explore from '../components/Explore/ProjectList';
 import Footer from '../components/Footer/Footer';
 import ModalSearch from '../components/Modal/ModalSearch';
 import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
-import EditProject from '../Edit/editProject';
-import ExploreAll from '../components/Explore/viewAllLatest';
-import { Breadcrumb } from 'react-bootstrap';
+import GetAllProjects from '../components/Explore/ProjectList';
+import LiveAuctions from '../components/Auctions/AuctionsTwo';
 
-const All = () => {
-
+const NewestProj = () => {
     return (
         <div className="main">
             <Header />
-            {/* <Breadcrumb title="Explore" subpage="Explore" page="Explore Style 4" /> */}
-            <ExploreAll type="LatestProjects" />
+            {/* <Breadcrumb title="Projects" subpage="Explore" page="" /> */}
+            <LiveAuctions />
             <Footer />
             <ModalSearch />
             <ModalMenu />
             <Scrollup />
         </div>
     );
-
 }
 
-export default All;
+export default NewestProj;

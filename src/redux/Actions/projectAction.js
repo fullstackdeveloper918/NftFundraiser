@@ -89,20 +89,21 @@ export const ProjectList = () => async dispatch => {
 
 export const getPublicLiveProjects = createAsyncThunk(
     "auth/liveProjects",
-    async (params, thunkAPI, type) => {
+    async (params, thunkAPI) => {
         try {
+            const { type, projectType } = params
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             }
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=&latitude=&longitude=&search_keyword=&type=${params?.type}`, config)
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=&latitude=&longitude=&search_keyword=&type=${type}`, config)
             console.log(res, 'projres')
-            // thunkAPI.dispatch(publicLiveProjects({
-            //     res: res,
-            //     type: type
-            // }));
-            thunkAPI.dispatch(publicLiveProjects(res));
+            thunkAPI.dispatch(publicLiveProjects({
+                res: res,
+                type: projectType,
+            }));
+            // thunkAPI.dispatch(publicLiveProjects(res));
 
         } catch (e) {
             if (e?.response?.data) {

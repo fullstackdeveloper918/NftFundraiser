@@ -4,6 +4,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 import { projectReducer } from './Slices/projectSlice'
 import { footerReducer } from './Slices/footerSlice'
 import { fundraiserReducer } from './Slices/fundraiserSlice'
+import { collectionReducer } from './Slices/popularCollectionSlice'
 
 const reducer = combineReducers({
     user: authReducer,
@@ -18,7 +19,8 @@ const reducer = combineReducers({
     projectdetails: projectReducer,
     latestprojects: projectReducer,
     fundraiser: fundraiserReducer,
-    footer: footerReducer
+    footer: footerReducer,
+    collection: collectionReducer
 })
 
 const store = configureStore({

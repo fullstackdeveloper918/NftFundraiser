@@ -11,11 +11,11 @@ const projectSlice = createSlice({
         project: [],
         projects: [],
         projectdetails: [],
-        liveProjects: [],
-        // liveProjects: {
-        //     LatestProjects: {},
-        //     RecentCampaigns: {}
-        // },
+        // liveProjects: [],
+        liveProjects: {
+            LatestProjects: [],
+            RecentCampaigns: []
+        },
         message: {},
     },
     reducers: {
@@ -40,9 +40,8 @@ const projectSlice = createSlice({
             state.projectdetails = action?.payload?.data?.data;
         },
         publicLiveProjects: (state, action) => {
-            // debugger
-            // state.liveProjects['LatestProjects'] = action.payload.data.data.data
-            state.liveProjects = action.payload.data.data.data
+            state.liveProjects[action.payload.type] = action.payload.res.data.data.data
+            // state.liveProjects = action.payload.data.data.data
             // state.liveProjects['R'] = action.payload.data.data.data
         },
         deleteProject: (state, action) => {

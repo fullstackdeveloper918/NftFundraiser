@@ -9,34 +9,14 @@ const Hero = () => {
         <section className="hero-section">
             <div className="container">
                 <div className="row">
-                    <div className="col-12 col-md-12 col-lg-12">
-
-
-                        {/* <span>{this.state.data.pre_heading}</span> */}
-                        {/* <h1 className="mt-4">{this.state.data.heading}</h1> */}
-                        {/* <p>{this.state.data.content}</p> */}
+                    <div className="col-12 col-md-6 col-lg-7">
+                        <h1 className="mt-4"> Donate to projects by buying their NFTs.
+                            Resell NFTs to earn a commission</h1>
+                        <p>Earn rewards by referring your friends.</p>
                         {/* Buttons */}
                         <div className="button-group">
-                            <div>
-                                <h3>
-                                    Donate to projects by buying their NFTs.
-                                    Resell NFTs to earn a commission.
-                                    Earn rewards by referring your friends.
-
-                                </h3>
-                                <p>Explore on the world's best & largest NFT marketplace</p>
-                                <a className="btn btn-bordered-white" href="/auctions"><i className="icon-rocket mr-2" />Support a Cause</a>
-                            </div>
-                            <div>
-                                <h3>
-                                    Fundraise for your project by selling NFTs.
-                                    Vote on decisions with your team members.
-                                    Earn commissions from NFTs in perpetuity.
-
-                                </h3>
-                                <p>Explore on the world's best & largest NFT marketplace</p>
-                                <a className="btn btn-bordered-white" href="/create"><i className="icon-note mr-2" />Create a Project</a>
-                            </div>
+                            <a className="btn btn-bordered-white" href="/auctions"><i className="icon-rocket mr-2" />Explore</a>
+                            <a className="btn btn-bordered-white" href="/create"><i className="icon-note mr-2" />Create </a>
                         </div>
                     </div>
                 </div>

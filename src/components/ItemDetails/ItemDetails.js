@@ -91,7 +91,7 @@ const ItemDetails = () => {
         }
     ]
 
-    const id = useParams();
+    const { id } = useParams();
     // console.log(id, 'idd')
 
     const dispatch = useDispatch()
@@ -99,9 +99,10 @@ const ItemDetails = () => {
     const projdetail = useSelector(state => {
         return state.projectdetails
     })
-
+    console.log(projdetail, 'projdata')
 
     useEffect(() => {
+        // debugger
         dispatch(ProjectDetail(id))
     }, [id])
 

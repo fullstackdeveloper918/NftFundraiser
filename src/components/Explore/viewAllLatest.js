@@ -4,8 +4,8 @@ import { Link, useParams } from 'react-router-dom';
 import { getPublicLiveProjects } from '../../redux/Actions/projectAction';
 
 const projectTypesMap = {
-    "Latest Projects": 2,
-    "Recent Campaigns": 1
+    "LatestProjects": 2,
+    "RecentCampaigns": 1
 }
 
 const ExploreAll = () => {
@@ -14,7 +14,7 @@ const ExploreAll = () => {
 
 
     const liveProjects = useSelector(state => {
-        return state.projectdetails.liveProjects
+        return state?.projectdetails?.liveProjects[type]
     })
     console.log(liveProjects, 'live')
     useEffect(() => {
@@ -22,28 +22,28 @@ const ExploreAll = () => {
         dispatch(getPublicLiveProjects({
             cursor: 1,
             type: projectTypesMap[type],
+            projectType: type,
+
         }))
     }, [dispatch, type])
 
     return (
-        <section className="explore-area load-more p-0">
+        <section className="live-auctions-area load-more">
             <div className="container">
-                <div className="row">
-                    <div className="col-12">
+                <div className="row justify-content-center">
+                    <div className="col-12 col-md-8 col-lg-7">
                         {/* Intro */}
-                        <div className="intro d-flex justify-content-between align-items-end m-0">
-                            <div className="intro-content">
-                                {/* <span>{this.state.initData.pre_heading}</span> */}
-                                <h3 className="mt-3 mb-0">{type}</h3>
-                            </div>
-
+                        <div className="intro text-center">
+                            {/* <span>{this.state.initData.pre_heading}</span> */}
+                            <h3 className="mt-3 mb-0">{type}</h3>
+                            {/* <p>{this.state.initData.content}</p> */}
                         </div>
                     </div>
                 </div>
                 <div className="row items">
                     {liveProjects?.map((item, idx) => {
                         return (
-                            <div key={`exo_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
+                            <div key={`auct_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
                                 <div className="card">
                                     <div className="image-over">
                                         <Link to={`/item-details/${item.id}`}>
@@ -54,6 +54,7 @@ const ExploreAll = () => {
                                     <div className="card-caption col-12 p-0">
                                         {/* Card Body */}
                                         <div className="card-body">
+
                                             <a href="/item-details">
                                                 <h5 className="mb-0">{item.title}</h5>
                                             </a>
@@ -63,16 +64,15 @@ const ExploreAll = () => {
                                                     <h6 className="ml-2 mb-0">{item.owner}</h6>
                                                 </a>
                                             </div>
-                                            <div className="card-bottom d-flex justify-content-between">
-                                                <span>{item.price}</span>
-                                                <span>{item.count}</span>
-                                            </div>
-                                            {/* <a className="btn btn-bordered-white btn-smaller mt-3" href="/login"><i className="icon-handbag mr-2" />{item.btnText}</a> */}
                                         </div>
+                                        <div className="card-bottom d-flex justify-content-between">
+                                            <span>{item.price}</span>
+                                            <span>{item.count}</span>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-
                         );
                     })}
                 </div>
@@ -82,9 +82,7 @@ const ExploreAll = () => {
                     </div>
                 </div>
             </div>
-        </section>
-    );
+        </section >
+    )
 }
-
-
 export default ExploreAll;

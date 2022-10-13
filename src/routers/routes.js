@@ -25,6 +25,10 @@ import PrivateRoute from "./privateRoutes";
 import ProjectUpdate from "../themes/update";
 import TermsCond from "../themes/term&cond";
 import All from "../themes/viewalllatest";
+import ColExplore from "../themes/exploreCollections";
+import Aboutus from "../themes/Aboutus";
+import LiveAuctions from "../components/Auctions/AuctionsTwo";
+import NewestProj from "../themes/newestproj";
 
 const MyRouts = () => {
   return (
@@ -47,7 +51,10 @@ const MyRouts = () => {
           <Route exact path="/author" component={Author} />
           <Route exact path="/terms&conditions" component={TermsCond} />
           <Route exact path="/all/:type" component={All} />
+          <Route exact path="/aboutus" component={Aboutus} />
+          <Route exact path="/allcollections" component={ColExplore} />
           <Route exact path="/wallet-connect" component={WalletConnect} />
+          {/* <Route exact path="/newest-projects" component={NewestProj} /> */}
           <Route exact path="/create" component={Create} />
           <PrivateRoute exact path="/login" component={Login} />
           <PrivateRoute exact path="/signup" component={Signup} />

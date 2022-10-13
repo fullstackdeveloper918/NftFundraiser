@@ -6,12 +6,16 @@ const footerSlice = createSlice({
 
     initialState: {
         footer: [],
+        aboutus: []
 
     },
     reducers: {
 
         getfooter: (state, action) => {
             state.footer = action.payload;
+        },
+        getabout: (state, action) => {
+            state.aboutus = action.payload;
         },
 
     },
@@ -20,5 +24,6 @@ const footerSlice = createSlice({
 export const footerReducer = footerSlice.reducer
 
 export const {
-    getfooter
+    getfooter,
+    getabout,
 } = footerSlice.actions;

@@ -27,7 +27,7 @@ const Fundraiser = () => {
                         {/* Intro */}
                         <div className="intro m-0">
                             <div className="intro-content">
-                                {/* <span>{this.state.data.preHeading}</span> */}
+                                <span>Fundraisers</span>
                                 <h3 className="mt-3 mb-0">Top Fundraisers</h3>
                             </div>
                         </div>

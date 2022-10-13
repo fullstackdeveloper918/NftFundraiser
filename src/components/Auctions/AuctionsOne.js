@@ -18,15 +18,15 @@ const AuctionsOne = ({ type }) => {
     const dispatch = useDispatch()
 
     const liveProjects = useSelector(state => {
-        // debugger
-        // return state?.projectdetails?.liveProjects[type]
-        return state?.projectdetails?.liveProjects
+        return state?.projectdetails?.liveProjects[type]
+        // return []
     })
-    // console.log(liveProjects, 'liveeproj')
+    console.log(liveProjects, 'liveeproj')
     useEffect(() => {
         dispatch(getPublicLiveProjects({
             cursor: 1,
             type: projectTypesMap[type],
+            projectType: type,
         }))
 
     }, [dispatch])
@@ -39,8 +39,17 @@ const AuctionsOne = ({ type }) => {
                         {/* Intro */}
                         <div className="intro d-flex justify-content-between align-items-end m-0">
                             <div className="intro-content">
-                                <span>Auctions</span>
+
+                                <span>Project</span>
+
+                                {/* {projectTypesMap?.LatestProjects?.type === 2 ? ( */}
+
                                 <h3 className="mt-3 mb-0">{type}</h3>
+                                {/* ) : ( */}
+
+                                {/* <h3 className="mt-3 mb-0">cccc</h3> */}
+                                {/* )} */}
+
                             </div>
                             <div className="intro-btn">
                                 <a className="btn content-btn" href={`/all/${type}`}>View All</a>

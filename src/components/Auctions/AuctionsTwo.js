@@ -7,7 +7,7 @@ const LiveAuctions = () => {
 
     const dispatch = useDispatch()
 
-    const liveProjects = useSelector(state => {
+    const { liveProjects } = useSelector(state => {
         return state.projectdetails.liveProjects
     })
 

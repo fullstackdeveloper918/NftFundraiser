@@ -32,7 +32,7 @@ const Read = () => {
                         <div className="intro d-flex justify-content-between align-items-end m-0">
                             <div className="intro-content">
                                 <span>Auctions</span>
-                                <h3 className="mt-3 mb-0">Live Auctions</h3>
+                                <h3 className="mt-3 mb-0">Latest Projects</h3>
                             </div>
                             <div className="intro-btn">
                                 <a className="btn content-btn" href="/auctions">View All</a>
