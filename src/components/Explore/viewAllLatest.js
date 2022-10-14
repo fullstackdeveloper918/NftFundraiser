@@ -4,8 +4,8 @@ import { Link, useParams } from 'react-router-dom';
 import { getPublicLiveProjects } from '../../redux/Actions/projectAction';
 
 const projectTypesMap = {
-    "Latest Projects": 2,
-    "Recent Campaigns": 1
+    "LatestProjects": 2,
+    "RecentCampaigns": 1
 }
 
 const ExploreAll = () => {

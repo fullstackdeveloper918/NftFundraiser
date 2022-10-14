@@ -8,12 +8,12 @@ import { getPublicLiveProjects } from '../../redux/Actions/projectAction';
 
 
 const projectTypesMap = {
-    "Latest Projects": 2,
-    "Recent Campaigns": 1
+    "LatestProjects": 2,
+    "RecentCampaigns": 1
 }
 
 
-const AuctionsOne = ({ type }) => {
+const AuctionsOne = ({ key, type }) => {
 
     const dispatch = useDispatch()
 
@@ -41,7 +41,7 @@ const AuctionsOne = ({ type }) => {
                         <div className="intro d-flex justify-content-between align-items-end m-0">
                             <div className="intro-content">
                                 <span>Project</span>
-                                <h3 className="mt-3 mb-0">{type}</h3>
+                                <h3 className="mt-3 mb-0">{type.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")}</h3>
                             </div>
                             <div className="intro-btn">
                                 <a className="btn content-btn" href={`/all/${type}`}>View All</a>
