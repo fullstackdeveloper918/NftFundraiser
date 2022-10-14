@@ -4,7 +4,7 @@ const initData = {
     menuName: "Search",
     menuIcon: "far fa-times-circle icon-close",
     heading: "What are you looking for?",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    content: "Mint NFTs that are based on real-life projects or events related to important causes.",
     btnText: "Search"
 }
 
@@ -12,7 +12,7 @@ class ModalSearch extends Component {
     state = {
         data: {}
     }
-    componentDidMount(){
+    componentDidMount() {
         this.setState({
             data: initData
         })

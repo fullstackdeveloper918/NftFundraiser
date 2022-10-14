@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 const initData = {
     pre_heading: "Contact",
     heading: "Get In Touch",
-    content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit."
+    content: "Mint NFTs that are based on real-life projects or events related to important causes."
 }
 
 class Contact extends Component {
     state = {
         initData: {}
     }
-    componentDidMount(){
+    componentDidMount() {
         this.setState({
             initData: initData
         })

@@ -29,6 +29,7 @@ import ColExplore from "../themes/exploreCollections";
 import Aboutus from "../themes/Aboutus";
 import LiveAuctions from "../components/Auctions/AuctionsTwo";
 import NewestProj from "../themes/newestproj";
+import latprojDetails from "../themes/latproj-details";
 
 const MyRouts = () => {
   return (
@@ -43,6 +44,7 @@ const MyRouts = () => {
           <Route exact path="/explore-4" component={ExploreFour} />
           <Route exact path="/auctions" component={Auctions} />
           <Route exact path="/item-details/:id" component={ItemDetails} />
+          <Route exact path="/proj-details/:id" component={latprojDetails} />
           <Route exact path="/activity" component={Activity} />
           <Route exact path="/blog" component={Blog} />
           <Route exact path="/blog-single" component={BlogSingle} />

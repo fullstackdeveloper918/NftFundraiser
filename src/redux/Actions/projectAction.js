@@ -8,7 +8,8 @@ import {
     publicLiveProjects,
     deleteProject,
     getLatestProjectList,
-    getTopFundraiser
+    getTopFundraiser,
+    getLatestProjectDetail
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -59,6 +60,23 @@ export const ProjectDetail = (id) => async dispatch => {
         // console.log(res?.data?.data[0]?.image, 'proj')
         // console.log(res)
         dispatch(getProjectDetail(res));
+    } catch (e) {
+        //  
+        return console.error(e.message);
+    }
+}
+export const LatestProjectDetail = (id) => async dispatch => {
+    // 
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjectDetails/${id}`,
+            config)
+        // console.log(res, 'ressssss')
+        dispatch(getLatestProjectDetail(res));
     } catch (e) {
         //  
         return console.error(e.message);

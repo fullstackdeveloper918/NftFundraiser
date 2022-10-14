@@ -13,7 +13,7 @@ class Contact extends Component {
         return (
             <div className="main">
                 <Header />
-                <Breadcrumb title="Contact" subpage="Pages" page="Contact" />
+                {/* <Breadcrumb title="Contact" subpage="Pages" page="Contact" /> */}
                 <ContactSection />
                 <Footer />
                 <ModalSearch />

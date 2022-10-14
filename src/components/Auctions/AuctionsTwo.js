@@ -35,7 +35,7 @@ const LiveAuctions = () => {
                                 <div className="card">
 
                                     <div className="image-over">
-                                        <Link to={`/item-details/${item.id}`}>
+                                        <Link to={`/proj-details/${item.id}`}>
                                             <img className="card-img-top" src={item.image} alt="" />
                                         </Link>
                                     </div>

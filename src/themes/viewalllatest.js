@@ -14,7 +14,7 @@ const All = () => {
         <div className="main">
             <Header />
             {/* <Breadcrumb title="Explore" subpage="Explore" page="Explore Style 4" /> */}
-            <ExploreAll type="LatestProjects" />
+            <ExploreAll type="Latest Projects" />
             <Footer />
             <ModalSearch />
             <ModalMenu />

@@ -39,6 +39,13 @@ export const LoginAction = (params, history) => async dispatch => {
             params, config)
         dispatch(loginSuccess(res));
 
+        if (res.status === 200) {
+            swal("success", res.data.message, 'success').then(function () {
+                window.location = "/";
+            });
+
+        }
+
     } catch (e) {
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
@@ -55,23 +62,19 @@ export const ForgotPasswordAction = (params) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/forgot_pssword`,
             params, config)
-        dispatch(forgotpasswordSuccess(res));
-        setTimeout(function () {
-            swal({
-                title: "Mail Sent!",
-                text: "Check your email!",
-                type: "success"
-            }, function () {
-                window.location = ('/login');
+        if (res.status === 200) {
+            swal("success", res.data.message, 'success').then(function () {
+                window.location = "/login";
             });
-        }, 1000);
-        // swal("Mail sent!", "Check your email!", "success");
+
+        }
 
     } catch (e) {
-        return console.error(e.message);
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
     }
 }
-
 export const CreateOrganizationAction = (params) => async dispatch => {
     // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
     try {

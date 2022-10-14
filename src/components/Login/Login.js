@@ -17,7 +17,7 @@ const Login = () => {
         // console.log(login.authToken, 'login')
         return state.login
     })
-    
+
     if (user?.status === 200) {
         history.push('/')
     }
@@ -74,7 +74,7 @@ const Login = () => {
                                             className="form-control"
                                             name="password"
                                             placeholder="Enter your Password"
-                                            {...register("password", { required: { mesg } })}
+                                            {...register("password", { required: "Password is required" })}
                                             // {...register("email")}
                                             aria-invalid={errors.email ? "true" : "false"}
                                         />

@@ -61,7 +61,7 @@ const Footer = () => {
                             <div className="footer-items">
                                 {/* Logo */}
                                 <a className="navbar-brand" href="/">
-                                    {/* <img src="/img/karmatica.png" alt="" /> */}
+                                    <img src="/img/logo.png" alt="" />
                                 </a>
                                 <p>Mint NFTs that are based on real-life projects or events related to important causes.</p>
                                 {/* Social Icons */}
@@ -75,7 +75,7 @@ const Footer = () => {
                                 <h4 className="footer-title">Useful Links</h4>
                                 <ul>
                                     <li><Link to="/create">Create Project</Link></li>
-                                    <li><Link to="/">Explore NFTs</Link></li>
+                                    <li><a href={`/all/${"Latest Projects"}`}>Explore NFTs</a></li>
                                     <li><Link to="/terms&conditions">Terms & Conditions</Link></li>
                                 </ul>
                             </div>
@@ -87,7 +87,7 @@ const Footer = () => {
                                 <h4 className="footer-title">Community</h4>
                                 <ul>
                                     <li><Link to='/aboutus'>About Us</Link></li>
-                                    <li><Link>Get Support</Link></li>
+                                    <li><Link to='/contact'>Get Support</Link></li>
                                 </ul>
                             </div>
                         </div>

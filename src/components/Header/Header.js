@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getPublicLiveProjects } from '../../redux/Actions/projectAction';
 import { logoutSuccess } from '../../redux/Slices/authSlice';
 
 const Header = () => {
@@ -13,6 +14,7 @@ const Header = () => {
     const log = useSelector(state => {
         return state.user.userToken
     })
+
 
     return (
         // <header id="header">
@@ -141,7 +143,7 @@ const Header = () => {
                             <a href="/create" className="nav-link">Create</a>
                         </li>
                         <li className="nav-item">
-                            <Link to="#" className="nav-link">Latest</Link>
+                            <a href={`/all/${"Latest Projects"}`} className="nav-link">Newest Projects</a>
                         </li>
                         {/* <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Community <i className="fas fa-angle-down ml-1" /></a>

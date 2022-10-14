@@ -19,9 +19,9 @@ const Home = () => {
         <div className="main">
             <Header />
             <Hero />
-            <Auctions key="latest" type={"LatestProjects"} />
+            <Auctions key="latest" type={"Latest Projects"} />
             {/* <Auctions type={"Top Fundraisers"} /> */}
-            <Auctions key="recent" type={"RecentCampaigns"} />
+            <Auctions key="recent" type={"Recent Campaigns"} />
             {/* <Auctions type={"Popular Connections"} /> */}
             <Fundraiser />
             <Collections />

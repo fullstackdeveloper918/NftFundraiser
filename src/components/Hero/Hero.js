@@ -15,7 +15,7 @@ const Hero = () => {
                         <p>Earn rewards by referring your friends.</p>
                         {/* Buttons */}
                         <div className="button-group">
-                            <a className="btn btn-bordered-white" href="/auctions"><i className="icon-rocket mr-2" />Explore</a>
+                            <a className="btn btn-bordered-white" href={`/all/${"Latest Projects"}`}><i className="icon-rocket mr-2" />Explore</a>
                             <a className="btn btn-bordered-white" href="/create"><i className="icon-note mr-2" />Create </a>
                         </div>
                     </div>

@@ -221,11 +221,11 @@ const Create = () => {
                                     <div className="form-group mt-3">
                                         <div className="form-check form-check-inline">
                                             <input className="form-check-input" type="radio" name="donation" id="donation" value="1"  {...register("type")} />
-                                            <label className="form-check-label" htmlFor="donation">Donation</label>
+                                            <label className="form-check-label" htmlFor="donation">Campaign</label>
                                         </div>
                                         <div className="form-check form-check-inline">
                                             <input className="form-check-input" type="radio" name="product_sale" id="product_sale" value='2' {...register("type")} />
-                                            <label className="form-check-label" htmlFor="product_sale">Product sale</label>
+                                            <label className="form-check-label" htmlFor="product_sale">Project</label>
                                         </div>
 
                                     </div>
