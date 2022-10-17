@@ -13,7 +13,7 @@ export const getFooter = createAsyncThunk(
             }
             const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/term-condition`, config)
             thunkAPI.dispatch(getfooter(res?.data?.data));
-            console.log(res, "res")
+            // console.log(res, "res")
 
         } catch (e) {
             if (e?.response?.data) {
@@ -32,7 +32,7 @@ export const AboutUsAction = createAsyncThunk(
             }
             const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getAbouts`, config)
             thunkAPI.dispatch(getabout(res?.data?.data));
-            console.log(res, "res")
+            // console.log(res, "res")
 
         } catch (e) {
             if (e?.response?.data) {

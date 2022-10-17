@@ -9,7 +9,8 @@ import {
     deleteProject,
     getLatestProjectList,
     getTopFundraiser,
-    getLatestProjectDetail
+    getLatestProjectDetail,
+    getCategoriesList
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -115,8 +116,8 @@ export const getPublicLiveProjects = createAsyncThunk(
                     'Content-Type': 'application/json',
                 },
             }
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=&latitude=&longitude=&search_keyword=&type=${type}`, config)
-            console.log(res, 'projres')
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=&latitude=&longitude=&search_keyword=&type=${type}&category_id=`, config)
+            // console.log(res, 'projres')
             thunkAPI.dispatch(publicLiveProjects({
                 res: res,
                 type: projectType,
@@ -144,7 +145,7 @@ export const UpdateProject = (id, params) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/update/${id.id}`,
             params, config)
         // 
-        console.log(res, 'proj')
+        // console.log(res, 'proj')
         await dispatch(getProjectDetail(res));
         if (res.status === 200) {
             swal("success", res.data.message, 'success').then(function () {
@@ -171,7 +172,7 @@ export const DeleteProject = (id) => async dispatch => {
         const res = await axios.delete(`${process.env.REACT_APP_BACKEND_API}api/projects/destroy/${id}`,
             config)
         // 
-        console.log(res.status, 'proj')
+        // console.log(res.status, 'proj')
         await dispatch(deleteProject(res));
         if (res.status === 200) {
             swal("success", res.data.message, 'success').then(function () {
@@ -185,3 +186,24 @@ export const DeleteProject = (id) => async dispatch => {
     }
 }
 
+export const CategoriesAction = createAsyncThunk(
+    "auth/categoryProjects",
+    async ({ }, thunkAPI) => {
+        debugger
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getCategories`, config)
+            console.log(res, 'catres')
+            thunkAPI.dispatch(getCategoriesList());
+
+        } catch (e) {
+            debugger
+            if (e?.response?.data) {
+                thunkAPI.dispatch()
+            }
+        }
+    })

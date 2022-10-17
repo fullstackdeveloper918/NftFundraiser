@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { getPublicLiveProjects } from '../../redux/Actions/projectAction';
+import { CategoriesAction, getPublicLiveProjects } from '../../redux/Actions/projectAction';
 
 const projectTypesMap = {
     "LatestProjects": 2,
@@ -28,6 +28,15 @@ const ExploreAll = () => {
         }))
     }, [dispatch, type])
 
+    // useEffect(() => {
+    //     dispatch(CategoriesAction())
+    // }, [])
+
+    // const cate = useSelector(state => {
+    //     // debugger
+    //     return []
+    // })
+    // console.log(cate, 'category')
     return (
 
         <section className="explore-area">
@@ -37,7 +46,7 @@ const ExploreAll = () => {
                         {/* Intro */}
                         <div className="intro text-center mb-4">
                             <span>Explore</span>
-                            <h3 className="mt-3 mb-0">{type}</h3>
+                            <h3 className="mt-3 mb-0">{type.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")}</h3>
                             <p>Mint NFTs that are based on real-life projects or events related to important causes.</p>
                         </div>
                     </div>
@@ -46,11 +55,18 @@ const ExploreAll = () => {
                     <div className="col-12">
                         {/* Explore Menu */}
                         <div className="explore-menu btn-group btn-group-toggle flex-wrap justify-content-center text-center mb-4" data-toggle="buttons">
-                            <label className="btn active d-table text-uppercase p-2">
-                                <input type="radio" defaultValue="all" defaultChecked className="explore-btn" />
-                                <span>All</span>
-                            </label>
-                            <label className="btn active d-table text-uppercase p-2">
+                            {/* {cate?.map((item, idx) => {
+                                return (
+                                    <Link key={`${idx}`} to='#'>
+                                        <label className="btn active d-table text-uppercase p-2">
+
+                                            <input type="radio" defaultValue="all" defaultChecked className="explore-btn" />
+                                            <span>{item.title}</span>
+                                        </label>
+                                    </Link>
+                                )
+                            })} */}
+                            <label className="btn d-table text-uppercase p-2">
                                 <input type="radio" defaultValue="all" defaultChecked className="explore-btn" />
                                 <span>Arts</span>
                             </label>
@@ -103,7 +119,7 @@ const ExploreAll = () => {
                                             <div className="card">
                                                 <div className="image-over">
                                                     <Link to={`/proj-details/${item.id}`}>
-                                                        <img className="card-img-top" src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt="" />
+                                                        <img className="card-img-top" src={item.image} alt="" />
                                                     </Link>
                                                 </div>
                                                 {/* Card Caption */}

@@ -7,12 +7,13 @@ import swal from 'sweetalert';
 import Swal from 'sweetalert2';
 // import state from 'sweetalert/typings/modules/state';
 import { CreateProjectAction } from '../../redux/Actions/projectAction';
-
-
+import GeoLocation from './geoLocation';
 
 const Create = () => {
 
-
+    const [country, setCountry] = useState("");
+    const [state, setState] = useState("");
+    const [city, setCity] = useState("");
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -34,8 +35,9 @@ const Create = () => {
         formData.append('image', data.image[0])
         formData.append('title', data.title)
         formData.append('description', data.description)
-        formData.append('latitude', data.latitude)
-        formData.append('logitude', data.logitude)
+        formData.append('country', data.country)
+        formData.append('state', data.state)
+        formData.append('city', data.city)
         formData.append('address', data.address)
         formData.append('price', data.price)
         formData.append('number_of_nft', data.number_of_nft)
@@ -67,8 +69,8 @@ const Create = () => {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="input-group form-group">
-                                        <div >
-                                            <h6 className="text-center" >Image, Video, Audio, or 3D ModelFile</h6>
+                                        <div>
+                                            <h6 className="text-center">Image, Video, Audio, or 3D ModelFile</h6>
                                             <p> types supported: JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100 MB</p>
                                             <label htmlFor="upload-button">
 
@@ -93,7 +95,22 @@ const Create = () => {
                                 </div>
 
 
+                                {/* 
+                                <div className="col-6">
+                                    <div className="form-group mt-3">
+                                        <input
+                                            type="radio"
 
+                                        />
+                                        <div className="col-12">
+                                            <input
+                                                type="radio"
+
+                                            />
+                                        </div>
+
+                                    </div>
+                                </div> */}
                                 <div className="col-12">
                                     <div className="form-group mt-3">
                                         <input
@@ -138,30 +155,42 @@ const Create = () => {
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="latitude"
-                                            placeholder="Latitude"
-                                            {...register("latitude", { required: true, pattern: /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/ })}
-                                            aria-invalid={errors.latitude ? "true" : "false"}
+                                        <GeoLocation
+                                            locationTitle="Country"
+                                            isCountry
+                                            onChange={setCountry}
+                                        // {...register("country", { required: true })}
+                                        // aria-invalid={errors.country ? "true" : "false"}
                                         />
-                                        {errors.latitude?.type === 'required' && <p style={{ color: 'red' }} role="alert">latitude is required</p>}
-                                        {errors?.latitude?.type === "pattern" && <p style={{ color: 'red' }}>Enter valid latitude value</p>}
+                                        {/* {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">country is required</p>} */}
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="logitude"
-                                            placeholder="Logitude"
-                                            {...register("logitude", { required: true, pattern: /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/ })}
-                                            aria-invalid={errors.logitude ? "true" : "false"}
+                                        <GeoLocation
+                                            // type="text"
+                                            // className="form-control"
+                                            locationTitle="State"
+                                            onChange={setState}
+                                            geoId={country}
+
+                                        // {...register("state", { required: true })}
+                                        // aria-invalid={errors.state ? "true" : "false"}
                                         />
-                                        {errors.logitude?.type === 'required' && <p style={{ color: 'red' }} role="alert">logitude is required</p>}
-                                        {errors?.logitude?.type === "pattern" && <p style={{ color: 'red' }}>Enter valid logitude value</p>}
+                                        {/* {errors.state?.type === 'required' && <p style={{ color: 'red' }} role="alert">state is required</p>} */}
+                                    </div>
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <div className="form-group">
+                                        <GeoLocation
+                                            locationTitle="City"
+                                            onChange={setCity}
+                                            geoId={state}
+
+                                        // {...register("city", { required: true })}
+                                        // aria-invalid={errors.city ? "true" : "false"}
+                                        />
+                                        {/* {errors.city?.type === 'required' && <p style={{ color: 'red' }} role="alert">city is required</p>} */}
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-6">
@@ -236,9 +265,9 @@ const Create = () => {
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-        </section>
+                </div >
+            </div >
+        </section >
     );
 
 }

@@ -7,13 +7,14 @@ import ModalSearch from '../components/Modal/ModalSearch';
 import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
 import CreateOrganizationSection from '../components/Signup/createOrganization';
+import SignupIndex from '../components/Signup';
 
 export const createOrganization = () => {
     return (
         <div className="main">
             <Header />
             {/* <Breadcrumb title="Create Organization" subpage="Pages" page="createOrganization" /> */}
-            <CreateOrganizationSection />
+            <SignupIndex />
             <Footer />
             <ModalSearch />
             <ModalMenu />

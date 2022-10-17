@@ -5,6 +5,7 @@ import FormCard from "./FormCard";
 
 import Signup from './Signup'
 import CreateOrganization from './createOrganization';
+import FormProvider from "./Context/context";
 
 const SignupIndex = () => {
   const [formStep, setFormStep] = useState(0);
@@ -14,20 +15,16 @@ const SignupIndex = () => {
   const prevFormStep = () => setFormStep((currentStep) => currentStep - 1);
 
   return (
-    <div>
+    <FormProvider>
 
       <FormCard currentStep={formStep} prevFormStep={prevFormStep}>
-        {formStep >= 0 && (
+        {formStep === 0 && (
           <Signup formStep={formStep} nextFormStep={nextFormStep} />
         )}
-        {formStep >= 1 && (
-          <CreateOrganization formStep={formStep} nextFormStep={nextFormStep} />
-        )}
-
-
-
+        {formStep === 1 && <CreateOrganization />
+        }
       </FormCard>
-    </div>
+    </FormProvider>
   );
 };
 

@@ -75,7 +75,7 @@ const Footer = () => {
                                 <h4 className="footer-title">Useful Links</h4>
                                 <ul>
                                     <li><Link to="/create">Create Project</Link></li>
-                                    <li><a href={`/all/${"Latest Projects"}`}>Explore NFTs</a></li>
+                                    <li><a href={`/all/${"LatestProjects"}`}>Explore NFTs</a></li>
                                     <li><Link to="/terms&conditions">Terms & Conditions</Link></li>
                                 </ul>
                             </div>

@@ -59,7 +59,7 @@ const AuctionsOne = ({ key, type }) => {
                                         <div className="card">
                                             <div className="image-over">
                                                 <Link to={`/proj-details/${item.id}`}>
-                                                    <img className="card-img-top" src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt="" />
+                                                    <img className="card-img-top" src={item.image} alt="" />
                                                 </Link>
                                             </div>
                                             {/* Card Caption */}
@@ -73,7 +73,7 @@ const AuctionsOne = ({ key, type }) => {
                                                         <h5 className="mb-0">{item.title}</h5>
                                                     </a>
                                                     <a className="seller d-flex align-items-center my-3" href="/item-details">
-                                                        <img className="avatar-sm rounded-circle" src='/img/avtar3.png' alt="" />
+                                                        <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />
                                                         <span className="ml-2">@{item.user_data.username}</span>
                                                     </a>
                                                     <div className="card-bottom d-flex justify-content-between">

@@ -143,7 +143,7 @@ const Header = () => {
                             <a href="/create" className="nav-link">Create</a>
                         </li>
                         <li className="nav-item">
-                            <a href={`/all/${"Latest Projects"}`} className="nav-link">Newest Projects</a>
+                            <a href={`/all/${"LatestProjects"}`} className="nav-link">Newest Projects</a>
                         </li>
                         {/* <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Community <i className="fas fa-angle-down ml-1" /></a>

@@ -12,6 +12,7 @@ const projectSlice = createSlice({
         projects: [],
         projectdetails: [],
         latestprojectdetails: [],
+        categories: [],
         // liveProjects: [],
         liveProjects: {
             LatestProjects: [],
@@ -26,10 +27,11 @@ const projectSlice = createSlice({
         getProjectList: (state, action) => {
             state.projects = action.payload;
         },
-        // getTopFundraiser: (state, action) => {
-        //     debugger
-        //     state.fundraiser = action.payload;
-        // },
+        getCategoriesList: (state, action) => {
+            debugger
+            state.categories = action?.payload?.data?.data;
+        },
+
         getLatestProjectList: (state, action) => {
             state.projects = action.payload;
         },
@@ -67,4 +69,5 @@ export const {
     deleteProject,
     createFail,
     getLatestProjectList,
+    getCategoriesList
 } = projectSlice.actions;

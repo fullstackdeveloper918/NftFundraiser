@@ -21,7 +21,7 @@ const Home = () => {
             <Hero />
             <Auctions key="latestProjects" type={"LatestProjects"} />
             {/* <Auctions type={"Top Fundraisers"} /> */}
-            <Auctions key="recentCampaigns" type={"RecentCampaigns"} />
+            {/* <Auctions key="recentCampaigns" type={"RecentCampaigns"} /> */}
             {/* <Auctions type={"Popular Connections"} /> */}
             <Fundraiser />
             <Collections />

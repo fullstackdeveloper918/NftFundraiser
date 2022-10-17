@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import * as Yup from 'yup'
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useFormData } from './Context/context'
+import styles from './styles/styles.module.scss'
 
 const formSchema = Yup.object().shape({
     email: Yup.string()
@@ -23,22 +25,22 @@ const formSchema = Yup.object().shape({
 });
 
 
-const Signup = ({ setStep }) => {
+const Signup = ({ formStep, nextFormStep }) => {
+    const { setFormValues } = useFormData();
     const dispatch = useDispatch()
     const { register, watch, handleSubmit, formState: { errors } } = useForm({
-        mode: "onTouched",
+        mode: "all",
         resolver: yupResolver(formSchema)
     });
 
     const OnSubmit = (data) => {
-        dispatch(Register(data))
+        // dispatch(Register(data))
+        setFormValues(data);
+        nextFormStep();
     }
 
     const { user } = useSelector(state => state.user)
 
-    if (user?.status === 200) {
-        setStep(prev => prev + 1)
-    }
 
     const { errMessage } = useSelector(state => {
         return state?.errmessage?.message
@@ -62,60 +64,60 @@ const Signup = ({ setStep }) => {
                                 <p></p>
                             </div>
                             {/* Item Form */}
+                            <div className={formStep === 0 ? styles.showForm : styles.hideForm}>
+                                <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
+                                    <div className="row">
 
-                            <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
-                                <div className="row">
-
-                                    <div className="col-12">
-                                        <div className="form-group mt-3">
-                                            <input
-                                                type="email"
-                                                className="form-control"
-                                                name="email"
-                                                placeholder="Enter your Email"
-                                                {...register("email", { required: 'Email address is required' })}
-                                                // {...register("email")}
-                                                aria-invalid={errors.email ? "true" : "false"} />
-                                            {/* {errors.errMessage} */}
-                                            {errors.email && <p style={{ color: 'red' }} role="alert">{errors.email?.message}</p>}
-                                            {/* {errMessage && <p>{errMessage}</p>} */}
+                                        <div className="col-12">
+                                            <div className="form-group mt-3">
+                                                <input
+                                                    type="email"
+                                                    className="form-control"
+                                                    name="email"
+                                                    placeholder="Enter your Email"
+                                                    {...register("email", { required: 'Email address is required' })}
+                                                    // {...register("email")}
+                                                    aria-invalid={errors.email ? "true" : "false"} />
+                                                {/* {errors.errMessage} */}
+                                                {errors.email && <p style={{ color: 'red' }} role="alert">{errors.email?.message}</p>}
+                                                {/* {errMessage && <p>{errMessage}</p>} */}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <div className="form-group mt-3">
-                                            <input
-                                                type="password"
-                                                className="form-control"
-                                                name="password"
-                                                placeholder="Enter your Password"
-                                                {...register("password", { required: true })}
-                                                aria-invalid={errors.password ? "true" : "false"} />
-                                            {errors.password && <p style={{ color: 'red' }} role="alert">{errors.password.message}</p>}
+                                        <div className="col-12">
+                                            <div className="form-group mt-3">
+                                                <input
+                                                    type="password"
+                                                    className="form-control"
+                                                    name="password"
+                                                    placeholder="Enter your Password"
+                                                    {...register("password", { required: true })}
+                                                    aria-invalid={errors.password ? "true" : "false"} />
+                                                {errors.password && <p style={{ color: 'red' }} role="alert">{errors.password.message}</p>}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <div className="form-group mt-3">
+                                        <div className="col-12">
+                                            <div className="form-group mt-3">
 
-                                            <input
-                                                type="password"
-                                                className="form-control"
-                                                name="confirm_password"
-                                                placeholder="Enter your Password Again"
-                                                {...register("confirm_password",
-                                                    {
-                                                        required: true,
-                                                        validate: (val) => {
-                                                            if (watch('password') != val) {
-                                                                return "Your passwords do no match";
-                                                            }
-                                                        },
-                                                    })}
-                                                aria-invalid={errors.confirm_password ? "true" : "false"} />
-                                            {errors.confirm_password && <p style={{ color: 'red' }} role="alert">{errors.confirm_password.message}</p>}
+                                                <input
+                                                    type="password"
+                                                    className="form-control"
+                                                    name="confirm_password"
+                                                    placeholder="Enter your Password Again"
+                                                    {...register("confirm_password",
+                                                        {
+                                                            required: true,
+                                                            validate: (val) => {
+                                                                if (watch('password') != val) {
+                                                                    return "Your passwords do no match";
+                                                                }
+                                                            },
+                                                        })}
+                                                    aria-invalid={errors.confirm_password ? "true" : "false"} />
+                                                {errors.confirm_password && <p style={{ color: 'red' }} role="alert">{errors.confirm_password.message}</p>}
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    {/* <div className="col-12">
+                                        {/* <div className="col-12">
                                         <div className="form-group mt-3">
                                             <div className="form-check form-check-inline">
                                                 <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" />
@@ -123,15 +125,16 @@ const Signup = ({ setStep }) => {
                                             </div>
                                         </div>
                                     </div> */}
-                                    <div className="col-12">
-                                        <button className="btn w-100 mt-3 mt-sm-4" type="submit">Next</button>
-                                    </div>
-                                    <div className="col-12">
-                                        <span className="d-block text-center mt-4">Already have an account?<Link to="/login">Login</Link></span>
-                                    </div>
+                                        <div className="col-12">
+                                            <button className="btn w-100 mt-3 mt-sm-4" type="submit">Next</button>
+                                        </div>
+                                        <div className="col-12">
+                                            <span className="d-block text-center mt-4">Already have an account?<Link to="/login">Login</Link></span>
+                                        </div>
 
-                                </div>
-                            </form>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </>

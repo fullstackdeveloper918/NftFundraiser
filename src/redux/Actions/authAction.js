@@ -8,15 +8,24 @@ export const Register = createAsyncThunk(
     "auth/register",
     async (params, thunkAPI) => {
         try {
+            const token = sessionStorage.getItem('authToken')
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
                 },
+                transformRequest: formData => formData
             }
             const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/signup`,
                 params, config)
 
             thunkAPI.dispatch(registerSuccess(res));
+            if (res.status === 200) {
+                swal("success", res.data.message, 'success').then(function () {
+                    window.location = "/";
+                });
+
+            }
 
         } catch (e) {
             if (e?.response?.data) {

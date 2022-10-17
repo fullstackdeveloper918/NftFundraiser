@@ -10,12 +10,12 @@ const Hero = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-6 col-lg-7">
-                        <h1 className="mt-4"> Donate to projects by buying their NFTs.
+                        <h1 className="mt-4">Invest in projects using NFTs.
                             Resell NFTs to earn a commission</h1>
                         <p>Earn rewards by referring your friends.</p>
                         {/* Buttons */}
                         <div className="button-group">
-                            <a className="btn btn-bordered-white" href={`/all/${"Latest Projects"}`}><i className="icon-rocket mr-2" />Explore</a>
+                            <a className="btn btn-bordered-white" href={`/all/${"LatestProjects"}`}><i className="icon-rocket mr-2" />Explore</a>
                             <a className="btn btn-bordered-white" href="/create"><i className="icon-note mr-2" />Create </a>
                         </div>
                     </div>
