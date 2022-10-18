@@ -1,54 +1,89 @@
 import { DropzoneAreaBase, DropzoneDialogBase } from 'material-ui-dropzone';
-import React, { Component, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { Component, useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import swal from 'sweetalert';
 import Swal from 'sweetalert2';
 // import state from 'sweetalert/typings/modules/state';
-import { CreateProjectAction } from '../../redux/Actions/projectAction';
+import { CategoriesAction, CreateCollectionAction, CreateProjectAction, GetCollectionsAction } from '../../redux/Actions/projectAction';
 import GeoLocation from './geoLocation';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import MyVerticallyCenteredModal from './createCollection';
 
 const Create = () => {
 
     const [country, setCountry] = useState("");
     const [state, setState] = useState("");
     const [city, setCity] = useState("");
+    const [collection_id, setCollectionId] = useState([]);
+
+
+    function onHandleClick(event) {
+        setCollectionId(event.currentTarget.id);
+    };
+
+
     const dispatch = useDispatch()
     const history = useHistory()
+    const [modalShow, setModalShow] = React.useState(false);
 
-    const message = useSelector(state => {
-        return state.projectdetails.message
+
+    const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
+
+
+    const col = useSelector(state => {
+        // debugger
+        return state?.projectdetails?.getcollections
     })
+    console.log(col, 'col')
+    useEffect(() => {
+        dispatch(GetCollectionsAction())
+    }, [])
 
-    const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm({});
-
-
-    const proj = useSelector(state => {
-        return state.createproject
+    const cat = useSelector(state => {
+        // debugger
+        return state?.projectdetails?.categories
     })
+    console.log(cat, 'cat')
+    useEffect(() => {
+        dispatch(CategoriesAction())
+    }, [])
 
 
     const OnSubmit = (data) => {
+        debugger
         const formData = new FormData()
-
         formData.append('image', data.image[0])
         formData.append('title', data.title)
         formData.append('description', data.description)
-        formData.append('country', data.country)
-        formData.append('state', data.state)
-        formData.append('city', data.city)
+        formData.append('country', country)
+        formData.append('state', state)
+        formData.append('city', city)
         formData.append('address', data.address)
         formData.append('price', data.price)
         formData.append('number_of_nft', data.number_of_nft)
         formData.append('start_date', data.start_date)
         formData.append('end_date', data.end_date)
         formData.append('type', data.type)
+        formData.append('collection_id', collection_id)
+        formData.append('category_id', data.category_id)
 
         dispatch(CreateProjectAction(formData))
 
     }
 
+    // const colSubmit = (data) => {
+    //     debugger
+    //     dispatch(CreateCollectionAction(data))
+    // }
+
+    // const coll = useSelector(state => {
+    //     return state?.projectdetails?.collections
+    // })
+    // console.log(coll, 'collections')
     return (
         <section className="author-area">
             <div className="container">
@@ -95,22 +130,7 @@ const Create = () => {
                                 </div>
 
 
-                                {/* 
-                                <div className="col-6">
-                                    <div className="form-group mt-3">
-                                        <input
-                                            type="radio"
 
-                                        />
-                                        <div className="col-12">
-                                            <input
-                                                type="radio"
-
-                                            />
-                                        </div>
-
-                                    </div>
-                                </div> */}
                                 <div className="col-12">
                                     <div className="form-group mt-3">
                                         <input
@@ -153,42 +173,111 @@ const Create = () => {
                                         {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
                                     </div>
                                 </div>
+
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
-                                        <GeoLocation
-                                            locationTitle="Country"
-                                            isCountry
-                                            onChange={setCountry}
-                                        // {...register("country", { required: true })}
-                                        // aria-invalid={errors.country ? "true" : "false"}
+                                        <label>Choose collection</label>
+                                        <div className="card" >
+                                            <div className="card-body">
+                                                <Button variant="primary" onClick={() => setModalShow(true)}>
+                                                    create
+                                                </Button>
+
+                                                <MyVerticallyCenteredModal
+                                                    show={modalShow}
+                                                    onHide={() => setModalShow(false)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-12 col-md-6">
+
+                                    {col?.map((item, idx) => (
+                                        <div key={`auc_${idx}`} id={item.id} >
+
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <Button id={item.id} onClick={onHandleClick}  >
+
+                                                        {item.title}
+                                                    </Button>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <div className="form-group">
+                                        <Controller
+                                            control={control}
+                                            name="country"
+                                            render={({ field: { onChange, onBlur, value, ref } }) => (
+
+                                                // onChange={onChange}
+
+                                                <GeoLocation
+                                                    locationTitle="Country"
+                                                    isCountry
+                                                    onBlur={onBlur}
+                                                    selected={value}
+                                                    onChange={setCountry}
+                                                // {...register("country", { required: true })}
+                                                // aria-invalid={errors.country ? "true" : "false"}
+                                                />
+
+                                            )}
                                         />
-                                        {/* {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">country is required</p>} */}
+
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
-                                        <GeoLocation
-                                            // type="text"
-                                            // className="form-control"
-                                            locationTitle="State"
-                                            onChange={setState}
-                                            geoId={country}
+                                        <Controller
+                                            control={control}
+                                            name="state"
+                                            render={({ field: { onChange, onBlur, value, ref } }) => (
 
-                                        // {...register("state", { required: true })}
-                                        // aria-invalid={errors.state ? "true" : "false"}
+                                                <GeoLocation
+                                                    // type="text"
+                                                    // className="form-control"
+                                                    locationTitle="State"
+                                                    onChange={setState}
+                                                    geoId={country}
+                                                    onBlur={onBlur}
+                                                    selected={value}
+                                                // onChange={onChange}
+
+                                                // {...register("state", { required: true })}
+                                                // aria-invalid={errors.state ? "true" : "false"}
+                                                />
+                                            )}
                                         />
                                         {/* {errors.state?.type === 'required' && <p style={{ color: 'red' }} role="alert">state is required</p>} */}
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
-                                        <GeoLocation
-                                            locationTitle="City"
-                                            onChange={setCity}
-                                            geoId={state}
+                                        <Controller
+                                            control={control}
+                                            name="city"
+                                            render={({ field: { onChange, onBlur, value, ref } }) => (
+                                                <GeoLocation
+                                                    locationTitle="City"
+                                                    onChange={setCity}
+                                                    geoId={state}
+                                                    onBlur={onBlur}
+                                                    selected={value}
+                                                // onChange={onChange}
 
-                                        // {...register("city", { required: true })}
-                                        // aria-invalid={errors.city ? "true" : "false"}
+
+                                                // {...register("city", { required: true })}
+                                                // aria-invalid={errors.city ? "true" : "false"}
+                                                />
+                                            )}
                                         />
                                         {/* {errors.city?.type === 'required' && <p style={{ color: 'red' }} role="alert">city is required</p>} */}
                                     </div>
@@ -243,6 +332,19 @@ const Create = () => {
                                             aria-invalid={errors.end_date ? "true" : "false"}
                                         />
                                         {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
+                                    </div>
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <div className="form-group">
+                                        <select name="annual_revenue_range"
+                                            {...register("category_id")}>
+                                            {cat?.map((option, key) => (
+
+                                                <option key={key.id} value={option.id} >
+                                                    {option.title}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
 

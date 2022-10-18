@@ -10,7 +10,9 @@ import {
     getLatestProjectList,
     getTopFundraiser,
     getLatestProjectDetail,
-    getCategoriesList
+    getCategoriesList,
+    createCollectionSuccess,
+    getCollections
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -31,12 +33,12 @@ export const CreateProjectAction = (params) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/store`,
             params, config)
         dispatch(createProjectSuccess(res));
-        if (res.status === 200) {
-            swal("success", res.data.message, 'success').then(function () {
-                window.location = "/projectlist";
-            });
+        // if (res.status === 200) {
+        //     swal("success", res.data.message, 'success').then(function () {
+        //         window.location = "/projectlist";
+        //     });
 
-        }
+        // }
 
     } catch (e) {
         if (e?.response?.data.message) {
@@ -186,24 +188,72 @@ export const DeleteProject = (id) => async dispatch => {
     }
 }
 
-export const CategoriesAction = createAsyncThunk(
-    "auth/categoryProjects",
-    async ({ }, thunkAPI) => {
-        debugger
-        try {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getCategories`, config)
-            console.log(res, 'catres')
-            thunkAPI.dispatch(getCategoriesList());
-
-        } catch (e) {
-            debugger
-            if (e?.response?.data) {
-                thunkAPI.dispatch()
-            }
+export const CategoriesAction = () => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
         }
-    })
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getCategories`, config)
+        console.log(res, 'catres')
+        dispatch(getCategoriesList(res));
+
+    } catch (e) {
+        debugger
+        if (e?.response?.data) {
+            dispatch()
+        }
+    }
+}
+
+export const CreateCollectionAction = (params) => async dispatch => {
+    try {
+        const token = sessionStorage.getItem('authToken')
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createCollection`,
+            params, config)
+        console.log(res, 'colres')
+        dispatch(createCollectionSuccess(res));
+        if (res.status === 200) {
+            swal("success", res.data.message, 'success')
+            // .then(function () {
+            //     window.location = "/projectlist";
+            // });
+
+        }
+
+    } catch (e) {
+        debugger
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+            dispatch(createFail(e))
+        }
+    }
+}
+
+export const GetCollectionsAction = () => async dispatch => {
+    const token = sessionStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        }
+
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getCollection`,
+            config)
+
+        console.log(res, 'rescol')
+        await dispatch(getCollections(res));
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}

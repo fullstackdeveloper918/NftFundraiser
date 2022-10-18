@@ -13,6 +13,8 @@ const projectSlice = createSlice({
         projectdetails: [],
         latestprojectdetails: [],
         categories: [],
+        collections: [],
+        getcollections: [],
         // liveProjects: [],
         liveProjects: {
             LatestProjects: [],
@@ -24,11 +26,17 @@ const projectSlice = createSlice({
         createProjectSuccess: (state, action) => {
             state.project = action.payload;
         },
+        createCollectionSuccess: (state, action) => {
+            state.collections = action.payload;
+        },
+        getCollections: (state, action) => {
+            // debugger
+            state.getcollections = action?.payload?.data?.data;
+        },
         getProjectList: (state, action) => {
             state.projects = action.payload;
         },
         getCategoriesList: (state, action) => {
-            debugger
             state.categories = action?.payload?.data?.data;
         },
 
@@ -66,8 +74,10 @@ export const {
     getProjectDetail,
     getLatestProjectDetail,
     publicLiveProjects,
+    createCollectionSuccess,
     deleteProject,
     createFail,
     getLatestProjectList,
-    getCategoriesList
+    getCategoriesList,
+    getCollections,
 } = projectSlice.actions;
