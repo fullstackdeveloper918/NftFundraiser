@@ -121,6 +121,7 @@ const CreateOrganization = ({ formStep, nextFormStep }) => {
 
                                                     <option key={key.id} value={option.id} >
                                                         {option.name}
+                                                        {/* aria-invalid={errors.tax_id ? "true" : "false"} */}
                                                     </option>
                                                 ))}
                                             </select>

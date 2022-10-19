@@ -12,7 +12,8 @@ import {
     getLatestProjectDetail,
     getCategoriesList,
     createCollectionSuccess,
-    getCollections
+    getCollections,
+    getCollectionDetails
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -252,6 +253,26 @@ export const GetCollectionsAction = () => async dispatch => {
 
         console.log(res, 'rescol')
         await dispatch(getCollections(res));
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+export const GetCollectionDetails = (id) => async dispatch => {
+    const token = sessionStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        }
+
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getCollectionById/${id}`,
+            config)
+
+        console.log(res, 'rescol')
+        await dispatch(getCollectionDetails(res));
 
     } catch (e) {
         return console.error(e.message);

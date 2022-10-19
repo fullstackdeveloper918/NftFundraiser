@@ -30,6 +30,9 @@ import Aboutus from "../themes/Aboutus";
 import LiveAuctions from "../components/Auctions/AuctionsTwo";
 import NewestProj from "../themes/newestproj";
 import latprojDetails from "../themes/latproj-details";
+import Showcollections from "../themes/showcollections";
+import Collectiondetails from "../themes/collectn-details";
+import CollectionDetail from "../themes/collectn-details";
 
 const MyRouts = () => {
   return (
@@ -56,6 +59,8 @@ const MyRouts = () => {
           <Route exact path="/aboutus" component={Aboutus} />
           <Route exact path="/allcollections" component={ColExplore} />
           <Route exact path="/wallet-connect" component={WalletConnect} />
+          <Route exact path="/my-collections" component={Showcollections} />
+          <Route exact path="/collection/:id" component={CollectionDetail} />
           {/* <Route exact path="/newest-projects" component={NewestProj} /> */}
           <Route exact path="/create" component={Create} />
           <PrivateRoute exact path="/login" component={Login} />

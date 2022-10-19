@@ -17,7 +17,9 @@ const geonames = new Geonames({
 
 const useStyles = makeStyles(theme => ({
     formControl: {
-        minWidth: "100%"
+        minWidth: "100%",
+        // background: 'black',
+        // color: "#FFF"
     },
     selectEmpty: {
         marginTop: theme.spacing(2)

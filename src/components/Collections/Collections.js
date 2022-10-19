@@ -11,7 +11,7 @@ const Collections = () => {
 
     const coll = useSelector(state => {
         // debugger
-        return state.collection.collection
+        return state?.collection?.collection
     })
     console.log(coll, "coll")
     useEffect(() => {

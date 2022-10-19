@@ -20,8 +20,9 @@ const reducer = combineReducers({
     latestprojects: projectReducer,
     fundraiser: fundraiserReducer,
     footer: footerReducer,
-    // collection: collectionReducer,
+    collection: collectionReducer,
     getcollections: collectionReducer,
+    getcollectiondetails: collectionReducer,
 })
 
 const store = configureStore({
