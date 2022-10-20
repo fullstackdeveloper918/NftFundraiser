@@ -8,7 +8,7 @@ import { CreateProjectAction, GetCollectionsAction } from '../../redux/Actions/p
 import { useFormData } from './Context/context'
 import MyVerticallyCenteredModal from './createCollection';
 import styles from './styles/styles.module.scss'
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 import { Upload, Modal } from 'antd';
 
 const getBase64 = (file) =>

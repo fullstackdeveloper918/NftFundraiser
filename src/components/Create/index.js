@@ -8,7 +8,7 @@ import UploadNft from "./uploadNft";
 import FormProvider from "./Context/context";
 
 const UploadNftIndex = () => {
-  const [formStep, setFormStep] = useState(1);
+  const [formStep, setFormStep] = useState(0);
 
   const nextFormStep = () => setFormStep((currentStep) => currentStep + 1);
 
