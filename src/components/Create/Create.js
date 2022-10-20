@@ -14,6 +14,8 @@ import 'reactjs-popup/dist/index.css';
 import styles from "./styles/styles.module.scss"
 import MyVerticallyCenteredModal from './createCollection';
 import { useFormData } from './Context/context';
+import { Label } from '@material-ui/icons';
+
 
 const Create = ({ formStep, nextFormStep }) => {
     const { setFormValues } = useFormData();
@@ -37,8 +39,10 @@ const Create = ({ formStep, nextFormStep }) => {
     const [modalShow, setModalShow] = React.useState(false);
 
 
+
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({
-        mode: "all"
+        mode: "all",
+
     });
 
 
@@ -62,7 +66,7 @@ const Create = ({ formStep, nextFormStep }) => {
 
 
     const OnSubmit = (data) => {
-        setFormValues({ ...data, country, state, city, type, collection_id, type });
+        setFormValues({ ...data, country, state, city, type });
         nextFormStep();
         // debugger
         // const formData = new FormData()
@@ -107,11 +111,11 @@ const Create = ({ formStep, nextFormStep }) => {
                                     <div className="col-12">
                                         <div className="form-group mt-3">
                                             <div className="form-check form-check-inline">
-                                                <input className="form-check-input" type="radio" name="donation" id="donation" value="1" onChange={(e) => setType(e.target.value)} />
+                                                <input className="form-check-input" type="radio" name="radiobutton" id="donation" value="1" onChange={(e) => setType(e.target.value)} defaultChecked />
                                                 <label className="form-check-label" htmlFor="donation">Campaign</label>
                                             </div>
                                             <div className="form-check form-check-inline">
-                                                <input className="form-check-input" type="radio" name="product_sale" id="product_sale" value="2" onChange={(e) => setType(e.target.value)} />
+                                                <input className="form-check-input" type="radio" name="radiobutton" id="product_sale" value="2" onChange={(e) => setType(e.target.value)} />
                                                 <label className="form-check-label" htmlFor="product_sale">Project</label>
                                             </div>
 
@@ -146,10 +150,11 @@ const Create = ({ formStep, nextFormStep }) => {
 
 
 
-                                    <div className="col-12">
+                                    <div className="col-6">
                                         {/* {type == 1 && ( */}
 
                                         <div className="form-group mt-3">
+                                            <label>Project name</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -163,8 +168,9 @@ const Create = ({ formStep, nextFormStep }) => {
                                         </div>
                                         {/* )} */}
                                     </div>
-                                    <div className="col-12">
+                                    <div className="col-6">
                                         <div className="form-group mt-3">
+                                            <label>Address</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -178,6 +184,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                         </div>
                                     </div>
                                     <div className="col-12">
+                                        <label>Description</label>
                                         <div className="form-group">
                                             <textarea
                                                 type="text"
@@ -234,6 +241,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                 </div> */}
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
+                                            <label>Country</label>
                                             <Controller
                                                 control={control}
                                                 name="country"
@@ -256,6 +264,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                     </div>
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
+                                            <label>State</label>
                                             <Controller
                                                 control={control}
                                                 name="state"
@@ -281,6 +290,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                     </div>
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
+                                            <label>City</label>
                                             <Controller
                                                 control={control}
                                                 name="city"
@@ -304,6 +314,13 @@ const Create = ({ formStep, nextFormStep }) => {
                                     </div>
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
+                                            {type == 2 ? (
+
+                                                <label>Price</label>
+                                            ) : (
+
+                                                <label>Price per NFT</label>
+                                            )}
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -318,48 +335,54 @@ const Create = ({ formStep, nextFormStep }) => {
 
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
+                                            <label>Number of NFT's</label>
                                             <input
                                                 type="number"
                                                 className="form-control"
                                                 name="number_of_nft"
                                                 defaultValue={1}
                                                 disabled={type == 2}
-                                                placeholder="Select yor number of NFT's (1-10)"
+                                                placeholder="Select your number of NFT's (1-10)"
+                                                min={1}
+                                                max={10}
                                                 {...register("number_of_nft", { required: true })}
                                                 aria-invalid={errors.number_of_nft ? "true" : "false"}
                                             />
-                                            {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of nft is required</p>}
+                                            {/* {errors.number_of_nft?.message && <p>{errors.number_of_nft.message}</p>} */}
+                                            {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required</p>}
                                         </div>
                                     </div>
+                                    {type == 1 && (
 
+                                        <><div className="col-12 col-md-6">
+                                            <div className="form-group">
+                                                <label>Start date</label>
+                                                <input
+                                                    type="date"
+                                                    className="form-control"
+                                                    name="start_date"
+                                                    placeholder=" Start date"
+                                                    {...register("start_date", { required: true })}
+                                                    aria-invalid={errors.start_date ? "true" : "false"} />
+                                                {errors.start_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">Start date is required</p>}
+                                            </div>
+                                        </div><div className="col-12 col-md-6">
+                                                <div className="form-group">
+                                                    <label>End date</label>
+                                                    <input
+                                                        type="date"
+                                                        className="form-control"
+                                                        name="end_date"
+                                                        placeholder=" End date"
+                                                        {...register("end_date", { required: true })}
+                                                        aria-invalid={errors.end_date ? "true" : "false"} />
+                                                    {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
+                                                </div>
+                                            </div></>
+                                    )}
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
-                                            <input
-                                                type="date"
-                                                className="form-control"
-                                                name="start_date"
-                                                placeholder=" Start date"
-                                                {...register("start_date", { required: true })}
-                                                aria-invalid={errors.start_date ? "true" : "false"}
-                                            />
-                                            {errors.start_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">Start date is required</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6">
-                                        <div className="form-group">
-                                            <input
-                                                type="date"
-                                                className="form-control"
-                                                name="end_date"
-                                                placeholder=" End date"
-                                                {...register("end_date", { required: true })}
-                                                aria-invalid={errors.end_date ? "true" : "false"}
-                                            />
-                                            {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6">
-                                        <div className="form-group">
+                                            <label>Category</label>
                                             <select name="annual_revenue_range"
                                                 {...register("category_id")}>
                                                 {cat?.map((option, key) => (

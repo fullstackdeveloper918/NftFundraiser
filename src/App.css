@@ -208,3 +208,8 @@ body header .navbar-expand .navbar-nav.action .btn {
 footer a.navbar-brand img {
     width: 70px;
 }
+
+.MuiSelect-select.MuiSelect-select {
+    padding-right: 24px;
+    color: var(--primary-p-color);
+}

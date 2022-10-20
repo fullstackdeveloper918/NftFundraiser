@@ -1,15 +1,51 @@
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Space } from 'antd';
-import React from 'react';
+import TextArea from 'antd/lib/input/TextArea';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { CreateProjectAction } from '../../redux/Actions/projectAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { CreateProjectAction, GetCollectionsAction } from '../../redux/Actions/projectAction';
 import { useFormData } from './Context/context'
+import MyVerticallyCenteredModal from './createCollection';
 import styles from './styles/styles.module.scss'
-// import 'antd/dist/antd.css';
+import 'antd/dist/antd.css';
+import { Upload, Modal } from 'antd';
+
+const getBase64 = (file) =>
+    new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+    });
+// import ImgCrop from 'antd-img-crop';
 
 const UploadNft = ({ formStep, nextFormStep }) => {
+
+
+    const [fileList, setFileList] = useState([])
     const { data, setFormValues } = useFormData();
+    const [previewOpen, setPreviewOpen] = useState(false);
+    const [previewImage, setPreviewImage] = useState('');
+    const [previewTitle, setPreviewTitle] = useState('');
+    console.log(data, 'formdta')
+    const [count, setCount] = useState(0);
+    const [modalShow, setModalShow] = React.useState(false);
+    const [collection_id, setCollectionId] = useState(0);
+    console.log(collection_id)
+    const handleIncrement = () => {
+        setCount(prevCount => prevCount + 1);
+    };
+    const handleDecrement = () => {
+        setCount(prevCount => prevCount - 1);
+    };
+    console.log(count, 'count')
+
+    function onHandleClick(event) {
+        setCollectionId(event.currentTarget.id);
+    };
+
+
     const { register, handleSubmit, formState: { errors }, watch } = useForm({
         mode: 'all'
     });
@@ -19,9 +55,11 @@ const UploadNft = ({ formStep, nextFormStep }) => {
 
         const formData = new FormData()
 
-        formData.append('image', data.image[0])
+        formData.append('image', values.image[0])
         formData.append('title', data.title)
+        formData.append('name', values.name)
         formData.append('description', data.description)
+        formData.append('description', values.description)
         formData.append('country', data.country)
         formData.append('state', data.state)
         formData.append('city', data.city)
@@ -31,7 +69,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
         formData.append('start_date', data.start_date)
         formData.append('end_date', data.end_date)
         formData.append('type', data.type)
-        formData.append('collection_id', data.collection_id)
+        formData.append('collection_id', collection_id)
         formData.append('category_id', data.category_id)
 
         dispatch(CreateProjectAction(formData))
@@ -40,8 +78,25 @@ const UploadNft = ({ formStep, nextFormStep }) => {
         //     history.push('/login')
         // }
     }
+    const col = useSelector(state => {
+        // debugger
+        return state?.projectdetails?.getcollections
+    })
+    console.log(col, 'col')
+    useEffect(() => {
+        dispatch(GetCollectionsAction())
+    }, [])
     const onFinish = (values) => {
         console.log('Received values of form:', values);
+    };
+    const handleCancel = () => setPreviewOpen(false);
+    const handlePreview = async (file) => {
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj);
+        }
+        setPreviewImage(file.url || file.preview);
+        setPreviewOpen(true);
+        setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
     };
     return (
         <section className="author-area">
@@ -74,72 +129,134 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                     align="baseline"
                                                 >
                                                     <div className="row">
-
                                                         <div className="col-6">
+                                                            <div>
 
 
-                                                            <Form.Item
-                                                                {...restField}
-                                                                name={[name, 'name']}
-                                                                rules={[
-                                                                    {
-                                                                        required: true,
-                                                                        message: 'Missing  name',
-                                                                    },
-                                                                ]}
-                                                            >
-                                                                <Input placeholder="Name" />
-                                                            </Form.Item>
+                                                                <Form.Item
+                                                                    {...restField}
+                                                                    name={[name, 'name']}
+                                                                    rules={[
+                                                                        {
+                                                                            required: true,
+                                                                            message: 'Missing  name',
+                                                                        },
+                                                                    ]}
+                                                                >
+                                                                    <label>Name</label>
+                                                                    <Input placeholder="Name" />
+                                                                </Form.Item>
+                                                            </div>
+                                                            <div>
+                                                                <Form.Item
+                                                                    {...restField}
+                                                                    name={[name, 'Description']}
+                                                                    rules={[
+                                                                        {
+                                                                            required: true,
+                                                                            message: 'Missing Description',
+                                                                        },
+                                                                    ]}
+                                                                >
+                                                                    <label>Description</label>
+                                                                    <TextArea placeholder="Description" minLength={'5px'} />
+
+                                                                </Form.Item>
+                                                            </div>
                                                         </div>
                                                         <div className="col-5">
-                                                            <Form.Item
-                                                                {...restField}
-                                                                name={[name, 'Description']}
-                                                                rules={[
-                                                                    {
-                                                                        required: true,
-                                                                        message: 'Missing Description',
-                                                                    },
-                                                                ]}
-                                                            >
-                                                                <Input placeholder="Description" />
+                                                            <div>
+                                                                <Form.Item
+                                                                    {...restField}
+                                                                    name={[name, 'image']}
+                                                                    rules={[
+                                                                        {
+                                                                            required: true,
+                                                                            message: 'Please select a image',
+                                                                        },
+                                                                    ]}
+                                                                >
 
-                                                            </Form.Item>
-                                                        </div>
-                                                        <div className="col-6">
-                                                            <Form.Item>
-                                                                <div className="input-group form-group">
-                                                                    <div>
-                                                                        <label htmlFor="upload-button">
-
-                                                                            <img src={
-                                                                                watch('image') && watch('image').length
-                                                                                    ? URL.createObjectURL(watch('image')[0])
-                                                                                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-                                                                            }
-                                                                                alt="photo preview" width="200" height="200" />
-                                                                        </label>
-                                                                        <input
-                                                                            type="file"
-                                                                            id="upload-button"
-                                                                            {...register("image", { required: true })}
-                                                                            style={{ display: "none" }}
-                                                                            aria-invalid={errors.image ? "true" : "false"}
+                                                                    <Upload
+                                                                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                                                        listType="picture-card"
+                                                                        // fileList={fileList}
+                                                                        // onChange={onChange}
+                                                                        onPreview={handlePreview}
+                                                                        maxCount={1}
+                                                                    >
+                                                                        + Upload
+                                                                    </Upload>
+                                                                    <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
+                                                                        <img
+                                                                            alt="example"
+                                                                            style={{
+                                                                                width: '100%',
+                                                                            }}
+                                                                            src={previewImage}
                                                                         />
-                                                                        {errors.image?.type === 'required' && <p style={{ color: 'red' }} role="alert">File is required</p>}
-                                                                    </div>
+                                                                    </Modal>
 
+                                                                </Form.Item>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-1">
+                                                            <MinusCircleOutlined onClick={(e) => { remove(name); handleDecrement(e) }} />
+                                                        </div>
+                                                        <div className="col-3">
+                                                            {/* <div className="col-24"> */}
+                                                            <div className="form-group">
+                                                                <label>Choose collection</label>
+                                                                <div className="card" style={{
+                                                                    background: "black",
+                                                                    marginBottom: "8px",
+
+                                                                }} >
+                                                                    <div className="card-body">
+                                                                        <Button variant="primary" onClick={() => setModalShow(true)}>
+                                                                            <i className="fa-regular fa-plus"></i> create
+                                                                        </Button>
+
+                                                                        <MyVerticallyCenteredModal
+                                                                            show={modalShow}
+                                                                            onHide={() => setModalShow(false)}
+                                                                        />
+                                                                    </div>
                                                                 </div>
-                                                            </Form.Item>
+                                                            </div>
                                                         </div>
 
-                                                        <MinusCircleOutlined onClick={() => remove(name)} />
+
+                                                        {col?.map((item, idx) => (
+                                                            <div key={`auc_${idx}`} id={item.id} className="col-3" >
+                                                                <div id={item.id} onClick={onHandleClick} className="card"
+                                                                    style={{
+                                                                        background: "black",
+                                                                        marginBottom: "8px",
+                                                                        border: collection_id == item.id ? "1px solid" : null
+                                                                    }} >
+                                                                    <div className="card-body">
+                                                                        <div  >
+
+                                                                            {item.title}
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            // </div>
+                                                        ))}
+
+
                                                     </div>
                                                 </Space>
                                             ))}
+
                                             <Form.Item>
-                                                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                                                    Add field
+                                                <Button type="dashed" onClick={(e) => { add(e); handleIncrement(e) }} block icon={<PlusOutlined />} disabled={data?.number_of_nft == count}>
+                                                    Add NFT
                                                 </Button>
                                             </Form.Item>
                                         </>
