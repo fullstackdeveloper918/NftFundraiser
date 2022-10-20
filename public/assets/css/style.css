@@ -320,7 +320,7 @@ h3 {
   font-weight: 600;
   line-height: 1.2;
   font-family: var(--primary-font);
-  color: var(--primary-t-color);
+  color: var(--primary-t-color) !important;
   -ms-word-wrap: break-word;
   word-wrap: break-word;
 }
@@ -346,7 +346,7 @@ h5 {
   font-weight: 600;
   line-height: 1.2;
   font-family: var(--primary-font);
-  color: var(--primary-t-color);
+  color: var(--primary-t-color) !important;
   -ms-word-wrap: break-word;
   word-wrap: break-word;
 }
@@ -357,7 +357,7 @@ h6 {
   font-weight: 600;
   line-height: 1.2;
   font-family: var(--primary-font);
-  color: var(--primary-t-color);
+  color: var(--primary-t-color) !important;
   -ms-word-wrap: break-word;
   word-wrap: break-word;
 }
@@ -1156,7 +1156,7 @@ aside {
 }
 
 .bg-grey input, .bg-grey textarea {
-  background-color: var(--white-color);
+  background-color: var(--white-color) !important;
 }
 
 .breadcrumb-area {
@@ -2314,7 +2314,7 @@ header .navbar-expand .dropdown:hover > .dropdown-menu {
 .author-area .item-form .form-group input, .author-area .item-form .form-group textarea, .author-area .item-form .form-group select, .author-area .item-form .form-group .custom-file-input, .author-area .item-form .form-group .custom-file-label, .author-area .item-form .form-group .custom-file-label::after {
   font-size: 1rem;
   font-weight: 500;
-  color: var(--primary-p-color);
+  color: var(--primary-p-color) !important;
   padding: 15px;
   border: none;
   -webkit-box-shadow: none;

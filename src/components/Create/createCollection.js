@@ -114,9 +114,10 @@ function MyVerticallyCenteredModal(props) {
                         <Button type="submit" className="btn btn-primary">Create</Button>
                     </div>
                 </form>
-            </Modal.Body><Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer>
+            </Modal.Body>
+            {/* <Modal.Footer> */}
+            {/* <Button onClick={props.onHide}></Button> */}
+            {/* </Modal.Footer> */}
         </Modal>
     );
 }

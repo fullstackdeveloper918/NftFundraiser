@@ -8,7 +8,7 @@ import { CreateProjectAction, GetCollectionsAction } from '../../redux/Actions/p
 import { useFormData } from './Context/context'
 import MyVerticallyCenteredModal from './createCollection';
 import styles from './styles/styles.module.scss'
-// import 'antd/dist/antd.css';
+import 'antd/dist/antd.css';
 import { Upload, Modal } from 'antd';
 
 const getBase64 = (file) =>
@@ -203,6 +203,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                         <div className="col-1">
                                                             <MinusCircleOutlined onClick={(e) => { remove(name); handleDecrement(e) }} />
                                                         </div>
+                                                        {/* </div> */}
                                                         <div className="col-3">
                                                             {/* <div className="col-24"> */}
                                                             <div className="form-group">
@@ -228,12 +229,13 @@ const UploadNft = ({ formStep, nextFormStep }) => {
 
 
                                                         {col?.map((item, idx) => (
-                                                            <div key={`auc_${idx}`} id={item.id} className="col-3" >
+                                                            <div key={`auc_${idx}`} id={item.id} className="col-3 choose_div" >
+                                                                <label className='hidden-word'>jsaswjdwjd</label>
                                                                 <div id={item.id} onClick={onHandleClick} className="card"
                                                                     style={{
                                                                         background: "black",
                                                                         marginBottom: "8px",
-                                                                        border: collection_id == item.id ? "1px solid" : null
+                                                                        border: collection_id == item.id ? "1px solid #fff" : null
                                                                     }} >
                                                                     <div className="card-body">
                                                                         <div  >

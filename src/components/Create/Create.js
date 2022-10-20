@@ -241,7 +241,6 @@ const Create = ({ formStep, nextFormStep }) => {
                                 </div> */}
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
-                                            <label>Country</label>
                                             <Controller
                                                 control={control}
                                                 name="country"
@@ -264,7 +263,6 @@ const Create = ({ formStep, nextFormStep }) => {
                                     </div>
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
-                                            <label>State</label>
                                             <Controller
                                                 control={control}
                                                 name="state"
@@ -290,7 +288,6 @@ const Create = ({ formStep, nextFormStep }) => {
                                     </div>
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
-                                            <label>City</label>
                                             <Controller
                                                 control={control}
                                                 name="city"

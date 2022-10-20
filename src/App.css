@@ -1,4 +1,61 @@
-
+body{
+    background-color: #09080d !important;
+}
+p, label , .h4{
+    color: #fff !important;
+}
+label#demo-simple-select-outlined-label {
+    color: #8e8e8e !important;
+}
+button.ant-btn.ant-btn-dashed.ant-btn-block {
+    background: transparent;
+    border: 1px solid #cccccc0d;
+}
+button.ant-btn.ant-btn-dashed.ant-btn-block svg ,button.ant-btn.ant-btn-dashed.ant-btn-block span{
+    color: #fff !important;
+}
+form label {
+    margin-bottom: 6px;
+}
+input , textarea{
+    background-color: #000 !important;
+    border: 1px solid #000 !important;
+}
+.ant-upload.ant-upload-select-picture-card {
+    background-color: #000000 !important;
+}
+.ant-upload.ant-upload-select-picture-card span{
+    color: #fff !important;
+}
+.MuiSelect-icon {
+    color: rgb(255 255 255 / 54%) !important;
+}
+.hidden-word {
+    visibility: hidden !important;
+   
+}
+.anticon svg {
+    display: inline-block;
+    color: #fff !important;
+}
+.choose_div div {
+    padding: 15px;
+}
+.card-body button {
+    background: #000 !important;
+    color: #fff !important;
+    margin: 0 !important;
+    border: 1px solid #cccccc14 !important;
+    /* padding-top: 0; */
+}
+.card-body div {
+    color: #fff !important;
+}
+::placeholder{
+    font-weight: 400!important;
+    font-size: 14px !important;
+    color: #515151 !important;
+}
 .creator-dropdown {
     min-width: 10rem !important;
     left: -20px;
@@ -9,7 +66,11 @@
     display: flex;
     gap: 8px;
 }
-
+.modal-content {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto !important;
+}
 .approval {
     font-size: 10px;
     background: #9b8bc1;
