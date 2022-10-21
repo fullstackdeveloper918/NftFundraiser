@@ -101,7 +101,7 @@ const Create = ({ formStep, nextFormStep }) => {
                         <div className="intro mt-5 mt-lg-0 mb-4 mb-lg-5">
                             <div className="intro-content">
                                 <span>Get Started</span>
-                                <h3 className="mt-3 mb-0">Create NFT</h3>
+                                <h3 className="mt-3 mb-0">Create Project</h3>
                             </div>
                         </div>
                         {/* Item Form */}
@@ -116,7 +116,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                             </div>
                                             <div className="form-check form-check-inline">
                                                 <input className="form-check-input" type="radio" name="radiobutton" id="product_sale" value="2" onChange={(e) => setType(e.target.value)} />
-                                                <label className="form-check-label" htmlFor="product_sale">Project</label>
+                                                <label className="form-check-label" htmlFor="product_sale">Single</label>
                                             </div>
 
                                         </div>

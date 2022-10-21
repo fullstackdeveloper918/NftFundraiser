@@ -1,15 +1,17 @@
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Space } from 'antd';
+import { Button, Form, Input, Modal, Space, Upload } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProjectAction, GetCollectionsAction } from '../../redux/Actions/projectAction';
 import { useFormData } from './Context/context'
 import MyVerticallyCenteredModal from './createCollection';
 import styles from './styles/styles.module.scss'
-import 'antd/dist/antd.css';
-import { Upload, Modal } from 'antd';
+import 'antd/lib/form/style/css';
+import 'antd/lib/upload/style/css';
+import 'antd/lib/modal/style/css';
+import swal from 'sweetalert';
 
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -22,6 +24,7 @@ const getBase64 = (file) =>
 
 const UploadNft = ({ formStep, nextFormStep }) => {
 
+    const [formValues, setFormvalues] = useState()
 
     const [fileList, setFileList] = useState([])
     const { data, setFormValues } = useFormData();
@@ -32,7 +35,10 @@ const UploadNft = ({ formStep, nextFormStep }) => {
     const [count, setCount] = useState(0);
     const [modalShow, setModalShow] = React.useState(false);
     const [collection_id, setCollectionId] = useState(0);
+    const [items, setItems] = useState([]);
     console.log(collection_id)
+
+
     const handleIncrement = () => {
         setCount(prevCount => prevCount + 1);
     };
@@ -49,30 +55,33 @@ const UploadNft = ({ formStep, nextFormStep }) => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm({
         mode: 'all'
     });
+
     const dispatch = useDispatch()
+
     const OnSubmit = (values) => {
+        // debugger
         setFormValues(values)
 
-        const formData = new FormData()
+        // const formData = new FormData()
 
-        formData.append('image', values.image[0])
-        formData.append('title', data.title)
-        formData.append('name', values.name)
-        formData.append('description', data.description)
-        formData.append('description', values.description)
-        formData.append('country', data.country)
-        formData.append('state', data.state)
-        formData.append('city', data.city)
-        formData.append('address', data.address)
-        formData.append('price', data.price)
-        formData.append('number_of_nft', data.number_of_nft)
-        formData.append('start_date', data.start_date)
-        formData.append('end_date', data.end_date)
-        formData.append('type', data.type)
-        formData.append('collection_id', collection_id)
-        formData.append('category_id', data.category_id)
+        // formData.append('image', values.image[0])
+        // formData.append('title', data.title)
+        // formData.append('name', values.name)
+        // formData.append('description', data.description)
+        // formData.append('description', values.description)
+        // formData.append('country', data.country)
+        // formData.append('state', data.state)
+        // formData.append('city', data.city)
+        // formData.append('address', data.address)
+        // formData.append('price', data.price)
+        // formData.append('number_of_nft', data.number_of_nft)
+        // formData.append('start_date', data.start_date)
+        // formData.append('end_date', data.end_date)
+        // formData.append('type', data.type)
+        // formData.append('collection_id', collection_id)
+        // formData.append('category_id', data.category_id)
 
-        dispatch(CreateProjectAction(formData))
+        // dispatch(CreateProjectAction(formData))
         // if (formData) {
         //     swal("Registered!", "You have been registered!", "success");
         //     history.push('/login')
@@ -83,13 +92,30 @@ const UploadNft = ({ formStep, nextFormStep }) => {
         return state?.projectdetails?.getcollections
     })
     console.log(col, 'col')
+
     useEffect(() => {
         dispatch(GetCollectionsAction())
     }, [])
+
     const onFinish = (values) => {
-        console.log('Received values of form:', values);
+        console.log('Received values of form:', values, data);
+        swal("Success", "Created", 'success')
+        localStorage.setItem("values", JSON.stringify({
+            ...data,
+            nfts: values.nfts.map(x => {
+                return {
+                    name: x.name,
+                    description: x.description,
+                    image: x.image,
+                }
+            })
+        }));
+        // localStorage.setItem("values", JSON.stringify(data));
+        // return values, data
     };
+
     const handleCancel = () => setPreviewOpen(false);
+
     const handlePreview = async (file) => {
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
@@ -98,6 +124,32 @@ const UploadNft = ({ formStep, nextFormStep }) => {
         setPreviewOpen(true);
         setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
     };
+
+    const fileProps = {
+        name: "file",
+        multiple: false,
+        beforeUpload: () => {
+            return false;
+        },
+        onChange(info) {
+            if (info.file.status !== "uploading") {
+                let reader = new FileReader();
+                reader.readAsDataURL(info.file);
+                // setUploadedImage(info.file);
+            }
+        }
+    };
+
+    // const getFile = (e) => {
+    //     // debugger
+    //     console.log('Upload event:', e);
+
+    //     if (Array.isArray(e)) {
+    //         return e;
+    //     }
+    //     return e && e.fileList;
+    // };
+    const [form] = Form.useForm()
     return (
         <section className="author-area">
             <div className="container">
@@ -115,27 +167,34 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                             </div>
                         </div>
                         <div className={formStep === 1 ? styles.showForm : styles.hideForm}>
-                            <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off" OnSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
-                                <Form.List name="users">
+                            <Form form={form} name="dynamic_form_nest_item" initialValues={{
+                                remember: true
+                            }}
+                                onFinish={onFinish}
+                                onSubmit={OnSubmit} autoComplete="off" className="item-form card no-hover">
+                                <Form.List name="nfts">
                                     {(fields, { add, remove }) => (
                                         <>
                                             {fields.map(({ key, name, ...restField }) => (
-                                                <Space
-                                                    key={key}
-                                                    style={{
-                                                        display: 'flex',
-                                                        marginBottom: 8,
-                                                    }}
-                                                    align="baseline"
-                                                >
+                                                // <Space
+                                                //     key={key}
+                                                //     style={{
+                                                //         display: 'flex',
+                                                //         marginBottom: 8,
+                                                //     }}
+                                                //     align="baseline"
+                                                // >
+                                                <Fragment>
                                                     <div className="row">
                                                         <div className="col-6">
                                                             <div>
 
-
                                                                 <Form.Item
                                                                     {...restField}
                                                                     name={[name, 'name']}
+                                                                    // label="Enter name"
+                                                                    // name="name"
+
                                                                     rules={[
                                                                         {
                                                                             required: true,
@@ -143,14 +202,15 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                                         },
                                                                     ]}
                                                                 >
-                                                                    <label>Name</label>
+                                                                    {/* <label>Name</label> */}
                                                                     <Input placeholder="Name" />
                                                                 </Form.Item>
                                                             </div>
                                                             <div>
                                                                 <Form.Item
                                                                     {...restField}
-                                                                    name={[name, 'Description']}
+                                                                    name={[name, 'description']}
+
                                                                     rules={[
                                                                         {
                                                                             required: true,
@@ -158,7 +218,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                                         },
                                                                     ]}
                                                                 >
-                                                                    <label>Description</label>
+                                                                    {/* <label>Description</label> */}
                                                                     <TextArea placeholder="Description" minLength={'5px'} />
 
                                                                 </Form.Item>
@@ -169,35 +229,40 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                                 <Form.Item
                                                                     {...restField}
                                                                     name={[name, 'image']}
+                                                                    // getValueFromEvent={getFile}
                                                                     rules={[
                                                                         {
                                                                             required: true,
                                                                             message: 'Please select a image',
                                                                         },
                                                                     ]}
+
                                                                 >
 
                                                                     <Upload
+                                                                        {...fileProps}
                                                                         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                                                         listType="picture-card"
                                                                         // fileList={fileList}
                                                                         // onChange={onChange}
                                                                         onPreview={handlePreview}
                                                                         maxCount={1}
+
                                                                     >
                                                                         + Upload
                                                                     </Upload>
-                                                                    <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
-                                                                        <img
-                                                                            alt="example"
-                                                                            style={{
-                                                                                width: '100%',
-                                                                            }}
-                                                                            src={previewImage}
-                                                                        />
-                                                                    </Modal>
+
 
                                                                 </Form.Item>
+                                                                <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
+                                                                    <img
+                                                                        alt="example"
+                                                                        style={{
+                                                                            width: '100%',
+                                                                        }}
+                                                                        src={previewImage}
+                                                                    />
+                                                                </Modal>
                                                             </div>
                                                         </div>
                                                         <div className="col-1">
@@ -205,6 +270,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                         </div>
                                                         {/* </div> */}
                                                         <div className="col-3">
+
                                                             {/* <div className="col-24"> */}
                                                             <div className="form-group">
                                                                 <label>Choose collection</label>
@@ -253,8 +319,9 @@ const UploadNft = ({ formStep, nextFormStep }) => {
 
 
                                                     </div>
-                                                </Space>
+                                                </Fragment>    // </Space>
                                             ))}
+
 
                                             <Form.Item>
                                                 <Button type="dashed" onClick={(e) => { add(e); handleIncrement(e) }} block icon={<PlusOutlined />} disabled={data?.number_of_nft == count}>
@@ -263,6 +330,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                             </Form.Item>
                                         </>
                                     )}
+
                                 </Form.List>
                                 <Form.Item>
                                     <div className="col-12">

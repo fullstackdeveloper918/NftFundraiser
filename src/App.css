@@ -1,8 +1,32 @@
 body{
     background-color: #09080d !important;
 }
-p, label , .h4{
+p, label , .h4 , span ,input{
+    color: #fff;
+}
+input, textarea {
+    background-color: #000 !important;
+    border: 1px solid #000 !important;
     color: #fff !important;
+}
+.ant-btn.ant-btn-block {
+    width: auto !important;
+    float: right;
+}
+a{
+    font-family: 'Poppins' !Important;
+}
+.hero-section h1 {
+    color: var(--white-color);
+    font-family: 'Jost';
+    margin-bottom: 1.5rem;
+    font-size: var(--h1-size);
+    font-weight: var(--h1-weight);
+    line-height: 1.2;
+    font-family: var(--primary-font);
+    /* color: var(--primary-color); */
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
 }
 label#demo-simple-select-outlined-label {
     color: #8e8e8e !important;
@@ -155,6 +179,10 @@ input[type="date"]:focus::before {
     left: -20px;
     text-align: center;
 }
+.hero-section p{
+    font-size: 1.2rem !important;
+    color: #8E8E8E !important;
+}
 .creator-button {
     display: flex;
     gap: 8px;
@@ -274,3 +302,21 @@ footer a.navbar-brand img {
     padding-right: 24px;
     color: var(--primary-p-color);
 }
+
+.ant-form-item {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    font-feature-settings: 'tnum', "tnum";
+    margin-bottom: 24px;
+    vertical-align: top;
+}
+.ant-form-item-control:first-child:not([class^='ant-col-']):not([class*=' ant-col-']) {
+    width: 100%;
+}
+
