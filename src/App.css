@@ -63,7 +63,10 @@ input , textarea{
     color: #fff !important;
 }
 .choose_div div {
-    padding: 15px;
+    padding: 15px !important;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 .card-body button {
     background: #000 !important;

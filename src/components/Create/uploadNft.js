@@ -175,7 +175,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                 <Form.List name="nfts">
                                     {(fields, { add, remove }) => (
                                         <>
-                                            {fields.map(({ key, name, ...restField }) => (
+                                            {fields.map(({ key, name, ...restField },index) => (
                                                 // <Space
                                                 //     key={key}
                                                 //     style={{
@@ -185,6 +185,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                 //     align="baseline"
                                                 // >
                                                 <Fragment>
+                                                     {/* <div>Artwork {index}</div> */}
                                                     <div className="row">
                                                         <div className="col-6">
                                                             <div>
@@ -274,12 +275,12 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                             {/* <div className="col-24"> */}
                                                             <div className="form-group">
                                                                 <label>Choose collection</label>
-                                                                <div className="card" style={{
+                                                                <div className="card choose_div"  style={{
                                                                     background: "black",
                                                                     marginBottom: "8px",
 
                                                                 }} >
-                                                                    <div className="card-body">
+                                                                    <div className="card-body ">
                                                                         <Button variant="primary" onClick={() => setModalShow(true)}>
                                                                             <i className="fa-regular fa-plus"></i> create
                                                                         </Button>
@@ -323,11 +324,13 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                             ))}
 
 
-                                            <Form.Item>
-                                                <Button type="dashed" onClick={(e) => { add(e); handleIncrement(e) }} block icon={<PlusOutlined />} disabled={data?.number_of_nft == count}>
-                                                    Add NFT
-                                                </Button>
-                                            </Form.Item>
+                                            {(!(data?.number_of_nft == count))?
+                                                <Form.Item>
+                                                    <Button type="dashed" onClick={(e) => { add(e); handleIncrement(e) }} block icon={<PlusOutlined />} disabled={data?.number_of_nft == count}>
+                                                        Add NFT
+                                                    </Button>
+                                                </Form.Item>
+                                            :null}
                                         </>
                                     )}
 

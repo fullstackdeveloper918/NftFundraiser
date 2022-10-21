@@ -15,6 +15,7 @@ import styles from "./styles/styles.module.scss"
 import MyVerticallyCenteredModal from './createCollection';
 import { useFormData } from './Context/context';
 import { Label } from '@material-ui/icons';
+import { date } from 'yup';
 
 
 const Create = ({ formStep, nextFormStep }) => {
@@ -38,6 +39,14 @@ const Create = ({ formStep, nextFormStep }) => {
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
 
+
+    const disablePastDate = () => {
+        const today = new Date();
+        const dd = String(today.getDate() + 1).padStart(2, "0");
+        const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        const yyyy = today.getFullYear();
+        return yyyy + "-" + mm + "-" + dd;
+    };
 
 
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({
@@ -353,24 +362,26 @@ const Create = ({ formStep, nextFormStep }) => {
 
                                         <><div className="col-12 col-md-6">
                                             <div className="form-group">
-                                                <label>Start date</label>
+                                                <label>Compaign Start date</label>
                                                 <input
                                                     type="date"
                                                     className="form-control"
                                                     name="start_date"
-                                                    placeholder=" Start date"
+                                                    min={disablePastDate()}
+                                                    placeholder="Start date"
                                                     {...register("start_date", { required: true })}
                                                     aria-invalid={errors.start_date ? "true" : "false"} />
                                                 {errors.start_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">Start date is required</p>}
                                             </div>
                                         </div><div className="col-12 col-md-6">
                                                 <div className="form-group">
-                                                    <label>End date</label>
+                                                    <label>Compaign End Date</label>
                                                     <input
                                                         type="date"
                                                         className="form-control"
                                                         name="end_date"
-                                                        placeholder=" End date"
+                                                        min={disablePastDate()}
+                                                        placeholder="End date"
                                                         {...register("end_date", { required: true })}
                                                         aria-invalid={errors.end_date ? "true" : "false"} />
                                                     {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
