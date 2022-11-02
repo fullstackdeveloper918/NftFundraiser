@@ -16,7 +16,8 @@ import MyVerticallyCenteredModal from './createCollection';
 import { useFormData } from './Context/context';
 import { Label } from '@material-ui/icons';
 import { date } from 'yup';
-
+import ReactMarkdown from 'react-markdown'
+import gfm from 'remark-gfm'
 
 const Create = ({ formStep, nextFormStep }) => {
     const { setFormValues } = useFormData();
@@ -25,10 +26,9 @@ const Create = ({ formStep, nextFormStep }) => {
     const [state, setState] = useState("");
     const [city, setCity] = useState("");
     const [collection_id, setCollectionId] = useState(0);
-    const [type, setType] = useState(1);
+    const [type, setType] = useState(2);
     console.log(type)
     // console.log(collection_id)
-
 
     function onHandleClick(event) {
         setCollectionId(event.currentTarget.id);
@@ -120,11 +120,11 @@ const Create = ({ formStep, nextFormStep }) => {
                                     <div className="col-12">
                                         <div className="form-group mt-3">
                                             <div className="form-check form-check-inline">
-                                                <input className="form-check-input" type="radio" name="radiobutton" id="donation" value="1" onChange={(e) => setType(e.target.value)} defaultChecked />
+                                                <input className="form-check-input" type="radio" name="radiobutton" id="donation" value="2" onChange={(e) => setType(e.target.value)} defaultChecked />
                                                 <label className="form-check-label" htmlFor="donation">Campaign</label>
                                             </div>
                                             <div className="form-check form-check-inline">
-                                                <input className="form-check-input" type="radio" name="radiobutton" id="product_sale" value="2" onChange={(e) => setType(e.target.value)} />
+                                                <input className="form-check-input" type="radio" name="radiobutton" id="product_sale" value="1" onChange={(e) => setType(e.target.value)} />
                                                 <label className="form-check-label" htmlFor="product_sale">Single</label>
                                             </div>
 
@@ -199,11 +199,21 @@ const Create = ({ formStep, nextFormStep }) => {
                                                 type="text"
                                                 className="form-control"
                                                 name="textarea"
+                                                // data-provide="markdown-editable" rows="10"
                                                 placeholder="Description"
-                                                cols={30} rows={3}
+                                                cols={30}
                                                 {...register("description", { required: true })}
                                                 aria-invalid={errors.description ? "true" : "false"}
                                             />
+                                            {/* <ReactMarkdown remarkPlugins={[gfm]}
+                                                className="form-control"
+                                                placeholder="Description"
+                                                cols={30}
+                                                rows={10}
+                                                {...register("description", { required: true })}
+                                                aria-invalid={errors.description ? "true" : "false"}
+                                            // style={{ height: '500px' }} renderHTML={text => mdParser.render(text)}
+                                            ></ReactMarkdown> */}
                                             {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
                                         </div>
                                     </div>
@@ -260,6 +270,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                                     <GeoLocation
                                                         locationTitle="Country"
                                                         isCountry
+
                                                         onBlur={onBlur}
                                                         selected={value}
                                                         onChange={setCountry}
@@ -347,7 +358,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                                 className="form-control"
                                                 name="number_of_nft"
                                                 defaultValue={1}
-                                                disabled={type == 2}
+                                                disabled={type == 1}
                                                 placeholder="Select your number of NFT's (1-10)"
                                                 min={1}
                                                 max={10}
@@ -358,7 +369,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                             {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required</p>}
                                         </div>
                                     </div>
-                                    {type == 1 && (
+                                    {type == 2 && (
 
                                         <><div className="col-12 col-md-6">
                                             <div className="form-group">

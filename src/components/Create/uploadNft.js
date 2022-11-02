@@ -34,9 +34,9 @@ const UploadNft = ({ formStep, nextFormStep }) => {
     console.log(data, 'formdta')
     const [count, setCount] = useState(0);
     const [modalShow, setModalShow] = React.useState(false);
-    const [collection_id, setCollectionId] = useState(0);
+    const [nft_collection_id, setNft_collection_id] = useState(0);
     const [items, setItems] = useState([]);
-    console.log(collection_id)
+    console.log(nft_collection_id)
 
 
     const handleIncrement = () => {
@@ -48,7 +48,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
     console.log(count, 'count')
 
     function onHandleClick(event) {
-        setCollectionId(event.currentTarget.id);
+        setNft_collection_id(event.currentTarget.id);
     };
 
 
@@ -61,6 +61,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
     const OnSubmit = (values) => {
         // debugger
         setFormValues(values)
+        // dispatch(CreateProjectAction())
 
         // const formData = new FormData()
 
@@ -96,24 +97,138 @@ const UploadNft = ({ formStep, nextFormStep }) => {
     useEffect(() => {
         dispatch(GetCollectionsAction())
     }, [])
+    // const nft_data = [
+    //     {
+    //         "nft_name": "test 1",
+    //         "nft_description": "asdasdasd",
+    //         "nft_collection_id": 5,
+    //         "nft_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
+    //     }
 
+    // ]
     const onFinish = (values) => {
-        console.log('Received values of form:', values, data);
-        swal("Success", "Created", 'success')
-        localStorage.setItem("values", JSON.stringify({
-            ...data,
-            nfts: values.nfts.map(x => {
-                return {
-                    name: x.name,
-                    description: x.description,
-                    image: x.image,
-                }
-            })
-        }));
+        debugger
+        const formData = new FormData()
+
+
+        formData.append('title', data.title)
+        formData.append('description', data.description)
+        formData.append('address', data.address)
+        formData.append('state', data.state)
+        formData.append('country', data.country)
+        formData.append('city', data.city)
+        formData.append('price', data.price)
+        formData.append('number_of_nft', data.number_of_nft)
+        formData.append('start_date', data.start_date)
+        formData.append('end_date', data.end_date)
+        formData.append('type', data.type)
+        formData.append('category_id', data.category_id)
+
+
+        formData.append('nft_image', values?.nfts?.map(x => {
+            debugger
+            return x.nft_image.fileList[0]
+        }
+        ))
+        formData.append('nft_name', values?.nfts?.map(x =>
+            x.nft_name
+        ))
+        // const newlist = newList.push(nft_collection_id);
+        formData.append('nft_collection_id', [nft_collection_id, ...nft_collection_id])
+        formData.append('nft_description', values?.nfts?.map(x =>
+            x.nft_description
+        ))
+
+        // formData.append('nft_name', "hjasd")
+        // formData.append('nft_collection_id', nft_collection_id)
+        // formData.append('nft_description', "as,jdkadb")
+        // formData.append('nft_image', "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png")
+        // const nft = values?.nfts?.map(x => {
+        //     // debugger
+        //     return {
+        //         "nft_name": x.nft_name,
+        //         "nft_collection_id": nft_collection_id,
+        //         "nft_description": x.nft_description,
+        //         "nft_image": x.nft_image.file,
+        //         // "nft_image": 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png',
+        //     }
+        // })
+        // nft.forEach(item => {
+        //     // debugger
+
+
+        // formData.append('nft_data', JSON.stringify(nft));
+        // })
+        // console.log('nftdata', formData.getAll('nft'))
+
+        // formData.append('nft_data', JSON.stringify('nft_data', values?.nfts?.map(x => {
+        //     return [{
+        //         "nft_name": x?.nft_name,
+        //         "nft_collection_id": nft_collection_id,
+        //         "nft_description": x?.nft_description,
+        //         "nft_image": x?.nft_image,
+        //     }]
+        // })));
+        // formData.append('nft_data', values?.nfts?.map(x => {
+        //     return [{
+        //         "nft_name": x?.nft_name,
+        //         "nft_collection_id": nft_collection_id,
+        //         "nft_description": x?.nft_description,
+        //         "nft_image": x?.nft_image,
+        //     }]
+        // }))
+
+        // const mydata = {
+        //     ...data,
+        //     nfts: values?.nfts?.map(x => {
+        //         return {
+        //             'nft_name': x.nft_name,
+        //             nft_collection_id,
+        //             'nft_description': x.nft_description,
+        //             'nft_image': x.nft_image,
+        //         }
+        //     })
+        // }
+        dispatch(CreateProjectAction(formData))
+        // dispatch(CreateProjectAction({
+        //     data,
+        //     nfts: values.nfts.map(x => {
+        //         return {
+        //             nft_name: x.nft_name,
+        //             nft_collection_id,
+        //             nft_description: x.nft_description,
+        //             nft_image: x.nft_image,
+        //         }
+        //     })
+        // }))
+        // dispatch(CreateProjectAction({
+        //     ...data,
+        //     nfts: values.nfts.map(x => {
+        //         return {
+        //             nft_name: x.nft_name,
+        //             nft_collection_id,
+        //             nft_description: x.nft_description,
+        //             nft_image: x.nft_image,
+        //         }
+        //     })
+        // }))
+        console.log('Received values of form:', values, data)
+        // swal("Success", "Created", 'success')
+        // localStorage.setItem("values", JSON.stringify({
+        //     ...data,
+        //     nfts: values.nfts.map(x => {
+        //         return {
+        //             name: x.name,
+        //             collection_id,
+        //             description: x.description,
+        //             image: x.image,
+        //         }
+        //     })
+        // }));
         // localStorage.setItem("values", JSON.stringify(data));
         // return values, data
     };
-
+    // console.log('title', localStorage.getItem('title'))
     const handleCancel = () => setPreviewOpen(false);
 
     const handlePreview = async (file) => {
@@ -175,7 +290,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                 <Form.List name="nfts">
                                     {(fields, { add, remove }) => (
                                         <>
-                                            {fields.map(({ key, name, ...restField },index) => (
+                                            {fields.map(({ key, name, ...restField }, index) => (
                                                 // <Space
                                                 //     key={key}
                                                 //     style={{
@@ -185,14 +300,14 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                 //     align="baseline"
                                                 // >
                                                 <Fragment>
-                                                     {/* <div>Artwork {index}</div> */}
+                                                    {/* <div>Artwork {index}</div> */}
                                                     <div className="row">
                                                         <div className="col-6">
                                                             <div>
 
                                                                 <Form.Item
                                                                     {...restField}
-                                                                    name={[name, 'name']}
+                                                                    name={[name, "nft_name"]}
                                                                     // label="Enter name"
                                                                     // name="name"
 
@@ -210,7 +325,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                             <div>
                                                                 <Form.Item
                                                                     {...restField}
-                                                                    name={[name, 'description']}
+                                                                    name={[name, "nft_description"]}
 
                                                                     rules={[
                                                                         {
@@ -229,7 +344,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                             <div>
                                                                 <Form.Item
                                                                     {...restField}
-                                                                    name={[name, 'image']}
+                                                                    name={[name, "nft_image"]}
                                                                     // getValueFromEvent={getFile}
                                                                     rules={[
                                                                         {
@@ -275,7 +390,7 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                             {/* <div className="col-24"> */}
                                                             <div className="form-group">
                                                                 <label>Choose collection</label>
-                                                                <div className="card choose_div"  style={{
+                                                                <div className="card choose_div" style={{
                                                                     background: "black",
                                                                     marginBottom: "8px",
 
@@ -302,10 +417,11 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                                     style={{
                                                                         background: "black",
                                                                         marginBottom: "8px",
-                                                                        border: collection_id == item.id ? "1px solid #fff" : null
+                                                                        border: nft_collection_id == item.id ? "1px solid #fff" : null
                                                                     }} >
                                                                     <div className="card-body">
                                                                         <div  >
+
 
                                                                             {item.title}
                                                                         </div>
@@ -324,13 +440,13 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                             ))}
 
 
-                                            {(!(data?.number_of_nft == count))?
+                                            {(!(data?.number_of_nft == count)) ?
                                                 <Form.Item>
                                                     <Button type="dashed" onClick={(e) => { add(e); handleIncrement(e) }} block icon={<PlusOutlined />} disabled={data?.number_of_nft == count}>
                                                         Add NFT
                                                     </Button>
                                                 </Form.Item>
-                                            :null}
+                                                : null}
                                         </>
                                     )}
 

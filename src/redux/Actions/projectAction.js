@@ -23,6 +23,7 @@ export const CreateProjectAction = (params) => async dispatch => {
     // sessionStorage.setItem('authToken', JSON.stringify(action.payload.dat
     try {
         const token = sessionStorage.getItem('authToken')
+        // debugger
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -33,13 +34,15 @@ export const CreateProjectAction = (params) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/store`,
             params, config)
+        console.log("resproj", res)
         dispatch(createProjectSuccess(res));
-        // if (res.status === 200) {
-        //     swal("success", res.data.message, 'success').then(function () {
-        //         window.location = "/projectlist";
-        //     });
+        if (res.status === 200) {
+            swal("success", res.data.message, 'success')
+                .then(function () {
+                    window.location = "/projectlist";
+                });
 
-        // }
+        }
 
     } catch (e) {
         if (e?.response?.data.message) {

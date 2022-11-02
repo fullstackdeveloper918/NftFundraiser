@@ -74,7 +74,7 @@ const GetAllProjects = () => {
                                             <div>
                                                 <div className="card">
                                                     <div className="image-over">
-                                                        <img className="card-img-top" src={item.image} alt={item.image.description} />
+                                                        {/* <img className="card-img-top" src={item.image} alt={item.image.description} /> */}
                                                     </div>
                                                     {/* Card Caption */}
                                                     <div className="card-caption col-12 p-0">
