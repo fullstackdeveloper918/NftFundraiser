@@ -150,6 +150,7 @@ input[type="date"]:focus::before {
 }
 .item-details-area .row {
     background: #101010;
+    padding: 20px 10px;
 }
 @media (max-width:768px){
 .item-details-area h3 {
@@ -295,8 +296,9 @@ body header .navbar-expand .navbar-nav.action .btn {
     }
 }
 .item-details-area {
-    padding: 130px 0 !important;
+    padding: 130px 0px 0px !important;
 }
+
 footer a.navbar-brand img {
     width: 70px;
 }
@@ -323,3 +325,10 @@ footer a.navbar-brand img {
     width: 100%;
 }
 
+.item-details-area .item-info img {
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: center;
+    width: 100% !important;
+    height: 225px;
+}

@@ -49,6 +49,7 @@ const CreateOrganization = ({ formStep, nextFormStep }) => {
         formData.append('tax_id', values.tax_id)
         formData.append('hear_about', values.hear_about)
         formData.append('method_heard_detail', values.method_heard_detail)
+        formData.append('role', values.role)
 
         dispatch(Register(formData))
         // if (formData) {
@@ -168,6 +169,19 @@ const CreateOrganization = ({ formStep, nextFormStep }) => {
                                                 ))}
                                             </select>
                                             {errors.hear_about?.type === 'required' && <p style={{ color: 'red' }} role="alert">Hear about is required</p>}
+                                        </div>
+                                    </div>
+                                    <div className="col-12">
+                                        <div className="form-group mt-3">
+                                            <textarea
+                                                type="text"
+                                                className="form-control"
+                                                name="role"
+                                                defaultValue='2'
+                                                placeholder="role"
+                                                {...register("role", { required: true })}
+                                            // {...register("email")}
+                                            />
                                         </div>
                                     </div>
                                     <div className="col-12">

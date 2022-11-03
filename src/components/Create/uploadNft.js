@@ -97,17 +97,8 @@ const UploadNft = ({ formStep, nextFormStep }) => {
     useEffect(() => {
         dispatch(GetCollectionsAction())
     }, [])
-    // const nft_data = [
-    //     {
-    //         "nft_name": "test 1",
-    //         "nft_description": "asdasdasd",
-    //         "nft_collection_id": 5,
-    //         "nft_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
-    //     }
 
-    // ]
     const onFinish = (values) => {
-        debugger
         const formData = new FormData()
 
 
@@ -126,7 +117,6 @@ const UploadNft = ({ formStep, nextFormStep }) => {
 
 
         formData.append('nft_image', values?.nfts?.map(x => {
-            debugger
             return x.nft_image.fileList[0]
         }
         ))
@@ -138,95 +128,11 @@ const UploadNft = ({ formStep, nextFormStep }) => {
         formData.append('nft_description', values?.nfts?.map(x =>
             x.nft_description
         ))
-
-        // formData.append('nft_name', "hjasd")
-        // formData.append('nft_collection_id', nft_collection_id)
-        // formData.append('nft_description', "as,jdkadb")
-        // formData.append('nft_image', "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png")
-        // const nft = values?.nfts?.map(x => {
-        //     // debugger
-        //     return {
-        //         "nft_name": x.nft_name,
-        //         "nft_collection_id": nft_collection_id,
-        //         "nft_description": x.nft_description,
-        //         "nft_image": x.nft_image.file,
-        //         // "nft_image": 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png',
-        //     }
-        // })
-        // nft.forEach(item => {
-        //     // debugger
-
-
-        // formData.append('nft_data', JSON.stringify(nft));
-        // })
-        // console.log('nftdata', formData.getAll('nft'))
-
-        // formData.append('nft_data', JSON.stringify('nft_data', values?.nfts?.map(x => {
-        //     return [{
-        //         "nft_name": x?.nft_name,
-        //         "nft_collection_id": nft_collection_id,
-        //         "nft_description": x?.nft_description,
-        //         "nft_image": x?.nft_image,
-        //     }]
-        // })));
-        // formData.append('nft_data', values?.nfts?.map(x => {
-        //     return [{
-        //         "nft_name": x?.nft_name,
-        //         "nft_collection_id": nft_collection_id,
-        //         "nft_description": x?.nft_description,
-        //         "nft_image": x?.nft_image,
-        //     }]
-        // }))
-
-        // const mydata = {
-        //     ...data,
-        //     nfts: values?.nfts?.map(x => {
-        //         return {
-        //             'nft_name': x.nft_name,
-        //             nft_collection_id,
-        //             'nft_description': x.nft_description,
-        //             'nft_image': x.nft_image,
-        //         }
-        //     })
-        // }
         dispatch(CreateProjectAction(formData))
-        // dispatch(CreateProjectAction({
-        //     data,
-        //     nfts: values.nfts.map(x => {
-        //         return {
-        //             nft_name: x.nft_name,
-        //             nft_collection_id,
-        //             nft_description: x.nft_description,
-        //             nft_image: x.nft_image,
-        //         }
-        //     })
-        // }))
-        // dispatch(CreateProjectAction({
-        //     ...data,
-        //     nfts: values.nfts.map(x => {
-        //         return {
-        //             nft_name: x.nft_name,
-        //             nft_collection_id,
-        //             nft_description: x.nft_description,
-        //             nft_image: x.nft_image,
-        //         }
-        //     })
-        // }))
+
+
         console.log('Received values of form:', values, data)
-        // swal("Success", "Created", 'success')
-        // localStorage.setItem("values", JSON.stringify({
-        //     ...data,
-        //     nfts: values.nfts.map(x => {
-        //         return {
-        //             name: x.name,
-        //             collection_id,
-        //             description: x.description,
-        //             image: x.image,
-        //         }
-        //     })
-        // }));
-        // localStorage.setItem("values", JSON.stringify(data));
-        // return values, data
+
     };
     // console.log('title', localStorage.getItem('title'))
     const handleCancel = () => setPreviewOpen(false);

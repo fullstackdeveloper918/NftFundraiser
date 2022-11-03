@@ -53,6 +53,7 @@ const projectSlice = createSlice({
             state.message = action.payload.response.data.message
         },
         getProjectDetail: (state, action) => {
+            // debugger
             state.projectdetails = action?.payload?.data?.data;
         },
         getLatestProjectDetail: (state, action) => {

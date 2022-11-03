@@ -33,6 +33,7 @@ import latprojDetails from "../themes/latproj-details";
 import Showcollections from "../themes/showcollections";
 import Collectiondetails from "../themes/collectn-details";
 import CollectionDetail from "../themes/collectn-details";
+import ProjNft from "../themes/projnft-details";
 
 const MyRouts = () => {
   return (
@@ -48,6 +49,7 @@ const MyRouts = () => {
           <Route exact path="/auctions" component={Auctions} />
           <Route exact path="/item-details/:id" component={ItemDetails} />
           <Route exact path="/proj-details/:id" component={latprojDetails} />
+          <Route exact path="/projnft-details/:id" component={ProjNft} />
           <Route exact path="/activity" component={Activity} />
           <Route exact path="/blog" component={Blog} />
           <Route exact path="/blog-single" component={BlogSingle} />

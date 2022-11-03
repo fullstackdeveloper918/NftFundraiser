@@ -105,7 +105,7 @@ const ProjDetails = () => {
 
     useEffect(() => {
         // debugger
-        dispatch(LatestProjectDetail(id))
+        dispatch(ProjectDetail(id))
     }, [id])
 
     // const deleteHandler = (id) => {

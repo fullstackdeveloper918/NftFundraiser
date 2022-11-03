@@ -70,11 +70,11 @@ const GetAllProjects = () => {
                             [...new Map(projects.map(item =>
                                 [item["title"], item])).values()].map((item, idx) => {
                                     return (
-                                        <Link key={`edth_${idx}`} to={`/item-details/${item.id}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
+                                        <Link key={`edth_${idx}`} to={`/projnft-details/${item.id}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
                                             <div>
                                                 <div className="card">
                                                     <div className="image-over">
-                                                        {/* <img className="card-img-top" src={item.image} alt={item.image.description} /> */}
+                                                        <img className="card-img-top" src='/img/avtar3.png' alt={item.nft_data.description} />
                                                     </div>
                                                     {/* Card Caption */}
                                                     <div className="card-caption col-12 p-0">

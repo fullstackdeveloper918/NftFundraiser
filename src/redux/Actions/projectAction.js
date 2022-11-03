@@ -62,10 +62,10 @@ export const ProjectDetail = (id) => async dispatch => {
                 Authorization: `Bearer ${token}`
             },
         }
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/project/details/${id.id}`,
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/project/details/${id}`,
             config)
         // console.log(res?.data?.data[0]?.image, 'proj')
-        // console.log(res)
+        console.log('details', res)
         dispatch(getProjectDetail(res));
     } catch (e) {
         //  
