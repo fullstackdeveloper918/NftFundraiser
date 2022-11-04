@@ -23,6 +23,7 @@ const reducer = combineReducers({
     collection: collectionReducer,
     getcollections: collectionReducer,
     getcollectiondetails: collectionReducer,
+    getSocialmediaIcons: projectReducer
 })
 
 const store = configureStore({

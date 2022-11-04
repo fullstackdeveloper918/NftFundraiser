@@ -13,7 +13,8 @@ import {
     getCategoriesList,
     createCollectionSuccess,
     getCollections,
-    getCollectionDetails
+    getCollectionDetails,
+    getSocialmediaIcons
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -68,8 +69,9 @@ export const ProjectDetail = (id) => async dispatch => {
         console.log('details', res)
         dispatch(getProjectDetail(res));
     } catch (e) {
-        //  
-        return console.error(e.message);
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
     }
 }
 export const LatestProjectDetail = (id) => async dispatch => {
@@ -85,8 +87,9 @@ export const LatestProjectDetail = (id) => async dispatch => {
         // console.log(res, 'ressssss')
         dispatch(getLatestProjectDetail(res));
     } catch (e) {
-        //  
-        return console.error(e.message);
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
     }
 }
 
@@ -107,7 +110,9 @@ export const ProjectList = () => async dispatch => {
         await dispatch(getProjectList(res.data?.data));
 
     } catch (e) {
-        return console.error(e.message);
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
     }
 }
 
@@ -131,8 +136,8 @@ export const getPublicLiveProjects = createAsyncThunk(
             // thunkAPI.dispatch(publicLiveProjects(res));
 
         } catch (e) {
-            if (e?.response?.data) {
-                thunkAPI.dispatch()
+            if (e?.response?.data.message) {
+                swal('error', e.response.data.message, 'error')
             }
         }
     })
@@ -148,7 +153,7 @@ export const UpdateProject = (id, params) => async dispatch => {
             },
             transformRequest: formData => formData
         }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/update/${id.id}`,
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/update/${id}`,
             params, config)
         // 
         // console.log(res, 'proj')
@@ -160,8 +165,9 @@ export const UpdateProject = (id, params) => async dispatch => {
 
         }
     } catch (e) {
-        //  
-        return console.error(e.message);
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
     }
 }
 
@@ -187,8 +193,9 @@ export const DeleteProject = (id) => async dispatch => {
 
         }
     } catch (e) {
-        //  
-        return console.error(e.message);
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
     }
 }
 
@@ -200,13 +207,12 @@ export const CategoriesAction = () => async dispatch => {
             },
         }
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getCategories`, config)
-        console.log(res, 'catres')
+        // console.log(res, 'catres')
         dispatch(getCategoriesList(res));
 
     } catch (e) {
-        debugger
-        if (e?.response?.data) {
-            dispatch()
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
         }
     }
 }
@@ -222,7 +228,6 @@ export const CreateCollectionAction = (params) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createCollection`,
             params, config)
-        console.log(res, 'colres')
         dispatch(createCollectionSuccess(res));
         if (res.status === 200) {
             swal("success", res.data.message, 'success')
@@ -233,7 +238,6 @@ export const CreateCollectionAction = (params) => async dispatch => {
         }
 
     } catch (e) {
-        debugger
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
             dispatch(createFail(e))
@@ -254,11 +258,12 @@ export const GetCollectionsAction = () => async dispatch => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getCollection`,
             config)
 
-        console.log(res, 'rescol')
         await dispatch(getCollections(res));
 
     } catch (e) {
-        return console.error(e.message);
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
     }
 }
 export const GetCollectionDetails = (id) => async dispatch => {
@@ -274,10 +279,30 @@ export const GetCollectionDetails = (id) => async dispatch => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getCollectionById/${id}`,
             config)
 
-        console.log(res, 'rescol')
         await dispatch(getCollectionDetails(res));
 
     } catch (e) {
-        return console.error(e.message);
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const GetSocialMediaIcons = () => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getSocialMediaIcon`,
+            config)
+        // console.log('social', res)
+        await dispatch(getSocialmediaIcons(res));
+
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
     }
 }

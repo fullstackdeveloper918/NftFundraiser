@@ -2,6 +2,7 @@ import axios from "axios";
 
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getabout, getfooter } from "../Slices/footerSlice";
+import swal from "sweetalert";
 export const getFooter = createAsyncThunk(
     "auth/footer",
     async (params, thunkAPI) => {
@@ -16,8 +17,8 @@ export const getFooter = createAsyncThunk(
             // console.log(res, "res")
 
         } catch (e) {
-            if (e?.response?.data) {
-                thunkAPI.dispatch()
+            if (e?.response?.data.message) {
+                swal('error', e.response.data.message, 'error')
             }
         }
     })
@@ -35,8 +36,8 @@ export const AboutUsAction = createAsyncThunk(
             // console.log(res, "res")
 
         } catch (e) {
-            if (e?.response?.data) {
-                thunkAPI.dispatch()
+            if (e?.response?.data.message) {
+                swal('error', e.response.data.message, 'error')
             }
         }
     })

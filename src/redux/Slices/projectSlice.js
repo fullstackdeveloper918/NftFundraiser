@@ -16,6 +16,7 @@ const projectSlice = createSlice({
         collections: [],
         getcollections: [],
         getcollectiondetails: [],
+        getSocialmediaIcons: [],
         // liveProjects: [],
         liveProjects: {
             LatestProjects: [],
@@ -33,6 +34,10 @@ const projectSlice = createSlice({
         getCollections: (state, action) => {
             // debugger
             state.getcollections = action?.payload?.data?.data;
+        },
+        getSocialmediaIcons: (state, action) => {
+            // debugger
+            state.getsocial = action?.payload?.data?.data;
         },
         getCollectionDetails: (state, action) => {
             // debugger
@@ -86,5 +91,6 @@ export const {
     getLatestProjectList,
     getCategoriesList,
     getCollections,
-    getCollectionDetails
+    getCollectionDetails,
+    getSocialmediaIcons
 } = projectSlice.actions;

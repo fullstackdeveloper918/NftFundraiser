@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getPopularCollection } from "../Slices/popularCollectionSlice";
-
+import swal from "sweetalert";
 export const PopularCollectionAction = createAsyncThunk(
     "auth/collection",
     async ({ }, thunkAPI) => {
@@ -18,6 +18,8 @@ export const PopularCollectionAction = createAsyncThunk(
 
         } catch (e) {
             // debugger
-            return console.error(e.message);
+            if (e?.response?.data.message) {
+                swal('error', e.response.data.message, 'error')
+            }
         }
     })

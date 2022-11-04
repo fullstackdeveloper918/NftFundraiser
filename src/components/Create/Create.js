@@ -14,10 +14,7 @@ import 'reactjs-popup/dist/index.css';
 import styles from "./styles/styles.module.scss"
 import MyVerticallyCenteredModal from './createCollection';
 import { useFormData } from './Context/context';
-import { Label } from '@material-ui/icons';
-import { date } from 'yup';
-import ReactMarkdown from 'react-markdown'
-import gfm from 'remark-gfm'
+import Editor from "rich-markdown-editor";
 
 const Create = ({ formStep, nextFormStep }) => {
     const { setFormValues } = useFormData();
@@ -195,7 +192,29 @@ const Create = ({ formStep, nextFormStep }) => {
                                     <div className="col-12">
                                         <label>Description</label>
                                         <div className="form-group">
-                                            <textarea
+                                            <Editor
+                                                embeds={[
+                                                    {
+                                                        title: "Google Doc",
+                                                        keywords: "google docs gdocs",
+                                                        // icon: <GoogleDocIcon />,
+                                                        defaultHidden: false,
+                                                        matcher: href => href.matches(/docs.google.com/i),
+                                                        // component: GoogleDocEmbed
+                                                    }
+                                                ]}
+                                                dark={true}
+                                                // className="form-control"
+                                                name="textarea"
+
+                                                // data-provide="markdown-editable" rows="10"
+                                                placeholder="Description"
+
+                                                cols={30}
+                                                // {...register("description", { required: true })}
+                                                aria-invalid={errors.description ? "true" : "false"}
+                                            />
+                                            {/* <textarea
                                                 type="text"
                                                 className="form-control"
                                                 name="textarea"
@@ -204,7 +223,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                                 cols={30}
                                                 {...register("description", { required: true })}
                                                 aria-invalid={errors.description ? "true" : "false"}
-                                            />
+                                            /> */}
                                             {/* <ReactMarkdown remarkPlugins={[gfm]}
                                                 className="form-control"
                                                 placeholder="Description"

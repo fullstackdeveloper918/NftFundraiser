@@ -29,7 +29,10 @@ export const Register = createAsyncThunk(
 
         } catch (e) {
             if (e?.response?.data) {
-                thunkAPI.dispatch(registerFail(e))
+                if (e?.response?.data.message) {
+
+                    swal('error', e?.response?.data?.message, 'error')
+                }
             }
         }
     })
@@ -49,15 +52,18 @@ export const LoginAction = (params, history) => async dispatch => {
         dispatch(loginSuccess(res));
 
         if (res.status === 200) {
-            swal("success", res.data.message, 'success').then(function () {
-                window.location = "/";
-            });
+            swal("success", res.data.message, 'success')
+                .then(function () {
+                    window.location = "/create";
+                });
 
         }
 
     } catch (e) {
+
         if (e?.response?.data.message) {
-            swal('error', e.response.data.message, 'error')
+
+            swal('error', e?.response?.data?.message, 'error')
         }
     }
 }
@@ -85,6 +91,7 @@ export const ForgotPasswordAction = (params) => async dispatch => {
     }
 }
 export const CreateOrganizationAction = (params) => async dispatch => {
+    debugger
     // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
     try {
         const token = sessionStorage.getItem('authToken')
@@ -101,7 +108,9 @@ export const CreateOrganizationAction = (params) => async dispatch => {
 
         dispatch(createOrganizationSuccess(res));
     } catch (e) {
-        return console.error(e.message);
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
     }
 }
 
@@ -116,7 +125,9 @@ export const CountryList = () => async dispatch => {
             config)
         dispatch(getCountryList(res));
     } catch (e) {
-        return console.error(e.message);
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getTopFundraiser } from "../Slices/fundraiserSlice";
-
+import swal from "sweetalert";
 export const TopFundraiserAction = createAsyncThunk(
     "auth/topfundraiser",
     async ({ }, thunkAPI) => {
@@ -17,7 +17,8 @@ export const TopFundraiserAction = createAsyncThunk(
             thunkAPI.dispatch(getTopFundraiser(res?.data?.data));
 
         } catch (e) {
-            // debugger
-            return console.error(e.message);
+            if (e?.response?.data.message) {
+                swal('error', e.response.data.message, 'error')
+            }
         }
     })

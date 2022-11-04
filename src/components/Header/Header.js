@@ -119,14 +119,14 @@ const Header = () => {
             <nav data-aos="zoom-out" data-aos-delay={800} className="navbar navbar-expand">
                 <div className="container header">
                     {/* Navbar Brand*/}
-                    <a className="navbar-brand" href="/">
+                    <Link to="/" className="navbar-brand">
                         <img className="navbar-brand-sticky" src="/img/karmatica.png" alt="karmatica" />
-                    </a>
+                    </Link>
                     <div className="ml-auto" />
                     {/* Navbar */}
                     <ul className="navbar-nav items mx-auto">
                         <li className="nav-item dropdown">
-                            <a className="nav-link" href="/">Explore</a>
+                            <Link to className="nav-link" href="/">Explore</Link>
                         </li>
                         {/* <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Explore <i className="fas fa-angle-down ml-1" /></a>
@@ -139,11 +139,14 @@ const Header = () => {
                                 <li className="nav-item"><a href="/item-details" className="nav-link">Item Details</a></li>
                             </ul>
                         </li> */}
+                        {log !== null && (
+
+                            <li className="nav-item">
+                                <Link to="/create" className="nav-link">Create</Link>
+                            </li>
+                        )}
                         <li className="nav-item">
-                            <a href="/create" className="nav-link">Create</a>
-                        </li>
-                        <li className="nav-item">
-                            <a href={`/all/${"LatestProjects"}`} className="nav-link">Newest Projects</a>
+                            <Link to={`/all/${"LatestProjects"}`} className="nav-link">Newest Projects</Link>
                         </li>
                         {/* <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Community <i className="fas fa-angle-down ml-1" /></a>

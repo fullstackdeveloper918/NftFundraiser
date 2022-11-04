@@ -35,7 +35,13 @@ export default function GeoLocation(props) {
 
     useEffect(() => {
         setLabelWidth(inputLabel.current.offsetWidth);
-    }, []);
+        {
+            !currentItem && (
+
+                setCurrentItem(props?.selected)
+            )
+        }
+    }, [props]);
 
     useEffect(() => {
         try {
