@@ -72,10 +72,13 @@ const ProjNftDetails = () => {
                         </div>
 
                     </div>
-                    <div className='eddlbtton d-flex  align-items-center px-2'>
-                        <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={`/updateproject/${projdetail.id}`} style={{ color: '#FFF' }}>Edit</Link></a>
-                        <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-2" onClick={() => deleteHandler(projdetail.id)} style={{ color: '#FFF' }}>Delete</a>
-                    </div>
+                    {projdetail?.status == 0 && (
+                        <div className='eddlbtton d-flex  align-items-center px-2'>
+
+                            <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={`/updateproject/${projdetail.id}`} style={{ color: '#FFF' }}>Edit</Link></a>
+                            <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-2" onClick={() => deleteHandler(projdetail.id)} style={{ color: '#FFF' }}>Delete</a>
+                        </div>
+                    )}
                     {/* <CollItem /> */}
                 </div>
             </div>

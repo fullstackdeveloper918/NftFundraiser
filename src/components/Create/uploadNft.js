@@ -208,6 +208,19 @@ const UploadNft = ({ formStep, nextFormStep }) => {
                                                 <Fragment>
                                                     {/* <div>Artwork {index}</div> */}
                                                     <div className="row">
+                                                        <div className='orgicon1'>
+
+                                                            <i className="fa-regular fa-circle" style={{ marginRight: '8px', marginLeft: '138px' }}> Step 1</i>
+                                                        </div>
+
+                                                        <div className='orgicon1line'>
+                                                            <span style={{ color: '#452868' }}> ----------------------------- </span>
+
+                                                        </div>
+                                                        <div className='orgicon2'>
+
+                                                            <i className="fa-solid fa-circle-check" style={{ marginLeft: '8px' }}> Step 2</i>
+                                                        </div>
                                                         <div className="col-6">
                                                             <div>
 

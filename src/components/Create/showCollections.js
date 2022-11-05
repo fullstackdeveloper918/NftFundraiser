@@ -6,22 +6,22 @@ import { GetCollectionsAction } from '../../redux/Actions/projectAction'
 
 const ShowCollections = () => {
     const dispatch = useDispatch()
-    // const col = useSelector(state => {
-    //     // debugger
-    //     return state?.projectdetails?.getcollections
-    // })
+    const col = useSelector(state => {
+        // debugger
+        return state?.projectdetails?.getcollections
+    })
     // const val = localStorage.getItem("values")
     // console.log(val.address, 'vall')
-    // console.log(col, 'col')
-    // useEffect(() => {
-    //     dispatch(GetCollectionsAction())
-    // }, [])
+    console.log(col, 'col')
     useEffect(() => {
+        dispatch(GetCollectionsAction())
+    }, [])
+    // useEffect(() => {
 
-    })
-    var dat = localStorage.getItem("values");
-    dat = JSON.parse(dat);
-    console.log('dat', dat?.nfts[0]?.image?.fileList[0]?.thumbUrl)
+    // })
+    // var dat = localStorage.getItem("values");
+    // dat = JSON.parse(dat);
+    // console.log('dat', dat?.nfts[0]?.image?.fileList[0]?.thumbUrl)
     // console.log('valus', localStorage.getItem('values', 'address'))
     // localStorage.setItem("values", JSON.stringify({
     //     ...data,
@@ -64,18 +64,18 @@ const ShowCollections = () => {
                                     {/* Card Body */}
                                     <div className="card-body">
                                         <a href="/item-details">
-                                            <h5 className="mb-0">{localStorage.getItem('name')}</h5>
+                                            <h5 className="mb-0">{col.name}</h5>
                                         </a>
                                         <div className="seller d-flex align-items-center my-3">
-                                            <span style={{ color: '#8E8E8E' }}>{dat?.nfts?.[0]?.name}</span>
+                                            <span style={{ color: '#8E8E8E' }}>{col?.nfts?.[0]?.name}</span>
                                             <a href="/author">
                                                 <h6 className="ml-2 mb-0"> </h6>
                                             </a>
                                         </div>
                                         <div className="card-bottom d-flex justify-content-between">
 
-                                            <span> {dat.price}</span>
-                                            <span> {dat.number_of_nft}</span>
+                                            <span> {col.price}</span>
+                                            <span> {col.number_of_nft}</span>
                                         </div>
                                         {/* <a className="btn btn-bordered-white btn-smaller mt-3" href="/wallet-connect"><i className="icon-handbag mr-2" />dfg</a> */}
                                     </div>

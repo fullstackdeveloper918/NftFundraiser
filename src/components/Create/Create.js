@@ -114,6 +114,18 @@ const Create = ({ formStep, nextFormStep }) => {
                         <div className={formStep === 0 ? styles.showForm : styles.hideForm}>
                             <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
                                 <div className="row">
+                                    <div className='step1icon'>
+
+                                        <i className="fa-solid fa-circle-check"> Step 1</i>
+                                    </div>
+                                    <div className='stepperline'>
+                                        <i style={{ color: '#452868' }}> ----------------------------- </i>
+
+                                    </div>
+                                    <div className='step2icon'>
+
+                                        <i className="fa-regular fa-circle" > Step 2</i>
+                                    </div>
                                     <div className="col-12">
                                         <div className="form-group mt-3">
                                             <div className="form-check form-check-inline">
@@ -192,7 +204,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                     <div className="col-12">
                                         <label>Description</label>
                                         <div className="form-group">
-                                            <Editor
+                                            {/* <Editor
                                                 embeds={[
                                                     {
                                                         title: "Google Doc",
@@ -213,8 +225,8 @@ const Create = ({ formStep, nextFormStep }) => {
                                                 cols={30}
                                                 // {...register("description", { required: true })}
                                                 aria-invalid={errors.description ? "true" : "false"}
-                                            />
-                                            {/* <textarea
+                                            /> */}
+                                            <textarea
                                                 type="text"
                                                 className="form-control"
                                                 name="textarea"
@@ -223,7 +235,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                                 cols={30}
                                                 {...register("description", { required: true })}
                                                 aria-invalid={errors.description ? "true" : "false"}
-                                            /> */}
+                                            />
                                             {/* <ReactMarkdown remarkPlugins={[gfm]}
                                                 className="form-control"
                                                 placeholder="Description"
@@ -337,15 +349,16 @@ const Create = ({ formStep, nextFormStep }) => {
                                                         geoId={state}
                                                         onBlur={onBlur}
                                                         selected={value}
-                                                    // onChange={onChange}
+                                                        required={true}
+                                                        // onChange={onChange}
 
 
-                                                    // {...register("city", { required: true })}
-                                                    // aria-invalid={errors.city ? "true" : "false"}
+                                                        // {...register("city", { required: true })}
+                                                        aria-invalid={errors.city ? "true" : "false"}
                                                     />
                                                 )}
                                             />
-                                            {/* {errors.city?.type === 'required' && <p style={{ color: 'red' }} role="alert">city is required</p>} */}
+                                            {errors.city?.type === 'required' && <p style={{ color: 'red' }} role="alert">city is required</p>}
                                         </div>
                                     </div>
                                     <div className="col-12 col-md-6">
@@ -392,7 +405,7 @@ const Create = ({ formStep, nextFormStep }) => {
 
                                         <><div className="col-12 col-md-6">
                                             <div className="form-group">
-                                                <label>Compaign Start date</label>
+                                                <label>Campaign Start date</label>
                                                 <input
                                                     type="date"
                                                     className="form-control"
@@ -405,7 +418,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                             </div>
                                         </div><div className="col-12 col-md-6">
                                                 <div className="form-group">
-                                                    <label>Compaign End Date</label>
+                                                    <label>Campaign End Date</label>
                                                     <input
                                                         type="date"
                                                         className="form-control"
@@ -421,8 +434,11 @@ const Create = ({ formStep, nextFormStep }) => {
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
                                             <label>Category</label>
-                                            <select name="annual_revenue_range"
-                                                {...register("category_id")}>
+                                            <select name="category_id"
+                                                {...register("category_id", { required: true })}
+                                            >
+                                                aria-invalid={errors.category_id ? "true" : "false"}
+                                                <option value="" disabled selected style={{ color: "#495057" }}>Select category </option>
                                                 {cat?.map((option, key) => (
 
                                                     <option key={key.id} value={option.id} >
@@ -430,6 +446,7 @@ const Create = ({ formStep, nextFormStep }) => {
                                                     </option>
                                                 ))}
                                             </select>
+                                            {errors.category_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Category is required</p>}
                                         </div>
                                     </div>
 

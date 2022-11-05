@@ -59,7 +59,6 @@ const EditProject = () => {
     }, [projdetail]);
 
     const OnSubmit = (data) => {
-        debugger
         const formData = new FormData()
 
         // formData.append('image', data.image[0])
@@ -71,8 +70,15 @@ const EditProject = () => {
         formData.append('address', data.address)
         formData.append('price', data.price)
         formData.append('number_of_nft', data.number_of_nft)
-        formData.append('start_date', data.start_date)
-        formData.append('end_date', data.end_date)
+        if (data?.type == 1) {
+
+            formData.append('start_date', '')
+            formData.append('end_date', '')
+        } else {
+
+            formData.append('start_date', data.start_date)
+            formData.append('end_date', data.end_date)
+        }
         formData.append('type', data.type)
         formData.append('category_id', data.category_id)
 

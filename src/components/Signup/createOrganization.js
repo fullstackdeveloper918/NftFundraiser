@@ -8,10 +8,13 @@ import { useFormData } from './Context/context'
 import styles from './styles/styles.module.scss'
 import { GetSocialMediaIcons } from '../../redux/Actions/projectAction'
 import SocialMedia from './media'
+import styled from 'styled-components'
+import ProgressSteps from './steps'
+
 // import { Widget } from "@uploadcare/react-widget";
 // import FileUpload from "react-material-file-upload";
 // import { uploadcare } from '../lib/uploadcare.min.js';
-const CreateOrganization = ({ formStep, nextFormStep }) => {
+const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
     const { data, setFormValues } = useFormData();
 
     const dispatch = useDispatch()
@@ -39,13 +42,13 @@ const CreateOrganization = ({ formStep, nextFormStep }) => {
         // FormData.append('password', data.password)
         // FormData.append('confirm_password', data.confirm_password)
         const formData = new FormData()
-
-        formData.append('banner_image', values.banner_image)
-        formData.append('logo', values.logo)
+        formData.append('banner_image', values.banner_image[0])
+        formData.append('logo', values.logo[0])
         formData.append('email', data.email)
         formData.append('password', data.password)
         formData.append('wallet_id', data.wallet_id)
         formData.append('role', data.role)
+        formData.append('goal', data.goal)
         formData.append('confirm_password', data.confirm_password)
         formData.append('organization_name', values.organization_name)
         formData.append('url', values.url)
@@ -94,10 +97,30 @@ const CreateOrganization = ({ formStep, nextFormStep }) => {
                         {/* Item Form */}
                         <div className={formStep === 1 ? styles.showForm : styles.hideForm}>
                             <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
+                                {/* <button
+                                    // className={styles.back}
+                                    onClick={prevFormStep}
+                                    type="button"
+                                >
+                                    back
+                                </button> */}
                                 <div className="row">
+                                    <div className='orgicon1'>
 
+                                        <i className="fa-regular fa-circle" style={{ marginRight: '8px', marginLeft: '138px' }}> Step 1</i>
+                                    </div>
+
+                                    <div className='orgicon1line'>
+                                        <span style={{ color: '#452868' }}> ----------------------------- </span>
+
+                                    </div>
+                                    <div className='orgicon2'>
+
+                                        <i className="fa-solid fa-circle-check" style={{ marginLeft: '8px' }}> Step 2</i>
+                                    </div>
                                     <div className="col-6">
                                         <div className="form-group mt-3">
+                                            <label>Organization Name</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -112,6 +135,7 @@ const CreateOrganization = ({ formStep, nextFormStep }) => {
                                     </div>
                                     <div className="col-6">
                                         <div className="form-group mt-3">
+                                            <label>Organization Website</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -126,11 +150,13 @@ const CreateOrganization = ({ formStep, nextFormStep }) => {
                                     </div>
                                     <div className="col-12">
                                         <div className="form- group mt-3">
+                                            <label>Organization Description</label>
                                             <textarea
                                                 type="text"
                                                 className="form-control"
                                                 name="description"
                                                 placeholder="Describe your project"
+
                                                 {...register("description", { required: true })}
                                                 // {...register("email")}
                                                 aria-invalid={errors.description ? "true" : "false"}
@@ -141,13 +167,15 @@ const CreateOrganization = ({ formStep, nextFormStep }) => {
 
                                     <div className="col-6">
                                         <div className="form-group mt-3">
+                                            <label>Organization Country</label>
 
                                             <select name="country"
                                                 {...register("country", { required: true })}>
+                                                aria-invalid={errors.tax_id ? "true" : "false"}
+                                                <option value="" disabled selected style={{ color: "#495057" }}>Select your country</option>
                                                 {countries.data?.data?.map((option, key) => (
-                                                    <><option value="" disabled selected style={{ color: "#495057" }}>Select your country</option><option key={key.id} value={option.id}>
+                                                    <><option key={key.id} value={option.id}>
                                                         {option.name}
-                                                        {/* aria-invalid={errors.tax_id ? "true" : "false"} */}
                                                     </option></>
                                                 ))}
                                             </select>
@@ -170,6 +198,7 @@ const CreateOrganization = ({ formStep, nextFormStep }) => {
                                     </div> */}
                                     <div className="col-6">
                                         <div className="form-group mt-3">
+                                            <label>Organization EIN Number/Tax Id</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -184,33 +213,38 @@ const CreateOrganization = ({ formStep, nextFormStep }) => {
                                     </div>
                                     <div className="col-6">
                                         <div className="form-group mt-3">
-
-                                            <select name="country"
+                                            <label>Organization Socialmedia</label>
+                                            <select name="social"
                                                 {...register("social", { required: true })}>
+                                                aria-invalid={errors.social ? "true" : "false"}
+                                                <option value="" disabled selected style={{ color: "#495057" }}>Select your social media</option>
                                                 {socialmedia?.map((option, key) => (
-                                                    <option key={key.id} value={option.id}>
+                                                    <><option key={key.id} value={option.id}>
                                                         {option.title}
-                                                        aria-invalid={errors.social ? "true" : "false"}
-                                                    </option>
+                                                    </option></>
                                                 ))}
                                             </select>
-                                            {errors.social?.type === 'required' && <p style={{ color: 'red' }} role="alert">Social is required</p>}
+                                            {errors.social?.type === 'required' && <p style={{ color: 'red' }} role="alert">Social media is required</p>}
                                         </div>
                                     </div>
 
                                     <div className="col-6">
                                         <div className="form-group mt-3">
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                name="social_link"
-                                                defaultValue='"facebook.com/nft"'
-                                                placeholder="social_link "
-                                                {...register("social_link", { required: true })}
-                                                // {...register("email")}
-                                                aria-invalid={errors.social_link ? "true" : "false"}
-                                            />
-                                            {errors.social_link?.type === 'required' && <p style={{ color: 'red' }} role="alert">Social link is required</p>}
+                                            <label>Organization Socialmedia Link</label>
+                                            <div className="input-group-prepend">
+
+                                                <span className="input-group-text" id="inputGroupPrepend2">@</span>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="social_link"
+                                                    placeholder="social link "
+                                                    {...register("social_link", { required: true })}
+                                                    // {...register("email")}
+                                                    aria-invalid={errors.social_link ? "true" : "false"}
+                                                />
+                                            </div>
+                                            {errors.social_link?.type === 'required' && <p style={{ color: 'red' }} role="alert">Social media link is required</p>}
                                         </div>
                                     </div>
 
@@ -232,20 +266,25 @@ const CreateOrganization = ({ formStep, nextFormStep }) => {
 
                                     <div className="col-6">
                                         <div className="form-group mt-3">
+                                            <label>Organization Banner</label>
                                             <input
                                                 className="form-control"
                                                 type="file"
+
                                                 name="banner_image"
                                                 placeholder="Select file"
+                                                disp
                                                 {...register("banner_image", { required: true })}
                                                 aria-invalid={errors.banner_image ? "true" : "false"}
                                             />
+                                            <span>maximum height should be 500 pixels & width should be 1500 pixels</span>
 
                                             {errors.banner_image?.type === 'required' && <p style={{ color: 'red' }} role="alert">Banner is required</p>}
                                         </div>
                                     </div>
                                     <div className="col-6">
                                         <div className="form-group mt-3">
+                                            <label>Organization Logo</label>
                                             <input
                                                 className="form-control"
                                                 type="file"
@@ -254,6 +293,10 @@ const CreateOrganization = ({ formStep, nextFormStep }) => {
                                                 {...register("logo", { required: true })}
                                                 aria-invalid={errors.logo ? "true" : "false"}
                                             />
+                                            <div className='logo'>
+
+                                                <span>maximum height should be 250 pixels</span>
+                                            </div>
                                             {errors.logo?.type === 'required' && <p style={{ color: 'red' }} role="alert">logo is required</p>}
                                         </div>
                                     </div>

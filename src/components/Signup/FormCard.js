@@ -13,6 +13,7 @@ export default function FormCard({ children, currentStep, prevFormStep }) {
                     )}
 
                 </>
+
             )}
             {children}
         </div>

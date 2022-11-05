@@ -13,6 +13,13 @@ const formSchema = Yup.object().shape({
     email: Yup.string()
         .email()
         .required("Email is required"),
+    // wallet_id: Yup.string()
+    //     .wallet_id()
+    //     .required("Wallet address is required"),
+    // goal: Yup.string()
+    //     .goal()
+    //     .required("Fundraising goal is required"),
+
     password: Yup.string()
         .required("Password is required")
         .min(4, "Password length should be at least 4 characters")
@@ -37,7 +44,7 @@ const Signup = ({ formStep, nextFormStep }) => {
     console.log('role', role)
     const OnSubmit = (data) => {
         // dispatch(Register(data))
-        setFormValues(data);
+        setFormValues({ ...data, role });
         if (role == 3) {
 
             nextFormStep();
@@ -45,6 +52,7 @@ const Signup = ({ formStep, nextFormStep }) => {
         if (role == 2) {
             const formData = new FormData()
             formData.append('email', data.email)
+            formData.append('goal', data.goal)
             formData.append('password', data.password)
             formData.append('confirm_password', data.confirm_password)
             formData.append('wallet_id', data.wallet_id)
@@ -81,14 +89,26 @@ const Signup = ({ formStep, nextFormStep }) => {
                             <div className={formStep === 0 ? styles.showForm : styles.hideForm}>
                                 <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
                                     <div className="row">
+                                        <div className='step1icon'>
 
+                                            <i className="fa-solid fa-circle-check"> Step 1</i>
+                                        </div>
+                                        <div className='stepperline'>
+                                            <i style={{ color: '#452868' }}> ----------------------------- </i>
+
+                                        </div>
+                                        <div className='step2icon'>
+
+                                            <i className="fa-regular fa-circle" > Step 2</i>
+                                        </div>
                                         <div className="col-12">
                                             <div className="form-group mt-3">
+                                                <label>Email</label>
                                                 <input
                                                     type="email"
                                                     className="form-control"
                                                     name="email"
-                                                    placeholder="Enter your Email"
+                                                    placeholder="Email"
                                                     {...register("email", { required: 'Email address is required' })}
                                                     // {...register("email")}
                                                     aria-invalid={errors.email ? "true" : "false"} />
@@ -99,11 +119,12 @@ const Signup = ({ formStep, nextFormStep }) => {
                                         </div>
                                         <div className="col-12">
                                             <div className="form-group mt-3">
+                                                <label>Password</label>
                                                 <input
                                                     type="password"
                                                     className="form-control"
                                                     name="password"
-                                                    placeholder="Enter your Password"
+                                                    placeholder="Password"
                                                     {...register("password", { required: true })}
                                                     aria-invalid={errors.password ? "true" : "false"} />
                                                 {errors.password && <p style={{ color: 'red' }} role="alert">{errors.password.message}</p>}
@@ -111,12 +132,12 @@ const Signup = ({ formStep, nextFormStep }) => {
                                         </div>
                                         <div className="col-12">
                                             <div className="form-group mt-3">
-
+                                                <label>Confirm Password</label>
                                                 <input
                                                     type="password"
                                                     className="form-control"
                                                     name="confirm_password"
-                                                    placeholder="Enter your Password Again"
+                                                    placeholder="Confirm password"
                                                     {...register("confirm_password",
                                                         {
                                                             required: true,
@@ -132,13 +153,31 @@ const Signup = ({ formStep, nextFormStep }) => {
                                         </div>
                                         <div className="col-12">
                                             <div className="form-group mt-3">
+                                                <label>Fundraising Goal</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="goal"
+                                                    placeholder="Fundraising goal (MATIC)"
+                                                    {...register("goal",
+                                                        {
+                                                            required: true,
+
+                                                        })}
+                                                    aria-invalid={errors.goal ? "true" : "false"} />
+                                                {errors.goal && <p style={{ color: 'red' }} role="alert">Fundraising goal is required</p>}
+                                            </div>
+                                        </div>
+                                        <div className="col-12">
+                                            <div className="form-group mt-3">
+                                                <label>Wallet Address</label>
                                                 <input
                                                     type="text"
                                                     className="form-control"
                                                     name="wallet_id"
                                                     // defaultValue='1'
                                                     placeholder="Wallet address"
-                                                    {...register("wallet_id")}
+                                                    {...register("wallet_id", { required: true })}
                                                     // {...register("email")}
                                                     aria-invalid={errors.wallet_id ? "true" : "false"}
                                                 />

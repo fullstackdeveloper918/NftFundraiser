@@ -1937,8 +1937,8 @@ header {
     }
     .tab-content {
         .single-tab-list {
-            margin: 1.5rem 0;
-            strong, a {
+            margin: 1.5rem 0 !important;
+            strong, a  {
                 color: var(--white-color);
                 transition: 0.3s;
             }

@@ -54,7 +54,7 @@ export const LoginAction = (params, history) => async dispatch => {
         if (res.status === 200) {
             swal("success", res.data.message, 'success')
                 .then(function () {
-                    window.location = "/create";
+                    window.location = "/projectlist";
                 });
 
         }
@@ -91,7 +91,7 @@ export const ForgotPasswordAction = (params) => async dispatch => {
     }
 }
 export const CreateOrganizationAction = (params) => async dispatch => {
-    debugger
+    // debugger
     // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
     try {
         const token = sessionStorage.getItem('authToken')

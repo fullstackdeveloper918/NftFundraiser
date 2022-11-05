@@ -348,3 +348,15 @@ footer a.navbar-brand img {
     user-select: none;
     color: #fff !important;
 }
+.fa-regular, .far {
+    font-weight: 400;
+    margin-left: 9px;
+    color: #452868;
+}
+.fa-solid, .fas {
+    font-weight: 900;
+    margin-left: 172px;
+    
+    color: #4528DC;
+    margin-right: 8px;
+}
