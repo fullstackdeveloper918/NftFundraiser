@@ -70,7 +70,7 @@ const GetAllProjects = () => {
                             [...new Map(projects.map(item =>
                                 [item["title"], item])).values()].map((item, idx) => {
                                     return (
-                                        <Link key={`edth_${idx}`} to={`/projnft-details/${item.id}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
+                                        <Link key={`edth_${idx}`} to={`/projnftdetails/${item.id}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
                                             <div>
                                                 <div className="card">
                                                     <div className="image-over">

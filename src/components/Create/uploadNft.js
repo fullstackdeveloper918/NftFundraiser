@@ -3,6 +3,7 @@ import { Button, Form, Input, Modal, Space, Upload } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { create } from 'ipfs-http-client'
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProjectAction, GetCollectionsAction } from '../../redux/Actions/projectAction';
 import { useFormData } from './Context/context'
@@ -22,7 +23,8 @@ const getBase64 = (file) =>
     });
 // import ImgCrop from 'antd-img-crop';
 
-const UploadNft = ({ formStep, nextFormStep }) => {
+const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
+
 
     const [formValues, setFormvalues] = useState()
 
@@ -55,7 +57,9 @@ const UploadNft = ({ formStep, nextFormStep }) => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm({
         mode: 'all'
     });
-
+    const ipfsClient = create('http://127.0.0.1:5001')
+    const ipfsBaseUrl = 'http://localhot:8080/ipfs/'
+    // const ipfsBaseUrl = '`${process.env.REACT_APP_IPFS_BASE_URL}`'
     const dispatch = useDispatch()
 
     const OnSubmit = (values) => {
@@ -98,7 +102,21 @@ const UploadNft = ({ formStep, nextFormStep }) => {
         dispatch(GetCollectionsAction())
     }, [])
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
+        const nftImagepromises = values?.nfts?.map(x => ipfsClient.add(x.nft_image.fileList[0].thumbUrl))
+        // debugger
+
+        const imagesRes = await Promise.all(nftImagepromises).then(res => res)
+        // debugger
+
+        const addedImage = imagesRes.map(x => ipfsBaseUrl + x.path)
+        // debugger
+
+        // const nft_image = ipfsBaseUrl + addedImage.path;
+        debugger
+        // console.log(nft_image, 'imageurl')
+
+
         const formData = new FormData()
 
 
@@ -116,10 +134,10 @@ const UploadNft = ({ formStep, nextFormStep }) => {
         formData.append('category_id', data.category_id)
 
 
-        formData.append('nft_image', values?.nfts?.map(x => {
-            return x.nft_image.fileList[0]
-        }
-        ))
+        // formData.append('nft_image', values?.nfts?.map(x => {
+        //     return x.nft_image.fileList[0]
+        // }
+        formData.append('nft_image', addedImage)
         formData.append('nft_name', values?.nfts?.map(x =>
             x.nft_name
         ))

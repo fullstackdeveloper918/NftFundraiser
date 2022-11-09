@@ -10,12 +10,14 @@ const projectSlice = createSlice({
     initialState: {
         project: [],
         projects: [],
+        nftlist: [],
         projectdetails: [],
         latestprojectdetails: [],
         categories: [],
         collections: [],
         getcollections: [],
         getcollectiondetails: [],
+        collectiondetails: [],
         getSocialmediaIcons: [],
         // liveProjects: [],
         liveProjects: {
@@ -61,6 +63,14 @@ const projectSlice = createSlice({
             // debugger
             state.projectdetails = action?.payload?.data?.data;
         },
+        getCollectionDetail: (state, action) => {
+            // debugger
+            state.collectiondetails = action?.payload?.data?.data;
+        },
+        getNftList: (state, action) => {
+            // debugger
+            state.nftlist = action?.payload?.data?.data;
+        },
         getLatestProjectDetail: (state, action) => {
             // debugger
             state.latestprojectdetails = action?.payload?.data?.data;
@@ -92,5 +102,7 @@ export const {
     getCategoriesList,
     getCollections,
     getCollectionDetails,
-    getSocialmediaIcons
+    getSocialmediaIcons,
+    getNftList,
+    getCollectionDetail
 } = projectSlice.actions;

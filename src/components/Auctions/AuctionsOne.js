@@ -58,7 +58,7 @@ const AuctionsOne = ({ key, type }) => {
                                     <div key={`auc_${idx}`} className="swiper-slide item">
                                         <div className="card">
                                             <div className="image-over">
-                                                <Link to={`/proj-details/${item.id}`}>
+                                                <Link to={`/projdetails/${item.id}`}>
                                                     <img className="card-img-top" src={item.image} alt="" />
                                                 </Link>
                                             </div>
@@ -69,10 +69,10 @@ const AuctionsOne = ({ key, type }) => {
                                                     <div className="countdown-times mb-3">
                                                         <div className="countdown d-flex justify-content-center" data-date={item.date} />
                                                     </div>
-                                                    <a href="/item-details">
+                                                    <a href="#">
                                                         <h5 className="mb-0">{item.title}</h5>
                                                     </a>
-                                                    <a className="seller d-flex align-items-center my-3" href="/item-details">
+                                                    <a className="seller d-flex align-items-center my-3" href="#">
                                                         <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />
                                                         <span className="ml-2">@{item.user_data.username}</span>
                                                     </a>

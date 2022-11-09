@@ -14,7 +14,8 @@ import {
     createCollectionSuccess,
     getCollections,
     getCollectionDetails,
-    getSocialmediaIcons
+    getSocialmediaIcons,
+    getNftList
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -108,6 +109,28 @@ export const ProjectList = () => async dispatch => {
 
         // console.log(res?.data?.data[0]?.image, 'proj')
         await dispatch(getProjectList(res.data?.data));
+
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const NftList = (id) => async dispatch => {
+    const token = sessionStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        }
+
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getNftDetailByIdx/${id}`,
+            config)
+
+        console.log(res, 'proj')
+        await dispatch(getNftList(res));
 
     } catch (e) {
         if (e?.response?.data.message) {
@@ -300,6 +323,35 @@ export const GetSocialMediaIcons = () => async dispatch => {
         // console.log('social', res)
         await dispatch(getSocialmediaIcons(res));
 
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+
+export const UpdateCollection = (id, params) => async dispatch => {
+    // 
+    const token = sessionStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            transformRequest: formData => formData
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/updateContract/${id}`,
+            params, config)
+        // 
+        console.log(res, 'coll rres')
+        await dispatch(getLatestProjectDetail(res));
+        // if (res.status === 200) {
+        //     swal("success", res.data.message, 'success').then(function () {
+        //         window.location = "/projectlist";
+        //     });
+
+        // }
     } catch (e) {
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')

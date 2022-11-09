@@ -94,9 +94,9 @@ const ProjNftDetails = () => {
                             <div key={`eds_${idx}`} className="col-12 col-md-3 item explore-item">
                                 <div className="card no-hover my-2">
                                     <div className="image-over">
-                                        <a href="/item-details">
+                                        <Link to={`/nft/details/${x.id}`}>
                                             <img className="card-img-top" src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="" />
-                                        </a>
+                                        </Link>
                                         {/* Author */}
 
                                     </div>
@@ -104,7 +104,7 @@ const ProjNftDetails = () => {
                                     <div className="card-caption col-12 ">
                                         {/* Card Body */}
                                         <div className="card-body">
-                                            <a href="/item-details">
+                                            <a href="#">
                                                 <h5 className="mb-2">{x.title}</h5>
                                             </a>
                                             <span>{x.description}</span>

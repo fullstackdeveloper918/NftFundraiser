@@ -118,7 +118,7 @@ const ExploreAll = () => {
                                         <div>
                                             <div className="card">
                                                 <div className="image-over">
-                                                    <Link to={`/proj-details/${item.id}`}>
+                                                    <Link to={`/projdetails/${item.id}`}>
                                                         <img className="card-img-top" src={item.image} alt="" />
                                                     </Link>
                                                 </div>

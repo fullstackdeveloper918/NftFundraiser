@@ -46,9 +46,9 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
         formData.append('logo', values.logo[0])
         formData.append('email', data.email)
         formData.append('password', data.password)
-        formData.append('wallet_id', data.wallet_id)
-        formData.append('role', data.role)
-        formData.append('goal', data.goal)
+        formData.append('wallet_id', values.wallet_id)
+        // formData.append('role', data.role)
+        formData.append('goal', values.goal)
         formData.append('confirm_password', data.confirm_password)
         formData.append('organization_name', values.organization_name)
         formData.append('url', values.url)
@@ -118,6 +118,40 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
 
                                         <i className="fa-solid fa-circle-check" style={{ marginLeft: '8px' }}> Step 2</i>
                                     </div>
+
+                                    <div className="col-6">
+                                        <div className="form-group mt-3">
+                                            <label>Fundraising Goal</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="goal"
+                                                placeholder="Fundraising goal (MATIC)"
+                                                {...register("goal",
+                                                    {
+                                                        required: true,
+
+                                                    })}
+                                                aria-invalid={errors.goal ? "true" : "false"} />
+                                            {errors.goal && <p style={{ color: 'red' }} role="alert">Fundraising goal is required</p>}
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="form-group mt-3">
+                                            <label>Wallet Address</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="wallet_id"
+                                                // defaultValue='1'
+                                                placeholder="Wallet address"
+                                                {...register("wallet_id", { required: true })}
+                                                // {...register("email")}
+                                                aria-invalid={errors.wallet_id ? "true" : "false"}
+                                            />
+                                            {errors.wallet_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Wallet address is required</p>}
+                                        </div>
+                                    </div>
                                     <div className="col-6">
                                         <div className="form-group mt-3">
                                             <label>Organization Name</label>
@@ -133,6 +167,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                             {errors.organization_name?.type === 'required' && <p style={{ color: 'red' }} role="alert">Organization name is required</p>}
                                         </div>
                                     </div>
+
                                     <div className="col-6">
                                         <div className="form-group mt-3">
                                             <label>Organization Website</label>
@@ -148,6 +183,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                             {errors.url?.type === 'required' && <p style={{ color: 'red' }} role="alert">Url is required</p>}
                                         </div>
                                     </div>
+                                    ``
                                     <div className="col-12">
                                         <div className="form- group mt-3">
                                             <label>Organization Description</label>

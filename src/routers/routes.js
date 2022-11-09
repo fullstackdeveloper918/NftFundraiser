@@ -34,6 +34,7 @@ import Showcollections from "../themes/showcollections";
 import Collectiondetails from "../themes/collectn-details";
 import CollectionDetail from "../themes/collectn-details";
 import ProjNft from "../themes/projnft-details";
+import Nft from './../themes/nft-list';
 
 const MyRouts = () => {
   return (
@@ -48,8 +49,9 @@ const MyRouts = () => {
           <Route exact path="/explore-4" component={ExploreFour} />
           <Route exact path="/auctions" component={Auctions} />
           <Route exact path="/item-details/:id" component={ItemDetails} />
-          <Route exact path="/proj-details/:id" component={latprojDetails} />
-          <Route exact path="/projnft-details/:id" component={ProjNft} />
+          <Route exact path="/projdetails/:id" component={latprojDetails} />
+          <Route exact path="/projnftdetails/:id" component={ProjNft} />
+          <Route exact path="/nft/details/:id" component={Nft} />
           <Route exact path="/activity" component={Activity} />
           <Route exact path="/blog" component={Blog} />
           <Route exact path="/blog-single" component={BlogSingle} />

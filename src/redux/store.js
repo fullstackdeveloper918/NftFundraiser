@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { authReducer } from '../redux/Slices/authSlice'
+import { authReducer, userDetail } from '../redux/Slices/authSlice'
 import { combineReducers } from '@reduxjs/toolkit'
 import { projectReducer } from './Slices/projectSlice'
 import { footerReducer } from './Slices/footerSlice'
@@ -23,7 +23,10 @@ const reducer = combineReducers({
     collection: collectionReducer,
     getcollections: collectionReducer,
     getcollectiondetails: collectionReducer,
-    getSocialmediaIcons: projectReducer
+    getSocialmediaIcons: projectReducer,
+    // userDetail: authReducer,
+
+    // Nftlist: projectReducer
 })
 
 const store = configureStore({

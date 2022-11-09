@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createOrganizationSuccess, forgotpasswordSuccess, getAnnualRevenueList, getCountryList, getHearAboutList, loginSuccess, registerFail, registerSuccess, } from "../Slices/authSlice";
+import { createOrganizationSuccess, forgotpasswordSuccess, getAnnualRevenueList, getCountryList, getHearAboutList, loginSuccess, registerFail, registerSuccess, userDetail, } from "../Slices/authSlice";
 import swal from "sweetalert";
 // import { useNavigate } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit'
@@ -51,13 +51,13 @@ export const LoginAction = (params, history) => async dispatch => {
             params, config)
         dispatch(loginSuccess(res));
 
-        if (res.status === 200) {
-            swal("success", res.data.message, 'success')
-                .then(function () {
-                    window.location = "/projectlist";
-                });
+        // if (res.status === 200) {
+        //     swal("success", res.data.message, 'success')
+        //         .then(function () {
+        //             window.location = "/projectlist";
+        //         });
 
-        }
+        // }
 
     } catch (e) {
 
@@ -85,6 +85,30 @@ export const ForgotPasswordAction = (params) => async dispatch => {
         }
 
     } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const GetUserAction = () => async dispatch => {
+    // debugger
+    // debugger
+    // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
+    const token = sessionStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                // 'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+        }
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getUserDetails`,
+            config)
+        console.log('userres', res)
+        dispatch(userDetail(res));
+    } catch (e) {
+        // debugger
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }

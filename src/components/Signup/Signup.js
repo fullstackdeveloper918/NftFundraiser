@@ -40,25 +40,25 @@ const Signup = ({ formStep, nextFormStep }) => {
         resolver: yupResolver(formSchema)
     });
 
-    const [role, setRole] = useState()
-    console.log('role', role)
+    // const [role, setRole] = useState()
+    // console.log('role', role)
     const OnSubmit = (data) => {
         // dispatch(Register(data))
-        setFormValues({ ...data, role });
-        if (role == 3) {
+        setFormValues({ ...data });
+        // if (role == 3) {
 
-            nextFormStep();
-        }
-        if (role == 2) {
-            const formData = new FormData()
-            formData.append('email', data.email)
-            formData.append('goal', data.goal)
-            formData.append('password', data.password)
-            formData.append('confirm_password', data.confirm_password)
-            formData.append('wallet_id', data.wallet_id)
-            formData.append('role', role)
-            dispatch(Register(formData))
-        }
+        nextFormStep();
+        // }
+        // if (role == 2) {
+        //     const formData = new FormData()
+        //     formData.append('email', data.email)
+        //     // formData.append('goal', data.goal)
+        //     formData.append('password', data.password)
+        //     formData.append('confirm_password', data.confirm_password)
+        //     // formData.append('wallet_id', data.wallet_id)
+        //     // formData.append('role', role)
+        //     dispatch(Register(formData))
+        // }
     }
 
     const { user } = useSelector(state => state.user)
@@ -151,7 +151,7 @@ const Signup = ({ formStep, nextFormStep }) => {
                                                 {errors.confirm_password && <p style={{ color: 'red' }} role="alert">{errors.confirm_password.message}</p>}
                                             </div>
                                         </div>
-                                        <div className="col-12">
+                                        {/* <div className="col-12">
                                             <div className="form-group mt-3">
                                                 <label>Fundraising Goal</label>
                                                 <input
@@ -167,8 +167,8 @@ const Signup = ({ formStep, nextFormStep }) => {
                                                     aria-invalid={errors.goal ? "true" : "false"} />
                                                 {errors.goal && <p style={{ color: 'red' }} role="alert">Fundraising goal is required</p>}
                                             </div>
-                                        </div>
-                                        <div className="col-12">
+                                        </div> */}
+                                        {/* <div className="col-12">
                                             <div className="form-group mt-3">
                                                 <label>Wallet Address</label>
                                                 <input
@@ -183,8 +183,8 @@ const Signup = ({ formStep, nextFormStep }) => {
                                                 />
                                                 {errors.wallet_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Wallet address is required</p>}
                                             </div>
-                                        </div>
-                                        <div className="col-12">
+                                        </div> */}
+                                        {/* <div className="col-12">
                                             <div className="form-group mt-3">
                                                 <div className="form-check form-check-inline">
                                                     <input className="form-check-input" type="radio" name="radiobutton" id="donation" value="3" onChange={(e) => setRole(e.target.value)} />
@@ -196,7 +196,7 @@ const Signup = ({ formStep, nextFormStep }) => {
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div> */}
                                         {/* <div className="col-12">
                                         <div className="form-group mt-3">
                                             <div className="form-check form-check-inline">
@@ -206,12 +206,12 @@ const Signup = ({ formStep, nextFormStep }) => {
                                         </div>
                                     </div> */}
                                         <div className="col-12">
-                                            {role == 2 ? (
-                                                <button className="btn w-100 mt-3 mt-sm-4" type="submit">Signup</button>
-                                            ) : (
+                                            {/* {role == 2 ? ( */}
+                                            {/* <button className="btn w-100 mt-3 mt-sm-4" type="submit">Signup</button> */}
+                                            {/* ) : ( */}
 
-                                                <button className="btn w-100 mt-3 mt-sm-4" type="submit">Next</button>
-                                            )}
+                                            <button className="btn w-100 mt-3 mt-sm-4" type="submit">Next</button>
+                                            {/* )} */}
                                         </div>
                                         <div className="col-12">
                                             <span className="d-block text-center mt-4">Already have an account?<Link to="/login">Login</Link></span>
