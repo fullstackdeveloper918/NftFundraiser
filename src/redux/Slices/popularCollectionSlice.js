@@ -13,11 +13,12 @@ const collectionSlice = createSlice({
             state.collection = action.payload;
         },
 
+
     },
 });
 
 export const collectionReducer = collectionSlice.reducer
 
 export const {
-    getPopularCollection
+    getPopularCollection,
 } = collectionSlice.actions;

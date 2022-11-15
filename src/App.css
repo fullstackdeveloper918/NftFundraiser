@@ -1,3 +1,6 @@
+
+
+/* new */
 body{
     background-color: #09080d !important;
 }
@@ -359,4 +362,112 @@ footer a.navbar-brand img {
     
     color: #4528DC;
     margin-right: 8px;
+}
+ul.creator-dropdown.dropdown-menu li {
+    text-transform: capitalize !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+}
+.dropdown-item {
+    padding: 0;
+}
+.dropdown-item a{
+color:#fff !important;
+}
+:root header .navbar-expand .dropdown:hover > .dropdown-menu:after {
+    content: "";
+    height: 15px;
+    width: 15px;
+    background-color: #252329 !important;
+    position: absolute;
+    top: -8px;
+    left: 76px;
+    transform: rotate(45deg);
+}
+header .navbar-expand .dropdown:hover > .dropdown-menu {
+    box-shadow: 0px 0px 7px #302f2f87 !important;
+    padding: 10px;
+    margin-top: 0px !important;
+    visibility: unset;
+    opacity: 1;
+    color: #fff;
+    text-align: left;
+    background-color: #252329 !important;
+}
+.dropdown{
+    padding: 13px 5px !important;
+}
+
+@media (max-width: 1245px){
+    ul.creator-dropdown.dropdown-menu {
+        left: -74px !important;
+    }
+    :root header .navbar-expand .dropdown:hover > .dropdown-menu:after {
+        content: "";
+        left: 106px;
+    }
+}
+
+nav .header .navbar-nav.items li a:hover , .dropdown ul li a:hover , .card-body a h5:hover{
+    color: #4528DC !important;
+}
+.step2icon i , .step1icon i , .stepperline i , .single-work h4 {
+    color: #fff !important;
+}
+.step1icon i {
+    margin: 0 !important;
+}
+input::placeholder , textarea::placeholder   {
+    color: #8e8e8e !important;
+    font-weight: 500 !important;
+}
+
+.form-group select option {
+    color: #8e8e8e  !important;
+}
+.steps-center{
+    justify-content: center;
+    display: flex ;
+    width: 100%;
+}
+.orgicon2 i , .orgicon1 i{
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+}
+.orgicon2 i {
+    color: #fff !important;
+}
+i.fa-regular.fa-plus {
+    color: #fff;
+    margin-right: 5px;
+}
+form#dynamic_form_nest_item .anticon {
+    vertical-align: unset!important;
+}
+.content.nft-single-content{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.content.nft-single-content p {
+    margin: 10px 0 !important;
+}
+.content.nft-single-content h3 {
+    padding: 0 !important ;
+}
+.ant-steps-item-title {
+    color: #FFF !important;
+}
+
+.ant-steps-item-description  {
+    color: #FFF !important;
+}
+.ant-steps-item-finish .ant-steps-item-icon {
+    background-color: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+    border-color: #fff !important;
+}
+.footer-items a.navbar-brand {
+    margin-bottom: 12px;
 }

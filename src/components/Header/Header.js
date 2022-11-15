@@ -9,18 +9,18 @@ import { ConnectWallet, getCurrentWalletConnected } from '../Wallet/interact';
 
 const Header = () => {
     const dispatch = useDispatch()
-    const [address, setAddress] = useState()
+    const [address, setAddress] = useState(null)
 
     const add1 = address?.slice(0, 4).toUpperCase()
     const add2 = address?.slice(35, 44).toUpperCase()
     // console.log(add2)
     // console.log(add1)
-    console.log(address, 'address')
+    // console.log(address, 'address')
     const LogoutHandler = () => {
         dispatch(logoutSuccess())
     }
     // useEffect(() => {
-
+    //     const 
     // }, [])
 
 
@@ -30,28 +30,31 @@ const Header = () => {
         return state.user.userToken
     })
 
-    function getSelectedAddress() {
-        return window.ethereum?.selectedAddress;
-    }
-    const WalletHandler = () => {
-
-        ConnectWallet()
-
-    }
-    // const [data, setData] = useState('')
-    // console.log('dataaa', data)
     useEffect(() => {
+
         dispatch(GetUserAction())
         getCurrentWalletConnected()
         setAddress(getSelectedAddress)
 
-    }, [dispatch])
+    }, [dispatch, address])
+
+    function getSelectedAddress() {
+        return window.ethereum?.selectedAddress;
+    }
+
+    const WalletHandler = async () => {
+        const res = await ConnectWallet()
+        setAddress(res?.address)
+    }
+    // const [data, setData] = useState('')
+    // console.log('dataaa', data)
+
     const userdet = useSelector(state => {
         // debugger 
 
         return state?.user?.userdetail
     })
-    console.log(userdet, 'user')
+    // console.log(userdet, 'user')
     const accc = () => {
         getCurrentWalletConnected()
     }
@@ -178,13 +181,14 @@ const Header = () => {
                 <div className="container header">
                     {/* Navbar Brand*/}
                     <Link to="/" className="navbar-brand">
-                        <img className="navbar-brand-sticky" src="/img/karmatica.png" alt="karmatica" />
+                        <img className="navbar-brand-sticky desktop_logo" src="/img/karmatica.png" alt="karmatica" />
+                        <img className="mobile-logo" src="/img/logo.png" alt="" />
                     </Link>
                     <div className="ml-auto" />
                     {/* Navbar */}
                     <ul className="navbar-nav items mx-auto">
                         <li className="nav-item dropdown">
-                            <Link to className="nav-link" href="/">Explore</Link>
+                            <Link className="nav-link" to="/">Explore</Link>
                         </li>
                         {/* <li className="nav-item dropdown">
                             <a className="nav-link" href="#">Explore <i className="fas fa-angle-down ml-1" /></a>

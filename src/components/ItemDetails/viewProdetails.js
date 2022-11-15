@@ -105,12 +105,14 @@ const ProjDetails = () => {
 
     useEffect(() => {
         // debugger
-        dispatch(ProjectDetail(id))
+        dispatch(LatestProjectDetail(id))
     }, [id])
 
     // const deleteHandler = (id) => {
     //     dispatch(DeleteProject(id))
     // }
+
+    // debugger
 
 
     return (
@@ -119,11 +121,17 @@ const ProjDetails = () => {
                 <div className="row justify-content-between">
                     <div className="col-12 col-lg-5">
                         <div className="item-info">
-                            {/* {latprojdetail?.map((item, key) => ( */}
 
                             <><div className="item-thumb text-center">
-                                <img src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt="" />
-                            </div><div className="card no-hover countdown-times my-4">
+                                {latprojdetail && latprojdetail?.nft_data && latprojdetail?.nft_data?.length ?
+                                    <img src={latprojdetail.nft_data[0].image} alt="first nft" />
+                                    : null}
+                                {/* {latprojdetail?.nft_data[0]?.map((item, key) => (
+                                    <img src={item.image} alt="" />
+                                ))} */}
+                            </div>
+
+                                <div className="card no-hover countdown-times my-4">
                                     <div className="countdown d-flex justify-content-center" data-date={latprojdetail.end_date} />
                                 </div>
                                 {/* Netstorm Tab */}
@@ -184,7 +192,7 @@ const ProjDetails = () => {
                             <div className="owner d-flex align-items-center">
                                 <span>Owned By</span>
                                 <a className="owner-meta d-flex align-items-center ml-3" href="/author">
-                                    <img className="avatar-sm rounded-circle" src="/img/avtar1.png" alt="" />
+                                    <img className="avatar-sm rounded-circle" src={latprojdetail?.user_data?.avatar} alt="" />
                                     <h6 className="ml-2">{latprojdetail?.user_data?.username}</h6>
                                 </a>
                             </div>

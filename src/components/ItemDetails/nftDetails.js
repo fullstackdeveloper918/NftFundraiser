@@ -10,10 +10,11 @@ import Web3 from 'web3';
 import NFTContract from '../../backend/contracts/artWork.sol/NFTContract.json'
 import { ConnectWallet } from '../Wallet/interact';
 import EditCollection from './updateCollection';
-import { createMetaDataAndMint } from './../Wallet/interact';
+import { CreateMetaDataAndMint } from './../Wallet/interact';
+import NftPopup from './nftPopup';
 // console.log(NFTContract.abi,"abi")
 const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
-const NftDetails = () => {
+const NftDetails = (props) => {
 
     const initData = {
         itemImg: "/img/avtar1.png",
@@ -97,7 +98,9 @@ const NftDetails = () => {
             post: "Collection"
         }
     ]
-
+    const [modalShow, setModalShow] = React.useState(false);
+    const [current, setCurrent] = React.useState(0)
+    console.log('current', current)
     const { id } = useParams();
     // console.log(id, 'idd')
     const projdetail = useSelector(state => {
@@ -126,59 +129,69 @@ const NftDetails = () => {
     }, [id])
 
     const mint = () => {
-        createMetaDataAndMint({
+        CreateMetaDataAndMint({
             _name: nftdetail.title,
             _des: nftdetail.description,
-            _imgBuffer: nftdetail.image
+            _imgBuffer: nftdetail.image,
+            setCurrent,
+            id,
+            setModalShow
         })
+    }
+    console.log('mint', mint)
+
+    const deployAndMint = () => {
+        setModalShow(true)
+        mint()
+        // nftdetail.id()
     }
     // const deleteHandler = (id) => {
     //     dispatch(DeleteProject(id))
     // }    
     // const MintHandler = () => {
-    const deployContract = async () => {
+    // const deployContract = async () => {
 
-        // <EditCollection />
-        const web3 = new Web3(window.ethereum);
+    //     // <EditCollection />
+    //      
 
-        await window.ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: web3.utils.toHex('80001') }],
-        })
+    //     await window.ethereum.request({
+    //         method: 'wallet_switchEthereumChain',
+    //         params: [{ chainId: web3.utils.toHex('80001') }],
+    //     })
 
-        const { address } = await ConnectWallet()
-        const MyNFTContract = new web3.eth.Contract(NFTContract.abi)
-        const gas = await web3.eth.getGasPrice();
+    //     const { address } = await ConnectWallet()
+    //     const MyNFTContract = new web3.eth.Contract(NFTContract.abi)
+    //     const gas = await web3.eth.getGasPrice();
 
-        MyNFTContract.deploy({
-            data: NFTContract.bytecode,
-            arguments: ['Name', 'SYMBOL']
-        }).send({
-            from: address,
-            gas: gas,
-        })
-            .on('error', (error) => {
-                console.log(error)
-            })
-            .on('transactionHash', (transactionHash) => {
-                console.log(transactionHash, "transactionHash")
-            })
-            .on('receipt', (receipt) => {
-                // receipt will contain deployed contract address
-                console.log(receipt, "reciept")
-            })
-            .on('confirmation', (confirmationNumber, receipt) => {
-                console.log(receipt, "confirmRecipet")
-                // axios.post(
+    //     MyNFTContract.deploy({
+    //         data: NFTContract.bytecode,
+    //         arguments: ['Name', 'SYMBOL']
+    //     }).send({
+    //         from: address,
+    //         gas: gas,
+    //     })
+    //         .on('error', (error) => {
+    //             console.log(error)
+    //         })
+    //         .on('transactionHash', (transactionHash) => {
+    //             console.log(transactionHash, "transactionHash")
+    //         })
+    //         .on('receipt', (receipt) => {
+    //             // receipt will contain deployed contract address
+    //             console.log(receipt, "reciept")
+    //         })
+    //         .on('confirmation', (confirmationNumber, receipt) => {
+    //             console.log(receipt, "confirmRecipet")
+    //             // axios.post(
 
-                // )
-            })
+    //             // )
+    //         })
 
-        // if (contractid) {
-        //     createMetaDataAndMint()
-        // }
+    //     // if (contractid) {
+    //     //     CreateMetaDataAndMint()
+    //     // }
 
-    }
+    // }
     // }
 
     return (
@@ -190,7 +203,7 @@ const NftDetails = () => {
                             {/* {latprojdetail?.map((item, key) => ( */}
 
                             <><div className="item-thumb text-center">
-                                <img src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt="" />
+                                <img src={nftdetail?.image} alt="" />
                             </div><div className="card no-hover countdown-times my-4">
                                     <div className="countdown d-flex justify-content-center" />
                                 </div>
@@ -239,11 +252,29 @@ const NftDetails = () => {
 
                     <div className="col-12 col-lg-6">
                         <div className="content mt-5 mt-lg-0">
-                            <div className='eddlbtton d-flex  align-items-center px-2'>
+                            {nftdetail.is_mint == 1 ? (
 
-                                <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                    onClick={() => mint()}>  Mint</button>
-                            </div>
+                                <div className='eddlbtton d-flex  align-items-center px-2'>
+
+                                    <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                    >  Ready to purchase</button>
+
+
+                                </div>
+                            ) : (
+
+                                <div className='eddlbtton d-flex  align-items-center px-2'>
+
+                                    <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                        id="nftdetail.id" onClick={() => deployAndMint(id)}>  Mint</button>
+                                    <NftPopup
+                                        show={modalShow}
+                                        current={current}
+                                        onHide={() => setModalShow(false)}
+                                    />
+
+                                </div>
+                            )}
                             <div className='d-flex  align-items-center justify-content-between'>
                                 <h3 className="m-0">{nftdetail?.title}</h3>
 

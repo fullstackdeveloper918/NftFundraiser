@@ -1,5 +1,7 @@
 import { create } from 'ipfs-http-client'
 import { useState } from 'react';
+import { useParams } from 'react-router';
+import swal from 'sweetalert';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // const contractABI = require('../../src/backend/contracts/artWork.sol/NFTContract.json')
@@ -12,19 +14,21 @@ function isMetaMaskInstalled() {
   return Boolean(window.ethereum);
 }
 
-const ipfsBaseUrl = `${process.env.REACT_APP_IPFS_BASE_URL}`
+const ipfsBaseUrl = ('http://localhot:8080/ipfs/')
+// const ipfsBaseUrl = ('http://208.113.134.142:8080/')
 // const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
 const web3 = createAlchemyWeb3(alchemyKey);
 
 export const ConnectWallet = async () => {
   const chainId = 80001// Polygon Mainnet
 
-  if (window.ethereum.networkVersion !== chainId) {
+  if (window?.ethereum?.networkVersion !== chainId) {
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: web3.utils.toHex(chainId) }]
       });
+
     } catch (err) {
       // This error code indicates that the chain has not been added to MetaMask
       if (err.code === 4902) {
@@ -35,15 +39,16 @@ export const ConnectWallet = async () => {
               chainName: 'Mumbai Testnet',
               chainId: web3.utils.toHex(chainId),
               nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
-              rpcUrls: [' https://polygon-mumbai.g.alchemy.com/v2/your-api-key']
+              rpcUrls: ['  https://rpc-mumbai.maticvigil.com/']
             }
           ]
         });
+
       }
     }
   }
   if (!isMetaMaskInstalled()) {
-    alert('No wallet found. Please install MetaMask')
+    swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
   } else {
 
@@ -66,6 +71,7 @@ export const ConnectWallet = async () => {
           status: "👆🏽 Write a message in the text-field above.",
           address: addressArray[0],
         };
+
         return obj;
       } catch (err) {
         return {
@@ -137,7 +143,55 @@ export const getCurrentWalletConnected = async () => {
   }
 };
 
-export const createMetaDataAndMint = async ({ _imgBuffer, _des, _name }) => {
+// const SendStatus = async (id) => {
+//   const token = sessionStorage.getItem('authToken')
+//   try {
+//     await fetch(`${process.env.REACT_APP_BACKEND_API}api/transaction/store`, {
+//       method: "POST",
+//       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+//       body: {
+
+//       }
+//     }.on('confirmation', async (confNumber, receipt) => {
+//     }),
+//     )
+//   } catch (error) {
+//     console.log("error");
+//   }
+// };
+
+const UpdateStatus = async (id) => {
+
+
+  const token = sessionStorage.getItem('authToken')
+  try {
+    debugger
+    await fetch(`${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${id}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: {
+        'is_mint': '1',
+
+      }
+    }
+
+    )
+  } catch (error) {
+    console.log("error");
+  }
+};
+export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCurrent }) => {
+
+
+  // const updateStatus = () => {
+  //   fetch(`${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${id}`)
+  //     .then((response) => response.json())
+  //     .then(is_mint => {
+  //       this.setState({ is_mint: 1 });
+  //     });
+  // }
+  // const { id } = useParams();
+
   const addedImage = await ipfsClient.add(_imgBuffer);
   const metaDataObj = {
     name: _name,
@@ -145,26 +199,58 @@ export const createMetaDataAndMint = async ({ _imgBuffer, _des, _name }) => {
     image: ipfsBaseUrl + addedImage.path,
   }
   const addedMetaData = await ipfsClient.add(JSON.stringify(metaDataObj));
+
   // const tokenURI = addedMetaData;
   // console.log(first)
   const contract = await new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
-  const transactionParameters = {
-    to: contractAddress, // Required except during contract publications.
-    from: window.ethereum.selectedAddress,
-    'data': contract.methods.mint(ipfsBaseUrl + addedMetaData.path).encodeABI() //make call to NFT smart contract
-  };
+
   try {
-    const txHash = await window.ethereum
-      .request({
-        method: 'eth_sendTransaction',
-        params: [transactionParameters],
+    let txHash = null
+
+    // const web3 = new Web3(window.ethereum);
+
+    await web3.eth.sendTransaction({
+      to: contractAddress, // Required except during contract publications.
+      from: window.ethereum.selectedAddress,
+      data: contract.methods.mint(ipfsBaseUrl + addedMetaData.path).encodeABI() //make call to NFT smart contract
+    })
+      .on('transactionHash', function (hash) {
+        txHash = hash
+
+        console.log('txhash11', txHash)
+
+        setCurrent(1)
+      })
+      .on('receipt', function (receipt) {
+        console.log(receipt, 'recipt')
+        setCurrent(1)
+      })
+      .on('confirmation', async (confNumber, receipt) => {
+        // debugger
+        console.log(receipt, 'conf')
+        // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
+        await UpdateStatus(id, receipt.transactionHash, receipt.from, receipt.to, receipt.status)
+        setCurrent(2)
+        // setModeShow(false)
+
+        // modalShow(false)
+      })
+      .on('error', function (error) {
+
+      })
+      .then(function (receipt) {
+        // will be fired once the receipt is mined
       });
+    // debugger
     console.log('txHash', txHash)
     return {
       success: true,
-      status: ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>" + txHash
+      // status: ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>" + txHash
+      status: ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>"
     }
   } catch (error) {
+    // debugger
+    alert("went wrong")
     return {
       success: false,
       status: ":disappointed_relieved: Something went wrong: " + error.message

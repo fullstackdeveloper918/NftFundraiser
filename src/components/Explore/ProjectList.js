@@ -74,7 +74,7 @@ const GetAllProjects = () => {
                                             <div>
                                                 <div className="card">
                                                     <div className="image-over">
-                                                        <img className="card-img-top" src='/img/avtar3.png' alt={item.nft_data.description} />
+                                                        <img className="card-img-top" src={item?.nft_data[0]?.image} alt={item.nft_data.description} />
                                                     </div>
                                                     {/* Card Caption */}
                                                     <div className="card-caption col-12 p-0">
@@ -93,7 +93,7 @@ const GetAllProjects = () => {
                                                                 <span>{item.price} MATIC</span>
                                                                 <span>{item.number_of_nft} NFTS</span>
                                                             </div>
-                                                            <div>
+                                                            {/* <div>
                                                                 {item.status == '1' ?
                                                                     <Button>Mint</Button>
                                                                     :
@@ -101,7 +101,7 @@ const GetAllProjects = () => {
                                                                         Waiting For Approval
                                                                     </div>
                                                                 }
-                                                            </div>
+                                                            </div> */}
                                                             {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
                                                             {/* <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a> */}
                                                         </div>

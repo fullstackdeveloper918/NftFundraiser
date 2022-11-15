@@ -35,6 +35,8 @@ import Collectiondetails from "../themes/collectn-details";
 import CollectionDetail from "../themes/collectn-details";
 import ProjNft from "../themes/projnft-details";
 import Nft from './../themes/nft-list';
+import FundDetail from "../themes/fund-detail";
+// import { NavLink } from "react-router-dom";
 
 const MyRouts = () => {
   return (
@@ -50,6 +52,7 @@ const MyRouts = () => {
           <Route exact path="/auctions" component={Auctions} />
           <Route exact path="/item-details/:id" component={ItemDetails} />
           <Route exact path="/projdetails/:id" component={latprojDetails} />
+          <Route exact path="/fundraiser/detail/:user_id" component={FundDetail} />
           <Route exact path="/projnftdetails/:id" component={ProjNft} />
           <Route exact path="/nft/details/:id" component={Nft} />
           <Route exact path="/activity" component={Activity} />

@@ -45,13 +45,13 @@ const Collections = () => {
                                 <div className="card no-hover text-center">
                                     <div className="image-over">
                                         <Link to={`/item-details/${item.id}`}>
-                                            <img className="card-img-top" src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt="" />
+                                            <img className="card-img-top" src={item?.nft_detail?.image} alt="" />
                                         </Link>
                                         {/* Seller */}
                                         <a className="seller">
                                             {/* <Link to={`/item-details/${item.id}`} className="seller"> */}
                                             <div className="seller-thumb avatar-lg">
-                                                <img className="rounded-circle" src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt="" />
+                                                <img className="rounded-circle" src={item?.user_data?.avatar} alt="" />
                                             </div>
                                         </a>
                                     </div>

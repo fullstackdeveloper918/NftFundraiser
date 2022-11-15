@@ -43,18 +43,31 @@ const ProjNftDetails = () => {
         <section className="item-details-area">
             <div className="container">
                 <div className="row justify-content-between">
+
                     <div className="col-12 col-lg-12">
-                        <div className="item-info">
+                        <div className="item-info" >
 
-                            <><div className="item-thumb text-center">
-                                <img src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt="" />
+                            <div className="item-thumb text-center">
+                                {projdetail && projdetail?.nft_data && projdetail?.nft_data?.length ?
+
+                                    <img src={projdetail.nft_data[0].image} alt="first nft" />
+                                    : null}
+
                             </div>
-
-
-                            </>
-
-
                         </div>
+                        {/*                    
+                                <div className="item-info" >
+
+                                    <><div className="item-thumb text-center">
+                                        <img src={x[0]?.image} alt="" />
+                                    </div>
+
+
+                                    </>
+
+
+                                </div> */}
+
                     </div>
 
                     <div className="col-12 col-lg-6">
@@ -95,7 +108,7 @@ const ProjNftDetails = () => {
                                 <div className="card no-hover my-2">
                                     <div className="image-over">
                                         <Link to={`/nft/details/${x.id}`}>
-                                            <img className="card-img-top" src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="" />
+                                            <img className="card-img-top" src={x.image} alt="" />
                                         </Link>
                                         {/* Author */}
 

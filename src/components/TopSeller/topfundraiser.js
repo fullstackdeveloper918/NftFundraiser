@@ -3,6 +3,7 @@ import axios from 'axios';
 import { getTopFundraiser } from '../../redux/Slices/projectSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { TopFundraiserAction } from '../../redux/Actions/fundraiserAction';
+import { Link } from 'react-router-dom';
 
 
 
@@ -10,7 +11,7 @@ const Fundraiser = () => {
     const dispatch = useDispatch()
 
     const fund = useSelector(state => {
-        return state.fundraiser.fundraiser
+        return state?.fundraiser?.fundraiser
     })
     console.log(fund, 'fdd')
 
@@ -40,12 +41,12 @@ const Fundraiser = () => {
                                 {/* Single Seller */}
                                 <div className="card no-hover">
                                     <div className="single-seller d-flex align-items-center">
-                                        <a href="/author">
+                                        <Link to={`/fundraiser/detail/${item.user_id}`}>
                                             <img className="avatar-md rounded-circle" src={item.avatar} alt="" />
-                                        </a>
+                                        </Link>
                                         {/* Seller Info */}
                                         <div className="seller-info ml-3">
-                                            <a className="seller mb-2" href="/author">@{item.username}</a>
+                                            <a className="seller mb-2">@{item.username}</a>
                                             <span>{item.amount}</span>
                                         </div>
                                     </div>
