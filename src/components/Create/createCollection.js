@@ -4,7 +4,7 @@ import { CreateCollectionAction } from '../../redux/Actions/projectAction';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+// import 'bootstrap/dist/css/bootstrap.min.css';
 function MyVerticallyCenteredModal(props) {
     // const [title, setTitle] = useState("");
     // const [description, setDescription] = useState("");
@@ -22,10 +22,13 @@ function MyVerticallyCenteredModal(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <Modal.Header closeButton>
+            <Modal.Header >
                 <Modal.Title id="contained-modal-title-vcenter">
                     Collection
                 </Modal.Title>
+                <div>
+                    <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
+                </div>
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
@@ -110,14 +113,14 @@ function MyVerticallyCenteredModal(props) {
                         </div>
                     </div>
 
-                    <div className="modal-footer">
-                        <Button type="submit" className="btn btn-primary">Create</Button>
-                    </div>
+                    {/* <div className="modal-footer"> */}
+                    <Button type="submit" className="btn btn-primary">Create</Button>
+                    {/* </div> */}
                 </form>
             </Modal.Body>
-            {/* <Modal.Footer> */}
-            {/* <Button onClick={props.onHide}></Button> */}
-            {/* </Modal.Footer> */}
+            {/* <Modal.Footer>
+                <Button onClick={props.onHide}>Close</Button>
+            </Modal.Footer> */}
         </Modal>
     );
 }

@@ -9,6 +9,7 @@ import ModalSearch from '../components/Modal/ModalSearch';
 import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
 import ProjDetails from '../components/ItemDetails/viewProdetails';
+import ProjNFTS from '../components/Auctions/projectnfts';
 
 class latprojDetails extends Component {
     render() {
@@ -16,7 +17,7 @@ class latprojDetails extends Component {
             <div className="main">
                 <Header />
                 <ProjDetails />
-                <LiveAuctions />
+                <ProjNFTS />
                 <Footer />
                 <ModalSearch />
                 <ModalMenu />

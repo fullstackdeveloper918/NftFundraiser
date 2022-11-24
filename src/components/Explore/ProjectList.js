@@ -111,9 +111,9 @@ const GetAllProjects = () => {
                                         </Link>
                                     )
                                 }) :
-                            <div className="col-12 col-sm-6 col-lg-3">
-                                <h2>
-                                    No Projects Created Yet
+                            <div className="col-12 col-sm-12 col-lg-12">
+                                <h2 className='allproj2'>
+                                    No project found
                                 </h2>
                             </div>
                         }

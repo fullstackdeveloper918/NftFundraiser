@@ -2,11 +2,17 @@ import { create } from 'ipfs-http-client'
 import { useState } from 'react';
 import { useParams } from 'react-router';
 import swal from 'sweetalert';
+import fs from 'fs'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { GetSettings } from '../../redux/Actions/projectAction';
+import NFTContract from '../../backend/contracts/artWork.sol/NFTContract.json'
+import axios from 'axios';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // const contractABI = require('../../src/backend/contracts/artWork.sol/NFTContract.json')
 const contractABI = require('../../backend/contracts/artWork.sol/NFTContract.json')
-const contractAddress = "0xE915A57e52A1f5a432b15727EA79e2542d435087";
+// const contractAddress = "0xE915A57e52A1f5a432b15727EA79e2542d435087";
 // connect to a different API
 const ipfsClient = create('http://127.0.0.1:5001')
 
@@ -160,37 +166,104 @@ export const getCurrentWalletConnected = async () => {
 //   }
 // };
 
-const UpdateStatus = async (id) => {
 
 
-  const token = sessionStorage.getItem('authToken')
+const deployContract = async () => {
+  await window.ethereum.request({
+    method: 'wallet_switchEthereumChain',
+    params: [{ chainId: web3.utils.toHex('80001') }],
+  })
+
+  const { address } = await ConnectWallet()
+  const MyNFTContract = new web3.eth.Contract(NFTContract.abi)
+  const gas = await web3.eth.getGasPrice();
+
+  MyNFTContract.deploy({
+    data: NFTContract.bytecode,
+    arguments: ['CHARITY', 'CHAR']
+  }).send({
+    from: address,
+  })
+    .on('error', (error) => {
+      console.log(error)
+    })
+    .on('transactionHash', (transactionHash) => {
+      console.log(transactionHash, "transactionHash")
+    })
+    .on('receipt', (receipt) => {
+      // receipt will contain deployed contract address
+      console.log(receipt, "reciept")
+    })
+    .on('confirmation', (confirmationNumber, receipt) => {
+      console.log(receipt, "confirmRecipet")
+      // // axios.post(
+
+      // if (receipt.contractAddress) {
+
+      // }
+      // // )
+    })
+
+
+}
+const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }) => {
   try {
-    debugger
-    await fetch(`${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${id}`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      body: {
-        'is_mint': '1',
+    const formData = new FormData();
 
-      }
+    formData.append('is_mint', '1');
+    formData.append('token_id', token_id);
+    formData.append('transaction_hash', transaction_hash);
+    formData.append('pay_from', pay_from);
+    formData.append('pay_to', pay_to);
+
+    const token = sessionStorage.getItem('authToken')
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
     }
-
+    // debugger
+    await axios.post(`${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${id}`,
+      formData, config
     )
   } catch (error) {
+    // debugger
     console.log("error");
   }
+
+
 };
-export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCurrent }) => {
+export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCurrent, contractAddress, collid }) => {
+
+  const UpdateContract = async (collid) => {
+
+    // debugger
+    try {
+      const formData = new FormData();
+
+      formData.append('contract_id', contractAddress);
+
+      const token = sessionStorage.getItem('authToken')
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      }
+      // debugger
+      await axios.post(`${process.env.REACT_APP_BACKEND_API}api/updateContract/${collid}`,
+        formData, config
+      )
+    } catch (error) {
+      // debugger
+      console.log("error");
+    }
+  };
 
 
-  // const updateStatus = () => {
-  //   fetch(`${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${id}`)
-  //     .then((response) => response.json())
-  //     .then(is_mint => {
-  //       this.setState({ is_mint: 1 });
-  //     });
-  // }
-  // const { id } = useParams();
 
   const addedImage = await ipfsClient.add(_imgBuffer);
   const metaDataObj = {
@@ -223,24 +296,24 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
       })
       .on('receipt', function (receipt) {
         console.log(receipt, 'recipt')
+        console.log(receipt.logs[0].topics[3])
         setCurrent(1)
       })
       .on('confirmation', async (confNumber, receipt) => {
-        // debugger
-        console.log(receipt, 'conf')
-        // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
-        await UpdateStatus(id, receipt.transactionHash, receipt.from, receipt.to, receipt.status)
-        setCurrent(2)
-        // setModeShow(false)
+        if (confNumber == 1) {
+          await UpdateContract(collid)
+          const tokid = web3.utils.hexToNumber(receipt.logs[0].topics[3])
 
-        // modalShow(false)
+          await UpdateStatus({ id, token_id: tokid, transaction_hash: receipt.transactionHash, pay_from: receipt.from, pay_to: receipt.to })
+          setCurrent(2)
+
+          // console.log('tokid', tokid)
+        }
       })
       .on('error', function (error) {
 
       })
-      .then(function (receipt) {
-        // will be fired once the receipt is mined
-      });
+
     // debugger
     console.log('txHash', txHash)
     return {
@@ -256,4 +329,41 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
       status: ":disappointed_relieved: Something went wrong: " + error.message
     }
   }
+}
+
+export const BuyNft = async ({ contractAddress }) => {
+  const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
+  // const nonce = await web3.eth.getTransactionCount('PUBLIC_KEY', 'latest');
+  //the transaction
+  const tx = {
+    // 'from': pay_from,
+    'to': window.ethereum?.selectedAddress,
+    // 'nonce': nonce,
+    'gas': 500000,
+    // 'input': nftContract.methods.safeTransferFrom(pay_from, window.ethereum?.selectedAddress, token_id).encodeABI() //I could use also transferFrom
+  };
+
+  await web3.eth.sendTransaction(tx)
+    .on('transactionHash', function (hash) {
+      let txHash = hash
+      console.log('txhash11', txHash)
+
+    })
+    .on('receipt', function (receipt) {
+      console.log(receipt, 'recipt')
+    })
+    .on('confirmation', async (confNumber, receipt) => {
+      // debugger
+      console.log(receipt, 'conf')
+      // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
+      // setModeShow(false)
+
+      // modalShow(false)
+    })
+    .on('error', function (error) {
+
+    })
+    .then(function (receipt) {
+      // will be fired once the receipt is mined
+    });
 }

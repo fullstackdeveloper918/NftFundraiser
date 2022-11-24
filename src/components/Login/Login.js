@@ -97,7 +97,7 @@ const Login = () => {
                                     <span className="d-block text-center mt-4"><Link to="/forgotpassword">Forgot Password</Link></span>
                                 </div>
                                 <div className="col-12">
-                                    <span className="d-block text-center mt-4">If not registered?<Link to="/signup">Sign Up</Link></span>
+                                    <span className="d-block text-center mt-4">If not registered? <Link to="/signup"><b>Sign Up</b></Link></span>
                                 </div>
                             </div>
                         </form>

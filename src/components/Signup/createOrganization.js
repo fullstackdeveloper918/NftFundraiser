@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AnnualRevenueList, CountryList, CreateOrganizationAction, HearAboutList, Register } from '../../redux/Actions/authAction'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import swal from 'sweetalert'
 import { useHistory } from 'react-router'
 import { useFormData } from './Context/context'
@@ -10,12 +10,20 @@ import { GetSocialMediaIcons } from '../../redux/Actions/projectAction'
 import SocialMedia from './media'
 import styled from 'styled-components'
 import ProgressSteps from './steps'
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+import FroalaEditorComponent from 'react-froala-wysiwyg';
+import FroalaEditor from 'react-froala-wysiwyg'
+import { useState } from 'react'
+import JoditEditor from 'jodit-react';;
 
 // import { Widget } from "@uploadcare/react-widget";
 // import FileUpload from "react-material-file-upload";
 // import { uploadcare } from '../lib/uploadcare.min.js';
 const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
+    const editor = useRef(null);
     const { data, setFormValues } = useFormData();
+    const [description, setDescription] = useState()
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -31,7 +39,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
     const { hereAbout } = useSelector(state => state.hereAbout)
     // console.log(user, 'user')
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors }, control } = useForm({
         mode: 'all'
     });
 
@@ -58,7 +66,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
 
         formData.append('social', values.social)
         formData.append('social_link', values.social_link)
-        formData.append('description', values.description)
+        formData.append('description', description)
         // formData.append('method_heard_detail', values.method_heard_detail)
 
         dispatch(Register(formData))
@@ -138,13 +146,13 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                     </div>
                                     <div className="col-6">
                                         <div className="form-group mt-3">
-                                            <label>Wallet Address</label>
+                                            <label>Funding Wallet </label>
                                             <input
                                                 type="text"
                                                 className="form-control"
                                                 name="wallet_id"
                                                 // defaultValue='1'
-                                                placeholder="Wallet address"
+                                                placeholder="Funding Wallet"
                                                 {...register("wallet_id", { required: true })}
                                                 // {...register("email")}
                                                 aria-invalid={errors.wallet_id ? "true" : "false"}
@@ -154,7 +162,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                     </div>
                                     <div className="col-6">
                                         <div className="form-group mt-3">
-                                            <label>Organization Name</label>
+                                            <label>Name</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -170,7 +178,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
 
                                     <div className="col-6">
                                         <div className="form-group mt-3">
-                                            <label>Organization Website</label>
+                                            <label>Website</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -183,10 +191,10 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                             {errors.url?.type === 'required' && <p style={{ color: 'red' }} role="alert">Url is required</p>}
                                         </div>
                                     </div>
-                                    ``
-                                    <div className="col-12">
+
+                                    {/* <div className="col-12">
                                         <div className="form- group mt-3">
-                                            <label>Organization Description</label>
+                                            <label>Description</label>
                                             <textarea
                                                 type="text"
                                                 className="form-control"
@@ -199,11 +207,34 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                             />
                                             {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
                                         </div>
+                                    </div> */}
+                                    <div className="col-12">
+                                        <div className="form- group mt-3">
+                                            <label>Description</label>
+                                            <Controller
+                                                control={control}
+                                                name="description"
+                                                defaultValue=""
+                                                render={({ field: { value, onChange } }) => {
+                                                    return <JoditEditor
+                                                        ref={editor}
+                                                        value={description}
+                                                        // config={config}
+
+                                                        placeholder="start typing"
+                                                        tabIndex={1} // tabIndex of textarea
+                                                        onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
+                                                        onChange={newContent => { }}
+                                                    />
+                                                }}
+                                            />
+                                            {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
+                                        </div>
                                     </div>
 
                                     <div className="col-6">
                                         <div className="form-group mt-3">
-                                            <label>Organization Country</label>
+                                            <label>Country</label>
 
                                             <select name="country"
                                                 {...register("country", { required: true })}>
@@ -234,7 +265,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                     </div> */}
                                     <div className="col-6">
                                         <div className="form-group mt-3">
-                                            <label>Organization EIN Number/Tax Id</label>
+                                            <label>EIN Number/Tax Id</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -249,7 +280,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                     </div>
                                     <div className="col-6">
                                         <div className="form-group mt-3">
-                                            <label>Organization Socialmedia</label>
+                                            <label>Social Media (required)</label>
                                             <select name="social"
                                                 {...register("social", { required: true })}>
                                                 aria-invalid={errors.social ? "true" : "false"}
@@ -266,7 +297,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
 
                                     <div className="col-6">
                                         <div className="form-group mt-3">
-                                            <label>Organization Socialmedia Link</label>
+                                            <label>Social Media (secondary)</label>
                                             <div className="input-group-prepend">
 
                                                 <span className="input-group-text" id="inputGroupPrepend2">@</span>
@@ -274,13 +305,13 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                                     type="text"
                                                     className="form-control"
                                                     name="social_link"
-                                                    placeholder="social link "
-                                                    {...register("social_link", { required: true })}
-                                                    // {...register("email")}
-                                                    aria-invalid={errors.social_link ? "true" : "false"}
+                                                    placeholder="social link(optional) "
+                                                    {...register("social_link")}
+                                                // {...register("email")}
+                                                // aria-invalid={errors.social_link ? "true" : "false"}
                                                 />
                                             </div>
-                                            {errors.social_link?.type === 'required' && <p style={{ color: 'red' }} role="alert">Social media link is required</p>}
+                                            {/* {errors.social_link?.type === 'required' && <p style={{ color: 'red' }} role="alert">Social media link is required</p>} */}
                                         </div>
                                     </div>
 
@@ -302,7 +333,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
 
                                     <div className="col-6">
                                         <div className="form-group mt-3">
-                                            <label>Organization Banner</label>
+                                            <label>Banner</label>
                                             <input
                                                 className="form-control"
                                                 type="file"
@@ -313,14 +344,14 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                                 {...register("banner_image", { required: true })}
                                                 aria-invalid={errors.banner_image ? "true" : "false"}
                                             />
-                                            <span>maximum height should be 500 pixels & width should be 1500 pixels</span>
+                                            <span className='banner-dis'>maximum height should be 500 pixels & width should be 1500 pixels</span>
 
                                             {errors.banner_image?.type === 'required' && <p style={{ color: 'red' }} role="alert">Banner is required</p>}
                                         </div>
                                     </div>
                                     <div className="col-6">
                                         <div className="form-group mt-3">
-                                            <label>Organization Logo</label>
+                                            <label>Logo</label>
                                             <input
                                                 className="form-control"
                                                 type="file"
@@ -331,7 +362,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                             />
                                             <div className='logo'>
 
-                                                <span>maximum height should be 250 pixels</span>
+                                                <span className='logo-dis'>maximum height should be 250 pixels</span>
                                             </div>
                                             {errors.logo?.type === 'required' && <p style={{ color: 'red' }} role="alert">logo is required</p>}
                                         </div>

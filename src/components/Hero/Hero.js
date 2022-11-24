@@ -1,16 +1,65 @@
 import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
 
-
+import { useEffect } from 'react';
 const Hero = () => {
+    var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+    };
+    function success(pos) {
+        var crd = pos.coords;
 
+        console.log("Your current position is:");
+        console.log(`Latitude : ${crd.latitude}`);
+        console.log(`Longitude: ${crd.longitude}`);
+        console.log(`More or less ${crd.accuracy} meters.`);
+        localStorage.setItem('latitude', `${crd.latitude}`);
+        localStorage.setItem('longitude', `${crd.longitude}`);
+        // setLatitude(`${crd.latitude}`)
+        // setLongitude(`${crd.longitude}`)
+    }
+
+    function errors(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    const currentLocation = () => {
+        // debugger
+        if (navigator.geolocation) {
+            navigator.permissions
+                .query({ name: "geolocation" })
+                .then(function (result) {
+                    if (result.state === "granted") {
+                        console.log(result.state);
+                        //If granted then you can directly call your function here
+                        navigator.geolocation.getCurrentPosition(success);
+                    } else if (result.state === "prompt") {
+                        navigator.geolocation.getCurrentPosition(success, errors, options);
+                    } else if (result.state === "denied") {
+                        //If denied then you have to show instructions to enable location
+                    }
+                    result.onchange = function () {
+                        console.log(result.state);
+                    };
+                });
+        } else {
+            alert("Sorry Not available!");
+        }
+    }
+
+    useEffect(() => {
+        currentLocation()
+    }, [])
 
     return (
         <section className="hero-section">
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-6 col-lg-7">
-                        <h1 className="mt-4">Invest in NFTs to help fund projects and earn perpetual income.</h1>
+
+                        <h1 className="mt-4">Invest in NFTs to help fund projects and earn income.</h1>
                         {/* <p>Earn rewards by referring your friends.</p> */}
                         {/* Buttons */}
                         <div className="button-group">

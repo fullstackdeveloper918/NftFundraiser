@@ -6,6 +6,7 @@ import { DeleteProject, LatestProjectDetail, ProjectDetail } from '../../redux/A
 import { getProjectDetail } from '../../redux/Slices/projectSlice';
 import { useState } from 'react';
 import dayjs from 'dayjs'
+import { BuyNft } from '../Wallet/interact';
 
 const ProjDetails = () => {
 
@@ -94,19 +95,26 @@ const ProjDetails = () => {
 
     const { id } = useParams();
     // console.log(id, 'idd')
-
+    const [tok, setTok] = useState('')
+    console.log('tok', tok)
     const dispatch = useDispatch()
 
     const latprojdetail = useSelector(state => {
         // debugger
         return state.projectdetails.latestprojectdetails
     })
-    console.log(latprojdetail, 'latprojdetail')
 
     useEffect(() => {
         // debugger
         dispatch(LatestProjectDetail(id))
+
     }, [id])
+
+
+
+
+    // debugger
+    // console.log(latprojdetail?.nft_data[0]?.token_id, 'latprojdetail')
 
     // const deleteHandler = (id) => {
     //     dispatch(DeleteProject(id))
@@ -114,6 +122,13 @@ const ProjDetails = () => {
 
     // debugger
 
+
+    // const buyHandler = (contractAddress) => {
+    //     BuyNft({
+    //         contractAddress,
+
+    //     })
+    // }
 
     return (
         <section className="item-details-area">
@@ -188,7 +203,7 @@ const ProjDetails = () => {
                                 </div>
 
                             </div>
-                            <p>{latprojdetail.description}</p>
+                            <p dangerouslySetInnerHTML={{ __html: latprojdetail.description }} />
                             <div className="owner d-flex align-items-center">
                                 <span>Owned By</span>
                                 <a className="owner-meta d-flex align-items-center ml-3" href="/author">
@@ -215,7 +230,7 @@ const ProjDetails = () => {
                                 </ul>
                             </div>
 
-                            {/* <a className="d-block btn btn-bordered-white mt-4" href="/wallet-connect">{initData.btnText}</a> */}
+                            {/* <a className="d-block btn btn-bordered-white mt-4" onClick={buyHandler}>Buy</a> */}
                         </div>
                     </div>
                 </div>

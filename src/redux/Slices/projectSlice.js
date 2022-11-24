@@ -19,6 +19,7 @@ const projectSlice = createSlice({
         getcollectiondetails: [],
         collectiondetails: [],
         getSocialmediaIcons: [],
+        settings: [],
         // liveProjects: [],
         liveProjects: {
             LatestProjects: [],
@@ -50,6 +51,9 @@ const projectSlice = createSlice({
         },
         getCategoriesList: (state, action) => {
             state.categories = action?.payload?.data?.data;
+        },
+        getSettings: (state, action) => {
+            state.settings = action?.payload?.data?.data;
         },
 
         getLatestProjectList: (state, action) => {
@@ -104,5 +108,6 @@ export const {
     getCollectionDetails,
     getSocialmediaIcons,
     getNftList,
-    getCollectionDetail
+    getCollectionDetail,
+    getSettings
 } = projectSlice.actions;

@@ -2,17 +2,21 @@ import React, { Component, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { DeleteProject, LatestProjectDetail, NftList, ProjectDetail, UpdateCollection } from '../../redux/Actions/projectAction';
+import { DeleteProject, GetSettings, LatestProjectDetail, NftList, ProjectDetail, UpdateCollection } from '../../redux/Actions/projectAction';
 import { getProjectDetail } from '../../redux/Slices/projectSlice';
 import { useState } from 'react';
 import dayjs from 'dayjs'
 import Web3 from 'web3';
 import NFTContract from '../../backend/contracts/artWork.sol/NFTContract.json'
-import { ConnectWallet } from '../Wallet/interact';
+import { BuyNft, ConnectWallet } from '../Wallet/interact';
 import EditCollection from './updateCollection';
 import { CreateMetaDataAndMint } from './../Wallet/interact';
 import NftPopup from './nftPopup';
+import axios from 'axios';
+const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
+const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
+const web3 = createAlchemyWeb3(alchemyKey);
 const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
 const NftDetails = (props) => {
 
@@ -100,6 +104,10 @@ const NftDetails = (props) => {
     ]
     const [modalShow, setModalShow] = React.useState(false);
     const [current, setCurrent] = React.useState(0)
+    const [contractAdd, setContractAdd] = useState('')
+    // const [collid, setCollid] = useState('')
+    // console.log('collid', collid)
+    console.log('contAddre', contractAdd)
     console.log('current', current)
     const { id } = useParams();
     // console.log(id, 'idd')
@@ -107,7 +115,7 @@ const NftDetails = (props) => {
         // debugger
         return state?.projectdetails?.projectdetails
     })
-    console.log(projdetail, 'projdata')
+    console.log(projdetail, 'projdataaaa')
 
 
     const dispatch = useDispatch()
@@ -115,6 +123,7 @@ const NftDetails = (props) => {
     const nftdetail = useSelector(state => {
         // debugger
         return state.projectdetails.nftlist
+
     })
     console.log(nftdetail, 'latprojdetail')
     const collupdate = useSelector(state => {
@@ -126,74 +135,114 @@ const NftDetails = (props) => {
         // debugger
         dispatch(NftList(id))
         dispatch(ProjectDetail(id))
+        // dispatch(GetSettings())
     }, [id])
 
-    const mint = () => {
+
+    const mint = (contractAddress) => {
         CreateMetaDataAndMint({
             _name: nftdetail.title,
             _des: nftdetail.description,
             _imgBuffer: nftdetail.image,
+            contractAddress,
             setCurrent,
+            collid: nftdetail?.collection_id,
             id,
             setModalShow
         })
     }
-    console.log('mint', mint)
 
-    const deployAndMint = () => {
+
+    // const UpdateContract = async (id) => {
+    //     debugger
+
+    //     const formData = new FormData();
+
+    //     formData.append('contract_id', cont);
+    //     const token = sessionStorage.getItem('authToken')
+
+
+    //     try {
+    //         const config = {
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': `Bearer ${token}`
+    //             },
+    //             transformRequest: formData => formData
+    //         }
+    //         // debugger
+    //         await axios.post(`${process.env.REACT_APP_BACKEND_API}api/updateContract/${id}`,
+    //             formData, config
+    //         )
+    //     } catch (error) {
+    //         debugger
+    //         console.log("error");
+    //     }
+    // };
+
+
+    const deployContract = async () => {
+        try {
+            if (nftdetail?.collectionData?.contract_id == null) {
+
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: web3.utils.toHex('80001') }],
+                })
+
+                const { address } = await ConnectWallet()
+                const MyNFTContract = new web3.eth.Contract(NFTContract.abi)
+                const gas = await web3.eth.getGasPrice();
+
+                MyNFTContract.deploy({
+                    data: NFTContract.bytecode,
+                    arguments: ['CHARITY', '']
+                }).send({
+                    from: address,
+                })
+                    .on('error', (error) => {
+                        console.log(error)
+                    })
+                    .on('transactionHash', (transactionHash) => {
+                        console.log(transactionHash, "transactionHash")
+                    })
+                    .on('receipt', (receipt) => {
+                        // receipt will contain deployed contract address
+                        console.log(receipt, "reciept")
+                    })
+                    .on('confirmation', (confNumber, receipt) => {
+                        console.log(receipt.contractAddress, "confirmRecipet")
+                        if (confNumber == 1) {
+                            mint(receipt?.contractAddress)
+                            // setContractAdd(receipt?.contractAddress)
+                            // UpdateContract(id)
+                        }
+                    })
+            } else {
+                mint(nftdetail?.collectionData?.contract_id)
+            }
+            return {
+                success: true,
+                // status: ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>" + txHash
+                status: ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>"
+            }
+        } catch (error) {
+            // debugger
+            alert("went wrong")
+            return {
+                success: false,
+                status: ":disappointed_relieved: Something went wrong: " + error.message
+            }
+        }
+
+    }
+
+    const deployAndMint = async () => {
         setModalShow(true)
-        mint()
+        // mint()
+        await deployContract()
         // nftdetail.id()
     }
-    // const deleteHandler = (id) => {
-    //     dispatch(DeleteProject(id))
-    // }    
-    // const MintHandler = () => {
-    // const deployContract = async () => {
-
-    //     // <EditCollection />
-    //      
-
-    //     await window.ethereum.request({
-    //         method: 'wallet_switchEthereumChain',
-    //         params: [{ chainId: web3.utils.toHex('80001') }],
-    //     })
-
-    //     const { address } = await ConnectWallet()
-    //     const MyNFTContract = new web3.eth.Contract(NFTContract.abi)
-    //     const gas = await web3.eth.getGasPrice();
-
-    //     MyNFTContract.deploy({
-    //         data: NFTContract.bytecode,
-    //         arguments: ['Name', 'SYMBOL']
-    //     }).send({
-    //         from: address,
-    //         gas: gas,
-    //     })
-    //         .on('error', (error) => {
-    //             console.log(error)
-    //         })
-    //         .on('transactionHash', (transactionHash) => {
-    //             console.log(transactionHash, "transactionHash")
-    //         })
-    //         .on('receipt', (receipt) => {
-    //             // receipt will contain deployed contract address
-    //             console.log(receipt, "reciept")
-    //         })
-    //         .on('confirmation', (confirmationNumber, receipt) => {
-    //             console.log(receipt, "confirmRecipet")
-    //             // axios.post(
-
-    //             // )
-    //         })
-
-    //     // if (contractid) {
-    //     //     CreateMetaDataAndMint()
-    //     // }
-
-    // }
-    // }
-
     return (
         <section className="item-details-area">
             <div className="container">
@@ -284,7 +333,8 @@ const NftDetails = (props) => {
                                 </div>
 
                             </div>
-                            <p>{nftdetail?.description}</p>
+
+                            <p dangerouslySetInnerHTML={{ __html: nftdetail?.description }} />
                             <div className="owner d-flex align-items-center">
                                 <span>Owned By</span>
                                 <a className="owner-meta d-flex align-items-center ml-3" href="/author">
@@ -322,5 +372,6 @@ const NftDetails = (props) => {
     );
 
 }
+
 
 export default NftDetails;

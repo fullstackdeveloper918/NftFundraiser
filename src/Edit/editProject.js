@@ -1,5 +1,5 @@
 // import { getValue } from '@mui/system';
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useRef, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
@@ -8,11 +8,20 @@ import { getProjectDetail } from '../redux/Slices/projectSlice';
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import GeoLocation from '../components/Create/geoLocation';
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+import FroalaEditor from 'react-froala-wysiwyg'
+import { FroalaEditorComponent } from 'react-froala-wysiwyg';
+import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
+import JoditEditor from 'jodit-react';;
 const EditProject = () => {
-
+    const editor = useRef(null);
     const [country, setCountry] = useState();
     const [state, setState] = useState();
     const [city, setCity] = useState();
+    const [description, setDescription] = useState();
+    // const [descriptionup, setDescriptionup] = useState();
+    // console.log(descriptionup, 'discup')
     const [type, setType] = useState();
     const { id } = useParams();
     console.log(id, "idd")
@@ -23,7 +32,9 @@ const EditProject = () => {
         // 
         return state?.projectdetails?.projectdetails
     })
-
+    const dis = projdetail.description
+    // setDescriptionup(dis)
+    console.log(dis, 'dis')
     console.log(projdetail, "gfgfhghgghhgh")
 
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm();
@@ -33,7 +44,10 @@ const EditProject = () => {
         dispatch(ProjectDetail(id))
 
     }, [id])
-
+    const config = {
+        placeholderText: 'Edit Your Content Here!',
+        charCounterCount: false
+    }
     useEffect(() => {
         if (projdetail && Object.keys(projdetail).length) {
 
@@ -63,7 +77,7 @@ const EditProject = () => {
 
         // formData.append('image', data.image[0])
         formData.append('title', data.title)
-        formData.append('description', data.description)
+        formData.append('description', description)
         formData.append('state', state)
         formData.append('country', country)
         formData.append('city', city)
@@ -85,6 +99,9 @@ const EditProject = () => {
 
         dispatch(UpdateProject(id, formData))
     }
+
+
+
     const disablePastDate = () => {
         const today = new Date();
         const dd = String(today.getDate() + 1).padStart(2, "0");
@@ -175,7 +192,7 @@ const EditProject = () => {
                                 <div className="col-12">
                                     <label>Description</label>
                                     <div className="form-group">
-                                        <textarea
+                                        {/* <textarea
                                             type="text"
                                             className="form-control"
                                             name="textarea"
@@ -184,7 +201,27 @@ const EditProject = () => {
                                             cols={30}
                                             {...register("description", { required: true })}
                                             aria-invalid={errors.description ? "true" : "false"}
+                                        /> */}
+                                        <Controller
+                                            control={control}
+                                            name="description"
+                                            defaultValue=""
+                                            render={({ field: { value, onChange } }) => {
+                                                return <JoditEditor
+                                                    ref={editor}
+                                                    value={value}
+                                                    // config={config}
+
+                                                    placeholder="start typing"
+                                                    tabIndex={1} // tabIndex of textarea
+                                                    onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
+                                                    onChange={newContent => { }}
+                                                />
+                                            }}
                                         />
+                                        {/* <textarea value={value} onChange={setDescription}></textarea> */}
+
+
 
                                         {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
                                     </div>

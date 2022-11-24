@@ -71,28 +71,16 @@ const ExploreAll = () => {
                                 <span>Arts</span>
                             </label>
                             <label className="btn d-table text-uppercase p-2">
+                                <input type="radio" defaultValue="sports" className="explore-btn" />
+                                <span>Education</span>
+                            </label>
+                            <label className="btn d-table text-uppercase p-2">
+                                <input type="radio" defaultValue="sports" className="explore-btn" />
+                                <span>Gaming</span>
+                            </label>
+                            <label className="btn d-table text-uppercase p-2">
                                 <input type="radio" defaultValue="art" className="explore-btn" />
                                 <span>Music</span>
-                            </label>
-                            <label className="btn d-table text-uppercase p-2">
-                                <input type="radio" defaultValue="music" className="explore-btn" />
-                                <span>Sports</span>
-                            </label>
-                            <label className="btn d-table text-uppercase p-2">
-                                <input type="radio" defaultValue="collectibles" className="explore-btn" />
-                                <span>Virtual Worlds</span>
-                            </label>
-                            <label className="btn d-table text-uppercase p-2">
-                                <input type="radio" defaultValue="sports" className="explore-btn" />
-                                <span>Utility</span>
-                            </label>
-                            <label className="btn d-table text-uppercase p-2">
-                                <input type="radio" defaultValue="sports" className="explore-btn" />
-                                <span>Tradings Cards</span>
-                            </label>
-                            <label className="btn d-table text-uppercase p-2">
-                                <input type="radio" defaultValue="sports" className="explore-btn" />
-                                <span>Photography</span>
                             </label>
                             <label className="btn d-table text-uppercase p-2">
                                 <input type="radio" defaultValue="sports" className="explore-btn" />
@@ -100,12 +88,35 @@ const ExploreAll = () => {
                             </label>
                             <label className="btn d-table text-uppercase p-2">
                                 <input type="radio" defaultValue="sports" className="explore-btn" />
+                                <span>Other</span>
+                            </label>
+                            <label className="btn d-table text-uppercase p-2">
+                                <input type="radio" defaultValue="sports" className="explore-btn" />
+                                <span>Photography</span>
+                            </label>
+                            <label className="btn d-table text-uppercase p-2">
+                                <input type="radio" defaultValue="music" className="explore-btn" />
+                                <span>Sports</span>
+                            </label>
+                            <label className="btn d-table text-uppercase p-2">
+                                <input type="radio" defaultValue="sports" className="explore-btn" />
+                                <span>Tradings Cards</span>
+                            </label>
+                            <label className="btn d-table text-uppercase p-2">
+                                <input type="radio" defaultValue="sports" className="explore-btn" />
                                 <span>Travel</span>
                             </label>
                             <label className="btn d-table text-uppercase p-2">
                                 <input type="radio" defaultValue="sports" className="explore-btn" />
-                                <span>Education</span>
+                                <span>Utility</span>
                             </label>
+                            <label className="btn d-table text-uppercase p-2">
+                                <input type="radio" defaultValue="collectibles" className="explore-btn" />
+                                <span>Virtual Worlds</span>
+                            </label>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -147,9 +158,9 @@ const ExploreAll = () => {
                                     </Link>
                                 )
                             }) :
-                        <div className="col-12 col-sm-6 col-lg-3">
-                            <h2>
-                                No Popular Collections
+                        <div className="col-12 col-sm-12 col-lg-12">
+                            <h2 className='allproj2'>
+                                No latest project found
                             </h2>
                         </div>
                     }

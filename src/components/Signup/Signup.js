@@ -448,7 +448,7 @@ const Signup = ({ formStep, nextFormStep }) => {
                                             {/* )} */}
                                         </div>
                                         <div className="col-12">
-                                            <span className="d-block text-center mt-4">Already have an account?<Link to="/login">Login</Link></span>
+                                            <span className="d-block text-center mt-4">Already have an account? <Link to="/login"><b>Login</b></Link></span>
                                         </div>
 
                                     </div>

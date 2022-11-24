@@ -6,7 +6,6 @@ import { getPublicLiveProjects } from '../../redux/Actions/projectAction';
 
 
 
-
 const projectTypesMap = {
     "LatestProjects": 2,
     "RecentCampaigns": 1

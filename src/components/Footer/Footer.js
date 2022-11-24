@@ -46,7 +46,7 @@ const Footer = () => {
                                 <ul>
                                     <li><Link to="/create">Create Project</Link></li>
                                     <li><a href={`/all/${"LatestProjects"}`}>Explore NFTs</a></li>
-                                    <li><Link to="/terms&conditions">Terms & Conditions</Link></li>
+                                    <li><Link to="/terms&conditions">Terms of Service</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -56,7 +56,8 @@ const Footer = () => {
                                 {/* Footer Title */}
                                 <h4 className="footer-title">Community</h4>
                                 <ul>
-                                    <li><Link to='/aboutus'>About Us</Link></li>
+                                    <li><a target="_blank" href="https://www.canopycrypto.io/our-team/">About Us</a></li>
+                                    {/* <li><Link to='/https://www.canopycrypto.io/our-team/'>About Us</Link></li> */}
                                     <li><Link to='/contact'>Get Support</Link></li>
                                 </ul>
                             </div>

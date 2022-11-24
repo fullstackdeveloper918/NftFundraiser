@@ -7,6 +7,7 @@ import Signup from './Signup'
 import CreateOrganization from './createOrganization';
 import FormProvider from "./Context/context";
 
+
 const SignupIndex = () => {
   const [formStep, setFormStep] = useState(0);
 

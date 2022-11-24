@@ -36,9 +36,13 @@ import CollectionDetail from "../themes/collectn-details";
 import ProjNft from "../themes/projnft-details";
 import Nft from './../themes/nft-list';
 import FundDetail from "../themes/fund-detail";
+import { useEffect } from "react";
+import latnftprojDetails from "../themes/Latnft";
 // import { NavLink } from "react-router-dom";
 
 const MyRouts = () => {
+
+
   return (
     <div>
       <BrowserRouter>
@@ -52,6 +56,7 @@ const MyRouts = () => {
           <Route exact path="/auctions" component={Auctions} />
           <Route exact path="/item-details/:id" component={ItemDetails} />
           <Route exact path="/projdetails/:id" component={latprojDetails} />
+          <Route exact path="/nftprojdetails/:id" component={latnftprojDetails} />
           <Route exact path="/fundraiser/detail/:user_id" component={FundDetail} />
           <Route exact path="/projnftdetails/:id" component={ProjNft} />
           <Route exact path="/nft/details/:id" component={Nft} />
@@ -70,8 +75,8 @@ const MyRouts = () => {
           <Route exact path="/collection/:id" component={CollectionDetail} />
           {/* <Route exact path="/newest-projects" component={NewestProj} /> */}
           <Route exact path="/create" component={Create} />
-          <PrivateRoute exact path="/login" component={Login} />
-          <PrivateRoute exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
           {/* <PrivateRoute exact path="/create-organization" component={createOrganization} /> */}
           <PrivateRoute exact path="/forgotpassword" component={Forgot} />
           <Route exact path="/contact" component={Contact} />

@@ -9,14 +9,13 @@ import { Button } from 'react-bootstrap';
 import Author from '../Author/Author';
 import CollItem from './bread-crumb';
 import { LatestProjectDetail } from './../../redux/Actions/projectAction';
-
 const ProjNftDetails = () => {
 
     const deleteHandler = (id) => {
         dispatch(DeleteProject(id))
     }
 
-    const { id } = useParams();
+    const { id } = useParams()
     // console.log(id, 'idd')
     const [modalShow, setModalShow] = React.useState(false);
 
@@ -78,7 +77,8 @@ const ProjNftDetails = () => {
 
 
                             </div>
-                            <p>{projdetail.description}</p>
+                            {/* footer?.footer?.description }} */}
+                            <p dangerouslySetInnerHTML={{ __html: projdetail.description }} />
 
 
 
@@ -120,7 +120,7 @@ const ProjNftDetails = () => {
                                             <a href="#">
                                                 <h5 className="mb-2">{x.title}</h5>
                                             </a>
-                                            <span>{x.description}</span>
+                                            <span dangerouslySetInnerHTML={{ __html: x.description }} />
 
                                             <div className="card-bottom d-flex justify-content-between">
                                                 {/* <span>{item.price}</span> */}

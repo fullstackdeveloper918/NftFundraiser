@@ -15,7 +15,8 @@ import {
     getCollections,
     getCollectionDetails,
     getSocialmediaIcons,
-    getNftList
+    getNftList,
+    getSettings
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -150,7 +151,7 @@ export const getPublicLiveProjects = createAsyncThunk(
                     'Content-Type': 'application/json',
                 },
             }
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=&latitude=&longitude=&search_keyword=&type=${type}&category_id=`, config)
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=&latitude=&longitude=&search_keyword=&category_id=&type`, config)
             // console.log(res, 'projres')
             thunkAPI.dispatch(publicLiveProjects({
                 res: res,
@@ -252,10 +253,12 @@ export const CreateCollectionAction = (params) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createCollection`,
             params, config)
         dispatch(createCollectionSuccess(res));
+        dispatch(GetCollectionsAction)
         if (res.status === 200) {
-            swal("success", res.data.message, 'success')
+            swal("success", 'Collection Created', 'success')
             // .then(function () {
-            //     window.location = "/projectlist";
+            //     onclick={props.onHide}
+
             // });
 
         }
@@ -346,6 +349,31 @@ export const UpdateCollection = (id, params) => async dispatch => {
         // 
         console.log(res, 'coll rres')
         await dispatch(getLatestProjectDetail(res));
+        // if (res.status === 200) {
+        //     swal("success", res.data.message, 'success').then(function () {
+        //         window.location = "/projectlist";
+        //     });
+
+        // }
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const GetSettings = () => async dispatch => {
+    // 
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getSettings`,
+            config)
+        // 
+        console.log(res, 'sett rres')
+        await dispatch(getSettings(res));
         // if (res.status === 200) {
         //     swal("success", res.data.message, 'success').then(function () {
         //         window.location = "/projectlist";
