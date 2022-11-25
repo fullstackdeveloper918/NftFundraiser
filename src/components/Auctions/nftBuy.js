@@ -1,9 +1,10 @@
 import React, { Component, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { DeleteProject, GetSettings, LatestProjectDetail, NftList, ProjectDetail, UpdateCollection } from '../../redux/Actions/projectAction';
+import { DeleteProject, GetNftwol, GetSettings, LatestProjectDetail, NftList, ProjectDetail, UpdateCollection } from '../../redux/Actions/projectAction';
 import Web3 from 'web3';
 import { BuyNft, ConnectWallet } from '../Wallet/interact';
+import { useState } from 'react';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -11,21 +12,31 @@ const web3 = createAlchemyWeb3(alchemyKey);
 const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
 const LatprojNftDetails = (props) => {
     const dispatch = useDispatch()
-    const { id } = useParams();
+
+    const id = useParams();
     // console.log(id, 'idd')
-    const latprojdetail = useSelector(state => {
+    const latprojnftdetail = useSelector(state => {
         // debugger
-        return state.projectdetails.latestprojectdetails
+        return state.projectdetails.getnftwoldetails
     })
+    console.log('latprojnft', latprojnftdetail)
+    const getSett = useSelector(state => {
+        // debugger
+        return state.projectdetails.settings
+    })
+    console.log('getSett', getSett)
 
     useEffect(() => {
-        // debugger
-        dispatch(LatestProjectDetail(id))
+        dispatch(GetNftwol(id))
+        dispatch(GetSettings())
 
     }, [id])
-    const buyHandler = (contractAddress) => {
+    const buyHandler = () => {
+
         BuyNft({
-            contractAddress,
+            contractAddress: latprojnftdetail?.collectionData?.contract_id,
+            tokenId: latprojnftdetail.token_id,
+            payFrom: latprojnftdetail.pay_from
 
         })
     }
@@ -37,15 +48,18 @@ const LatprojNftDetails = (props) => {
                         <div className="item-info">
                             {/* {latprojdetail?.map((item, key) => ( */}
 
+                            <h4 style={{ color: '#fff' }}>{latprojnftdetail.title}</h4>
                             <><div className="item-thumb text-center">
-                                {latprojdetail?.nft_data?.map((item, idx) => {
-                                    {/* debugger */ }
-                                    return (
-                                        <img src={item?.image} alt="" />
-                                    )
-                                })}
+
+                                {/* {latprojdetail?.nft_data?.map((item, idx) => { */}
+                                {/* debugger */}
+                                {/* return ( */}
+                                <img src={latprojnftdetail.image} alt="" />
+                                {/* ) */}
+                                {/* })} */}
                             </div><div className="card no-hover countdown-times my-4">
-                                    <div className="countdown d-flex justify-content-center" />
+                                    <span dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} />
+                                    {/* <div className="countdown d-flex justify-content-center" /> */}
                                 </div>
                                 {/* Netstorm Tab */}
                                 {/* <ul className="netstorm-tab nav nav-tabs" id="nav-tab">
@@ -113,10 +127,10 @@ const LatprojNftDetails = (props) => {
 
                             {/* <p dangerouslySetInnerHTML={{ __html: nftdetail?.description }} /> */}
                             <div className="owner d-flex align-items-center">
-                                <span>Owned By</span>
+                                <span>Owned By : {latprojnftdetail.pay_from}</span>
                                 <a className="owner-meta d-flex align-items-center ml-3" href="/author">
-                                    <img className="avatar-sm rounded-circle" src="/img/avtar1.png" alt="" />
-                                    {/* <h6 className="ml-2">{projdetail?.user_data?.username}</h6> */}
+                                    {/* <img className="avatar-sm rounded-circle" src="/img/avtar1.png" alt="" /> */}
+                                    {/* <h6 className="ml-2">{latprojnftdetail.pay_from}</h6> */}
                                 </a>
                             </div>
 
@@ -128,18 +142,18 @@ const LatprojNftDetails = (props) => {
                                         {/* <span>{latprojdetail.price} MATIC</span> */}
 
                                     </li>
-                                    <li>
+                                    {/* <li>
 
-                                        {/* <span>{projdetail.projectdetails.latitude}</span> */}
-                                    </li>
+                                        <span dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} />
+                                    </li> */}
                                     {/* <li> */}
                                     {/* <span>Volume Traded </span> */}
-                                    {latprojdetail?.nft_data?.map((item, idx) => {
-                                        {/* debugger */ }
+                                    {/* {latprojdetail?.nft_data?.map((item, idx) => { */}
+                                    {/* debugger */}
 
-                                        <span>Number of NFT's Minted : {item?.token_id}</span>
+                                    <span>Token : #{latprojnftdetail.token_id}</span>
 
-                                    })}
+                                    {/* })} */}
                                     {/* </li> */}
                                 </ul>
                             </div>

@@ -17,7 +17,7 @@ class latprojDetails extends Component {
             <div className="main">
                 <Header />
                 <ProjDetails />
-                <ProjNFTS />
+                {/* <ProjNFTS /> */}
                 <Footer />
                 <ModalSearch />
                 <ModalMenu />

@@ -331,16 +331,17 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
   }
 }
 
-export const BuyNft = async ({ contractAddress }) => {
+export const BuyNft = async ({ contractAddress, tokenId, payFrom }) => {
+  debugger
   const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
   // const nonce = await web3.eth.getTransactionCount('PUBLIC_KEY', 'latest');
   //the transaction
   const tx = {
-    // 'from': pay_from,
+    'from': payFrom,
     'to': window.ethereum?.selectedAddress,
     // 'nonce': nonce,
     'gas': 500000,
-    // 'input': nftContract.methods.safeTransferFrom(pay_from, window.ethereum?.selectedAddress, token_id).encodeABI() //I could use also transferFrom
+    'input': nftContract.methods.safeTransferFrom(payFrom, window.ethereum?.selectedAddress, tokenId).encodeABI() //I could use also transferFrom
   };
 
   await web3.eth.sendTransaction(tx)

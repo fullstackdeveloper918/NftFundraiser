@@ -21,23 +21,19 @@ const ProjNFTS = () => {
     return (
         <section className="live-auctions-area">
             <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-12 col-md-8 col-lg-7">
-                        {/* Intro */}
-                        <div className="intro text-center">
-                            <h3 className="mt-3 mb-0">NFT'S</h3>
-                            {/* <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati <br /> dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p> */}
-                        </div>
-                    </div>
-                </div>
+
                 <div className="row items">
                     {latprojdetail?.nft_data?.map((item, idx) => {
                         return (
                             <div key={`auct_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
+                                <div className="intro text-center">
+                                    <h3 className="mt-3 mb-0">NFT'S</h3>
+                                    {/* <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati <br /> dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p> */}
+                                </div>
                                 <div className="card">
 
                                     <div className="image-over">
-                                        <Link to={`/nftprojdetails/${latprojdetail.id}`}>
+                                        <Link to={`/nftprojdetails/${item.id}`}>
                                             <img className="card-img-top" src={item.image} alt="" />
                                         </Link>
                                     </div>
@@ -49,7 +45,7 @@ const ProjNFTS = () => {
                                                 <div className="countdown d-flex justify-content-center" data-date={item.end_date} />
                                             </div>
                                             <a href="/item-details">
-                                                <h5 className="mb-0">{item.title}</h5>
+                                                <h5 className="mb-0">{item.title.toUpperCase()} #{item.token_id}</h5>
                                             </a>
                                             {/* <a className="seller d-flex align-items-center my-3">
                                                 <img className="avatar-sm rounded-circle"
@@ -57,8 +53,7 @@ const ProjNFTS = () => {
                                                 <span className="ml-2">{item.from}</span>
                                             </a> */}
                                             <div className="card-bottom d-flex justify-content-between">
-                                                <span>{item.from}</span>
-                                                <span>#{item.token_id}</span>
+                                                <span dangerouslySetInnerHTML={{ __html: item.description.toUpperCase() }} />
                                             </div>
                                         </div>
                                     </div>

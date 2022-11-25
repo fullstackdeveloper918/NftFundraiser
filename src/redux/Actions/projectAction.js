@@ -16,7 +16,9 @@ import {
     getCollectionDetails,
     getSocialmediaIcons,
     getNftList,
-    getSettings
+    getSettings,
+    getNftwolDetails,
+    getfundprojdetails
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -380,6 +382,46 @@ export const GetSettings = () => async dispatch => {
         //     });
 
         // }
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+
+export const GetNftwol = ({ id }) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getNftDetailByIdxWithoutLogin/${id}`,
+            config)
+
+        await dispatch(getNftwolDetails(res));
+
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const GetfundraiserProject = (user_id) => async dispatch => {
+    // debugger
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getProjectByfundraiserIdx/${user_id}`,
+            config)
+
+        await dispatch(getfundprojdetails(res));
+
     } catch (e) {
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')

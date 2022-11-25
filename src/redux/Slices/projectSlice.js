@@ -19,6 +19,8 @@ const projectSlice = createSlice({
         getcollectiondetails: [],
         collectiondetails: [],
         getSocialmediaIcons: [],
+        getfundProjDetails: [],
+        getnftwoldetails: [],
         settings: [],
         // liveProjects: [],
         liveProjects: {
@@ -45,6 +47,14 @@ const projectSlice = createSlice({
         getCollectionDetails: (state, action) => {
             // debugger
             state.getcollectiondetails = action?.payload?.data?.data;
+        },
+        getNftwolDetails: (state, action) => {
+            // debugger
+            state.getnftwoldetails = action?.payload?.data?.data;
+        },
+        getfundprojdetails: (state, action) => {
+            // debugger
+            state.getfundProjDetails = action?.payload?.data?.data;
         },
         getProjectList: (state, action) => {
             state.projects = action.payload;
@@ -109,5 +119,7 @@ export const {
     getSocialmediaIcons,
     getNftList,
     getCollectionDetail,
-    getSettings
+    getSettings,
+    getNftwolDetails,
+    getfundprojdetails
 } = projectSlice.actions;

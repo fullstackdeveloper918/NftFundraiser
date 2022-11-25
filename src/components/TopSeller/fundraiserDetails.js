@@ -4,6 +4,9 @@ import { useParams } from 'react-router';
 import { TopFundraiserDetail } from '../../redux/Actions/fundraiserAction';
 import ProgressBar from "@ramonak/react-progress-bar";
 import { Button } from 'bootstrap';
+import { GetfundraiserProject } from '../../redux/Actions/projectAction';
+import dayjs from 'dayjs'
+import { Link } from 'react-router-dom';
 // const initData = {
 //     itemImg: "/img/auction_2.jpg",
 //     date: "2022-03-30",
@@ -90,16 +93,24 @@ import { Button } from 'bootstrap';
 
 const FundraiserDetail = () => {
     const { user_id } = useParams()
+    // const { id } = useParams()
     const dispatch = useDispatch()
 
     const funddetail = useSelector(state => {
         return state?.fundraiser?.fundraiserdetail
     })
-    console.log(funddetail, 'fdddetail')
+    console.log(funddetail?.organization_detail?.organization_name, 'fdddetail')
+    const fundprojdetail = useSelector(state => {
+        // debugger
+        return state?.projectdetails?.getfundProjDetails
+    })
+    console.log(fundprojdetail, 'fdprojetail')
 
     useEffect(() => {
 
         dispatch(TopFundraiserDetail(user_id))
+        dispatch(GetfundraiserProject(user_id))
+
     }, [dispatch, user_id])
     // state = {
     //     initData: {},
@@ -120,48 +131,26 @@ const FundraiserDetail = () => {
         <section className="item-details-area">
             <div className="container">
                 <div className="row justify-content-between">
-                    <h3>Kimball family medical and funeral bills.</h3>
+
                     <div className="col-12 col-lg-7">
                         <div className="item-info">
+                            <span>{funddetail?.organization_detail?.organization_name}</span>
                             <div className="item-thumb text-center">
-                                <img src="/img/ph.jpg" alt="" />
+                                {/* <img src={funddetail?.organization_detail?.banner_image} alt="" /> */}
+                                <img src='/img/ph.jpg' alt="" />
                             </div>
 
 
 
                         </div>
-                        <i className="fa-sharp fa-solid fa-user"></i><span> Kelli Liston is organizing this fundraiser.</span>
+                        <span> {funddetail?.organization_detail?.organization_name} is organizing this fundraiser.</span>
 
                         <div className="card no-hover">
-                            <span className="mt-0 mb-2">My sister Kristi Kimball and her children were driving on the freeway Thursday evening when they were hit full speed by a semi truck while traffic had slowed to a stop. My sister has a concussion and broken bones. - Kristi and Quinn’s oldest daughter Ruby is in critical condition at Primary Childrens hospital in the ICU awaiting surgery this morning. And Lou is stable. Kristi and Quinn’s beautiful 6 year old son Edison died in the crash. - please help alleviate some of the immediate financial burden so that this family can focus on healing. - my sister and her husband buried their oldest daughter Lila 8 years ago, and we cannot comprehend what is ahead. Please understand that Kristi and Quinn need time and space to focus on the immediate health care needs of their family. Thank you for your help.
-
-                                Update: Kristi and Ruby are still hospitalized but are in stable condition. Ruby’s surgery went well.</span>
+                            <span className="mt-0 mb-2" dangerouslySetInnerHTML={{ __html: funddetail?.organization_detail?.description }} />
                             <div className="price d-flex justify-content-between align-items-center">
                             </div>
                         </div>
                         <br />
-                        <div>
-                            <span><b>Word of support (80)</b> <br />Please donate to share words of support.</span>
-                        </div>
-                        <br />
-                        <br />
-                        <div>
-                            Kenneth Corbett <br /><b>$27</b>  10 d<br />You _all_ matter.
-                        </div>
-                        <br />
-                        <div>
-                            Kevin Sheridan  <br /><b>$50</b>  24 d<br />Sending you and the family love, prayers and healing
-                        </div>
-                        <br />
-                        <div>
-                            Aileen Imperial  <br /><b>$20</b>  25 d<br />Thoughts go to your family, I hope things will head in a good direction!
-                        </div>
-                        <br />
-
-                        <div>
-                            Nate Hrivnak  <br /><b>$100</b>  26 d<br />Quinn and Family, I am so sorry to hear of your loss and send love and healing thoughts to you and your family.
-                        </div>
-
                     </div>
 
                     <div className="col-12 col-lg-5">
@@ -169,74 +158,66 @@ const FundraiserDetail = () => {
                             {/* <h3 className="m-0">{this.state.initData.title}</h3> */}
                             {/* <p>{this.state.initData.content}</p> */}
                             <div className="owner d-flex align-items-center">
-                                <span>$188,449 USD raised of $200,000 goal</span>
+
                                 <a className="owner-meta d-flex align-items-center ml-3" href="/author">
                                     {/* <img className="avatar-sm rounded-circle" src={this.state.initData.ownerImg} alt="" /> */}
                                     {/* <h6 className="ml-2"></h6> */}
 
                                 </a>
                             </div>
+
                             <div className="item-info-list mt-4">
                                 <ul className="list-unstyled">
-                                    <li className="price d-flex justify-content-between">
-                                        <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 71% </span>
-
-                                    </li>
-                                    <span>2K donations</span>
-
-                                    {/* <button>Share </button> */}
-                                    {/* <span>size</span> */}
-
-                                    {/* <Button>Donate now </Button> */}
-                                    {/* <span>size</span> */}
-
-                                    <li>
-                                        {/* <span>Volume Traded </span> */}
-                                        {/* <span>trad</span> */}
-                                    </li>
-                                </ul>
-                            </div>
-                            <a className="d-block btn btn-bordered-white mt-2" >Share</a>
-                            <a className="d-block btn btn-bordered-white mt-2">Donate now</a>
-
-                            <div className="row items">
-                                <div className="col-12 col-md-6 item px-lg-2">
-                                    <div>
-                                        Kenneth Corbett <br /><b>$27</b>  10 d
-                                    </div>
-                                    <br />
-                                    <div>
-                                        Kevin Sheridan  <br /><b>$50</b>  24 d
-                                    </div>
-                                    <br />
-                                    <div>
-                                        Aileen Imperial  <br /><b>$20</b>  25 d
-                                    </div>
-                                    <br />
-
-                                    <div>
-                                        Nate Hrivnak  <br /><b>$100</b>  26 d
-                                    </div>
-                                    {/* <div className="card no-hover">
-                                        <div className="single-seller d-flex align-items-center">
-                                            <a href="/author"> */}
-                                    {/* <img className="avatar-md rounded-circle" src={funddetail.avatar} alt="" /> */}
-                                    {/* </a> */}
-                                    {/* <div className="seller-info ml-3">
-                                                <a className="seller mb-2" href="/author">wwww</a>
-                                            </div> */}
-                                    {/* </div> */}
-                                    {/* </div> */}
-                                </div>
-                                {/* <div className="col-12 item px-lg-2">
                                     <div className="card no-hover">
-                                        <h4 className="mt-0 mb-2">Highest Bid</h4>
-                                        <div className="price d-flex justify-content-between align-items-center">
-                                        </div>
+
+                                        <li>
+                                            ${funddetail?.total_fundraised} raised from all projects
+
+                                        </li>
+
+                                        {/* <li className="price d-flex justify-content-between">
+                                            <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 71% </span>
+
+                                        </li> */}
+                                        <li>
+
+
+                                        </li>
                                     </div>
-                                </div> */}
+                                    <div className="card no-hover">
+                                        <li>
+
+                                            <span>PROJECTS</span>
+                                        </li>
+
+                                        {fundprojdetail && fundprojdetail.length &&
+                                            [...new Map(fundprojdetail.map(item =>
+                                                [item["title"], item])).values()]?.slice(0, 4)?.map((item, idx) => {
+                                                    return (
+
+                                                        <>
+
+                                                            <li>
+                                                                {item.title}
+                                                            </li><li>
+                                                                {item.created_at}
+                                                                {/* {(item.created_at).diff(new Date, 'day', true)} */}
+                                                            </li></>
+                                                    )
+                                                })}
+                                    </div>
+                                    <li>
+                                        <a className="d-block btn btn-bordered-white mt-4" href="/all/LatestProjects">view all</a>
+
+                                    </li>
+
+                                </ul>
+
+
+
+
                             </div>
-                            {/* <a className="d-block btn btn-bordered-white mt-4" href="/wallet-connect">New</a> */}
+
                         </div>
                     </div>
                 </div>

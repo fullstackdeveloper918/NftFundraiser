@@ -7,6 +7,7 @@ import { getProjectDetail } from '../../redux/Slices/projectSlice';
 import { useState } from 'react';
 import dayjs from 'dayjs'
 import { BuyNft } from '../Wallet/interact';
+import ProjNFTS from '../Auctions/projectnfts';
 
 const ProjDetails = () => {
 
@@ -103,6 +104,7 @@ const ProjDetails = () => {
         // debugger
         return state.projectdetails.latestprojectdetails
     })
+    console.log('latproj', latprojdetail?.nft_data?.pay_from)
 
     useEffect(() => {
         // debugger
@@ -134,9 +136,9 @@ const ProjDetails = () => {
         <section className="item-details-area">
             <div className="container">
                 <div className="row justify-content-between">
-                    <div className="col-12 col-lg-5">
+                    <div className="col-12 col-lg-8">
                         <div className="item-info">
-
+                            <h4 style={{ color: '#fff' }} >{latprojdetail.title}</h4>
                             <><div className="item-thumb text-center">
                                 {latprojdetail && latprojdetail?.nft_data && latprojdetail?.nft_data?.length ?
                                     <img src={latprojdetail.nft_data[0].image} alt="first nft" />
@@ -147,10 +149,11 @@ const ProjDetails = () => {
                             </div>
 
                                 <div className="card no-hover countdown-times my-4">
-                                    <div className="countdown d-flex justify-content-center" data-date={latprojdetail.end_date} />
+
+                                    <div className="countdown d-flex " dangerouslySetInnerHTML={{ __html: latprojdetail.description }} />
                                 </div>
                                 {/* Netstorm Tab */}
-                                <ul className="netstorm-tab nav nav-tabs" id="nav-tab">
+                                {/* <ul className="netstorm-tab nav nav-tabs" id="nav-tab">
                                     <><li>
                                         <a className="active" id="nav-home-tab" data-toggle="pill" href="#nav-home">
                                             <h5 className="m-0">{initData.tab_1}</h5>
@@ -160,12 +163,12 @@ const ProjDetails = () => {
                                                 <h5 className="m-0">{initData.tab_3}</h5>
                                             </a>
                                         </li></>
-                                </ul>
+                                </ul> */}
                             </>
                             {/* ))
                             } */}
-                            <div className="tab-content" id="nav-tabContent">
-                                <div className="tab-pane fade show active" id="nav-home">
+                            {/* <div className="tab-content" id="nav-tabContent"> */}
+                            {/* <div className="tab-pane fade show active" id="nav-home">
                                     <ul className="list-unstyled">
                                         {tabData_1.map((item, idx) => {
                                             return (
@@ -176,9 +179,9 @@ const ProjDetails = () => {
                                             )
                                         })}
                                     </ul>
-                                </div>
+                                </div> */}
 
-                                <div className="tab-pane fade" id="nav-contact">
+                            {/* <div className="tab-pane fade" id="nav-contact">
                                     <div className="owner-meta d-flex align-items-center mt-3">
                                         <span>Owner</span>
                                         <a className="owner d-flex align-items-center ml-2" href="/author">
@@ -187,55 +190,51 @@ const ProjDetails = () => {
                                         </a>
                                     </div>
                                     <p className="mt-2">Created : {dayjs(latprojdetail.created_at).format("DD MMM YYYY")}</p>
-                                </div>
-                            </div>
+                                </div> */}
+                            {/* </div> */}
                         </div>
                     </div>
 
-                    <div className="col-12 col-lg-6">
-                        <div className="content mt-5 mt-lg-0">
-                            <div className='d-flex  align-items-center justify-content-between'>
-                                <h3 className="m-0">{latprojdetail.title}</h3>
+                    <div className="col-12 col-lg-4">
+                        <div className="card no-hover">
+                            <span>$188,449 USD raised of $200,000 goal</span>
+                            <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 71% </span>
 
-                                <div className='eddlbtton d-flex  align-items-center '>
-                                    {/* <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={`/updateproject/${projdetail.projectdetails.id}`} style={{ color: '#FFF' }}>Edit</Link></a>
-                                    <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-2" onClick={() => deleteHandler(projdetail.projectdetails.id)} style={{ color: '#FFF' }}>Delete</a> */}
+
+                            <div className="content mt-5 mt-lg-0">
+
+
+                                <div className="item-info-list mt-4">
+                                    <ul className="list-unstyled">
+                                        <li> <span>Owned By :  Organization name</span></li>
+                                        <li className="price d-flex justify-content-between">
+                                            <span>Current Price : {latprojdetail.price} MATIC</span>
+                                            {/* <span>Price </span> */}
+                                            {/* <span>{latprojdetail.price} MATIC</span> */}
+
+                                        </li>
+                                        <li>
+
+                                            {/* <span>{projdetail.projectdetails.latitude}</span> */}
+                                        </li>
+                                        <li>
+                                            {/* <span>Volume Traded </span> */}
+                                            <span>Number of NFT's Minted : {latprojdetail.number_of_nft}</span>
+                                        </li>
+                                    </ul>
                                 </div>
 
+                                {/* <a className="d-block btn btn-bordered-white mt-4" onClick={buyHandler}>Buy</a> */}
                             </div>
-                            <p dangerouslySetInnerHTML={{ __html: latprojdetail.description }} />
-                            <div className="owner d-flex align-items-center">
-                                <span>Owned By</span>
-                                <a className="owner-meta d-flex align-items-center ml-3" href="/author">
-                                    <img className="avatar-sm rounded-circle" src={latprojdetail?.user_data?.avatar} alt="" />
-                                    <h6 className="ml-2">{latprojdetail?.user_data?.username}</h6>
-                                </a>
-                            </div>
-                            <div className="item-info-list mt-4">
-                                <ul className="list-unstyled">
-                                    <li className="price d-flex justify-content-between">
-                                        <span>Current Price : {latprojdetail.price} MATIC</span>
-                                        {/* <span>Price </span> */}
-                                        {/* <span>{latprojdetail.price} MATIC</span> */}
-
-                                    </li>
-                                    <li>
-
-                                        {/* <span>{projdetail.projectdetails.latitude}</span> */}
-                                    </li>
-                                    <li>
-                                        {/* <span>Volume Traded </span> */}
-                                        <span>Number of NFT's Minted : {latprojdetail.number_of_nft}</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            {/* <a className="d-block btn btn-bordered-white mt-4" onClick={buyHandler}>Buy</a> */}
                         </div>
                     </div>
+                    <ProjNFTS />
+
+
+
+
                 </div>
             </div >
-
         </section >
     );
 
