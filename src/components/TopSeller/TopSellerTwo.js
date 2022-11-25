@@ -8,7 +8,7 @@ class TopSeller extends Component {
         data: {},
         sellerData: []
     }
-    componentDidMount(){
+    componentDidMount() {
         axios.get(`${BASE_URL}`)
             .then(res => {
                 this.setState({
@@ -17,7 +17,7 @@ class TopSeller extends Component {
                 })
                 // console.log(this.state.data)
             })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
     }
     render() {
         return (

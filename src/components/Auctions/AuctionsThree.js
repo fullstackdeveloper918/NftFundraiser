@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 const initData = {
     pre_heading: "Auctions",
-    heading: "Live Auctions",
+    heading: "Latest Projects",
     btnText: "View All"
 }
 
@@ -74,7 +74,7 @@ class AuctionsThree extends Component {
         initData: {},
         data: []
     }
-    componentDidMount(){
+    componentDidMount() {
         this.setState({
             initData: initData,
             data: data

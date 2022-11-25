@@ -9,13 +9,14 @@ const authSlice = createSlice({
     name: 'user',
     initialState: {
         user: {},
+        userdetail: [],
         userToken,
         logout: {},
         message: {},
         countries: [],
         annualRevenue: [],
         hereAbout: [],
-        organization:false
+        organization: false
     },
     reducers: {
         registerSuccess: (state, action) => {
@@ -26,6 +27,10 @@ const authSlice = createSlice({
         registerFail: (state, action) => {
             // 
             state.message = action.payload.response.data.message
+        },
+        userDetail: (state, action) => {
+            // debugger
+            state.userdetail = action.payload.data.data
         },
         loginSuccess: (state, action) => {
             state.user = action.payload;
@@ -73,5 +78,6 @@ export const {
     getHearAboutList,
     loginSuccess,
     forgotpasswordSuccess,
-    logoutSuccess, registerFail
+    logoutSuccess, registerFail,
+    userDetail
 } = authSlice.actions;

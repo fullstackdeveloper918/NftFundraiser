@@ -25,7 +25,7 @@
 1. Preloader
 ----------------------------------------------*/
 
-$( document ).ready(function() {
+$(document).ready(function () {
     'use strict';
 
     /*----------------------------------------------
@@ -34,7 +34,7 @@ $( document ).ready(function() {
     (function ($) {
         'use strict';
 
-        $(window).on('load', function() {
+        $(window).on('load', function () {
             $('#netstorm-preloader').addClass('loaded');
         })
 
@@ -64,14 +64,14 @@ $( document ).ready(function() {
             navResponsive();
         })
 
-        $('.menu .dropdown-menu').each(function() {
+        $('.menu .dropdown-menu').each(function () {
 
             var children = $(this).children('.dropdown').length;
-            $(this).addClass('children-'+children);
+            $(this).addClass('children-' + children);
         })
 
-        
-        $('.menu .nav-item.dropdown').each(function() {
+
+        $('.menu .nav-item.dropdown').each(function () {
 
             var children = $(this).children('.nav-link');
             children.addClass('prevent');
@@ -79,7 +79,7 @@ $( document ).ready(function() {
 
         $(document).on('click', '#menu .nav-item .nav-link', function (event) {
 
-            if($(this).hasClass('prevent')) {
+            if ($(this).hasClass('prevent')) {
                 event.preventDefault();
             }
 
@@ -87,7 +87,7 @@ $( document ).ready(function() {
 
             nav_link.next().toggleClass('show');
 
-            if(nav_link.hasClass('smooth-anchor')) {
+            if (nav_link.hasClass('smooth-anchor')) {
                 $('#menu').modal('hide');
             }
         })
@@ -101,10 +101,10 @@ $( document ).ready(function() {
         'use strict';
 
         var position = $(window).scrollTop();
-        var toTop    = $('#scroll-to-top');
-        var navbar   = $('.navbar');
+        var toTop = $('#scroll-to-top');
+        var navbar = $('.navbar');
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             if (position > 0) {
                 navbar.hide();
             }
@@ -164,7 +164,7 @@ $( document ).ready(function() {
             }
         })
 
-        $('.nav-link').each(function() {
+        $('.nav-link').each(function () {
             let href = $(this).attr('href');
             if (href.length > 1 && href.indexOf('#') != -1) {
                 $(this).addClass('smooth-anchor');
@@ -205,13 +205,13 @@ $( document ).ready(function() {
 
         'use strict';
 
-        setTimeout(function() {
+        setTimeout(function () {
 
             $('.no-slider .left').addClass('init');
 
         }, 1200)
 
-        var animation = function(slider) {
+        var animation = function (slider) {
 
             let image = $(slider + ' .swiper-slide-active img');
             let title = $(slider + ' .title');
@@ -225,7 +225,7 @@ $( document ).ready(function() {
             btn.toggleClass('aos-animate');
             nav.toggleClass('aos-animate');
 
-            setTimeout(function() {
+            setTimeout(function () {
 
                 image.toggleClass('aos-animate');
                 title.toggleClass('aos-animate');
@@ -242,13 +242,13 @@ $( document ).ready(function() {
                 $('.full-slider .left').addClass('off');
                 $('.full-slider .left').removeClass('init');
 
-                setTimeout(function() {
+                setTimeout(function () {
 
                     $('.full-slider .left').removeClass('off');
 
                 }, 200)
 
-                setTimeout(function() {
+                setTimeout(function () {
 
                     $('.full-slider .left').addClass('init');
 
@@ -271,7 +271,7 @@ $( document ).ready(function() {
             pagination: {
                 el: '.swiper-pagination'
             },
-            navigation: false,
+            navigation: true,
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true
@@ -281,7 +281,7 @@ $( document ).ready(function() {
                 onlyInViewport: false
             },
             on: {
-                init: function() {
+                init: function () {
 
                     animation('.full-slider')
 
@@ -289,14 +289,14 @@ $( document ).ready(function() {
 
                     pagination.hide();
 
-                    setTimeout(function() {
+                    setTimeout(function () {
 
                         pagination.show();
 
                     }, 2000)
 
                 },
-                slideChange: function() {
+                slideChange: function () {
 
                     animation('.full-slider')
                 }
@@ -308,7 +308,8 @@ $( document ).ready(function() {
             autoplay: true,
             loop: true,
             slidesPerView: 1,
-            spaceBetween: 30,
+            spaceBetween: 50,
+
             breakpoints: {
                 767: {
                     slidesPerView: 2,
@@ -317,8 +318,14 @@ $( document ).ready(function() {
                 1023: {
                     slidesPerView: 4,
                     spaceBetween: 30
+                },
+
+                1440: {
+                    slidesPerView: 4,
+                    spaceBetween: 30
                 }
             },
+            // navigation: true,
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true
@@ -362,7 +369,7 @@ $( document ).ready(function() {
             grabCursor: false,
             allowTouchMove: false,
             on: {
-                init: function() {
+                init: function () {
                     animation('.no-slider')
                 }
             }
@@ -398,24 +405,24 @@ $( document ).ready(function() {
 
         'use strict';
 
-        $('.explore-area').each(function(index) {
+        $('.explore-area').each(function (index) {
 
             var count = index + 1;
 
-            $(this).find('.explore-items').removeClass('explore-items').addClass('explore-items-'+count);
-            $(this).find('.explore-item').removeClass('explore-item').addClass('explore-item-'+count);
-            $(this).find('.explore-btn').removeClass('explore-btn').addClass('explore-btn-'+count);
-            
+            $(this).find('.explore-items').removeClass('explore-items').addClass('explore-items-' + count);
+            $(this).find('.explore-item').removeClass('explore-item').addClass('explore-item-' + count);
+            $(this).find('.explore-btn').removeClass('explore-btn').addClass('explore-btn-' + count);
+
             var Shuffle = window.Shuffle;
-            var Filter  = new Shuffle(document.querySelector('.explore-items-'+count), {
-                itemSelector: '.explore-item-'+count,
+            var Filter = new Shuffle(document.querySelector('.explore-items-' + count), {
+                itemSelector: '.explore-item-' + count,
                 buffer: 1,
             })
 
-            $('.explore-btn-'+count).on('change', function (e) {
+            $('.explore-btn-' + count).on('change', function (e) {
 
                 var input = e.currentTarget;
-                
+
                 if (input.checked) {
                     Filter.filter(input.value);
                 }
@@ -446,26 +453,26 @@ $( document ).ready(function() {
                 url: $(form).attr('action'),
                 data: formData
             })
-            .done(function (response) {
+                .done(function (response) {
 
-                $(formMessages).removeClass('error');
-                $(formMessages).addClass('success');
+                    $(formMessages).removeClass('error');
+                    $(formMessages).addClass('success');
 
-                $(formMessages).text(response);
+                    $(formMessages).text(response);
 
-                $('#contact-form input,#contact-form textarea').val('');
-            })
-            .fail(function (data) {
+                    $('#contact-form input,#contact-form textarea').val('');
+                })
+                .fail(function (data) {
 
-                $(formMessages).removeClass('success');
-                $(formMessages).addClass('error');
+                    $(formMessages).removeClass('success');
+                    $(formMessages).addClass('error');
 
-                if (data.responseText !== '') {
-                    $(formMessages).text(data.responseText);
-                } else {
-                    $(formMessages).text('Oops! An error occured and your message could not be sent.');
-                }
-            });
+                    if (data.responseText !== '') {
+                        $(formMessages).text(data.responseText);
+                    } else {
+                        $(formMessages).text('Oops! An error occured and your message could not be sent.');
+                    }
+                });
         });
 
     }(jQuery));

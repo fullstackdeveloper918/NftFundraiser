@@ -47,10 +47,10 @@ const ForgotPassword = () => {
                                             className="form-control"
                                             name="email"
                                             placeholder="Enter your Email"
-                                            {...register("email")}
-                                        // aria-invalid={errors.email ? "true" : "false"}
+                                            {...register("email", { required: "Email Address is required" })}
+                                            aria-invalid={errors.email ? "true" : "false"}
                                         />
-                                        {errors.email && <p style={{ color: 'red' }} role="alert">{errors.message}</p>}
+                                        {errors.email && <p style={{ color: 'red' }} role="alert">{errors?.email?.message}</p>}
                                     </div>
                                 </div>
                                 {/* <div>{errors.username && errors.username.message}</div> */}

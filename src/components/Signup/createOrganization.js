@@ -1,20 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AnnualRevenueList, CountryList, CreateOrganizationAction, HearAboutList } from '../../redux/Actions/authAction'
-import { useForm } from 'react-hook-form'
+import { AnnualRevenueList, CountryList, CreateOrganizationAction, HearAboutList, Register } from '../../redux/Actions/authAction'
+import { Controller, useForm } from 'react-hook-form'
 import swal from 'sweetalert'
 import { useHistory } from 'react-router'
+import { useFormData } from './Context/context'
+import styles from './styles/styles.module.scss'
+import { GetSocialMediaIcons } from '../../redux/Actions/projectAction'
+import SocialMedia from './media'
+import styled from 'styled-components'
+import ProgressSteps from './steps'
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+import FroalaEditorComponent from 'react-froala-wysiwyg';
+import FroalaEditor from 'react-froala-wysiwyg'
+import { useState } from 'react'
+import JoditEditor from 'jodit-react';;
+
 // import { Widget } from "@uploadcare/react-widget";
 // import FileUpload from "react-material-file-upload";
 // import { uploadcare } from '../lib/uploadcare.min.js';
-const CreateOrganization = () => {
+const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
+    const editor = useRef(null);
+    const { data, setFormValues } = useFormData();
+    const [description, setDescription] = useState()
 
     const dispatch = useDispatch()
     const history = useHistory()
 
     const organization = useSelector(state => {
-      
-      return state.user.organization
+
+        return state.user.organization
     })
     const { countries } = useSelector(state => state.countries)
     const { annualRevenue } = useSelector(state => state.annualRevenue)
@@ -23,32 +39,51 @@ const CreateOrganization = () => {
     const { hereAbout } = useSelector(state => state.hereAbout)
     // console.log(user, 'user')
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, control } = useForm({
+        mode: 'all'
+    });
 
 
-    const OnSubmit = (data) => {
+    const OnSubmit = (values) => {
+        setFormValues(values)
+        // FormData.append('email', data.email)
+        // FormData.append('password', data.password)
+        // FormData.append('confirm_password', data.confirm_password)
         const formData = new FormData()
+        formData.append('banner_image', values.banner_image[0])
+        formData.append('logo', values.logo[0])
+        formData.append('email', data.email)
+        formData.append('password', data.password)
+        formData.append('wallet_id', values.wallet_id)
+        // formData.append('role', data.role)
+        formData.append('goal', values.goal)
+        formData.append('confirm_password', data.confirm_password)
+        formData.append('organization_name', values.organization_name)
+        formData.append('url', values.url)
+        formData.append('country', values.country)
+        // formData.append('annual_revenue_range', values.annual_revenue_range)
+        formData.append('tax_id', values.tax_id)
 
-        formData.append('image', data.image[0])
-        formData.append('organization_name', data.organization_name)
-        formData.append('url', data.url)
-        formData.append('country', data.country)
-        formData.append('annual_revenue_range', data.annual_revenue_range)
-        formData.append('tax_id', data.tax_id)
-        formData.append('hear_about', data.hear_about)
-        formData.append('method_heard_detail', data.method_heard_detail)
+        formData.append('social', values.social)
+        formData.append('social_link', values.social_link)
+        formData.append('description', description)
+        // formData.append('method_heard_detail', values.method_heard_detail)
 
-        dispatch(CreateOrganizationAction(formData))
+        dispatch(Register(formData))
         // if (formData) {
         //     swal("Registered!", "You have been registered!", "success");
         //     history.push('/login')
         // }
     }
-
+    const socialmedia = useSelector(state => {
+        return state?.getSocialmediaIcons?.getsocial
+    })
+    console.log('social', socialmedia)
     useEffect(() => {
         dispatch(CountryList())
         dispatch(AnnualRevenueList())
         dispatch(HearAboutList())
+        dispatch(GetSocialMediaIcons())
     }, [])
 
 
@@ -68,164 +103,271 @@ const CreateOrganization = () => {
                             <p></p>
                         </div>
                         {/* Item Form */}
+                        <div className={formStep === 1 ? styles.showForm : styles.hideForm}>
+                            <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
+                                {/* <button
+                                    // className={styles.back}
+                                    onClick={prevFormStep}
+                                    type="button"
+                                >
+                                    back
+                                </button> */}
+                                <div className="row">
+                                    <div className='orgicon1'>
 
-                        <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
-                            <div className="row">
-
-                                <div className="col-12">
-                                    <div className="form-group mt-3">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="organization_name"
-                                            placeholder="Enter your Organization Name"
-                                            {...register("organization_name", { required: true })}
-                                            // {...register("email")}
-                                            aria-invalid={errors.organization_name ? "true" : "false"}
-                                        />
-                                        {errors.organization_name?.type === 'required' && <p style={{ color: 'red' }} role="alert">Organization name is required</p>}
+                                        <i className="fa-regular fa-circle" style={{ marginRight: '8px', marginLeft: '138px' }}> Step 1</i>
                                     </div>
-                                </div>
-                                <div className="col-12">
-                                    <div className="form-group mt-3">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="url"
-                                            placeholder="Enter your Url"
-                                            {...register("url", { required: true })}
-                                            // {...register("email")}
-                                            aria-invalid={errors.url ? "true" : "false"}
-                                        />
-                                        {errors.url?.type === 'required' && <p style={{ color: 'red' }} role="alert">Url is required</p>}
-                                    </div>
-                                </div>
-                                <div className="col-12">
-                                    <div className="form-group mt-3">
 
-                                        <select name="country"
-                                            {...register("country", { required: true })}>
-                                            {countries.data?.data?.map((option, key) => (
+                                    <div className='orgicon1line'>
+                                        <span style={{ color: '#452868' }}> ----------------------------- </span>
 
-                                                <option key={key.id} value={option.id} >
-                                                    {option.name}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">Country is required</p>}
                                     </div>
-                                </div>
-                                <div className="col-12">
-                                    <div className="form-group mt-3">
-                                        <select name="annual_revenue_range"
-                                            {...register("annual_revenue_range", { required: true })}>
-                                            {annualRevenue?.data?.data?.map((option, key) => (
+                                    <div className='orgicon2'>
 
-                                                <option key={key.id} value={option.id} >
-                                                    {option.title}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        {errors.annual_revenue_range?.type === 'required' && <p style={{ color: 'red' }} role="alert">Range name is required</p>}
+                                        <i className="fa-solid fa-circle-check" style={{ marginLeft: '8px' }}> Step 2</i>
                                     </div>
-                                </div>
-                                <div className="col-12">
-                                    <div className="form-group mt-3">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="tax_id"
-                                            placeholder="Enter your EIN Number/Tax Id"
-                                            {...register("tax_id", { required: true })}
-                                            // {...register("email")}
-                                            aria-invalid={errors.tax_id ? "true" : "false"}
-                                        />
-                                        {errors.tax_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Id is required</p>}
-                                    </div>
-                                </div>
-                                <div className="col-12">
-                                    <div className="form-group mt-3">
-                                        <select name="hear_about"
-                                            {...register("hear_about", { required: true })}>
-                                            {hereAbout?.data?.data?.map((option, key) => (
 
-                                                <option key={key} value={option.id} >
-                                                    {option.title}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        {errors.hear_about?.type === 'required' && <p style={{ color: 'red' }} role="alert">Hear about is required</p>}
-                                    </div>
-                                </div>
-                                <div className="col-12">
-                                    <div className="form-group mt-3">
-                                        <textarea
-                                            type="text"
-                                            className="form-control"
-                                            name="method_hear_detail"
-                                            placeholder="Tell us How you Heard about us?(other)"
-                                            {...register("method_heard_detail", { required: true })}
-                                            // {...register("email")}
-                                            aria-invalid={errors.method_heard_detail ? "true" : "false"}
-                                        />
-                                        {errors.method_heard_detail?.type === 'required' && <p style={{ color: 'red' }} role="alert">Hear detail is required</p>}
-                                    </div>
-                                </div>
-                                <div className="col-12">
-                                    <div className="form-group mt-3">
-                                        {/* <Dropzone
-                                            onDrop={handleDrop}
-                                            accept="image/*"
-                                            minSize={1024}
-                                            maxSize={3072000}
-                                        >
-                                            {({
-                                                getRootProps,
-                                                getInputProps,
-                                                isDragActive,
-                                                isDragAccept,
-                                                isDragReject
-                                            }) => {
-                                                const additionalClass = isDragAccept
-                                                    ? "accept"
-                                                    : isDragReject
-                                                        ? "reject"
-                                                        : "";
+                                    <div className="col-6">
+                                        <div className="form-group mt-3">
+                                            <label>Fundraising Goal</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="goal"
+                                                placeholder="Fundraising goal (MATIC)"
+                                                {...register("goal",
+                                                    {
+                                                        required: true,
 
-                                                return (
-                                                    <div
-                                                        {...getRootProps({
-                                                            className: `dropzone ${additionalClass}`
-                                                        })}
-                                                    >
-                                                        <input {...getInputProps()} />
-                                                        <span>{isDragActive ? "📂" : "📁"}</span>
-                                                        <p>Drag'n'drop images, or click to select files</p>
-                                                    </div>
-                                                );
-                                            }}
-                                        </Dropzone> */}
-                                        {/* <FileUpload
-
-                                            className="form-control"
-                                            value={files}
-                                            name="image"
-                                            onChange={setFiles}
-                                            {...register("image")}
-                                        /> */}
-
-                                        <input
-                                            className="form-control"
-                                            type="file"
-                                            name="image"
-                                            placeholder="Select file"
-                                            {...register("image", { required: true })}
-                                            aria-invalid={errors.image ? "true" : "false"}
-                                        />
-                                        {errors.image?.type === 'required' && <p style={{ color: 'red' }} role="alert">File is required</p>}
+                                                    })}
+                                                aria-invalid={errors.goal ? "true" : "false"} />
+                                            {errors.goal && <p style={{ color: 'red' }} role="alert">Fundraising goal is required</p>}
+                                        </div>
                                     </div>
-                                </div>
-                                {/* <div className="col-12">
+                                    <div className="col-6">
+                                        <div className="form-group mt-3">
+                                            <label>Funding Wallet </label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="wallet_id"
+                                                // defaultValue='1'
+                                                placeholder="Funding Wallet"
+                                                {...register("wallet_id", { required: true })}
+                                                // {...register("email")}
+                                                aria-invalid={errors.wallet_id ? "true" : "false"}
+                                            />
+                                            {errors.wallet_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Wallet address is required</p>}
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="form-group mt-3">
+                                            <label>Name</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="organization_name"
+                                                placeholder="Organization name"
+                                                {...register("organization_name", { required: true })}
+                                                // {...register("email")}
+                                                aria-invalid={errors.organization_name ? "true" : "false"}
+                                            />
+                                            {errors.organization_name?.type === 'required' && <p style={{ color: 'red' }} role="alert">Organization name is required</p>}
+                                        </div>
+                                    </div>
+
+                                    <div className="col-6">
+                                        <div className="form-group mt-3">
+                                            <label>Website</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="url"
+                                                placeholder="Website"
+                                                {...register("url", { required: true })}
+                                                // {...register("email")}
+                                                aria-invalid={errors.url ? "true" : "false"}
+                                            />
+                                            {errors.url?.type === 'required' && <p style={{ color: 'red' }} role="alert">Url is required</p>}
+                                        </div>
+                                    </div>
+
+                                    {/* <div className="col-12">
+                                        <div className="form- group mt-3">
+                                            <label>Description</label>
+                                            <textarea
+                                                type="text"
+                                                className="form-control"
+                                                name="description"
+                                                placeholder="Describe your project"
+
+                                                {...register("description", { required: true })}
+                                                // {...register("email")}
+                                                aria-invalid={errors.description ? "true" : "false"}
+                                            />
+                                            {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
+                                        </div>
+                                    </div> */}
+                                    <div className="col-12">
+                                        <div className="form- group mt-3">
+                                            <label>Description</label>
+                                            <Controller
+                                                control={control}
+                                                name="description"
+                                                defaultValue=""
+                                                render={({ field: { value, onChange } }) => {
+                                                    return <JoditEditor
+                                                        ref={editor}
+                                                        value={description}
+                                                        // config={config}
+
+                                                        placeholder="start typing"
+                                                        tabIndex={1} // tabIndex of textarea
+                                                        onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
+                                                        onChange={newContent => { }}
+                                                    />
+                                                }}
+                                            />
+                                            {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
+                                        </div>
+                                    </div>
+
+                                    <div className="col-6">
+                                        <div className="form-group mt-3">
+                                            <label>Country</label>
+
+                                            <select name="country"
+                                                {...register("country", { required: true })}>
+                                                aria-invalid={errors.tax_id ? "true" : "false"}
+                                                <option value="" disabled selected style={{ color: "#495057" }}>Select your country</option>
+                                                {countries.data?.data?.map((option, key) => (
+                                                    <><option key={key.id} value={option.id}>
+                                                        {option.name}
+                                                    </option></>
+                                                ))}
+                                            </select>
+                                            {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">Country is required</p>}
+                                        </div>
+                                    </div>
+                                    {/* <div className="col-12">
+                                        <div className="form-group mt-3">
+                                            <select name="annual_revenue_range"
+                                                {...register("annual_revenue_range", { required: true })}>
+                                                {annualRevenue?.data?.data?.map((option, key) => (
+
+                                                    <option key={key.id} value={option.id} >
+                                                        {option.title}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            {errors.annual_revenue_range?.type === 'required' && <p style={{ color: 'red' }} role="alert">Range name is required</p>}
+                                        </div>
+                                    </div> */}
+                                    <div className="col-6">
+                                        <div className="form-group mt-3">
+                                            <label>EIN Number/Tax Id</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="tax_id"
+                                                placeholder="EIN Number/Tax Id(optional)"
+                                                {...register("tax_id", { required: true })}
+                                                // {...register("email")}
+                                                aria-invalid={errors.tax_id ? "true" : "false"}
+                                            />
+                                            {errors.tax_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Id is required</p>}
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="form-group mt-3">
+                                            <label>Social Media (required)</label>
+                                            <select name="social"
+                                                {...register("social", { required: true })}>
+                                                aria-invalid={errors.social ? "true" : "false"}
+                                                <option value="" disabled selected style={{ color: "#495057" }}>Select your social media</option>
+                                                {socialmedia?.map((option, key) => (
+                                                    <><option key={key.id} value={option.id}>
+                                                        {option.title}
+                                                    </option></>
+                                                ))}
+                                            </select>
+                                            {errors.social?.type === 'required' && <p style={{ color: 'red' }} role="alert">Social media is required</p>}
+                                        </div>
+                                    </div>
+
+                                    <div className="col-6">
+                                        <div className="form-group mt-3">
+                                            <label>Social Media (secondary)</label>
+                                            <div className="input-group-prepend">
+
+                                                <span className="input-group-text" id="inputGroupPrepend2">@</span>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="social_link"
+                                                    placeholder="social link(optional) "
+                                                    {...register("social_link")}
+                                                // {...register("email")}
+                                                // aria-invalid={errors.social_link ? "true" : "false"}
+                                                />
+                                            </div>
+                                            {/* {errors.social_link?.type === 'required' && <p style={{ color: 'red' }} role="alert">Social media link is required</p>} */}
+                                        </div>
+                                    </div>
+
+                                    {/* <div className="col-12">
+                                        <div className="form-group mt-3">
+                                            <select name="project"
+                                                {...register("hear_about", { required: true })}>
+                                                {hereAbout?.data?.data?.map((option, key) => (
+
+                                                    <option key={key} value={option.id} >
+                                                        {option.title}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            {errors.hear_about?.type === 'required' && <p style={{ color: 'red' }} role="alert">Hear about is required</p>}
+                                        </div>
+                                    </div> */}
+
+
+                                    <div className="col-6">
+                                        <div className="form-group mt-3">
+                                            <label>Banner</label>
+                                            <input
+                                                className="form-control"
+                                                type="file"
+
+                                                name="banner_image"
+                                                placeholder="Select file"
+                                                disp
+                                                {...register("banner_image", { required: true })}
+                                                aria-invalid={errors.banner_image ? "true" : "false"}
+                                            />
+                                            <span className='banner-dis'>maximum height should be 500 pixels & width should be 1500 pixels</span>
+
+                                            {errors.banner_image?.type === 'required' && <p style={{ color: 'red' }} role="alert">Banner is required</p>}
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="form-group mt-3">
+                                            <label>Logo</label>
+                                            <input
+                                                className="form-control"
+                                                type="file"
+                                                name="logo"
+                                                placeholder="Select file"
+                                                {...register("logo", { required: true })}
+                                                aria-invalid={errors.logo ? "true" : "false"}
+                                            />
+                                            <div className='logo'>
+
+                                                <span className='logo-dis'>maximum height should be 250 pixels</span>
+                                            </div>
+                                            {errors.logo?.type === 'required' && <p style={{ color: 'red' }} role="alert">logo is required</p>}
+                                        </div>
+                                    </div>
+                                    {/* <div className="col-12">
                                     <div className="form-group mt-3">
                                         <div className="form-check form-check-inline">
                                             <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" />
@@ -233,11 +375,12 @@ const CreateOrganization = () => {
                                         </div>
                                     </div>
                                 </div> */}
-                                <div className="col-12">
-                                    <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create</button>
+                                    <div className="col-12">
+                                        <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

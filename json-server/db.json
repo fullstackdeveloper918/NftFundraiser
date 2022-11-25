@@ -111,26 +111,28 @@
             {
                 "id": 1,
                 "icon": "icons icon-wallet text-effect",
-                "title": "Set up your wallet",
-                "text": "Once you’ve set up your wallet of choice, connect it to OpenSea by clicking the NFT Marketplace in the top right corner. Learn about the wallets we support."
+                "title": "Setup your wallet",
+                "text": "Click Connect Wallet in the top right corner to login and get started."
             },
             {
                 "id": 2,
                 "icon": "icons icon-grid text-effect",
                 "title": "Create your collection",
-                "text": "Click Create and set up your collection. Add social links, a description, profile & banner images, and set a secondary sales fee."
+                "text": "Click Creator and set up your organization profile, description, fundraising goal and more."
             },
             {
                 "id": 3,
                 "icon": "icons icon-drawer text-effect",
                 "title": "Add your NFTs",
-                "text": "Upload your work (image, video, audio, or 3D art), add a title and description, and customize your NFTs with properties, stats, and unlockable content."
+                "text": "Upload your project art or images and description."
+
             },
             {
                 "id": 4,
                 "icon": "icons icon-bag text-effect",
                 "title": "List them for sale",
-                "text": "Choose between auctions, fixed-price listings, and declining-price listings. You choose how you want to sell your NFTs!"
+                "text": "Choose how you want to price and sell your NFTs!"
+
             }
         ]
     },

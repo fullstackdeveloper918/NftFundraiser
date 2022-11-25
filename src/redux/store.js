@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { authReducer } from '../redux/Slices/authSlice'
+import { authReducer, userDetail } from '../redux/Slices/authSlice'
 import { combineReducers } from '@reduxjs/toolkit'
 import { projectReducer } from './Slices/projectSlice'
+import { footerReducer } from './Slices/footerSlice'
+import { fundraiserReducer } from './Slices/fundraiserSlice'
+import { collectionReducer } from './Slices/popularCollectionSlice'
 
 const reducer = combineReducers({
     user: authReducer,
@@ -14,6 +17,16 @@ const reducer = combineReducers({
     createproject: projectReducer,
     // getproject: projectReducer,
     projectdetails: projectReducer,
+    latestprojects: projectReducer,
+    fundraiser: fundraiserReducer,
+    footer: footerReducer,
+    collection: collectionReducer,
+    getcollections: collectionReducer,
+    getcollectiondetails: collectionReducer,
+    getSocialmediaIcons: projectReducer,
+    // userDetail: authReducer,
+
+    // Nftlist: projectReducer
 })
 
 const store = configureStore({

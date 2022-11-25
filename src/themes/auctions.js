@@ -7,20 +7,22 @@ import Footer from '../components/Footer/Footer';
 import ModalSearch from '../components/Modal/ModalSearch';
 import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
+import ExploreFour from './latestProjects';
+import LatestProject from '../components/Explore/LatestProjects';
 
-class Auctions extends Component {
-    render() {
-        return (
-            <div className="main">
-                <Header />
-                <LiveAuctions />
-                <Footer />
-                <ModalSearch />
-                <ModalMenu />
-                <Scrollup />
-            </div>
-        );
-    }
+const Auctions = () => {
+
+    return (
+        <div className="main">
+            <Header />
+            <LatestProject />
+            <Footer />
+            <ModalSearch />
+            <ModalMenu />
+            <Scrollup />
+        </div>
+    );
 }
+
 
 export default Auctions;

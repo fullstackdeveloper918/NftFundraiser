@@ -17,7 +17,8 @@ const Login = () => {
         // console.log(login.authToken, 'login')
         return state.login
     })
-    
+    console.log(user, 'user')
+
     if (user?.status === 200) {
         history.push('/')
     }
@@ -74,21 +75,21 @@ const Login = () => {
                                             className="form-control"
                                             name="password"
                                             placeholder="Enter your Password"
-                                            {...register("password", { required: { mesg } })}
+                                            {...register("password", { required: "Password is required" })}
                                             // {...register("email")}
                                             aria-invalid={errors.email ? "true" : "false"}
                                         />
                                         {errors.password && <p style={{ color: 'red' }} role="alert">{errors.password?.message}</p>}
                                     </div>
                                 </div>
-                                <div className="col-12">
+                                {/* <div className="col-12">
                                     <div className="form-group mt-3">
                                         <div className="form-check form-check-inline">
                                             <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" defaultChecked />
                                             <label className="form-check-label" htmlFor="inlineRadio1">Remember Me</label>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="col-12">
                                     <button className="btn w-100 mt-3 mt-sm-4" type="submit">Log In</button>
                                 </div>
@@ -96,7 +97,7 @@ const Login = () => {
                                     <span className="d-block text-center mt-4"><Link to="/forgotpassword">Forgot Password</Link></span>
                                 </div>
                                 <div className="col-12">
-                                    <span className="d-block text-center mt-4">If not registered?<Link to="/signup">Sign Up</Link></span>
+                                    <span className="d-block text-center mt-4">If not registered? <Link to="/signup"><b>Sign Up</b></Link></span>
                                 </div>
                             </div>
                         </form>
