@@ -115,7 +115,7 @@ const ItemDetails = () => {
         <section className="item-details-area">
             <div className="container">
                 <div className="row justify-content-between">
-                    <div className="col-12 col-lg-5">
+                    <div className="col-12 col-lg-7">
                         <div className="item-info">
                             {/* {projdetail?.map((item) => ( */}
 
@@ -183,7 +183,7 @@ const ItemDetails = () => {
                         </div>
                     </div>
 
-                    <div className="col-12 col-lg-6">
+                    <div className="col-12 col-lg-4">
                         <div className="content mt-5 mt-lg-0">
                             <div className='d-flex  align-items-center justify-content-between'>
                                 <h3 className="m-0">{projdetail.projectdetails.title}</h3>

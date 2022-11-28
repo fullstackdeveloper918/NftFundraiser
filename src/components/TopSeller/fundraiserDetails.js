@@ -130,11 +130,16 @@ const FundraiserDetail = () => {
     return (
         <section className="item-details-area">
             <div className="container">
+                <div class="row py-0">
+                    <div className='col-12'>
+                        <span className='title_main'>{funddetail?.organization_detail?.organization_name}</span>
+                    </div>
+                </div>
                 <div className="row justify-content-between">
 
                     <div className="col-12 col-lg-7">
                         <div className="item-info">
-                            <span>{funddetail?.organization_detail?.organization_name}</span>
+
                             <div className="item-thumb text-center">
                                 {/* <img src={funddetail?.organization_detail?.banner_image} alt="" /> */}
                                 <img src='/img/ph.jpg' alt="" />
@@ -143,7 +148,9 @@ const FundraiserDetail = () => {
 
 
                         </div>
-                        <span> {funddetail?.organization_detail?.organization_name} is organizing this fundraiser.</span>
+                        <div className='lorem_done'>
+                            <span className='cutom_dis'> {funddetail?.organization_detail?.organization_name} is organizing this fundraiser.</span>
+                        </div>
 
                         <div className="card no-hover">
                             <span className="mt-0 mb-2" dangerouslySetInnerHTML={{ __html: funddetail?.organization_detail?.description }} />
@@ -166,7 +173,7 @@ const FundraiserDetail = () => {
                                 </a>
                             </div>
 
-                            <div className="item-info-list mt-4">
+                            <div className="item-info-list">
                                 <ul className="list-unstyled">
                                     <div className="card no-hover">
 

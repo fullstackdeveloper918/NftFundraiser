@@ -136,9 +136,9 @@ const ProjDetails = () => {
         <section className="item-details-area">
             <div className="container">
                 <div className="row justify-content-between">
-                    <div className="col-12 col-lg-8">
+                    <div className="col-12 col-md-5">
                         <div className="item-info">
-                            <h4 style={{ color: '#fff' }} >{latprojdetail.title}</h4>
+
                             <><div className="item-thumb text-center">
                                 {latprojdetail && latprojdetail?.nft_data && latprojdetail?.nft_data?.length ?
                                     <img src={latprojdetail.nft_data[0].image} alt="first nft" />
@@ -195,20 +195,21 @@ const ProjDetails = () => {
                         </div>
                     </div>
 
-                    <div className="col-12 col-lg-4">
+                    <div className="col-12 col-md-6">
+                        <h4 style={{ color: '#fff' }} >{latprojdetail.title}</h4>
                         <div className="card no-hover">
                             <span>$188,449 USD raised of $200,000 goal</span>
                             <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 71% </span>
 
 
-                            <div className="content mt-5 mt-lg-0">
+                            <div className="content sm:mt-5 mt-lg-0">
 
 
-                                <div className="item-info-list mt-4">
-                                    <ul className="list-unstyled">
-                                        <li> <span>Owned By :  Organization name</span></li>
-                                        <li className="price d-flex justify-content-between">
-                                            <span>Current Price : {latprojdetail.price} MATIC</span>
+                                <div className="item-info-list">
+                                    <ul className="list-unstyled viewproduct-detail">
+                                        <li> <span>Owned By :</span> <span> Organization name</span></li>
+                                        <li className="price d-flex">
+                                            <span>Current Price : </span><span>{latprojdetail.price} MATIC</span>
                                             {/* <span>Price </span> */}
                                             {/* <span>{latprojdetail.price} MATIC</span> */}
 

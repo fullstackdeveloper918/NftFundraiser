@@ -45,7 +45,7 @@ export const ConnectWallet = async () => {
               chainName: 'Mumbai Testnet',
               chainId: web3.utils.toHex(chainId),
               nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
-              rpcUrls: ['  https://rpc-mumbai.maticvigil.com/']
+              rpcUrls: ['https://rpc-mumbai.maticvigil.com/']
             }
           ]
         });
@@ -331,23 +331,40 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
   }
 }
 
-export const BuyNft = async ({ contractAddress, tokenId, payFrom }) => {
-  debugger
+export const BuyNft = async ({ contractAddress, tokenId, payFrom, values }) => {
+
+
   const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
-  // const nonce = await web3.eth.getTransactionCount('PUBLIC_KEY', 'latest');
+  const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
   //the transaction
-  const tx = {
-    'from': payFrom,
-    'to': window.ethereum?.selectedAddress,
-    // 'nonce': nonce,
+  const amount = '0.01'; // Willing to send 2 ethers
+  const amountToSend = web3.utils.toWei(amount, "ether"); // Convert to wei value
+
+  // const tx = {
+  //   'to': payFrom,
+  //   'from': window.ethereum?.selectedAddress,
+  //   'value': amountToSend,
+  //   'gas': 500000,
+  //   'chainId': '0x3',
+  //   // 'input': nftContract.methods.safeTransferFrom(payFrom, window.ethereum?.selectedAddress, tokenId).encodeABI() //I could use also transferFrom
+  // };
+  const transferowner = {
+    'from': window.ethereum.selectedAddress,
+    'to': contractAddress, // Required except during contract publications.
     'gas': 500000,
-    'input': nftContract.methods.safeTransferFrom(payFrom, window.ethereum?.selectedAddress, tokenId).encodeABI() //I could use also transferFrom
+    // 'nonce': nonce,
+    // 'chainId': '0x3',
+    'input': nftContract.methods.safeTransferFrom(window.ethereum?.selectedAddress, payFrom, tokenId).encodeABI() //I could use also transferFrom
   };
 
-  await web3.eth.sendTransaction(tx)
+  // const txHash = await web3.eth.sendTransaction(tx)
+
+  // console.log('txhash', txHash)
+  await web3.eth.sendTransaction(transferowner)
     .on('transactionHash', function (hash) {
       let txHash = hash
-      console.log('txhash11', txHash)
+      console.log('tx', txHash)
+
 
     })
     .on('receipt', function (receipt) {

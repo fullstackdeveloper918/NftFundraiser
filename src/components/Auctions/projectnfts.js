@@ -53,7 +53,7 @@ const ProjNFTS = () => {
                                                 <span className="ml-2">{item.from}</span>
                                             </a> */}
                                             <div className="card-bottom d-flex justify-content-between">
-                                                <span dangerouslySetInnerHTML={{ __html: item.description.toUpperCase() }} />
+                                                <span dangerouslySetInnerHTML={{ __html: item.description.toUpperCase().slice(0, 27) }} />
                                             </div>
                                         </div>
                                     </div>

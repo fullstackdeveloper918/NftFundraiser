@@ -152,7 +152,7 @@ input[type="date"]:focus::before {
     padding: 20px 0px 0px 30px;
 }
 .item-details-area .row {
-    background: #101010;
+    /* background: #101010; */
     padding: 20px 10px;
 }
 @media (max-width:768px){
@@ -239,9 +239,7 @@ input[type="date"]:focus::before {
 .item-details-area h3 {
     padding: 20px 0px 0px 0px;
 }
-.item-details-area .row {
-    background: #101010;
-}
+
 @media (max-width:768px){
 .item-details-area h3 {
     padding: 20px 0px 0px 10px;
@@ -333,7 +331,8 @@ footer a.navbar-brand img {
     object-fit: cover;
     object-position: center;
     width: 100% !important;
-    height: 225px;
+    /* height: 225px; */
+    height: auto;
 }
 .ant-select:not(.ant-select-customize-input) .ant-select-selector  {
     position: relative;
@@ -502,8 +501,8 @@ header .navbar-expand .navbar-nav .nav-link:not(.btn) {
     color: var(--top-nav-item-color);
 }
 img.card-img-top {
-    width: 222px;
-    height: 222px;
+    width: 100%;
+    height: 200px;
     object-fit: cover;
 }
 span.banner-dis {
@@ -560,4 +559,117 @@ text-align: center;
 }
 body {
     color: rgb(255 255 255 / 85%) !important;
+}
+.card .card-body {
+    padding: 5px 0 0 !important;
+}
+.popular-collections-area .card .card-body {
+    padding: 35px 0 0 !important;
+}
+.intro span {   
+    font-size: 16px;
+}
+.seller-info.ml-3 span {
+    color: #8e8e8e !important;
+    font-family: var(--secondary-font) !important;
+    font-size: 15px;
+}
+.popular-collections-area img.card-img-top {
+    width: 214px;
+    height: 161px;
+    object-fit: cover;
+}
+
+section.work-area p {
+    color: #8e8e8e !important;
+    font-family: var(--secondary-font);
+}
+h4 {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.2;
+    font-family: 'Jost', sans-serif;
+    color: var(--primary-t-color);
+}
+span , p{
+    color: var(--primary-p-color) !Important;
+    font-size: 16px;
+}
+span.progress-bar.bg-success {
+    margin-top: 20px;
+    padding: 4px;
+    color :#fff !important;
+    margin-bottom: 20px;
+}
+.live-auctions-area.single_project-detail h3{
+    width: 100%;
+}
+section.live-auctions-area.single_project-detail {
+    padding: 0 !important;
+}
+section.live-auctions-area.single_project-detail .row {
+    padding: 0 !important;
+}
+section.live-auctions-area.single_project-detail .row h3 {
+    padding: 20px 0px 0px 15px;
+}
+.eddlbtton button {
+    font-size: 16px !important;
+    padding: 16px 30px !important;
+    font-family: 'Poppins', sans-serif;
+}
+.modal-dialog.modal-lg.modal-dialog-centered {
+    background: #2222228a;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    max-width: 100%;
+    margin: 0;
+}
+.fade.modal.show {
+    padding: 0 !important;
+}
+.ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%)!important;
+    border: 0;
+}
+.ant-steps-item-custom > .ant-steps-item-container > .ant-steps-item-icon > .ant-steps-icon {
+    top: -7px !important;
+}
+.ant-steps-vertical > .ant-steps-item .ant-steps-item-description {
+    padding-bottom: 12px;
+    color: var(--primary-p-color) !important;
+}
+.modal-header {
+    padding-bottom: 0!important;
+}
+.countdown{
+    color: var(--primary-p-color) !important; 
+}
+.card .card-caption .card-bottom span {
+    font-size: 14px;
+}
+.card-body h5 {
+    padding-bottom: 10px;
+}
+.container.single_project-detail .row h3 {
+    width: 100% !important;
+    padding-left: 15px !important;
+}
+.card.no-hover {
+    margin-bottom: 10px;
+}
+span.title_main {
+    font-size: 39px;
+    font-weight: 700;
+    color: white !important;
+}
+.project-nft-single img{
+    height: 225px !important;
+}
+section.live-auctions-area {
+    padding: 0 !important;
+}
+.intro {
+    margin-bottom: 20px !important;
 }
