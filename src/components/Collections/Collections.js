@@ -36,7 +36,7 @@ const Collections = () => {
                     </div>
                 </div>
                 <div className="row items">
-                    {coll.slice(1, 9)?.map((item, idx) => {
+                    {coll.slice(0, 8)?.map((item, idx) => {
 
 
 
@@ -46,7 +46,7 @@ const Collections = () => {
                                     <div className="image-over">
                                         <Link to={`/item-details/${item.id}`}>
                                             <img className="card-img-top" src={item?.nft_detail?.image} alt="" />
-                                        </Link>
+                                        </Link>0
                                         {/* Seller */}
                                         <a className="seller">
                                             {/* <Link to={`/item-details/${item.id}`} className="seller"> */}

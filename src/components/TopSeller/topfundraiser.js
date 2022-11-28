@@ -37,7 +37,7 @@ const Fundraiser = () => {
                 <div className="row items">
                     {fund?.map((item, idx) => {
                         return (
-                            <div key={`ts_${idx}`} className="col-12 col-sm-6 col-lg-4 item">
+                            <div key={`ts_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
                                 {/* Single Seller */}
                                 <div className="card no-hover">
                                     <div className="single-seller d-flex align-items-center">

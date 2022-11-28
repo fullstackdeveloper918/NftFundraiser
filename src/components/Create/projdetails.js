@@ -39,7 +39,7 @@ const ProjNftDetails = () => {
     // debugger
 
     return (
-        <section className="item-details-area">
+        <section className="item-details-area project-nft-single">
             <div className="container">
                 <div className="row justify-content-between">
 
@@ -100,7 +100,7 @@ const ProjNftDetails = () => {
             <div className="container">
 
                 <div className="row items explore-items px-2">
-                    <span>NFT'S</span>
+                    <h3 className="mt-3 mb-0">NFT'S</h3>
                     {projdetail?.nft_data?.map((x, idx) => {
                         // {projdetail?.map((item, idx) => {
                         return (
