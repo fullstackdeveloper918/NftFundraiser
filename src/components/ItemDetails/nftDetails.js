@@ -125,7 +125,7 @@ const NftDetails = (props) => {
         return state.projectdetails.nftlist
 
     })
-    console.log(nftdetail, 'latprojdetail')
+    console.log(nftdetail?.collectionData, 'latprojdetail')
     const collupdate = useSelector(state => {
         return state?.projectdetails?.collectiondetails
     })
@@ -183,7 +183,7 @@ const NftDetails = (props) => {
 
     const deployContract = async () => {
         try {
-            if (nftdetail?.collectionData?.contract_id == null) {
+            if (false) {
 
                 await window.ethereum.request({
                     method: 'wallet_switchEthereumChain',
@@ -193,10 +193,11 @@ const NftDetails = (props) => {
                 const { address } = await ConnectWallet()
                 const MyNFTContract = new web3.eth.Contract(NFTContract.abi)
                 const gas = await web3.eth.getGasPrice();
+                // const gas = 500000
 
                 MyNFTContract.deploy({
                     data: NFTContract.bytecode,
-                    arguments: ['CHARITY', '']
+                    arguments: { "symbol": nftdetail?.collectionData?.symbol, "url": nftdetail?.collectionData?.short_url },
                 }).send({
                     from: address,
                 })
@@ -244,77 +245,96 @@ const NftDetails = (props) => {
         // nftdetail.id()
     }
     return (
+
         <section className="item-details-area">
             <div className="container">
                 <div className="row justify-content-between">
-                    <div className="col-12 col-lg-5">
+                    <div className="col-12 col-md-8 ">
                         <div className="item-info">
                             {/* {latprojdetail?.map((item, key) => ( */}
 
                             <><div className="item-thumb text-center">
-                                <img src={nftdetail?.image} alt="" />
+                                <img src="/img/ph.jpg" alt="" />
                             </div><div className="card no-hover countdown-times my-4">
                                     <div className="countdown d-flex justify-content-center" />
                                 </div>
                                 {/* Netstorm Tab */}
                                 {/* <ul className="netstorm-tab nav nav-tabs" id="nav-tab">
-                                    <><li>
-                                        <a className="active" id="nav-home-tab" data-toggle="pill" href="#nav-home">
-                                            <h5 className="m-0">{initData.tab_1}</h5>
-                                        </a>
-                                    </li><li>
-                                            <a id="nav-contact-tab" data-toggle="pill" href="#nav-contact">
-                                                <h5 className="m-0">{initData.tab_3}</h5>
+                                        <><li>
+                                            <a className="active" id="nav-home-tab" data-toggle="pill" href="#nav-home">
+                                                <h5 className="m-0">{initData.tab_1}</h5>
                                             </a>
-                                        </li></>
-                                </ul> */}
+                                        </li><li>
+                                                <a id="nav-contact-tab" data-toggle="pill" href="#nav-contact">
+                                                    <h5 className="m-0">{initData.tab_3}</h5>
+                                                </a>
+                                            </li></>
+                                    </ul> */}
                             </>
                             {/* ))
-                            } */}
+                                } */}
                             {/* <div className="tab-content" id="nav-tabContent">
-                                <div className="tab-pane fade show active" id="nav-home">
-                                    <ul className="list-unstyled">
-                                        {tabData_1.map((item, idx) => {
-                                            return (
-                                                <li className="single-tab-list d-flex align-items-center">
-                                                    <img className="avatar-sm rounded-circle mr-3" src={item.img} alt="" />
-                                                    <p className="m-0">Bid listed for <strong>{item.price}</strong> {item.time} <br />by <a href="/author">{nftdetail?.user_data?.username}</a></p>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
-                                </div>
-
-                                <div className="tab-pane fade" id="nav-contact">
-                                    <div className="owner-meta d-flex align-items-center mt-3">
-                                        <span>Owner</span>
-                                        <a className="owner d-flex align-items-center ml-2" href="/author">
-                                            <img className="avatar-sm rounded-circle" src={initData.ownerImg} alt="" />
-                                            <h6 className="ml-2">{nftdetail?.user_data?.username}</h6>
-                                        </a>
+                                    <div className="tab-pane fade show active" id="nav-home">
+                                        <ul className="list-unstyled">
+                                            {tabData_1.map((item, idx) => {
+                                                return (
+                                                    <li className="single-tab-list d-flex align-items-center">
+                                                        <img className="avatar-sm rounded-circle mr-3" src={item.img} alt="" />
+                                                        <p className="m-0">Bid listed for <strong>{item.price}</strong> {item.time} <br />by <a href="/author">{nftdetail?.user_data?.username}</a></p>
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
                                     </div>
-                                    <p className="mt-2">Created : {dayjs(nftdetail?.created_at).format("DD MMM YYYY")}</p>
-                                </div>
-                            </div> */}
+    
+                                    <div className="tab-pane fade" id="nav-contact">
+                                        <div className="owner-meta d-flex align-items-center mt-3">
+                                            <span>Owner</span>
+                                            <a className="owner d-flex align-items-center ml-2" href="/author">
+                                                <img className="avatar-sm rounded-circle" src={initData.ownerImg} alt="" />
+                                                <h6 className="ml-2">{nftdetail?.user_data?.username}</h6>
+                                            </a>
+                                        </div>
+                                        <p className="mt-2">Created : {dayjs(nftdetail?.created_at).format("DD MMM YYYY")}</p>
+                                    </div>
+                                </div> */}
                         </div>
                     </div>
 
-                    <div className="col-12 col-lg-6">
-                        <div className="content mt-5 mt-lg-0">
+                    <div className="col-12 col-md-4">
+                        <div className="card no-hover content sm:mt-5 mt-lg-0">
+                            <div className='d-flex  align-items-center justify-content-between'>
+                                <h3 className="m-0">{nftdetail?.title}</h3>
+
+                                <div className='eddlbtton d-flex  align-items-center '>
+                                    {/* <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={`/updateproject/${projdetail.projectdetails.id}`} style={{ color: '#FFF' }}>Edit</Link></a>
+                                        <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-2" onClick={() => deleteHandler(projdetail.projectdetails.id)} style={{ color: '#FFF' }}>Delete</a> */}
+                                </div>
+
+                            </div>
+
+                            <p dangerouslySetInnerHTML={{ __html: nftdetail?.description }} className="nft-detail-nft" />
+                            <div className="owner d-flex align-items-center">
+                                <span>Owned By</span>
+                                <a className="owner-meta d-flex align-items-center ml-3" href="/author">
+                                    <img className="avatar-sm rounded-circle" src="/img/avtar1.png" alt="" />
+                                    <h6 className="ml-2">{projdetail?.user_data?.username}</h6>
+                                </a>
+                            </div>
                             {nftdetail.is_mint == 1 ? (
 
-                                <div className='eddlbtton d-flex  align-items-center px-2'>
+                                <div className='eddlbtton d-flex  align-items-center '>
 
-                                    <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                    <button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF', width: "100%" }}
                                     >  Ready to purchase</button>
 
 
                                 </div>
                             ) : (
 
-                                <div className='eddlbtton d-flex  align-items-center px-2'>
+                                <div className='eddlbtton d-flex  align-items-center'>
 
-                                    <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                    <button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                         id="nftdetail.id" onClick={() => deployAndMint(id)}>  Mint</button>
                                     <NftPopup
                                         show={modalShow}
@@ -324,28 +344,11 @@ const NftDetails = (props) => {
 
                                 </div>
                             )}
-                            <div className='d-flex  align-items-center justify-content-between'>
-                                <h3 className="m-0">{nftdetail?.title}</h3>
 
-                                <div className='eddlbtton d-flex  align-items-center '>
-                                    {/* <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={`/updateproject/${projdetail.projectdetails.id}`} style={{ color: '#FFF' }}>Edit</Link></a>
-                                    <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-2" onClick={() => deleteHandler(projdetail.projectdetails.id)} style={{ color: '#FFF' }}>Delete</a> */}
-                                </div>
 
-                            </div>
-
-                            <p dangerouslySetInnerHTML={{ __html: nftdetail?.description }} />
-                            <div className="owner d-flex align-items-center">
-                                <span>Owned By</span>
-                                <a className="owner-meta d-flex align-items-center ml-3" href="/author">
-                                    <img className="avatar-sm rounded-circle" src="/img/avtar1.png" alt="" />
-                                    <h6 className="ml-2">{projdetail?.user_data?.username}</h6>
-                                </a>
-                            </div>
-
-                            <div className="item-info-list mt-4">
+                            <div className="item-info-list">
                                 <ul className="list-unstyled">
-                                    <li className="price d-flex justify-content-between">
+                                    <li className="price d-flex">
                                         {/* <span>Current Price : {nftdetail?.price} MATIC</span> */}
                                         {/* <span>Price </span> */}
                                         {/* <span>{latprojdetail.price} MATIC</span> */}

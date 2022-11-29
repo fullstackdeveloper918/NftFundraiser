@@ -41,7 +41,7 @@ const ProjNftDetails = () => {
     return (
         <section className="item-details-area project-nft-single">
             <div className="container">
-                <div className="row justify-content-between">
+                <div className="row justify-content-between p-0">
 
                     <div className="col-12 col-lg-12">
                         <div className="item-info" >
@@ -69,12 +69,20 @@ const ProjNftDetails = () => {
 
                     </div>
 
-                    <div className="col-12 col-lg-6">
+                    <div className="cart col-12 col-lg-12 content-baner">
                         <div className="content mt-5 mt-lg-0">
                             <div className='d-flex  align-items-center justify-content-between'>
-                                <h3 className="m-0">{projdetail.title}</h3>
+                                <h3 className="m-0 ">{projdetail.title}</h3>
 
+                                <div>
+                                    {projdetail?.status == 0 && (
+                                        <div className='eddlbtton d-flex  align-items-center px-2'>
 
+                                            <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={`/updateproject/${projdetail.id}`} style={{ color: '#FFF' }}>Edit</Link></a>
+                                            <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-2" onClick={() => deleteHandler(projdetail.id)} style={{ color: '#FFF' }}>Delete</a>
+                                        </div>
+                                    )}
+                                </div>
 
                             </div>
                             {/* footer?.footer?.description }} */}
@@ -85,27 +93,23 @@ const ProjNftDetails = () => {
                         </div>
 
                     </div>
-                    {projdetail?.status == 0 && (
-                        <div className='eddlbtton d-flex  align-items-center px-2'>
 
-                            <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={`/updateproject/${projdetail.id}`} style={{ color: '#FFF' }}>Edit</Link></a>
-                            <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-2" onClick={() => deleteHandler(projdetail.id)} style={{ color: '#FFF' }}>Delete</a>
-                        </div>
-                    )}
                     {/* <CollItem /> */}
                 </div>
             </div>
 
 
             <div className="container">
+                <div className='row mb-0'>
+                    <h3 className="mb-0">NFT'S</h3>
+                </div>
+                <div className="row items mt-0 explore-items px-0">
 
-                <div className="row items explore-items px-2">
-                    <h3 className="mt-3 mb-0">NFT'S</h3>
                     {projdetail?.nft_data?.map((x, idx) => {
                         // {projdetail?.map((item, idx) => {
                         return (
-                            <div key={`eds_${idx}`} className="col-12 col-md-3 item explore-item">
-                                <div className="card no-hover my-2">
+                            <div key={`eds_${idx}`} className="col-12 col-md-3 item explore-item mt-0">
+                                <div className="card no-hover m-0">
                                     <div className="image-over">
                                         <Link to={`/nft/details/${x.id}`}>
                                             <img className="card-img-top" src={x.image} alt="" />
@@ -114,11 +118,11 @@ const ProjNftDetails = () => {
 
                                     </div>
                                     {/* Card Caption */}
-                                    <div className="card-caption col-12 ">
+                                    <div className="card-caption px-0 col-12 ">
                                         {/* Card Body */}
                                         <div className="card-body">
                                             <a href="#">
-                                                <h5 className="mb-2">{x.title}</h5>
+                                                <h5 className="mt-3 m-0 pb-2 p-0">{x.title}</h5>
                                             </a>
                                             <span dangerouslySetInnerHTML={{ __html: x.description }} />
 

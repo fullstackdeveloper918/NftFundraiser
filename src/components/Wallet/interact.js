@@ -206,36 +206,37 @@ const deployContract = async () => {
 
 
 }
-const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }) => {
-  try {
-    const formData = new FormData();
-
-    formData.append('is_mint', '1');
-    formData.append('token_id', token_id);
-    formData.append('transaction_hash', transaction_hash);
-    formData.append('pay_from', pay_from);
-    formData.append('pay_to', pay_to);
-
-    const token = sessionStorage.getItem('authToken')
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-    }
-    // debugger
-    await axios.post(`${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${id}`,
-      formData, config
-    )
-  } catch (error) {
-    // debugger
-    console.log("error");
-  }
-
-
-};
 export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCurrent, contractAddress, collid }) => {
+  const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }) => {
+    debugger
+    try {
+      const formData = new FormData();
+
+      formData.append('is_mint', '1');
+      formData.append('token_id', token_id);
+      formData.append('transaction_hash', transaction_hash);
+      formData.append('pay_from', pay_from);
+      formData.append('pay_to', pay_to);
+
+      const token = sessionStorage.getItem('authToken')
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      }
+      // debugger
+      await axios.post(`${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${id}`,
+        formData, config
+      )
+    } catch (error) {
+      // debugger
+      console.log("error");
+    }
+
+
+  };
 
   const UpdateContract = async (collid) => {
 
@@ -275,7 +276,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
 
   // const tokenURI = addedMetaData;
   // console.log(first)
-  const contract = await new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
+  const contract = await new web3.eth.Contract(contractABI.abi, '0xF5689144C9fE7E45d175DA28E96ba95c8155989C');//loadContract();
 
   try {
     let txHash = null
@@ -283,7 +284,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
     // const web3 = new Web3(window.ethereum);
 
     await web3.eth.sendTransaction({
-      to: contractAddress, // Required except during contract publications.
+      to: '0xF5689144C9fE7E45d175DA28E96ba95c8155989C', // Required except during contract publications.
       from: window.ethereum.selectedAddress,
       data: contract.methods.mint(ipfsBaseUrl + addedMetaData.path).encodeABI() //make call to NFT smart contract
     })
@@ -300,6 +301,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
         setCurrent(1)
       })
       .on('confirmation', async (confNumber, receipt) => {
+        debugger
         if (confNumber == 1) {
           await UpdateContract(collid)
           const tokid = web3.utils.hexToNumber(receipt.logs[0].topics[3])
@@ -334,7 +336,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values }) => {
 
 
-  const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
+  const nftContract = new web3.eth.Contract(contractABI.abi, '0x53C26EB02eAaCBCcf23052D21bEE7a191903241C')
   const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
   //the transaction
   const amount = '0.01'; // Willing to send 2 ethers
@@ -349,12 +351,14 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values }) => {
   //   // 'input': nftContract.methods.safeTransferFrom(payFrom, window.ethereum?.selectedAddress, tokenId).encodeABI() //I could use also transferFrom
   // };
   const transferowner = {
-    'from': window.ethereum.selectedAddress,
-    'to': contractAddress, // Required except during contract publications.
+    'from': window.ethereum?.selectedAddress,
+    'to': '0x53C26EB02eAaCBCcf23052D21bEE7a191903241C',
     'gas': 500000,
     // 'nonce': nonce,
     // 'chainId': '0x3',
-    'input': nftContract.methods.safeTransferFrom(window.ethereum?.selectedAddress, payFrom, tokenId).encodeABI() //I could use also transferFrom
+    'input': nftContract.methods.approveAndTransfer(
+      '0x53C26EB02eAaCBCcf23052D21bEE7a191903241C', '1', '0xe3aece4172d4092fac4dc5dd8389fca32fcddf6c', window.ethereum?.selectedAddress).encodeABI()
+    //I could use also transferFrom
   };
 
   // const txHash = await web3.eth.sendTransaction(tx)

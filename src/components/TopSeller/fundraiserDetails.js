@@ -131,13 +131,13 @@ const FundraiserDetail = () => {
         <section className="item-details-area">
             <div className="container">
                 <div class="row py-0">
-                    <div className='col-12'>
+                    <div className='col-12 p-0'>
                         <span className='title_main'>{funddetail?.organization_detail?.organization_name}</span>
                     </div>
                 </div>
-                <div className="row justify-content-between">
+                <div className="row justify-content-between px-0">
 
-                    <div className="col-12 col-lg-7">
+                    <div className="col-12 col-lg-8">
                         <div className="item-info">
 
                             <div className="item-thumb text-center">
@@ -149,6 +149,13 @@ const FundraiserDetail = () => {
 
                         </div>
                         <div className='lorem_done'>
+                            <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+
+
                             <span className='cutom_dis'> {funddetail?.organization_detail?.organization_name} is organizing this fundraiser.</span>
                         </div>
 
@@ -160,7 +167,7 @@ const FundraiserDetail = () => {
                         <br />
                     </div>
 
-                    <div className="col-12 col-lg-5">
+                    <div className="col-12 col-lg-4">
                         <div className="content mt-5 mt-lg-0">
                             {/* <h3 className="m-0">{this.state.initData.title}</h3> */}
                             {/* <p>{this.state.initData.content}</p> */}
@@ -175,7 +182,7 @@ const FundraiserDetail = () => {
 
                             <div className="item-info-list">
                                 <ul className="list-unstyled">
-                                    <div className="card no-hover">
+                                    <div className="card no-hover detail_single_nfts">
 
                                         <li>
                                             ${funddetail?.total_fundraised} raised from all projects
@@ -183,18 +190,15 @@ const FundraiserDetail = () => {
                                         </li>
 
                                         {/* <li className="price d-flex justify-content-between">
-                                            <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 71% </span>
+                                                <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 71% </span>
+    
+                                            </li> */}
 
-                                        </li> */}
-                                        <li>
-
-
-                                        </li>
                                     </div>
                                     <div className="card no-hover">
                                         <li>
 
-                                            <span>PROJECTS</span>
+                                            <span style={{ fontWeight: "600" }}>PROJECTS</span>
                                         </li>
 
                                         {fundprojdetail && fundprojdetail.length &&
@@ -204,9 +208,9 @@ const FundraiserDetail = () => {
 
                                                         <>
 
-                                                            <li>
+                                                            <li className='item_title'>
                                                                 {item.title}
-                                                            </li><li>
+                                                            </li><li className='item_created'>
                                                                 {item.created_at}
                                                                 {/* {(item.created_at).diff(new Date, 'day', true)} */}
                                                             </li></>

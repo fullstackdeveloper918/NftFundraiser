@@ -121,7 +121,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                             <i className="fa-regular fa-circle" > Step 2</i>
                                         </div>
                                     </div>
-                                    <div className="col-12">
+                                    <div className="col-12 ">
                                         <div className="form-group mt-3">
                                             <div className="form-check form-check-inline">
                                                 <input className="form-check-input" type="radio" name="radiobutton" id="donation" value="2" onChange={(e) => setType(e.target.value)} defaultChecked />
@@ -138,7 +138,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
 
 
 
-                                    <div className="col-6">
+                                    <div className="col-md-6 col-12">
                                         {/* {type == 1 && ( */}
 
                                         <div className="form-group mt-3">
@@ -156,7 +156,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                         </div>
                                         {/* )} */}
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-md-6 col-12">
                                         <div className="form-group mt-3">
                                             <label>Address</label>
                                             <input
@@ -279,6 +279,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                 </div> */}
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
+                                        <label>Country</label>
                                             <Controller
                                                 control={control}
                                                 name="country"
@@ -287,7 +288,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                                     // onChange={onChange}
 
                                                     <GeoLocation
-                                                        locationTitle="Country"
+                                                        // locationTitle="Country"
                                                         isCountry
 
                                                         onBlur={onBlur}
@@ -302,6 +303,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                     </div>
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
+                                        <label>State</label>
                                             <Controller
                                                 control={control}
                                                 name="state"
@@ -310,7 +312,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                                     <GeoLocation
                                                         // type="text"
                                                         // className="form-control"
-                                                        locationTitle="State"
+                                                        // locationTitle="State"
                                                         onChange={setState}
                                                         geoId={country}
                                                         onBlur={onBlur}
@@ -327,12 +329,13 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                     </div>
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
+                                        <label>City</label>
                                             <Controller
                                                 control={control}
                                                 name="city"
                                                 render={({ field: { onChange, onBlur, value, ref } }) => (
                                                     <GeoLocation
-                                                        locationTitle="City"
+                                                        // locationTitle="City"
                                                         onChange={setCity}
                                                         geoId={state}
                                                         onBlur={onBlur}

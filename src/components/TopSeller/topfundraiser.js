@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 const Fundraiser = () => {
     const dispatch = useDispatch()
 
+
     const fund = useSelector(state => {
         return state?.fundraiser?.fundraiser
     })
@@ -39,18 +40,20 @@ const Fundraiser = () => {
                         return (
                             <div key={`ts_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
                                 {/* Single Seller */}
-                                <div className="card no-hover">
-                                    <div className="single-seller d-flex align-items-center">
-                                        <Link to={`/fundraiser/detail/${item.user_id}`}>
+                                <Link to={`/fundraiser/detail/${item.user_id}`}>
+                                    <div className="card no-hover">
+                                        <div className="single-seller d-flex align-items-center">
+
                                             <img className="avatar-md rounded-circle" src={item.avatar} alt="" />
-                                        </Link>
-                                        {/* Seller Info */}
-                                        <div className="seller-info ml-3">
-                                            <a className="seller mb-2">@{item.username}</a>
-                                            <span>{item.amount}</span>
+
+                                            {/* Seller Info */}
+                                            <div className="seller-info ml-3">
+                                                <a className="seller mb-2">@{item.username}</a>
+                                                <span>{item.amount}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             </div>
                         );
                     })}

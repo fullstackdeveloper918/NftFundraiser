@@ -284,7 +284,7 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                                         {/* <div>Artwork {index}</div> */}
                                                         <div className="row">
 
-                                                            <div className="col-6">
+                                                            <div className="col-md-6 col-12">
                                                                 <div>
 
                                                                     <Form.Item
@@ -367,7 +367,7 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                                                     />
                                                                 </div>
                                                             </div>
-                                                            <div className="col-5">
+                                                            <div className="col-md-5 col-12">
                                                                 <div>
                                                                     <Form.Item
                                                                         {...restField}
@@ -407,11 +407,11 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                                                     </Modal>
                                                                 </div>
                                                             </div>
-                                                            <div className="col-1">
+                                                            <div className="col-md-1 col-12">
                                                                 <MinusCircleOutlined onClick={(e) => { remove(name); handleDecrement(e); }} />
                                                             </div>
                                                             {/* </div> */}
-                                                            <div className="col-3">
+                                                            <div className="col-md-3 col-12">
 
                                                                 {/* <div className="col-24"> */}
                                                                 <div className="form-group">
@@ -435,7 +435,7 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
 
 
                                                             {col?.map((item, idx) => (
-                                                                <div key={`auc_${idx}`} id={item.id} className="col-3 choose_div">
+                                                                <div key={`auc_${idx}`} id={item.id} className="col-md-3 col-12 choose_div">
                                                                     <label className='hidden-word'>jsaswjdwjd</label>
                                                                     <div id={item.id} onClick={onHandleClick} className="card"
                                                                         style={{
