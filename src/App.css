@@ -560,8 +560,14 @@ text-align: center;
 body {
     color: rgb(255 255 255 / 85%) !important;
 }
-.card .card-body {
+#dynamic_form_nest_item .card .card-body {
     padding: 5px 0 0 !important;
+    text-align: center !important;
+}
+span#inputGroupPrepend2 {
+    background-color: #474746;
+    border: none;
+    border-radius: 0px;
 }
 .popular-collections-area .card .card-body {
     padding: 35px 0 0 !important;
@@ -579,10 +585,18 @@ body {
     height: 161px;
     object-fit: cover;
 }
-
+.styles_hideForm__Dhvgw .orgicon1line {
+    width: 150px;
+}
+ form span {
+    color: white !important;
+}
 section.work-area p {
     color: #8e8e8e !important;
     font-family: var(--secondary-font);
+}
+.stepperline {
+    margin: 0px -2px 0px 5px;
 }
 h4 {
     /* font-size: 2rem; */
@@ -664,6 +678,7 @@ span.title_main {
     font-size: 40px !important;
     font-weight: 700 !important;
     color: white !important;
+    text-transform: capitalize;
 }
 .detail_single_nfts li{
     font-size: 16px !important;
@@ -723,6 +738,9 @@ span.progress-bar {
         overflow: hidden;
         width: 59px;
         margin: 1px 0px 0px 15px;
+    }
+     .orgicon1line {
+        width: 50px !important;
     }
     span.title_main {
         font-size: 30px !important;
@@ -786,7 +804,25 @@ input[type="date"]::before {
 form.item-form.card.no-hover select {
     background-color: black !important;
 }
-ul.list-unstyled.viewproduct-detail li span:first-child , :root .boldertext{
-    color: #fff !important;
+ul.list-unstyled.viewproduct-detail li span:first-child , :root .boldertext , li.item_title , .card-inner-heading span{
+    color: #f5f5f5 !important;
     font-weight: 600!important;
+    margin-right: 10px; 
+}
+:root .nft_price {
+    color: #f5f5f5 !important;
+    font-size: 18px;
+}
+.item_created i.fa-solid.fa-circle {
+    margin-left: 0px;
+    color: white;
+    font-size: 7px;
+    position: relative;
+    top: -2px;
+}
+.progressbar {
+    border: 1px solid #454248;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 7px;
 }

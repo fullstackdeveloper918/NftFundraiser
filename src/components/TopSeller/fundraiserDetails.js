@@ -184,7 +184,7 @@ const FundraiserDetail = () => {
                                 <ul className="list-unstyled">
                                     <div className="card no-hover detail_single_nfts">
 
-                                        <li>
+                                        <li className='nft_price'>
                                             ${funddetail?.total_fundraised} raised from all projects
 
                                         </li>
@@ -196,14 +196,21 @@ const FundraiserDetail = () => {
 
                                     </div>
                                     <div className="card no-hover">
-                                        <li>
+                                        <li className='card-inner-heading'>
 
-                                            <span style={{ fontWeight: "600" }}>PROJECTS</span>
+                                            <span style={{}}>PROJECTS</span>
                                         </li>
 
                                         {fundprojdetail && fundprojdetail.length &&
                                             [...new Map(fundprojdetail.map(item =>
                                                 [item["title"], item])).values()]?.slice(0, 4)?.map((item, idx) => {
+                                                    const date1 = new Date(item.created_at)
+                                                    const date2 = new Date()
+                                                    console.log('todat', date2)
+                                                    const time_difference = date2.getTime() - date1.getTime();
+                                                    const days_difference = Math.ceil(time_difference / (1000 * 60 * 60 * 24));
+                                                    // const totaldays = days_difference.slice(0,1)
+                                                    console.log("daysss", days_difference)
                                                     return (
 
                                                         <>
@@ -211,16 +218,16 @@ const FundraiserDetail = () => {
                                                             <li className='item_title'>
                                                                 {item.title}
                                                             </li><li className='item_created'>
-                                                                {item.created_at}
+                                                                <i className="fa-solid fa-circle"></i>{days_difference} days ago
                                                                 {/* {(item.created_at).diff(new Date, 'day', true)} */}
                                                             </li></>
                                                     )
                                                 })}
-                                    </div>
-                                    <li>
-                                        <a className="d-block btn btn-bordered-white mt-4" href="/all/LatestProjects">view all</a>
+                                        <li>
+                                            <a className="d-block btn btn-bordered-white mt-4" href="/all/LatestProjects">view all</a>
 
-                                    </li>
+                                        </li>
+                                    </div>
 
                                 </ul>
 

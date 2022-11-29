@@ -100,7 +100,7 @@ const Header = () => {
                     <ul className="navbar-nav action">
                         {address &&
 
-                            <li className="nav-item ml-3">
+                            <li className="nav-item mr-2">
                                 <a className="btn ml-lg-auto btn-bordered-white" onClick={WalletHandler} style={{ color: '#f8f9fa' }}><i className="icon-wallet mr-md-2" />{add1}...{add2}</a>
                             </li>
                         }

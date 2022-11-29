@@ -290,7 +290,7 @@ const LatprojNftDetails = (props) => {
                     <div className="col-12 col-lg-4">
 
                         <div className="content sm:mt-5 mt-lg-0">
-                            <div className="card no-hover my-2">
+                            <div className="card no-hover">
 
 
 

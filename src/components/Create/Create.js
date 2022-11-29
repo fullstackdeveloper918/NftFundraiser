@@ -279,7 +279,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                 </div> */}
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
-                                        <label>Country</label>
+                                            <label>Country</label>
                                             <Controller
                                                 control={control}
                                                 name="country"
@@ -303,7 +303,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                     </div>
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
-                                        <label>State</label>
+                                            <label>State</label>
                                             <Controller
                                                 control={control}
                                                 name="state"
@@ -329,7 +329,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                     </div>
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
-                                        <label>City</label>
+                                            <label>City</label>
                                             <Controller
                                                 control={control}
                                                 name="city"
@@ -404,6 +404,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                                 <label>Campaign Start date</label>
                                                 <input
                                                     type="date"
+                                                    // placeholder='dd-mm-yy'
                                                     className="form-control"
                                                     name="start_date"
                                                     min={disablePastDate()}

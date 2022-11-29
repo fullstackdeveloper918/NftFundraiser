@@ -285,6 +285,7 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                                         <div className="row">
 
                                                             <div className="col-md-6 col-12">
+                                                                <label>Name</label>
                                                                 <div>
 
                                                                     <Form.Item
@@ -303,51 +304,9 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                                                         <Input placeholder="Name" />
                                                                     </Form.Item>
                                                                 </div>
+                                                                <label>Description</label>
                                                                 <div>
-                                                                    {/* <Form.Item
-                                                                        {...restField}
-                                                                        name={[name, "nft_description"]}
 
-                                                                        rules={[
-                                                                            {
-                                                                                required: true,
-                                                                                message: 'Missing Description',
-                                                                            },
-                                                                        ]}
-                                                                    > */}
-                                                                    {/* <label>Description</label> */}
-                                                                    {/* <TextArea placeholder="Description" minLength={'5px'} />
-                                                                         */}
-                                                                    {/* <Controller
-                                                                        control={control}
-                                                                        name="description"
-                                                                        defaultValue=""
-                                                                        render={({ field }) =>
-                                                                            <ThemeProvider theme={myTheme}>
-                                                                                <MUIRichTextEditor
-                                                                                    // defaultValue={nft_description}
-                                                                                    label="Start typing..."
-                                                                                    // onChange={setNft_description}
-                                                                                    onSave={save}
-                                                                                    // className="form-control"
-                                                                                    // name="description"
-                                                                                    // placeholder="Describe your project"
-
-                                                                                    // {...register("description", { required: true })}
-                                                                                    // {...register("email")}
-                                                                                    // required='true'
-                                                                                    aria-invalid={errors.description ? "true" : "false"}
-                                                                                />
-                                                                            </ThemeProvider>
-                                                                        }
-                                                                    /> */}
-
-                                                                    {/* </Form.Item> */}
-                                                                    {/* <Controller
-                                                                        control={control}
-                                                                        name="nft_description"
-                                                                        defaultValue=""
-                                                                        render={({ field }) => { */}
                                                                     <Controller
                                                                         control={control}
                                                                         name="nft_description"
@@ -368,6 +327,7 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                                                 </div>
                                                             </div>
                                                             <div className="col-md-5 col-12">
+                                                                <label>Nft</label>
                                                                 <div>
                                                                     <Form.Item
                                                                         {...restField}
@@ -415,7 +375,7 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
 
                                                                 {/* <div className="col-24"> */}
                                                                 <div className="form-group">
-                                                                    <label>Choose Collection</label>
+                                                                    <label className='mt-2'>Choose Collection</label>
                                                                     <div className="card choose_div" style={{
                                                                         background: "black",
                                                                         marginBottom: "8px",

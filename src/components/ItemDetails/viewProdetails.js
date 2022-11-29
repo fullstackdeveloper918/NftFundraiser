@@ -202,16 +202,17 @@ const ProjDetails = () => {
                     <div className="col-12 col-lg-4">
 
                         <div className="card no-hover">
-                            <span>$188,449 USD raised of $200,000 goal</span>
-                            <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 71% </span>
-
+                            <span className='nft_price'>$188,449 USD raised of $200,000 goal</span>
+                            <div className='progressbar'>
+                                <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 71% </span>
+                            </div>
 
                             <div className="content sm:mt-5 mt-lg-0">
 
 
                                 <div className="item-info-list">
                                     <ul className="list-unstyled viewproduct-detail">
-                                        <li> <span>Owned By :</span> <span> Organization name</span></li>
+                                        <li> <span>Owned By : </span> <span> Organization name</span></li>
                                         <li className="price d-flex">
                                             <span>Current Price : </span><span>{latprojdetail.price} MATIC</span>
                                             {/* <span>Price </span> */}
@@ -224,7 +225,7 @@ const ProjDetails = () => {
                                         </li>
                                         <li>
                                             {/* <span>Volume Traded </span> */}
-                                            <span>Number of NFT's Minted : {latprojdetail.number_of_nft}</span>
+                                            <span>Number of NFT's Minted :  </span><span>{latprojdetail.number_of_nft}</span>
                                         </li>
                                     </ul>
                                 </div>

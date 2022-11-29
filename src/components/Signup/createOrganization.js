@@ -95,7 +95,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
         <section className="author-area">
             <div className="container">
                 <div className="row justify-content-center">
-                    <div className="col-12 col-md-8 col-lg-7">
+                    <div className="col-12 col-md-9">
                         {/* Intro */}
                         <div className="intro text-center">
                             <span></span>
@@ -113,21 +113,23 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                     back
                                 </button> */}
                                 <div className="row">
-                                    <div className='orgicon1'>
+                                    <div className='col-12 d-flex justify-content-center'>
+                                        <div className='orgicon1'>
 
-                                        <i className="fa-regular fa-circle" style={{ marginRight: '8px', marginLeft: '138px' }}> Step 1</i>
+                                            <i className="fa-solid fa-circle-check" > Step 1</i>
+                                        </div>
+
+                                        <div className='orgicon1line'>
+                                            <span style={{ color: '#452868' }}> ----------------------------- </span>
+
+                                        </div>
+                                        <div className='orgicon2'>
+
+                                            <i className="fa-solid fa-circle-check" > Step 2</i>
+                                        </div>
+
                                     </div>
-
-                                    <div className='orgicon1line'>
-                                        <span style={{ color: '#452868' }}> ----------------------------- </span>
-
-                                    </div>
-                                    <div className='orgicon2'>
-
-                                        <i className="fa-solid fa-circle-check" style={{ marginLeft: '8px' }}> Step 2</i>
-                                    </div>
-
-                                    <div className="col-6">
+                                    <div className="col-md-6 col-12">
                                         <div className="form-group mt-3">
                                             <label>Fundraising Goal</label>
                                             <input
@@ -144,7 +146,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                             {errors.goal && <p style={{ color: 'red' }} role="alert">Fundraising goal is required</p>}
                                         </div>
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-md-6 col-12">
                                         <div className="form-group mt-3">
                                             <label>Funding Wallet </label>
                                             <input
@@ -160,7 +162,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                             {errors.wallet_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Wallet address is required</p>}
                                         </div>
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-md-6 col-12">
                                         <div className="form-group mt-3">
                                             <label>Name</label>
                                             <input
@@ -176,7 +178,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                         </div>
                                     </div>
 
-                                    <div className="col-6">
+                                    <div className="col-md-6 col-12">
                                         <div className="form-group mt-3">
                                             <label>Website</label>
                                             <input
@@ -232,7 +234,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                         </div>
                                     </div>
 
-                                    <div className="col-6">
+                                    <div className="col-md-6 col-12">
                                         <div className="form-group mt-3">
                                             <label>Country</label>
 
@@ -263,7 +265,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                             {errors.annual_revenue_range?.type === 'required' && <p style={{ color: 'red' }} role="alert">Range name is required</p>}
                                         </div>
                                     </div> */}
-                                    <div className="col-6">
+                                    <div className="col-md-6 col-12">
                                         <div className="form-group mt-3">
                                             <label>EIN Number/Tax Id</label>
                                             <input
@@ -278,7 +280,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                             {errors.tax_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Id is required</p>}
                                         </div>
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-md-6 col-12">
                                         <div className="form-group mt-3">
                                             <label>Social Media (required)</label>
                                             <select name="social"
@@ -295,7 +297,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                         </div>
                                     </div>
 
-                                    <div className="col-6">
+                                    <div className="col-md-6 col-12">
                                         <div className="form-group mt-3">
                                             <label>Social Media (secondary)</label>
                                             <div className="input-group-prepend">
@@ -331,11 +333,11 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                     </div> */}
 
 
-                                    <div className="col-6">
+                                    <div className="col-md-6 col-12">
                                         <div className="form-group mt-3">
                                             <label>Banner</label>
                                             <input
-                                                className="form-control"
+                                                className="form-control p-2"
                                                 type="file"
 
                                                 name="banner_image"
@@ -349,11 +351,11 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                             {errors.banner_image?.type === 'required' && <p style={{ color: 'red' }} role="alert">Banner is required</p>}
                                         </div>
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-md-6 col-12">
                                         <div className="form-group mt-3">
                                             <label>Logo</label>
                                             <input
-                                                className="form-control"
+                                                className="form-control p-2"
                                                 type="file"
                                                 name="logo"
                                                 placeholder="Select file"

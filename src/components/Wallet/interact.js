@@ -208,7 +208,6 @@ const deployContract = async () => {
 }
 export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCurrent, contractAddress, collid }) => {
   const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }) => {
-    debugger
     try {
       const formData = new FormData();
 
@@ -301,7 +300,6 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
         setCurrent(1)
       })
       .on('confirmation', async (confNumber, receipt) => {
-        debugger
         if (confNumber == 1) {
           await UpdateContract(collid)
           const tokid = web3.utils.hexToNumber(receipt.logs[0].topics[3])
@@ -335,8 +333,17 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values }) => {
 
+  debugger
+  const addressArray = await window.ethereum.request({
+    method: "eth_requestAccounts",
+  });
 
-  const nftContract = new web3.eth.Contract(contractABI.abi, '0x53C26EB02eAaCBCcf23052D21bEE7a191903241C')
+  const obj = {
+    status: "👆🏽 Write a message in the text-field above.",
+    address: addressArray[0],
+  };
+  console.log(obj)
+  const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
   const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
   //the transaction
   const amount = '0.01'; // Willing to send 2 ethers
@@ -352,12 +359,15 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values }) => {
   // };
   const transferowner = {
     'from': window.ethereum?.selectedAddress,
-    'to': '0x53C26EB02eAaCBCcf23052D21bEE7a191903241C',
-    'gas': 500000,
+    'to': contractAddress,
+    // 'to': '0x53C26EB02eAaCBCcf23052D21bEE7a191903241C',
+    "gasPrice": web3.utils.toHex('20000000000'),
+    "gasLimit": web3.utils.toHex('500000'),
+    // 'value': amountToSend,
     // 'nonce': nonce,
     // 'chainId': '0x3',
-    'input': nftContract.methods.approveAndTransfer(
-      '0x53C26EB02eAaCBCcf23052D21bEE7a191903241C', '1', '0xe3aece4172d4092fac4dc5dd8389fca32fcddf6c', window.ethereum?.selectedAddress).encodeABI()
+    'input': nftContract.methods.safeTransferFrom(
+      payFrom, window.ethereum?.selectedAddress, tokenId).encodeABI()
     //I could use also transferFrom
   };
 
