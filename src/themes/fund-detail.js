@@ -13,7 +13,8 @@ import Fundraiser from '../components/TopSeller/topfundraiser';
 const FundDetail = () => {
 
     return (
-        <div className="main">
+        <div className="main main-fund-detail">
+
             <Header />
             <FundraiserDetail />
             <Fundraiser />

@@ -19,22 +19,29 @@ const ProjNFTS = () => {
 
     }, [id])
     return (
-        <section className="live-auctions-area">
+        <section className="live-auctions-area single_project-detail">
             <div className="container">
+                <div className='intro row m-0'>
+                    <div className="intro-content">
+                        <span style={{ marginLeft: "15px" }}>NFT's</span>
+                        <h3 className="w-full mb-0">NFT'S</h3>
+                    </div>
+                </div>
+
 
                 <div className="row items">
+
                     {latprojdetail?.nft_data?.map((item, idx) => {
                         return (
                             <div key={`auct_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
-                                <div className="intro text-center">
-                                    <h3 className="mt-3 mb-0">NFT'S</h3>
-                                    {/* <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati <br /> dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p> */}
-                                </div>
+                                {/* <div className="intro text-center">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati <br /> dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p>
+                                </div> */}
                                 <div className="card">
 
                                     <div className="image-over">
                                         <Link to={`/nftprojdetails/${item.id}`}>
-                                            <img className="card-img-top" src={item.image} alt="" />
+                                            <img className="card-img-top" src="/img/ph.jpg" alt="" />
                                         </Link>
                                     </div>
                                     {/* Card Caption */}
@@ -42,7 +49,7 @@ const ProjNFTS = () => {
                                         {/* Card Body */}
                                         <div className="card-body">
                                             <div className="countdown-times mb-3">
-                                                <div className="countdown d-flex justify-content-center" data-date={item.end_date} />
+                                                <div className="countdown d-flex" data-date={item.end_date} />
                                             </div>
                                             <a href="/item-details">
                                                 <h5 className="mb-0">{item.title.toUpperCase()} #{item.token_id}</h5>
@@ -52,8 +59,8 @@ const ProjNFTS = () => {
                                                     src='https://images.unsplash.com/photo-1547555999-14e818e09e33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80' alt="" />
                                                 <span className="ml-2">{item.from}</span>
                                             </a> */}
-                                            <div className="card-bottom d-flex justify-content-between">
-                                                <span dangerouslySetInnerHTML={{ __html: item.description.toUpperCase().slice(0, 27) }} />
+                                            <div className="card-bottom d-flex">
+                                                <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 28).toUpperCase() }} /><span></span>
                                             </div>
                                         </div>
                                     </div>

@@ -135,8 +135,12 @@ const ProjDetails = () => {
     return (
         <section className="item-details-area">
             <div className="container">
-                <div className="row justify-content-between">
-                    <div className="col-12 col-md-5">
+                <div className='row py-0'>
+                    <span Class="title_main ">{latprojdetail.title}</span>
+                </div>
+
+                <div className="row justify-content-between px-0">
+                    <div className="col-12 col-lg-8">
                         <div className="item-info">
 
                             <><div className="item-thumb text-center">
@@ -195,8 +199,8 @@ const ProjDetails = () => {
                         </div>
                     </div>
 
-                    <div className="col-12 col-md-6">
-                        <h4 style={{ color: '#fff' }} >{latprojdetail.title}</h4>
+                    <div className="col-12 col-lg-4">
+
                         <div className="card no-hover">
                             <span>$188,449 USD raised of $200,000 goal</span>
                             <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 71% </span>

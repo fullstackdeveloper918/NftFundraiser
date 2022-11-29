@@ -24,10 +24,8 @@
 //         // debugger
 //         return state.projectdetails.settings
 //     })
-//     // console.log('getSett', getSett.find(x => x.key === 'pricing_per_nft'))
+//     console.log('getSett', getSett)
 //     const setValue = getSett.find(x => x.key === 'pricing_per_nft')
-//     // console.log('setval', setValue.value)
-
 //     useEffect(() => {
 //         dispatch(GetNftwol(id))
 //         dispatch(GetSettings())
@@ -41,17 +39,18 @@
 //             payFrom: latprojnftdetail.pay_from,
 //             values: setValue.value
 
+
 //         })
 //     }
 //     return (
 //         <section className="item-details-area">
 //             <div className="container">
 //                 <div className="row justify-content-between">
-//                     <div className="col-12 col-lg-5">
+//                     <div className="col-12 col-md-7">
 //                         <div className="item-info">
 //                             {/* {latprojdetail?.map((item, key) => ( */}
 
-//                             <h4 style={{ color: '#fff' }}>{latprojnftdetail.title}</h4>
+
 //                             <><div className="item-thumb text-center">
 
 //                                 {/* {latprojdetail?.nft_data?.map((item, idx) => { */}
@@ -107,61 +106,64 @@
 //                         </div>
 //                     </div>
 
-//                     <div className="col-12 col-lg-6">
-//                         <div className="content mt-5 mt-lg-0">
-
-//                             <div className='eddlbtton d-flex  align-items-center px-2'>
-
-//                                 <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-//                                     id="nftdetail.id" onClick={() => buyHandler()}>  Buy</button>
+//                     <div className="col-12 col-md-5">
+//                         <h4 style={{ color: '#fff' }}>{latprojnftdetail.title}</h4>
+//                         <div className="content sm:mt-5 mt-lg-0">
+//                             <div className="card no-hover my-2">
 
 
-//                             </div>
 
-//                             <div className='d-flex  align-items-center justify-content-between'>
-//                                 {/* <h3 className="m-0">{nftdetail?.title}</h3> */}
+//                                 <div className='d-flex  align-items-center justify-content-between'>
+//                                     {/* <h3 className="m-0">{nftdetail?.title}</h3> */}
 
-//                                 <div className='eddlbtton d-flex  align-items-center '>
-//                                     {/* <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={`/updateproject/${projdetail.projectdetails.id}`} style={{ color: '#FFF' }}>Edit</Link></a>
+//                                     <div className='eddlbtton d-flex  align-items-center '>
+//                                         {/* <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={`/updateproject/${projdetail.projectdetails.id}`} style={{ color: '#FFF' }}>Edit</Link></a>
 //                                     <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-2" onClick={() => deleteHandler(projdetail.projectdetails.id)} style={{ color: '#FFF' }}>Delete</a> */}
+//                                     </div>
+
 //                                 </div>
 
-//                             </div>
+//                                 {/* <p dangerouslySetInnerHTML={{ __html: nftdetail?.description }} /> */}
+//                                 <div className="owner d-flex align-items-center">
+//                                     <span>Owned By : {latprojnftdetail.pay_from}</span>
+//                                     <a className="owner-meta d-flex align-items-center ml-3" href="/author">
+//                                         {/* <img className="avatar-sm rounded-circle" src="/img/avtar1.png" alt="" /> */}
+//                                         {/* <h6 className="ml-2">{latprojnftdetail.pay_from}</h6> */}
+//                                     </a>
+//                                 </div>
 
-//                             {/* <p dangerouslySetInnerHTML={{ __html: nftdetail?.description }} /> */}
-//                             <div className="owner d-flex align-items-center">
-//                                 <span>Owned By : {latprojnftdetail.pay_from}</span>
-//                                 <a className="owner-meta d-flex align-items-center ml-3" href="/author">
-//                                     {/* <img className="avatar-sm rounded-circle" src="/img/avtar1.png" alt="" /> */}
-//                                     {/* <h6 className="ml-2">{latprojnftdetail.pay_from}</h6> */}
-//                                 </a>
-//                             </div>
+//                                 <div className="item-info-list">
+//                                     <ul className="list-unstyled">
+//                                         <li className="price d-flex">
+//                                             {/* <span>Current Price : {nftdetail?.price} MATIC</span> */}
+//                                             {/* <span>Price </span> */}
+//                                             {/* <span>{latprojdetail.price} MATIC</span> */}
 
-//                             <div className="item-info-list mt-4">
-//                                 <ul className="list-unstyled">
-//                                     <li className="price d-flex justify-content-between">
-//                                         {/* <span>Current Price : {nftdetail?.price} MATIC</span> */}
-//                                         {/* <span>Price </span> */}
-//                                         {/* <span>{latprojdetail.price} MATIC</span> */}
-
-//                                     </li>
-//                                     {/* <li>
+//                                         </li>
+//                                         {/* <li>
 
 //                                         <span dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} />
 //                                     </li> */}
-//                                     {/* <li> */}
-//                                     {/* <span>Volume Traded </span> */}
-//                                     {/* {latprojdetail?.nft_data?.map((item, idx) => { */}
-//                                     {/* debugger */}
+//                                         {/* <li> */}
+//                                         {/* <span>Volume Traded </span> */}
+//                                         {/* {latprojdetail?.nft_data?.map((item, idx) => { */}
+//                                         {/* debugger */}
 
-//                                     <span>Token : #{latprojnftdetail.token_id}</span>
+//                                         <span>Token : #{latprojnftdetail.token_id}</span>
 
-//                                     {/* })} */}
-//                                     {/* </li> */}
-//                                 </ul>
+//                                         {/* })} */}
+//                                         {/* </li> */}
+//                                     </ul>
+//                                 </div>
+//                                 <div className='eddlbtton d-flex  align-items-center px-2'>
+
+//                                     <button className="btn btn-bordered-white w-100 btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+//                                         id="nftdetail.id" onClick={() => buyHandler()}>  Buy</button>
+
+
+//                                 </div>
+//                                 {/* <a className="d-block btn btn-bordered-white mt-4" href="/wallet-connect">{initData.btnText}</a> */}
 //                             </div>
-
-//                             {/* <a className="d-block btn btn-bordered-white mt-4" href="/wallet-connect">{initData.btnText}</a> */}
 //                         </div>
 //                     </div>
 //                 </div>
@@ -221,8 +223,11 @@ const LatprojNftDetails = (props) => {
     return (
         <section className="item-details-area">
             <div className="container">
-                <div className="row justify-content-between">
-                    <div className="col-12 col-md-7">
+                <div className='row py-0'>
+                    <span Class="title_main " style={{ color: '#fff' }}>{latprojnftdetail.title}</span>
+                </div>
+                <div className="row justify-content-between px-0">
+                    <div className="col-12 col-lg-8">
                         <div className="item-info">
                             {/* {latprojdetail?.map((item, key) => ( */}
 
@@ -267,7 +272,7 @@ const LatprojNftDetails = (props) => {
                                         })}
                                     </ul>
                                 </div>
-
+​
                                 <div className="tab-pane fade" id="nav-contact">
                                     <div className="owner-meta d-flex align-items-center mt-3">
                                         <span>Owner</span>
@@ -282,8 +287,8 @@ const LatprojNftDetails = (props) => {
                         </div>
                     </div>
 
-                    <div className="col-12 col-md-5">
-                        <h4 style={{ color: '#fff' }}>{latprojnftdetail.title}</h4>
+                    <div className="col-12 col-lg-4">
+
                         <div className="content sm:mt-5 mt-lg-0">
                             <div className="card no-hover my-2">
 
@@ -300,8 +305,9 @@ const LatprojNftDetails = (props) => {
                                 </div>
 
                                 {/* <p dangerouslySetInnerHTML={{ __html: nftdetail?.description }} /> */}
-                                <div className="owner d-flex align-items-center">
-                                    <span>Owned By : {latprojnftdetail.pay_from}</span>
+                                <div className="owner align-items-start">
+                                    <span className='boldertext w-100'>Owned By : </span>
+                                    <span>{latprojnftdetail.pay_from}</span>
                                     <a className="owner-meta d-flex align-items-center ml-3" href="/author">
                                         {/* <img className="avatar-sm rounded-circle" src="/img/avtar1.png" alt="" /> */}
                                         {/* <h6 className="ml-2">{latprojnftdetail.pay_from}</h6> */}
@@ -317,7 +323,7 @@ const LatprojNftDetails = (props) => {
 
                                         </li>
                                         {/* <li>
-
+​
                                         <span dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} />
                                     </li> */}
                                         {/* <li> */}
@@ -325,8 +331,8 @@ const LatprojNftDetails = (props) => {
                                         {/* {latprojdetail?.nft_data?.map((item, idx) => { */}
                                         {/* debugger */}
 
-                                        <span>Token : #{latprojnftdetail.token_id}</span>
-
+                                        <span class='boldertext'>Token :</span>
+                                        <span> #{latprojnftdetail.token_id}</span>
                                         {/* })} */}
                                         {/* </li> */}
                                     </ul>
@@ -347,7 +353,6 @@ const LatprojNftDetails = (props) => {
 
         </section >
     );
-
 }
 
 

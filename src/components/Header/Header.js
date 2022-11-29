@@ -76,12 +76,12 @@ const Header = () => {
                             <Link className="nav-link" to="/">Explore</Link>
                         </li>
 
-                        {log !== null && (
+                        {/* {log !== null && ( */}
 
-                            <li className="nav-item">
-                                <Link to="/create" className="nav-link">Create</Link>
-                            </li>
-                        )}
+                        <li className="nav-item">
+                            <Link to="/create" className="nav-link">Create</Link>
+                        </li>
+                        {/* )} */}
                         <li className="nav-item">
                             <Link to={`/all/${"LatestProjects"}`} className="nav-link">Newest Projects</Link>
                         </li>
