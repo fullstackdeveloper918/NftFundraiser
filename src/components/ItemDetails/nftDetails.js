@@ -125,7 +125,7 @@ const NftDetails = (props) => {
         return state.projectdetails.nftlist
 
     })
-    console.log(nftdetail.description, 'latprojdetail')
+    console.log(nftdetail, 'latprojdetail')
     const collupdate = useSelector(state => {
         return state?.projectdetails?.collectiondetails
     })
@@ -182,6 +182,7 @@ const NftDetails = (props) => {
 
 
     const deployContract = async () => {
+
         try {
             if (nftdetail?.collectionData?.contract_id == null) {
 
@@ -197,7 +198,7 @@ const NftDetails = (props) => {
 
                 MyNFTContract.deploy({
                     data: NFTContract.bytecode,
-                    arguments: [{ 'symbol': nftdetail?.collectionData?.symbol }, { 'url': nftdetail?.collectionData?.short_url }],
+                    arguments: [nftdetail?.collectionData?.title, nftdetail?.collectionData?.symbol],
                 }).send({
                     from: address,
                 })

@@ -826,3 +826,12 @@ ul.list-unstyled.viewproduct-detail li span:first-child , :root .boldertext , li
     margin-bottom: 20px;
     border-radius: 7px;
 }
+hr {
+    
+    background-color: white;
+}
+.copy .fa-solid {
+    margin-left: 0px;
+    color: #fff;
+   
+}

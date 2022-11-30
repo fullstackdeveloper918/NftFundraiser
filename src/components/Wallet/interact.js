@@ -283,7 +283,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
     // const web3 = new Web3(window.ethereum);
 
     await web3.eth.sendTransaction({
-      to: '0xF5689144C9fE7E45d175DA28E96ba95c8155989C', // Required except during contract publications.
+      to: contractAddress, // Required except during contract publications.
       from: window.ethereum.selectedAddress,
       data: contract.methods.mint(ipfsBaseUrl + addedMetaData.path).encodeABI() //make call to NFT smart contract
     })
@@ -332,8 +332,6 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
 }
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values }) => {
-
-  debugger
   const addressArray = await window.ethereum.request({
     method: "eth_requestAccounts",
   });
@@ -359,15 +357,13 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values }) => {
   // };
   const transferowner = {
     'from': window.ethereum?.selectedAddress,
-    'to': contractAddress,
-    // 'to': '0x53C26EB02eAaCBCcf23052D21bEE7a191903241C',
-    "gasPrice": web3.utils.toHex('20000000000'),
-    "gasLimit": web3.utils.toHex('500000'),
-    // 'value': amountToSend,
+    'to': '0xe3aece4172d4092fac4dc5dd8389fca32fcddf6c',
+    // "gasPrice": web3.utils.toHex('20000000000'),
+    // "gasLimit": web3.utils.toHex('500000'),
+    'value': amountToSend,
     // 'nonce': nonce,
     // 'chainId': '0x3',
-    'input': nftContract.methods.safeTransferFrom(
-      payFrom, window.ethereum?.selectedAddress, tokenId).encodeABI()
+    'input': nftContract.methods.buyNft(contractAddress, tokenId).encodeABI()
     //I could use also transferFrom
   };
 
