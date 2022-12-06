@@ -15,7 +15,7 @@ class ItemDetails extends Component {
             <div className="main">
                 <Header />
                 <ItemDetail />
-                <LiveAuctions />
+                {/* <LiveAuctions /> */}
                 <Footer />
                 <ModalSearch />
                 <ModalMenu />

@@ -66,7 +66,6 @@ input , textarea{
     color: #fff !important;
 }
 .choose_div div {
-    padding: 15px !important;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -80,6 +79,7 @@ input , textarea{
 }
 .card-body div {
     color: #fff !important;
+    font-family: 'Poppins', sans-serif !important;
 }
 ::placeholder{
     font-weight: 400!important;
@@ -407,8 +407,11 @@ header .navbar-expand .dropdown:hover > .dropdown-menu {
     }
 }
 
-nav .header .navbar-nav.items li a:hover , .dropdown ul li a:hover , .card-body a h5:hover{
+nav .header .navbar-nav.items li a:hover , .dropdown ul li a:hover , .card-body a h5:hover , .explore-menu label span:hover{
     color: #4528DC !important;
+}
+.explore-menu label span{
+transition: 0.3s ease-in-out;
 }
 .step2icon i , .step1icon i , .stepperline i , .single-work h4 {
     color: #fff !important;
@@ -445,6 +448,7 @@ input::placeholder , textarea::placeholder   {
 i.fa-regular.fa-plus {
     color: #fff;
     margin-right: 5px;
+    margin-left: 0;
 }
 form#dynamic_form_nest_item .anticon {
     vertical-align: unset!important;
@@ -610,10 +614,9 @@ span , p{
     font-size: 16px;
 }
 span.progress-bar.bg-success {
-    margin-top: 20px;
     padding: 4px;
     color :#fff !important;
-    margin-bottom: 20px;
+   margin: 0; 
 }
 .live-auctions-area.single_project-detail h3{
     width: 100%;
@@ -834,4 +837,33 @@ hr {
     margin-left: 0px;
     color: #fff;
    
+}
+.demo .modal-content {
+    background-color: var(--primary-bg-color);
+    border: none;
+    border-radius: 0;
+    overflow-x: hidden;
+    height: auto;
+    max-height: calc(100vh - 40px);
+    overflow-y: scroll;
+}
+.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: unset !important;
+}
+.create_collection span{
+    font-size: 14px;
+}
+.modal-body hr {
+    margin: 15px 0;
+}
+.refer-icons {
+    display: flex;
+    justify-content: space-between;
+}
+.countdown.d-flex {
+    flex-direction: column;
+}
+section{
+    height: auto;
+    min-height: calc(100vh - 450px);
 }

@@ -125,7 +125,7 @@ const ItemDetails = () => {
                                     <div className="countdown d-flex justify-content-center" data-date={initData.date} />
                                 </div>
                                 {/* Netstorm Tab */}
-                                <ul className="netstorm-tab nav nav-tabs" id="nav-tab">
+                                {/* <ul className="netstorm-tab nav nav-tabs" id="nav-tab">
                                     <><li>
                                         <a className="active" id="nav-home-tab" data-toggle="pill" href="#nav-home">
                                             <h5 className="m-0">{initData.tab_1}</h5>
@@ -139,12 +139,12 @@ const ItemDetails = () => {
                                                 <h5 className="m-0">{initData.tab_3}</h5>
                                             </a>
                                         </li></>
-                                </ul>
+                                </ul> */}
                             </>
                             {/* )) */}
                             {/* } */}
                             <div className="tab-content" id="nav-tabContent">
-                                <div className="tab-pane fade show active" id="nav-home">
+                                {/* <div className="tab-pane fade show active" id="nav-home">
                                     <ul className="list-unstyled">
                                         {tabData_1.map((item, idx) => {
                                             return (
@@ -155,8 +155,8 @@ const ItemDetails = () => {
                                             )
                                         })}
                                     </ul>
-                                </div>
-                                <div className="tab-pane fade" id="nav-profile">
+                                </div> */}
+                                {/* <div className="tab-pane fade" id="nav-profile">
                                     <ul className="list-unstyled">
 
                                         {tabData_2.map((item, idx) => {
@@ -168,8 +168,8 @@ const ItemDetails = () => {
                                             )
                                         })}
                                     </ul>
-                                </div>
-                                <div className="tab-pane fade" id="nav-contact">
+                                </div> */}
+                                {/* <div className="tab-pane fade" id="nav-contact">
                                     <div className="owner-meta d-flex align-items-center mt-3">
                                         <span>Owner</span>
                                         <a className="owner d-flex align-items-center ml-2" href="/author">
@@ -178,7 +178,7 @@ const ItemDetails = () => {
                                         </a>
                                     </div>
                                     <p className="mt-2">Created : {initData.created}</p>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
@@ -188,10 +188,10 @@ const ItemDetails = () => {
                             <div className='d-flex  align-items-center justify-content-between'>
                                 <h3 className="m-0">{projdetail.projectdetails.title}</h3>
 
-                                <div className='eddlbtton d-flex  align-items-center '>
+                                {/* <div className='eddlbtton d-flex  align-items-center '>
                                     <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={`/updateproject/${projdetail.projectdetails.id}`} style={{ color: '#FFF' }}>Edit</Link></a>
                                     <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-2" onClick={() => deleteHandler(projdetail.projectdetails.id)} style={{ color: '#FFF' }}>Delete</a>
-                                </div>
+                                </div> */}
 
                             </div>
                             <p>{projdetail.projectdetails.description}</p>
@@ -213,14 +213,14 @@ const ItemDetails = () => {
                                         <span>Size </span>
                                         <span>{projdetail.projectdetails.latitude}</span>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <span>Volume Traded </span>
                                         <span>{projdetail.projectdetails.logitude}</span>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                             <div className="row items">
-                                {sellerData.map((item, idx) => {
+                                {/* {sellerData.map((item, idx) => {
                                     return (
                                         <div key={`sd_${idx}`} className="col-12 col-md-6 item px-lg-2">
                                             <div className="card no-hover">
@@ -236,8 +236,8 @@ const ItemDetails = () => {
                                             </div>
                                         </div>
                                     );
-                                })}
-                                <div className="col-12 item px-lg-2">
+                                })} */}
+                                {/* <div className="col-12 item px-lg-2">
                                     <div className="card no-hover">
                                         <h4 className="mt-0 mb-2">Highest Bid</h4>
                                         <div className="price d-flex justify-content-between align-items-center">
@@ -245,9 +245,9 @@ const ItemDetails = () => {
                                             <span>{initData.bid_count}</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
-                            <a className="d-block btn btn-bordered-white mt-4" href="/wallet-connect">{initData.btnText}</a>
+                            {/* <a className="d-block btn btn-bordered-white mt-4" href="/wallet-connect">{initData.btnText}</a> */}
                         </div>
                     </div>
                 </div>
