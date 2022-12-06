@@ -32,8 +32,8 @@ const GetAllProjects = () => {
                         <div className="col-12 col-md-8 col-lg-7">
                             {/* Intro */}
                             <div className="intro text-center mb-4">
-                                <span>Explore</span>
-                                <h3 className="mt-3 mb-0">Projects</h3>
+                                {/* <span>Explore</span> */}
+                                <h3 className="mt-3 mb-0">My Projects</h3>
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@ const GetAllProjects = () => {
                                                             <div className="seller d-flex align-items-center my-3">
                                                                 <span>Owned By</span>
                                                                 <a href="/author">
-                                                                    <h6 className="ml-2 mb-0">{"bc1q...hx0wlh"}</h6>
+                                                                    <h6 className="ml-2 mb-0">You</h6>
                                                                 </a>
                                                             </div>
                                                             <div className="card-bottom d-flex justify-content-between">

@@ -18,7 +18,8 @@ import {
     getNftList,
     getSettings,
     getNftwolDetails,
-    getfundprojdetails
+    getfundprojdetails,
+    Nftres
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -119,6 +120,7 @@ export const ProjectList = () => async dispatch => {
         }
     }
 }
+
 export const NftList = (id) => async dispatch => {
     const token = sessionStorage.getItem('authToken')
     try {
@@ -128,7 +130,6 @@ export const NftList = (id) => async dispatch => {
                 'Authorization': `Bearer ${token}`
             },
         }
-
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getNftDetailByIdx/${id}`,
             config)
 
@@ -141,10 +142,47 @@ export const NftList = (id) => async dispatch => {
         }
     }
 }
+export const uploadNFT = (params) => {
+    // debugger
+    const token = sessionStorage.getItem('authToken')
+    const config = {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
+        },
+        // transformRequest: formData.append('image', params)
+    }
+    const formData = new FormData();
+
+    formData.append("image", params);
+    return axios
+        .post(`${process.env.REACT_APP_BACKEND_API}api/ipfsHash/Nfft`,
+            formData, config)
+        .then(function (response) {
+            console.log(response, 'resss')
+            return {
+                success: true,
+                data: response.data,
+            };
+        })
+        .catch(function (error) {
+            return { success: false };
+        });
+    // formData.append('image',params)
+
+    // const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/ipfsHash/Nfft`,
+    //     params, config)
+    // debugger
+    // console.log('rasasses', res)
+    // return res
+    // await dispatch(Nftres(res))
+
+}
 
 
 export const getPublicLiveProjects = createAsyncThunk(
     "auth/liveProjects",
+
     async (params, thunkAPI) => {
         try {
             const { type, projectType } = params
@@ -243,35 +281,6 @@ export const CategoriesAction = () => async dispatch => {
     }
 }
 
-export const CreateCollectionAction = (params) => async dispatch => {
-    try {
-        const token = sessionStorage.getItem('authToken')
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
-            },
-        }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createCollection`,
-            params, config)
-        dispatch(createCollectionSuccess(res));
-        dispatch(GetCollectionsAction)
-        if (res.status === 200) {
-            swal("success", 'Collection Created', 'success')
-            // .then(function () {
-            //     onclick={props.onHide}
-
-            // });
-
-        }
-
-    } catch (e) {
-        if (e?.response?.data.message) {
-            swal('error', e.response.data.message, 'error')
-            dispatch(createFail(e))
-        }
-    }
-}
 
 export const GetCollectionsAction = () => async dispatch => {
     const token = sessionStorage.getItem('authToken')
@@ -285,12 +294,42 @@ export const GetCollectionsAction = () => async dispatch => {
 
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getCollection`,
             config)
-
+        console.log('colres', res)
         await dispatch(getCollections(res));
 
     } catch (e) {
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const CreateCollectionAction = (params) => async dispatch => {
+    try {
+        const token = sessionStorage.getItem('authToken')
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createCollection`,
+            params, config)
+        dispatch(createCollectionSuccess(res));
+        // dispatch(GetCollectionsAction)
+        if (res?.status === 200) {
+
+            dispatch(GetCollectionsAction());
+            swal("success", 'Collection Created', 'success')
+            // .then(function () {
+            //     onClick={() => props.onHide()}
+            // });
+
+        }
+
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+            dispatch(createFail(e))
         }
     }
 }

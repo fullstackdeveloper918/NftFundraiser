@@ -22,6 +22,7 @@ const projectSlice = createSlice({
         getfundProjDetails: [],
         getnftwoldetails: [],
         settings: [],
+        nftres: [],
         // liveProjects: [],
         liveProjects: {
             LatestProjects: [],
@@ -81,6 +82,10 @@ const projectSlice = createSlice({
             // debugger
             state.collectiondetails = action?.payload?.data?.data;
         },
+        Nftres: (state, action) => {
+            // debugger
+            state.nftres = action?.payload?.data?.data;
+        },
         getNftList: (state, action) => {
             // debugger
             state.nftlist = action?.payload?.data?.data;
@@ -121,5 +126,6 @@ export const {
     getCollectionDetail,
     getSettings,
     getNftwolDetails,
-    getfundprojdetails
+    getfundprojdetails,
+    Nftres,
 } = projectSlice.actions;

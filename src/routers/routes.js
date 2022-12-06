@@ -38,6 +38,7 @@ import Nft from './../themes/nft-list';
 import FundDetail from "../themes/fund-detail";
 import { useEffect } from "react";
 import latnftprojDetails from "../themes/Latnft";
+import ScrollToTop from "../ScrollToTop";
 // import { NavLink } from "react-router-dom";
 
 const MyRouts = () => {
@@ -46,6 +47,7 @@ const MyRouts = () => {
   return (
     <div>
       <BrowserRouter>
+        <ScrollToTop />
         <Switch>
           <Route exact path="/" component={ThemeOne} />
           <Route exact path="/explore-1" component={ExploreOne} />

@@ -238,7 +238,7 @@ const EditProject = () => {
                                                 // onChange={onChange}
 
                                                 <GeoLocation
-                                                    locationTitle="Country"
+                                                    // locationTitle="Country"
                                                     isCountry
                                                     onBlur={onBlur}
                                                     selected={value}
@@ -260,7 +260,7 @@ const EditProject = () => {
                                                 <GeoLocation
                                                     // type="text"
                                                     // className="form-control"
-                                                    locationTitle="State"
+                                                    // locationTitle="State"
                                                     onChange={setState}
                                                     geoId={country}
                                                     onBlur={onBlur}
@@ -282,7 +282,7 @@ const EditProject = () => {
                                             render={({ field: { onChange, onBlur, value, ref } }) => (
 
                                                 <GeoLocation
-                                                    locationTitle="City"
+                                                    // locationTitle="City"
                                                     onChange={setCity}
                                                     geoId={state}
                                                     onBlur={onBlur}

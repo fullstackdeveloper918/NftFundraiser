@@ -279,7 +279,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                 </div> */}
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
-                                        <label>Country</label>
+                                            <label>Country</label>
                                             <Controller
                                                 control={control}
                                                 name="country"
@@ -288,7 +288,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                                     // onChange={onChange}
 
                                                     <GeoLocation
-                                                        // locationTitle="Country"
+                                                        // locationTitle="Country"  
                                                         isCountry
 
                                                         onBlur={onBlur}
@@ -303,7 +303,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                     </div>
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
-                                        <label>State</label>
+                                            <label>State</label>
                                             <Controller
                                                 control={control}
                                                 name="state"
@@ -329,7 +329,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                     </div>
                                     <div className="col-12 col-md-6">
                                         <div className="form-group">
-                                        <label>City</label>
+                                            <label>City</label>
                                             <Controller
                                                 control={control}
                                                 name="city"
@@ -381,6 +381,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                                 className="form-control"
                                                 name="number_of_nft"
                                                 defaultValue={1}
+                                                min={1}
                                                 disabled={type == 1}
                                                 placeholder="Select your number of NFT's (1-12)"
                                                 {...register("number_of_nft", { required: true, min: 1, max: 12 })}
@@ -404,6 +405,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                                 <label>Campaign Start date</label>
                                                 <input
                                                     type="date"
+                                                    // placeholder='dd-mm-yy'
                                                     className="form-control"
                                                     name="start_date"
                                                     min={disablePastDate()}

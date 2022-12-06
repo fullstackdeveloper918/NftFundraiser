@@ -125,7 +125,7 @@ const NftDetails = (props) => {
         return state.projectdetails.nftlist
 
     })
-    console.log(nftdetail?.collectionData, 'latprojdetail')
+    console.log(nftdetail, 'latprojdetail')
     const collupdate = useSelector(state => {
         return state?.projectdetails?.collectiondetails
     })
@@ -182,8 +182,9 @@ const NftDetails = (props) => {
 
 
     const deployContract = async () => {
+
         try {
-            if (false) {
+            if (nftdetail?.collectionData?.contract_id == null) {
 
                 await window.ethereum.request({
                     method: 'wallet_switchEthereumChain',
@@ -197,7 +198,7 @@ const NftDetails = (props) => {
 
                 MyNFTContract.deploy({
                     data: NFTContract.bytecode,
-                    arguments: { "symbol": nftdetail?.collectionData?.symbol, "url": nftdetail?.collectionData?.short_url },
+                    arguments: [nftdetail?.collectionData?.title, nftdetail?.collectionData?.symbol],
                 }).send({
                     from: address,
                 })
@@ -254,9 +255,12 @@ const NftDetails = (props) => {
                             {/* {latprojdetail?.map((item, key) => ( */}
 
                             <><div className="item-thumb text-center">
-                                <img src="/img/ph.jpg" alt="" />
+                                <img src={nftdetail.image} alt="" />
                             </div><div className="card no-hover countdown-times my-4">
-                                    <div className="countdown d-flex justify-content-center" />
+                                    {/* ksdjfksdjbfjsdbf */}
+                                    {/* {nftdetail.description} */}
+                                    {/* <div className="countdown d-flex justify-content-center" /> */}
+                                    <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft" />
                                 </div>
                                 {/* Netstorm Tab */}
                                 {/* <ul className="netstorm-tab nav nav-tabs" id="nav-tab">
@@ -313,7 +317,7 @@ const NftDetails = (props) => {
 
                             </div>
 
-                            <p dangerouslySetInnerHTML={{ __html: nftdetail?.description }} className="nft-detail-nft" />
+
                             <div className="owner d-flex align-items-center">
                                 <span>Owned By</span>
                                 <a className="owner-meta d-flex align-items-center ml-3" href="/author">

@@ -41,7 +41,7 @@ const ProjNFTS = () => {
 
                                     <div className="image-over">
                                         <Link to={`/nftprojdetails/${item.id}`}>
-                                            <img className="card-img-top" src="/img/ph.jpg" alt="" />
+                                            <img className="card-img-top" src={item.image} alt="" />
                                         </Link>
                                     </div>
                                     {/* Card Caption */}
