@@ -66,9 +66,9 @@ function MyVerticallyCenteredModal(props) {
                 <form className="item-form card no-hover">
                     <div className="row">
 
-                        <div className="col-10">
+                        <div className="col-10 p-0">
 
-                            <div className="form-group mt-3">
+                            <div className="form-group m-0">
                                 {/* <label>Display name</label> */}
                                 <input
                                     type="text"
@@ -93,15 +93,17 @@ function MyVerticallyCenteredModal(props) {
 
 
                             <hr />
-                            <TwitterShareButton url={'www.twitter.com' + '/' + url} title="Reffral code "> <TwitterIcon size={32} round={true} /></TwitterShareButton>
-                            <FacebookShareButton url={'www.facebook.com' + '/' + url} title="Reffral code "> <FacebookIcon size={32} round={true} /></FacebookShareButton>
-                            <WhatsappShareButton url={'https://web.whatsapp.com/' + '/' + url} title="Reffral code "><WhatsappIcon size={32} round={true} /></WhatsappShareButton>
-                            <TelegramShareButton url={'www.telegram.com' + '/' + url} title="Reffral code "><TelegramIcon size={32} round={true} /></TelegramShareButton>
-                            <InstapaperShareButton url={'www.instagram.com' + '/' + url} title="Reffral code ">  <InstapaperIcon size={32} round={true} /></InstapaperShareButton>
-                            <LinkedinShareButton url={'www.linkedin.com' + '/' + url} title="Reffral code ">  <LinkedinIcon size={32} round={true} /></LinkedinShareButton>
-                            <EmailShareButton url={'www.gmail.com' + '/' + url} title="Reffral code " ><EmailIcon size={32} round={true} /></EmailShareButton>
+                            <div className="refer-icons">
+                                <TwitterShareButton url={'www.twitter.com' + '/' + url} title="Reffral code "> <TwitterIcon size={32} round={true} /></TwitterShareButton>
+                                <FacebookShareButton url={'www.facebook.com' + '/' + url} title="Reffral code "> <FacebookIcon size={32} round={true} /></FacebookShareButton>
+                                <WhatsappShareButton url={'https://web.whatsapp.com/' + '/' + url} title="Reffral code "><WhatsappIcon size={32} round={true} /></WhatsappShareButton>
+                                <TelegramShareButton url={'www.telegram.com' + '/' + url} title="Reffral code "><TelegramIcon size={32} round={true} /></TelegramShareButton>
+                                <InstapaperShareButton url={'www.instagram.com' + '/' + url} title="Reffral code ">  <InstapaperIcon size={32} round={true} /></InstapaperShareButton>
+                                <LinkedinShareButton url={'www.linkedin.com' + '/' + url} title="Reffral code ">  <LinkedinIcon size={32} round={true} /></LinkedinShareButton>
+                                <EmailShareButton url={'www.gmail.com' + '/' + url} title="Reffral code " ><EmailIcon size={32} round={true} /></EmailShareButton>
+                            </div>
                         </div>
-                        <div className="col-2">
+                        <div className="col-2 p-0 text-right">
                             <CopyToClipboard text={url}>
                                 <div className='copy'>
 

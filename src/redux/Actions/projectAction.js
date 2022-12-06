@@ -27,6 +27,7 @@ import swal from "sweetalert";
 
 export const CreateProjectAction = (params) => async dispatch => {
     // sessionStorage.setItem('authToken', JSON.stringify(action.payload.dat
+    // const [loading, setLoading] = useState(false)
     try {
         const token = sessionStorage.getItem('authToken')
         // debugger

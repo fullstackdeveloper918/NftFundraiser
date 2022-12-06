@@ -77,7 +77,7 @@ const AuctionsOne = ({ key, type }) => {
                                                     </a>
                                                     <a className="seller d-flex align-items-center my-3" href="#">
                                                         <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />
-                                                        <span className="ml-2">@{item.user_data.username}</span>
+                                                        <span className="ml-2">{item.user_data.username}</span>
                                                     </a>
                                                     <div className="card-bottom d-flex justify-content-between">
                                                         <span>{item.price} MATIC</span>

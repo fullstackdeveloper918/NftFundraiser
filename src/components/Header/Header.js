@@ -61,7 +61,7 @@ const Header = () => {
                         </li>
                         {/* {log !== null && ( */}
                         <li className="nav-item">
-                            <Link to="/create" className="nav-link">Create</Link>
+                            <a href="/create" className="nav-link">Create</a>
                         </li>
                         {/* )} */}
                         <li className="nav-item">
