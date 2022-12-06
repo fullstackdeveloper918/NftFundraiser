@@ -99,7 +99,7 @@ const FundraiserDetail = () => {
     const funddetail = useSelector(state => {
         return state?.fundraiser?.fundraiserdetail
     })
-    console.log(funddetail?.organization_detail?.organization_name, 'fdddetail')
+    console.log(funddetail, 'fdddetail')
     const fundprojdetail = useSelector(state => {
         // debugger
         return state?.projectdetails?.getfundProjDetails
@@ -141,8 +141,8 @@ const FundraiserDetail = () => {
                         <div className="item-info">
 
                             <div className="item-thumb text-center">
-                                {/* <img src={funddetail?.organization_detail?.banner_image} alt="" /> */}
-                                <img src='/img/ph.jpg' alt="" />
+                                <img src={funddetail?.organization_detail?.banner_image} alt="" />
+                                {/* <img src='/img/ph.jpg' alt="" /> */}
                             </div>
 
 

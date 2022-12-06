@@ -288,7 +288,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                                     // onChange={onChange}
 
                                                     <GeoLocation
-                                                        // locationTitle="Country"
+                                                        // locationTitle="Country"  
                                                         isCountry
 
                                                         onBlur={onBlur}
@@ -381,6 +381,7 @@ const Create = ({ formStep, nextFormStep, placeholder }) => {
                                                 className="form-control"
                                                 name="number_of_nft"
                                                 defaultValue={1}
+                                                min={1}
                                                 disabled={type == 1}
                                                 placeholder="Select your number of NFT's (1-12)"
                                                 {...register("number_of_nft", { required: true, min: 1, max: 12 })}

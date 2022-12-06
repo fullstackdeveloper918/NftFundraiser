@@ -1,8 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { CreateCollectionAction } from '../../redux/Actions/projectAction';
+import { CreateCollectionAction, GetCollectionsAction } from '../../redux/Actions/projectAction';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 function MyVerticallyCenteredModal(props) {
@@ -14,7 +14,9 @@ function MyVerticallyCenteredModal(props) {
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
     const OnSubmit = (data) => {
         dispatch(CreateCollectionAction(data))
+
     }
+
     return (
         <Modal
             {...props}

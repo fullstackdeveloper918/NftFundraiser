@@ -11,6 +11,7 @@ import ProjNFTS from '../Auctions/projectnfts';
 import { Button } from 'react-bootstrap';
 import { GetUserAction } from '../../redux/Actions/authAction';
 import MyVerticallyCenteredModal from './refralPopup';
+import swal from 'sweetalert';
 
 const ProjDetails = () => {
 
@@ -31,6 +32,9 @@ const ProjDetails = () => {
     })
     const userDetail = userdet.referrer_id
     console.log('userdet', userDetail)
+    const log = useSelector(state => {
+        return state.user.userToken
+    })
     useEffect(() => {
         // debugger
         dispatch(LatestProjectDetail(id))
@@ -93,17 +97,28 @@ const ProjDetails = () => {
                                         </li>
                                     </ul>
                                 </div>
+                                {userDetail !== null ? (
 
-                                {/* <a className="d-block btn btn-bordered-white mt-4">Buy</a> */}
-                                <Button variant="primary" onClick={() => setModalShow(true)}>
-                                    Share
-                                </Button>
+                                    <Button variant="primary" onClick={() => setModalShow(true)}>
+                                        Share
+                                    </Button>
+                                ) : (
+                                    <Button variant="primary" onClick={() => setModalShow(true)}>
+                                        No refferal code
+                                    </Button>
+                                )
 
-                                <MyVerticallyCenteredModal
-                                    id={id}
-                                    userRef={userDetail}
-                                    show={modalShow}
-                                    onHide={() => setModalShow(false)} />
+                                }
+                                {log === null ? (
+                                    swal("please login to continue...")
+                                ) : (
+
+                                    <MyVerticallyCenteredModal
+                                        id={id}
+                                        userRef={userDetail}
+                                        show={modalShow}
+                                        onHide={() => setModalShow(false)} />
+                                )}
                             </div>
                         </div>
                     </div>

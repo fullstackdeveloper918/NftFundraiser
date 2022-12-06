@@ -6,8 +6,10 @@ import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
 import Geonames from "geonames.js";
 import PropTypes from "prop-types";
+import axios from "axios";
+import { Api } from "@mui/icons-material";
 const geonames = new Geonames({
-    username: "thalesandrade",
+    username: "fullstackdeveloper91",
     lan: "en",
     encoding: "JSON"
 });
@@ -25,6 +27,7 @@ export default function GeoLocation(props) {
     const classes = useStyles();
     const { locationTitle, geoId, onChange, isCountry } = props;
     const [options, setOptions] = useState([]);
+    console.log(options, 'opttt')
     const [currentItem, setCurrentItem] = useState("");
     const [labelWidth, setLabelWidth] = useState(0);
     useEffect(() => {
@@ -35,16 +38,19 @@ export default function GeoLocation(props) {
             )
         }
     }, [props]);
+    // http://api.geonames.org/countryInfoJSON?username=fullstackdeveloper91&lang=en
+    // https://secure.geonames.org/countryInfoJSON?username=jhon_doe&lang=en
     useEffect(() => {
         try {
             const data = async () => {
                 (await isCountry)
-                    ? geonames.countryInfo({}).then(res => {
-                        console.log(res);
-                        setOptions(res.geonames);
+                    ? axios.get(`http://api.geonames.org/countryInfoJSON?username=fullstackdeveloper91&lang=en`)?.then(res => {
+                        // debugger
+                        setOptions(res);
                     })
-                    : geonames.children({ geonameId: geoId }).then(res => {
-                        if (res.totalResultsCount) setOptions(res.geonames);
+                    // "https://secure.geonames.org/childrenJSON?geonameId=" + id
+                    : axios.get(`http://api.geonames.org/childrenJSON?username=fullstackdeveloper91&lang=en&geonameId=${geoId}`)?.then(res => {
+                        setOptions(res);
                     });
             };
             data();
@@ -57,6 +63,7 @@ export default function GeoLocation(props) {
         setCurrentItem(e.target.value);
         onChange(e.target.value);
     };
+
     return (
         <FormControl className={classes.formControl}>
             <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
@@ -70,7 +77,7 @@ export default function GeoLocation(props) {
                 labelWidth={labelWidth}
             >
                 <option value="" disabled selected style={{ color: "#495057" }}>Select </option>
-                {options?.map((v, index) => (
+                {options?.data?.geonames?.map((v, index) => (
                     <option key={index} value={v?.geonameId}>
                         {isCountry ? v?.countryName : v?.name}
                     </option>

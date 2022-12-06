@@ -1,11 +1,5 @@
 import { create } from 'ipfs-http-client'
-import { useState } from 'react';
-import { useParams } from 'react-router';
 import swal from 'sweetalert';
-import fs from 'fs'
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { GetSettings } from '../../redux/Actions/projectAction';
 import NFTContract from '../../backend/contracts/artWork.sol/NFTContract.json'
 import axios from 'axios';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
@@ -206,76 +200,98 @@ const deployContract = async () => {
 
 
 }
-export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCurrent, contractAddress, collid }) => {
-  const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }) => {
-    try {
-      const formData = new FormData();
 
-      formData.append('is_mint', '1');
-      formData.append('token_id', token_id);
-      formData.append('transaction_hash', transaction_hash);
-      formData.append('pay_from', pay_from);
-      formData.append('pay_to', pay_to);
+const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }) => {
+  try {
+    const formData = new FormData();
 
-      const token = sessionStorage.getItem('authToken')
+    formData.append('is_mint', '1');
+    formData.append('token_id', token_id);
+    formData.append('transaction_hash', transaction_hash);
+    formData.append('pay_from', pay_from);
+    formData.append('pay_to', pay_to);
 
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-      }
-      // debugger
-      await axios.post(`${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${id}`,
-        formData, config
-      )
-    } catch (error) {
-      // debugger
-      console.log("error");
+    const token = sessionStorage.getItem('authToken')
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
     }
-
-
-  };
-
-  const UpdateContract = async (collid) => {
-
     // debugger
+    await axios.post(`${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${id}`,
+      formData, config
+    )
+  } catch (error) {
+    // debugger
+    console.log("error");
+  }
+};
+
+const UpdateContract = async (collid, contractAddress) => {
+  try {
+    const formData = new FormData();
+
+    formData.append('contract_id', contractAddress);
+
+    const token = sessionStorage.getItem('authToken')
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    }
+    // debugger
+    await axios.post(`${process.env.REACT_APP_BACKEND_API}api/updateContract/${collid}`,
+      formData, config
+    )
+  } catch (error) {
+    console.log("error");
+  }
+};
+
+export const sendFileToIPFS = async (fileImg) => {
+  if (fileImg) {
     try {
       const formData = new FormData();
+      formData.append("file", fileImg);
 
-      formData.append('contract_id', contractAddress);
-
-      const token = sessionStorage.getItem('authToken')
-
-      const config = {
+      const resFile = await axios({
+        method: "post",
+        url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        data: formData,
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
+          'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET}`,
+          "Content-Type": "multipart/form-data"
         },
-      }
-      // debugger
-      await axios.post(`${process.env.REACT_APP_BACKEND_API}api/updateContract/${collid}`,
-        formData, config
-      )
+      });
+
+      const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
+
+      return ImgHash
+
     } catch (error) {
-      // debugger
-      console.log("error");
+      console.log("Error sending File to IPFS: ")
+      console.log(error)
     }
-  };
+  }
+}
 
+export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCurrent, contractAddress, collid }) => {
 
-
-  const addedImage = await ipfsClient.add(_imgBuffer);
   const metaDataObj = {
     name: _name,
     description: _des,
-    image: ipfsBaseUrl + addedImage.path,
+    image: _imgBuffer,
   }
+
   const addedMetaData = await ipfsClient.add(JSON.stringify(metaDataObj));
 
-  // const tokenURI = addedMetaData;
-  // console.log(first)
-  const contract = await new web3.eth.Contract(contractABI.abi, '0xF5689144C9fE7E45d175DA28E96ba95c8155989C');//loadContract();
+  const contract = await
+    new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
 
   try {
     let txHash = null
@@ -301,7 +317,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
       })
       .on('confirmation', async (confNumber, receipt) => {
         if (confNumber == 1) {
-          await UpdateContract(collid)
+          await UpdateContract(collid, contractAddress)
           const tokid = web3.utils.hexToNumber(receipt.logs[0].topics[3])
 
           await UpdateStatus({ id, token_id: tokid, transaction_hash: receipt.transactionHash, pay_from: receipt.from, pay_to: receipt.to })
@@ -340,31 +356,18 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values }) => {
     status: "👆🏽 Write a message in the text-field above.",
     address: addressArray[0],
   };
-  console.log(obj)
+
   const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
   const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
   //the transaction
   const amount = '0.01'; // Willing to send 2 ethers
   const amountToSend = web3.utils.toWei(amount, "ether"); // Convert to wei value
 
-  // const tx = {
-  //   'to': payFrom,
-  //   'from': window.ethereum?.selectedAddress,
-  //   'value': amountToSend,
-  //   'gas': 500000,
-  //   'chainId': '0x3',
-  //   // 'input': nftContract.methods.safeTransferFrom(payFrom, window.ethereum?.selectedAddress, tokenId).encodeABI() //I could use also transferFrom
-  // };
   const transferowner = {
     'from': window.ethereum?.selectedAddress,
-    'to': '0xe3aece4172d4092fac4dc5dd8389fca32fcddf6c',
-    // "gasPrice": web3.utils.toHex('20000000000'),
-    // "gasLimit": web3.utils.toHex('500000'),
+    'to': contractAddress,
     'value': amountToSend,
-    // 'nonce': nonce,
-    // 'chainId': '0x3',
     'input': nftContract.methods.buyNft(contractAddress, tokenId).encodeABI()
-    //I could use also transferFrom
   };
 
   // const txHash = await web3.eth.sendTransaction(tx)

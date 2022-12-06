@@ -6,7 +6,7 @@ import React, { Fragment, useEffect, useState, useRef, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { create } from 'ipfs-http-client'
 import { useDispatch, useSelector } from 'react-redux';
-import { CreateProjectAction, GetCollectionsAction } from '../../redux/Actions/projectAction';
+import { CreateProjectAction, GetCollectionsAction, uploadNFT } from '../../redux/Actions/projectAction';
 import { useFormData } from './Context/context'
 import MyVerticallyCenteredModal from './createCollection';
 import styles from './styles/styles.module.scss'
@@ -22,7 +22,8 @@ import { Controller } from 'react-hook-form';
 import MUIRichTextEditor from 'mui-rte'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Save } from '@material-ui/icons';
-import JoditEditor from 'jodit-react';;
+import JoditEditor from 'jodit-react'
+
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -45,14 +46,14 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
     const [previewTitle, setPreviewTitle] = useState('');
     // console.log(data, 'formdta')
     const [count, setCount] = useState(0);
-    const [nft_description, setNft_description] = useState()
+    const [nft_description, setNft_description] = useState('')
     console.log('nft_description', nft_description)
 
     const [modalShow, setModalShow] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState(0);
     const [items, setItems] = useState([]);
-    const [coldata, setColData] = useState([]);
-
+    const [coldata, setColData] = useState();
+    const [allcol, setAllColl] = useState()
     console.log('colldata', coldata)
     console.log(nft_collection_id)
 
@@ -80,13 +81,24 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
     useEffect(() => {
         register("nft_description");
     }, [register]);
-    const ipfsClient = create('http://127.0.0.1:5001')
-    const ipfsBaseUrl = 'http://localhost:8080/ipfs/'
-    // const ipfsBaseUrl = ('http://208.113.134.142:8080/')
+
+    // const ipfsClient = create('http://127.0.0.1:5001')
+    const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
+    // const ipfsBaseUrl = ('http://127.0.0.1:8080/')
     // const ipfsBaseUrl = '`${process.env.REACT_APP_IPFS_BASE_URL}`'
     const dispatch = useDispatch()
+    const col = useSelector(state => {
+        // debugger
+        return state?.projectdetails?.getcollections
+    })
+    const imaeg = useSelector(state => {
+        // debugger
+        return state?.projectdetails?.nftres
+    })
+    console.log(imaeg, 'imgg')
 
     const OnSubmit = (values) => {
+        // setColData(col)
         // debugger
         setFormValues(values)
         // loc()
@@ -117,10 +129,14 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
         //     history.push('/login')
         // }
     }
-    const col = useSelector(state => {
-        // debugger
-        return state?.projectdetails?.getcollections
-    })
+
+    // const collldata = async () => {
+    //     await setColData(col)
+    // }
+    console.log('col', col)
+
+
+
     const lat = localStorage.getItem('latitude')
     console.log(lat, 'lattt')
     const log = localStorage.getItem('longitude')
@@ -128,24 +144,28 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
 
     // const desdata = { nft_description() }
     useEffect(() => {
-        async function fetchData() {
-            const result = await dispatch(GetCollectionsAction());
-            setColData(result);
-        }
-        fetchData();
-    }, [coldata]);
+        // debugger
+        // async function fetchData() {
+        dispatch(GetCollectionsAction())
+        // const result = await dispatch(GetCollectionsAction());
+        // console.log('gettt', result)
+        // coldata();
+        // }
+        // fetchData();
+
+    }, []);
 
 
     const onFinish = async (values) => {
-
+        debugger
+        const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
         // debugger
-        const nftImagepromises = values?.nfts?.map(x => ipfsClient?.add(x?.nft_image?.file))
-        // debugger
 
+        // uploadNFT(nftImagepromises[0])
         const imagesRes = await Promise.all(nftImagepromises).then(res => res)
         // debugger
 
-        const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.path)
+        const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
         // debugger
 
 
@@ -181,8 +201,10 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
             x.nft_name
         ))
         // const newlist = newList.push(nft_collection_id);
-        formData.append('nft_collection_id', [nft_collection_id, ...nft_collection_id])
-        formData.append('nft_description', nft_description)
+        formData.append('nft_collection_id', [nft_collection_id])
+        formData.append('nft_description', [nft_description])
+
+        // dispatch(uploadNFT())
         dispatch(CreateProjectAction(formData))
 
 
@@ -307,23 +329,37 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                                                 <label>Description</label>
                                                                 <div>
 
-                                                                    <Controller
-                                                                        control={control}
-                                                                        name="nft_description"
-                                                                        defaultValue=""
-                                                                        render={({ field: { value, onChange } }) => {
-                                                                            return <JoditEditor
-                                                                                ref={editor}
-                                                                                value={nft_description}
-                                                                                // config={config}
+                                                                    <Form.Item
+                                                                        {...restField}
+                                                                        name={[name, "nft_description"]}
+                                                                        // label="Enter name"
+                                                                        // name="name"
+                                                                        rules={[
+                                                                            {
+                                                                                required: true,
+                                                                                message: 'Missing  description',
+                                                                            },
+                                                                        ]}
+                                                                    >
+                                                                        {/* <Controller
+                                                                            control={control}
+                                                                            name="nft_description"
+                                                                            defaultValue=""
+                                                                            render={({ field: { value, onChange } }) => {
+                                                                                return  */}
+                                                                        <JoditEditor
+                                                                            ref={editor}
+                                                                            value={nft_description}
+                                                                            // config={config}
 
-                                                                                placeholder="start typing"
-                                                                                tabIndex={1} // tabIndex of textarea
-                                                                                onBlur={newContent => setNft_description(newContent)} // preferred to use only this option to update the content for performance reasons
-                                                                                onChange={newContent => { }}
-                                                                            />
-                                                                        }}
-                                                                    />
+                                                                            placeholder="start typing"
+                                                                            tabIndex={1} // tabIndex of textarea
+                                                                            onBlur={newContent => setNft_description(newContent)} // preferred to use only this option to update the content for performance reasons
+                                                                            onChange={newContent => { }}
+                                                                        />
+                                                                        {/* }} */}
+                                                                        {/* /> */}
+                                                                    </Form.Item>
                                                                 </div>
                                                             </div>
                                                             <div className="col-md-5 col-12">
