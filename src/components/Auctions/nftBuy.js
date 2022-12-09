@@ -197,12 +197,12 @@ const LatprojNftDetails = (props) => {
         // debugger
         return state.projectdetails.getnftwoldetails
     })
-    console.log('latprojnft', latprojnftdetail)
+    // console.log('latprojnft', latprojnftdetail)
     const getSett = useSelector(state => {
         // debugger
         return state.projectdetails.settings
     })
-    console.log('getSett', getSett)
+    // console.log('getSett', getSett)
     const setValue = getSett.find(x => x.key === 'pricing_per_nft')
     useEffect(() => {
         dispatch(GetNftwol(id))

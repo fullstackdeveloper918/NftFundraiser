@@ -8,7 +8,7 @@ import { useState } from 'react';
 import dayjs from 'dayjs'
 import { BuyNft } from '../Wallet/interact';
 import ProjNFTS from '../Auctions/projectnfts';
-import { Button } from 'react-bootstrap';
+import { Button, ProgressBar } from 'react-bootstrap';
 import { GetUserAction } from '../../redux/Actions/authAction';
 import MyVerticallyCenteredModal from './refralPopup';
 import swal from 'sweetalert';
@@ -19,19 +19,19 @@ const ProjDetails = () => {
     const { id } = useParams();
     // console.log(id, 'idd')
     const [tok, setTok] = useState('')
-    console.log('tok', tok)
+    // console.log('tok', tok)
     const dispatch = useDispatch()
     const [modalShow, setModalShow] = React.useState(false);
     const latprojdetail = useSelector(state => {
         // debugger
         return state.projectdetails.latestprojectdetails
     })
-    console.log('latproj', latprojdetail?.nft_data?.pay_from)
+    console.log('latproj', latprojdetail)
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
     const userDetail = userdet.referrer_id
-    console.log('userdet', userDetail)
+    // console.log('userdet', userDetail)
     const log = useSelector(state => {
         return state.user.userToken
     })
@@ -78,10 +78,11 @@ const ProjDetails = () => {
                     <div className="col-12 col-lg-4">
 
                         <div className="card no-hover">
-                            <span className='nft_price'>$188,449 USD raised of $200,000 goal</span>
+                            <span className='nft_price'>{latprojdetail.selling_amount} raised of {latprojdetail.price}</span>
 
                             <div className='progressbar'>
-                                <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 71% </span>
+                                <ProgressBar varient="success" now={latprojdetail.project_percentage} />
+                                {/* <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" now={latprojdetail.project_percentage}> {latprojdetail.project_percentage}% </span> */}
                             </div>
 
                             <div className="content sm:mt-5 mt-lg-0">
@@ -97,18 +98,14 @@ const ProjDetails = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                {userDetail !== null ? (
+                                {userDetail !== null && (
 
                                     <Button variant="primary" onClick={() => setModalShow(true)}>
                                         Share
                                     </Button>
-                                ) : (
-                                    <Button variant="primary" onClick={() => setModalShow(true)}>
-                                        No refferal code
-                                    </Button>
-                                )
+                                )}
 
-                                }
+
                                 {log === null ? (
                                     swal("please login to continue...")
                                 ) : (

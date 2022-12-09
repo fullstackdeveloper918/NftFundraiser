@@ -44,7 +44,7 @@ const Collections = () => {
                             <div key={`cd_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
                                 <div className="card no-hover text-center">
                                     <div className="image-over">
-                                        <Link to={`/item-details/${item.id}`}>
+                                        <Link to={`/popularcollection/details/${item.id}`}>
                                             <img className="card-img-top" src={item?.nft_detail?.image} alt="" />
                                         </Link>0
                                         {/* Seller */}

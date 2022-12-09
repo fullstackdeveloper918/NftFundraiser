@@ -12,7 +12,7 @@ const ShowCollections = () => {
     })
     // const val = localStorage.getItem("values")
     // console.log(val.address, 'vall')
-    console.log(col, 'col')
+    // console.log(col, 'col')
     useEffect(() => {
         dispatch(GetCollectionsAction())
     }, [])

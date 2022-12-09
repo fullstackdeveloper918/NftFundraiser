@@ -105,7 +105,7 @@ export const GetUserAction = () => async dispatch => {
         }
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getUserDetails`,
             config)
-        console.log('userres', res)
+        // console.log('userres', res)
         dispatch(userDetail(res));
     } catch (e) {
         // debugger

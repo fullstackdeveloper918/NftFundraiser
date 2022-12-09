@@ -12,7 +12,7 @@ const AboutUs = () => {
     useEffect(() => {
         dispatch(AboutUsAction())
     }, [])
-    console.log(about, 'footerabout')
+    // console.log(about, 'footerabout')
     return (
         <section className="item-details-area">
             <div className="container">

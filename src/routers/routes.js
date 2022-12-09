@@ -56,7 +56,7 @@ const MyRouts = () => {
           {/* <Route exact path="/projectlist" component={ExploreThree} /> */}
           <Route exact path="/explore-4" component={ExploreFour} />
           <Route exact path="/auctions" component={Auctions} />
-          <Route exact path="/item-details/:id" component={ItemDetails} />
+          <Route exact path="/popularcollection/details/:id" component={ItemDetails} />
           <Route exact path="/projdetails/:id" component={latprojDetails} />
           <Route exact path="/nftprojdetails/:id" component={latnftprojDetails} />
           <Route exact path="/fundraiser/detail/:user_id" component={FundDetail} />

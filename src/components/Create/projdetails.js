@@ -25,7 +25,7 @@ const ProjNftDetails = () => {
         // debugger
         return state?.projectdetails?.projectdetails
     })
-    console.log(projdetail, 'projdata')
+    // console.log(projdetail, 'projdata')
 
     useEffect(() => {
         // debugger

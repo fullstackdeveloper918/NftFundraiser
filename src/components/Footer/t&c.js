@@ -12,7 +12,7 @@ const TermsConditions = () => {
     useEffect(() => {
         dispatch(getFooter())
     }, [])
-    console.log(footer, 'footer')
+    // console.log(footer, 'footer')
     return (
         <section className="item-details-area">
             <div className="container">

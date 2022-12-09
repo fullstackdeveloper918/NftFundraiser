@@ -8,13 +8,13 @@ const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const contractABI = require('../../backend/contracts/artWork.sol/NFTContract.json')
 // const contractAddress = "0xE915A57e52A1f5a432b15727EA79e2542d435087";
 // connect to a different API
-const ipfsClient = create('http://127.0.0.1:5001')
+// const ipfsClient = create('http://127.0.0.1:5001')
 
 function isMetaMaskInstalled() {
   return Boolean(window.ethereum);
 }
 
-const ipfsBaseUrl = ('http://localhot:8080/ipfs/')
+const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
 // const ipfsBaseUrl = ('http://208.113.134.142:8080/')
 // const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
 const web3 = createAlchemyWeb3(alchemyKey);
@@ -179,17 +179,17 @@ const deployContract = async () => {
     from: address,
   })
     .on('error', (error) => {
-      console.log(error)
+      // console.log(error)
     })
     .on('transactionHash', (transactionHash) => {
-      console.log(transactionHash, "transactionHash")
+      // console.log(transactionHash, "transactionHash")
     })
     .on('receipt', (receipt) => {
       // receipt will contain deployed contract address
-      console.log(receipt, "reciept")
+      // console.log(receipt, "reciept")
     })
     .on('confirmation', (confirmationNumber, receipt) => {
-      console.log(receipt, "confirmRecipet")
+      // console.log(receipt, "confirmRecipet")
       // // axios.post(
 
       // if (receipt.contractAddress) {
@@ -202,6 +202,7 @@ const deployContract = async () => {
 }
 
 const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }) => {
+
   try {
     const formData = new FormData();
 
@@ -225,7 +226,7 @@ const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }
     )
   } catch (error) {
     // debugger
-    console.log("error");
+    // console.log("error");
   }
 };
 
@@ -248,7 +249,7 @@ const UpdateContract = async (collid, contractAddress) => {
       formData, config
     )
   } catch (error) {
-    console.log("error");
+    // console.log("error");
   }
 };
 
@@ -274,21 +275,21 @@ export const sendFileToIPFS = async (fileImg) => {
       return ImgHash
 
     } catch (error) {
-      console.log("Error sending File to IPFS: ")
-      console.log(error)
+      // console.log("Error sending File to IPFS: ")
+      // console.log(error)
     }
   }
 }
 
-export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCurrent, contractAddress, collid }) => {
+export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content }) => {
 
-  const metaDataObj = {
-    name: _name,
-    description: _des,
-    image: _imgBuffer,
-  }
+  // const metaDataObj = {
+  //   name: _name,
+  //   description: _des,
+  //   image: _imgBuffer,
+  // }
 
-  const addedMetaData = await ipfsClient.add(JSON.stringify(metaDataObj));
+  // const addedMetaData = await nft_file_content(JSON.stringify(metaDataObj));
 
   const contract = await
     new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
@@ -301,18 +302,18 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
     await web3.eth.sendTransaction({
       to: contractAddress, // Required except during contract publications.
       from: window.ethereum.selectedAddress,
-      data: contract.methods.mint(ipfsBaseUrl + addedMetaData.path).encodeABI() //make call to NFT smart contract
+      data: contract.methods.mint(nft_file_content).encodeABI() //make call to NFT smart contract
     })
       .on('transactionHash', function (hash) {
         txHash = hash
 
-        console.log('txhash11', txHash)
+        // console.log('txhash11', txHash)
 
         setCurrent(1)
       })
       .on('receipt', function (receipt) {
-        console.log(receipt, 'recipt')
-        console.log(receipt.logs[0].topics[3])
+        // console.log(receipt, 'recipt')
+        // console.log(receipt.logs[0].topics[3])
         setCurrent(1)
       })
       .on('confirmation', async (confNumber, receipt) => {
@@ -331,7 +332,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
       })
 
     // debugger
-    console.log('txHash', txHash)
+    // console.log('txHash', txHash)
     return {
       success: true,
       // status: ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>" + txHash
@@ -376,16 +377,16 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values }) => {
   await web3.eth.sendTransaction(transferowner)
     .on('transactionHash', function (hash) {
       let txHash = hash
-      console.log('tx', txHash)
+      // console.log('tx', txHash)
 
 
     })
     .on('receipt', function (receipt) {
-      console.log(receipt, 'recipt')
+      // console.log(receipt, 'recipt')
     })
     .on('confirmation', async (confNumber, receipt) => {
       // debugger
-      console.log(receipt, 'conf')
+      // console.log(receipt, 'conf')
       // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
       // setModeShow(false)
 
