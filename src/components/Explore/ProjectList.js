@@ -14,7 +14,7 @@ const GetAllProjects = () => {
         return state.projectdetails.projects
     })
 
-    console.log(projects, 'projects')
+    // console.log(projects, 'projects')
 
     useEffect(() => {
         dispatch(ProjectList())

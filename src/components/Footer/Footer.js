@@ -17,7 +17,7 @@ const Footer = () => {
     useEffect(() => {
         dispatch(getFooter())
     }, [])
-    console.log(footer, 'footer')
+    // console.log(footer, 'footer')
     return (
 
 

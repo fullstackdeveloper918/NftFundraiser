@@ -11,10 +11,10 @@ const Hero = () => {
     function success(pos) {
         var crd = pos.coords;
 
-        console.log("Your current position is:");
-        console.log(`Latitude : ${crd.latitude}`);
-        console.log(`Longitude: ${crd.longitude}`);
-        console.log(`More or less ${crd.accuracy} meters.`);
+        // console.log("Your current position is:");
+        // console.log(`Latitude : ${crd.latitude}`);
+        // console.log(`Longitude: ${crd.longitude}`);
+        // console.log(`More or less ${crd.accuracy} meters.`);
         localStorage.setItem('latitude', `${crd.latitude}`);
         localStorage.setItem('longitude', `${crd.longitude}`);
         // setLatitude(`${crd.latitude}`)
@@ -32,7 +32,7 @@ const Hero = () => {
                 .query({ name: "geolocation" })
                 .then(function (result) {
                     if (result.state === "granted") {
-                        console.log(result.state);
+                        // console.log(result.state);
                         //If granted then you can directly call your function here
                         navigator.geolocation.getCurrentPosition(success);
                     } else if (result.state === "prompt") {
@@ -41,7 +41,7 @@ const Hero = () => {
                         //If denied then you have to show instructions to enable location
                     }
                     result.onchange = function () {
-                        console.log(result.state);
+                        // console.log(result.state);
                     };
                 });
         } else {

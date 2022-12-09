@@ -24,7 +24,7 @@ const EditProject = () => {
     // console.log(descriptionup, 'discup')
     const [type, setType] = useState();
     const { id } = useParams();
-    console.log(id, "idd")
+    // console.log(id, "idd")
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -34,8 +34,8 @@ const EditProject = () => {
     })
     const dis = projdetail.description
     // setDescriptionup(dis)
-    console.log(dis, 'dis')
-    console.log(projdetail, "gfgfhghgghhgh")
+    // console.log(dis, 'dis')
+    // console.log(projdetail, "gfgfhghgghhgh")
 
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm();
 
@@ -113,7 +113,7 @@ const EditProject = () => {
         // debugger
         return state?.projectdetails?.categories
     })
-    console.log(cat, 'cat')
+    // console.log(cat, 'cat')
     useEffect(() => {
         dispatch(CategoriesAction())
     }, [])

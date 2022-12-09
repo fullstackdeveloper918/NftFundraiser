@@ -50,7 +50,7 @@ function NftPopup(props) {
         // debugger
         return state.projectdetails.nftlist
     })
-    console.log('latprojdetailpop', nftdetail)
+    // console.log('latprojdetailpop', nftdetail)
     // const mint = () => {
     //     CreateMetaDataAndMint({
     //         _name: nftdetail.title,

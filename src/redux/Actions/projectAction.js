@@ -25,9 +25,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
 import swal from "sweetalert";
 
-export const CreateProjectAction = (params) => async dispatch => {
+export const CreateProjectAction = (params, setLoading) => async dispatch => {
     // sessionStorage.setItem('authToken', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
+    // setLoading(true)
     try {
         const token = sessionStorage.getItem('authToken')
         // debugger
@@ -41,9 +42,10 @@ export const CreateProjectAction = (params) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/store`,
             params, config)
-        console.log("resproj", res)
+        // console.log("resproj", res)
         dispatch(createProjectSuccess(res));
         if (res.status === 200) {
+            setLoading(false)
             swal("success", res.data.message, 'success')
                 .then(function () {
                     window.location = "/projectlist";
@@ -72,7 +74,7 @@ export const ProjectDetail = (id) => async dispatch => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/project/details/${id}`,
             config)
         // console.log(res?.data?.data[0]?.image, 'proj')
-        console.log('details', res)
+        // console.log('details', res)
         dispatch(getProjectDetail(res));
     } catch (e) {
         if (e?.response?.data.message) {
@@ -134,7 +136,7 @@ export const NftList = (id) => async dispatch => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getNftDetailByIdx/${id}`,
             config)
 
-        console.log(res, 'proj')
+        // console.log(res, 'proj')
         await dispatch(getNftList(res));
 
     } catch (e) {
@@ -160,7 +162,7 @@ export const uploadNFT = (params) => {
         .post(`${process.env.REACT_APP_BACKEND_API}api/ipfsHash/Nfft`,
             formData, config)
         .then(function (response) {
-            console.log(response, 'resss')
+            // console.log(response, 'resss')
             return {
                 success: true,
                 data: response.data,
@@ -295,7 +297,7 @@ export const GetCollectionsAction = () => async dispatch => {
 
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getCollection`,
             config)
-        console.log('colres', res)
+        // console.log('colres', res)
         await dispatch(getCollections(res));
 
     } catch (e) {
@@ -315,11 +317,11 @@ export const CreateCollectionAction = (params) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createCollection`,
             params, config)
-        dispatch(createCollectionSuccess(res));
         // dispatch(GetCollectionsAction)
+        await dispatch(createCollectionSuccess(res));
         if (res?.status === 200) {
 
-            dispatch(GetCollectionsAction());
+            await dispatch(GetCollectionsAction());
             swal("success", 'Collection Created', 'success')
             // .then(function () {
             //     onClick={() => props.onHide()}
@@ -389,7 +391,7 @@ export const UpdateCollection = (id, params) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/updateContract/${id}`,
             params, config)
         // 
-        console.log(res, 'coll rres')
+        // console.log(res, 'coll rres')
         await dispatch(getLatestProjectDetail(res));
         // if (res.status === 200) {
         //     swal("success", res.data.message, 'success').then(function () {
@@ -414,7 +416,7 @@ export const GetSettings = () => async dispatch => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getSettings`,
             config)
         // 
-        console.log(res, 'sett rres')
+        // console.log(res, 'sett rres')
         await dispatch(getSettings(res));
         // if (res.status === 200) {
         //     swal("success", res.data.message, 'success').then(function () {

@@ -5,6 +5,7 @@ export const FormContext = createContext();
 export default function FormProvider({ children }) {
     const [data, setData] = useState({});
     console.log(data, 'dataaacreate')
+    // localStorage.setItem("data", JSON.stringify(data))
 
     const setFormValues = (data) => {
         setData((prevValues) => ({

@@ -17,7 +17,7 @@ const Login = () => {
         // console.log(login.authToken, 'login')
         return state.login
     })
-    console.log(user, 'user')
+    // console.log(user, 'user')
 
     if (user?.status === 200) {
         history.push('/')

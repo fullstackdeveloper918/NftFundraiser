@@ -99,7 +99,7 @@ const ItemDetails = () => {
     const projdetail = useSelector(state => {
         return state.projectdetails
     })
-    console.log(projdetail, 'projdata')
+    // console.log(projdetail, 'projdata')
 
     useEffect(() => {
         // debugger

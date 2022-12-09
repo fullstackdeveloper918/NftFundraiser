@@ -19,7 +19,7 @@ const AuctionsOne = ({ key, type }) => {
     const liveProjects = useSelector(state => {
         return state?.projectdetails?.liveProjects[type]
     })
-    console.log(liveProjects, 'liveeproj')
+    // console.log(liveProjects, 'liveeproj')
     useEffect(() => {
         dispatch(getPublicLiveProjects({
             cursor: 1,

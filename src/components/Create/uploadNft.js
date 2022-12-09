@@ -13,15 +13,8 @@ import styles from './styles/styles.module.scss'
 import 'antd/lib/form/style/css';
 import 'antd/lib/upload/style/css';
 import 'antd/lib/modal/style/css';
-import swal from 'sweetalert';
-import Header from '../Header/Header';
 import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
-import FroalaEditor from 'react-froala-wysiwyg'
-import { Controller } from 'react-hook-form';
-import MUIRichTextEditor from 'mui-rte'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { Save } from '@material-ui/icons';
 import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
 
@@ -34,11 +27,9 @@ const getBase64 = (file) =>
     });
 // import ImgCrop from 'antd-img-crop';
 
-const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
+const UploadNft = ({ current, prev }) => {
 
-    const myTheme = createTheme({
-        // Set up your custom MUI theme here
-    })
+
     const editor = useRef(null);
     const [fileList, setFileList] = useState([])
     const { data, setFormValues } = useFormData();
@@ -51,24 +42,35 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
     // console.log('nft_description', nft_description)
 
     const [modalShow, setModalShow] = React.useState(false);
-    const [nft_collection_id, setNft_collection_id] = useState([]);
+    const [nft_collection_id, setNft_collection_id] = useState({ 0: "0" });
     const [items, setItems] = useState([]);
     const [coldata, setColData] = useState();
     const [allcol, setAllColl] = useState()
-    console.log('colldata', coldata)
-    console.log(nft_collection_id)
+    // console.log('colldata', coldata)
+    // console.log(nft_collection_id)
+    // const [coll_id,setCollId] = useState()
+    const coll_id = (Object.values(nft_collection_id));
+    // console.log("collid", coll_id)
     const [loading, setLoading] = useState(false)
 
     const handleIncrement = () => {
         setCount(prevCount => prevCount + 1);
     };
+
+
     const handleDecrement = () => {
         setCount(prevCount => prevCount - 1);
     };
-    console.log(count, 'count')
+    // console.log(count, 'count')
 
-    function onHandleClick(e) {
-        setNft_collection_id(prev => [...prev, e.currentTarget.id]);
+    function onHandleClick(index, item) {
+        setNft_collection_id(previ => {
+            previ[index] = item
+            return {
+                ...previ,
+            }
+        }
+        );
     };
     // function descc(e) {
     //     setNft_description(prev => [...prev, nft_description]);
@@ -77,9 +79,9 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
     const defaultValues = {
         setNft_description: '',
     }
-    // function dess(e) {
-    //     setNft_description(prev => [...prev, e.nft_description])
-    // };
+    // this.setState(prev => ({
+    //     item: prev.item.map(item => item.name === 'xjz' ? { ...item, age: '10' } : item)
+    // }))
     const { register, handleSubmit, formState: { errors }, watch, control, setValue } = useForm({
         mode: 'all',
         defaultValues
@@ -101,86 +103,45 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
         // debugger
         return state?.projectdetails?.nftres
     })
-    console.log(imaeg, 'imgg')
+    // console.log(imaeg, 'imgg')
 
     const OnSubmit = (values) => {
+        // e.preventDefault
         // setColData(col)
         // debugger
         setFormValues(values)
-        // loc()
-        // dispatch(CreateProjectAction())
 
-        // const formData = new FormData()
-
-        // formData.append('image', values.image[0])
-        // formData.append('title', data.title)
-        // formData.append('name', values.name)
-        // formData.append('description', data.description)
-        // formData.append('description', values.description)
-        // formData.append('country', data.country)
-        // formData.append('state', data.state)
-        // formData.append('city', data.city)
-        // formData.append('address', data.address)
-        // formData.append('price', data.price)
-        // formData.append('number_of_nft', data.number_of_nft)
-        // formData.append('start_date', data.start_date)
-        // formData.append('end_date', data.end_date)
-        // formData.append('type', data.type)
-        // formData.append('collection_id', collection_id)
-        // formData.append('category_id', data.category_id)
-
-        // dispatch(CreateProjectAction(formData))
-        // if (formData) {
-        //     swal("Registered!", "You have been registered!", "success");
-        //     history.push('/login')
-        // }
     }
 
-    // const collldata = async () => {
-    //     await setColData(col)
-    // }
-    console.log('col', col)
+
+    // console.log('col', col)
 
 
 
     const lat = localStorage.getItem('latitude')
-    console.log(lat, 'lattt')
+    // console.log(lat, 'lattt')
     const log = localStorage.getItem('longitude')
-    console.log(log, 'logggg')
+    // console.log(log, 'logggg')
 
     // const desdata = { nft_description() }
     useEffect(() => {
-        // debugger
-        // async function fetchData() {
+
         dispatch(GetCollectionsAction())
-        // const result = await dispatch(GetCollectionsAction());
-        // console.log('gettt', result)
-        // coldata();
-        // }
-        // fetchData();
+
 
     }, []);
 
 
     const onFinish = async (values) => {
-        debugger
-        // debugger
+
         setLoading(true)
         const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
-        // debugger
 
-        // uploadNFT(nftImagepromises[0])
         const imagesRes = await Promise.all(nftImagepromises).then(res => res)
         // debugger
 
         const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
         // debugger
-
-
-        // const nft_image = ipfsBaseUrl + addedImage.path;
-        // debugger
-        // console.log(nft_image, 'imageurl')
-
 
         const formData = new FormData()
 
@@ -201,23 +162,21 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
         formData.append('category_id', data.category_id)
 
 
-        // formData.append('nft_image', values?.nfts?.map(x => {
-        //     return x.nft_image.fileList[0]
-        // }
         formData.append('nft_image', addedImage)
         formData.append('nft_name', values?.nfts?.map(x =>
             x.nft_name
         ))
         // const newlist = newList.push(nft_collection_id);
-        formData.append('nft_collection_id', nft_collection_id)
+        formData.append('nft_collection_id', coll_id)
         // formData.append('nft_description', nft_description)
         formData.append('nft_description', values?.nfts?.map(x => x.nft_description))
+        // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
 
         // dispatch(uploadNFT())
-        dispatch(CreateProjectAction(formData))
-        setLoading(false)
+        dispatch(CreateProjectAction(formData, setLoading))
+        // setLoading(false)
 
-        console.log('Received values of form:', values, data)
+        // console.log('Received values of form:', values, data)
 
     };
     // console.log('title', localStorage.getItem('title'))
@@ -281,11 +240,12 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                     <label>Project image</label>
                                 </div>
                             </div>
-                            <div className={formStep === 1 ? styles.showForm : styles.hideForm}>
+                            <div className={current === 1 ? styles.showForm : styles.hideForm}>
                                 <Form form={form} name="dynamic_form_nest_item" initialValues={{
                                     remember: true
                                 }}
-                                    onFinish={onFinish}
+                                    // onSubmit={(event) => handleSubmit(event)}
+                                    onFinish={(event) => onFinish(event)}
                                     onSubmit={OnSubmit} autoComplete="off" className="item-form card no-hover">
                                     <Form.List name="nfts">
 
@@ -320,7 +280,7 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                                             {/* <div>Artwork {index}</div> */}
                                                             <div className="row">
 
-                                                                <div className="col-md-6 col-12">
+                                                                <div className="col-md-10 col-12">
                                                                     <label>Name</label>
                                                                     <div>
 
@@ -376,7 +336,7 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                                                         </Form.Item>
                                                                     </div>
                                                                 </div>
-                                                                <div className="col-md-5 col-12">
+                                                                {/* <div className="col-md-5 col-12">
                                                                     <label>Nft</label>
                                                                     <div>
                                                                         <Form.Item
@@ -416,7 +376,7 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                                                                 src={previewImage} />
                                                                         </Modal>
                                                                     </div>
-                                                                </div>
+                                                                </div> */}
                                                                 <div className="col-md-1 col-12">
                                                                     <MinusCircleOutlined onClick={(e) => { remove(name); handleDecrement(e); }} />
                                                                 </div>
@@ -462,11 +422,11 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                                                         > */}
                                                                         <label className='hidden-word'>jsaswjdwjd</label>
 
-                                                                        <div id={item.id} onClick={onHandleClick} className="card"
+                                                                        <div id={item.id} onClick={() => onHandleClick(index, item.id)} className="card"
                                                                             style={{
                                                                                 background: "black",
                                                                                 marginBottom: "8px",
-                                                                                border: nft_collection_id == item.id ? "1px solid #fff" : null
+                                                                                border: nft_collection_id[index] == item.id ? "1px solid #fff" : null
                                                                             }}>
                                                                             <div className="card-body">
                                                                                 <div>
@@ -483,7 +443,47 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                                                     </div>
                                                                     // </div>
                                                                 ))}
+                                                                <div className="col-md-12 col-12">
+                                                                    <label>Upload Nft</label>
+                                                                    <div>
+                                                                        <Form.Item
+                                                                            {...restField}
+                                                                            name={[name, "nft_image"]}
+                                                                            // getValueFromEvent={getFile}
+                                                                            rules={[
+                                                                                {
+                                                                                    required: true,
+                                                                                    message: 'Please select a image',
+                                                                                },
+                                                                            ]}
 
+                                                                        >
+
+                                                                            <Upload
+                                                                                {...fileProps}
+                                                                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                                                                listType="picture-card"
+                                                                                // fileList={fileList}
+                                                                                // onChange={onChange}
+                                                                                onPreview={handlePreview}
+                                                                                maxCount={1}
+
+                                                                            >
+                                                                                + Upload
+                                                                            </Upload>
+
+
+                                                                        </Form.Item>
+                                                                        <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
+                                                                            <img
+                                                                                alt="example"
+                                                                                style={{
+                                                                                    width: '100%',
+                                                                                }}
+                                                                                src={previewImage} />
+                                                                        </Modal>
+                                                                    </div>
+                                                                </div>
 
                                                             </div>
                                                         </Fragment> // </Space>
@@ -505,6 +505,7 @@ const UploadNft = ({ formStep, nextFormStep, _des, _name }) => {
                                         <div className="col-12">
                                             <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create</button>
                                         </div>
+
                                     </Form.Item>
                                 </Form>
                             </div>

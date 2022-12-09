@@ -103,7 +103,7 @@ const CollectionDetails = () => {
     const coldetail = useSelector(state => {
         return state?.projectdetails?.getcollectiondetails
     })
-    console.log(coldetail, 'coldetail')
+    // console.log(coldetail, 'coldetail')
 
     useEffect(() => {
         dispatch(GetCollectionDetails(id))

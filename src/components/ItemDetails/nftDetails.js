@@ -107,15 +107,15 @@ const NftDetails = (props) => {
     const [contractAdd, setContractAdd] = useState('')
     // const [collid, setCollid] = useState('')
     // console.log('collid', collid)
-    console.log('contAddre', contractAdd)
-    console.log('current', current)
+    // console.log('contAddre', contractAdd)
+    // console.log('current', current)
     const { id } = useParams();
     // console.log(id, 'idd')
     const projdetail = useSelector(state => {
         // debugger
         return state?.projectdetails?.projectdetails
     })
-    console.log(projdetail, 'projdataaaa')
+    // console.log(projdetail, 'projdataaaa')
 
 
     const dispatch = useDispatch()
@@ -125,12 +125,12 @@ const NftDetails = (props) => {
         return state.projectdetails.nftlist
 
     })
-    console.log(nftdetail, 'latprojdetail')
+    // console.log(nftdetail, 'latprojdetail')
     const collupdate = useSelector(state => {
         return state?.projectdetails?.collectiondetails
     })
 
-    console.log('collupdate', collupdate)
+    // console.log('collupdate', collupdate)
     useEffect(() => {
         // debugger
         dispatch(NftList(id))
@@ -147,6 +147,7 @@ const NftDetails = (props) => {
             contractAddress,
             setCurrent,
             collid: nftdetail?.collection_id,
+            nft_file_content: nftdetail?.nft_file_content,
             id,
             setModalShow
         })
@@ -203,17 +204,17 @@ const NftDetails = (props) => {
                     from: address,
                 })
                     .on('error', (error) => {
-                        console.log(error)
+                        // console.log(error)
                     })
                     .on('transactionHash', (transactionHash) => {
-                        console.log(transactionHash, "transactionHash")
+                        // console.log(transactionHash, "transactionHash")
                     })
                     .on('receipt', (receipt) => {
                         // receipt will contain deployed contract address
-                        console.log(receipt, "reciept")
+                        // console.log(receipt, "reciept")
                     })
                     .on('confirmation', (confNumber, receipt) => {
-                        console.log(receipt.contractAddress, "confirmRecipet")
+                        // console.log(receipt.contractAddress, "confirmRecipet")
                         if (confNumber == 1) {
                             mint(receipt?.contractAddress)
                             // setContractAdd(receipt?.contractAddress)
@@ -334,19 +335,25 @@ const NftDetails = (props) => {
 
 
                                 </div>
+
                             ) : (
 
                                 <div className='eddlbtton d-flex  align-items-center'>
+                                    {nftdetail.project_status == 1 ? (
 
-                                    <button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                        id="nftdetail.id" onClick={() => deployAndMint(id)}>  Mint</button>
-                                    <NftPopup
-                                        show={modalShow}
-                                        current={current}
-                                        onHide={() => setModalShow(false)}
-                                    />
+                                        <><button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                            id="nftdetail.id" onClick={() => deployAndMint(id)}>  Mint</button><NftPopup
+                                                show={modalShow}
+                                                current={current}
+                                                onHide={() => setModalShow(false)} /></>
+                                    ) : (
+
+                                        <button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                        >  waiting for approval</button>
+                                    )}
 
                                 </div>
+
                             )}
 
 

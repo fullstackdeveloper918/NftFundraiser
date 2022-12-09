@@ -33,7 +33,6 @@ import {
     TumblrShareCount,
     VKShareCount
 } from "react-share";
-import { Instagram } from '@material-ui/icons';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 function MyVerticallyCenteredModal(props) {
     // const [title, setTitle] = useState("");

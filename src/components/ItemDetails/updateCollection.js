@@ -10,7 +10,7 @@ const EditCollection = () => {
 
 
     const { id } = useParams();
-    console.log(id, "idd")
+    // console.log(id, "idd")
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -19,7 +19,7 @@ const EditCollection = () => {
         return state?.projectdetails?.projectdetails
     })
 
-    console.log(projdetail, "gfgfhghgghhgh")
+    // console.log(projdetail, "gfgfhghgghhgh")
 
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm();
     const contractAddress = "0xE915A57e52A1f5a432b15727EA79e2542d435087"

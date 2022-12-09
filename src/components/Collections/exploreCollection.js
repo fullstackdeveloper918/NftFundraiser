@@ -15,7 +15,7 @@ const AllCollections = () => {
         // debugger
         return state.collection.collection
     })
-    console.log(coll, "coll")
+    // console.log(coll, "coll")
     useEffect(() => {
 
         dispatch(PopularCollectionAction())

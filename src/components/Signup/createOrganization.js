@@ -78,7 +78,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
     const socialmedia = useSelector(state => {
         return state?.getSocialmediaIcons?.getsocial
     })
-    console.log('social', socialmedia)
+    // console.log('social', socialmedia)
     useEffect(() => {
         dispatch(CountryList())
         dispatch(AnnualRevenueList())
