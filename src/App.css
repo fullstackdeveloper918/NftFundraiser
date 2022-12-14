@@ -888,3 +888,7 @@ section{
   :root ul.creator-dropdown.dropdown-menu li:nth-child(2) {
     text-transform: none !important;
 }
+.copyright-area {
+    text-align: center !IMPORTANT;
+    justify-content: center !IMPORTANT;
+}

@@ -68,7 +68,7 @@ const EditProject = () => {
             setCountry(projdetail.country)
             setCity(projdetail.city)
             setState(projdetail.state)
-            // setValue("image", projdetail.image)
+            setValue("image", projdetail.image)
         }
     }, [projdetail]);
 
@@ -176,12 +176,12 @@ const EditProject = () => {
                                 </div>
                                 <div className="col-6">
                                     <div className="form-group mt-3">
-                                        <label>Address</label>
+                                        <label>Web address</label>
                                         <input
                                             type="text"
                                             className="form-control"
                                             name="address"
-                                            placeholder="Address"
+                                            placeholder="Web Address"
                                             {...register("address", { required: true })}
                                             aria-invalid={errors.address ? "true" : "false"}
                                         />
@@ -230,6 +230,7 @@ const EditProject = () => {
 
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
+                                        <label>Country</label>
                                         <Controller
                                             control={control}
                                             name="country"
@@ -252,6 +253,7 @@ const EditProject = () => {
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
+                                        <label>State or Province</label>
                                         <Controller
                                             control={control}
                                             name="state"
@@ -276,6 +278,7 @@ const EditProject = () => {
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
+                                        <label>City or Region</label>
                                         <Controller
                                             control={control}
                                             name="city"
@@ -321,14 +324,14 @@ const EditProject = () => {
 
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
-                                        <label>Number of NFT's</label>
+                                        <label>Number of NFTs</label>
                                         <input
                                             type="number"
                                             className="form-control"
                                             name="number_of_nft"
                                             defaultValue={1}
                                             disabled={type == 1}
-                                            placeholder="Select your number of NFT's (1-10)"
+                                            placeholder="Select your number of NFTs (1-10)"
                                             min={1}
                                             max={10}
                                             {...register("number_of_nft", { required: true })}
@@ -348,7 +351,7 @@ const EditProject = () => {
                                                 className="form-control"
                                                 name="start_date"
                                                 min={disablePastDate()}
-                                                placeholder="Start date"
+                                                // placeholder="Start date"
                                                 {...register("start_date", { required: true })}
                                                 aria-invalid={errors.start_date ? "true" : "false"} />
                                             {errors.start_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">Start date is required</p>}
@@ -361,7 +364,7 @@ const EditProject = () => {
                                                     className="form-control"
                                                     name="end_date"
                                                     min={disablePastDate()}
-                                                    placeholder="End date"
+                                                    // placeholder="End date"
                                                     {...register("end_date", { required: true })}
                                                     aria-invalid={errors.end_date ? "true" : "false"} />
                                                 {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}

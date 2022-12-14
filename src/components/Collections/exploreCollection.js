@@ -47,11 +47,11 @@ const AllCollections = () => {
                             [...new Map(coll?.map(item =>
                                 [item["title"], item])).values()]?.map((item, idx) => {
                                     return (
-                                        <Link key={`edth_${idx}`} to={`/item-details/${item.id}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
+                                        <Link key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item" >
                                             <div>
                                                 <div className="card">
                                                     <div className="image-over">
-                                                        <img className="card-img-top" src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt={item?.image?.description} />
+                                                        <img className="card-img-top" src={item.image} />
                                                     </div>
                                                     {/* Card Caption */}
                                                     <div className="card-caption col-12 p-0">
