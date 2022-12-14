@@ -65,7 +65,7 @@ const Header = () => {
                         </li>
                         {/* )} */}
                         <li className="nav-item">
-                            <Link to={`/all/${"LatestProjects"}`} className="nav-link">Newest Projects</Link>
+                            <Link to={`/all/${"LatestProjects"}`} className="nav-link">Latest Projects</Link>
                         </li>
                     </ul>
                     {/* Navbar Toggler */}

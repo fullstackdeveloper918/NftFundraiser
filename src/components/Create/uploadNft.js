@@ -92,6 +92,7 @@ const UploadNft = ({ current, prev }) => {
 
     // const ipfsClient = create('http://127.0.0.1:5001')
     const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
+    // const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
     // const ipfsBaseUrl = ('http://127.0.0.1:8080/')
     // const ipfsBaseUrl = '`${process.env.REACT_APP_IPFS_BASE_URL}`'
     const dispatch = useDispatch()
@@ -220,37 +221,24 @@ const UploadNft = ({ current, prev }) => {
     //     setNft_description(data)
     // };
     return (
-        <section className="author-area">
+        // <section className="author-area">
+        <div>
             {loading ? (
                 <Loader />
             ) : (
-                <div className="container">
 
+                <div className={current === 1 ? styles.showForm : styles.hideForm}>
+                    <Form form={form} name="dynamic_form_nest_item" initialValues={{
+                        remember: true
+                    }}
+                        // onSubmit={(event) => handleSubmit(event)}
+                        onFinish={(event) => onFinish(event)}
+                        onSubmit={OnSubmit} autoComplete="off" className="item-form card no-hover">
+                        <Form.List name="nfts">
 
-                    <div className="row justify-content-center">
-
-
-                        <div className="col-14 col-md-9">
-                            {/* Intro */}
-                            <div className="intro mt-5 mt-lg-0 mb-4 mb-lg-5">
-                                <div className="intro-content">
-                                    <span>Get Started</span>
-                                    <h3 className="mt-3 mb-0">Create NFT</h3>
-                                    <p> types supported: JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100 MB</p>
-                                    <label>Project image</label>
-                                </div>
-                            </div>
-                            <div className={current === 1 ? styles.showForm : styles.hideForm}>
-                                <Form form={form} name="dynamic_form_nest_item" initialValues={{
-                                    remember: true
-                                }}
-                                    // onSubmit={(event) => handleSubmit(event)}
-                                    onFinish={(event) => onFinish(event)}
-                                    onSubmit={OnSubmit} autoComplete="off" className="item-form card no-hover">
-                                    <Form.List name="nfts">
-
-                                        {(fields, { add, remove }) => (
-                                            <><div className='steps-center'>
+                            {(fields, { add, remove }) => (
+                                <>
+                                    {/* <div className='steps-center'>
 
 
                                                 <div className='orgicon1'>
@@ -266,77 +254,78 @@ const UploadNft = ({ current, prev }) => {
 
                                                     <i className="fa-regular fa-circle" style={{}}> Step 2</i>
                                                 </div>
-                                            </div><>
-                                                    {fields.map(({ key, name, ...restField }, index) => (
-                                                        // <Space
-                                                        //     key={key}
-                                                        //     style={{
-                                                        //         display: 'flex',
-                                                        //         marginBottom: 8,
-                                                        //     }}
-                                                        //     align="baseline"
-                                                        // >
-                                                        <Fragment>
-                                                            {/* <div>Artwork {index}</div> */}
-                                                            <div className="row">
+                                            </div> */}
+                                    <>
+                                        {fields.map(({ key, name, ...restField }, index) => (
+                                            // <Space
+                                            //     key={key}
+                                            //     style={{
+                                            //         display: 'flex',
+                                            //         marginBottom: 8,
+                                            //     }}
+                                            //     align="baseline"
+                                            // >
+                                            <Fragment>
+                                                {/* <div>Artwork {index}</div> */}
+                                                <div className="row">
 
-                                                                <div className="col-md-10 col-12">
-                                                                    <label>Name</label>
-                                                                    <div>
+                                                    <div className="col-md-10 col-12">
+                                                        <label>Name</label>
+                                                        <div>
 
-                                                                        <Form.Item
-                                                                            {...restField}
-                                                                            name={[name, "nft_name"]}
-                                                                            // label="Enter name"
-                                                                            // name="name"
-                                                                            rules={[
-                                                                                {
-                                                                                    required: true,
-                                                                                    message: 'Missing  name',
-                                                                                },
-                                                                            ]}
-                                                                        >
-                                                                            {/* <label>Name</label> */}
-                                                                            <Input placeholder="Name" />
-                                                                        </Form.Item>
-                                                                    </div>
-                                                                    <label>Description</label>
-                                                                    <div>
+                                                            <Form.Item
+                                                                {...restField}
+                                                                name={[name, "nft_name"]}
+                                                                // label="Enter name"
+                                                                // name="name"
+                                                                rules={[
+                                                                    {
+                                                                        required: true,
+                                                                        message: 'Missing  name',
+                                                                    },
+                                                                ]}
+                                                            >
+                                                                {/* <label>Name</label> */}
+                                                                <Input placeholder="Name" />
+                                                            </Form.Item>
+                                                        </div>
+                                                        <label>Description</label>
+                                                        <div>
 
-                                                                        <Form.Item
-                                                                            {...restField}
-                                                                            name={[name, "nft_description"]}
-                                                                            // label="Enter name"
-                                                                            // name="name"
-                                                                            rules={[
-                                                                                {
-                                                                                    required: true,
-                                                                                    message: 'Missing  description',
-                                                                                },
-                                                                            ]}
-                                                                        >
-                                                                            {/* <Controller
+                                                            <Form.Item
+                                                                {...restField}
+                                                                name={[name, "nft_description"]}
+                                                                // label="Enter name"
+                                                                // name="name"
+                                                                rules={[
+                                                                    {
+                                                                        required: true,
+                                                                        message: 'Missing  description',
+                                                                    },
+                                                                ]}
+                                                            >
+                                                                {/* <Controller
                                                                             control={control}
                                                                             name="nft_description"
                                                                             defaultValue=""
                                                                             render={({ field: { value, onChange } }) => {
                                                                                 return  */}
-                                                                            <JoditEditor
-                                                                                ref={editor}
-                                                                                value={'nft_description'}
-                                                                                // config={config}
+                                                                <JoditEditor
+                                                                    ref={editor}
+                                                                    value={'nft_description'}
+                                                                    // config={config}
 
-                                                                                placeholder="start typing"
-                                                                                tabIndex={1} // tabIndex of textarea
-                                                                                // onBlur={newContent => 'nft_description'(newContent)} // preferred to use only this option to update the content for performance reasons
-                                                                                onChange={newContent => { }}
-                                                                            />
-                                                                            {/* }} */}
-                                                                            {/* /> */}
-                                                                        </Form.Item>
-                                                                    </div>
-                                                                </div>
-                                                                {/* <div className="col-md-5 col-12">
+                                                                    placeholder="start typing"
+                                                                    tabIndex={1} // tabIndex of textarea
+                                                                    // onBlur={newContent => 'nft_description'(newContent)} // preferred to use only this option to update the content for performance reasons
+                                                                    onChange={newContent => { }}
+                                                                />
+                                                                {/* }} */}
+                                                                {/* /> */}
+                                                            </Form.Item>
+                                                        </div>
+                                                    </div>
+                                                    {/* <div className="col-md-5 col-12">
                                                                     <label>Nft</label>
                                                                     <div>
                                                                         <Form.Item
@@ -377,38 +366,38 @@ const UploadNft = ({ current, prev }) => {
                                                                         </Modal>
                                                                     </div>
                                                                 </div> */}
-                                                                <div className="col-md-1 col-12">
-                                                                    <MinusCircleOutlined onClick={(e) => { remove(name); handleDecrement(e); }} />
+                                                    <div className="col-md-1 col-12">
+                                                        <MinusCircleOutlined onClick={(e) => { remove(name); handleDecrement(e); }} />
+                                                    </div>
+                                                    {/* </div> */}
+                                                    <div className="col-md-3 col-12">
+
+                                                        {/* <div className="col-24"> */}
+
+                                                        <div className="form-group">
+                                                            <label className='mt-2'>Choose Collection</label>
+                                                            <div className="card choose_div" style={{
+                                                                background: "black",
+                                                                marginBottom: "8px",
+                                                            }}>
+                                                                <div className="card-body ">
+                                                                    <Button variant="primary" onClick={() => setModalShow(true)}>
+                                                                        <i className="fa-regular fa-plus" ></i> Create Collection
+                                                                    </Button>
+
+                                                                    <MyVerticallyCenteredModal
+                                                                        show={modalShow}
+                                                                        onHide={() => setModalShow(false)} />
                                                                 </div>
-                                                                {/* </div> */}
-                                                                <div className="col-md-3 col-12">
-
-                                                                    {/* <div className="col-24"> */}
-
-                                                                    <div className="form-group">
-                                                                        <label className='mt-2'>Choose Collection</label>
-                                                                        <div className="card choose_div" style={{
-                                                                            background: "black",
-                                                                            marginBottom: "8px",
-                                                                        }}>
-                                                                            <div className="card-body ">
-                                                                                <Button variant="primary" onClick={() => setModalShow(true)}>
-                                                                                    <i className="fa-regular fa-plus" ></i> Create Collection
-                                                                                </Button>
-
-                                                                                <MyVerticallyCenteredModal
-                                                                                    show={modalShow}
-                                                                                    onHide={() => setModalShow(false)} />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
 
-                                                                {col?.map((item, idx) => (
+                                                    {col?.map((item, idx) => (
 
-                                                                    <div key={`auc_${idx}`} id={item.id} className="col-md-3 col-12 choose_div">
-                                                                        {/* <Form.Item
+                                                        <div key={`auc_${idx}`} id={item.id} className="col-md-3 col-12 choose_div">
+                                                            {/* <Form.Item
                                                                             {...restField}
                                                                             name={[name, "nft_collection_id"]}
                                                                             // getValueFromEvent={getFile}
@@ -420,100 +409,98 @@ const UploadNft = ({ current, prev }) => {
                                                                             ]}
 
                                                                         > */}
-                                                                        <label className='hidden-word'>jsaswjdwjd</label>
+                                                            <label className='hidden-word'>jsaswjdwjd</label>
 
-                                                                        <div id={item.id} onClick={() => onHandleClick(index, item.id)} className="card"
-                                                                            style={{
-                                                                                background: "black",
-                                                                                marginBottom: "8px",
-                                                                                border: nft_collection_id[index] == item.id ? "1px solid #fff" : null
-                                                                            }}>
-                                                                            <div className="card-body">
-                                                                                <div>
-
-
-                                                                                    {item.title}
-                                                                                </div>
-
-
-                                                                            </div>
-                                                                        </div>
-                                                                        {/* </Form.Item> */}
-
-                                                                    </div>
-                                                                    // </div>
-                                                                ))}
-                                                                <div className="col-md-12 col-12">
-                                                                    <label>Upload Nft</label>
+                                                            <div id={item.id} onClick={() => onHandleClick(index, item.id)} className="card"
+                                                                style={{
+                                                                    background: "black",
+                                                                    marginBottom: "8px",
+                                                                    border: nft_collection_id[index] == item.id ? "1px solid #fff" : null
+                                                                }}>
+                                                                <div className="card-body">
                                                                     <div>
-                                                                        <Form.Item
-                                                                            {...restField}
-                                                                            name={[name, "nft_image"]}
-                                                                            // getValueFromEvent={getFile}
-                                                                            rules={[
-                                                                                {
-                                                                                    required: true,
-                                                                                    message: 'Please select a image',
-                                                                                },
-                                                                            ]}
-
-                                                                        >
-
-                                                                            <Upload
-                                                                                {...fileProps}
-                                                                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                                                                listType="picture-card"
-                                                                                // fileList={fileList}
-                                                                                // onChange={onChange}
-                                                                                onPreview={handlePreview}
-                                                                                maxCount={1}
-
-                                                                            >
-                                                                                + Upload
-                                                                            </Upload>
 
 
-                                                                        </Form.Item>
-                                                                        <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
-                                                                            <img
-                                                                                alt="example"
-                                                                                style={{
-                                                                                    width: '100%',
-                                                                                }}
-                                                                                src={previewImage} />
-                                                                        </Modal>
+                                                                        {item.title}
                                                                     </div>
+
+
                                                                 </div>
-
                                                             </div>
-                                                        </Fragment> // </Space>
+                                                            {/* </Form.Item> */}
+
+                                                        </div>
+                                                        // </div>
                                                     ))}
+                                                    <div className="col-md-12 col-12">
+                                                        <label>Upload Nft</label>
+                                                        <div>
+                                                            <Form.Item
+                                                                {...restField}
+                                                                name={[name, "nft_image"]}
+                                                                // getValueFromEvent={getFile}
+                                                                rules={[
+                                                                    {
+                                                                        required: true,
+                                                                        message: 'Please select a image',
+                                                                    },
+                                                                ]}
+
+                                                            >
+
+                                                                <Upload
+                                                                    {...fileProps}
+                                                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                                                    listType="picture-card"
+                                                                    // fileList={fileList}
+                                                                    // onChange={onChange}
+                                                                    onPreview={handlePreview}
+                                                                    maxCount={1}
+
+                                                                >
+                                                                    + Upload
+                                                                </Upload>
 
 
-                                                    {(!(data?.number_of_nft == count)) ?
-                                                        <Form.Item>
-                                                            <Button type="dashed" onClick={(e) => { add(e); handleIncrement(e); }} block icon={<PlusOutlined />} disabled={data?.number_of_nft == count}>
-                                                                Add NFT
-                                                            </Button>
-                                                        </Form.Item>
-                                                        : null}
-                                                </></>
-                                        )}
+                                                            </Form.Item>
+                                                            <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
+                                                                <img
+                                                                    alt="example"
+                                                                    style={{
+                                                                        width: '100%',
+                                                                    }}
+                                                                    src={previewImage} />
+                                                            </Modal>
+                                                        </div>
+                                                    </div>
 
-                                    </Form.List>
-                                    <Form.Item>
-                                        <div className="col-12">
-                                            <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create</button>
-                                        </div>
+                                                </div>
+                                            </Fragment> // </Space>
+                                        ))}
 
-                                    </Form.Item>
-                                </Form>
+
+                                        {(!(data?.number_of_nft == count)) ?
+                                            <Form.Item>
+                                                <Button type="dashed" onClick={(e) => { add(e); handleIncrement(e); }} block icon={<PlusOutlined />} disabled={data?.number_of_nft == count}>
+                                                    Add NFT
+                                                </Button>
+                                            </Form.Item>
+                                            : null}
+                                    </></>
+                            )}
+
+                        </Form.List>
+                        <Form.Item>
+                            <div className="col-12">
+                                <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create</button>
                             </div>
-                        </div>
-                    </div>
+
+                        </Form.Item>
+                    </Form>
                 </div>
+
             )}
-        </section >
+        </div>
     );
 };
 export default UploadNft;

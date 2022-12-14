@@ -94,28 +94,25 @@ const ProjDetails = () => {
                                         </li>
 
                                         <li>
-                                            <span>Number of NFT's Minted :  </span><span>{latprojdetail.number_of_nft}</span>
+                                            <span>Number of NFTs Minted :  </span><span>{latprojdetail.number_of_nft}</span>
                                         </li>
                                     </ul>
                                 </div>
                                 {userDetail !== null && (
 
-                                    <Button variant="primary" onClick={() => setModalShow(true)}>
+                                    <><Button variant="primary" onClick={() => setModalShow(true)}>
                                         Share
-                                    </Button>
+                                    </Button><MyVerticallyCenteredModal
+                                            id={id}
+                                            userRef={userDetail}
+                                            show={modalShow}
+                                            onHide={() => setModalShow(false)} /></>
                                 )}
 
 
-                                {log === null ? (
-                                    swal("please login to continue...")
-                                ) : (
 
-                                    <MyVerticallyCenteredModal
-                                        id={id}
-                                        userRef={userDetail}
-                                        show={modalShow}
-                                        onHide={() => setModalShow(false)} />
-                                )}
+
+
                             </div>
                         </div>
                     </div>

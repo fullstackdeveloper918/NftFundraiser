@@ -23,8 +23,8 @@ const ProjNFTS = () => {
             <div className="container">
                 <div className='intro row m-0'>
                     <div className="intro-content">
-                        <span style={{ marginLeft: "15px" }}>NFT's</span>
-                        <h3 className="w-full mb-0">NFT'S</h3>
+                        <span style={{ marginLeft: "15px" }}>NFTs</span>
+                        <h3 className="w-full mb-0">NFTs</h3>
                     </div>
                 </div>
 

@@ -101,7 +101,7 @@ const ProjNftDetails = () => {
 
             <div className="container">
                 <div className='row mb-0'>
-                    <h3 className="mb-0">NFT'S</h3>
+                    <h3 className="mb-0">NFTs</h3>
                 </div>
                 <div className="row items mt-0 explore-items px-0">
 

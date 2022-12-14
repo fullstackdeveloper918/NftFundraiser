@@ -75,6 +75,11 @@ const Create = ({ current, next, prev }) => {
             // setValue('start_date', data.start_date)
             setValue('type', data.type)
 
+            setType(data.type)
+            setCountry(data.country)
+            setCity(data.city)
+            setState(data.state)
+
             // setValue('end_date', data.end_date)
         }
 
@@ -90,314 +95,288 @@ const Create = ({ current, next, prev }) => {
 
 
     return (
-        <section className="author-area">
-            <div className="container">
-                <div className="row justify-content-center">
+
+        <div className={current === 0 ? styles.showForm : styles.hideForm}>
+            <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
+                <div className="row">
+
+                    <div className="col-12 ">
+                        <div className="form-group mt-3">
+                            <div className="form-check form-check-inline">
+                                {data.type == 2 ? (
+                                    <><input className="form-check-input" type="radio" name="radiobutton" id="donation" value="2" onChange={(e) => setType(e.target.value)} defaultChecked={data.type} /><label className="form-check-label" htmlFor="donation">Campaign</label></>
+                                ) : (
+
+                                    <><input className="form-check-input" type="radio" name="radiobutton" id="donation" value="2" onChange={(e) => setType(e.target.value)} /><label className="form-check-label" htmlFor="donation">Campaign</label></>
+                                )}
+                            </div>
+                            <div className="form-check form-check-inline">
+                                {data.type == 1 ? (
+                                    <><input className="form-check-input" type="radio" name="radiobutton" id="product_sale" value="1" onChange={(e) => setType(e.target.value)} defaultChecked={data.type} /><label className="form-check-label" htmlFor="product_sale">Single</label></>
+                                ) : (
+
+                                    <><input className="form-check-input" type="radio" name="radiobutton" id="product_sale" value="1" onChange={(e) => setType(e.target.value)} /><label className="form-check-label" htmlFor="product_sale">Single</label></>
+                                )}
+                            </div>
+
+                        </div>
+                    </div>
 
 
-                    <div className="col-14 col-md-9">
-                        {/* Intro */}
-                        <div className="intro mt-5 mt-lg-0 mb-4 mb-lg-5">
-                            <div className="intro-content">
-                                <span>Get Started</span>
-                                <h3 className="mt-3 mb-0">Create Project</h3>
+
+
+                    <div className="col-md-6 col-12">
+                        {/* {type == 1 && ( */}
+
+                        <div className="form-group mt-3">
+                            <label>Project name</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="title"
+                                placeholder="Project name"
+                                {...register("title", { required: true })}
+                                aria-invalid={errors.title ? "true" : "false"}
+                            />
+                            {errors.title?.type === 'required' && <p style={{ color: 'red' }} role="alert">Title is required</p>}
+
+                        </div>
+                        {/* )} */}
+                    </div>
+                    <div className="col-md-6 col-12">
+                        <div className="form-group mt-3">
+                            <label>Web address</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="address"
+                                placeholder="Web Address"
+                                {...register("address", { required: true })}
+                                aria-invalid={errors.address ? "true" : "false"}
+                            />
+                            {errors.address?.type === 'required' && <p style={{ color: 'red' }} role="alert">Address is required</p>}
+
+                        </div>
+                    </div>
+                    <div className="col-12">
+                        <label>Description</label>
+                        <div className="form-group">
+
+
+                            <Controller
+                                control={control}
+                                name="description"
+                                defaultValue=""
+                                render={({ field: { value, onChange } }) => {
+                                    return <JoditEditor
+                                        ref={editor}
+                                        value={description}
+                                        // config={config}
+
+                                        placeholder="start typing"
+                                        tabIndex={1} // tabIndex of textarea
+                                        onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
+                                        onChange={newContent => { }}
+                                    />
+                                }}
+                            />
+                            {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
+                        </div>
+                    </div>
+
+
+                    <div className="col-12 col-md-6">
+                        <div className="form-group">
+                            <label>Country</label>
+                            <Controller
+                                control={control}
+                                name="country"
+                                render={({ field: { onChange, onBlur, value, ref } }) => (
+
+                                    // onChange={onChange}
+
+                                    <GeoLocation
+                                        // locationTitle="Country"  
+                                        isCountry
+
+                                        onBlur={onBlur}
+                                        selected={value}
+                                        onChange={setCountry}
+                                        required={true}
+                                    />
+                                )}
+                            />
+
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-6">
+                        <div className="form-group">
+                            <label>State or Province</label>
+                            <Controller
+                                control={control}
+                                name="state"
+                                render={({ field: { onChange, onBlur, value, ref } }) => (
+
+                                    <GeoLocation
+                                        // isState
+                                        // type="text"
+                                        // className="form-control"
+                                        // locationTitle="State"
+                                        onChange={setState}
+                                        geoId={country}
+                                        onBlur={onBlur}
+                                        selected={value}
+                                    // onChange={onChange}
+
+                                    // {...register("state", { required: true })}
+                                    // aria-invalid={errors.state ? "true" : "false"}
+                                    />
+                                )}
+                            />
+                            {/* {errors.state?.type === 'required' && <p style={{ color: 'red' }} role="alert">state is required</p>} */}
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-6">
+                        <div className="form-group">
+                            <label>City or Region</label>
+                            <Controller
+                                control={control}
+                                name="city"
+                                render={({ field: { onChange, onBlur, value, ref } }) => (
+                                    <GeoLocation
+                                        // locationTitle="City"
+                                        // isCity
+                                        onChange={setCity}
+                                        geoId={state}
+
+                                        onBlur={onBlur}
+                                        selected={value}
+                                        required={true}
+                                        // onChange={onChange}
+
+
+                                        // {...register("city", { required: true })}
+                                        aria-invalid={errors.city ? "true" : "false"}
+                                    />
+                                )}
+                            />
+                            {errors.city?.type === 'required' && <p style={{ color: 'red' }} role="alert">city is required</p>}
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-6">
+                        <div className="form-group">
+                            {type == 2 ? (
+
+                                <label>Price per NFT (MATIC)</label>
+                            ) : (
+                                <label>Price (MATIC)</label>
+
+                            )}
+                            <input
+                                type="float"
+                                className="form-control"
+                                name="price"
+                                placeholder="Price"
+                                {...register("price", { required: true })}
+                                aria-invalid={errors.price ? "true" : "false"}
+                            />
+                            {errors.price?.type === 'required' && <p style={{ color: 'red' }} role="alert">Price is required</p>}
+                        </div>
+                    </div>
+
+
+                    {type == 1 ? (
+
+                        <div className="col-12 col-md-6">
+                            <div className="form-group">
+                                <label>Number of NFTs</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    name="number_of_nft"
+                                    // value='1'
+                                    // defaultValue={1}
+                                    // defaultValue={1}
+                                    // disabled={true}
+                                    min={1}
+
+                                    placeholder="number of NFT (1 allowed)"
+                                    {...register("number_of_nft", { required: true, min: 1, max: 1 })}
+                                    // {...register("number_of_nft", { maxLength: 12 })}
+                                    aria-invalid={errors.number_of_nft ? "true" : "false"}
+                                />
+                                {errors.number_of_nft && errors.number_of_nft.type === "max" && (
+                                    <p style={{ color: 'red' }}>
+                                        Only 1 nft allowed
+                                    </p>
+                                )}
+                                {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required and limit is upto 1</p>}
+                                {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max one length </p>} */}
                             </div>
                         </div>
-                        {/* Item Form */}
-                        <div className={current === 0 ? styles.showForm : styles.hideForm}>
-                            <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
-                                <div className="row">
-                                    {/* <div className='steps-center'> */}
-                                    {/* <div className='step1icon'> */}
+                    ) : (
+                        <div className="col-12 col-md-6">
+                            <div className="form-group">
+                                <label>Number of NFTs</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    name="number_of_nft"
 
-                                    {/* <i className="fa-solid fa-circle-check"> Step 1</i> */}
-                                    {/* </div> */}
-                                    {/* <div className='stepperline'> */}
-                                    {/* <i style={{ color: '#452868' }}> ----------------------------- </i> */}
+                                    // defaultValue={1}
+                                    min={1}
+                                    // disabled={type == 1}
+                                    placeholder="Select your number of NFTs (1-12)"
+                                    {...register("number_of_nft", { required: true, min: 1, max: 12 })}
+                                    // {...register("number_of_nft", { maxLength: 12 })}
+                                    aria-invalid={errors.number_of_nft ? "true" : "false"}
+                                />
+                                {/* {errors.number_of_nft?.message && <p>{errors.number_of_nft.message}</p>} */}
+                                {errors.number_of_nft && errors.number_of_nft.type === "max" && (
+                                    <p style={{ color: 'red' }}>
+                                        Only 12 nfts allowed
+                                    </p>
+                                )}
+                                {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required and limit is upto 12</p>}
+                                {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max length exceeded</p>} */}
+                            </div>
+                        </div>
+                    )}
+                    {type == 2 && (
 
-                                    {/* </div> */}
-                                    {/* <div className='step2icon'> */}
+                        <><div className="col-12 col-md-6">
+                            <div className="form-group">
+                                <label>Campaign Start date</label>
+                                <input
+                                    type="date"
+                                    // placeholder='dd-mm-yy'
+                                    // hidden={data.type == 1}
+                                    className="form-control"
+                                    name="start_date"
+                                    min={disablePastDate()}
 
-                                    {/* <i className="fa-regular fa-circle" > Step 2</i> */}
-                                    {/* </div> */}
-                                    {/* </div>/ */}
-                                    <div className="col-12 ">
-                                        <div className="form-group mt-3">
-                                            <div className="form-check form-check-inline">
-                                                {data.type == 2 ? (
-                                                    <><input className="form-check-input" type="radio" name="radiobutton" id="donation" value="2" onChange={(e) => setType(e.target.value)} defaultChecked={data.type} /><label className="form-check-label" htmlFor="donation">Campaign</label></>
-                                                ) : (
-
-                                                    <><input className="form-check-input" type="radio" name="radiobutton" id="donation" value="2" onChange={(e) => setType(e.target.value)} /><label className="form-check-label" htmlFor="donation">Campaign</label></>
-                                                )}
-                                            </div>
-                                            <div className="form-check form-check-inline">
-                                                {data.type == 1 ? (
-                                                    <><input className="form-check-input" type="radio" name="radiobutton" id="product_sale" value="1" onChange={(e) => setType(e.target.value)} defaultChecked={data.type} /><label className="form-check-label" htmlFor="product_sale">Single</label></>
-                                                ) : (
-
-                                                    <><input className="form-check-input" type="radio" name="radiobutton" id="product_sale" value="1" onChange={(e) => setType(e.target.value)} /><label className="form-check-label" htmlFor="product_sale">Single</label></>
-                                                )}
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-
-
-
-                                    <div className="col-md-6 col-12">
-                                        {/* {type == 1 && ( */}
-
-                                        <div className="form-group mt-3">
-                                            <label>Project name</label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                name="title"
-                                                placeholder="Project name"
-                                                {...register("title", { required: true })}
-                                                aria-invalid={errors.title ? "true" : "false"}
-                                            />
-                                            {errors.title?.type === 'required' && <p style={{ color: 'red' }} role="alert">Title is required</p>}
-
-                                        </div>
-                                        {/* )} */}
-                                    </div>
-                                    <div className="col-md-6 col-12">
-                                        <div className="form-group mt-3">
-                                            <label>Address</label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                name="address"
-                                                placeholder="Address"
-                                                {...register("address", { required: true })}
-                                                aria-invalid={errors.address ? "true" : "false"}
-                                            />
-                                            {errors.address?.type === 'required' && <p style={{ color: 'red' }} role="alert">Address is required</p>}
-
-                                        </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <label>Description</label>
-                                        <div className="form-group">
-
-
-                                            <Controller
-                                                control={control}
-                                                name="description"
-                                                defaultValue=""
-                                                render={({ field: { value, onChange } }) => {
-                                                    return <JoditEditor
-                                                        ref={editor}
-                                                        value={value}
-                                                        // config={config}
-
-                                                        placeholder="start typing"
-                                                        tabIndex={1} // tabIndex of textarea
-                                                        onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
-                                                        onChange={newContent => { }}
-                                                    />
-                                                }}
-                                            />
-                                            {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
-                                        </div>
-                                    </div>
-
-
-                                    <div className="col-12 col-md-6">
-                                        <div className="form-group">
-                                            <label>Country</label>
-                                            <Controller
-                                                control={control}
-                                                name="country"
-                                                render={({ field: { onChange, onBlur, value, ref } }) => (
-
-                                                    // onChange={onChange}
-
-                                                    <GeoLocation
-                                                        // locationTitle="Country"  
-                                                        isCountry
-
-                                                        onBlur={onBlur}
-                                                        selected={value}
-                                                        onChange={setCountry}
-                                                        required={true}
-                                                    />
-                                                )}
-                                            />
-
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6">
-                                        <div className="form-group">
-                                            <label>State</label>
-                                            <Controller
-                                                control={control}
-                                                name="state"
-                                                render={({ field: { onChange, onBlur, value, ref } }) => (
-
-                                                    <GeoLocation
-                                                        // isState
-                                                        // type="text"
-                                                        // className="form-control"
-                                                        // locationTitle="State"
-                                                        onChange={setState}
-                                                        geoId={country}
-                                                        onBlur={onBlur}
-                                                        selected={value}
-                                                    // onChange={onChange}
-
-                                                    // {...register("state", { required: true })}
-                                                    // aria-invalid={errors.state ? "true" : "false"}
-                                                    />
-                                                )}
-                                            />
-                                            {/* {errors.state?.type === 'required' && <p style={{ color: 'red' }} role="alert">state is required</p>} */}
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6">
-                                        <div className="form-group">
-                                            <label>City</label>
-                                            <Controller
-                                                control={control}
-                                                name="city"
-                                                render={({ field: { onChange, onBlur, value, ref } }) => (
-                                                    <GeoLocation
-                                                        // locationTitle="City"
-                                                        // isCity
-                                                        onChange={setCity}
-                                                        geoId={state}
-
-                                                        onBlur={onBlur}
-                                                        selected={value}
-                                                        required={true}
-                                                        // onChange={onChange}
-
-
-                                                        // {...register("city", { required: true })}
-                                                        aria-invalid={errors.city ? "true" : "false"}
-                                                    />
-                                                )}
-                                            />
-                                            {errors.city?.type === 'required' && <p style={{ color: 'red' }} role="alert">city is required</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6">
-                                        <div className="form-group">
-                                            {type == 2 ? (
-
-                                                <label>Price (MATIC)</label>
-                                            ) : (
-
-                                                <label>Price per NFT</label>
-                                            )}
-                                            <input
-                                                type="float"
-                                                className="form-control"
-                                                name="price"
-                                                placeholder="Price"
-                                                {...register("price", { required: true })}
-                                                aria-invalid={errors.price ? "true" : "false"}
-                                            />
-                                            {errors.price?.type === 'required' && <p style={{ color: 'red' }} role="alert">Price is required</p>}
-                                        </div>
-                                    </div>
-
-
-                                    {type == 1 ? (
-
-                                        <div className="col-12 col-md-6">
-                                            <div className="form-group">
-                                                <label>Number of NFT's</label>
-                                                <input
-                                                    type="number"
-                                                    className="form-control"
-                                                    name="number_of_nft"
-                                                    // value='1'
-                                                    // defaultValue={1}
-                                                    // defaultValue={1}
-                                                    // disabled={true}
-                                                    min={1}
-
-                                                    placeholder="number of NFT (1 allowed)"
-                                                    {...register("number_of_nft", { required: true, min: 1, max: 1 })}
-                                                    // {...register("number_of_nft", { maxLength: 12 })}
-                                                    aria-invalid={errors.number_of_nft ? "true" : "false"}
-                                                />
-                                                {errors.number_of_nft && errors.number_of_nft.type === "max" && (
-                                                    <p style={{ color: 'red' }}>
-                                                        Only 1 nft allowed
-                                                    </p>
-                                                )}
-                                                {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required and limit is upto 1</p>}
-                                                {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max one length </p>} */}
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <div className="col-12 col-md-6">
-                                            <div className="form-group">
-                                                <label>Number of NFT's</label>
-                                                <input
-                                                    type="number"
-                                                    className="form-control"
-                                                    name="number_of_nft"
-
-                                                    // defaultValue={1}
-                                                    min={1}
-                                                    // disabled={type == 1}
-                                                    placeholder="Select your number of NFT's (1-12)"
-                                                    {...register("number_of_nft", { required: true, min: 1, max: 12 })}
-                                                    // {...register("number_of_nft", { maxLength: 12 })}
-                                                    aria-invalid={errors.number_of_nft ? "true" : "false"}
-                                                />
-                                                {/* {errors.number_of_nft?.message && <p>{errors.number_of_nft.message}</p>} */}
-                                                {errors.number_of_nft && errors.number_of_nft.type === "max" && (
-                                                    <p style={{ color: 'red' }}>
-                                                        Only 12 nfts allowed
-                                                    </p>
-                                                )}
-                                                {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required and limit is upto 12</p>}
-                                                {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max length exceeded</p>} */}
-                                            </div>
-                                        </div>
-                                    )}
-                                    {type == 2 && data.type == null && (
-
-                                        <><div className="col-12 col-md-6">
-                                            <div className="form-group">
-                                                <label>Campaign Start date</label>
-                                                <input
-                                                    type="date"
-                                                    // placeholder='dd-mm-yy'
-                                                    // hidden={data.type == 1}
-                                                    className="form-control"
-                                                    name="start_date"
-                                                    min={disablePastDate()}
-
-                                                    // placeholder="Start date :"
-                                                    {...register("start_date", { required: true })}
-                                                    aria-invalid={errors.start_date ? "true" : "false"} />
-                                                {errors.start_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">Start date is required</p>}
-                                            </div>
-                                        </div><div className="col-12 col-md-6">
-                                                <div className="form-group">
-                                                    <label>Campaign End Date</label>
-                                                    <input
-                                                        type="date"
-                                                        // hidden={data.type == 1}
-                                                        className="form-control"
-                                                        name="end_date"
-                                                        min={disablePastDate()}
-                                                        // placeholder="End date"
-                                                        {...register("end_date", { required: true })}
-                                                        aria-invalid={errors.end_date ? "true" : "false"} />
-                                                    {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
-                                                </div>
-                                            </div></>
-                                    )}
-                                    {data.type == 2 && (
+                                    // placeholder="Start date :"
+                                    {...register("start_date", { required: true })}
+                                    aria-invalid={errors.start_date ? "true" : "false"} />
+                                {errors.start_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">Start date is required</p>}
+                            </div>
+                        </div><div className="col-12 col-md-6">
+                                <div className="form-group">
+                                    <label>Campaign End Date</label>
+                                    <input
+                                        type="date"
+                                        // hidden={data.type == 1}
+                                        className="form-control"
+                                        name="end_date"
+                                        min={disablePastDate()}
+                                        // placeholder="End date"
+                                        {...register("end_date", { required: true })}
+                                        aria-invalid={errors.end_date ? "true" : "false"} />
+                                    {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
+                                </div>
+                            </div></>
+                    )}
+                    {/* {data.type == 2 && (
 
                                         <><div className="col-12 col-md-6">
                                             <div className="form-group">
@@ -432,37 +411,33 @@ const Create = ({ current, next, prev }) => {
                                                     {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
                                                 </div>
                                             </div></>
-                                    )}
-                                    <div className="col-12 col-md-6">
-                                        <div className="form-group">
-                                            <label>Category</label>
-                                            <select name="category_id"
-                                                {...register("category_id", { required: true })}
-                                            >
-                                                aria-invalid={errors.category_id ? "true" : "false"}
-                                                <option value="" disabled selected style={{ color: "#495057" }}>Select category </option>
-                                                {cat?.map((option, key) => (
+                                    )} */}
+                    <div className="col-12 col-md-6">
+                        <div className="form-group">
+                            <label>Category</label>
+                            <select name="category_id"
+                                {...register("category_id", { required: true })}
+                            >
+                                aria-invalid={errors.category_id ? "true" : "false"}
+                                <option value="" disabled selected style={{ color: "#495057" }}>Select category </option>
+                                {cat?.map((option, key) => (
 
-                                                    <option key={key.id} value={option.id} >
-                                                        {option.title}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                            {errors.category_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Category is required</p>}
-                                        </div>
-                                    </div>
-
-
-                                    <div className="col-12">
-                                        <button className="btn w-100 mt-3 mt-sm-4" type="submit">Next</button>
-                                    </div>
-                                </div>
-                            </form>
+                                    <option key={key.id} value={option.id} >
+                                        {option.title}
+                                    </option>
+                                ))}
+                            </select>
+                            {errors.category_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Category is required</p>}
                         </div>
                     </div>
-                </div >
-            </div >
-        </section >
+
+
+                    <div className="col-12">
+                        <button className="btn w-100 mt-3 mt-sm-4" type="submit">Next</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     );
 
 }
