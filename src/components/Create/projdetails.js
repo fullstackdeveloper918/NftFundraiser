@@ -1,16 +1,11 @@
 import React, { Component, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { DeleteProject, GetCollectionDetails, ProjectDetail } from '../../redux/Actions/projectAction';
-import { getProjectDetail } from '../../redux/Slices/projectSlice';
-import { useState } from 'react';
-import { Button } from 'react-bootstrap';
-import Author from '../Author/Author';
-import CollItem from './bread-crumb';
-import { LatestProjectDetail } from './../../redux/Actions/projectAction';
+import Banner from './editBanner';
 const ProjNftDetails = () => {
-
     const deleteHandler = (id) => {
         dispatch(DeleteProject(id))
     }
@@ -37,22 +32,33 @@ const ProjNftDetails = () => {
     //     dispatch(DeleteProject(id))
     // }
     // debugger
+    const bannerHandler = () => {
 
+    }
     return (
-        <section className="item-details-area project-nft-single">
+        <section className="item-details-area project-nft-si"   >
             <div className="container">
                 <div className="row justify-content-between p-0">
 
                     <div className="col-12 col-lg-12">
                         <div className="item-info" >
 
+
                             <div className="item-thumb text-center">
-                                {projdetail && projdetail?.nft_data && projdetail?.nft_data?.length ?
+                                {/* {projdetail && projdetail?.nft_data && projdetail?.nft_data?.length ? */}
+                                <div>
+                                    <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() => setModalShow(true)}></i>
 
-                                    <img src={projdetail.nft_data[0].image} alt="first nft" />
-                                    : null}
 
+                                    <Banner
+                                        id={id}
+                                        show={modalShow}
+                                        onHide={() => setModalShow(false)} />
+                                </div>
+                                <img src={projdetail?.image} alt="first nft" />
+                                {/* : null} */}
                             </div>
+
                         </div>
                         {/*                    
                                 <div className="item-info" >

@@ -19,7 +19,8 @@ import {
     getSettings,
     getNftwolDetails,
     getfundprojdetails,
-    Nftres
+    Nftres,
+    updatebanner
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -464,6 +465,37 @@ export const GetfundraiserProject = (user_id) => async dispatch => {
 
         await dispatch(getfundprojdetails(res));
 
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+
+export const UpdateBanner = (formData, params) => async dispatch => {
+    // 
+    const token = sessionStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            transformRequest: formData => formData
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/image_update/${params}`,
+            formData, config)
+        // 
+        // console.log(res, 'coll rres')
+        await dispatch(updatebanner(res));
+
+        if (res.status === 200) {
+            swal("success", "updated", 'success').then(function () {
+                dispatch(ProjectDetail(params))
+                // window.location = "/projectlist";
+            });
+
+        }
     } catch (e) {
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')

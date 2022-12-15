@@ -13,8 +13,7 @@ import styles from './styles/styles.module.scss'
 import 'antd/lib/form/style/css';
 import 'antd/lib/upload/style/css';
 import 'antd/lib/modal/style/css';
-import 'froala-editor/css/froala_style.min.css';
-import 'froala-editor/css/froala_editor.pkgd.min.css';
+import 'antd/lib/button/style/css'
 import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
 
@@ -27,7 +26,7 @@ const getBase64 = (file) =>
     });
 // import ImgCrop from 'antd-img-crop';
 
-const UploadNft = ({ current, prev }) => {
+const UploadNft = ({ current, goBack }) => {
 
 
     const editor = useRef(null);
@@ -492,9 +491,14 @@ const UploadNft = ({ current, prev }) => {
                         </Form.List>
                         <Form.Item>
                             <div className="col-12">
-                                <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create</button>
+                                <button className="btn w-100 mt-3 mt-sm-4 mb-3" type="submit">Create</button>
                             </div>
-
+                            <Button className="previous_btn" onClick={() => goBack()}>
+                                <svg width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="none" stroke="#fff" stroke-width="2" d="M2,12 L22,12 M13,3 L22,12 L13,21" transform="matrix(-1 0 0 1 24 0)" />
+                                </svg>
+                                Previous
+                            </Button>
                         </Form.Item>
                     </Form>
                 </div>

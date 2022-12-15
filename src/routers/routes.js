@@ -67,7 +67,7 @@ const MyRouts = () => {
           <Route exact path="/blog-single" component={BlogSingle} />
           <Route exact path="/help-center" component={HelpCenter} />
           <Route exact path="/authors" component={Authors} />
-          <Route exact path="/author" component={Author} />
+          <Route exact path="/profile" component={Author} />
           <Route exact path="/terms&conditions" component={TermsCond} />
           <Route exact path="/all/:type" component={All} />
           <Route exact path="/aboutus" component={Aboutus} />
