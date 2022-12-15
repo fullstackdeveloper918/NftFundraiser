@@ -1,4 +1,6 @@
 import axios from "axios";
+import swal from "sweetalert";
+import { postContact } from "../Slices/contactSlice";
 export const ContactAction = (params, setLoading) => async dispatch => {
     // sessionStorage.setItem('authToken', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
@@ -7,14 +9,14 @@ export const ContactAction = (params, setLoading) => async dispatch => {
         // debugger
         const config = {
             headers: {
-                // 'Content-Type': 'multipart/form-data',
+                // 'Content-Type': 'multipart/form-data'
                 'Content-Type': 'application/json',
             },
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/contact-us/store`,
             params, config)
         // console.log("resproj", res)
-        dispatch(createProjectSuccess(res));
+        dispatch(postContact(res));
         if (res.status === 200) {
             setLoading(false)
             swal("success", res.data.message, 'success')

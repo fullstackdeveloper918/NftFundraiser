@@ -23,6 +23,7 @@ const projectSlice = createSlice({
         getnftwoldetails: [],
         settings: [],
         nftres: [],
+        updbanner: [],
         // liveProjects: [],
         liveProjects: {
             LatestProjects: [],
@@ -94,6 +95,10 @@ const projectSlice = createSlice({
             // debugger
             state.latestprojectdetails = action?.payload?.data?.data;
         },
+        updatebanner: (state, action) => {
+            // debugger
+            state.updbanner = action?.payload?.data?.data;
+        },
         publicLiveProjects: (state, action) => {
             state.liveProjects[action.payload.type] = action.payload.res.data.data.data
             // state.liveProjects = action.payload.data.data.data
@@ -128,4 +133,5 @@ export const {
     getNftwolDetails,
     getfundprojdetails,
     Nftres,
+    updatebanner
 } = projectSlice.actions;

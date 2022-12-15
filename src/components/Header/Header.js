@@ -99,7 +99,7 @@ const Header = () => {
                                 <ul class="creator-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ left: '-37%' }}>
                                     <li>{userdet?.username}</li>
                                     <li>{userdet?.email}</li>
-                                    <li><button type='button' class="dropdown-item"><a href='/author'>Profile</a></button></li>
+                                    <li><button type='button' class="dropdown-item"><a href='/profile'>My Profile</a></button></li>
                                     <li><button type='button' class="dropdown-item"><a href='/projectlist'>My Projects</a></button></li>
                                     <li><button type='button' class="dropdown-item" onClick={LogoutHandler}><a href='/'>Logout</a></button></li>
                                 </ul>

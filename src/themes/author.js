@@ -13,7 +13,7 @@ class Author extends Component {
         return (
             <div className="main">
                 <Header />
-                <Breadcrumb title="Author Profile" subpage="Pages" page="Author" />
+                {/* <Breadcrumb title="Author Profile" subpage="Pages" page="Author" /> */}
                 <AuthorProfile />
                 <Footer />
                 <ModalSearch />

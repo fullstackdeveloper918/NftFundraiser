@@ -473,8 +473,11 @@ form#dynamic_form_nest_item .anticon {
     color: #FFF !important;
 }
 .ant-steps-item-finish .ant-steps-item-icon {
-    background-color: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
-    border-color: #fff !important;
+    background-image: linear-gradient(54deg, #57048a 0%, var(--primary-color) 78%);
+    border-image: linear-gradient(54deg, #57048a 0%, var(--primary-color) 78%);
+}
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after {
+    background-color: #fff !important;
 }
 .footer-items a.navbar-brand {
     margin-bottom: 12px;
@@ -616,11 +619,7 @@ span , p{
     color: var(--primary-p-color);
     font-size: 16px;
 }
-span.progress-bar.bg-success {
-    padding: 4px;
-    color :#fff !important;
-   margin: 0; 
-}
+
 .live-auctions-area.single_project-detail h3{
     width: 100%;
 }
@@ -649,9 +648,13 @@ section.live-auctions-area.single_project-detail .row h3 {
 .fade.modal.show {
     padding: 0 !important;
 }
-.ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%)!important;
+.ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon , .ant-steps-item-wait .ant-steps-item-icon{
+    background-image: linear-gradient(150deg, #000000 0%, #000000 78%)!important;
     border: 0;
+    border: 2px solid #ffff !important;
+}
+.ant-steps-item-wait .ant-steps-item-icon > .ant-steps-icon {
+    color: rgb(255 250 250) !important;
 }
 .ant-steps-item-custom > .ant-steps-item-container > .ant-steps-item-icon > .ant-steps-icon {
     top: -7px !important;
@@ -722,11 +725,6 @@ span.cutom_dis {
 }
 .main-fund-detail .top-seller-area{
     padding-top: 0 !Important;
-}
-span.progress-bar {
-    color: white !important;
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
-    margin: 10px 0px;
 }
 /* .item-details-area h4{
     font-size: 40px !important;
@@ -889,6 +887,154 @@ section{
     text-transform: none !important;
 }
 .copyright-area {
-    text-align: center !IMPORTANT;
-    justify-content: center !IMPORTANT;
+    text-align: center !important;
+    justify-content: center !important;
+}
+.ant-steps.ant-steps-horizontal.ant-steps-label-horizontal {
+    width: 50%;
+    margin: 20px auto;
+}
+
+:root #dynamic_form_nest_item button.ant-btn.ant-btn-default.previous_btn{
+    color: #fff !important;
+    padding: 4px 15px !important;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #cccccc0d !important;
+}
+button.ant-btn.ant-btn-default.previous_btn span{
+    color: #fff !important;
+}
+.swal-icon--success__line {
+    background-color: #ffffff;
+}
+.swal-title , .swal-text  {
+    color: #fff !important;
+}
+.swal-button {
+    background-color: #7cd1f900 !important;
+    color: #fff;
+    border: 2px solid #cccccc0d !important;
+}
+.swal-overlay--show-modal .swal-modal {
+    background: #000 !important;
+}
+.swal-overlay {
+    background-color: #2222228a !important;
+}
+.author-details-area img.card-img-top {
+    width: 100%;
+    height: 210px;
+}
+.input-group.author_detail {
+    border-radius: 100px;
+    background-color: #000000f2;
+    border: 2px solid;
+    height: unset !important;
+    border-color: #000;
+    outline: none;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    padding: 13px 30px;
+    margin: 0;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    gap: 10px;
+}
+:root .author-details-area{
+    padding: 160px 0px 0px !important;
+}
+.author-area .card .image-over .author .author-thumb img {
+    height: calc(6rem - 16px) !important;
+    width: calc(6rem - 16px) !important;
+    margin: 5px;
+}
+.author-area .card .image-over .author .author-thumb::before {
+    content: "";
+    width: calc(6rem - 6px) !important;
+    height: calc(6rem - 6px) !important;
+    background-color: rgb(9 8 13 / 0%) !important;
+}
+.author-area .card .image-over .author .author-thumb::after {
+    width: calc(6rem - 16px) !important;
+    height: calc(6rem - 16px) !important;
+    background-color: rgb(9 8 13 / 0%) !important;
+}
+:root .author-details-area .card .image-over .author {
+    top: calc(100% - 4rem);
+}
+.input-group.author_detail div {
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+.input-group.author_detail div label {
+    width: 140px;
+}
+.item-thumb{
+    position: relative;
+}
+.item-thumb-edit {
+    position: absolute;
+    right: 4px;
+    color: #fff !important;
+    top: 10px;
+    font-size: 15px;
+    font-weight: 200 !important;
+}
+:root .auctions-slides span {
+    color: #fffbfb !important;
+}
+section.explore-area {
+    padding: 130px 0 0 0 !important;
+}
+.card-body h5 {
+    text-transform: capitalize;
+}
+.progress-bar {
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+}
+.progressbar .progress {
+    background: transparent;
+    height: 0.5rem;
+}
+.avatar-lg {
+    height: 6rem !important;
+    width: 6rem !important;
+}
+.input-group.author_detail input {
+    height: 40px;
+    border: 1px solid #1d1c1c !important;
+}
+@media (max-width: 600px){
+    .input-group.author_detail {
+        border-radius: 30px !important;
+        padding: 13px 0px !important;
+        margin: 0;
+        gap: 10px;
+    }
+    .input-group.author_detail div {
+        flex-direction: column;
+        /* text-align: left; */
+    }
+    .input-group.author_detail div label {
+        width: 90%;
+    }
+    .input-group.author_detail input {
+        height: 40px !important;
+    }
+}
+.btn.btn-bordered-white {
+  
+    margin: 24px 0px;
+}
+.input-group.author_detail {
+    padding: 32px;
+}
+header .navbar-expand {
+    padding: 0  !important;
 }
