@@ -41,7 +41,7 @@ const GetAllProjects = () => {
                         <div className="col-12">
                             {/* Explore Menu */}
 
-                            <div className="explore-menu btn-group btn-group-toggle flex-wrap justify-content-center text-center mb-4" data-toggle="buttons">
+                            {/* <div className="explore-menu btn-group btn-group-toggle flex-wrap justify-content-center text-center mb-4" data-toggle="buttons">
                                 <label className="btn active d-table text-uppercase p-2">
                                     <input type="radio" defaultValue="all" defaultChecked className="explore-btn" />
                                     <span>All</span>
@@ -62,7 +62,7 @@ const GetAllProjects = () => {
                                     <input type="radio" defaultValue="sports" className="explore-btn" />
                                     <span>Sports</span>
                                 </label>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="row items explore-items h-auto">

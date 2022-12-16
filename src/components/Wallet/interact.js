@@ -1,12 +1,14 @@
 import { create } from 'ipfs-http-client'
+import { useHistory } from 'react-router-dom'
 import swal from 'sweetalert';
-import NFTContract from '../../backend/contracts/artWork.sol/NFTContract.json'
 import axios from 'axios';
 import { walletSignin } from '../../redux/Actions/authAction';
+import { object } from 'yup';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // const contractABI = require('../../src/backend/contracts/artWork.sol/NFTContract.json')
 const contractABI = require('../../backend/contracts/artWork.sol/NFTContract.json')
+
 // const contractAddress = "0xE915A57e52A1f5a432b15727EA79e2542d435087";
 // connect to a different API
 // const ipfsClient = create('http://127.0.0.1:5001')
@@ -21,13 +23,18 @@ const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
 // const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
 const web3 = createAlchemyWeb3(alchemyKey);
 
-const UpdateWalletAddress = async () => {
+export const Roles = {
+  "ADMIN":1,
+  "BUYER":2,
+  "CREATOR":3
+}
 
+const UpdateWalletAddress = async (role) => {
   try {
     const formData = new FormData();
-    // debugger
+ 
     formData.append('wallet_id', window.ethereum.selectedAddress);
-
+    formData.append('role',Roles[role])
 
     const token = localStorage.getItem('auth_token')
 
@@ -37,20 +44,20 @@ const UpdateWalletAddress = async () => {
         'Authorization': `Bearer ${token}`
       },
     }
-    // debugger
-    await axios.post(`${process.env.REACT_APP_BACKEND_API}api/wallet/connect`,
+
+    return await axios.post(`${process.env.REACT_APP_BACKEND_API}api/sign_in`,
       formData, config
     )
+
   } catch (error) {
     // debugger
     // console.log("error");
   }
 };
 
-export const ConnectWallet = async () => {
+export const ConnectWallet = async (role,setAddress) => {
 
   const chainId = 80001// Polygon Mainnet
-
 
   if (window?.ethereum?.networkVersion !== chainId) {
     try {
@@ -87,10 +94,7 @@ export const ConnectWallet = async () => {
         const addressArray = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-        // setAdd({ ...addressArray })
-        // useEffect(() => {
-        // localStorage.setItem('addressArray', JSON.stringify(addressArray));
-        // console.log('first', addressArray)
+
         await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
           params: [{ chainId: web3.utils.toHex('80001') }],
@@ -100,8 +104,15 @@ export const ConnectWallet = async () => {
           address: addressArray[0],
         };
 
-        UpdateWalletAddress()
-        return obj;
+        setAddress(addressArray[0])
+        
+        const res = await UpdateWalletAddress(role) 
+
+        return {
+          ...obj,
+          res
+        }
+
       } catch (err) {
         return {
           address: "",

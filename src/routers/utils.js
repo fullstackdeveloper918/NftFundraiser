@@ -1,14 +1,10 @@
-export const TOKEN_KEY = sessionStorage.getItem('authToken')
+export const TOKEN_KEY = localStorage.getItem('auth_token')
 
 
 export const logout = () => {
-    sessionStorage.removeItem("authToken");
+    localStorage.removeItem("auth_token");
 }
 
 export const isLogin = () => {
-    if (TOKEN_KEY) {
-        return true;
-    }
-
-    return false;
+  return TOKEN_KEY ? true : false
 }

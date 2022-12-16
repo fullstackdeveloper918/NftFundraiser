@@ -112,7 +112,7 @@
 
 // export default AuthorProfile;
 import React, { Component } from 'react';
-import axios from 'axios';
+import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { GetUserAction, UpdateProfileAction } from '../../redux/Actions/authAction';
@@ -120,15 +120,18 @@ import { useEffect } from 'react';
 // const BASE_URL = "https://my-json-server.typicode.com/themeland/netstorm-json-1/author";
 
 const AuthorProfile = () => {
+    const history = useHistory()
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm();
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(GetUserAction())
 
     }, [])
+
     useEffect(() => {
         if (userdet && Object.keys(userdet).length) {
 
@@ -139,15 +142,17 @@ const AuthorProfile = () => {
         }
 
     }, [userdet])
+
+    const handleSkip = () => {
+        history.push('/all/LatestProjects')
+    }
+
     const OnSubmit = (data) => {
-        debugger
         const formData = new FormData()
 
         // formData.append('image', data.image[0])
         formData.append('avatar', data.avatar[0])
         formData.append('username', data.username)
-
-
 
         dispatch(UpdateProfileAction(formData))
     }
@@ -211,8 +216,10 @@ const AuthorProfile = () => {
                                 />
                                 {errors.email?.type === 'required' && <p style={{ color: 'red' }} role="alert">email is required</p>}
                             </div>
+                            <div className='buttons-group'>
                             <button className="btn btn-bordered-white btn-smaller" type="submit">Update</button>
-                            {/* <a className="btn btn-bordered-white btn-smaller" type="submit">update</a> */}
+                            <button onClick={handleSkip} className="btn btn-bordered-white btn-smaller" type="submit">Skip</button>
+                            </div>
                         </div>
 
                     </div>

@@ -9,12 +9,8 @@ class Author extends Component {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-12 col-md-10">
-                            {/* Author Profile */}
                             <AuthorProfile />
                         </div>
-                        {/* <div className="col-12 col-md-8">
-                            <Explore />
-                        </div> */}
                     </div>
                 </div>
             </section>

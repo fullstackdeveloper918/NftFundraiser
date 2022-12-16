@@ -1,19 +1,11 @@
-import React, { useEffect, useRef, useMemo } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AnnualRevenueList, CountryList, CreateOrganizationAction, HearAboutList, Register } from '../../redux/Actions/authAction'
+import { AnnualRevenueList, CountryList, HearAboutList, Register } from '../../redux/Actions/authAction'
 import { Controller, useForm } from 'react-hook-form'
-import swal from 'sweetalert'
 import { useHistory } from 'react-router'
 import { useFormData } from './Context/context'
 import styles from './styles/styles.module.scss'
 import { GetSocialMediaIcons } from '../../redux/Actions/projectAction'
-import SocialMedia from './media'
-import styled from 'styled-components'
-import ProgressSteps from './steps'
-import 'froala-editor/css/froala_style.min.css';
-import 'froala-editor/css/froala_editor.pkgd.min.css';
-import FroalaEditorComponent from 'react-froala-wysiwyg';
-import FroalaEditor from 'react-froala-wysiwyg'
 import { useState } from 'react'
 import JoditEditor from 'jodit-react';;
 

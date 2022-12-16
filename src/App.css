@@ -640,7 +640,7 @@ section.live-auctions-area.single_project-detail .row h3 {
 .modal-dialog.modal-lg.modal-dialog-centered {
     background: #2222228a;
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
     padding: 0;
     max-width: 100%;
     margin: 0;
@@ -1038,3 +1038,21 @@ section.explore-area {
 header .navbar-expand {
     padding: 0  !important;
 }
+
+.image-container {
+    max-width: 900px;
+    padding: 32px 15px;
+    margin: 0px auto;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.buttons-group {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 12px 0px 0px 0px;
+}
+  

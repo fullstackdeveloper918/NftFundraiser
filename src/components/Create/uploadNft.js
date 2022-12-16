@@ -1,10 +1,8 @@
 
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Modal, Space, Upload } from 'antd';
-import TextArea from 'antd/lib/input/TextArea';
-import React, { Fragment, useEffect, useState, useRef, useMemo } from 'react';
+import { Button, Form, Input, Modal, Upload } from 'antd';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { create } from 'ipfs-http-client'
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProjectAction, GetCollectionsAction, uploadNFT } from '../../redux/Actions/projectAction';
 import { useFormData } from './Context/context'
@@ -27,10 +25,7 @@ const getBase64 = (file) =>
 // import ImgCrop from 'antd-img-crop';
 
 const UploadNft = ({ current, goBack }) => {
-
-
     const editor = useRef(null);
-    const [fileList, setFileList] = useState([])
     const { data, setFormValues } = useFormData();
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
@@ -42,9 +37,6 @@ const UploadNft = ({ current, goBack }) => {
 
     const [modalShow, setModalShow] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: "0" });
-    const [items, setItems] = useState([]);
-    const [coldata, setColData] = useState();
-    const [allcol, setAllColl] = useState()
     // console.log('colldata', coldata)
     // console.log(nft_collection_id)
     // const [coll_id,setCollId] = useState()
