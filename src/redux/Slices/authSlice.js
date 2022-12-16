@@ -11,11 +11,14 @@ const authSlice = createSlice({
         user: {},
         userdetail: [],
         userToken,
+        // wallToken,
         logout: {},
         message: {},
         countries: [],
         annualRevenue: [],
         hereAbout: [],
+        updpro: [],
+        wallesign: [],
         organization: false
     },
     reducers: {
@@ -28,6 +31,10 @@ const authSlice = createSlice({
             // 
             state.message = action.payload.response.data.message
         },
+        updateprofile: (state, action) => {
+            // debugger
+            state.updpro = action?.payload?.data?.data;
+        },
         userDetail: (state, action) => {
             // debugger
             state.userdetail = action.payload.data.data
@@ -39,7 +46,10 @@ const authSlice = createSlice({
             sessionStorage.setItem('authToken', action.payload.data.data.auth_token)
         },
         logoutSuccess: (state) => {
-            sessionStorage.removeItem('authToken')
+            // sessionStorage.removeItem('authToken')
+            localStorage.removeItem('auth_token')
+            // setAddress = null
+
             state.userToken = null
         },
         forgotpasswordSuccess: (state, action) => {
@@ -50,6 +60,12 @@ const authSlice = createSlice({
         createOrganizationSuccess: (state, action) => {
             state.user = action.payload;
             state.organization = true
+        },
+        wallsignin: (state, action) => {
+            // debugger
+            state.wallesign = action.payload?.data?.data;
+            // state.userToken = action.payload.data.data.auth_token;
+            // localStorage.setItem('authToken', action.payload.data.data.auth_token)
         },
         getCountryList: (state, action) => {
             state.countries = action.payload;
@@ -79,5 +95,7 @@ export const {
     loginSuccess,
     forgotpasswordSuccess,
     logoutSuccess, registerFail,
-    userDetail
+    userDetail,
+    wallsignin,
+    updateprofile
 } = authSlice.actions;

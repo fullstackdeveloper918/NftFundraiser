@@ -2,6 +2,7 @@ import { create } from 'ipfs-http-client'
 import swal from 'sweetalert';
 import NFTContract from '../../backend/contracts/artWork.sol/NFTContract.json'
 import axios from 'axios';
+import { walletSignin } from '../../redux/Actions/authAction';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // const contractABI = require('../../src/backend/contracts/artWork.sol/NFTContract.json')
@@ -28,7 +29,7 @@ const UpdateWalletAddress = async () => {
     formData.append('wallet_id', window.ethereum.selectedAddress);
 
 
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('auth_token')
 
     const config = {
       headers: {
@@ -98,7 +99,7 @@ export const ConnectWallet = async () => {
           status: "👆🏽 Write a message in the text-field above.",
           address: addressArray[0],
         };
-        // debugger
+
         UpdateWalletAddress()
         return obj;
       } catch (err) {
@@ -184,7 +185,7 @@ const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }
     formData.append('pay_from', pay_from);
     formData.append('pay_to', pay_to);
 
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('auth_token')
 
     const config = {
       headers: {
@@ -208,7 +209,7 @@ const UpdateContract = async (collid, contractAddress) => {
 
     formData.append('contract_id', contractAddress);
 
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('auth_token')
 
     const config = {
       headers: {
@@ -324,69 +325,74 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
 }
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet }) => {
-  try {
+  if (!isMetaMaskInstalled()) {
+    swal('oops!', 'No wallet found. Please install MetaMask', 'error')
+
+  } else {
+    try {
 
 
-    const addressArray = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
+      const addressArray = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
 
-    const obj = {
-      status: "👆🏽 Write a message in the text-field above.",
-      address: addressArray[0],
-    };
+      const obj = {
+        status: "👆🏽 Write a message in the text-field above.",
+        address: addressArray[0],
+      };
 
-    const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
-    // const nftContract = new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
-    const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
-    const amountToSendPlatform = ((`${platformFee[0]}` / 100) * 0.03)
-    const amountToSendowner = ((`${ownerFee[0]}` / 100) * 0.03)
-    // // const amountToSend = (amountToSendPlatform - amount, "either")
-    // const amountToSend = (0.0005)
-    // const amountToSend = ; // Convert to wei value
-    const memory_clients = ['0x2Aaab1bd336819948C3286cE92034CdB95137D8b', ownerWallet[0]]
-    const memory_amounts = [web3.utils.toWei(`${amountToSendPlatform}`, "ether"), web3.utils.toWei(`${amountToSendowner}`, "ether")]
+      const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
+      // const nftContract = new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
+      const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
+      const amountToSendPlatform = ((`${platformFee[0]}` / 100) * 0.03)
+      const amountToSendowner = ((`${ownerFee[0]}` / 100) * 0.03)
+      // // const amountToSend = (amountToSendPlatform - amount, "either")
+      // const amountToSend = (0.0005)
+      // const amountToSend = ; // Convert to wei value
+      const memory_clients = ['0x2Aaab1bd336819948C3286cE92034CdB95137D8b', ownerWallet[0]]
+      const memory_amounts = [web3.utils.toWei(`${amountToSendPlatform}`, "ether"), web3.utils.toWei(`${amountToSendowner}`, "ether")]
 
-    const transferowner = {
-      'from': window.ethereum?.selectedAddress,
-      'to': contractAddress,
-      // 'to': "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A",
-      // 'value': web3.utils.toWei(`${values}`),
-      'value': web3.utils.toWei('0.03', 'ether'),
-      // 'input': nftContract.methods.buyNft(contractAddress, tokenId).encodeABI()
-      'input': nftContract.methods.buyNft(contractAddress, tokenId, memory_clients, memory_amounts).encodeABI()
-    };
+      const transferowner = {
+        'from': window.ethereum?.selectedAddress,
+        'to': contractAddress,
+        // 'to': "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A",
+        // 'value': web3.utils.toWei(`${values}`),
+        'value': web3.utils.toWei('0.03', 'ether'),
+        // 'input': nftContract.methods.buyNft(contractAddress, tokenId).encodeABI()
+        'input': nftContract.methods.buyNft(contractAddress, tokenId, memory_clients, memory_amounts).encodeABI()
+      };
 
-    // const txHash = await web3.eth.sendTransaction(tx)
+      // const txHash = await web3.eth.sendTransaction(tx)
 
-    // console.log('txhash', txHash)
-    await web3.eth.sendTransaction(transferowner)
-      .on('transactionHash', function (hash) {
-        let txHash = hash
-        // console.log('tx', txHash)
+      // console.log('txhash', txHash)
+      await web3.eth.sendTransaction(transferowner)
+        .on('transactionHash', function (hash) {
+          let txHash = hash
+          // console.log('tx', txHash)
 
 
-      })
-      .on('receipt', function (receipt) {
-        // console.log(receipt, 'recipt')
-      })
-      .on('confirmation', async (confNumber, receipt) => {
-        // debugger
-        console.log(receipt, 'conf')
-        // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
-        // setModeShow(false)
+        })
+        .on('receipt', function (receipt) {
+          // console.log(receipt, 'recipt')
+        })
+        .on('confirmation', async (confNumber, receipt) => {
+          // debugger
+          console.log(receipt, 'conf')
+          // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
+          // setModeShow(false)
 
-        // modalShow(false)
-      })
-      .on('error', function (error) {
+          // modalShow(false)
+        })
+        .on('error', function (error) {
 
-      })
-      .then(function (receipt) {
-        // will be fired once the receipt is mined
-      })
-  } catch (error) {
-    // debugger
-    alert(error)
+        })
+        .then(function (receipt) {
+          // will be fired once the receipt is mined
+        })
+    } catch (error) {
+      // debugger
+      alert(error)
 
+    }
   }
 }

@@ -76,7 +76,9 @@ const MyRouts = () => {
           <Route exact path="/my-collections" component={Showcollections} />
           <Route exact path="/collection/:id" component={CollectionDetail} />
           {/* <Route exact path="/newest-projects" component={NewestProj} /> */}
+
           <Route exact path="/create" component={Create} />
+
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           {/* <PrivateRoute exact path="/create-organization" component={createOrganization} /> */}

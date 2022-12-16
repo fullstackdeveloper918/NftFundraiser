@@ -90,10 +90,6 @@ const Create = ({ current, next, prev }) => {
         return state?.projectdetails?.categories
     })
 
-
-
-
-
     return (
 
         <div className={current === 0 ? styles.showForm : styles.hideForm}>

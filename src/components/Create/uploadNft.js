@@ -219,16 +219,25 @@ const UploadNft = ({ current, goBack }) => {
     // const save = (data) => {
     //     setNft_description(data)
     // };
+    const nfts = [
+        {
+            key: 0,
+            name: 'Wheat Flour',
+            amount: 1000
+        },
+
+    ];
     return (
         // <section className="author-area">
         <div>
+
             {loading ? (
                 <Loader />
             ) : (
 
                 <div className={current === 1 ? styles.showForm : styles.hideForm}>
                     <Form form={form} name="dynamic_form_nest_item" initialValues={{
-                        remember: true
+                        nfts: nfts
                     }}
                         // onSubmit={(event) => handleSubmit(event)}
                         onFinish={(event) => onFinish(event)}
@@ -324,47 +333,7 @@ const UploadNft = ({ current, goBack }) => {
                                                             </Form.Item>
                                                         </div>
                                                     </div>
-                                                    {/* <div className="col-md-5 col-12">
-                                                                    <label>Nft</label>
-                                                                    <div>
-                                                                        <Form.Item
-                                                                            {...restField}
-                                                                            name={[name, "nft_image"]}
-                                                                            // getValueFromEvent={getFile}
-                                                                            rules={[
-                                                                                {
-                                                                                    required: true,
-                                                                                    message: 'Please select a image',
-                                                                                },
-                                                                            ]}
 
-                                                                        >
-
-                                                                            <Upload
-                                                                                {...fileProps}
-                                                                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                                                                listType="picture-card"
-                                                                                // fileList={fileList}
-                                                                                // onChange={onChange}
-                                                                                onPreview={handlePreview}
-                                                                                maxCount={1}
-
-                                                                            >
-                                                                                + Upload
-                                                                            </Upload>
-
-
-                                                                        </Form.Item>
-                                                                        <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
-                                                                            <img
-                                                                                alt="example"
-                                                                                style={{
-                                                                                    width: '100%',
-                                                                                }}
-                                                                                src={previewImage} />
-                                                                        </Modal>
-                                                                    </div>
-                                                                </div> */}
                                                     <div className="col-md-1 col-12">
                                                         <MinusCircleOutlined onClick={(e) => { remove(name); handleDecrement(e); }} />
                                                     </div>

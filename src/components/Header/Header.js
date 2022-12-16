@@ -1,12 +1,16 @@
+import { redirect } from 'next/dist/server/api-utils';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { GetUserAction } from '../../redux/Actions/authAction';
+import { Link, useHistory } from 'react-router-dom';
+import { GetUserAction, walletSignin } from '../../redux/Actions/authAction';
 import { getPublicLiveProjects } from '../../redux/Actions/projectAction';
 import { logoutSuccess } from '../../redux/Slices/authSlice';
 import { ConnectWallet, getCurrentWalletConnected } from '../Wallet/interact';
+const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
+const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
+const web3 = createAlchemyWeb3(alchemyKey);
 const Header = () => {
     const dispatch = useDispatch()
     const [address, setAddress] = useState(null)
@@ -16,27 +20,57 @@ const Header = () => {
     // console.log('longitudeeee', longitude)
     const add1 = address?.slice(0, 4).toUpperCase()
     const add2 = address?.slice(35, 44).toUpperCase()
+    function removeSelectedAddress() {
+        return web3.eth.accounts.wallet?.remove(window.ethereum?.selectedAddress);
+    }
     const LogoutHandler = () => {
+        // debugger
         dispatch(logoutSuccess())
+
+        // dispatch(removeSelectedAddress());
+        setAddress(null)
     }
     const log = useSelector(state => {
+        // debugger
         return state.user.userToken
     })
+    console.log(log)
+    // const tok = localStorage.getItem("auth_token")
+    const wallsig = useSelector(state => {
+        // debugger
+        return state.user.wallToken
+    })
+    // console.log(wallsig)
     useEffect(() => {
+        // localStorage.getItem('authToken')
         dispatch(GetUserAction())
         getCurrentWalletConnected()
         setAddress(getSelectedAddress)
+
     }, [dispatch, address])
     function getSelectedAddress() {
         return window.ethereum?.selectedAddress;
     }
-    const WalletHandler = async () => {
-        const res = await ConnectWallet()
-        setAddress(res?.address)
-    }
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
+    console.log('userdet', userdet)
+    const history = useHistory()
+    const WalletHandler = async () => {
+        const res = await ConnectWallet()
+        setAddress(res?.address)
+        // debugger
+        dispatch(walletSignin(window.ethereum.selectedAddress, history))
+        // if (userdet.role === 3) {
+        //     return redirect('/projectlist')
+        // }
+        // if (address) {
+        //     log()
+        // } else {
+        //     redirect('/signup')
+        // }
+    }
+
     const accc = () => {
         getCurrentWalletConnected()
     }
@@ -61,7 +95,12 @@ const Header = () => {
                         </li>
                         {/* {log !== null && ( */}
                         <li className="nav-item">
-                            <a href="/create" className="nav-link">Create</a>
+                            {address ? (
+
+                                <a href="/create" className="nav-link">Create</a>
+                            ) : (
+                                <a onClick={WalletHandler} className="nav-link">Create</a>
+                            )}
                         </li>
                         {/* )} */}
                         <li className="nav-item">
@@ -90,7 +129,7 @@ const Header = () => {
                             </li>
                         }
                     </ul>
-                    {log !== null ? (
+                    {address && localStorage.getItem('auth_token') ? (
                         <>
                             <div className="dropdown">
                                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -108,10 +147,12 @@ const Header = () => {
                     ) : (
                         <ul className="navbar-nav action">
                             <li className="nav-item ml-3">
-                                <Link to="/login" className="creator-button btn ml-md-auto btn-bordered-white">
+                                <a className="creator-button btn ml-md-auto btn-bordered-white" onClick={WalletHandler}><i className="fa fa-user" />
+                                    <div>CREATOR</div></a>
+                                {/* <Link to="/login" className="creator-button btn ml-md-auto btn-bordered-white">
                                     <i className="fa fa-user" />
                                     <div>CREATOR</div>
-                                </Link>
+                                </Link> */}
                             </li>
                         </ul>
                     )}

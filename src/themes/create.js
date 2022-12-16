@@ -14,11 +14,11 @@ import UploadNftIndex from '../components/Create';
 const Create = () => {
   const history = useHistory();
 
-  useEffect(() => {
-    if (!isLogin()) {
-      history.push('/login')
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!isLogin()) {
+  //     history.push('/login')
+  //   }
+  // }, [])
 
   return (
     <div className="main">

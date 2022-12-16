@@ -23,7 +23,7 @@ const steps = [
 const UploadNftIndex = () => {
   // const [formStep, setFormStep] = useState(0);
   // const { setValue } = useForm();
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(1);
   // debugger
 
   // const { prevValues, setFormValues } = useFormData();
