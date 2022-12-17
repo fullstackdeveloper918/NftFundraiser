@@ -49,11 +49,11 @@ const ProjDetails = () => {
         <section className="item-details-area">
             <div className="container">
                 <div className='row py-0'>
-                    <span Class="title_main ">{latprojdetail.title}</span>
+
                 </div>
 
                 <div className="row justify-content-between px-0">
-                    <div className="col-12 col-lg-8">
+                    <div className="col-12 col-lg-4">
                         <div className="item-info">
 
                             <><div className="item-thumb text-center">
@@ -63,10 +63,7 @@ const ProjDetails = () => {
 
                             </div>
 
-                                <div className="card no-hover countdown-times my-4">
 
-                                    <div className="countdown d-flex " dangerouslySetInnerHTML={{ __html: latprojdetail.description }} />
-                                </div>
 
                             </>
 
@@ -75,9 +72,9 @@ const ProjDetails = () => {
                         </div>
                     </div>
 
-                    <div className="col-12 col-lg-4">
-
-                        <div className="card no-hover">
+                    <div className="col-12 col-lg-8">
+                        <span Class="title_main ">{latprojdetail.title}</span>
+                        <div className="card mt-3 no-hover">
                             <span className='nft_price'>{latprojdetail.selling_amount} raised of {latprojdetail.price}</span>
 
                             <div className='progressbar'>
@@ -116,6 +113,16 @@ const ProjDetails = () => {
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="col-12 description mt-3 ">
+                        <h3 > Description</h3>
+                        <div className="card no-hover countdown-times">
+
+                            <div className="countdown d-flex " dangerouslySetInnerHTML={{ __html: latprojdetail.description }} />
+                        </div>
+                    </div>
+
                     <ProjNFTS />
 
 

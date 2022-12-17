@@ -80,10 +80,11 @@ const UploadNftIndex = () => {
                   <Create current={current} next={next} prev={prev} />
                 )}
 
-                {current === 1 && <><UploadNft />
-                  <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
+                {current === 1 && <><UploadNft prev={prev} />
+                  {/* <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
                     Previous
-                  </Button></>
+                  </Button> */}
+                </>
                 }
                 {/* <div className="steps-action">
           {current < steps.length - 1 && (

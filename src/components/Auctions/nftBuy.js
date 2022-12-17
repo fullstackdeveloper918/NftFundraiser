@@ -60,11 +60,9 @@ const LatprojNftDetails = (props) => {
     return (
         <section className="item-details-area">
             <div className="container">
-                <div className='row py-0'>
-                    <span Class="title_main " style={{ color: '#fff' }}>{latprojnftdetail.title}</span>
-                </div>
-                <div className="row justify-content-between px-0">
-                    <div className="col-12 col-lg-8">
+
+                <div className="row justify-content-between content_project px-0">
+                    <div className="col-12 col-lg-4">
                         <div className="item-info">
                             {/* {latprojdetail?.map((item, key) => ( */}
 
@@ -77,10 +75,7 @@ const LatprojNftDetails = (props) => {
                                 <img src={latprojnftdetail.image} alt="" />
                                 {/* ) */}
                                 {/* })} */}
-                            </div><div className="card no-hover countdown-times my-4">
-                                    <span dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} />
-                                    {/* <div className="countdown d-flex justify-content-center" /> */}
-                                </div>
+                            </div>
                                 {/* Netstorm Tab */}
                                 {/* <ul className="netstorm-tab nav nav-tabs" id="nav-tab">
                                     <><li>
@@ -124,9 +119,11 @@ const LatprojNftDetails = (props) => {
                         </div>
                     </div>
 
-                    <div className="col-12 col-lg-4">
-
-                        <div className="content sm:mt-5 mt-lg-0">
+                    <div className="col-12 col-lg-8">
+                        <div className='row py-0'>
+                            <span Class="title_main " style={{ color: '#fff' }}>{latprojnftdetail.title}</span>
+                        </div>
+                        <div className="content sm:mt-5 mt-lg-3">
                             <div className="card no-hover">
 
 
@@ -174,9 +171,9 @@ const LatprojNftDetails = (props) => {
                                         {/* </li> */}
                                     </ul>
                                 </div>
-                                <div className='eddlbtton d-flex  align-items-center px-2'>
+                                <div className='eddlbtton d-flex  align-items-center mt-2'>
 
-                                    <button className="btn btn-bordered-white w-100 btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                    <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                         id="nftdetail.id" onClick={() => buyHandler()}>  Buy</button>
 
 
@@ -184,6 +181,14 @@ const LatprojNftDetails = (props) => {
                                 {/* <a className="d-block btn btn-bordered-white mt-4" href="/wallet-connect">{initData.btnText}</a> */}
                             </div>
                         </div>
+                    </div>
+
+                    <div className="col-12">
+                        <div className="card no-hover countdown-times my-4 ">
+                            <span dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} />
+                            {/* <div className="countdown d-flex justify-content-center" /> */}
+                        </div>
+
                     </div>
                 </div>
             </div >

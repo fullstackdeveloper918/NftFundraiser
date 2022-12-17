@@ -13,6 +13,7 @@ import EditCollection from './updateCollection';
 import { CreateMetaDataAndMint } from './../Wallet/interact';
 import NftPopup from './nftPopup';
 import axios from 'axios';
+import NftdataTable from '../Explore/nftdataTable';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -115,7 +116,7 @@ const NftDetails = (props) => {
         // debugger
         return state?.projectdetails?.projectdetails
     })
-    // console.log(projdetail, 'projdataaaa')
+    console.log(projdetail, 'projdataaaa')
 
 
     const dispatch = useDispatch()
@@ -183,7 +184,7 @@ const NftDetails = (props) => {
 
 
     const deployContract = async () => {
-
+        // debugger
         try {
             if (nftdetail?.collectionData?.contract_id == null) {
 
@@ -241,6 +242,7 @@ const NftDetails = (props) => {
     }
 
     const deployAndMint = async () => {
+        debugger
         setModalShow(true)
         // mint()
         await deployContract()
@@ -250,19 +252,14 @@ const NftDetails = (props) => {
 
         <section className="item-details-area">
             <div className="container">
-                <div className="row justify-content-between">
-                    <div className="col-12 col-md-8 ">
+                <div className="row justify-content-between content_project">
+                    <div className="col-12 col-md-4 ">
                         <div className="item-info">
                             {/* {latprojdetail?.map((item, key) => ( */}
 
                             <><div className="item-thumb text-center">
                                 <img src={nftdetail.image} alt="" />
-                            </div><div className="card no-hover countdown-times my-4">
-                                    {/* ksdjfksdjbfjsdbf */}
-                                    {/* {nftdetail.description} */}
-                                    {/* <div className="countdown d-flex justify-content-center" /> */}
-                                    <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft" />
-                                </div>
+                            </div>
                                 {/* Netstorm Tab */}
                                 {/* <ul className="netstorm-tab nav nav-tabs" id="nav-tab">
                                         <><li>
@@ -306,39 +303,40 @@ const NftDetails = (props) => {
                         </div>
                     </div>
 
-                    <div className="col-12 col-md-4">
-                        <div className="card no-hover content sm:mt-5 mt-lg-0">
-                            <div className='d-flex  align-items-center justify-content-between'>
-                                <h3 className="m-0">{nftdetail?.title}</h3>
-
-                                <div className='eddlbtton d-flex  align-items-center '>
-                                    {/* <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={`/updateproject/${projdetail.projectdetails.id}`} style={{ color: '#FFF' }}>Edit</Link></a>
-                                        <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-2" onClick={() => deleteHandler(projdetail.projectdetails.id)} style={{ color: '#FFF' }}>Delete</a> */}
-                                </div>
-
-                            </div>
-
+                    <div className="col-12 col-md-8">
+                        <h3 className="m-0">{nftdetail?.title}</h3>
+                        <div className="card no-hover content sm:mt-5 mt-lg-3">
 
                             <div className="owner d-flex align-items-center">
                                 <span>Owned By</span>
-                                <a className="owner-meta d-flex align-items-center ml-3" href="/author">
-                                    <img className="avatar-sm rounded-circle" src="/img/avtar1.png" alt="" />
-                                    <h6 className="ml-2">{projdetail?.user_data?.username}</h6>
+                                <a className="owner-meta d-flex align-items-center">
+                                    {/* <img className="avatar-sm rounded-circle" src={projdetail.user_data.avatar} alt="" /> */}
                                 </a>
+                                <span className="text-white">{projdetail?.user_data?.username} </span>
+
                             </div>
+                            <div class="item-info-list">
+                                <ul class="list-unstyled viewproduct-detail mt-4">
+
+                                    {/* <li class="price d-flex "><span>Current Price : </span><span>1122 MATIC</span></li> */}
+                                    {/* <li class="mt-4"><span>Number of NFTs Minted :  </span><span>5</span></li> */}
+                                    <li class="mt-4"><span>Token No:  </span><span>#{nftdetail.token_id}</span></li>
+                                </ul>
+                            </div>
+
                             {nftdetail.is_mint == 1 ? (
 
-                                <div className='eddlbtton d-flex  align-items-center '>
+                                <div className='eddlbtton d-flex  align-items-center mt-3'>
 
-                                    <button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF', width: "100%" }}
-                                    >  Ready to purchase</button>
+                                    <div className=" mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF', width: "100%" }}
+                                    >  Ready to purchase</div>
 
 
                                 </div>
 
                             ) : (
 
-                                <div className='eddlbtton d-flex  align-items-center'>
+                                <div className='eddlbtton d-flex  align-items-center mt-3'>
                                     {nftdetail.project_status == 1 ? (
 
                                         <><button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
@@ -379,8 +377,26 @@ const NftDetails = (props) => {
                             {/* <a className="d-block btn btn-bordered-white mt-4" href="/wallet-connect">{initData.btnText}</a> */}
                         </div>
                     </div>
+
+
+                </div>
+
+                <div className='col-12 description'>
+                    <h3 > Description</h3>
+                    <div className="card no-hover countdown-times my-4">
+                        {/* ksdjfksdjbfjsdbf */}
+                        {/* {nftdetail.description} */}
+                        {/* <div className="countdown d-flex justify-content-center" /> */}
+                        <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft" />
+                    </div>
                 </div>
             </div >
+            <div className='container table-detail'>
+                <div className='col-12'>
+                    <NftdataTable />
+                </div>
+
+            </div>
 
         </section >
     );

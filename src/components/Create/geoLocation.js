@@ -45,13 +45,13 @@ export default function GeoLocation(props) {
         try {
             const data = async () => {
                 (await isCountry)
-                    ? axios.get(`https://secure.geonames.org/countryInfoJSON?username=fullstackdeveloper91&lang=en`)?.then(res => {
+                    ? axios?.get(`https://secure.geonames.org/countryInfoJSON?username=fullstackdeveloper91&lang=en`)?.then(res => {
                         // debugger
                         setOptions(res);
                         console.log(res, "countries")
                     })
                     // "https://secure.geonames.org/childrenJSON?geonameId=" + id
-                    : axios.get(`https://secure.geonames.org/childrenJSON?username=fullstackdeveloper91&lang=en&geonameId=${geoId}`)?.then(res => {
+                    : axios?.get(`https://secure.geonames.org/childrenJSON?username=fullstackdeveloper91&lang=en&geonameId=${geoId}`)?.then(res => {
                         setOptions(res);
                         console.log(res, "cities")
                     });
