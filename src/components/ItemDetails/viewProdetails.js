@@ -28,7 +28,7 @@ const ProjDetails = () => {
     const dispatch = useDispatch()
     const [modalShow, setModalShow] = React.useState(false);
     const latprojdetail = useSelector(state => {
-        // debugger
+        // 
         return state.projectdetails.latestprojectdetails
     })
     const [modalShoww, setModalShoww] = React.useState(false);
@@ -42,7 +42,7 @@ const ProjDetails = () => {
         return state.user.userToken
     })
     useEffect(() => {
-        // debugger
+        // 
         dispatch(LatestProjectDetail(id))
         dispatch(GetUserAction())
 

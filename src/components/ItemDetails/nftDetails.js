@@ -113,7 +113,7 @@ const NftDetails = (props) => {
     const { id } = useParams();
     // console.log(id, 'idd')
     const projdetail = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.projectdetails
     })
     console.log(projdetail, 'projdataaaa')
@@ -122,7 +122,7 @@ const NftDetails = (props) => {
     const dispatch = useDispatch()
 
     const nftdetail = useSelector(state => {
-        // debugger
+        // 
         return state.projectdetails.nftlist
 
     })
@@ -133,7 +133,7 @@ const NftDetails = (props) => {
 
     // console.log('collupdate', collupdate)
     useEffect(() => {
-        // debugger
+        // 
         dispatch(NftList(id))
         dispatch(ProjectDetail(id))
         // dispatch(GetSettings())
@@ -156,12 +156,12 @@ const NftDetails = (props) => {
 
 
     // const UpdateContract = async (id) => {
-    //     debugger
+    //     
 
     //     const formData = new FormData();
 
     //     formData.append('contract_id', cont);
-    //     const token = sessionStorage.getItem('authToken')
+    //     const token = localStorage.getItem('authToken')
 
 
     //     try {
@@ -172,19 +172,19 @@ const NftDetails = (props) => {
     //             },
     //             transformRequest: formData => formData
     //         }
-    //         // debugger
+    //         // 
     //         await axios.post(`${process.env.REACT_APP_BACKEND_API}api/updateContract/${id}`,
     //             formData, config
     //         )
     //     } catch (error) {
-    //         debugger
+    //         
     //         console.log("error");
     //     }
     // };
 
 
     const deployContract = async () => {
-        // debugger
+        // 
         try {
             if (nftdetail?.collectionData?.contract_id == null) {
 
@@ -231,7 +231,7 @@ const NftDetails = (props) => {
                 status: ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>"
             }
         } catch (error) {
-            // debugger
+            // 
             alert("went wrong")
             return {
                 success: false,
@@ -242,7 +242,7 @@ const NftDetails = (props) => {
     }
 
     const deployAndMint = async () => {
-        debugger
+        
         setModalShow(true)
         // mint()
         await deployContract()

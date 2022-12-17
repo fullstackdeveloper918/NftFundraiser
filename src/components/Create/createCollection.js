@@ -13,7 +13,7 @@ function MyVerticallyCenteredModal(props) {
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
     const OnSubmit = (dat) => {
-        // debugger
+        // 
         // data.preventDefault()
         dispatch(CreateCollectionAction(dat))
         // console.log(data?.statusCode)

@@ -10,6 +10,7 @@ const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
 const web3 = createAlchemyWeb3(alchemyKey);
 const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
+
 const LatprojNftDetails = (props) => {
     const dispatch = useDispatch()
     const [ownwallet, setOwnWallet] = useState('')
@@ -19,14 +20,14 @@ const LatprojNftDetails = (props) => {
     const id = useParams();
     // console.log(id, 'idd')
     const latprojnftdetail = useSelector(state => {
-        // debugger
+        // 
         return state.projectdetails.getnftwoldetails
     })
     // console.log('paymentflow', [latprojnftdetail.payment_flow?.project_data.wallets])
 
 
     const getSett = useSelector(state => {
-        // debugger
+        // 
         return state.projectdetails.settings
     })
     // console.log('getSett', getSett)
@@ -38,7 +39,7 @@ const LatprojNftDetails = (props) => {
 
     }, [id])
     const buyHandler = () => {
-        debugger
+        
         // setOwnWallet([latprojnftdetail.payment_flow?.project_data.wallets])
         // setOwnFee([latprojnftdetail.payment_flow?.project_data.fees])
         // setPlatformFee([latprojnftdetail.payment_flow?.karmatica_fee])
@@ -70,7 +71,7 @@ const LatprojNftDetails = (props) => {
                             <><div className="item-thumb text-center">
 
                                 {/* {latprojdetail?.nft_data?.map((item, idx) => { */}
-                                {/* debugger */}
+                                {/*  */}
                                 {/* return ( */}
                                 <img src={latprojnftdetail.image} alt="" />
                                 {/* ) */}
@@ -163,7 +164,7 @@ const LatprojNftDetails = (props) => {
                                         {/* <li> */}
                                         {/* <span>Volume Traded </span> */}
                                         {/* {latprojdetail?.nft_data?.map((item, idx) => { */}
-                                        {/* debugger */}
+                                        {/*  */}
 
                                         <span class='boldertext'>Token :</span>
                                         <span> #{latprojnftdetail.token_id}</span>

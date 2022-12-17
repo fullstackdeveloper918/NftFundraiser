@@ -1,10 +1,8 @@
 
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Modal, Space, Upload } from 'antd';
-import TextArea from 'antd/lib/input/TextArea';
-import React, { Fragment, useEffect, useState, useRef, useMemo } from 'react';
+import { Button, Form, Input, Modal, Upload } from 'antd';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { create } from 'ipfs-http-client'
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProjectAction, GetCollectionsAction, uploadNFT } from '../../redux/Actions/projectAction';
 import { useFormData } from './Context/context'
@@ -28,10 +26,7 @@ const getBase64 = (file) =>
 // import ImgCrop from 'antd-img-crop';
 
 const UploadNft = ({ current, prev }) => {
-
-
     const editor = useRef(null);
-    const [fileList, setFileList] = useState([])
     const { data, setFormValues } = useFormData();
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
@@ -43,9 +38,6 @@ const UploadNft = ({ current, prev }) => {
 
     const [modalShow, setModalShow] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: "0" });
-    const [items, setItems] = useState([]);
-    const [coldata, setColData] = useState();
-    const [allcol, setAllColl] = useState()
     // console.log('colldata', coldata)
     // console.log(nft_collection_id)
     // const [coll_id,setCollId] = useState()
@@ -98,11 +90,11 @@ const UploadNft = ({ current, prev }) => {
     // const ipfsBaseUrl = '`${process.env.REACT_APP_IPFS_BASE_URL}`'
     const dispatch = useDispatch()
     const col = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.getcollections
     })
     const imaeg = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.nftres
     })
     // console.log(imaeg, 'imgg')
@@ -110,7 +102,7 @@ const UploadNft = ({ current, prev }) => {
     const OnSubmit = (values) => {
         // e.preventDefault
         // setColData(col)
-        // debugger
+        // 
         setFormValues(values)
 
     }
@@ -140,10 +132,10 @@ const UploadNft = ({ current, prev }) => {
         const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
 
         const imagesRes = await Promise.all(nftImagepromises).then(res => res)
-        // debugger
+        // 
 
         const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
-        // debugger
+        // 
 
         const formData = new FormData()
 
@@ -209,7 +201,7 @@ const UploadNft = ({ current, prev }) => {
     };
 
     // const getFile = (e) => {
-    //     // debugger
+    //     // 
     //     console.log('Upload event:', e);
 
     //     if (Array.isArray(e)) {

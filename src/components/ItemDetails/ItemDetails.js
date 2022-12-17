@@ -102,7 +102,7 @@ const ItemDetails = () => {
     // console.log(projdetail, 'projdata')
 
     useEffect(() => {
-        // debugger
+        // 
         dispatch(ProjectDetail(id))
     }, [id])
 

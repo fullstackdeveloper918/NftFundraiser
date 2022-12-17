@@ -1,19 +1,13 @@
 // import { getValue } from '@mui/system';
-import React, { Component, useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
-import { CategoriesAction, ProjectDetail, ProjectList, UpdateProject } from '../redux/Actions/projectAction';
-import { getProjectDetail } from '../redux/Slices/projectSlice';
+import { CategoriesAction, ProjectDetail, UpdateProject } from '../redux/Actions/projectAction';
 import { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
 import GeoLocation from '../components/Create/geoLocation';
-import 'froala-editor/css/froala_style.min.css';
-import 'froala-editor/css/froala_editor.pkgd.min.css';
-import FroalaEditor from 'react-froala-wysiwyg'
-import { FroalaEditorComponent } from 'react-froala-wysiwyg';
-import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
-import JoditEditor from 'jodit-react';;
+import JoditEditor from 'jodit-react';
+
 const EditProject = () => {
     const editor = useRef(null);
     const [country, setCountry] = useState();
@@ -110,7 +104,7 @@ const EditProject = () => {
         return yyyy + "-" + mm + "-" + dd;
     };
     const cat = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.categories
     })
     // console.log(cat, 'cat')

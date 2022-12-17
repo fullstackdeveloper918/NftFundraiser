@@ -10,13 +10,13 @@ const CollItem = () => {
     const { id } = useParams();
     const dispatch = useDispatch()
     const projdetail = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.projectdetails
     })
     // console.log(projdetail, 'projdata')
 
     useEffect(() => {
-        // debugger
+        // 
         dispatch(ProjectDetail(id))
     }, [id])
 

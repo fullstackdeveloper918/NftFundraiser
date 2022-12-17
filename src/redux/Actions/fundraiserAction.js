@@ -5,14 +5,14 @@ import swal from "sweetalert";
 export const TopFundraiserAction = createAsyncThunk(
     "auth/topfundraiser",
     async ({ }, thunkAPI) => {
-        // debugger
+        // 
         try {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             }
-            // debugger
+            // 
             const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getTopFundraisers`, config)
             // console.log(res, 'fund res')
             thunkAPI.dispatch(getTopFundraiser(res?.data?.data));
@@ -26,7 +26,7 @@ export const TopFundraiserAction = createAsyncThunk(
 // export const TopFundraiserDetail = createAsyncThunk(
 //     "auth/topfundraiserdetail",
 //     async (id, thunkAPI) => {
-//         // debugger
+//         // 
 //         try {
 //             const config = {
 //                 headers: {
@@ -51,7 +51,7 @@ export const TopFundraiserDetail = (user_id) => async dispatch => {
                 'Content-Type': 'application/json',
             },
         }
-        // debugger
+        // 
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getTopFundraisers/${user_id}`,
             config)
 

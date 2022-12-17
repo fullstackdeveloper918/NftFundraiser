@@ -54,7 +54,7 @@ const Create = ({ current, next, prev }) => {
     });
 
     const col = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.getcollections
     })
     // console.log(col, 'col')
@@ -67,7 +67,7 @@ const Create = ({ current, next, prev }) => {
         dispatch(GetCollectionsAction())
         dispatch(CategoriesAction())
         if (prev) {
-            // debugger
+            // 
             setValue('title', data.title)
             setValue('address', data.address)
             setValue('category_id', data.category_id)
@@ -82,7 +82,7 @@ const Create = ({ current, next, prev }) => {
 
             setType(data.type)
             setCountry(data.country)
-            // debugger
+            // 
             setState(data.state)
             setCity(data.city)
 
@@ -92,7 +92,7 @@ const Create = ({ current, next, prev }) => {
     }, [data])
 
     const cat = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.categories
     })
 

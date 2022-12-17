@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import { Carousel } from 'react-bootstrap';
 
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
+import { Roles } from '../Wallet/interact';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom'
+
 const Hero = () => {
+    const history = useHistory()
+
     var options = {
         enableHighAccuracy: true,
         timeout: 5000,
         maximumAge: 0,
     };
+
     function success(pos) {
         var crd = pos.coords;
 
@@ -25,8 +32,16 @@ const Hero = () => {
         console.warn(`ERROR(${err.code}): ${err.message}`);
     }
 
+    const userRole = useSelector(state => {
+        return state.user.userdetail.role
+    })
+
+    const userToken = useSelector(state => {
+        return state.user.userToken
+    })
+
     const currentLocation = () => {
-        // debugger
+        // 
         if (navigator.geolocation) {
             navigator.permissions
                 .query({ name: "geolocation" })
@@ -53,6 +68,37 @@ const Hero = () => {
         currentLocation()
     }, [])
 
+    const handleCreate = () => {
+        if (Roles["CREATOR"] == userRole) {
+            history.push('/create')
+        }
+        if (Roles["BUYER"] == userRole) {
+            Swal.fire({
+                icon: 'info',
+                html:
+                    'You need to Signup as a Creator to Create a Project',
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Ok!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+            })
+        } 
+        else if(!userToken) {
+            Swal.fire({
+                icon: 'info',
+                html:
+                  'You need to Signup as a Creator to Create a Project',
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                  '<i class="fa fa-thumbs-up"></i> Ok!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+            })
+        }
+
+    }
+
     return (
         <section className="hero-section">
             <div className="container">
@@ -64,7 +110,7 @@ const Hero = () => {
                         {/* Buttons */}
                         <div className="button-group">
                             <a className="btn btn-bordered-white" href={`/all/${"LatestProjects"}`}><i className="icon-rocket mr-2" />Explore</a>
-                            <a className="btn btn-bordered-white" href="/create"><i className="icon-note mr-2" />Create </a>
+                            <a className="btn btn-bordered-white" onClick={handleCreate}><i className="icon-note mr-2" />Create </a>
                         </div>
                     </div>
                 </div>

@@ -1,14 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import { makeStyles } from "@material-ui/core/styles";
 import Geonames from "geonames.js";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { Api } from "@mui/icons-material";
-import { Form } from "react-bootstrap";
 const geonames = new Geonames({
     username: "fullstackdeveloper91",
     lan: "en",
@@ -46,7 +39,7 @@ export default function GeoLocation(props) {
             const data = async () => {
                 (await isCountry)
                     ? axios?.get(`https://secure.geonames.org/countryInfoJSON?username=fullstackdeveloper91&lang=en`)?.then(res => {
-                        // debugger
+                        // 
                         setOptions(res);
                         console.log(res, "countries")
                     })

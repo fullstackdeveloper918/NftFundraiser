@@ -7,7 +7,7 @@ import { GetCollectionsAction } from '../../redux/Actions/projectAction'
 const ShowCollections = () => {
     const dispatch = useDispatch()
     const col = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.getcollections
     })
     // const val = localStorage.getItem("values")

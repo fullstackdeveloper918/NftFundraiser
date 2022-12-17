@@ -16,13 +16,13 @@ const NftdataTable = () => {
         setExpandIconPosition(newExpandIconPosition);
     };
     const projdetail = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.projectdetails
     })
     console.log(projdetail.nft_data, 'projdatanft')
 
     useEffect(() => {
-        // debugger
+        // 
         dispatch(ProjectDetail(id))
     }, [id])
 

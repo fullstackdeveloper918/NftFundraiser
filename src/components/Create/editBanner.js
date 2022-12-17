@@ -1,11 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { UpdateBanner } from '../../redux/Actions/projectAction';
+import {  UpdateBanner } from '../../redux/Actions/projectAction';
 import { useDispatch } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
-import { dataURLtoBlob } from '../../routers/blobfromurl';
-import UploadNft from './uploadNft';
-import UploadImage from '../../uploader';
+import UploadImage  from '../../shared/Upload'
+import { dataURLtoBlob } from '../../utils/blobfromurl'
+
 function Banner(props) {
 
     const [imageSrc, setImageSrc] = useState('');
@@ -13,7 +13,6 @@ function Banner(props) {
     const dispatch = useDispatch()
 
     const submit = () => {
-
         const formData = new FormData()
         const image = dataURLtoBlob(imageSrc)
         formData.append('image', image)

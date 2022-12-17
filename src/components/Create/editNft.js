@@ -81,16 +81,16 @@ const EditNft = (props) => {
     // const ipfsBaseUrl = '`${process.env.REACT_APP_IPFS_BASE_URL}`'
     const dispatch = useDispatch()
     const col = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.getcollections
     })
     const imaeg = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.nftres
     })
 
     const nftdetail = useSelector(state => {
-        // debugger
+        // 
         return state.projectdetails.nftlist
 
     })
@@ -129,10 +129,10 @@ const EditNft = (props) => {
     //     const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
 
     //     const imagesRes = await Promise.all(nftImagepromises).then(res => res)
-    //     // debugger
+    //     // 
 
     //     const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
-    //     // debugger
+    //     // 
 
     //     const formData = new FormData()
 

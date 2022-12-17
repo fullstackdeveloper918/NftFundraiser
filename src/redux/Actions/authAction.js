@@ -1,14 +1,15 @@
 import axios from "axios";
-import { createOrganizationSuccess, forgotpasswordSuccess, getAnnualRevenueList, getCountryList, getHearAboutList, loginSuccess, registerFail, registerSuccess, updateprofile, userDetail, wallsignin, } from "../Slices/authSlice";
+import { createOrganizationSuccess, getAnnualRevenueList, getCountryList, getHearAboutList, loginSuccess, registerFail, registerSuccess, updateprofile, userDetail, wallsignin, } from "../Slices/authSlice";
 import swal from "sweetalert";
 // import { useNavigate } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import {creatorWalletUpdate } from "../../components/Wallet/interact";
 
 export const Register = createAsyncThunk(
     "auth/register",
     async (params, thunkAPI) => {
         try {
-            const token = localStorage.getItem('auth_token')
+            const token = localStorage.getItem('authToken')
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
@@ -16,15 +17,19 @@ export const Register = createAsyncThunk(
                 },
                 transformRequest: formData => formData
             }
+            
+            //create oraginization creator login
             const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/signup`,
                 params, config)
 
-            thunkAPI.dispatch(registerSuccess(res));
+            await creatorWalletUpdate(res?.data?.data?.auth_token)
+
+            thunkAPI.dispatch(loginSuccess(res));
+
             if (res.status === 200) {
                 swal("success", res.data.message, 'success').then(function () {
                     window.location = "/";
                 });
-
             }
 
         } catch (e) {
@@ -39,7 +44,7 @@ export const Register = createAsyncThunk(
 
 export const LoginAction = (params, history) => async dispatch => {
     try {
-        const token = localStorage.getItem('auth_token')
+        const token = localStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -49,15 +54,8 @@ export const LoginAction = (params, history) => async dispatch => {
 
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/organization_signin`,
             params, config)
+            
         dispatch(loginSuccess(res));
-
-        // if (res.status === 200) {
-        //     swal("success", res.data.message, 'success')
-        //         .then(function () {
-        //             window.location = "/projectlist";
-        //         });
-
-        // }
 
     } catch (e) {
 
@@ -91,10 +89,8 @@ export const ForgotPasswordAction = (params) => async dispatch => {
     }
 }
 export const GetUserAction = () => async dispatch => {
-    // debugger
-    // debugger
-    // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
-    const token = localStorage.getItem('auth_token')
+    const token = localStorage.getItem('authToken')
+
     try {
         const config = {
             headers: {
@@ -107,18 +103,20 @@ export const GetUserAction = () => async dispatch => {
             config)
         // console.log('userres', res)
         dispatch(userDetail(res));
+        
     } catch (e) {
-        // debugger
+        // 
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
     }
 }
+
 export const CreateOrganizationAction = (params) => async dispatch => {
-    // debugger
+    // 
     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
     try {
-        const token = localStorage.getItem('auth_token')
+        const token = localStorage.getItem('authToken')
         const config = {
             headers: {
                 // 'Content-Type': 'multipart/form-data',
@@ -127,10 +125,12 @@ export const CreateOrganizationAction = (params) => async dispatch => {
             },
             transformRequest: formData => formData
         }
+        
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createOrganizationDetails`,
             params, config)
 
         dispatch(createOrganizationSuccess(res));
+
     } catch (e) {
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
@@ -187,15 +187,15 @@ export const HearAboutList = () => async dispatch => {
 
 export const walletSignin = (params, history) => async dispatch => {
 
-    // debugger
+    // 
     const formData = new FormData();
 
     formData.append('wallet_id', params);
-    // debugger
+    // 
     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
     try {
-        // const token = localStorage.getItem('auth_token')
-        // const token = localStorage.getItem('auth_token')
+        // const token = localStorage.getItem('authToken')
+        // const token = localStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -227,9 +227,9 @@ export const walletSignin = (params, history) => async dispatch => {
     }
 }
 export const UpdateProfileAction = (formData) => async dispatch => {
-    debugger
+    
     // 
-    const token = localStorage.getItem('auth_token')
+    const token = localStorage.getItem('authToken')
     try {
         const config = {
             headers: {

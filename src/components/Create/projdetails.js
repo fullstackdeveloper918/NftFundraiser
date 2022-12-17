@@ -21,13 +21,13 @@ const ProjNftDetails = () => {
     const dispatch = useDispatch()
 
     const projdetail = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.projectdetails
     })
     console.log(projdetail, 'projdata')
 
     useEffect(() => {
-        // debugger
+        // 
         dispatch(ProjectDetail(id))
     }, [id])
 
@@ -35,7 +35,7 @@ const ProjNftDetails = () => {
     // const deleteHandler = (id) => {
     //     dispatch(DeleteProject(id))
     // }
-    // debugger
+    // 
     const bannerHandler = () => {
 
     }
@@ -51,13 +51,12 @@ const ProjNftDetails = () => {
                             <div className="item-thumb text-center">
                                 {/* {projdetail && projdetail?.nft_data && projdetail?.nft_data?.length ? */}
                                 <div>
-                                    <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() => setModalShow(true)}></i>
-
-
-                                    <Banner
-                                        id={id}
-                                        show={modalShow}
-                                        onHide={() => setModalShow(false)} />
+                                    <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() => 
+                                      setModalShow(true)}></i>
+                                        <Banner
+                                            id={id}
+                                            show={modalShow}
+                                            onHide={() => setModalShow(false)} />
                                 </div>
                                 <img src={projdetail?.image} alt="first nft" />
                                 {/* : null} */}
