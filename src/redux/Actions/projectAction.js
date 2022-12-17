@@ -492,6 +492,7 @@ export const UpdateBanner = (formData, params) => async dispatch => {
         if (res.status === 200) {
             swal("success", "updated", 'success').then(function () {
                 dispatch(ProjectDetail(params))
+                dispatch(LatestProjectDetail(params))
                 // window.location = "/projectlist";
             });
 

@@ -30,7 +30,6 @@ const getBase64 = (file) =>
 
 const EditNft = (props) => {
 
-
     const editor = useRef(null);
     const [fileList, setFileList] = useState([])
     // const { data, setFormValues } = useFormData();
@@ -45,22 +44,18 @@ const EditNft = (props) => {
     const [modalShow, setModalShow] = React.useState(false);
     const [modalShoww, setModalShoww] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: "0" });
+    console.log(nft_collection_id, "sdfasf")
     const [items, setItems] = useState([]);
     const [coldata, setColData] = useState();
     const [allcol, setAllColl] = useState()
+    const [form] = Form.useForm()
     // console.log('colldata', coldata)
     // console.log(nft_collection_id)
     // const [coll_id,setCollId] = useState()
-    const coll_id = (Object.values(nft_collection_id));
+    // const coll_id = (Object.values(nft_collection_id));
     // console.log("collid", coll_id)
 
     const [loading, setLoading] = useState(false)
-
-    const handleIncrement = () => {
-        setCount(prevCount => prevCount + 1);
-    };
-
-
     const handleDecrement = () => {
         setCount(prevCount => prevCount - 1);
     };
@@ -75,26 +70,12 @@ const EditNft = (props) => {
         }
         );
     };
-    // function descc(e) {
-    //     setNft_description(prev => [...prev, nft_description]);
-    // };
 
     const defaultValues = {
         setNft_description: '',
     }
-    // this.setState(prev => ({
-    //     item: prev.item.map(item => item.name === 'xjz' ? { ...item, age: '10' } : item)
-    // }))
-    const { register, handleSubmit, formState: { errors }, watch, control, setValue } = useForm({
-        mode: 'all',
-        defaultValues
-    });
-    useEffect(() => {
-        register("nft_description");
-    }, [register]);
 
-    // const ipfsClient = create('http://127.0.0.1:5001')
-    // const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
+
     const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
     // const ipfsBaseUrl = ('http://127.0.0.1:8080/')
     // const ipfsBaseUrl = '`${process.env.REACT_APP_IPFS_BASE_URL}`'
@@ -113,37 +94,31 @@ const EditNft = (props) => {
         return state.projectdetails.nftlist
 
     })
+
     useEffect(() => {
         dispatch(NftList(props.nft_id))
     }, [props.nft_id])
+
     console.log("nftdet", nftdetail)
+
+
     useEffect(() => {
-        if (nftdetail) {
-            setValue('nft_name', nftdetail.title)
-            setValue('nft_description', nftdetail.nft_description)
-            setValue('nft_collection_id', nftdetail.nft_collection_id)
-            setValue('nft_image', nftdetail.nft_image)
-        }
+        form.setFieldsValue({
+            nfts: [{
+                nft_name: nftdetail.title,
+                nft_description: nftdetail.description,
+                nft_collection_id: nftdetail.collection_id,
+                nft_collection_id: nftdetail.image,
+            }]
 
-    }, [nftdetail])
-    // console.log(imaeg, 'imgg')
+        })
+        setNft_collection_id(nftdetail.collection_id)
 
+    }, [form, nftdetail])
 
-
-    // console.log('col', col)
-
-
-
-    const lat = localStorage.getItem('latitude')
-    // console.log(lat, 'lattt')
-    const log = localStorage.getItem('longitude')
-    // console.log(log, 'logggg')
-
-    // const desdata = { nft_description() }
     useEffect(() => {
 
         dispatch(GetCollectionsAction())
-
 
     }, []);
 
@@ -223,10 +198,10 @@ const EditNft = (props) => {
     };
 
 
-    const [form] = Form.useForm()
 
     const { Panel } = Collapse;
     const [expandIconPosition, setExpandIconPosition] = useState('end');
+
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
     };
@@ -241,6 +216,7 @@ const EditNft = (props) => {
         },
 
     ];
+
     return (
         // <section className="author-area">
         <div>
@@ -255,7 +231,7 @@ const EditNft = (props) => {
                 >
                     <Modal.Header >
                         <Modal.Title id="contained-modal-title-vcenter">
-                            Project Banner
+                            Update NFT
                         </Modal.Title>
                         <div>
                             <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
@@ -264,7 +240,7 @@ const EditNft = (props) => {
                     <Modal.Body>
                         <div>
                             <Form form={form} name="dynamic_form_nest_item" initialValues={{
-                                nfts: nfts
+                                nfts: nfts, defaultValues
                             }}
                                 // onSubmit={(event) => handleSubmit(event)}
                                 // onFinish={(event) => onFinish(event)}
@@ -310,6 +286,7 @@ const EditNft = (props) => {
                                                                         <label>Name</label>
                                                                         <div>
 
+
                                                                             <Form.Item
                                                                                 {...restField}
                                                                                 name={[name, "nft_name"]}
@@ -322,6 +299,7 @@ const EditNft = (props) => {
                                                                                     },
                                                                                 ]}
                                                                             >
+
                                                                                 {/* <label>Name</label> */}
                                                                                 <Input placeholder="Name" />
                                                                             </Form.Item>
@@ -412,7 +390,7 @@ const EditNft = (props) => {
                                                                                 style={{
                                                                                     background: "black",
                                                                                     marginBottom: "8px",
-                                                                                    border: nft_collection_id[index] == item.id ? "1px solid #fff" : null
+                                                                                    border: nft_collection_id == item.id ? "1px solid #fff" : null
                                                                                 }}>
                                                                                 <div className="card-body">
                                                                                     <div>
@@ -493,8 +471,9 @@ const EditNft = (props) => {
                     </Modal.Body>
                 </Modal>
 
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 };
 export default EditNft;

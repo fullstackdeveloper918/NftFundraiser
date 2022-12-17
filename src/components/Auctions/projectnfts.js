@@ -62,6 +62,7 @@ const ProjNFTS = () => {
                                             <div className="card-bottom d-flex">
                                                 <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 28).toUpperCase() }} /><span></span>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
