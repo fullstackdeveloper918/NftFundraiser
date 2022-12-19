@@ -11,7 +11,7 @@ const authSlice = createSlice({
         user: {},
         userdetail: [],
         userToken,
-        role:null,
+        role: null,
         // wallToken,
         logout: {},
         message: {},
@@ -43,10 +43,10 @@ const authSlice = createSlice({
         },
         loginSuccess: (state, action) => {
             state.user = action.payload;
-            state.role = action.payload.data.data.role;
-            state.message = action.payload.data.message
-            state.userToken = action.payload.data.data.auth_token;
-            localStorage.setItem('authToken', action.payload.data.data.auth_token)
+            state.role = action.payload?.data?.data?.role;
+            state.message = action.payload?.data?.message
+            state.userToken = action.payload?.data?.data?.auth_token;
+            localStorage.setItem('authToken', action.payload?.data?.data?.auth_token)
         },
         logoutSuccess: (state) => {
             localStorage.removeItem('authToken')
@@ -90,7 +90,7 @@ export const {
     loginSuccess,
     forgotpasswordSuccess,
     logoutSuccess,
-     registerFail,
+    registerFail,
     userDetail,
     wallsignin,
     updateprofile

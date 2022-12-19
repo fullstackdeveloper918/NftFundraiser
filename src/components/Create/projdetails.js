@@ -6,6 +6,7 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { DeleteProject, GetCollectionDetails, ProjectDetail } from '../../redux/Actions/projectAction';
 import NftdataTable from '../Explore/nftdataTable';
+import AddNFT from './AddNft/addNft';
 import Banner from './editBanner';
 import EditNft from './editNft';
 const ProjNftDetails = () => {
@@ -17,6 +18,7 @@ const ProjNftDetails = () => {
     // console.log(id, 'idd')
     const [modalShow, setModalShow] = React.useState(false);
     const [modalShoww, setModalShoww] = React.useState(false);
+    const [modalShowadd, setModalShowadd] = React.useState(false);
 
     const dispatch = useDispatch()
 
@@ -51,12 +53,12 @@ const ProjNftDetails = () => {
                             <div className="item-thumb text-center">
                                 {/* {projdetail && projdetail?.nft_data && projdetail?.nft_data?.length ? */}
                                 <div>
-                                    <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() => 
-                                      setModalShow(true)}></i>
-                                        <Banner
-                                            id={id}
-                                            show={modalShow}
-                                            onHide={() => setModalShow(false)} />
+                                    <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() =>
+                                        setModalShow(true)}></i>
+                                    <Banner
+                                        id={id}
+                                        show={modalShow}
+                                        onHide={() => setModalShow(false)} />
                                 </div>
                                 <img src={projdetail?.image} alt="first nft" />
                                 {/* : null} */}
@@ -144,6 +146,15 @@ const ProjNftDetails = () => {
                         <h3 className="w-full mb-0 pt-4">NFTs</h3>
                     </div>
                 </div>
+
+                <div>
+                    <Button onClick={() =>
+                        setModalShowadd(true)}>Add NFT</Button>
+                    <AddNFT
+                        id={id}
+                        show={modalShowadd}
+                        onHide={() => setModalShowadd(false)} />
+                </div>
                 <div className="row items mt-0 explore-items px-0">
 
                     {projdetail?.nft_data?.map((x, idx) => {
@@ -190,7 +201,7 @@ const ProjNftDetails = () => {
 
 
                                             <div className='mint'>
-                                                {x.is_mint === 0 ? (
+                                                {x.is_mint == 0 ? (
 
                                                     <button>
                                                         <a href='#'>Mint</a>

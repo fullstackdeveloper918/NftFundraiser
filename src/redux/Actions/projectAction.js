@@ -20,7 +20,9 @@ import {
     getNftwolDetails,
     getfundprojdetails,
     Nftres,
-    updatebanner
+    updatebanner,
+    nftUpd,
+    nftAdd
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -147,7 +149,6 @@ export const NftList = (id) => async dispatch => {
     }
 }
 export const uploadNFT = (params) => {
-    // 
     const token = localStorage.getItem('authToken')
     const config = {
         headers: {
@@ -493,6 +494,69 @@ export const UpdateBanner = (formData, params) => async dispatch => {
             swal("success", "updated", 'success').then(function () {
                 dispatch(ProjectDetail(params))
                 dispatch(LatestProjectDetail(params))
+                // window.location = "/projectlist";
+            });
+
+        }
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const UpdateNft = (formData, props) => async dispatch => {
+    const token = localStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            transformRequest: formData => formData
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/nft/update/${props.id}/${props.nft_id}`,
+            formData, config)
+        // 
+        // console.log(res, 'coll rres')
+        await dispatch(nftUpd(res));
+
+        if (res.status === 200) {
+            // setLoading(false)
+            swal("success", "updated", 'success').then(function () {
+                dispatch(ProjectDetail(props.id))
+                // dispatch(LatestProjectDetail(params))
+                // window.location = "/projectlist";
+            });
+
+        }
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const AddNft = (formData, props) => async dispatch => {
+    debugger
+    const token = localStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            transformRequest: formData => formData
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/nft/create/${props.id}`,
+            formData, config)
+        // 
+        // console.log(res, 'coll rres')
+        await dispatch(nftAdd(res));
+
+        if (res.status === 200) {
+            // setLoading(false)
+            swal("success", "updated", 'success').then(function () {
+                dispatch(ProjectDetail(props.id))
+                // dispatch(LatestProjectDetail(params))
                 // window.location = "/projectlist";
             });
 

@@ -3,7 +3,7 @@ import ReactImagePickerEditor, { ImagePickerConf } from 'react-image-picker-edit
 
 import 'react-image-picker-editor/dist/index.css'
 
-const UploadImage = ({imageSrc,setImageSrc}) => {
+const UploadImage = ({ initalImag, imageSrc, setImageSrc, show = true }) => {
   const config2 = {
     borderRadius: '8px',
     language: 'en',
@@ -11,22 +11,23 @@ const UploadImage = ({imageSrc,setImageSrc}) => {
     height: '250px',
     objectFit: 'contain',
     compressInitial: null,
-    hideDownloadBtn:true
+    hideDownloadBtn: true
   };
 
-  const initialImage = '';
+  const initialImage = initalImag;
 
   return <div className='image-container'>
     < ReactImagePickerEditor
       config={config2}
+      // initialImage={im}
       imageSrcProp={initialImage}
       imageChanged={(newDataUri) => { setImageSrc(newDataUri) }} />
-    <br /> <br />
+    {/* <br /> <br />
     <hr />
-    <br />
-    <p>Image preview:</p>
-    {imageSrc && <img src={imageSrc} alt="example" style={{ maxHeight: '900px', maxWidth: '100%', objectFit: 'contain', background: 'black' }} />}
-    {!imageSrc && <h2 style={{ textAlign: 'center',color:'#FFF' }}>No image loaded yet</h2>}
+    <br /> */}
+    {/* <p>Image preview:</p> */}
+    {/* {imageSrc && <img src={imageSrc} alt="example" style={{ maxHeight: '900px', maxWidth: '100%', objectFit: 'contain', background: 'black' }} />}
+    {!imageSrc && <h2 style={{ textAlign: 'center', color: '#FFF' }}>No image loaded yet</h2>} */}
 
   </div>
 }

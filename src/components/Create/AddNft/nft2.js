@@ -21,6 +21,7 @@ import Loader from '../Loader/loader';
 import { useParams } from 'react-router';
 import UploadImage from '../../shared/Upload';
 import { dataURLtoBlob } from '../../utils/blobfromurl';
+import { AddNft } from '../../../redux/Actions/projectAction';
 
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -31,9 +32,10 @@ const getBase64 = (file) =>
     });
 // import ImgCrop from 'antd-img-crop';
 
-const EditNft = (props) => {
+const AddNFT2 = (props, { current, prev }) => {
 
     const editor = useRef(null);
+    const { data, setFormValues } = useFormData();
     const [fileList, setFileList] = useState([])
     // const { data, setFormValues } = useFormData();
     const [previewOpen, setPreviewOpen] = useState(false);
@@ -70,13 +72,13 @@ const EditNft = (props) => {
 
     const dispatch = useDispatch()
     const col = useSelector(state => {
-        // 
+        //
         return state?.projectdetails?.getcollections
     })
 
 
     const nftdetail = useSelector(state => {
-        // 
+        //
         return state.projectdetails.nftlist
 
     })
@@ -91,10 +93,9 @@ const EditNft = (props) => {
     useEffect(() => {
         form.setFieldsValue({
             nfts: [{
-                nft_name: nftdetail.title,
-                nft_description: nftdetail.description,
-                nft_collection_id: nftdetail.collection_id,
-                nft_image: nftdetail.image,
+                nft_name: data.title,
+                nft_description: data.description,
+
             }]
 
         })
@@ -119,7 +120,7 @@ const EditNft = (props) => {
         // const nftImagepromises = nfts?.map(x => uploadNFT(x?.image))
         const imagesRes = await Promise.all(nftImagepromises).then(res => res)
         // const imagesRes = await (nftImagepromises).then(res => res)
-        // 
+        //
 
         const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
         // const addedImage = ipfsBaseUrl + image
@@ -132,17 +133,15 @@ const EditNft = (props) => {
 
 
         formData.append('image', addedImage)
-        formData.append('title', values?.nfts?.map(x =>
-            x.nft_name
-        ))
+        formData.append('title', data.title)
         // const newlist = newList.push(nft_collection_id);
         formData.append('collection_id', nft_collection_id)
         // formData.append('nft_description', nft_description)
-        formData.append('description', values?.nfts?.map(x => x.nft_description))
+        formData.append('description', data.nft_description)
         // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
 
         // dispatch(uploadNFT())
-        dispatch(UpdateNft(formData, props))
+        dispatch(AddNft(formData, props))
         // setLoading(false)
 
         // console.log('Received values of form:', values, data)
@@ -227,23 +226,7 @@ const EditNft = (props) => {
 
                                     {(fields, { add, remove }) => (
                                         <>
-                                            {/* <div className='steps-center'>
 
-
-                                                <div className='orgicon1'>
-
-                                                    <i className=" fa-solid fa-circle-check" style={{}}> Step 1</i>
-                                                </div>
-
-                                                <div className='orgicon1line'>
-                                                    <span style={{}}> ----------------------------- </span>
-
-                                                </div>
-                                                <div className='orgicon2'>
-
-                                                    <i className="fa-regular fa-circle" style={{}}> Step 2</i>
-                                                </div>
-                                            </div> */}
                                             <>
                                                 {fields.map(({ key, name, ...restField }, index) => (
                                                     // <Space
@@ -260,69 +243,9 @@ const EditNft = (props) => {
                                                                 {/* <div>Artwork {index}</div> */}
                                                                 <div className="row">
 
-                                                                    <div className="col-md-10 col-12">
-                                                                        <label>Name</label>
-                                                                        <div>
 
 
-                                                                            <Form.Item
-                                                                                {...restField}
-                                                                                name={[name, "nft_name"]}
-                                                                                // label="Enter name"
-                                                                                // name="name"
-                                                                                rules={[
-                                                                                    {
-                                                                                        required: true,
-                                                                                        message: 'Missing  name',
-                                                                                    },
-                                                                                ]}
-                                                                            >
 
-                                                                                {/* <label>Name</label> */}
-                                                                                <Input placeholder="Name" />
-                                                                            </Form.Item>
-                                                                        </div>
-                                                                        <label>Description</label>
-                                                                        <div>
-
-                                                                            <Form.Item
-                                                                                {...restField}
-                                                                                name={[name, "nft_description"]}
-                                                                                // label="Enter name"
-                                                                                // name="name"
-                                                                                rules={[
-                                                                                    {
-                                                                                        required: true,
-                                                                                        message: 'Missing  description',
-                                                                                    },
-                                                                                ]}
-                                                                            >
-                                                                                {/* <Controller
-                                                                            control={control}
-                                                                            name="nft_description"
-                                                                            defaultValue=""
-                                                                            render={({ field: { value, onChange } }) => {
-                                                                                return  */}
-                                                                                <JoditEditor
-                                                                                    ref={editor}
-                                                                                    value={'nft_description'}
-                                                                                    // config={config}
-
-                                                                                    placeholder="start typing"
-                                                                                    tabIndex={1} // tabIndex of textarea
-                                                                                    // onBlur={newContent => 'nft_description'(newContent)} // preferred to use only this option to update the content for performance reasons
-                                                                                    onChange={newContent => { }}
-                                                                                />
-                                                                                {/* }} */}
-                                                                                {/* /> */}
-                                                                            </Form.Item>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div className="col-md-1 col-12">
-                                                                        <MinusCircleOutlined onClick={(e) => { remove(name); handleDecrement(e); }} />
-                                                                    </div>
-                                                                    {/* </div> */}
                                                                     <div className="col-md-3 col-12">
 
                                                                         {/* <div className="col-24"> */}
@@ -445,7 +368,7 @@ const EditNft = (props) => {
                                 </Form.List>
                                 <Form.Item>
                                     <div className="col-12">
-                                        <button className="btn w-100 mt-3 mt-sm-4 mb-3" type="submit">Update </button>
+                                        <button className="btn w-100 mt-3 mt-sm-4 mb-3" type="submit">Add </button>
                                     </div>
 
                                 </Form.Item>
@@ -459,4 +382,4 @@ const EditNft = (props) => {
         </div >
     );
 };
-export default EditNft;
+export default AddNFT2;
