@@ -6,7 +6,6 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { DeleteProject, GetCollectionDetails, ProjectDetail } from '../../redux/Actions/projectAction';
 import NftdataTable from '../Explore/nftdataTable';
-import AddNFT from './AddNft/addNft';
 import Banner from './editBanner';
 import EditNft from './editNft';
 const ProjNftDetails = () => {
@@ -148,12 +147,11 @@ const ProjNftDetails = () => {
                 </div>
 
                 <div>
-                    <Button onClick={() =>
-                        setModalShowadd(true)}>Add NFT</Button>
-                    <AddNFT
+                    <Link to={`/addnft/${projdetail.id}`}>+ Add NFT</Link>
+                    {/* <AddNFT
                         id={id}
                         show={modalShowadd}
-                        onHide={() => setModalShowadd(false)} />
+                        onHide={() => setModalShowadd(false)} /> */}
                 </div>
                 <div className="row items mt-0 explore-items px-0">
 

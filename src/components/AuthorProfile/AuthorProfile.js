@@ -112,26 +112,23 @@
 
 // export default AuthorProfile;
 import React, { Component } from 'react';
-import { useHistory } from 'react-router-dom'
+import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { GetUserAction, UpdateProfileAction } from '../../redux/Actions/authAction';
+import { GetUserAction } from '../../redux/Actions/authAction';
 import { useEffect } from 'react';
 // const BASE_URL = "https://my-json-server.typicode.com/themeland/netstorm-json-1/author";
 
 const AuthorProfile = () => {
-    const history = useHistory()
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm();
     const dispatch = useDispatch()
-
     useEffect(() => {
         dispatch(GetUserAction())
 
     }, [])
-
     useEffect(() => {
         if (userdet && Object.keys(userdet).length) {
 
@@ -142,89 +139,65 @@ const AuthorProfile = () => {
         }
 
     }, [userdet])
-
-    const handleSkip = () => {
-        history.push('/all/LatestProjects')
-    }
-
-    const OnSubmit = (data) => {
-        const formData = new FormData()
-
-        // formData.append('image', data.image[0])
-        formData.append('avatar', data.avatar[0])
-        formData.append('username', data.username)
-
-        dispatch(UpdateProfileAction(formData))
-    }
-
-
     return (
         <div className="card no-hover text-center">
-            <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
-
-                <div className="image-over">
-                    {/* <img className="card-img-top"  alt="" /> */}
-                    {/* Author */}
-                    <div className="author">
-                        <div className="author-thumb avatar-lg">
-                            <img className="rounded-circle" src={userdet.avatar} alt="" />
-                        </div>
+            <div className="image-over">
+                {/* <img className="card-img-top"  alt="" /> */}
+                {/* Author */}
+                <div className="author">
+                    <div className="author-thumb avatar-lg">
+                        <img className="rounded-circle" src={userdet.avatar} alt="" />
                     </div>
                 </div>
-                {/* Card Caption */}
-                <div className="card-caption col-12 p-0">
-                    {/* Card Body */}
-                    <div className="card-body mt-4">
-                        <h5 className="mb-3">{userdet.username}</h5>
-                        <div className="input-group author_detail">
+            </div>
+            {/* Card Caption */}
+            <div className="card-caption col-12 p-0">
+                {/* Card Body */}
+                <div className="card-body mt-4">
+                    <h5 className="mb-3">{userdet.username}</h5>
+                    <div className="input-group author_detail">
+                        <div>
+                            <label> Username  </label>
+                            <input
+                                type="text"
+                                // className="form-control"
+                                name="username"
+                                // placeholder="username"
+                                {...register("username", { required: true })}
+                                aria-invalid={errors.username ? "true" : "false"}
+                            />
+                            {errors.username?.type === 'required' && <p style={{ color: 'red' }} role="alert">username is required</p>}
+                        </div>
+                        <div>
+                            <label> Email  </label>
+                            <input
+                                type="email"
+                                // className="form-control"
+                                name="email"
+                                disabled={true}
+                                // placeholder="username"
+                                {...register("email", { required: true })}
+                                aria-invalid={errors.email ? "true" : "false"}
 
-                            <div>
-                                <label> Avatar  </label>
-                                <input
-                                    type="file"
-                                    // className="form-control"
-                                    name="avatar"
-                                    // placeholder="username"
-                                    {...register("avatar", { required: true })}
-                                    aria-invalid={errors.avatar ? "true" : "false"}
-                                />
-                                {errors.avatar?.type === 'required' && <p style={{ color: 'red' }} role="alert">avatar is required</p>}
-                            </div>
-                            <div>
-                                <label> Username  </label>
-                                <input
-                                    type="text"
-                                    // className="form-control"
-                                    name="username"
-                                    // placeholder="username"
-                                    {...register("username", { required: true })}
-                                    aria-invalid={errors.username ? "true" : "false"}
-                                />
-                                {errors.username?.type === 'required' && <p style={{ color: 'red' }} role="alert">username is required</p>}
-                            </div>
-                            <div>
-                                <label> Email  </label>
-                                <input
-                                    type="email"
-                                    // className="form-control"
-                                    name="email"
-                                    disabled={true}
-                                    // placeholder="username"
-                                    {...register("email", { required: true })}
-                                    aria-invalid={errors.email ? "true" : "false"}
-
-                                />
-                                {errors.email?.type === 'required' && <p style={{ color: 'red' }} role="alert">email is required</p>}
-                            </div>
-                            <div className='buttons-group'>
-                            <button className="btn btn-bordered-white btn-smaller" type="submit">Update</button>
-                            <button onClick={handleSkip} className="btn btn-bordered-white btn-smaller" type="submit">Skip</button>
-                            </div>
+                            />
+                            {errors.email?.type === 'required' && <p style={{ color: 'red' }} role="alert">email is required</p>}
                         </div>
 
                     </div>
+                    {/* Social Icons */}
+                    {/* <div className="social-icons d-flex justify-content-center my-3">
+                        {this.state.socialData.map((item, idx) => {
+                            return (
+                                <a key={`asd_${idx}`} className={item.link} href="#">
+                                    <i className={item.icon} />
+                                    <i className={item.icon} />
+                                </a>
+                            );
+                        })}
+                    </div> */}
+                    <a className="btn btn-bordered-white btn-smaller" href="#">update</a>
                 </div>
-            </form>
+            </div>
         </div>
     );
 }

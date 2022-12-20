@@ -22,7 +22,7 @@ const projectSlice = createSlice({
         getfundProjDetails: [],
         getnftwoldetails: [],
         settings: [],
-        nftAdd: [],
+        nftadd: [],
         nftres: [],
         nftupdate: [],
         updbanner: [],

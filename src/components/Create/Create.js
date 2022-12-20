@@ -37,6 +37,8 @@ const Create = ({ current, next, prev }) => {
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
 
+    const { countries } = useSelector(state => state.countries)
+    // useEffect(()
 
     const disablePastDate = () => {
         const today = new Date();
