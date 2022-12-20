@@ -22,7 +22,7 @@ const SignupIndex = () => {
         {formStep === 0 && (
           <Signup formStep={formStep} nextFormStep={nextFormStep} />
         )}
-        {formStep === 1 && <CreateOrganization />
+        {formStep === 1 && <CreateOrganization goBack={prevFormStep} />
         }
       </FormCard>
     </FormProvider>

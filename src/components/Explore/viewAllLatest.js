@@ -19,7 +19,7 @@ const ExploreAll = () => {
     })
     console.log(liveProjects?.nft_data?.image, 'live')
     useEffect(() => {
-        // debugger
+        // 
         dispatch(getPublicLiveProjects({
             cursor: 1,
             type: projectTypesMap[type],
@@ -33,7 +33,7 @@ const ExploreAll = () => {
     // }, [])
 
     // const cate = useSelector(state => {
-    //     // debugger
+    //     // 
     //     return []
     // })
     // console.log(cate, 'category')

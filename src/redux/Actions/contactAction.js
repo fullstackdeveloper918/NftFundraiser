@@ -2,11 +2,11 @@ import axios from "axios";
 import swal from "sweetalert";
 import { postContact } from "../Slices/contactSlice";
 export const ContactAction = (params, setLoading) => async dispatch => {
-    // sessionStorage.setItem('authToken', JSON.stringify(action.payload.dat
+    // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
     // setLoading(true)
     try {
-        // debugger
+        // 
         const config = {
             headers: {
                 // 'Content-Type': 'multipart/form-data'

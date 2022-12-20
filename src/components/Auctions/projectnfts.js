@@ -9,12 +9,12 @@ const ProjNFTS = () => {
     const dispatch = useDispatch()
     const { id } = useParams();
     const latprojdetail = useSelector(state => {
-        // debugger
+        // 
         return state.projectdetails.latestprojectdetails
     })
 
     useEffect(() => {
-        // debugger
+        // 
         dispatch(LatestProjectDetail(id))
 
     }, [id])
@@ -52,7 +52,7 @@ const ProjNFTS = () => {
                                                 <div className="countdown d-flex" data-date={item.end_date} />
                                             </div>
                                             <a href="/item-details">
-                                                <h5 className="mb-0">{item.title.toUpperCase()} #{item.token_id}</h5>
+                                                <h5 className="mb-0">{item.title.toUpperCase()} {item.token_id}</h5>
                                             </a>
                                             {/* <a className="seller d-flex align-items-center my-3">
                                                 <img className="avatar-sm rounded-circle"
@@ -62,6 +62,7 @@ const ProjNFTS = () => {
                                             <div className="card-bottom d-flex">
                                                 <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 28).toUpperCase() }} /><span></span>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>

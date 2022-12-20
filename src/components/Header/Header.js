@@ -1,45 +1,113 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { GetUserAction } from '../../redux/Actions/authAction';
-import { getPublicLiveProjects } from '../../redux/Actions/projectAction';
-import { logoutSuccess } from '../../redux/Slices/authSlice';
-import { ConnectWallet, getCurrentWalletConnected } from '../Wallet/interact';
+
+import { loginSuccess, logoutSuccess } from '../../redux/Slices/authSlice';
+import { ConnectWallet, getCurrentWalletConnected, Roles } from '../Wallet/interact';
+import Swal from 'sweetalert2';
+
 const Header = () => {
     const dispatch = useDispatch()
     const [address, setAddress] = useState(null)
-    // const [latitide, setLatitude] = useState([])
-    // const [longitude, setLongitude] = useState([])
-    // console.log('latitidell', latitide)
-    // console.log('longitudeeee', longitude)
+
     const add1 = address?.slice(0, 4).toUpperCase()
     const add2 = address?.slice(35, 44).toUpperCase()
+
     const LogoutHandler = () => {
         dispatch(logoutSuccess())
+        setAddress(null)
     }
-    const log = useSelector(state => {
+
+    const userRole = useSelector(state => {
+        return state.user.userdetail.role
+    })
+
+    const userToken = useSelector(state => {
         return state.user.userToken
     })
+
+    const history = useHistory()
+
+
     useEffect(() => {
         dispatch(GetUserAction())
         getCurrentWalletConnected()
         setAddress(getSelectedAddress)
+
+        if(window.ethereum){
+          window.ethereum.on('accountsChanged', function (accounts) {
+            if(!accounts.length){
+             setAddress(null)
+            //  setIsLoggedIn(false)
+             localStorage.removeItem('auth_token')
+            }
+          })
+        }
+       
     }, [dispatch, address])
+
     function getSelectedAddress() {
         return window.ethereum?.selectedAddress;
     }
-    const WalletHandler = async () => {
-        const res = await ConnectWallet()
-        setAddress(res?.address)
-    }
+
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
-    const accc = () => {
-        getCurrentWalletConnected()
+
+    const WalletHandler = async () => {
+        const response = await ConnectWallet("BUYER")
+        const { res } = response
+ 
+        if (!res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data.role) {
+            dispatch(loginSuccess(res))
+            setAddress(window.ethereum.selectedAddress)
+            history.push('/all/LatestProjects')
+        }
+        else if (res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data?.role) {
+            dispatch(loginSuccess(res))
+            setAddress(window.ethereum.selectedAddress)
+            history.push('/profile')
+        }
+        else if(!res?.data?.data?.is_new_user && Roles["CREATOR"] == res?.data?.data?.role){
+            dispatch(loginSuccess(res))
+            setAddress(window.ethereum.selectedAddress)
+        }
     }
+
+    const handleCreate = () => {
+        
+        if (Roles["CREATOR"] == userRole) {
+          history.push('/create')
+        }
+        else if (Roles["BUYER"] == userRole) {
+            Swal.fire({
+                icon: 'info',
+                html:
+                  'You need to Signup as a Creator to Create a Project',
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                  '<i class="fa fa-thumbs-up"></i> Ok!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+            })
+        }
+        else if(!userToken){
+            Swal.fire({
+                icon: 'info',
+                html:
+                  'You need to Signup as a Creator to Create a Project',
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                  '<i class="fa fa-thumbs-up"></i> Ok!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+            })
+        }
+
+    }
+
     return (
         <header id="header">
             {/* Navbar */}
@@ -53,17 +121,13 @@ const Header = () => {
                     <div className="ml-auto" />
                     {/* Navbar */}
                     <ul className="navbar-nav items mx-auto">
-                        {/* <li className="nav-item">
-                            <Link className="nav-link" onClick={currentLocation}><i className="fa-solid fa-location-pin"></i></Link>
-                        </li> */}
                         <li className="nav-item dropdown">
                             <Link className="nav-link" to="/">Explore</Link>
                         </li>
                         {/* {log !== null && ( */}
                         <li className="nav-item">
-                            <a href="/create" className="nav-link">Create</a>
+                            <a onClick={handleCreate} className="nav-link">Create</a>
                         </li>
-                        {/* )} */}
                         <li className="nav-item">
                             <Link to={`/all/${"LatestProjects"}`} className="nav-link">Latest Projects</Link>
                         </li>
@@ -90,7 +154,7 @@ const Header = () => {
                             </li>
                         }
                     </ul>
-                    {log !== null ? (
+                    {userToken? (
                         <>
                             <div className="dropdown">
                                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -108,10 +172,13 @@ const Header = () => {
                     ) : (
                         <ul className="navbar-nav action">
                             <li className="nav-item ml-3">
-                                <Link to="/login" className="creator-button btn ml-md-auto btn-bordered-white">
+                                <a className="creator-button btn ml-md-auto btn-bordered-white"
+                                    onClick={() => history.push('/wallet-connect')}><i className="fa fa-user" />
+                                    <div>CREATOR</div></a>
+                                {/* <Link to="/login" className="creator-button btn ml-md-auto btn-bordered-white">
                                     <i className="fa fa-user" />
                                     <div>CREATOR</div>
-                                </Link>
+                                </Link> */}
                             </li>
                         </ul>
                     )}

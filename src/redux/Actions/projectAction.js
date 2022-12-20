@@ -20,19 +20,21 @@ import {
     getNftwolDetails,
     getfundprojdetails,
     Nftres,
-    updatebanner
+    updatebanner,
+    nftUpd,
+    nftAdd
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
 import swal from "sweetalert";
 
 export const CreateProjectAction = (params, setLoading) => async dispatch => {
-    // sessionStorage.setItem('authToken', JSON.stringify(action.payload.dat
+    // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
     // setLoading(true)
     try {
-        const token = sessionStorage.getItem('authToken')
-        // debugger
+        const token = localStorage.getItem('authToken')
+        // 
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -64,7 +66,7 @@ export const CreateProjectAction = (params, setLoading) => async dispatch => {
 
 export const ProjectDetail = (id) => async dispatch => {
     // 
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -103,7 +105,7 @@ export const LatestProjectDetail = (id) => async dispatch => {
 }
 
 export const ProjectList = () => async dispatch => {
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -126,7 +128,7 @@ export const ProjectList = () => async dispatch => {
 }
 
 export const NftList = (id) => async dispatch => {
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -147,8 +149,7 @@ export const NftList = (id) => async dispatch => {
     }
 }
 export const uploadNFT = (params) => {
-    // debugger
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken')
     const config = {
         headers: {
             'Content-Type': 'multipart/form-data',
@@ -176,7 +177,7 @@ export const uploadNFT = (params) => {
 
     // const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/ipfsHash/Nfft`,
     //     params, config)
-    // debugger
+    // 
     // console.log('rasasses', res)
     // return res
     // await dispatch(Nftres(res))
@@ -212,7 +213,7 @@ export const getPublicLiveProjects = createAsyncThunk(
 
 export const UpdateProject = (id, params) => async dispatch => {
     // 
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -241,7 +242,7 @@ export const UpdateProject = (id, params) => async dispatch => {
 
 export const DeleteProject = (id) => async dispatch => {
     // 
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -287,7 +288,7 @@ export const CategoriesAction = () => async dispatch => {
 
 
 export const GetCollectionsAction = () => async dispatch => {
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -309,7 +310,7 @@ export const GetCollectionsAction = () => async dispatch => {
 }
 export const CreateCollectionAction = (params) => async dispatch => {
     try {
-        const token = sessionStorage.getItem('authToken')
+        const token = localStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -338,7 +339,7 @@ export const CreateCollectionAction = (params) => async dispatch => {
     }
 }
 export const GetCollectionDetails = (id) => async dispatch => {
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -380,7 +381,7 @@ export const GetSocialMediaIcons = () => async dispatch => {
 
 export const UpdateCollection = (id, params) => async dispatch => {
     // 
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -452,7 +453,7 @@ export const GetNftwol = ({ id }) => async dispatch => {
     }
 }
 export const GetfundraiserProject = (user_id) => async dispatch => {
-    // debugger
+    // 
     try {
         const config = {
             headers: {
@@ -474,7 +475,7 @@ export const GetfundraiserProject = (user_id) => async dispatch => {
 
 export const UpdateBanner = (formData, params) => async dispatch => {
     // 
-    const token = sessionStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -492,6 +493,70 @@ export const UpdateBanner = (formData, params) => async dispatch => {
         if (res.status === 200) {
             swal("success", "updated", 'success').then(function () {
                 dispatch(ProjectDetail(params))
+                dispatch(LatestProjectDetail(params))
+                // window.location = "/projectlist";
+            });
+
+        }
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const UpdateNft = (formData, props) => async dispatch => {
+    const token = localStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            transformRequest: formData => formData
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/nft/update/${props.id}/${props.nft_id}`,
+            formData, config)
+        // 
+        // console.log(res, 'coll rres')
+        await dispatch(nftUpd(res));
+
+        if (res.status === 200) {
+            // setLoading(false)
+            swal("success", "updated", 'success').then(function () {
+                dispatch(ProjectDetail(props.id))
+                // dispatch(LatestProjectDetail(params))
+                // window.location = "/projectlist";
+            });
+
+        }
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const AddNftAction = (formData, id, setLoading) => async dispatch => {
+    debugger
+    const token = localStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            transformRequest: formData => formData
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/nft/create/${id}`,
+            formData, config)
+        // 
+        // console.log(res, 'coll rres')
+        await dispatch(nftAdd(res));
+
+        if (res.status === 200) {
+            setLoading(false)
+            swal("success", "updated", 'success').then(function () {
+                // dispatch(ProjectDetail(props.id))
+                // dispatch(LatestProjectDetail(params))
                 // window.location = "/projectlist";
             });
 

@@ -1,18 +1,12 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { CreateCollectionAction } from '../../redux/Actions/projectAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { set, useForm } from 'react-hook-form';
-import LoadingSpinner from './loader';
-import Loader from './loader';
-import { CreateMetaDataAndMint } from '../Wallet/interact';
 import 'antd/dist/antd.css';
 import { Steps } from 'antd';
 import { LoadingOutlined, SmileOutlined, SolutionOutlined, UserOutlined, CheckOutlined } from '@ant-design/icons'
-import { color } from '@mui/system';
-import { useEffect } from 'react';
 import { useParams } from 'react-router';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
@@ -30,11 +24,11 @@ function NftPopup(props) {
 
     const description = 'This is a description.';
     function gettxhashAddress() {
-        // debugger
+        // 
         return window.ethereum?.selectedAddress;
     }
     // function getconfirmAddress() {
-    //     // debugger
+    //     // 
     //     return web3.eth.getTransactionReceipt;
     // }
     // useEffect(() => {
@@ -47,7 +41,7 @@ function NftPopup(props) {
     // }
     // }, [])
     const nftdetail = useSelector(state => {
-        // debugger
+        // 
         return state.projectdetails.nftlist
     })
     // console.log('latprojdetailpop', nftdetail)

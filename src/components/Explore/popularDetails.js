@@ -14,7 +14,7 @@ const PopularDetails = () => {
     const { id } = useParams();
     // console.log(id, 'idd')
     const populardetail = useSelector(state => {
-        // debugger
+        // 
         return state?.collection.collectiondetail
     })
     console.log(populardetail, 'populardetail')

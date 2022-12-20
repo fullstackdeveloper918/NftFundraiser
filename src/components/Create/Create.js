@@ -18,8 +18,12 @@ const Create = ({ current, next, prev }) => {
     const [description, setDescription] = useState()
     console.log('disss', description)
     const [country, setCountry] = useState("");
+    console.log('country', country)
     const [state, setState] = useState("");
+    console.log('state', state)
     const [city, setCity] = useState("");
+    console.log('city', city)
+
     const [collection_id, setCollectionId] = useState(0);
     const [type, setType] = useState(2);
 
@@ -33,6 +37,8 @@ const Create = ({ current, next, prev }) => {
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
 
+    const { countries } = useSelector(state => state.countries)
+    // useEffect(()
 
     const disablePastDate = () => {
         const today = new Date();
@@ -50,7 +56,7 @@ const Create = ({ current, next, prev }) => {
     });
 
     const col = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.getcollections
     })
     // console.log(col, 'col')
@@ -63,12 +69,13 @@ const Create = ({ current, next, prev }) => {
         dispatch(GetCollectionsAction())
         dispatch(CategoriesAction())
         if (prev) {
+            // 
             setValue('title', data.title)
             setValue('address', data.address)
             setValue('category_id', data.category_id)
             setValue('country', data.country)
-            setValue('city', data.city)
             setValue('state', data.state)
+            setValue('city', data.city)
             setValue('description', data.description)
             setValue('number_of_nft', data.number_of_nft)
             setValue('price', data.price)
@@ -77,8 +84,9 @@ const Create = ({ current, next, prev }) => {
 
             setType(data.type)
             setCountry(data.country)
-            setCity(data.city)
+            // 
             setState(data.state)
+            setCity(data.city)
 
             // setValue('end_date', data.end_date)
         }
@@ -86,13 +94,9 @@ const Create = ({ current, next, prev }) => {
     }, [data])
 
     const cat = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.categories
     })
-
-
-
-
 
     return (
 
@@ -170,13 +174,14 @@ const Create = ({ current, next, prev }) => {
                                 render={({ field: { value, onChange } }) => {
                                     return <JoditEditor
                                         ref={editor}
-                                        value={description}
-                                        // config={config}
+                                        // value={description}
 
+                                        // config={config}
+                                        value={description}
                                         placeholder="start typing"
                                         tabIndex={1} // tabIndex of textarea
                                         onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
-                                        onChange={newContent => { }}
+                                        onChange={setDescription}
                                     />
                                 }}
                             />
@@ -196,8 +201,10 @@ const Create = ({ current, next, prev }) => {
                                     // onChange={onChange}
 
                                     <GeoLocation
-                                        // locationTitle="Country"  
+                                        // locationTitle="Country" 
+                                        // setValue={data.country}
                                         isCountry
+
 
                                         onBlur={onBlur}
                                         selected={value}
@@ -218,10 +225,12 @@ const Create = ({ current, next, prev }) => {
                                 render={({ field: { onChange, onBlur, value, ref } }) => (
 
                                     <GeoLocation
+                                        // setValue={data.state}
                                         // isState
                                         // type="text"
                                         // className="form-control"
                                         // locationTitle="State"
+
                                         onChange={setState}
                                         geoId={country}
                                         onBlur={onBlur}
@@ -246,6 +255,7 @@ const Create = ({ current, next, prev }) => {
                                     <GeoLocation
                                         // locationTitle="City"
                                         // isCity
+                                        // setValue={data.city}
                                         onChange={setCity}
                                         geoId={state}
 

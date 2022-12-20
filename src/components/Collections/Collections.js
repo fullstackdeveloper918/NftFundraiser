@@ -10,7 +10,7 @@ const Collections = () => {
     const dispatch = useDispatch()
 
     const coll = useSelector(state => {
-        // debugger
+        // 
         return state?.collection?.collection
     })
     console.log(coll, "coll")

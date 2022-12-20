@@ -19,7 +19,7 @@ const AuctionsOne = ({ key, type }) => {
     const liveProjects = useSelector(state => {
         return state?.projectdetails?.liveProjects[type]
     })
-    // console.log(liveProjects, 'liveeproj')
+    console.log(liveProjects, 'liveeproj')
     useEffect(() => {
         dispatch(getPublicLiveProjects({
             cursor: 1,
@@ -62,6 +62,9 @@ const AuctionsOne = ({ key, type }) => {
                                                 <Link to={`/projdetails/${item.id}`}>
                                                     <img className="card-img-top" src={item?.nft_data[0]?.image} alt="" />
                                                 </Link>
+                                                <div className='token'>
+                                                    <span>#1123</span>
+                                                </div>
                                             </div>
                                             {/* ) */}
                                             {/* })} */}
@@ -73,7 +76,7 @@ const AuctionsOne = ({ key, type }) => {
                                                         <div className="countdown d-flex justify-content-center" data-date={item.date} />
                                                     </div>
                                                     <a href="#">
-                                                        <h5 className="mb-0">{item.title}</h5>
+                                                        <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
                                                     </a>
                                                     <a className="seller d-flex align-items-center my-3" href="#">
                                                         <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />

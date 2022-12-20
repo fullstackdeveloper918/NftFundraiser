@@ -1,26 +1,18 @@
-import React, { useEffect, useRef, useMemo } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AnnualRevenueList, CountryList, CreateOrganizationAction, HearAboutList, Register } from '../../redux/Actions/authAction'
+import { AnnualRevenueList, CountryList, HearAboutList, Register } from '../../redux/Actions/authAction'
 import { Controller, useForm } from 'react-hook-form'
-import swal from 'sweetalert'
 import { useHistory } from 'react-router'
 import { useFormData } from './Context/context'
 import styles from './styles/styles.module.scss'
 import { GetSocialMediaIcons } from '../../redux/Actions/projectAction'
-import SocialMedia from './media'
-import styled from 'styled-components'
-import ProgressSteps from './steps'
-import 'froala-editor/css/froala_style.min.css';
-import 'froala-editor/css/froala_editor.pkgd.min.css';
-import FroalaEditorComponent from 'react-froala-wysiwyg';
-import FroalaEditor from 'react-froala-wysiwyg'
 import { useState } from 'react'
 import JoditEditor from 'jodit-react';;
 
 // import { Widget } from "@uploadcare/react-widget";
 // import FileUpload from "react-material-file-upload";
 // import { uploadcare } from '../lib/uploadcare.min.js';
-const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
+const CreateOrganization = ({ formStep, nextFormStep,goBack }) => {
     const editor = useRef(null);
     const { data, setFormValues } = useFormData();
     const [description, setDescription] = useState()
@@ -29,9 +21,9 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
     const history = useHistory()
 
     const organization = useSelector(state => {
-
         return state.user.organization
     })
+    
     const { countries } = useSelector(state => state.countries)
     const { annualRevenue } = useSelector(state => state.annualRevenue)
 
@@ -75,6 +67,7 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
         //     history.push('/login')
         // }
     }
+
     const socialmedia = useSelector(state => {
         return state?.getSocialmediaIcons?.getsocial
     })
@@ -380,6 +373,9 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                                     <div className="col-12">
                                         <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create</button>
                                     </div>
+                                    <div className="col-3">
+                                        <button className="btn w-100 mt-3 mt-sm-4" onClick={()=>goBack()}>Previous</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -387,7 +383,6 @@ const CreateOrganization = ({ formStep, nextFormStep, prevFormStep }) => {
                 </div>
             </div>
         </section>
-
     )
 }
 

@@ -18,7 +18,6 @@ class latnftprojDetails extends Component {
             <div className="main">
                 <Header />
                 <LatprojNftDetails />
-
                 <Footer />
                 <ModalSearch />
                 <ModalMenu />

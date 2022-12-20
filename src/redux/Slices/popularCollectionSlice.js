@@ -10,11 +10,11 @@ const collectionSlice = createSlice({
     },
     reducers: {
         getPopularCollection: (state, action) => {
-            // debugger
+            // 
             state.collection = action.payload;
         },
         getPopularCollectiondetails: (state, action) => {
-            // debugger
+            // 
             state.collectiondetail = action.payload?.data?.data;
         },
 

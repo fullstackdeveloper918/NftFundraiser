@@ -10,12 +10,12 @@ const fundraiserSlice = createSlice({
     },
     reducers: {
         getTopFundraiser: (state, action) => {
-            // debugger
+            // 
             state.fundraiser = action.payload;
 
         },
         getTopFundraiserDetail: (state, action) => {
-            // debugger
+            // 
             state.fundraiserdetail = action?.payload?.data?.data;
         },
     },

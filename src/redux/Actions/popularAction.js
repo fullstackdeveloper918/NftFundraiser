@@ -5,7 +5,7 @@ import swal from "sweetalert";
 export const PopularCollectionAction = createAsyncThunk(
     "auth/collection",
     async ({ }, thunkAPI) => {
-        // debugger
+        // 
         try {
             const config = {
                 headers: {
@@ -17,7 +17,7 @@ export const PopularCollectionAction = createAsyncThunk(
             thunkAPI.dispatch(getPopularCollection(res?.data?.data));
 
         } catch (e) {
-            // debugger
+            // 
             if (e?.response?.data.message) {
                 swal('error', e.response.data.message, 'error')
             }
@@ -26,7 +26,7 @@ export const PopularCollectionAction = createAsyncThunk(
 export const PopularCollectionActionDetails = createAsyncThunk(
     "auth/collection",
     async ({ id }, thunkAPI) => {
-        // debugger
+        // 
         try {
             const config = {
                 headers: {
@@ -38,7 +38,7 @@ export const PopularCollectionActionDetails = createAsyncThunk(
             thunkAPI.dispatch(getPopularCollectiondetails(res));
 
         } catch (e) {
-            // debugger
+            // 
             if (e?.response?.data.message) {
                 swal('error', e.response.data.message, 'error')
             }

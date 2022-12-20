@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 // Slice
-const userToken = sessionStorage.getItem('authToken')
-    // ? JSON.parse(sessionStorage.getItem('user'))
-    ? sessionStorage.getItem('authToken')
+const userToken = localStorage.getItem('authToken')
+    // ? JSON.parse(localStorage.getItem('user'))
+    ? localStorage.getItem('authToken')
     : null
 const projectSlice = createSlice({
     name: 'project',
@@ -22,7 +22,9 @@ const projectSlice = createSlice({
         getfundProjDetails: [],
         getnftwoldetails: [],
         settings: [],
+        nftadd: [],
         nftres: [],
+        nftupdate: [],
         updbanner: [],
         // liveProjects: [],
         liveProjects: {
@@ -39,23 +41,31 @@ const projectSlice = createSlice({
             state.collections = action.payload;
         },
         getCollections: (state, action) => {
-            // debugger
+            // 
             state.getcollections = action?.payload?.data?.data;
         },
         getSocialmediaIcons: (state, action) => {
-            // debugger
+            // 
             state.getsocial = action?.payload?.data?.data;
         },
         getCollectionDetails: (state, action) => {
-            // debugger
+            // 
             state.getcollectiondetails = action?.payload?.data?.data;
         },
         getNftwolDetails: (state, action) => {
-            // debugger
+            // 
             state.getnftwoldetails = action?.payload?.data?.data;
         },
+        nftUpd: (state, action) => {
+            // 
+            state.nftupdate = action?.payload?.data?.data;
+        },
+        nftAdd: (state, action) => {
+            // 
+            state.nftadd = action?.payload?.data?.data;
+        },
         getfundprojdetails: (state, action) => {
-            // debugger
+            // 
             state.getfundProjDetails = action?.payload?.data?.data;
         },
         getProjectList: (state, action) => {
@@ -76,27 +86,27 @@ const projectSlice = createSlice({
             state.message = action.payload.response.data.message
         },
         getProjectDetail: (state, action) => {
-            // debugger
+            // 
             state.projectdetails = action?.payload?.data?.data;
         },
         getCollectionDetail: (state, action) => {
-            // debugger
+            // 
             state.collectiondetails = action?.payload?.data?.data;
         },
         Nftres: (state, action) => {
-            // debugger
+            // 
             state.nftres = action?.payload?.data?.data;
         },
         getNftList: (state, action) => {
-            // debugger
+            // 
             state.nftlist = action?.payload?.data?.data;
         },
         getLatestProjectDetail: (state, action) => {
-            // debugger
+            // 
             state.latestprojectdetails = action?.payload?.data?.data;
         },
         updatebanner: (state, action) => {
-            // debugger
+            // 
             state.updbanner = action?.payload?.data?.data;
         },
         publicLiveProjects: (state, action) => {
@@ -133,5 +143,7 @@ export const {
     getNftwolDetails,
     getfundprojdetails,
     Nftres,
-    updatebanner
+    updatebanner,
+    nftUpd,
+    nftAdd
 } = projectSlice.actions;

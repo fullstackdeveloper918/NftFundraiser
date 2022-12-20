@@ -101,7 +101,7 @@ const FundraiserDetail = () => {
     })
     // console.log(funddetail, 'fdddetail')
     const fundprojdetail = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.getfundProjDetails
     })
     // console.log(fundprojdetail, 'fdprojetail')
