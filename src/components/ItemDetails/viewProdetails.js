@@ -243,6 +243,14 @@ const ProjDetails = () => {
                 </div>
 
             </div>
+            <div>
+                <span className='nft_price'>{latprojdetail.selling_amount} raised of {latprojdetail.price}</span>
+
+                <div className='progressbar'>
+                    <ProgressBar varient="success" now={latprojdetail.project_percentage} />
+                    {/* <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" now={latprojdetail.project_percentage}> {latprojdetail.project_percentage}% </span> */}
+                </div>
+            </div>
 
             <div className="container mt-5">
 

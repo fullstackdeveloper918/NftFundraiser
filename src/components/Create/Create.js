@@ -8,7 +8,8 @@ import GeoLocation from './geoLocation';
 import 'reactjs-popup/dist/index.css';
 import styles from "./styles/styles.module.scss"
 import { useFormData } from './Context/context';
-import JoditEditor from 'jodit-react';;
+import JoditEditor from 'jodit-react'; import { CityList, CountryList, StateList } from '../../redux/Actions/authAction';
+;
 
 const Create = ({ current, next, prev }) => {
 
@@ -38,7 +39,19 @@ const Create = ({ current, next, prev }) => {
     const [modalShow, setModalShow] = React.useState(false);
 
     const { countries } = useSelector(state => state.countries)
-    // useEffect(()
+
+    console.log(countries?.data?.data, 'cntry')
+    const states = useSelector(state => {
+        // debugger
+        return state.countries.states
+    })
+
+    console.log(states?.data?.data, 'states')
+    const cities = useSelector(state => { return state.countries.city })
+    useEffect(() => {
+        dispatch(CountryList())
+
+    }, [])
 
     const disablePastDate = () => {
         const today = new Date();
@@ -47,6 +60,7 @@ const Create = ({ current, next, prev }) => {
         const yyyy = today.getFullYear();
         return yyyy + "-" + mm + "-" + dd;
     };
+
 
 
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({
@@ -61,7 +75,7 @@ const Create = ({ current, next, prev }) => {
     })
     // console.log(col, 'col')
     const OnSubmit = (data) => {
-        setFormValues({ ...data, country, state, city, type, description });
+        setFormValues({ ...data, type, description });
         // localStorage.setItem('country', JSON.stringify(country))
         next();
     }
@@ -97,7 +111,27 @@ const Create = ({ current, next, prev }) => {
         // 
         return state?.projectdetails?.categories
     })
+    const handleChangeCountry = (event) => {
+        // 👇 Get input value from "event"
+        setCountry(event.currentTarget.value);
+        const formData = new FormData()
+        formData.append('country_id', event.currentTarget.value)
+        dispatch(StateList(formData))        // if (country) {
 
+        //     debugger
+        // }
+    };
+    const handleChangeState = (event) => {
+        // 👇 Get input value from "event"
+        // setCountry(event.currentTarget.value);
+        const formData = new FormData()
+        formData.append('country_id', country)
+        formData.append('state_id', event.currentTarget.value)
+        dispatch(CityList(formData))
+
+        //     debugger
+        // }
+    };
     return (
 
         <div className={current === 0 ? styles.showForm : styles.hideForm}>
@@ -190,33 +224,69 @@ const Create = ({ current, next, prev }) => {
                     </div>
 
 
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
+                    <div className="col-md-6 col-12">
+                        <div className="form-group mt-3">
                             <label>Country</label>
-                            <Controller
-                                control={control}
-                                name="country"
-                                render={({ field: { onChange, onBlur, value, ref } }) => (
 
-                                    // onChange={onChange}
+                            <select name="country"
 
-                                    <GeoLocation
-                                        // locationTitle="Country" 
-                                        // setValue={data.country}
-                                        isCountry
+                                {...register("country", { required: true })} onChange={handleChangeCountry}>
+                                aria-invalid={errors?.country ? "true" : "false"}
+                                <option value="" disabled selected style={{ color: "#495057" }}>Select your country</option>
+                                {countries?.data?.data?.map((option, key) => (
+                                    <>
 
 
-                                        onBlur={onBlur}
-                                        selected={value}
-                                        onChange={setCountry}
-                                        required={true}
-                                    />
-                                )}
-                            />
+                                        <option key={key.id} value={option.id}>
 
+                                            {option.name}
+
+                                        </option>
+
+
+                                    </>
+
+                                ))}
+                            </select>
+                            {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">Country is required</p>}
                         </div>
                     </div>
-                    <div className="col-12 col-md-6">
+                    <div className="col-md-6 col-12">
+                        <div className="form-group mt-3">
+                            <label>State or Province</label>
+
+                            <select name="state"
+                                {...register("state", { required: true })} onChange={handleChangeState}>
+                                aria-invalid={errors?.state ? "true" : "false"}
+                                <option value="" disabled selected style={{ color: "#495057" }}>Select your state</option>
+                                {states?.data?.data?.map((option, key) => (
+
+                                    <><option key={key.id} value={option.id}  >
+                                        {option.name}
+                                    </option></>
+                                ))}
+                            </select>
+                            {errors.state?.type === 'required' && <p style={{ color: 'red' }} role="alert">State is required</p>}
+                        </div>
+                    </div>
+                    <div className="col-md-6 col-12">
+                        <div className="form-group mt-3">
+                            <label>City or Region</label>
+
+                            <select name="city"
+                                {...register("city", { required: true })}>
+                                aria-invalid={errors?.city ? "true" : "false"}
+                                <option value="" disabled selected style={{ color: "#495057" }}>Select your city</option>
+                                {cities?.data?.data?.map((option, key) => (
+                                    <><option key={key.id} value={option.id}>
+                                        {option.name}
+                                    </option></>
+                                ))}
+                            </select>
+                            {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">City is required</p>}
+                        </div>
+                    </div>
+                    {/* <div className="col-12 col-md-6">
                         <div className="form-group">
                             <label>State or Province</label>
                             <Controller
@@ -225,24 +295,16 @@ const Create = ({ current, next, prev }) => {
                                 render={({ field: { onChange, onBlur, value, ref } }) => (
 
                                     <GeoLocation
-                                        // setValue={data.state}
-                                        // isState
-                                        // type="text"
-                                        // className="form-control"
-                                        // locationTitle="State"
+                                       
 
                                         onChange={setState}
                                         geoId={country}
                                         onBlur={onBlur}
                                         selected={value}
-                                    // onChange={onChange}
-
-                                    // {...register("state", { required: true })}
-                                    // aria-invalid={errors.state ? "true" : "false"}
+                                    
                                     />
                                 )}
                             />
-                            {/* {errors.state?.type === 'required' && <p style={{ color: 'red' }} role="alert">state is required</p>} */}
                         </div>
                     </div>
                     <div className="col-12 col-md-6">
@@ -272,7 +334,7 @@ const Create = ({ current, next, prev }) => {
                             />
                             {errors.city?.type === 'required' && <p style={{ color: 'red' }} role="alert">city is required</p>}
                         </div>
-                    </div>
+                    </div> */}
                     <div className="col-12 col-md-6">
                         <div className="form-group">
                             {type == 2 ? (

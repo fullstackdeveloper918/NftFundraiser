@@ -16,6 +16,8 @@ const authSlice = createSlice({
         logout: {},
         message: {},
         countries: [],
+        states: [],
+        city: [],
         annualRevenue: [],
         hereAbout: [],
         updpro: [],
@@ -68,6 +70,12 @@ const authSlice = createSlice({
         getCountryList: (state, action) => {
             state.countries = action.payload;
         },
+        getStateList: (state, action) => {
+            state.states = action.payload;
+        },
+        getCityList: (state, action) => {
+            state.city = action.payload;
+        },
 
         getAnnualRevenueList: (state, action) => {
             state.annualRevenue = action.payload;
@@ -85,6 +93,8 @@ export const {
     registerSuccess,
     createOrganizationSuccess,
     getCountryList,
+    getStateList,
+    getCityList,
     getAnnualRevenueList,
     getHearAboutList,
     loginSuccess,

@@ -107,7 +107,7 @@ const ProjNftDetails = () => {
                                 </div>
                                 <div>
 
-                                    <h5 className='user_title'><div>Project Detail</div>
+                                    <h5 className='user_title'><div>Project Description</div>
                                         {/* <i class="fa-solid fa-pen" ></i>
                                                     <i class="fa-sharp fa-solid fa-trash"></i> */}
 
@@ -115,8 +115,8 @@ const ProjNftDetails = () => {
                                             <div >
 
                                                 <a className=""> <Link to={`/updateproject/${projdetail.id}`} style={{ color: '#FFF' }}> <i class="fa-solid fa-pen" ></i></Link></a>
-                                                <a className="" onClick={() => deleteHandler(projdetail.id)} style={{ color: '#FFF' }}> <i class="fa-sharp fa-solid fa-trash"></i>
-                                                </a>
+                                                {/* <a className="" onClick={() => deleteHandler(projdetail.id)} style={{ color: '#FFF' }}> <i class="fa-sharp fa-solid fa-trash"></i> */}
+                                                {/* </a> */}
                                             </div>
                                         )}
                                     </h5>
