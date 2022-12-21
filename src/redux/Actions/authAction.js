@@ -164,6 +164,7 @@ export const StateList = (formData) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/getStateById`,
             formData, config)
+        // debugger
         dispatch(getStateList(res));
     } catch (e) {
         if (e?.response?.data.message) {
@@ -178,8 +179,8 @@ export const CityList = (formData) => async dispatch => {
                 'Content-Type': 'application/json',
             },
         }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/getCityById`, formData,
-            config)
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/getCityById`,
+            formData, config)
         dispatch(getCityList(res));
     } catch (e) {
         if (e?.response?.data.message) {

@@ -12,6 +12,7 @@ import { CityList, CountryList, StateList } from '../redux/Actions/authAction';
 const EditProject = () => {
     const editor = useRef(null);
     const [country, setCountry] = useState();
+    console.log(country)
     const [state, setState] = useState();
     const [city, setCity] = useState();
     const [description, setDescription] = useState();
@@ -50,8 +51,9 @@ const EditProject = () => {
         // debugger
         return state.countries.states
     })
+    // console.log(first)
 
-    console.log(states?.data?.data, 'states')
+    // console.log(states?.data?.data, 'states')
     const cities = useSelector(state => { return state.countries.city })
     useEffect(() => {
         if (projdetail && Object.keys(projdetail).length) {
@@ -73,8 +75,14 @@ const EditProject = () => {
             setCountry(projdetail.country)
             // setState(projdetail.state)
             // setCity(projdetail.city)
-
+            console.log(projdetail.state, 'edit state')
+            console.log(projdetail.city, 'edit city')
             setValue("image", projdetail.image)
+            // const formData = new FormData()
+            // // formData.append('country_id', event?.currentTarget?.value)
+            // formData.append('country_id', projdetail.country)
+            // dispatch(StateList(formData))
+
         }
     }, [projdetail]);
 
@@ -123,24 +131,30 @@ const EditProject = () => {
     useEffect(() => {
         dispatch(CategoriesAction())
         dispatch(CountryList())
+        // dispatch(StateList(projdetail.country))
     }, [])
     const handleChangeCountry = (event) => {
+        // debugger
         // 👇 Get input value from "event"
-        setCountry(event.currentTarget.value);
+        setCountry(event?.currentTarget?.value);
         const formData = new FormData()
-        formData.append('country_id', event.currentTarget.value)
-        dispatch(StateList(formData))        // if (country) {
+        // formData.append('country_id', event?.currentTarget?.value)
+        formData.append('country_id', event?.currentTarget?.value)
+        dispatch(StateList(formData))
+
+        // if (country) {
 
         //     debugger
         // }
     };
     const handleChangeState = (event) => {
         // 👇 Get input value from "event"
-        // setCountry(event.currentTarget.value);
+        // setState(event.currentTarget.value);
         const formData = new FormData()
         formData.append('country_id', country)
-        formData.append('state_id', event.currentTarget.value)
+        formData.append('state_id', event?.currentTarget?.value)
         dispatch(CityList(formData))
+
 
         //     debugger
         // }
@@ -264,10 +278,17 @@ const EditProject = () => {
                                             // selected={country}
                                             render={({ field: { onChange, onBlur, value, ref } }) => (
                                                 <select name="country"
+                                                    {...register("country", { required: true })}
+                                                    value={value}
+                                                    onChange={
+                                                        // onChange(selectedOption.currentTarget.value); 
+                                                        handleChangeCountry()
+                                                    }>
 
-                                                    {...register("country", { required: true })} onChange={handleChangeCountry} >
                                                     aria-invalid={errors?.country ? "true" : "false"}
-                                                    <option value="" disabled selected style={{ color: "#495057" }} >Select your country</option>
+
+                                                    <option value="" disabled selected style={{ color: "#495057" }} >
+                                                        Select your country</option>
                                                     {countries?.data?.data?.map((option, key) => (
                                                         <>
                                                             <option key={key.id} value={option.id} >
@@ -286,18 +307,32 @@ const EditProject = () => {
                                 <div className="col-md-6 col-12">
                                     <div className="form-group mt-3">
                                         <label>State or Province</label>
+                                        <Controller
+                                            control={control}
+                                            name="state"
+                                            // selected={country}
+                                            render={({ field: { onChange, onBlur, value, ref } }) => (
+                                                <select name="state"
 
-                                        <select name="state"
-                                            {...register("state", { required: true })} onChange={handleChangeState} >
-                                            aria-invalid={errors?.state ? "true" : "false"}
-                                            <option value="" disabled selected style={{ color: "#495057" }}>Select your state</option>
-                                            {states?.data?.data?.map((option, key) => (
+                                                    {...register("state", { required: true })}
+                                                    //  onChange={handleChangeState}
 
-                                                <><option key={key.id} value={option.id}  >
-                                                    {option.name}
-                                                </option></>
-                                            ))}
-                                        </select>
+                                                    value={value}
+                                                    onChange={
+                                                        // onChange(selectedOption.currentTarget.value); 
+                                                        handleChangeState
+                                                    } >
+                                                    aria-invalid={errors?.state ? "true" : "false"}
+                                                    <option value="" disabled selected style={{ color: "#495057" }}>Select your state</option>
+                                                    {states?.data?.data?.map((option, key) => (
+
+                                                        <><option key={key.id} value={option.id}  >
+                                                            {option.name}
+                                                        </option></>
+                                                    ))}
+                                                </select>
+                                            )}
+                                        />
                                         {errors.state?.type === 'required' && <p style={{ color: 'red' }} role="alert">State is required</p>}
                                     </div>
                                 </div>
