@@ -211,8 +211,8 @@ export const getPublicLiveProjects = createAsyncThunk(
         }
     })
 
-export const UpdateProject = (id, params) => async dispatch => {
-    // 
+export const UpdateProject = (props, params) => async dispatch => {
+    debugger
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -222,14 +222,14 @@ export const UpdateProject = (id, params) => async dispatch => {
             },
             transformRequest: formData => formData
         }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/update/${id}`,
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/update/${props}`,
             params, config)
         // 
         // console.log(res, 'proj')
         await dispatch(getProjectDetail(res));
         if (res.status === 200) {
             swal("success", res.data.message, 'success').then(function () {
-                window.location = "/projectlist";
+                window.location = `/projnftdetails/${props}`;
             });
 
         }

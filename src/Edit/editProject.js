@@ -7,10 +7,12 @@ import { CategoriesAction, ProjectDetail, UpdateProject } from '../redux/Actions
 import { useState } from 'react';
 import GeoLocation from '../components/Create/geoLocation';
 import JoditEditor from 'jodit-react';
+import { CityList, CountryList, StateList } from '../redux/Actions/authAction';
 
 const EditProject = () => {
     const editor = useRef(null);
     const [country, setCountry] = useState();
+    console.log(country)
     const [state, setState] = useState();
     const [city, setCity] = useState();
     const [description, setDescription] = useState();
@@ -42,6 +44,17 @@ const EditProject = () => {
         placeholderText: 'Edit Your Content Here!',
         charCounterCount: false
     }
+    const { countries } = useSelector(state => state.countries)
+
+    console.log(countries?.data?.data, 'cntry')
+    const states = useSelector(state => {
+        // debugger
+        return state.countries.states
+    })
+    // console.log(first)
+
+    // console.log(states?.data?.data, 'states')
+    const cities = useSelector(state => { return state.countries.city })
     useEffect(() => {
         if (projdetail && Object.keys(projdetail).length) {
 
@@ -60,9 +73,16 @@ const EditProject = () => {
 
             setType(projdetail.type)
             setCountry(projdetail.country)
-            setCity(projdetail.city)
-            setState(projdetail.state)
+            // setState(projdetail.state)
+            // setCity(projdetail.city)
+            console.log(projdetail.state, 'edit state')
+            console.log(projdetail.city, 'edit city')
             setValue("image", projdetail.image)
+            // const formData = new FormData()
+            // // formData.append('country_id', event?.currentTarget?.value)
+            // formData.append('country_id', projdetail.country)
+            // dispatch(StateList(formData))
+
         }
     }, [projdetail]);
 
@@ -72,9 +92,9 @@ const EditProject = () => {
         // formData.append('image', data.image[0])
         formData.append('title', data.title)
         formData.append('description', description)
-        formData.append('state', state)
-        formData.append('country', country)
-        formData.append('city', city)
+        formData.append('state', data.state)
+        formData.append('country', data.country)
+        formData.append('city', data.city)
         formData.append('address', data.address)
         formData.append('price', data.price)
         formData.append('number_of_nft', data.number_of_nft)
@@ -110,7 +130,35 @@ const EditProject = () => {
     // console.log(cat, 'cat')
     useEffect(() => {
         dispatch(CategoriesAction())
+        dispatch(CountryList())
+        // dispatch(StateList(projdetail.country))
     }, [])
+    const handleChangeCountry = (event) => {
+        // debugger
+        // 👇 Get input value from "event"
+        setCountry(event?.currentTarget?.value);
+        const formData = new FormData()
+        // formData.append('country_id', event?.currentTarget?.value)
+        formData.append('country_id', event?.currentTarget?.value)
+        dispatch(StateList(formData))
+
+        // if (country) {
+
+        //     debugger
+        // }
+    };
+    const handleChangeState = (event) => {
+        // 👇 Get input value from "event"
+        // setState(event.currentTarget.value);
+        const formData = new FormData()
+        formData.append('country_id', country)
+        formData.append('state_id', event?.currentTarget?.value)
+        dispatch(CityList(formData))
+
+
+        //     debugger
+        // }
+    };
     return (
         // <Modal
         //     {...props}
@@ -221,8 +269,91 @@ const EditProject = () => {
                                     </div>
                                 </div>
 
+                                <div className="col-md-6 col-12">
+                                    <div className="form-group mt-3">
+                                        <label>Country</label>
+                                        <Controller
+                                            control={control}
+                                            name="country"
+                                            // selected={country}
+                                            render={({ field: { onChange, onBlur, value, ref } }) => (
+                                                <select name="country"
+                                                    {...register("country", { required: true })}
+                                                    value={value}
+                                                    onChange={
+                                                        // onChange(selectedOption.currentTarget.value); 
+                                                        handleChangeCountry()
+                                                    }>
 
-                                <div className="col-12 col-md-6">
+                                                    aria-invalid={errors?.country ? "true" : "false"}
+
+                                                    <option value="" disabled selected style={{ color: "#495057" }} >
+                                                        Select your country</option>
+                                                    {countries?.data?.data?.map((option, key) => (
+                                                        <>
+                                                            <option key={key.id} value={option.id} >
+
+                                                                {option.name}
+
+                                                            </option>
+                                                        </>
+                                                    ))}
+                                                </select>
+                                            )}
+                                        />
+                                        {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">Country is required</p>}
+                                    </div>
+                                </div>
+                                <div className="col-md-6 col-12">
+                                    <div className="form-group mt-3">
+                                        <label>State or Province</label>
+                                        <Controller
+                                            control={control}
+                                            name="state"
+                                            // selected={country}
+                                            render={({ field: { onChange, onBlur, value, ref } }) => (
+                                                <select name="state"
+
+                                                    {...register("state", { required: true })}
+                                                    //  onChange={handleChangeState}
+
+                                                    value={value}
+                                                    onChange={
+                                                        // onChange(selectedOption.currentTarget.value); 
+                                                        handleChangeState
+                                                    } >
+                                                    aria-invalid={errors?.state ? "true" : "false"}
+                                                    <option value="" disabled selected style={{ color: "#495057" }}>Select your state</option>
+                                                    {states?.data?.data?.map((option, key) => (
+
+                                                        <><option key={key.id} value={option.id}  >
+                                                            {option.name}
+                                                        </option></>
+                                                    ))}
+                                                </select>
+                                            )}
+                                        />
+                                        {errors.state?.type === 'required' && <p style={{ color: 'red' }} role="alert">State is required</p>}
+                                    </div>
+                                </div>
+                                <div className="col-md-6 col-12">
+                                    <div className="form-group mt-3">
+                                        <label>City or Region</label>
+
+                                        <select name="city"
+                                            {...register("city", { required: true })}>
+                                            aria-invalid={errors?.city ? "true" : "false"}
+                                            <option value="" disabled selected style={{ color: "#495057" }}>Select your city</option>
+                                            {cities?.data?.data?.map((option, key) => (
+                                                <><option key={key.id} value={option.id}>
+                                                    {option.name}
+                                                </option></>
+                                            ))}
+                                        </select>
+                                        {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">City is required</p>}
+                                    </div>
+                                </div>
+                                {/* <div className="col-12 col-md-6">
                                     <div className="form-group">
                                         <label>Country</label>
                                         <Controller
@@ -254,20 +385,17 @@ const EditProject = () => {
                                             render={({ field: { onChange, onBlur, value, ref } }) => (
 
                                                 <GeoLocation
-                                                    // type="text"
-                                                    // className="form-control"
-                                                    // locationTitle="State"
+                                                    
                                                     onChange={setState}
                                                     geoId={country}
                                                     onBlur={onBlur}
                                                     selected={value}
 
-                                                // {...register("state", { required: true })}
-                                                // aria-invalid={errors.state ? "true" : "false"}
+                                               
                                                 />
                                             )}
                                         />
-                                        {/* {errors.state?.type === 'required' && <p style={{ color: 'red' }} role="alert">state is required</p>} */}
+                                       
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-6">
@@ -279,22 +407,18 @@ const EditProject = () => {
                                             render={({ field: { onChange, onBlur, value, ref } }) => (
 
                                                 <GeoLocation
-                                                    // locationTitle="City"
+                                                  
                                                     onChange={setCity}
                                                     geoId={state}
                                                     onBlur={onBlur}
                                                     selected={value}
-                                                // onChange={onChange}
-
-
-                                                // {...register("city", { required: true })}
-                                                // aria-invalid={errors.city ? "true" : "false"}
+                                             
                                                 />
                                             )}
                                         />
-                                        {/* {errors.city?.type === 'required' && <p style={{ color: 'red' }} role="alert">city is required</p>} */}
+                                     
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">
                                         {type == 2 ? (

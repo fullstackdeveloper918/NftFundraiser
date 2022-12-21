@@ -1,9 +1,9 @@
 import axios from "axios";
-import { createOrganizationSuccess, getAnnualRevenueList, getCountryList, getHearAboutList, loginSuccess, registerFail, registerSuccess, updateprofile, userDetail, wallsignin, } from "../Slices/authSlice";
+import { createOrganizationSuccess, getAnnualRevenueList, getCityList, getCountryList, getHearAboutList, getStateList, loginSuccess, registerFail, registerSuccess, updateprofile, userDetail, wallsignin, } from "../Slices/authSlice";
 import swal from "sweetalert";
 // import { useNavigate } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import {creatorWalletUpdate } from "../../components/Wallet/interact";
+import { creatorWalletUpdate } from "../../components/Wallet/interact";
 
 export const Register = createAsyncThunk(
     "auth/register",
@@ -17,7 +17,7 @@ export const Register = createAsyncThunk(
                 },
                 transformRequest: formData => formData
             }
-            
+
             //create oraginization creator login
             const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/signup`,
                 params, config)
@@ -54,7 +54,7 @@ export const LoginAction = (params, history) => async dispatch => {
 
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/organization_signin`,
             params, config)
-            
+
         dispatch(loginSuccess(res));
 
     } catch (e) {
@@ -103,7 +103,7 @@ export const GetUserAction = () => async dispatch => {
             config)
         // console.log('userres', res)
         dispatch(userDetail(res));
-        
+
     } catch (e) {
         // 
         if (e?.response?.data.message) {
@@ -125,7 +125,7 @@ export const CreateOrganizationAction = (params) => async dispatch => {
             },
             transformRequest: formData => formData
         }
-        
+
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createOrganizationDetails`,
             params, config)
 
@@ -148,6 +148,40 @@ export const CountryList = () => async dispatch => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getCountryList`,
             config)
         dispatch(getCountryList(res));
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const StateList = (formData) => async dispatch => {
+    // debugger
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/getStateById`,
+            formData, config)
+        // debugger
+        dispatch(getStateList(res));
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const CityList = (formData) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/getCityById`,
+            formData, config)
+        dispatch(getCityList(res));
     } catch (e) {
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
@@ -227,7 +261,7 @@ export const walletSignin = (params, history) => async dispatch => {
     }
 }
 export const UpdateProfileAction = (formData) => async dispatch => {
-    
+
     // 
     const token = localStorage.getItem('authToken')
     try {

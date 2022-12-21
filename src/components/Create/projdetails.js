@@ -1,14 +1,17 @@
 import dayjs from 'dayjs';
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useRef } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { DeleteProject, GetCollectionDetails, ProjectDetail } from '../../redux/Actions/projectAction';
 import NftdataTable from '../Explore/nftdataTable';
+import ProjdataTable from '../Explore/projDetailtable';
+import DesPopup from './desPopup';
 import Banner from './editBanner';
 import EditNft from './editNft';
 const ProjNftDetails = () => {
+
     const deleteHandler = (id) => {
         dispatch(DeleteProject(id))
     }
@@ -17,7 +20,7 @@ const ProjNftDetails = () => {
     // console.log(id, 'idd')
     const [modalShow, setModalShow] = React.useState(false);
     const [modalShoww, setModalShoww] = React.useState(false);
-    const [modalShowadd, setModalShowadd] = React.useState(false);
+    const [modalShowDes, setModalShowDes] = React.useState(false);
 
     const dispatch = useDispatch()
 
@@ -107,16 +110,22 @@ const ProjNftDetails = () => {
                                 </div>
                                 <div>
 
-                                    <h5 className='user_title'><div>Project Detail</div>
+                                    <h5 className='user_title'><div>Project Description</div>
                                         {/* <i class="fa-solid fa-pen" ></i>
                                                     <i class="fa-sharp fa-solid fa-trash"></i> */}
 
                                         {projdetail?.status == 1 && (
                                             <div >
+                                                <i class="fa-solid fa-pen" onClick={() =>
+                                                    setModalShowDes(true)}></i>
+                                                <DesPopup
+                                                    id={id}
+                                                    show={modalShowDes}
+                                                    onHide={() => setModalShowDes(false)} />
+                                                {/* <a className=""> <Link to={`/updateproject/${projdetail.id}`} style={{ color: '#FFF' }}> <i class="fa-solid fa-pen" ></i></Link></a> */}
 
-                                                <a className=""> <Link to={`/updateproject/${projdetail.id}`} style={{ color: '#FFF' }}> <i class="fa-solid fa-pen" ></i></Link></a>
-                                                <a className="" onClick={() => deleteHandler(projdetail.id)} style={{ color: '#FFF' }}> <i class="fa-sharp fa-solid fa-trash"></i>
-                                                </a>
+                                                {/* <a className="" onClick={() => deleteHandler(projdetail.id)} style={{ color: '#FFF' }}> <i class="fa-sharp fa-solid fa-trash"></i> */}
+                                                {/* </a> */}
                                             </div>
                                         )}
                                     </h5>
@@ -136,7 +145,9 @@ const ProjNftDetails = () => {
                 </div>
             </div>
 
-
+            <ProjdataTable
+                id={id}
+            />
 
             <div className="container mt-5">
                 <div className='intro row m-0'>
