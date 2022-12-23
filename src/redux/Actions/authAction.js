@@ -133,7 +133,11 @@ export const CreateOrganizationAction = (params) => async dispatch => {
 
     } catch (e) {
         if (e?.response?.data.message) {
-            swal('error', e.response.data.message, 'error')
+            swal('error', e.response.data.message, 'error').then(function () {
+                // dispatch(ProjectDetail(params))
+                // window.location = "/projectlist";
+            });
+
         }
     }
 }

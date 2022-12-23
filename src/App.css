@@ -94,6 +94,8 @@ input , textarea{
 
 .creator-button {
     display: flex;
+    grid-gap: 8px;
+    align-items: center;
     gap: 8px;
 }
 .modal-content {
@@ -355,10 +357,9 @@ footer a.navbar-brand img {
 }
 .fa-solid, .fas {
     font-weight: 900;
-    margin-left: 172px;
+    margin-left: 186px;
     
     color: #4528DC;
-    margin-right: 8px;
 }
 ul.creator-dropdown.dropdown-menu li {
     text-transform: capitalize !important;
@@ -487,16 +488,23 @@ img.navbar-brand-sticky.desktop_logo {
     display: block;
 }
 @media (max-width:767px){
+    .nft-remove {
+        position: absolute;
+        left: 0 !important;
+        top: 16px !important;
+        text-align: right !important;
+    }
     img.mobile-logo {
         display: block;
     }
     img.navbar-brand-sticky.desktop_logo {
         display: none;
     }
-    .project-total-detail {
-        gap: 10px !important;
-        flex-direction: column;
-    }
+  
+    /* .project_img {
+        left: 70px;
+        right: 0 !important;
+    } */
 }
 .modal-header .icon-close {
     color: #fff;
@@ -642,7 +650,7 @@ section.live-auctions-area.single_project-detail .row h3 {
 .modal-dialog.modal-lg.modal-dialog-centered {
     background: #2222228a;
     width: 100%;
-    /* height: 100vh; */
+    height: 100vh;
     padding: 0;
     max-width: 100%;
     margin: 0;
@@ -698,7 +706,7 @@ span.title_main {
     text-transform: uppercase;
 }
 .lorem_done {
-    padding: 18px 0;
+    padding: 0px 18px 0;
     display: flex;
     gap: 4px;
     align-items: center;
@@ -715,7 +723,7 @@ span.cutom_dis {
 .item_title{
     padding-left: 15px;  
 }
-.card li , .card span , .card .countdown {
+.card li  , .card .countdown {
     color: #8e8e8e !important;
     /* font-size: 1rem !important; */
     font-weight: 400 !important;
@@ -828,8 +836,8 @@ ul.list-unstyled.viewproduct-detail li span:first-child , :root .boldertext , li
 }
 .progressbar {
     border: 1px solid #454248;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border-radius: 7px;
     width: 100%;
     max-width: 300px;
@@ -985,9 +993,9 @@ button.ant-btn.ant-btn-default.previous_btn span{
 .item-thumb-edit {
     position: absolute;
     cursor: pointer;
-    right: 4px;
+    right: 16px;
     color: #fff !important;
-    top: 10px;
+    top: 16px;
     font-size: 15px;
     font-weight: 200 !important;
     background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
@@ -1020,8 +1028,8 @@ section.explore-area {
     border: 1px solid #565656;
 }
 .avatar-lg {
-    height: 6rem !important;
-    width: 6rem !important;
+    height: 5rem !important;
+    width: 5rem !important;
 }
 .input-group.author_detail input {
     height: 40px;
@@ -1104,9 +1112,9 @@ span.nft_price {
 }
 .item-thumb {
     position: relative;
-    border: 10px solid #131314 !important;
+    border: 10px solid #111112f5 !important;
     border-radius: 20px;
-    box-shadow: 2px 1px 20px -8px #ffffff36 !important;
+    box-shadow: 2px 1px 20px -8px #8b8b8b2e !important;
     height: 100%;
 }
 .eddlbtton button {
@@ -1122,21 +1130,33 @@ span.nft_price {
 .content_project .card {
     height: 75% !important;
 }
-.project_img img.avatar-sm.rounded-circle {
+/* .project_img {
     position: absolute;
-    bottom: -29px;
+    bottom: -89px;
     right: 70px;
     width: 90px;
-    height: 90px;
+    height: auto;
     object-fit: cover;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 22px;
+} */
+
+:root .project_img img {
     box-shadow: 0px 2px 6px #5012a9fa;
+    width: 60px;
+    height: 60px;
 }
 :root .project-total-detail div span {
-    font-size: 20px !important;
+    font-size: 16px !important;
 }
-.project-total-detail{
+.project-total-detail {
     display: flex;
-    gap: 30px;
+    grid-gap: 30px;
+    flex-direction: column;
+    gap: 10px;
 }
 .project-total-detail div {
     display: flex;
@@ -1150,15 +1170,16 @@ span.nft_price {
     cursor: pointer;
     color: #fff !important;
 }
+
 .token span {
-    position: absolute;
     font-size: 12px;
-    top: 28px;
-    right: 35px;
+    top: 30px;
+    right: 30px;
     background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
     color: #fff !important;
-    padding: 0 8px;
+    padding: 0 16px;
     border-radius: 12px;
+    cursor: pointer;
 }
 .mint a{
     color: #fff !important;
@@ -1184,71 +1205,87 @@ color: #fff !important;
 }
 header .navbar-expand {
     padding: 0  !important;
+    opacity: unset !important;
 }
 .ant-collapse-content {
-    color: rgba(0, 0, 0, 0.85) !important;
-    background-color: #16151A !important;
-    border-top: 1px solid #D9D9D9;
+    color: #8e8e8e !important;
+    border: unset !important;
+    background-color: black !important;
 }
-.ant-collapse-header {
+.ant-collapse-content tr {
+    color: #8e8e8e !important;
+    border-top: 1px solid #16151a;
+    background-color: #09080d;
+}
+.table-detail tr:nth-child(odd) {
+    /* color: rgba(0, 0, 0, 0.85) !important; */
     background-color: #16151A !important;
+
+}
+
+.ant-collapse-header {
+    background-color: #16151a !important;
 }
 .container.table-detail th {
     color: #fff;
+    border: unset !important;
 }   
+:root .container.table-detail tr {
+    /* border-bottom: 1px solid #000000 !important; */
+    border: unset !important;
+}
+:root .table-detail thead tr {
+    background: #09080d !important;
+}
 .container.table-detail table.table-detail.table * {
     border: none;
 }
 .container.table-detail .ant-collapse {
-    border: 1px solid #424242;
+    border: 1px solid #1e1e1e;
     border-radius: 12px;
     overflow: hidden;
+    background: transparent;
 }
+
 .container.table-detail .table {
     width: 100%;
     margin-bottom: 0px !important;
     color: #8E8E8E;
 }
-.container.table-detail .ant-collapse > .ant-collapse-item {
-    border-bottom: 1px solid #2C2C2C;
-}
+
 .container.table-detail .ant-collapse-content > .ant-collapse-content-box {
     padding: 0px;
 }
-.container.table-detail tr {
-    border-bottom: 1px solid #2C2C2C !important;
+.container.table-detail td {
+    border: unset;
 }
 .container.table-detail tr:last-child {
     border-bottom:none;
 }
-.ant-collapse-content {
+/* .ant-collapse-content {
     background-color: #16151A !important;
     border-top: 1px solid #2C2C2C !important;
-}
+} */
 .owner span:nth-child(3) {
     color: #fff !important;
     text-transform: capitalize;
     font-weight: 700 !important;
 }
 .main-proj-detail .item-thumb img {
-    height: 300px;
+    height: 400px;
     /* height: auto; */
 }
-.user_title i.fa-solid.fa-pen {
-    width: 10px !important;
-    margin: 0px 10px !important ;
 
-}
-.user_title{
+.user_title {
     display: flex;
     align-items: center;
     position: relative;
+    padding: 12px 16px !important;
 }
 .user_title .fa-trash {
     color: #ffffff;
     position: inherit;
-    width: 10px !important;
-    margin: 0px 10px !important ;
+
 }
 
 
@@ -1283,5 +1320,455 @@ header .navbar-expand {
     border-color: #34305a !important;
     color: #34305a !important;
 }
+a:not(.btn), a:link:not(.btn), a:visited:not(.btn), a:hover:not(.btn), a:active:not(.btn) {
+    font-size: unset !important;
+}
+
+.table-detail .ant-collapse.ant-collapse-icon-position-end {
+    width: 100%;
+}
+@media (max-width: 850px){
+    .project-total-detail {
+        gap: 10px !important;
+        flex-direction: column;
+    }
+}
+.banner_img {
+    width: 100%;
+}
+.image-holder {
+    width: 100% !important;
+    background-color: #262424 !important;
+    border-style: dotted !important;
+    border-color: #484646 !important;
+    /* padding: 130px !important; */
+}
+button:focus {
+    outline: 1px dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline: unset !important;
+}
+.image-holder-loaded {
+    width: 100% !important;
+    border: 1px solid #1a1919;
+}
+.ReactImagePickerEditor .place-image .editing-bar-btn {
+    margin-top: 2px;
+    position: absolute;
+    right: 0;
+}
+.place-image {
+    position: relative;
+}
+form#dynamic_form_nest_item {
+    gap: 15px;
+}
+
+.ant-collapse {
+    width: 100% !important;
+}
+button.ant-btn.ant-btn-default.collection_btn span {
+    font-size: 14px !important;
+}
+.project_img {
+    align-items: center;
+}
+.proj_main> div {
+    /* background: red; */
+    border: 1px solid #cccccc1a;
+    margin: 0 -15px;
+    padding: 15px;
+}
+.project-total-detail {
+    background: #16151a;
+    padding: 15px;
+    border-radius: 8px;
+}
+h5.user_title {
+    background: #16151a;
+    padding: 10px;
+    /* border-radius: 8px 8px 0px 0; */
+    justify-content: space-between;
+}
+.user-description {
+    border: 1px solid #1e1e1e;
+    border-radius: 8px;
+    padding-bottom: 10px;
+    min-height: 156px;
+    height: 100%;
+}
+.user-description p {
+    padding: 0 5px;
+}
+.table-main-detail .ant-collapse.ant-collapse-icon-position-end {
+    margin-bottom: 0px !important;
+}
+:root span.progress-bar.bg-success {
+    font-size: 8px !important;
+}
+h5.user_title i , .container.table-main-detail i{
+    font-size: 15px;
+    cursor: pointer;
+    color: #fff !important;
+    font-size: 10px;
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+    padding: 6px 20px;
+    border-radius: 25px;
+    margin: 0;
+    margin-top: -5px;
+}
+.project-btn.flex-column button {
+    background: transparent;
+    position: relative;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    padding: 8px;
+    /* gap: 20px; */
+    /* display: flex; */
+    background: transparent none repeat scroll 0 0;
+    border: 2px solid #fff;
+}
+.project-btn button::after {
+    position: absolute;
+    content: "";
+    height: calc(100% + 4px);
+    width: calc(100% + 4px);
+    background-image: linear-gradient(135deg, var(--primary-color) 10%, var(--secondary-color));
+    top: -2px;
+    left: -2px;
+    border-radius: 100px;
+    opacity: 0;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    z-index: -1;
+}
+
+.project-btn button:hover::after{
+    opacity: 1;
+}
+.project-btn{
+    display: flex;
+    gap: 10px;
+}
+:root .card.add-nft {
+    min-height: 426.6px;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #2a2a2a;
+}
+:root .add-nft a {
+    /* color: #fff !important; */
+    font-size: 20px !important;
+}
+
+.table-detail span.ant-collapse-header-text , .table-main-detail span.ant-collapse-header-text{
+    font-size: 1.2rem;
+    color: #ffffff;
+    font-family: var(--primary-font);
+}
+.owner-nft span:nth-child(2) {
+    color: #fff !important;
+    text-transform: capitalize;
+    font-weight: 700 !important;
+    margin-right: 2px;
+}
+span.cards-icons i {
+    margin-left: unset !important;
+    color: #fff;
+    font-size: 10px;
+}
+.token {
+    display: flex;
+    /* align-items: center; */
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    gap: 5px;
+}
+.nfts_details tr tr {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 16px;
+}
+table.nfts_details.table i {
+    position: absolute;
+    top: 22px;
+    right: 62px;
+}
+
+.table-main-detail .ant-collapse {
+border: unset !important;
+background-color: transparent !important;
+}
+
+.ant-collapse-header {
+    border-radius: 8px 8px 0 0 !important;
+}
+.container.table-main-detail .ant-collapse-content > .ant-collapse-content-box {
+    padding: unset !important;
+}
+.container.table-main-detail span:nth-child(1) {
+    color: #fff;
+}
+.nfts_main{
+    border: 1px solid #1e1e1e;
+    border-radius: 8px;
+}
+.nfts_main .item {
+    margin-top: unset !important;
+    margin-bottom: 10px !important;
+}
+.progress_main{
+    flex-direction: column;
+}
+:root form#dynamic_form_nest_item span {
+    color: #fff !important;
+    background-image: white !important;
+    -webkit-text-fill-color: #ffffff;
+}
+/* .ant-collapse > .ant-collapse-item {
+    border: unset !important;
+   } */
+   .ant-collapse-content-box {
+    padding: 16px;
+    /* border-bottom: 1px solid; */
+    background: #16151a;
+}
+div.ant-collapse ,  div.ant-collapse > .ant-collapse-item{
+    border: 1px solid #1e1e1e;
+}
+.card.choose_div {
+    padding: 1.2rem;
+}
+.nft-remove {
+    position: absolute;
+    right: 0;
+    top: 25px;
+}
+.fade.edit_nft_popup.modal.show .modal-content {
+    max-width: 100%;
+}
+.fundraiser {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.progress_nft {
+    border: 1px solid #1e1e1e;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 10px;
+    gap: 10px;
+    background-color: #16151a;
+    border-radius: 10px;
+}
+:root .ant-collapse {
+    background-color: #16151a;
+}
+.progress_nft ul li {
+    list-style: none;
+    border-bottom: 1px solid #2e2e2e;
+    padding: 0;
+    padding: 11px 0;
+    margin: 0;
+}
+.progress_nft ul li:last-child {
+    border: unset;
+}
+.progress_nft .lorem_done {
+    gap: 10px
+}
+.progress_name {
+    color: #fff;
+}
+.ant-collapse-item {
+    border-radius: 8px;
+}
+:root .btn.btn-bordered-white {
+    line-height: 7px !important;
+}
+.donation-count{
+
+}
+.see_all{
+    color:white;
+    cursor: pointer;
+    border: 2px solid #4B1BBF;
+    border-radius: 100px;
+    padding: 5px 20px;
+    max-width: 100px;
+    text-align: center;
+    margin: auto;
+}
 
 
+
+
+span.ant-collapse-header-text {
+    text-align: start;
+}
+.ant-collapse-content {
+    color: #8E8E8E !important;
+    border: unset !important;
+    background-color: #09080D !important;
+}
+.table thead th, td {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e600;
+    border-top: 0px !important;
+}
+.ant-collapse {
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    margin-bottom: 20px !important;
+    background-color: transparent !important;
+}
+.ant-collapse-content tr {
+    border-top: 0px;
+}
+:root span.ant-collapse-header-text {
+    font-size: 1.2rem;
+    color: #FFFFFF;
+    font-family: var(--primary-font);
+}
+.input-group_1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: initial;
+}
+.input-group_1 div {
+    color: #fff !important;
+    font-family: 'Poppins', sans-serif !important;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.input-group_1 div input{
+    margin-top: 10px;
+}
+.rounded-circle {
+    border-radius: 50%!important;
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+}
+.ant-collapse {
+    border: 1px solid #1E1E1E !important;
+}
+.wrap_card .btn.btn-bordered-white {
+    margin: 0px 24px 0px;
+}
+.wrap_card .social-icons svg {
+    margin: 0px 12px !important;
+    font-size: 17px !important;
+    margin-bottom: 9px !important;
+    cursor: pointer;
+}
+.wrap_card .social-icons svg:hover {
+    color: #4528DC;
+}
+.wrap_card .Edite_able input.user_name {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: jost;
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid #383838 !important;
+}
+.wrap_card input.user_email {
+    background-color: transparent !important;
+    border: none !important;
+    text-align: center;
+    padding: 0px !important;
+    font-family: jost;
+    color: gray !important;
+    font-size: 18px;
+    border-bottom: 1px solid #383838 !important;
+}
+.item-thumb {
+    border: 7px solid #131314 !important;
+    box-shadow: 0px 0px 33px 3px #ffffff0a !important;
+    overflow: hidden;
+}
+.banner {
+    height: 400px;
+    width: 100%;
+}
+.banner img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.wrap_card .Edite_able label {
+    position: relative;
+    width: 100%;
+}
+.wrap_card .Edite_able i.fa-solid.fa-pen {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+ul.project_back {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0px !important;
+}
+li.item_title {
+    padding: 0px;
+}
+li.item_title {
+    padding: 0px;
+    margin: 0px  !important;
+}
+.item_created {
+    margin: 0;
+    font-size: 14px;
+    margin-bottom: 10px !important;
+    padding-left: 15px;
+}
+.custam_col {
+    border:1px solid #1E1E1E !important;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.custam_col .no-hover {
+    padding: 16px;
+}
+ul.project_back {
+    padding: 0px 22px;
+}
+li.button_blow {
+    padding: 0px 20px;
+}
+:root .detail_single_nfts li {
+    text-transform: capitalize;
+}
+span.read-or-hide {
+    color: #4B1BBF;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+.modal-body form.item-form.card.no-hover select {
+    background-color: black !important;
+    padding: 7px;
+    height: 38px;
+}
+.item-thumb {
+    border: 0px solid #16151a !important;
+    box-shadow: none !important;
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+section.wallet-connect-area h4 {
+    color: #fff;
+    padding: 22px 0;
+}
+.ant-collapse-content-box {
+    padding: 16px;
+    /* border-bottom: 1px solid; */
+    background: #16151a00;
+}

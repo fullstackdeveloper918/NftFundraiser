@@ -21,88 +21,7 @@ const web3 = createAlchemyWeb3(alchemyKey);
 const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
 const NftDetails = (props) => {
 
-    const initData = {
-        itemImg: "/img/avtar1.png",
-        date: "2022-03-30",
-        tab_1: "Activity",
-        tab_2: "History",
-        tab_3: "Details",
-        ownerImg: "/img/avtar1.png",
-        itemOwner: "Themeland",
-        created: "15 Jul 2021",
-        title: "Walking On Air",
-        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.",
-        price_1: "1.5 ETH",
-        price_2: "$500.89",
-        count: "1 of 5",
-        size: "14000 x 14000 px",
-        volume: "64.1",
-        highest_bid: "2.9 BNB",
-        bid_count: "1 of 5",
-        btnText: "Place a Bid"
-    }
-    const tabData_1 = [
-        {
-            id: "1",
-            img: "/img/avtar1.png",
-            price: "14 ETH",
-            time: "4 hours ago",
-            author: "@arham"
-        },
-        {
-            id: "2",
-            img: "/img/avtar2.jpg",
-            price: "10 ETH",
-            time: "8 hours ago",
-            author: "@junaid"
-        },
-        {
-            id: "3",
-            img: "/img/avtar3.png",
-            price: "12 ETH",
-            time: "3 hours ago",
-            author: "@yasmin"
-        }
-    ]
 
-    const tabData_2 = [
-        {
-            id: "1",
-            img: "/img/avtar1.png",
-            price: "32 ETH",
-            time: "10 hours ago",
-            author: "@hasan"
-        },
-        {
-            id: "2",
-            img: "/img/avtar2.jpg",
-            price: "24 ETH",
-            time: "6 hours ago",
-            author: "@artnox"
-        },
-        {
-            id: "3",
-            img: "/img/avtar3.png",
-            price: "29 ETH",
-            time: "12 hours ago",
-            author: "@meez"
-        }
-    ]
-
-    const sellerData = [
-        {
-            id: "1",
-            img: "/img/avtar1.png",
-            seller: "@ArtNoxStudio",
-            post: "Creator"
-        },
-        {
-            id: "2",
-            img: "/img/avtar2.jpg",
-            seller: "Virtual Worlds",
-            post: "Collection"
-        }
-    ]
     const [modalShow, setModalShow] = React.useState(false);
     const [current, setCurrent] = React.useState(0)
     const [contractAdd, setContractAdd] = useState('')
@@ -242,7 +161,7 @@ const NftDetails = (props) => {
     }
 
     const deployAndMint = async () => {
-        
+
         setModalShow(true)
         // mint()
         await deployContract()

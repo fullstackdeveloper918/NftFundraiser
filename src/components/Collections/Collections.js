@@ -45,10 +45,11 @@ const Collections = () => {
                                 <div className="card no-hover text-center">
                                     <div className="image-over">
                                         <Link to={`/popularcollection/details/${item.id}`}>
-                                            <img className="card-img-top" src={item?.nft_detail?.image} alt="" />
-                                        </Link>0
+                                            <img className="card-img-top" src={item?.image} alt="" />
+                                        </Link>
                                         {/* Seller */}
                                         <a className="seller">
+
                                             {/* <Link to={`/item-details/${item.id}`} className="seller"> */}
                                             <div className="seller-thumb avatar-lg">
                                                 <img className="rounded-circle" src={item?.user_data?.avatar} alt="" />

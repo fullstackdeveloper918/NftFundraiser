@@ -31,30 +31,36 @@ const LatNftdataTable = () => {
     return (
         <div>
             <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
-                <Panel header="Details" key="1">
+                <Panel header="Item Activity" key="1">
                     <Table responsive >
                         <thead>
 
 
                             <tr>
 
-                                <th>Contract Address</th>
-                                <th>Token ID</th>
-                                <th>Token Stranded</th>
-                                <th>Blockchain</th>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Transaction</th>
                             </tr>
 
 
                         </thead>
                         <tbody>
-                            {projdetail.nft_data?.map((items) => {
+                            {projdetail?.project_activity?.map((items) => {
                                 return (
                                     <tr>
 
-                                        <td>{items.collectionData?.contract_id}</td>
-                                        <td>{items.token_id}</td>
-                                        <td>ERC721</td>
-                                        <td>Polygon (Matic)</td>
+                                        <td><img
+                                            src={items.image}
+                                            className="rounded-circle"
+                                            alt="Avatar"
+                                        />{items.nft_title.slice(0, 15)}</td>
+                                        <td>{items.price}</td>
+                                        <td>{items.pay_from.slice(0, 4)}...{items.pay_from.slice(35, 44)}</td>
+                                        <td>{items.pay_to.slice(0, 4)}...{items.pay_to.slice(35, 44)}</td>
+                                        <td>{items.txd_id.slice(0, 4)}...{items.txd_id.slice(35, 44)}</td>
                                     </tr>
                                 )
                             })}

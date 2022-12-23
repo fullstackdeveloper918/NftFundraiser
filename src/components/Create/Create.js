@@ -93,16 +93,17 @@ const Create = ({ current, next, prev }) => {
             setValue('description', data.description)
             setValue('number_of_nft', data.number_of_nft)
             setValue('price', data.price)
-            // setValue('start_date', data.start_date)
+            setValue('start_date', data.start_date)
             setValue('type', data.type)
 
             setType(data.type)
             setCountry(data.country)
+            setDescription(data.description)
             // 
             setState(data.state)
             setCity(data.city)
 
-            // setValue('end_date', data.end_date)
+            setValue('end_date', data.end_date)
         }
 
     }, [data])
@@ -188,7 +189,7 @@ const Create = ({ current, next, prev }) => {
                                 type="text"
                                 className="form-control"
                                 name="address"
-                                placeholder="Web Address"
+                                placeholder="Web address"
                                 {...register("address", { required: true })}
                                 aria-invalid={errors.address ? "true" : "false"}
                             />
@@ -253,7 +254,7 @@ const Create = ({ current, next, prev }) => {
                     </div>
                     <div className="col-md-6 col-12">
                         <div className="form-group mt-3">
-                            <label>State or Province</label>
+                            <label>State or province</label>
 
                             <select name="state"
                                 {...register("state", { required: true })} onChange={handleChangeState}>
@@ -339,7 +340,7 @@ const Create = ({ current, next, prev }) => {
                         <div className="form-group">
                             {type == 2 ? (
 
-                                <label>Price per NFT (MATIC)</label>
+                                <label>Price per NFT (revise from Price)</label>
                             ) : (
                                 <label>Price (MATIC)</label>
 
