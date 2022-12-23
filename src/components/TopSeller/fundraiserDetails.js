@@ -7,6 +7,9 @@ import { Button } from 'bootstrap';
 import { GetfundraiserProject } from '../../redux/Actions/projectAction';
 import dayjs from 'dayjs'
 import { Link } from 'react-router-dom';
+import FunddataTable from './fundraiserdetail';
+import FundTransdataTable from './fundPaymenttable';
+import ReadMore from '../../readMore';
 // const initData = {
 //     itemImg: "/img/auction_2.jpg",
 //     date: "2022-03-30",
@@ -136,7 +139,6 @@ const FundraiserDetail = () => {
                     </div>
                 </div>
                 <div className="row justify-content-between px-0">
-
                     <div className="col-12 col-lg-8">
                         <div className="item-info">
 
@@ -144,8 +146,6 @@ const FundraiserDetail = () => {
                                 <img src={funddetail?.organization_detail?.banner_image} alt="" />
                                 {/* <img src='/img/ph.jpg' alt="" /> */}
                             </div>
-
-
 
                         </div>
                         <div className='lorem_done'>
@@ -159,14 +159,17 @@ const FundraiserDetail = () => {
                             <span className='cutom_dis'> {funddetail?.organization_detail?.organization_name} is organizing this fundraiser.</span>
                         </div>
 
-                        <div className="card no-hover">
-                            <span className="mt-0 mb-2" dangerouslySetInnerHTML={{ __html: funddetail?.organization_detail?.description }} />
-                            <div className="price d-flex justify-content-between align-items-center">
+                        <br />
+                        <div className='custam_col'>
+                            <h5 class="user_title"><div>Description</div></h5>
+                            <div className=" no-hover">
+                                {/* <span className="mt-0 mb-2" dangerouslySetInnerHTML={{ __html: funddetail?.organization_detail?.description }} /> */}
+                                <ReadMore data={funddetail?.organization_detail?.description} />
+                                <div className="price d-flex justify-content-between align-items-center">
+                                </div>
                             </div>
                         </div>
-                        <br />
                     </div>
-
                     <div className="col-12 col-lg-4">
                         <div className="content mt-5 mt-lg-0">
                             {/* <h3 className="m-0">{this.state.initData.title}</h3> */}
@@ -181,6 +184,7 @@ const FundraiserDetail = () => {
                             </div>
 
                             <div className="item-info-list">
+
                                 <ul className="list-unstyled">
                                     <div className="card no-hover detail_single_nfts">
 
@@ -189,17 +193,18 @@ const FundraiserDetail = () => {
 
                                         </li>
 
+
                                         {/* <li className="price d-flex justify-content-between">
                                                 <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 71% </span>
     
                                             </li> */}
 
                                     </div>
-                                    <div className="card no-hover">
-                                        <li className='card-inner-heading'>
-
-                                            <span style={{}}>PROJECTS</span>
-                                        </li>
+                                    <div className="custam_col no-hover">
+                                        <h5 class="user_title"><div>Projects</div></h5>
+                                        {/* <li className='card-inner-heading'>
+                                            <span style={{}}>Projects</span>
+                                        </li> */}
 
                                         {fundprojdetail && fundprojdetail.length &&
                                             [...new Map(fundprojdetail.map(item =>
@@ -214,16 +219,18 @@ const FundraiserDetail = () => {
                                                     return (
 
                                                         <>
-
-                                                            <li className='item_title'>
-                                                                {item.title}
-                                                            </li><li className='item_created'>
-                                                                <i className="fa-solid fa-circle"></i>{days_difference} days ago
-                                                                {/* {(item.created_at).diff(new Date, 'day', true)} */}
-                                                            </li></>
+                                                            <ul className="project_back">
+                                                                <li className='item_title'>
+                                                                    {item.title}
+                                                                </li><li className='item_created'>
+                                                                    {days_difference} days ago
+                                                                    {/* {(item.created_at).diff(new Date, 'day', true)} */}
+                                                                </li>
+                                                            </ul>
+                                                        </>
                                                     )
                                                 })}
-                                        <li>
+                                        <li className='button_blow'>
                                             <a className="d-block btn btn-bordered-white mt-4" href="/all/LatestProjects">view all</a>
 
                                         </li>
@@ -235,6 +242,26 @@ const FundraiserDetail = () => {
 
 
                             </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div className='row'>
+                    <div className='col-12 col-md-8'>
+
+                    </div>
+                    <div className='col-12 col-md-4'>
+
+                    </div>
+                </div>
+
+                <div className='row'>
+                    <div className='col-12'>
+                        <div className='funddeatil'>
+
+                            <FunddataTable />
+
+                            <FundTransdataTable />
 
                         </div>
                     </div>
