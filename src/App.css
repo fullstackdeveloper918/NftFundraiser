@@ -1060,9 +1060,7 @@ section.explore-area {
 .input-group.author_detail {
     padding: 32px;
 }
-header .navbar-expand {
-    padding: 0  !important;
-}
+
 section.hero-section .button-group a {
     margin-left: 10px;
 }
@@ -1171,15 +1169,16 @@ span.nft_price {
     color: #fff !important;
 }
 
-.token span {
-    font-size: 12px;
+.token span:first-child {
+    font-size: 14px;
     top: 30px;
     right: 30px;
     background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
     color: #fff !important;
-    padding: 0 16px;
+    padding: 0 20px;
     border-radius: 12px;
     cursor: pointer;
+    margin-top: 4px;
 }
 .mint a{
     color: #fff !important;
@@ -1204,7 +1203,8 @@ color: #fff !important;
     gap: 10px;
 }
 header .navbar-expand {
-    padding: 0  !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     opacity: unset !important;
 }
 .ant-collapse-content {
@@ -1301,7 +1301,6 @@ header .navbar-expand {
 
 .image-container {
     max-width: 900px;
-    padding: 32px 15px;
     margin: 0px auto;
     box-sizing: border-box;
     width: 100%;
@@ -1406,7 +1405,7 @@ h5.user_title {
 :root span.progress-bar.bg-success {
     font-size: 8px !important;
 }
-h5.user_title i , .container.table-main-detail i{
+h5.user_title i , .container.table-main-detail i , .token span i{
     font-size: 15px;
     cursor: pointer;
     color: #fff !important;
@@ -1479,7 +1478,7 @@ span.cards-icons i {
 }
 .token {
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     position: absolute;
     top: 30px;
     right: 30px;
@@ -1771,4 +1770,13 @@ section.wallet-connect-area h4 {
     padding: 16px;
     /* border-bottom: 1px solid; */
     background: #16151a00;
+}
+.container.table-main-detail.position-relative {
+    padding: 0;
+}
+.container.table-detail {
+    padding: 0;
+}
+.banner_img button {
+    margin-top: 15px;
 }

@@ -913,7 +913,7 @@ const EditNft = (props) => {
                                 </Form.List>
                                 <Form.Item>
                                     <div className="col-12">
-                                        <button className="btn w-100 mt-3 mt-sm-4 mb-3" type="submit">Update </button>
+                                        <button className="btn w-100 mb-3" type="submit">Update </button>
                                     </div>
 
                                 </Form.Item>

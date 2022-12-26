@@ -62,9 +62,7 @@ const AuctionsOne = ({ key, type }) => {
                                                 <Link to={`/projdetails/${item.id}`}>
                                                     <img className="card-img-top" src={item?.nft_data[0]?.image} alt="" />
                                                 </Link>
-                                                <div className='token'>
-                                                    <span>#1123</span>
-                                                </div>
+
                                             </div>
                                             {/* ) */}
                                             {/* })} */}

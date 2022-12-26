@@ -135,7 +135,7 @@ export const CreateOrganizationAction = (params) => async dispatch => {
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error').then(function () {
                 // dispatch(ProjectDetail(params))
-                // window.location = "/projectlist";
+                window.location = "/projectlist";
             });
 
         }

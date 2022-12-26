@@ -708,7 +708,7 @@ function ProjDetailPopup(props) {
                 <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
                     <div className="row">
 
-                        <div className="col-6">
+                        <div className="col-6 col-12">
                             {/* {type == 1 && ( */}
 
                             <div className="form-group mt-3">
@@ -726,7 +726,7 @@ function ProjDetailPopup(props) {
                             </div>
                             {/* )} */}
                         </div>
-                        <div className="col-6">
+                        <div className="col-6 col-12">
                             <div className="form-group mt-3">
                                 <label>Web address</label>
                                 <input
@@ -744,7 +744,7 @@ function ProjDetailPopup(props) {
 
 
                         <div className="col-md-6 col-12">
-                            <div className="form-group mt-3">
+                            <div className="form-group">
                                 <label>Country</label>
                                 <Controller
                                     control={control}
@@ -780,7 +780,7 @@ function ProjDetailPopup(props) {
                             </div>
                         </div>
                         <div className="col-md-6 col-12">
-                            <div className="form-group mt-3">
+                            <div className="form-group">
                                 <label>State or Province</label>
                                 <Controller
                                     control={control}
