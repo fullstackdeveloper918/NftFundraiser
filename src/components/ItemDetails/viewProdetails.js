@@ -19,6 +19,7 @@ import latNftdataTable from './../Explore/latProjNftdata';
 import LatNftdataTable from './../Explore/latProjNftdata';
 import ProjdataTable from '../Explore/projDetailtable';
 import ReferalPopup from './refralPopup';
+import ReadMore from '../../readMore';
 
 const ProjDetails = () => {
 
@@ -190,7 +191,8 @@ const ProjDetails = () => {
 
 
                             </h5>
-                            <p dangerouslySetInnerHTML={{ __html: latprojdetail.description }} />
+                            <ReadMore data={latprojdetail.description} />
+                            {/* <p dangerouslySetInnerHTML={{ __html: latprojdetail.description }} /> */}
                         </div>
                     </div>
 

@@ -26,7 +26,7 @@ const Create = ({ current, next, prev }) => {
     console.log('city', city)
 
     const [collection_id, setCollectionId] = useState(0);
-    const [type, setType] = useState(2);
+    const [type, setType] = useState();
 
     function onHandleClick(event) {
         setCollectionId(event.currentTarget.id);
@@ -99,7 +99,7 @@ const Create = ({ current, next, prev }) => {
             setType(data.type)
             setCountry(data.country)
             setDescription(data.description)
-            // 
+
             setState(data.state)
             setCity(data.city)
 
@@ -133,6 +133,16 @@ const Create = ({ current, next, prev }) => {
         //     debugger
         // }
     };
+    // const [dateError,setErrordate] = useState("")
+    // function checkDateValidation(start_date, end_date) {
+    //     // check the dates
+    //     if ((new Date(start_date) > new Date(end_date)) || (new Date(end_date) < new Date(start_date))) {
+    //         // set date error validation true 
+    //         setErrordate("should be gtr")
+    //     } else {
+    //         // null or false date error validation 
+    //     }
+    // }
     return (
 
         <div className={current === 0 ? styles.showForm : styles.hideForm}>
@@ -143,20 +153,72 @@ const Create = ({ current, next, prev }) => {
                         <div className="form-group mt-3">
                             <div className="form-check form-check-inline">
                                 {data.type == 2 ? (
-                                    <><input className="form-check-input" type="radio" name="radiobutton" id="donation" value="2" onChange={(e) => setType(e.target.value)} defaultChecked={data.type} /><label className="form-check-label" htmlFor="donation">Campaign</label></>
+                                    <><input
+                                        className="form-check-input"
+                                        type="radio"
+                                        name="radiobutton"
+                                        id="donation"
+                                        value="2"
+                                        // defaultChecked={data.type ? true : false}
+                                        {...register("type", { required: true })}
+                                        aria-invalid={errors.type ? "true" : "false"}
+                                        onChange={(e) => setType(e.target.value)}
+                                        defaultChecked={data.type}
+                                    />
+                                        <label className="form-check-label" htmlFor="donation">Campaign</label>
+                                    </>
                                 ) : (
 
-                                    <><input className="form-check-input" type="radio" name="radiobutton" id="donation" value="2" onChange={(e) => setType(e.target.value)} /><label className="form-check-label" htmlFor="donation">Campaign</label></>
+                                    <><input
+                                        className="form-check-input"
+                                        type="radio"
+                                        name="radiobutton"
+                                        id="donation"
+                                        value="2"
+                                        {...register("type", { required: true })}
+                                        onChange={(e) => setType(e.target.value)}
+                                        aria-invalid={errors.type ? "true" : "false"}
+                                    />
+                                        <label className="form-check-label" htmlFor="donation">Campaign</label></>
                                 )}
                             </div>
                             <div className="form-check form-check-inline">
                                 {data.type == 1 ? (
-                                    <><input className="form-check-input" type="radio" name="radiobutton" id="product_sale" value="1" onChange={(e) => setType(e.target.value)} defaultChecked={data.type} /><label className="form-check-label" htmlFor="product_sale">Single</label></>
+                                    <><input
+                                        className="form-check-input"
+                                        type="radio" name="radiobutton"
+                                        id="product_sale"
+                                        value="1"
+                                        defaultChecked={data.type}
+                                        {...register("type", { required: true })}
+                                        onChange={(e) => setType(e.target.value)}
+                                        aria-invalid={errors.type ? "true" : "false"}
+                                    // defaultChecked={data.type ? true : false}
+                                    /><label className="form-check-label" htmlFor="product_sale">Single</label></>
                                 ) : (
 
-                                    <><input className="form-check-input" type="radio" name="radiobutton" id="product_sale" value="1" onChange={(e) => setType(e.target.value)} /><label className="form-check-label" htmlFor="product_sale">Single</label></>
+
+
+                                    <><input
+                                        className="form-check-input"
+                                        type="radio"
+                                        name="radiobutton"
+                                        id="product_sale"
+                                        value="1"
+                                        // checked
+                                        {...register("type", { required: true })}
+                                        // defaultChecked={type === null ? true : false}
+
+                                        onChange={(e) => setType(e.target.value)}
+                                        aria-invalid={errors.type ? "true" : "false"}
+
+                                    />
+                                        <label className="form-check-label" htmlFor="product_sale">Single</label></>
+
+
                                 )}
                             </div>
+                            {errors.type?.type === 'required' && <p style={{ color: 'red' }} role="alert">Type is required</p>}
 
                         </div>
                     </div>
@@ -174,9 +236,10 @@ const Create = ({ current, next, prev }) => {
                                 className="form-control"
                                 name="title"
                                 placeholder="Project name"
-                                {...register("title", { required: true })}
+                                {...register("title", { required: true, pattern: { value: /[A-Za-z]/ } })}
                                 aria-invalid={errors.title ? "true" : "false"}
                             />
+                            {errors.title && errors.title?.type === 'pattern' && <p style={{ color: 'red' }} role="alert">Only VarChar allowed</p>}
                             {errors.title?.type === 'required' && <p style={{ color: 'red' }} role="alert">Title is required</p>}
 
                         </div>
@@ -186,13 +249,21 @@ const Create = ({ current, next, prev }) => {
                         <div className="form-group mt-3">
                             <label>Web address</label>
                             <input
-                                type="text"
+                                type="url"
                                 className="form-control"
                                 name="address"
                                 placeholder="Web address"
-                                {...register("address", { required: true })}
+                                {...register("address", {
+                                    required: true, pattern: {
+                                        value: /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
+                                        message: 'Please enter a valid url'
+                                    }
+                                })}
                                 aria-invalid={errors.address ? "true" : "false"}
                             />
+
+
+                            {errors.address && errors.address?.type === "pattern" && <p style={{ color: 'red' }} role="alert">Not valid URL</p>}
                             {errors.address?.type === 'required' && <p style={{ color: 'red' }} role="alert">Address is required</p>}
 
                         </div>
@@ -206,21 +277,27 @@ const Create = ({ current, next, prev }) => {
                                 control={control}
                                 name="description"
                                 defaultValue=""
+
+
                                 render={({ field: { value, onChange } }) => {
                                     return <JoditEditor
                                         ref={editor}
                                         // value={description}
-
+                                        // {...register("description", { required: true })}
                                         // config={config}
                                         value={description}
                                         placeholder="start typing"
+                                        // aria-invalid={errors.description ? "true" : "false"}
                                         tabIndex={1} // tabIndex of textarea
                                         onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
                                         onChange={setDescription}
                                     />
+
                                 }}
+                            // { errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p> }
                             />
-                            {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
+
+                            {/* {errors.description && errors?.description?.type === "min" && <p style={{ color: 'red' }} role="alert">Description limit is 150 words</p>} */}
                         </div>
                     </div>
 
@@ -257,7 +334,7 @@ const Create = ({ current, next, prev }) => {
                             <label>State or province</label>
 
                             <select name="state"
-                                {...register("state", { required: true })} onChange={handleChangeState}>
+                                {...register("state")} onChange={handleChangeState}>
                                 aria-invalid={errors?.state ? "true" : "false"}
                                 <option value="" disabled selected style={{ color: "#495057" }}>Select your state</option>
                                 {states?.data?.data?.map((option, key) => (
@@ -267,7 +344,7 @@ const Create = ({ current, next, prev }) => {
                                     </option></>
                                 ))}
                             </select>
-                            {errors.state?.type === 'required' && <p style={{ color: 'red' }} role="alert">State is required</p>}
+                            {/* {errors.state?.type === 'required' && <p style={{ color: 'red' }} role="alert">State is required</p>} */}
                         </div>
                     </div>
                     <div className="col-md-6 col-12">
@@ -275,7 +352,7 @@ const Create = ({ current, next, prev }) => {
                             <label>City or Region</label>
 
                             <select name="city"
-                                {...register("city", { required: true })}>
+                                {...register("city")}>
                                 aria-invalid={errors?.city ? "true" : "false"}
                                 <option value="" disabled selected style={{ color: "#495057" }}>Select your city</option>
                                 {cities?.data?.data?.map((option, key) => (
@@ -284,7 +361,7 @@ const Create = ({ current, next, prev }) => {
                                     </option></>
                                 ))}
                             </select>
-                            {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">City is required</p>}
+                            {/* {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">City is required</p>} */}
                         </div>
                     </div>
                     {/* <div className="col-12 col-md-6">
@@ -346,8 +423,9 @@ const Create = ({ current, next, prev }) => {
 
                             )}
                             <input
-                                type="float"
+                                type="number"
                                 className="form-control"
+                                step="0.01"
                                 name="price"
                                 placeholder="Price"
                                 {...register("price", { required: true })}
@@ -365,6 +443,7 @@ const Create = ({ current, next, prev }) => {
                                 <label>Number of NFTs</label>
                                 <input
                                     type="number"
+
                                     className="form-control"
                                     name="number_of_nft"
                                     // value='1'
@@ -399,18 +478,18 @@ const Create = ({ current, next, prev }) => {
                                     // defaultValue={1}
                                     min={1}
                                     // disabled={type == 1}
-                                    placeholder="Select your number of NFTs (1-12)"
-                                    {...register("number_of_nft", { required: true, min: 1, max: 12 })}
+                                    placeholder="Select your number of NFTs (1-10)"
+                                    {...register("number_of_nft", { required: true, min: 1, max: 10 })}
                                     // {...register("number_of_nft", { maxLength: 12 })}
                                     aria-invalid={errors.number_of_nft ? "true" : "false"}
                                 />
                                 {/* {errors.number_of_nft?.message && <p>{errors.number_of_nft.message}</p>} */}
                                 {errors.number_of_nft && errors.number_of_nft.type === "max" && (
                                     <p style={{ color: 'red' }}>
-                                        Only 12 nfts allowed
+                                        Only 10 nfts allowed
                                     </p>
                                 )}
-                                {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required and limit is upto 12</p>}
+                                {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFTs per project is required with a limit of 10</p>}
                                 {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max length exceeded</p>} */}
                             </div>
                         </div>
@@ -442,14 +521,18 @@ const Create = ({ current, next, prev }) => {
                                         className="form-control"
                                         name="end_date"
                                         min={disablePastDate()}
+
                                         // placeholder="End date"
-                                        {...register("end_date", { required: true })}
-                                        aria-invalid={errors.end_date ? "true" : "false"} />
+                                        {...register("end_date")}
+                                        aria-invalid={errors.end_date ? "true" : "false"}
+                                    />
+                                    {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}
                                     {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
                                 </div>
                             </div></>
                     )}
                     {/* {data.type == 2 && (
+
 
                                         <><div className="col-12 col-md-6">
                                             <div className="form-group">

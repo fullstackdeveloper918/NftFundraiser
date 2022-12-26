@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AnnualRevenueList, CountryList, HearAboutList, Register } from '../../redux/Actions/authAction'
 import { Controller, useForm } from 'react-hook-form'
+
 import { useHistory } from 'react-router'
 import { useFormData } from './Context/context'
 import styles from './styles/styles.module.scss'
@@ -12,10 +13,12 @@ import JoditEditor from 'jodit-react';;
 // import { Widget } from "@uploadcare/react-widget";
 // import FileUpload from "react-material-file-upload";
 // import { uploadcare } from '../lib/uploadcare.min.js';
-const CreateOrganization = ({ formStep, nextFormStep,goBack }) => {
+const CreateOrganization = ({ formStep, nextFormStep, goBack }) => {
+
+    const [description, setDescription] = useState()
+
     const editor = useRef(null);
     const { data, setFormValues } = useFormData();
-    const [description, setDescription] = useState()
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -23,7 +26,7 @@ const CreateOrganization = ({ formStep, nextFormStep,goBack }) => {
     const organization = useSelector(state => {
         return state.user.organization
     })
-    
+
     const { countries } = useSelector(state => state.countries)
     const { annualRevenue } = useSelector(state => state.annualRevenue)
 
@@ -32,8 +35,12 @@ const CreateOrganization = ({ formStep, nextFormStep,goBack }) => {
     // console.log(user, 'user')
 
     const { register, handleSubmit, formState: { errors }, control } = useForm({
-        mode: 'all'
+        mode: 'all',
+
     });
+
+
+
 
 
     const OnSubmit = (values) => {
@@ -126,7 +133,7 @@ const CreateOrganization = ({ formStep, nextFormStep,goBack }) => {
                                         <div className="form-group mt-3">
                                             <label>Fundraising Goal</label>
                                             <input
-                                                type="text"
+                                                type="number"
                                                 className="form-control"
                                                 name="goal"
                                                 placeholder="Fundraising goal (MATIC)"
@@ -175,14 +182,20 @@ const CreateOrganization = ({ formStep, nextFormStep,goBack }) => {
                                         <div className="form-group mt-3">
                                             <label>Website</label>
                                             <input
-                                                type="text"
+                                                type="url"
                                                 className="form-control"
                                                 name="url"
                                                 placeholder="Website"
-                                                {...register("url", { required: true })}
+                                                {...register("url", {
+                                                    required: true, pattern: {
+                                                        value: /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/
+                                                    }
+                                                })}
                                                 // {...register("email")}
                                                 aria-invalid={errors.url ? "true" : "false"}
                                             />
+
+                                            {errors.url && errors.url?.type === "pattern" && <p style={{ color: 'red' }} role="alert">Not valid URL</p>}
                                             {errors.url?.type === 'required' && <p style={{ color: 'red' }} role="alert">Url is required</p>}
                                         </div>
                                     </div>
@@ -210,12 +223,19 @@ const CreateOrganization = ({ formStep, nextFormStep,goBack }) => {
                                                 control={control}
                                                 name="description"
                                                 defaultValue=""
+                                                {...register("description", { required: true })}
+                                                // rules={{
+                                                //     required: true, pattern: {
+
+                                                //         message: "Description is required",
+                                                //     },
+                                                // }}
                                                 render={({ field: { value, onChange } }) => {
                                                     return <JoditEditor
                                                         ref={editor}
                                                         value={description}
                                                         // config={config}
-
+                                                        aria-invalid={errors.description ? "true" : "false"}
                                                         placeholder="start typing"
                                                         tabIndex={1} // tabIndex of textarea
                                                         onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
@@ -223,7 +243,7 @@ const CreateOrganization = ({ formStep, nextFormStep,goBack }) => {
                                                     />
                                                 }}
                                             />
-                                            {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
+                                            {errors?.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
                                         </div>
                                     </div>
 
@@ -233,7 +253,7 @@ const CreateOrganization = ({ formStep, nextFormStep,goBack }) => {
 
                                             <select name="country"
                                                 {...register("country", { required: true })}>
-                                                aria-invalid={errors.tax_id ? "true" : "false"}
+                                                aria-invalid={errors.country ? "true" : "false"}
                                                 <option value="" disabled selected style={{ color: "#495057" }}>Select your country</option>
                                                 {countries.data?.data?.map((option, key) => (
                                                     <><option key={key.id} value={option.id}>
@@ -262,7 +282,7 @@ const CreateOrganization = ({ formStep, nextFormStep,goBack }) => {
                                         <div className="form-group mt-3">
                                             <label>EIN Number/Tax Id</label>
                                             <input
-                                                type="text"
+                                                type="number"
                                                 className="form-control"
                                                 name="tax_id"
                                                 placeholder="EIN Number/Tax Id(optional)"
@@ -374,7 +394,7 @@ const CreateOrganization = ({ formStep, nextFormStep,goBack }) => {
                                         <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create</button>
                                     </div>
                                     <div className="col-3">
-                                        <button className="btn w-100 mt-3 mt-sm-4" onClick={()=>goBack()}>Previous</button>
+                                        <button className="btn w-100 mt-3 mt-sm-4" onClick={() => goBack()}>Previous</button>
                                     </div>
                                 </div>
                             </form>

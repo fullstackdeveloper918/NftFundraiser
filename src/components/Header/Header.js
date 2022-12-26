@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { GetUserAction } from '../../redux/Actions/authAction';
-
+import swal from 'sweetalert';
 import { loginSuccess, logoutSuccess } from '../../redux/Slices/authSlice';
 import { ConnectWallet, getCurrentWalletConnected, Roles } from '../Wallet/interact';
 import Swal from 'sweetalert2';
+import { isCancel } from 'axios';
 
 const Header = () => {
     const dispatch = useDispatch()
@@ -36,16 +37,16 @@ const Header = () => {
         getCurrentWalletConnected()
         setAddress(getSelectedAddress)
 
-        if(window.ethereum){
-          window.ethereum.on('accountsChanged', function (accounts) {
-            if(!accounts.length){
-             setAddress(null)
-            //  setIsLoggedIn(false)
-             localStorage.removeItem('auth_token')
-            }
-          })
+        if (window.ethereum) {
+            window.ethereum.on('accountsChanged', function (accounts) {
+                if (!accounts.length) {
+                    setAddress(null)
+                    //  setIsLoggedIn(false)
+                    localStorage.removeItem('auth_token')
+                }
+            })
         }
-       
+
     }, [dispatch, address])
 
     function getSelectedAddress() {
@@ -59,7 +60,8 @@ const Header = () => {
     const WalletHandler = async () => {
         const response = await ConnectWallet("BUYER")
         const { res } = response
- 
+
+        // debugger
         if (!res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data.role) {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)
@@ -68,40 +70,84 @@ const Header = () => {
         else if (res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data?.role) {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)
-            history.push('/profile')
+
+            // swal({
+            //     title: "Are you sure?",
+            //     text: "You will  be able to add it back again!",
+            //     type: "warning",
+            //     showCancelButton: true,
+            //     confirmButtonColor: "#DD6B55",
+            //     confirmButtonText: "Yes, delete it!",
+            //     cancelButtonText: "Cancel",
+            //     closeOnConfirm: false,
+            //     closeOnCancel: false
+            // },
+            //     function (isConfirm) {
+            //         if (isConfirm) {
+            //             window.location = '/profile'
+            //         } else {
+            //             if (isCancel) {
+            //                 window.location = '/projectlist'
+            //             }
+            //         }
+            //     });
+            swal({
+                title: "Welcome to Karmatica!!!",
+                text: "Karmatica would like to know more about yourself. Update your profile",
+                icon: "success",
+                buttons: {
+                    continue: '',
+                    skip: '',
+                }
+            }).then((value) => {
+                switch (value) {
+                    case "continue":
+                        window.location = '/profile'
+                        break;
+
+                    case "skip":
+                        window.location = '/projectlist'
+                        break;
+
+
+                }
+            });
+
+
+
         }
-        else if(!res?.data?.data?.is_new_user && Roles["CREATOR"] == res?.data?.data?.role){
+        else if (!res?.data?.data?.is_new_user && Roles["CREATOR"] == res?.data?.data?.role) {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)
         }
     }
 
     const handleCreate = () => {
-        
+
         if (Roles["CREATOR"] == userRole) {
-          history.push('/create')
+            history.push('/create')
         }
         else if (Roles["BUYER"] == userRole) {
             Swal.fire({
                 icon: 'info',
                 html:
-                  'You need to Signup as a Creator to Create a Project',
+                    'You need to Signup as a Creator to Create a Project',
                 showCloseButton: true,
                 focusConfirm: false,
                 confirmButtonText:
-                  '<i class="fa fa-thumbs-up"></i> Ok!',
+                    '<i class="fa fa-thumbs-up"></i> Ok!',
                 confirmButtonAriaLabel: 'Thumbs up, great!',
             })
         }
-        else if(!userToken){
+        else if (!userToken) {
             Swal.fire({
                 icon: 'info',
                 html:
-                  'You need to Signup as a Creator to Create a Project',
+                    'You need to Signup as a Creator to Create a Project',
                 showCloseButton: true,
                 focusConfirm: false,
                 confirmButtonText:
-                  '<i class="fa fa-thumbs-up"></i> Ok!',
+                    '<i class="fa fa-thumbs-up"></i> Ok!',
                 confirmButtonAriaLabel: 'Thumbs up, great!',
             })
         }
@@ -154,17 +200,18 @@ const Header = () => {
                             </li>
                         }
                     </ul>
-                    {userToken? (
+                    {userToken ? (
                         <>
                             <div className="dropdown">
                                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i className="fa fa-solid fa-user"></i>
                                 </button>
                                 <ul class="creator-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ left: '-37%' }}>
-                                    <li>{userdet?.username}</li>
+                                    {/* <li>{userdet?.username}</li> */}
                                     <li>{userdet?.email}</li>
-                                    <li><button type='button' class="dropdown-item"><a href='/profile'>My Profile</a></button></li>
+                                    <li><button type='button' class="dropdown-item"><Link to='/profile'>My Profile</Link></button></li>
                                     <li><button type='button' class="dropdown-item"><a href='/projectlist'>My Projects</a></button></li>
+                                    <li><button type='button' class="dropdown-item"><Link to={`/myfundraiser/detail/${userdet.user_id}`}>Fundraise</Link></button></li>
                                     <li><button type='button' class="dropdown-item" onClick={LogoutHandler}><a href='/'>Logout</a></button></li>
                                 </ul>
                             </div>
