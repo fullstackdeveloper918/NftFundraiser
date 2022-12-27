@@ -576,40 +576,47 @@ const EditNft = (props) => {
 
 
     const onFinish = async (values) => {
+        try {
+
+            debugger
+
+            // setLoading(true)
+            const nftImagepromises = [uploadNFT(dataURLtoBlob(image))]
+            // const nftImagepromises = nfts?.map(x => uploadNFT(x?.image))
+            const imagesRes = await Promise.all(nftImagepromises).then(res => res)
+            // const imagesRes = await (nftImagepromises).then(res => res)
+            // 
+
+            const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
+            // const addedImage = ipfsBaseUrl + image
 
 
-        // setLoading(true)
-        const nftImagepromises = [uploadNFT(dataURLtoBlob(image))]
-        // const nftImagepromises = nfts?.map(x => uploadNFT(x?.image))
-        const imagesRes = await Promise.all(nftImagepromises).then(res => res)
-        // const imagesRes = await (nftImagepromises).then(res => res)
-        // 
-
-        const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
-        // const addedImage = ipfsBaseUrl + image
-
-
-        const formData = new FormData()
+            const formData = new FormData()
 
 
 
 
 
-        formData.append('image', addedImage)
-        formData.append('title', values?.nfts?.map(x =>
-            x.nft_name
-        ))
-        // const newlist = newList.push(nft_collection_id);
-        formData.append('collection_id', nft_collection_id)
-        // formData.append('nft_description', nft_description)
-        formData.append('description', values?.nfts?.map(x => x.nft_description))
-        // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
+            formData.append('image', addedImage)
+            formData.append('title', values?.nfts?.map(x =>
+                x.nft_name
+            ))
+            // const newlist = newList.push(nft_collection_id);
+            formData.append('collection_id', nft_collection_id)
+            // formData.append('nft_description', nft_description)
+            formData.append('description', values?.nfts?.map(x => x.nft_description))
+            // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
 
-        // dispatch(uploadNFT())
-        dispatch(UpdateNft(formData, props))
-        // setLoading(false)
+            // dispatch(uploadNFT())
+            debugger
+            dispatch(UpdateNft(formData, props))
+            // setLoading(false)
 
-        // console.log('Received values of form:', values, data)
+            // console.log('Received values of form:', values, data)
+        } catch (error) {
+            debugger
+            console.log(error)
+        }
 
     };
     const handleCancel = () => setPreviewOpen(false);

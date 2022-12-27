@@ -24,7 +24,7 @@ const Header = () => {
     const userRole = useSelector(state => {
         return state.user.userdetail.role
     })
-
+    // console.log(userRole)
     const userToken = useSelector(state => {
         return state.user.userToken
     })
@@ -211,7 +211,10 @@ const Header = () => {
                                     <li>{userdet?.email}</li>
                                     <li><button type='button' class="dropdown-item"><Link to='/profile'>My Profile</Link></button></li>
                                     <li><button type='button' class="dropdown-item"><a href='/projectlist'>My Projects</a></button></li>
-                                    <li><button type='button' class="dropdown-item"><Link to={`/myfundraiser/detail/${userdet.user_id}`}>Fundraise</Link></button></li>
+                                    {userRole == 3 && (
+
+                                        <li><button type='button' class="dropdown-item"><Link to={`/fundraiser/detail/${userdet.user_id}`}>Fundraise</Link></button></li>
+                                    )}
                                     <li><button type='button' class="dropdown-item" onClick={LogoutHandler}><a href='/'>Logout</a></button></li>
                                 </ul>
                             </div>

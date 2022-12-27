@@ -148,7 +148,8 @@ export const NftList = (id) => async dispatch => {
         }
     }
 }
-export const uploadNFT = (params) => {
+export const uploadNFT = async (params) => {
+    // debugger
     const token = localStorage.getItem('authToken')
     const config = {
         headers: {
@@ -212,7 +213,7 @@ export const getPublicLiveProjects = createAsyncThunk(
     })
 
 export const UpdateProject = (props, params) => async dispatch => {
-    debugger
+
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -536,7 +537,7 @@ export const UpdateNft = (formData, props) => async dispatch => {
     }
 }
 export const AddNftAction = (formData, id, setLoading) => async dispatch => {
-    debugger
+    // debugger
     const token = localStorage.getItem('authToken')
     try {
         const config = {

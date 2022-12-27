@@ -26,13 +26,13 @@ const FunddataTable = (props) => {
         <div>
             <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
                 <Panel header="Details" key="1" >
-                    <Table responsive >
-                        <tbody>
+                    <Table responsive>
+                        <tbody class="nfts_details">
                             <tr>
-                                <td>Organization Name  {funddetail?.organization_detail?.organization_name}</td>
-                                <td>Country  {funddetail?.organization_detail?.country}</td>
-                                <td>Tax Number  {funddetail?.organization_detail?.tax_number}</td>
-                                <td>Web URL  {funddetail?.organization_detail?.web_url}</td>
+                                <td><span>Organization Name </span> <span>{funddetail?.organization_detail?.organization_name}</span></td>
+                                <td><span>Country</span>  <span>{funddetail?.organization_detail?.country}</span></td>
+                                <td><span>Tax Number </span> <span>{funddetail?.organization_detail?.tax_number}</span></td>
+                                <td><span>Web URL</span>  <span>{funddetail?.organization_detail?.web_url}</span></td>
                             </tr>
                             {/* )
                             })} */}

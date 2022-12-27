@@ -12,6 +12,7 @@ import Banner from './editBanner';
 import EditNft from './editNft';
 import DesPopup from './desPopup';
 import ProjdataTable from '../Explore/projDetailtable';
+import ReadMore from '../../readMore';
 
 // import ProgressBar from 'react-bootstrap';
 
@@ -98,7 +99,7 @@ const ProjNftDetails = () => {
                             <div>
                                 <div className="progress_nft mb-3">
                                     <div className='progress_main'><span>
-                                        <span className='nft_price'>{projdetail.selling_amount} raised of {projdetail.price}</span><small> USD raised of $200,000 goal </small>
+                                        <span className='nft_price'>{projdetail.selling_amount} raised of {projdetail.price} Cdn goal ()</span><small>   </small>
                                         <div className='progressbar'>
                                             <ProgressBar varient="success" now={projdetail.project_percentage} />
                                             {/* <span className="progress-bar bg-success" role="progressbar" style={{ width: "70" }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" now={projdetail.project_percentage}> {projdetail.project_percentage}% </span> */}
@@ -123,7 +124,7 @@ const ProjNftDetails = () => {
                                         </>
 
                                         <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                            Donate
+                                            Invest
                                         </Button>
                                     </div>
 
@@ -140,7 +141,7 @@ const ProjNftDetails = () => {
                                                     <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
                                                 </span>
-                                                <span><div className="progress_name">Anonymous </div> <div>$25</div></span>
+                                                <span><div className="progress_name">Anonymous </div> <div>$25 Cdn</div></span>
                                             </div>
                                         </li>
                                         <li>
@@ -151,7 +152,7 @@ const ProjNftDetails = () => {
                                                     <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
                                                 </span>
-                                                <span><div className="progress_name">Anonymous </div> <div >$27 </div></span>
+                                                <span><div className="progress_name">Anonymous </div> <div >$27 Cdn </div></span>
                                             </div>
                                         </li>
                                         <li>
@@ -198,7 +199,8 @@ const ProjNftDetails = () => {
                                         onHide={() => setModalShowDes(false)} />
                                 </div>
                             </h5>
-                            <p dangerouslySetInnerHTML={{ __html: projdetail.description }} />
+                            <ReadMore data={projdetail.description} />
+                            {/* <p dangerouslySetInnerHTML={{ __html: projdetail.description }} /> */}
                         </div>
                     </div>
 

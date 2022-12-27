@@ -61,7 +61,7 @@ const Collections = () => {
                                         {/* Card Body */}
                                         <div className="card-body mt-4">
                                             <Link to={`/item-details/${item.id}`}>
-                                                <h5 className="mb-2">{item.title}</h5>
+                                                <h5 className="mb-2">{item.title.slice(0, 16)}<span>...</span></h5>
                                             </Link>
                                             <span>{item.price}</span>
                                         </div>
