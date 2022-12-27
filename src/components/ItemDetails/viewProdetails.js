@@ -36,7 +36,7 @@ const ProjDetails = () => {
         return state.projectdetails.latestprojectdetails
     })
     const [modalShoww, setModalShoww] = React.useState(false);
-    console.log('latproj', latprojdetail)
+    console.log('latproj', latprojdetail?.nft_data)
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
@@ -78,7 +78,7 @@ const ProjDetails = () => {
 
                             <div className="item-thumb text-center">
                                 {/* {projdetail && projdetail?.nft_data && projdetail?.nft_data?.length ? */}
-                                <div>
+                                {/* <div>
                                     <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() => setModalShow(true)}></i>
 
 
@@ -86,7 +86,7 @@ const ProjDetails = () => {
                                         id={id}
                                         show={modalShow}
                                         onHide={() => setModalShow(false)} />
-                                </div>
+                                </div> */}
                                 <img src={latprojdetail?.image} alt="first nft" />
                                 {/* : null} */}
                             </div>
@@ -114,7 +114,7 @@ const ProjDetails = () => {
                         <div>
                             <div className="progress_nft mb-3">
                                 <div className='progress_main'><span>
-                                    <span className='nft_price'>{latprojdetail.selling_amount} raised of {latprojdetail.price}</span><small> USD raised of $200,000 goal </small>
+                                    <span className='nft_price'>{latprojdetail.selling_amount} raised of {latprojdetail.price} Cdn goal (150 of 758 MATIC)</span><small>  </small>
                                     <div className='progressbar'>
                                         <ProgressBar varient="success" now={latprojdetail.project_percentage} />
                                         {/* <span className="progress-bar bg-success" role="progressbar" style={{ width: "70" }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" now={projdetail.project_percentage}> {projdetail.project_percentage}% </span> */}
@@ -133,50 +133,40 @@ const ProjDetails = () => {
                                             onHide={() => setModalShowrefer(false)} /></>
 
                                     <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Donate
+                                        Invest
                                     </Button>
                                 </div>
 
 
+                                {latprojdetail.user_invest?.slice(0, 3)?.map((items) => {
+                                    const date1 = new Date(items.updated_at)
+                                    const date2 = new Date()
+                                    const time_difference = date2.getTime() - date1.getTime();
+                                    const days_difference = Math.ceil(time_difference / (1000 * 60 * 60 * 24));
+                                    console.log('days', days_difference)
+                                    return (
+
+                                        <ul className="m-0 custom_lis pl-0">
+                                            <li>
+                                                <div className='lorem_done p-0'>
+                                                    <span><svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                    </span>
+
+                                                    <span><div className="progress_name">{items.username} </div> <div>${items.price} Cdn / 40 MATIC ({days_difference} days ago)</div></span>
+                                                </div>
+                                            </li>
 
 
+                                        </ul>
+                                    )
+                                })}
 
-                                <ul className="m-0 custom_lis pl-0">
-                                    <li>
-                                        <div className='lorem_done p-0'>
-                                            <span><svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                            </span>
-                                            <span><div className="progress_name">Anonymous </div> <div>$25</div></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className='lorem_done p-0'>
-                                            <span><svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                            </span>
-                                            <span><div className="progress_name">Anonymous </div> <div >$27 </div></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className='lorem_done p-0'>
-                                            <span><svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg></span>
-                                            <span><div className="progress_name">Kevin Sheridan </div> <div className="price">$50</div></span>
-                                        </div>
-                                    </li>
 
-                                </ul>
-                                <p className='see_all'>See all</p>
+                                {/* <p className='see_all'>See all</p> */}
                             </div>
                         </div>
                     </div>

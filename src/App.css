@@ -362,7 +362,6 @@ footer a.navbar-brand img {
     color: #4528DC;
 }
 ul.creator-dropdown.dropdown-menu li {
-    text-transform: capitalize !important;
     font-size: 15px !important;
     font-weight: 600 !important;
 }
@@ -706,7 +705,6 @@ span.title_main {
     text-transform: uppercase;
 }
 .lorem_done {
-    padding: 0px 18px 0;
     display: flex;
     gap: 4px;
     align-items: center;
@@ -838,9 +836,11 @@ ul.list-unstyled.viewproduct-detail li span:first-child , :root .boldertext , li
     border: 1px solid #454248;
     margin-top: 10px;
     margin-bottom: 10px;
-    border-radius: 7px;
+    border-radius: 25px;
     width: 100%;
     max-width: 300px;
+    background: #1e1d1d;
+    height: 10px;
 }
 hr {
     
@@ -1021,6 +1021,7 @@ section.explore-area {
 }
 .progress-bar {
     background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+    border-radius: 25px;
 }
 .progressbar .progress {
     background: #464646;
@@ -1217,7 +1218,7 @@ header .navbar-expand {
     border-top: 1px solid #16151a;
     background-color: #09080d;
 }
-.table-detail tr:nth-child(odd) {
+.table-detail tr:nth-child(odd){
     /* color: rgba(0, 0, 0, 0.85) !important; */
     background-color: #16151A !important;
 
@@ -1226,7 +1227,7 @@ header .navbar-expand {
 .ant-collapse-header {
     background-color: #16151a !important;
 }
-.container.table-detail th {
+.table-detail th {
     color: #fff;
     border: unset !important;
 }   
@@ -1259,7 +1260,7 @@ header .navbar-expand {
 .container.table-detail td {
     border: unset;
 }
-.container.table-detail tr:last-child {
+.table-detail tr:last-child {
     border-bottom:none;
 }
 /* .ant-collapse-content {
@@ -1484,10 +1485,11 @@ span.cards-icons i {
     right: 30px;
     gap: 5px;
 }
-.nfts_details tr tr {
+.nfts_details tr td {
     display: flex;
     justify-content: space-between;
     padding: 4px 16px;
+    font-family: var(--secondary-font);
 }
 table.nfts_details.table i {
     position: absolute;
@@ -1506,7 +1508,7 @@ background-color: transparent !important;
 .container.table-main-detail .ant-collapse-content > .ant-collapse-content-box {
     padding: unset !important;
 }
-.container.table-main-detail span:nth-child(1) {
+.nfts_details span:nth-child(1) {
     color: #fff;
 }
 .nfts_main{
@@ -1553,6 +1555,7 @@ div.ant-collapse ,  div.ant-collapse > .ant-collapse-item{
     justify-content: space-between;
 }
 .progress_nft {
+    font-family: var(--secondary-font);
     border: 1px solid #1e1e1e;
     padding: 20px;
     display: flex;
@@ -1622,6 +1625,7 @@ span.ant-collapse-header-text {
     overflow: hidden !important;
     margin-bottom: 20px !important;
     background-color: transparent !important;
+    font-family: var(--secondary-font);
 }
 .ant-collapse-content tr {
     border-top: 0px;
@@ -1707,7 +1711,11 @@ span.ant-collapse-header-text {
 .wrap_card .Edite_able i.fa-solid.fa-pen {
     position: absolute;
     right: 10px;
-    top: 20px;
+    top: 12px;
+    background-color: #000;
+}
+from.Edite_able input {
+    font-size: 14px;
 }
 ul.project_back {
     display: flex;
@@ -1779,4 +1787,46 @@ section.wallet-connect-area h4 {
 }
 .banner_img button {
     margin-top: 15px;
+}
+.author-details-area .ant-collapse-content-box , .funddeatil .ant-collapse-content-box  {
+    padding: 0 !important;
+}
+.author-details-area table{
+    margin-bottom: 0;
+}
+.profile_main_right {
+    position: sticky;
+    top: 0;
+}
+.desktop_nft .progress_nft.mb-3 {
+    position: sticky;
+    top: 10px;
+}
+@media (max-width: 991px){
+    .desktop_nft .progress_nft.mb-3 {
+       display: none;
+    }
+    .progress_nft.mobile_nft .fund_row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .progress_nft.mobile_nft ul li {
+        border-bottom: unset;
+        width: 100%;
+    max-width: 200px;
+    }
+
+}
+@media (min-width: 991px){
+    .progress_nft.mobile_nft.mb-3 {
+       display: none;
+    }
+    
+}
+.table td, .table th {
+    vertical-align: middle !important;
+}
+.funddeatil.mt-3 table {
+    margin-top: 0.5rem;
 }

@@ -104,6 +104,7 @@ export const GetUserAction = () => async dispatch => {
         // console.log('userres', res)
         dispatch(userDetail(res));
 
+
     } catch (e) {
         // 
         if (e?.response?.data.message) {
@@ -283,6 +284,7 @@ export const UpdateProfileAction = (formData) => async dispatch => {
         await dispatch(updateprofile(res));
 
         if (res.status === 200) {
+            dispatch(GetUserAction())
             swal("success", "updated", 'success')
             // .then(function () {
             // dispatch(ProjectDetail(params))

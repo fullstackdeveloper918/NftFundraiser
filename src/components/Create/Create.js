@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { CategoriesAction, GetCollectionsAction } from '../../redux/Actions/projectAction';
 import GeoLocation from './geoLocation';
+// import { yupResolver } from '@hookform/resolvers/yup';
+// import * as yup from 'yup';
 import 'reactjs-popup/dist/index.css';
 import styles from "./styles/styles.module.scss"
 import { useFormData } from './Context/context';
@@ -28,6 +30,10 @@ const Create = ({ current, next, prev }) => {
     const [collection_id, setCollectionId] = useState(0);
     const [type, setType] = useState();
 
+    // const schema = yup.object().shape({
+    //     description: yup.string().required()
+    //     // password: yup.string().required(),
+    // });
     function onHandleClick(event) {
         setCollectionId(event.currentTarget.id);
     };
@@ -65,7 +71,7 @@ const Create = ({ current, next, prev }) => {
 
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({
         mode: "all",
-
+        // resolver: yupResolver(schema)
 
     });
 
@@ -255,7 +261,7 @@ const Create = ({ current, next, prev }) => {
                                 placeholder="Web address"
                                 {...register("address", {
                                     required: true, pattern: {
-                                        value: /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
+                                        value: /^(\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
                                         message: 'Please enter a valid url'
                                     }
                                 })}
@@ -292,6 +298,7 @@ const Create = ({ current, next, prev }) => {
                                         onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
                                         onChange={setDescription}
                                     />
+                                    { errors.description?.message && <span>{errors.description.message}</span> }
 
                                 }}
                             // { errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p> }
@@ -336,7 +343,7 @@ const Create = ({ current, next, prev }) => {
                             <select name="state"
                                 {...register("state")} onChange={handleChangeState}>
                                 aria-invalid={errors?.state ? "true" : "false"}
-                                <option value="" disabled selected style={{ color: "#495057" }}>Select your state</option>
+                                <option value="" disabled selected style={{ color: "#495057" }}>Select your state/province</option>
                                 {states?.data?.data?.map((option, key) => (
 
                                     <><option key={key.id} value={option.id}  >
@@ -354,7 +361,7 @@ const Create = ({ current, next, prev }) => {
                             <select name="city"
                                 {...register("city")}>
                                 aria-invalid={errors?.city ? "true" : "false"}
-                                <option value="" disabled selected style={{ color: "#495057" }}>Select your city</option>
+                                <option value="" disabled selected style={{ color: "#495057" }}>Select your city/region</option>
                                 {cities?.data?.data?.map((option, key) => (
                                     <><option key={key.id} value={option.id}>
                                         {option.name}
@@ -417,9 +424,9 @@ const Create = ({ current, next, prev }) => {
                         <div className="form-group">
                             {type == 2 ? (
 
-                                <label>Price per NFT (revise from Price)</label>
+                                <label>Price per NFT (In MATIC tokens)</label>
                             ) : (
-                                <label>Price (MATIC)</label>
+                                <label>Price (In MATIC tokens)</label>
 
                             )}
                             <input

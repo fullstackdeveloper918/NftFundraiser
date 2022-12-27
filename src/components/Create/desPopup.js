@@ -91,7 +91,6 @@ function DesPopup(props) {
     }, [projdetail]);
 
     const OnSubmit = (data) => {
-        debugger
         const formData = new FormData()
 
         // formData.append('image', data.image[0])

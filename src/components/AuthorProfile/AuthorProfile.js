@@ -329,18 +329,21 @@ import React, { Component } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { GetUserAction } from "../../redux/Actions/authAction";
+import { GetUserAction, UpdateProfileAction } from "../../redux/Actions/authAction";
 import { useEffect } from "react";
 import UserTransdataTable from "./userTransTable";
 import UserdataTable from "./userDetails";
 import Banner from "../Create/editBanner";
+import AvatarUpload from "./avatarUpload";
+import BannerUpload from "./bannerUpload";
 // const BASE_URL = "https://my-json-server.typicode.com/themeland/netstorm-json-1/author";
 
 const AuthorProfile = () => {
     const [modalSho, setModalSho] = React.useState(false);
     const [modalShoww, setModalShoww] = React.useState(false);
     const [modalShowadd, setModalShowadd] = React.useState(false);
-
+    const [modalShow, setModalShow] = React.useState(false);
+    const [modalShowavatar, setModalShowavatar] = React.useState(false);
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
@@ -360,7 +363,15 @@ const AuthorProfile = () => {
         }
 
     }, [userdet])
+    const onSubmit = (data) => {
+        const formData = new FormData()
 
+        // formData.append('image', data.image[0])
+        formData.append('username', data.username)
+        formData.append('email', userdet.email)
+        dispatch(UpdateProfileAction(formData))
+
+    }
     useEffect(() => {
         dispatch(GetUserAction());
     }, []);
@@ -378,26 +389,42 @@ const AuthorProfile = () => {
                 <div className="row pt-0">
                     <div className='col-md-8 p-0'>
                         <div className="banner item-thumb text-center">
-                            <i class="fa-solid fa-pen-to-square item-thumb-edit"
-                                onClick={() => setModalSho(true)}
-                            ></i>
-                            <img src="/img/ph.jpg" alt="first nft" />
+                            <div>
+                                <i class="fa-solid fa-pen-to-square item-thumb-edit"
+                                    onClick={() => setModalSho(true)}
+                                ></i>
+                                <BannerUpload
+
+                                    show={modalSho}
+                                    onHide={() => setModalSho(false)} />
+
+                            </div>
+                            <img src={userdet.banner_image} alt="first nft" />
+                        </div>
+                        <div className="table-detail mt-3">
+                            <UserdataTable />
+
                         </div>
                         <div className="profile_detail mt-3">
-                            <UserdataTable />
+
                             <UserTransdataTable />
                         </div>
                     </div>
                     <div className="col-12 col-md-4">
-                        <div className="card wrap_card no-hover text-center">
+                        <div className="profile_main_right card wrap_card no-hover text-center">
+
                             <div className="image-over">
+                                <div>
+                                    <i class="fa-solid fa-pen-to-square item-thumb-edit"
+                                        onClick={() => setModalShowavatar(true)}
+                                    ></i>
+                                    <AvatarUpload
+
+                                        show={modalShowavatar}
+                                        onHide={() => setModalShowavatar(false)} />
+
+                                </div>
                                 <img className="card-img-top" src={userdet.avatar} alt="" />
-                                {/* Author */}
-                                {/* <div className="author">
-                        <div className="author-thumb avatar-lg">
-                            <img className="rounded-circle" src={""} alt="" />
-                        </div>
-                    </div> */}
                             </div>
                             {/* Card Caption */}
                             <div className="card-caption col-12 p-0">
@@ -405,7 +432,8 @@ const AuthorProfile = () => {
 
 
                             </div>
-                            <form onSubmit={handleSubmit} className="item-form card no-hover">
+                            <form onSubmit={handleSubmit(onSubmit)} className="item-form card no-hover">
+
                                 <div className="card-body">
                                     <from className="Edite_able">
                                         <label>
@@ -426,11 +454,11 @@ const AuthorProfile = () => {
                                                 className="form-control"
                                                 name="email"
                                                 value={userdet.email}
-                                                {...register("address", { required: true })}
+                                                {...register("address")}
                                                 aria-invalid={errors.address ? "true" : "false"}
                                             />
-                                            {errors.address?.type === 'required' && <p style={{ color: 'red' }} role="alert">Address is required</p>}
-                                            <i class="fa-solid fa-pen"></i>
+                                            {/* {errors.address?.type === 'required' && <p style={{ color: 'red' }} role="alert">Address is required</p>} */}
+                                            {/* <i class="fa-solid fa-pen"></i> */}
                                         </label>
 
                                         {/* Social Icons */}
@@ -500,9 +528,9 @@ const AuthorProfile = () => {
                                                 ></path>
                                             </svg>
                                         </div>
-                                        <a className="btn btn-bordered-white btn-smaller" href="#">
+                                        <button className="btn btn-bordered-white btn-smaller" type="submit" >
                                             Update
-                                        </a>
+                                        </button>
                                     </from>
                                 </div>
                             </form>
