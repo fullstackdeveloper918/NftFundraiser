@@ -94,7 +94,7 @@ const ProjDetails = () => {
                         </div>
 
 
-                        <div className="fundraiser mt-3">
+                        <div className="fundraiser mt-3 ">
                             <div className='lorem_done'>
                                 <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -110,7 +110,7 @@ const ProjDetails = () => {
 
                     </div>
 
-                    <div className="col-lg-4 col-12">
+                    <div className="col-lg-4 col-12 mt-3 mt-lg-0">
                         <div>
                             <div className="progress_nft mb-3">
                                 <div className='progress_main'><span>
@@ -162,6 +162,7 @@ const ProjDetails = () => {
 
 
                                         </ul>
+
                                     )
                                 })}
 
@@ -173,7 +174,7 @@ const ProjDetails = () => {
                     {/* {userDetail !== null && ( */}
 
                     {/* )} */}
-                    <div className="col-8 col-lg-8">
+                    <div className="col-12 col-lg-8 mt-3">
                         <div class="user-description ">
                             <h5 className='user_title'><div>Description</div>
                                 {/* <i class="fa-solid fa-pen" ></i>
@@ -186,10 +187,10 @@ const ProjDetails = () => {
                         </div>
                     </div>
 
-                    <div className='col-12 col-lg-4 mt-5 mt-lg-0'>
+                    <div className='col-12 col-lg-4 mt-3'>
 
 
-                        <div className='container table-main-detail position-relative'>
+                        <div className='table-main-detail position-relative'>
 
 
 
@@ -199,156 +200,24 @@ const ProjDetails = () => {
                         </div>
 
                     </div>
-                    {/*                    
-			<div className="item-info" >
+                    <div className='col-12'>
+                        <div className='mt-3'>
+                            <div className='table-detail'>
+                                <LatNftdataTable />
+                            </div>
+                        </div>
 
-				<><div className="item-thumb text-center">
-					<img src={x[0]?.image} alt="" />
-				</div>
+                    </div>
 
-
-				</>
-
-
-			</div> */}
-
-                </div>
-
-                {/* <div className='col-12 col-md-4'>
-			
-			<div className='project-total-detail'>
-
-				<div className='flex-column'>
-					<span className='nft_price'>{projdetail.selling_amount} raised of {projdetail.price}</span>
-
-					<div className='progressbar'>
-						<ProgressBar varient="success" now={projdetail.project_percentage} />
-						<span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" now={projdetail.project_percentage}> {projdetail.project_percentage}% </span>
-					</div>
-					
-				</div>
-
-				<div >
-					<span className="mr-2">Total NFT's:</span><span>{projdetail?.number_of_nft}</span>
-				</div>
-				<div>
-					<span  className="mr-2">Chain: </span><span>Polygon (Matic)</span>
-				</div>
-
-				<div>
-					<span  className="mr-2">Created : </span><span>{dayjs(projdetail?.created_at).format("DD MMM YYYY")}</span>
-				</div> */}
-
-                {/* <div className='project-btn flex-column'>
-					<button>
-						<a href="#">Share</a> 
-					</button>
-					<button>
-						<a href="#">Donate Now</a>
-					</button>
-
-				</div> */}
-                {/* </div> */}
-
-                {/* </div> */}
-
-
-                <div className='col-md-12 col-12'>
-                    {/* <div className='py-4 owner-nft'>
-				<img class="avatar-sm rounded-circle" src={projdetail?.user_data?.avatar} alt="" /> <span>Owned By:</span>  <span>{projdetail?.user_data?.username}</span>
-			</div> */}
-
-
-
-
-
-                    <div className='col-12 mt-3'>
-                        <div className='container table-detail'>
-                            <LatNftdataTable />
+                    <div className=" col-12 mt-3">
+                        <div className="items mt-0 explore-items p-0">
+                            <ProjNFTS />
                         </div>
                     </div>
 
-                    {/* <div className='mt-5 row justify-content-between proj_main'>
-				<div className="cart col-12 col-md-8 content-baner ">
-					<div className="content">
-						<div className='align-items-center justify-content-between'>
-							<div className='d-sm-flex justify-content-between align-items-center'>
-								<h3 className="m-0 p-0">{latprojdetail.title}</h3>
-								
-							</div>
-							<div className='project-total-detail'>
-
-
-								<div>
-									<div className="project_img">
-										<span>Owned By:</span> 
-										<img class="avatar-sm rounded-circle" src={latprojdetail?.user_data?.avatar} alt="" />
-										<span>{latprojdetail?.user_data?.username}</span>
-									</div>
-
-								</div>
-								<div>
-									<span>Chain: </span><span>Polygon (Matic)</span>
-								</div>
-
-								<div>
-									<span>Created : </span><span>{dayjs(latprojdetail?.created_at).format("DD MMM YYYY")}</span>
-								</div>
-							</div>
-							
-
-						</div>
-						
-
-
-
-					</div>
-
-				</div>
-
-				<div className='col-12 col-md-4'>
-					<div>
-						<span className='nft_price'>{latprojdetail.selling_amount} raised of {latprojdetail.price}</span>
-
-						<div className='progressbar'>
-							<ProgressBar varient="success" now={latprojdetail.project_percentage} />
-							
-						</div>
-					</div>
-				</div>
-			</div> */}
-
-                    {/* <div className='col-12'>
-				<div>
-
-					<h5 className='user_title {item.title.slice(0, 16)}'><div>Description</div>
-						
-					</h5>
-					<p dangerouslySetInnerHTML={{ __html: latprojdetail.description }} />
-				</div>
-			</div> */}
-
                 </div>
             </div>
 
-            {/* <div className='container table-detail'>
-		<div className='row'>
-			<div className='col-8'>
-				<LatNftdataTable />
-			</div>
-			
-		</div>
-
-	</div> */}
-
-            <div className="container mt-3">
-
-                <div className="row items mt-0 explore-items px-0">
-                    <ProjNFTS />
-
-
-                </div>
-            </div>
         </section>
     );
 

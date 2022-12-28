@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Collapse } from 'antd';
-import { ProjectDetail, ProjectList } from '../../redux/Actions/projectAction';
-import { useParams } from 'react-router';
+import { LatestProjectDetail, ProjectDetail, ProjectList } from '../../redux/Actions/projectAction';
+import { useLocation, useParams } from 'react-router';
 import { ProgressBar, Table } from 'react-bootstrap';
 import ProjDetailPopup from '../Create/projectDetailpopup';
 import dayjs from 'dayjs';
@@ -23,31 +23,49 @@ const ProjdataTable = (props) => {
         // 
         return state?.projectdetails?.projectdetails
     })
-    console.log(projdetail.country_name?.name, 'projdatanft')
-
-    useEffect(() => {
+    console.log(projdetail, 'userprojdata')
+    const userdet = useSelector(state => {
+        return state?.user?.userdetail
+    })
+    const latprojdetail = useSelector(state => {
         // 
+        return state.projectdetails.latestprojectdetails
+    })
+    console.log(latprojdetail, 'userprojdetaaaa')
+    // const [projuserID, setProjuserid] = useState()
+    // console.log('projjj', projuserID)
+    // const projuserid = projdetail?.user_data?.map((item) => {
+    //     return (
+    //         setProjuserid(item.user_id)
+    //     )
+    // })
+    console.log(userdet.user_id, 'uid')
+    useEffect(() => {
+        dispatch(LatestProjectDetail(id))
         dispatch(ProjectDetail(id))
     }, [id])
-
+    const location = useLocation();
     return (
         <div>
             <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
                 <Panel header="Details" key="1" >
                     <Table responsive className='nfts_details'>
-                        <div >
-                            <i class="fa-solid fa-pen" onClick={() =>
-                                setModalShowproj(true)}></i>
-                            <ProjDetailPopup
-                                debugger
-                                id={props.id}
-                                show={modalShowproj}
-                                onHide={() => setModalShowproj(false)} />
-                            {/* <a className=""> <Link to={`/updateproject/${projdetail.id}`} style={{ color: '#FFF' }}> <i class="fa-solid fa-pen" ></i></Link></a> */}
+                        {projdetail?.user_data?.user_id === userdet?.user_id && localStorage.getItem('authToken') &&
 
-                            {/* <a className="" onClick={() => deleteHandler(projdetail.id)} style={{ color: '#FFF' }}> <i class="fa-sharp fa-solid fa-trash"></i> */}
-                            {/* </a> */}
-                        </div>
+                            <div >
+                                <i class="fa-solid fa-pen" onClick={() =>
+                                    setModalShowproj(true)}></i>
+                                <ProjDetailPopup
+                                    debugger
+                                    id={props.id}
+                                    show={modalShowproj}
+                                    onHide={() => setModalShowproj(false)} />
+                                {/* <a className=""> <Link to={`/updateproject/${projdetail.id}`} style={{ color: '#FFF' }}> <i class="fa-solid fa-pen" ></i></Link></a> */}
+
+                                {/* <a className="" onClick={() => deleteHandler(projdetail.id)} style={{ color: '#FFF' }}> <i class="fa-sharp fa-solid fa-trash"></i> */}
+                                {/* </a> */}
+                            </div>
+                        }
                         <tbody className=''>
                             {/* {projdetail.nft_data?.map((items) => {
                                 return ( */}
@@ -59,17 +77,40 @@ const ProjdataTable = (props) => {
                                         <tr>Country : {item.name}</tr>
                                     )
                                 })} */}
-                                <td><span>Owned By:</span> <span>{projdetail?.user_data?.username}</span></td>
-                                <td><span>Total NFT's:</span> <span>{projdetail?.number_of_nft}</span></td>
-                                <td><span>Chain: </span> <span>Polygon (Matic)</span></td>
-                                <td><span>Created : </span> <span> {dayjs(projdetail?.created_at).format("DD MMM YYYY")} </span></td>
-                                <td><span>Country </span> <span>{projdetail.country_name?.name}</span></td>
-                                <td><span>State</span>  <span>{projdetail.state_name?.name}</span> </td>
-                                <td><span>City</span>  <span>{projdetail.city_name?.name}</span> </td>
-                                <td><span>Number of NFTs</span>  <span>{projdetail.number_of_nft}</span> </td>
-                                <td><span>Start Date</span>  <span>{projdetail.start_date}</span> </td>
-                                <td><span>End Date </span> <span>{projdetail.end_date}</span> </td>
-                                <td><span>Price </span> <span> {projdetail.price} </span> </td>
+                                {location.pathname === `/projdetails/${id}` ? (
+
+                                    <>
+                                        {/* <td><span>Owned By:</span> <span>{latprojdetail?.user_data?.username}</span> </td> */}
+                                        {/* <td><span>Total NFT's:</span> <span>{latprojdetail?.number_of_nft}</span></td> */}
+                                        <td><span>Chain: </span> <span>Polygon (Matic)</span></td>
+                                        <td><span>Created : </span> <span> {dayjs(latprojdetail?.created_at).format("DD MMM YYYY")} </span></td>
+                                        <td><span>Country </span> <span>{latprojdetail?.country_name?.name}</span></td>
+                                        <td><span>State</span>  <span>{latprojdetail?.state_name?.name}</span> </td>
+                                        <td><span>City</span>  <span>{latprojdetail?.city_name?.name}</span> </td>
+                                        <td><span>Number of NFTs</span>  <span>{latprojdetail?.number_of_nft}</span> </td>
+                                        {latprojdetail.type == 2 &&
+
+                                            <><td><span>Start Date</span>  <span>{latprojdetail?.start_date}</span> </td>
+                                                <td><span>End Date </span> <span>{latprojdetail?.end_date}</span> </td></>
+                                        }
+                                        <td><span>Price </span> <span> {latprojdetail?.price} </span> </td></>
+                                ) : (
+                                    <>
+                                        {/* <td><span>Owned By:</span> <span>{projdetail?.user_data?.username}</span></td> */}
+                                        {/* <td><span>Total NFT's:</span> <span>{projdetail?.number_of_nft}</span></td> */}
+                                        <td><span>Chain: </span> <span>Polygon (Matic)</span></td>
+                                        <td><span>Created : </span> <span> {dayjs(projdetail?.created_at).format("DD MMM YYYY")} </span></td>
+                                        <td><span>Country </span> <span>{projdetail.country_name?.name}</span></td>
+                                        <td><span>State</span>  <span>{projdetail.state_name?.name}</span> </td>
+                                        <td><span>City</span>  <span>{projdetail.city_name?.name}</span> </td>
+                                        <td><span>Number of NFTs</span>  <span>{projdetail.number_of_nft}</span> </td>
+                                        {projdetail.type == 2 &&
+
+                                            <><td><span>Start Date</span>  <span>{projdetail.start_date}</span> </td>
+                                                <td><span>End Date </span> <span>{projdetail.end_date}</span> </td></>
+                                        }
+                                        <td><span>Price </span> <span> {projdetail.price} </span> </td></>
+                                )}
                             </tr>
                             {/* )
                             })} */}

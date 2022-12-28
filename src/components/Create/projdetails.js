@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Button, ProgressBar } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
@@ -29,6 +29,8 @@ const ProjNftDetails = () => {
     })
     const [modalShow, setModalShow] = React.useState(false);
     const [modalShowedit, setModalShowedit] = React.useState(false);
+    const [nftId, setNftID] = useState();
+    console.log('nftid', nftId)
     const [modalShowadd, setModalShowadd] = React.useState(false);
     const [modalShowrefer, setModalShowrefer] = React.useState(false);
     const dispatch = useDispatch()
@@ -39,8 +41,8 @@ const ProjNftDetails = () => {
     })
     console.log(projdetail, 'projdata')
 
-    useEffect(() => {
-        // 
+    useEffect((event) => {
+        // event.preventDefault()
         dispatch(ProjectDetail(id))
     }, [id])
 
@@ -233,16 +235,33 @@ const ProjNftDetails = () => {
                     <div className='nfts_main'>
                         <h5 className='user_title'>NFT'S </h5>
                         <div className="row items mt-0 explore-items px-0">
-
                             <div className='col-12 col-sm-6 col-lg-3 item explore-item'>
                                 <div className='card no-hover m-0 add-nft '>
+                                    {projdetail.number_of_nft === projdetail?.nft_data?.length ? (
 
-                                    <div class="image-over relative">
-                                        <Link to={`/addnft/${projdetail.id}`}>
+                                        <div class="image-over relative">
 
-                                            + Add NFT </Link>
 
-                                    </div>
+
+
+                                            <span>No NFT left to add</span>
+
+
+                                        </div>
+                                    ) : (
+                                        <div class="image-over relative">
+
+
+
+                                            <Link to={`/addnft/${projdetail.id}`}>
+
+                                                + Add NFT </Link>
+
+
+
+                                        </div>
+
+                                    )}
                                 </div>
                             </div>
 
@@ -264,13 +283,23 @@ const ProjNftDetails = () => {
                                                 <div className='token'>
                                                     <span>#{x?.token_id}</span>
                                                     <span className='cards-icons'>
-                                                        <i className="fa-solid fa-pen" onClick={() => setModalShowedit(true)}></i>
+                                                        <div>
+                                                            <i className="fa-solid fa-pen" onClick={(e) => {
+                                                                setNftID(x.id)
+                                                                e.preventDefault();
+                                                                setModalShowedit(true)
+                                                            }
+                                                            } ></i>
+                                                            {modalShowedit &&
 
-                                                        <EditNft
-                                                            id={id}
-                                                            nft_id={x.id}
-                                                            show={modalShowedit}
-                                                            onHide={() => setModalShowedit(false)} />
+                                                                <EditNft
+                                                                    // debugger
+                                                                    id={id}
+                                                                    nft_id={nftId}
+                                                                    show={modalShowedit}
+                                                                    onHide={() => setModalShowedit(false)} />
+                                                            }
+                                                        </div>
                                                     </span>
                                                 </div>
                                                 {/* Author */}

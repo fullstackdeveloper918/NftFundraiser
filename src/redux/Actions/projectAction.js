@@ -27,6 +27,7 @@ import {
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
 import swal from "sweetalert";
+import { useState } from "react";
 
 export const CreateProjectAction = (params, setLoading) => async dispatch => {
     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
@@ -58,6 +59,7 @@ export const CreateProjectAction = (params, setLoading) => async dispatch => {
 
     } catch (e) {
         if (e?.response?.data.message) {
+            setLoading(false)
             swal('error', e.response.data.message, 'error')
             dispatch(createFail(e))
         }
@@ -104,8 +106,9 @@ export const LatestProjectDetail = (id) => async dispatch => {
     }
 }
 
-export const ProjectList = () => async dispatch => {
+export const ProjectList = (setLoading) => async dispatch => {
     const token = localStorage.getItem('authToken')
+    setLoading(true)
     try {
         const config = {
             headers: {
@@ -119,15 +122,18 @@ export const ProjectList = () => async dispatch => {
 
         // console.log(res?.data?.data[0]?.image, 'proj')
         await dispatch(getProjectList(res.data?.data));
+        setLoading(false)
 
     } catch (e) {
         if (e?.response?.data.message) {
+            setLoading(false)
             swal('error', e.response.data.message, 'error')
         }
     }
 }
 
 export const NftList = (id) => async dispatch => {
+    // debugger
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -150,6 +156,8 @@ export const NftList = (id) => async dispatch => {
 }
 export const uploadNFT = async (params) => {
     // debugger
+    // const [loading, setLoading] = useState()
+    // setLoading(true)
     const token = localStorage.getItem('authToken')
     const config = {
         headers: {
@@ -165,6 +173,7 @@ export const uploadNFT = async (params) => {
         .post(`${process.env.REACT_APP_BACKEND_API}api/ipfsHash/Nfft`,
             formData, config)
         .then(function (response) {
+            // setLoading(false)
             // console.log(response, 'resss')
             return {
                 success: true,
@@ -505,7 +514,7 @@ export const UpdateBanner = (formData, params) => async dispatch => {
         }
     }
 }
-export const UpdateNft = (formData, props) => async dispatch => {
+export const UpdateNft = (formData, props, setLoading) => async dispatch => {
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -522,16 +531,18 @@ export const UpdateNft = (formData, props) => async dispatch => {
         await dispatch(nftUpd(res));
 
         if (res.status === 200) {
-            // setLoading(false)
-            swal("success", "updated", 'success').then(function () {
-                dispatch(ProjectDetail(props.id))
-                // dispatch(LatestProjectDetail(params))
-                // window.location = "/projectlist";
-            });
+            swal("success", "updated", 'success')
+            setLoading(false)
+            dispatch(ProjectDetail(props.id))
+                .then(function () {
+                    window.location = `/projnftdetails/${props.id}`;
+
+                });
 
         }
     } catch (e) {
         if (e?.response?.data.message) {
+            setLoading(false)
             swal('error', e.response.data.message, 'error')
         }
     }
@@ -558,12 +569,13 @@ export const AddNftAction = (formData, id, setLoading) => async dispatch => {
             swal("success", "updated", 'success').then(function () {
                 // dispatch(ProjectDetail(props.id))
                 // dispatch(LatestProjectDetail(params))
-                // window.location = "/projectlist";
+                window.location = `/projnftdetails/${id}`;
             });
 
         }
     } catch (e) {
         if (e?.response?.data.message) {
+            setLoading(false)
             swal('error', e.response.data.message, 'error')
         }
     }

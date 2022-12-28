@@ -10,92 +10,11 @@ import FunddataTable from './fundraiserdetail';
 import FundTransdataTable from './fundPaymenttable';
 import ReadMore from '../../readMore';
 import { Button } from 'react-bootstrap';
-// const initData = {
-//     itemImg: "/img/auction_2.jpg",
-//     date: "2022-03-30",
-//     tab_1: "Bids",
-//     tab_2: "History",
-//     tab_3: "Details",
-//     ownerImg: "/img/avatar_1.jpg",
-//     itemOwner: "Themeland",
-//     created: "15 Jul 2021",
-//     title: "Walking On Air",
-//     content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.",
-//     price_1: "1.5 ETH",
-//     price_2: "$500.89",
-//     count: "1 of 5",
-//     size: "14000 x 14000 px",
-//     volume: "64.1",
-//     highest_bid: "2.9 BNB",
-//     bid_count: "1 of 5",
-//     btnText: "Place a Bid"
-// }
 
-// const tabData_1 = [
-//     {
-//         id: "1",
-//         img: "/img/avatar_1.jpg",
-//         price: "14 ETH",
-//         time: "4 hours ago",
-//         author: "@arham"
-//     },
-//     {
-//         id: "2",
-//         img: "/img/avatar_2.jpg",
-//         price: "10 ETH",
-//         time: "8 hours ago",
-//         author: "@junaid"
-//     },
-//     {
-//         id: "3",
-//         img: "/img/avatar_3.jpg",
-//         price: "12 ETH",
-//         time: "3 hours ago",
-//         author: "@yasmin"
-//     }
-// ]
-
-// const tabData_2 = [
-//     {
-//         id: "1",
-//         img: "/img/avatar_6.jpg",
-//         price: "32 ETH",
-//         time: "10 hours ago",
-//         author: "@hasan"
-//     },
-//     {
-//         id: "2",
-//         img: "/img/avatar_7.jpg",
-//         price: "24 ETH",
-//         time: "6 hours ago",
-//         author: "@artnox"
-//     },
-//     {
-//         id: "3",
-//         img: "/img/avatar_8.jpg",
-//         price: "29 ETH",
-//         time: "12 hours ago",
-//         author: "@meez"
-//     }
-// ]
-
-// const sellerData = [
-//     {
-//         id: "1",
-//         img: "/img/avatar_1.jpg",
-//         seller: "@ArtNoxStudio",
-//         post: "Creator"
-//     },
-//     {
-//         id: "2",
-//         img: "/img/avatar_2.jpg",
-//         seller: "Virtual Worlds",
-//         post: "Collection"
-//     }
-// ]
 
 const FundraiserDetail = () => {
     const { user_id } = useParams()
+    // const id = useParams()
     // const { id } = useParams()
     const dispatch = useDispatch()
 
@@ -111,7 +30,7 @@ const FundraiserDetail = () => {
         // 
         return state.projectdetails.latestprojectdetails
     })
-    // console.log(fundprojdetail, 'fdprojetail')
+    console.log(fundprojdetail.user_data, 'fdprojetail')
 
     useEffect(() => {
 
@@ -150,8 +69,8 @@ const FundraiserDetail = () => {
                         <div className="item-info">
 
                             <div className="item-thumb text-center">
-                                {/* <img src={funddetail?.organization_detail?.banner_image} alt="" /> */}
-                                <img src="/img/ph.jpg" />
+                                <img src={funddetail?.organization_detail?.banner_image} alt="" />
+                                {/* <img src="/img/ph.jpg" /> */}
                                 {/* <img src='/img/ph.jpg' alt="" /> */}
                             </div>
 
@@ -263,7 +182,7 @@ const FundraiserDetail = () => {
                         </div>
 
 
-                        <div className='custam_col'>
+                        <div className='custam_col mt-3'>
                             <h5 class="user_title"><div>Description</div></h5>
                             <div className=" no-hover">
                                 {/* <span className="mt-0 mb-2" dangerouslySetInnerHTML={{ __html: funddetail?.organization_detail?.description }} /> */}
@@ -314,45 +233,11 @@ const FundraiserDetail = () => {
                                         Invest
                                     </Button>
                                 </div>
-                                <>
-                                    {/* <Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary">
-                                        Share
-                                    </Button> */}
-                                    {/* <ReferalPopup
-                                            id={id}
-                                            userRef={userDetail}
-                                            show={modalShowrefer}
-                                            onHide={() => setModalShowrefer(false)} /> */}
-                                </>
 
-                                {/* <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Donate
-                                    </Button> */}
+
+
                             </div>
-                            {/* {fundprojdetail && fundprojdetail.length &&
-                                            [...new Map(fundprojdetail.map(item =>
-                                                [item["title"], item])).values()]?.slice(0, 4)?.map((item, idx) => {
-                                                    const date1 = new Date(item.created_at)
-                                                    const date2 = new Date()
-                                                    // console.log('todat', date2)
-                                                    const time_difference = date2.getTime() - date1.getTime();
-                                                    const days_difference = Math.ceil(time_difference / (1000 * 60 * 60 * 24));
-                                                    // const totaldays = days_difference.slice(0,1)
-                                                    // console.log("daysss", days_difference)
-                                                    return (
 
-                                                        <>
-                                                            <ul className="project_back">
-                                                                <li className='item_title'>
-                                                                    {item.title}
-                                                                </li><li className='item_created'>
-                                                                    {days_difference} days ago
-                                                                    {/* {(item.created_at).diff(new Date, 'day', true)} */}
-                            {/* </li> */}
-                            {/* </ul> */}
-                            {/* </> */}
-                            {/* ) */}
-                            {/* })} */}
                             <h5 class="user_title_1 mt-3 mb-0"><div>Projects</div></h5>
 
                             <ul className="m-0 custom_lis pl-0 fund_row">
@@ -384,7 +269,7 @@ const FundraiserDetail = () => {
                                             )
                                         })}
                             </ul>
-                            <Link className="" to="/all/LatestProjects"><p className='see_all'>See all</p></Link>
+                            <Link className="" to={`/all/fundraise/projects/${user_id}`}><p className='see_all'>See all</p></Link>
                         </div>
                         <div className="content mt-5 mt-lg-0">
                             {/* <h3 className="m-0">{this.state.initData.title}</h3> */}
@@ -459,7 +344,7 @@ const FundraiserDetail = () => {
                             <FunddataTable />
                         </div>
                     </div> */}
-                    <div className='col-12'>
+                    <div className='col-12 mt-3 mb-3'>
                         <div className='funddeatil table-detail '>
                             <FundTransdataTable />
 

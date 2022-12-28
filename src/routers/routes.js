@@ -41,6 +41,8 @@ import latnftprojDetails from "../themes/Latnft";
 import ScrollToTop from "../ScrollToTop";
 import EditNft from "../components/Create/editNft";
 import AddNFT from "../themes/addnftTheme";
+import AllFundraiser from "../themes/allFundproj";
+import AllFundraiserProjects from "../themes/fund-projects";
 import FundraiserProjects from "../themes/fundraise";
 // import { NavLink } from "react-router-dom";
 
@@ -65,6 +67,8 @@ const MyRouts = () => {
           <Route exact path="/fundraiser/detail/:user_id" component={FundDetail} />
           <Route exact path="/myfundraiser/detail/:user_id" component={FundraiserProjects} />
           <Route exact path="/projnftdetails/:id" component={ProjNft} />
+          <Route exact path="/allfundraise" component={AllFundraiser} />
+          <Route exact path="/all/fundraise/projects/:user_id" component={AllFundraiserProjects} />
           <Route exact path="/nft/details/:id" component={Nft} />
           <Route exact path="/nftedit/:id/:id" component={EditNft} />
           <Route exact path="/addnft/:id" component={AddNFT} />
