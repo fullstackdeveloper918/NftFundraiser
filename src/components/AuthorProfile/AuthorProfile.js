@@ -432,7 +432,7 @@ const AuthorProfile = () => {
 
 
                             </div>
-                            <form onSubmit={handleSubmit(onSubmit)} className="item-form card no-hover">
+                            <form onSubmit={handleSubmit(onSubmit)} className="item-form card no-hover p-0">
 
                                 <div className="card-body">
                                     <from className="Edite_able">

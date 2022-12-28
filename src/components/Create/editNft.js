@@ -538,17 +538,20 @@ const EditNft = (props) => {
         return state?.projectdetails?.getcollections
     })
 
+    console.log(props.nft_id, "nftid")
+
+    useEffect(() => {
+        // event.preventDefault()
+        dispatch(NftList(props.nft_id, props.id))
+    }, [props.nft_id, props.id])
+
+
 
     const nftdetail = useSelector(state => {
         // 
         return state.projectdetails.nftlist
 
     })
-
-    useEffect(() => {
-        dispatch(NftList(props.nft_id, props.id))
-    }, [props.nft_id, props.id])
-
     console.log("nftdet", nftdetail)
 
 
@@ -562,7 +565,6 @@ const EditNft = (props) => {
             }]
 
         })
-        console.log(nftdetail.image, "Image")
         setImage(nftdetail.image)
         setNft_collection_id(nftdetail.collection_id)
 
@@ -577,44 +579,77 @@ const EditNft = (props) => {
 
     const onFinish = async (values) => {
         try {
-
-            debugger
-
             // setLoading(true)
-            const nftImagepromises = [uploadNFT(dataURLtoBlob(image))]
-            // const nftImagepromises = nfts?.map(x => uploadNFT(x?.image))
-            const imagesRes = await Promise.all(nftImagepromises).then(res => res)
-            // const imagesRes = await (nftImagepromises).then(res => res)
-            // 
 
-            const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
-            // const addedImage = ipfsBaseUrl + image
+            if (image.charAt(0) === 'd') {
 
+                const nftImagepromises = [uploadNFT(dataURLtoBlob(image))]
+                // setLoading(true)
+                // const nftImagepromises = nfts?.map(x => uploadNFT(x?.image))
+                const imagesRes = await Promise.all(nftImagepromises).then(res => res)
+                // const imagesRes = await (nftImagepromises).then(res => res)
+                // 
 
-            const formData = new FormData()
-
-
-
+                const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
+                // const addedImage = ipfsBaseUrl + image
 
 
-            formData.append('image', addedImage)
-            formData.append('title', values?.nfts?.map(x =>
-                x.nft_name
-            ))
-            // const newlist = newList.push(nft_collection_id);
-            formData.append('collection_id', nft_collection_id)
-            // formData.append('nft_description', nft_description)
-            formData.append('description', values?.nfts?.map(x => x.nft_description))
-            // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
+                const formData = new FormData()
 
-            // dispatch(uploadNFT())
-            debugger
-            dispatch(UpdateNft(formData, props))
+
+
+
+
+                formData.append('image', addedImage)
+                formData.append('title', values?.nfts?.map(x =>
+                    x.nft_name
+                ))
+                // const newlist = newList.push(nft_collection_id);
+                formData.append('collection_id', nft_collection_id)
+                // formData.append('nft_description', nft_description)
+                formData.append('description', values?.nfts?.map(x => x.nft_description))
+                // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
+
+                // dispatch(uploadNFT())
+                // debugger
+                dispatch(UpdateNft(formData, props, setLoading))
+            } else {
+                // const nftImagepromises = uploadNFT(image)
+                // // setLoading(true)
+                // const nftImagepromises = nfts?.map(x => uploadNFT(x?.image))
+                // const imagesRes = await Promise.all(nftImagepromises).then(res => res)
+                // // const imagesRes = await (nftImagepromises).then(res => res)
+                // // 
+
+                // const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
+                // // const addedImage = ipfsBaseUrl + image
+
+
+                const formData = new FormData()
+
+
+
+
+
+                formData.append('image', image)
+                formData.append('title', values?.nfts?.map(x =>
+                    x.nft_name
+                ))
+                // const newlist = newList.push(nft_collection_id);
+                formData.append('collection_id', nft_collection_id)
+                // formData.append('nft_description', nft_description)
+                formData.append('description', values?.nfts?.map(x => x.nft_description))
+                // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
+
+                // dispatch(uploadNFT())
+                // debugger
+                dispatch(UpdateNft(formData, props, setLoading))
+            }
+
             // setLoading(false)
 
             // console.log('Received values of form:', values, data)
         } catch (error) {
-            debugger
             console.log(error)
         }
 

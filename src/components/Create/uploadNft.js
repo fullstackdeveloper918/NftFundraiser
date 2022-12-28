@@ -231,7 +231,7 @@ const UploadNft = ({ current, prev }) => {
     ];
     return (
         // <section className="author-area">
-        <div>
+        <div className='main-create'>
             {loading ? (
                 <Loader />
             ) : (
@@ -278,9 +278,9 @@ const UploadNft = ({ current, prev }) => {
                                                 <Panel header="Details" key="1">
                                                     <Fragment>
                                                         {/* <div>Artwork {index}</div> */}
-                                                        <div className="row">
+                                                        <div className="row relative">
 
-                                                            <div className="col-md-10 col-12">
+                                                            <div className="col-12">
                                                                 <label>Name</label>
                                                                 <div>
 
@@ -377,22 +377,25 @@ const UploadNft = ({ current, prev }) => {
                                                                         </Modal>
                                                                     </div>
                                                                 </div> */}
-                                                            <div className="col-md-1 col-12">
+                                                            <div className="col-md-1 col-12 nft-remove">
                                                                 <MinusCircleOutlined onClick={(e) => { remove(name); handleDecrement(e); }} />
                                                             </div>
                                                             {/* </div> */}
+                                                            <div className='col-12'>
+                                                                <label className='mt-2 mb-3'>Choose Collection</label>
+                                                            </div>
                                                             <div className="col-md-3 col-12">
 
                                                                 {/* <div className="col-24"> */}
 
                                                                 <div className="form-group">
-                                                                    <label className='mt-2'>Choose Collection</label>
+
                                                                     <div className="card choose_div" style={{
                                                                         background: "black",
                                                                         marginBottom: "8px",
                                                                     }}>
                                                                         <div className="card-body ">
-                                                                            <Button variant="primary" onClick={() => setModalShow(true)}>
+                                                                            <Button variant="primary" className='collection_btn' onClick={() => setModalShow(true)}>
                                                                                 <i className="fa-regular fa-plus" ></i> Create Collection
                                                                             </Button>
 
@@ -420,7 +423,7 @@ const UploadNft = ({ current, prev }) => {
                                                                             ]}
 
                                                                         > */}
-                                                                    <label className='hidden-word'>jsaswjdwjd</label>
+
 
                                                                     <div id={item.id} onClick={() => onHandleClick(index, item.id)} className="card"
                                                                         style={{

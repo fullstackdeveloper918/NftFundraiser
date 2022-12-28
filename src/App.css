@@ -637,9 +637,10 @@ section.live-auctions-area.single_project-detail {
 }
 section.live-auctions-area.single_project-detail .row {
     padding: 0 !important;
+    margin: 0 -15px;
 }
 section.live-auctions-area.single_project-detail .row h3 {
-    padding: 20px 0px 0px 15px;
+    padding: 20px 0px 0px 0px;
 }
 .eddlbtton button {
     font-size: 16px !important;
@@ -815,6 +816,7 @@ input[type="date"]::before {
 }
 form.item-form.card.no-hover select {
     background-color: black !important;
+    padding: 5px 15px;
 }
 ul.list-unstyled.viewproduct-detail li span:first-child , :root .boldertext , li.item_title , .card-inner-heading span{
     color: #f5f5f5 !important;
@@ -1128,7 +1130,13 @@ span.nft_price {
 }
 .content_project .card {
     height: 75% !important;
+    display: flex;
+    gap: 14px;
+    flex-direction: column;
+    font-family: var(--secondary-font);
+    margin-bottom: 0;
 }
+
 /* .project_img {
     position: absolute;
     bottom: -89px;
@@ -1248,16 +1256,16 @@ header .navbar-expand {
     background: transparent;
 }
 
-.container.table-detail .table {
+.table-detail .table {
     width: 100%;
     margin-bottom: 0px !important;
     color: #8E8E8E;
 }
 
-.container.table-detail .ant-collapse-content > .ant-collapse-content-box {
+.table-detail .ant-collapse-content > .ant-collapse-content-box {
     padding: 0px;
 }
-.container.table-detail td {
+.table-detail td {
     border: unset;
 }
 .table-detail tr:last-child {
@@ -1390,15 +1398,14 @@ h5.user_title {
     /* border-radius: 8px 8px 0px 0; */
     justify-content: space-between;
 }
-.user-description {
+.user-description , .price_nft {
     border: 1px solid #1e1e1e;
     border-radius: 8px;
     padding-bottom: 10px;
-    min-height: 156px;
     height: 100%;
 }
 .user-description p {
-    padding: 0 5px;
+    padding: 0 16px;
 }
 .table-main-detail .ant-collapse.ant-collapse-icon-position-end {
     margin-bottom: 0px !important;
@@ -1533,7 +1540,7 @@ background-color: transparent !important;
    .ant-collapse-content-box {
     padding: 16px;
     /* border-bottom: 1px solid; */
-    background: #16151a;
+    /* background: #16151a; */
 }
 div.ant-collapse ,  div.ant-collapse > .ant-collapse-item{
     border: 1px solid #1e1e1e;
@@ -1623,7 +1630,6 @@ span.ant-collapse-header-text {
 .ant-collapse {
     border-radius: 10px !important;
     overflow: hidden !important;
-    margin-bottom: 20px !important;
     background-color: transparent !important;
     font-family: var(--secondary-font);
 }
@@ -1777,7 +1783,6 @@ section.wallet-connect-area h4 {
 .ant-collapse-content-box {
     padding: 16px;
     /* border-bottom: 1px solid; */
-    background: #16151a00;
 }
 .container.table-main-detail.position-relative {
     padding: 0;
@@ -1826,7 +1831,35 @@ section.wallet-connect-area h4 {
 }
 .table td, .table th {
     vertical-align: middle !important;
+    padding: 12px 16px;
 }
 .funddeatil.mt-3 table {
     margin-top: 0.5rem;
+}
+span.share {
+    position: absolute;
+    right: 22px;
+}
+.price_nft_detail{
+    padding: 12px 16px;
+    font-family: var(--secondary-font);
+}
+.nft-price span {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+}
+.sales span:first-child {
+    margin-right: 10px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 200;
+}
+.nft-price {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.main-create .ant-collapse-content-box {
+    background: #16151a;
 }

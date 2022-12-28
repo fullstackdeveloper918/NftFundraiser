@@ -283,7 +283,7 @@ const Create = ({ current, next, prev }) => {
                                 control={control}
                                 name="description"
                                 defaultValue=""
-
+                                rules={{ required: true }}
 
                                 render={({ field: { value, onChange } }) => {
                                     return <JoditEditor
@@ -293,16 +293,16 @@ const Create = ({ current, next, prev }) => {
                                         // config={config}
                                         value={description}
                                         placeholder="start typing"
-                                        // aria-invalid={errors.description ? "true" : "false"}
+                                        aria-invalid={errors.description ? "true" : "false"}
                                         tabIndex={1} // tabIndex of textarea
                                         onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
                                         onChange={setDescription}
                                     />
-                                    { errors.description?.message && <span>{errors.description.message}</span> }
 
                                 }}
-                            // { errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p> }
                             />
+                            {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
+                            {/* {errors.description?.message && <span>{errors.description.message}</span>} */}
 
                             {/* {errors.description && errors?.description?.type === "min" && <p style={{ color: 'red' }} role="alert">Description limit is 150 words</p>} */}
                         </div>

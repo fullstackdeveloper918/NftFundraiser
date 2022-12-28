@@ -27,10 +27,13 @@ const Fundraiser = () => {
                 <div className="row">
                     <div className="col-12">
                         {/* Intro */}
-                        <div className="intro m-0">
+                        <div className="intro d-flex justify-content-between align-items-end m-0">
                             <div className="intro-content">
                                 <span>Fundraisers</span>
                                 <h3 className="mt-3 mb-0">Top Fundraisers</h3>
+                            </div>
+                            <div className="intro-btn">
+                                <Link className="btn content-btn" to='/allfundraise'>View All</Link>
                             </div>
                         </div>
                     </div>
