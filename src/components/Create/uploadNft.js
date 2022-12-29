@@ -152,7 +152,7 @@ const UploadNft = ({ current, prev }) => {
         formData.append('number_of_nft', data.number_of_nft)
         formData.append('start_date', data.start_date)
         formData.append('end_date', data.end_date)
-        formData.append('type', data.type)
+        formData.append('type', data.usertype)
         formData.append('category_id', data.category_id)
 
 

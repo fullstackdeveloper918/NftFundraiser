@@ -106,9 +106,9 @@ export const LatestProjectDetail = (id) => async dispatch => {
     }
 }
 
-export const ProjectList = (setLoading) => async dispatch => {
+export const ProjectList = () => async dispatch => {
     const token = localStorage.getItem('authToken')
-    setLoading(true)
+    // setLoading(true)
     try {
         const config = {
             headers: {
@@ -122,11 +122,11 @@ export const ProjectList = (setLoading) => async dispatch => {
 
         // console.log(res?.data?.data[0]?.image, 'proj')
         await dispatch(getProjectList(res.data?.data));
-        setLoading(false)
+        // setLoading(false)
 
     } catch (e) {
         if (e?.response?.data.message) {
-            setLoading(false)
+            // setLoading(false)
             swal('error', e.response.data.message, 'error')
         }
     }

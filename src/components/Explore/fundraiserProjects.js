@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import ReadMore from '../../readMore';
 import { TopFundraiserAction } from '../../redux/Actions/fundraiserAction';
 import { ProjectList } from '../../redux/Actions/projectAction';
+import FundDetail from '../../themes/fund-detail';
 import Loader from '../Loader/loader';
 import { DeleteProject } from './../../redux/Actions/projectAction';
 
@@ -52,8 +54,13 @@ const GetAllFundraise = () => {
                                 return (
                                     <Link key={`edth_${idx}`} to={`/fundraiser/detail/${item.user_id}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
                                         <div>
-                                            <div className="card project_cards">
-                                                <div className="image-over relative ">
+                                            <div className="card project_cards position-relative ">
+                                                <div className="card-bottom d-flex justify-content-between">
+                                                    <span className='matics'>{item.amount} MATIC</span>
+                                                    {/* <span>{item.nft_data.length} NFTS </span> */}
+                                                    {/* <span> + {item.number_of_nft} NFTS </span> */}
+                                                </div>
+                                                <div className="image-over position-relative ">
                                                     {/* <i class="fa-solid fa-pen" ></i>
                                                     <i class="fa-sharp fa-solid fa-trash"></i> */}
                                                     <img className="card-img-top" src={item?.avatar} />
@@ -74,10 +81,23 @@ const GetAllFundraise = () => {
                                                                         <h6 className="ml-2 mb-0">You</h6>
                                                                     </a>
                                                                 </div> */}
-                                                        <div className="card-bottom d-flex justify-content-between">
-                                                            <span>{item.amount} MATIC</span>
-                                                            {/* <span>{item.nft_data.length} NFTS </span> */}
-                                                            {/* <span> + {item.number_of_nft} NFTS </span> */}
+                                                        <div className='mt-3'>
+
+                                                            It is a long established fact that a reader
+
+                                                        </div>
+
+
+                                                        <div className='progress_main my-2'><span>
+                                                            <span><small>Last donation 2hr ago</small></span>
+                                                        </span>
+                                                            <li className="price d-flex justify-content-between progressbar progress mt-1 mb-1">
+                                                                <span className="progress-bar bg-success" role="progressbar" style={{ width: "70%" }} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></span>
+
+                                                            </li>
+                                                            <div>
+                                                                <strong className='mr-2 font-weight-normal'>$59,869 raised of</strong><span><small>$40,000</small></span>
+                                                            </div>
                                                         </div>
 
                                                         {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
@@ -96,6 +116,7 @@ const GetAllFundraise = () => {
                                     </h2>
                                 </div>
                             } */}
+
                         </div>
                     </div>
                 </section>

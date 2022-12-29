@@ -1404,7 +1404,7 @@ h5.user_title {
     padding-bottom: 10px;
     height: 100%;
 }
-.user-description p {
+.user-description >p {
     padding: 0 16px;
 }
 .table-main-detail .ant-collapse.ant-collapse-icon-position-end {
@@ -1862,4 +1862,15 @@ span.share {
 }
 .main-create .ant-collapse-content-box {
     background: #16151a;
+}
+span.matics {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 999;
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+    border-radius: 25px;
+    padding: 2px 14px;
+    color: #fff;
+    font-size: 12px;
 }
