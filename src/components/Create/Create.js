@@ -28,7 +28,8 @@ const Create = ({ current, next, prev }) => {
     console.log('city', city)
 
     const [collection_id, setCollectionId] = useState(0);
-    const [type, setType] = useState();
+    const [usertype, setUserType] = useState();
+    console.log("type", usertype)
 
     // const schema = yup.object().shape({
     //     description: yup.string().required()
@@ -55,6 +56,7 @@ const Create = ({ current, next, prev }) => {
     console.log(states?.data?.data, 'states')
     const cities = useSelector(state => { return state.countries.city })
     useEffect(() => {
+
         dispatch(CountryList())
 
     }, [])
@@ -71,7 +73,7 @@ const Create = ({ current, next, prev }) => {
 
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({
         mode: "all",
-        // resolver: yupResolver(schema)
+
 
     });
 
@@ -81,10 +83,13 @@ const Create = ({ current, next, prev }) => {
     })
     // console.log(col, 'col')
     const OnSubmit = (data) => {
-        setFormValues({ ...data, type, description });
+        debugger
+
+        setFormValues({ ...data, description, usertype });
         // localStorage.setItem('country', JSON.stringify(country))
         next();
     }
+
     useEffect(() => {
         dispatch(GetCollectionsAction())
         dispatch(CategoriesAction())
@@ -100,9 +105,9 @@ const Create = ({ current, next, prev }) => {
             setValue('number_of_nft', data.number_of_nft)
             setValue('price', data.price)
             setValue('start_date', data.start_date)
-            setValue('type', data.type)
+            setValue('type', data.usertype)
 
-            setType(data.type)
+            setUserType(data.usertype)
             setCountry(data.country)
             setDescription(data.description)
 
@@ -158,48 +163,52 @@ const Create = ({ current, next, prev }) => {
                     <div className="col-12 ">
                         <div className="form-group mt-3">
                             <div className="form-check form-check-inline">
-                                {data.type == 2 ? (
-                                    <><input
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="radiobutton"
-                                        id="donation"
-                                        value="2"
-                                        // defaultChecked={data.type ? true : false}
-                                        {...register("type", { required: true })}
-                                        aria-invalid={errors.type ? "true" : "false"}
-                                        onChange={(e) => setType(e.target.value)}
-                                        defaultChecked={data.type}
-                                    />
-                                        <label className="form-check-label" htmlFor="donation">Campaign</label>
-                                    </>
-                                ) : (
+                                {/* {data.usertype == 2 ? ( */}
+                                <><input
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="radiobutton"
+                                    id="1"
+                                    // checked={!usertype ? true : false}
 
-                                    <><input
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="radiobutton"
-                                        id="donation"
-                                        value="2"
-                                        {...register("type", { required: true })}
-                                        onChange={(e) => setType(e.target.value)}
-                                        aria-invalid={errors.type ? "true" : "false"}
-                                    />
-                                        <label className="form-check-label" htmlFor="donation">Campaign</label></>
-                                )}
+                                    value="1"
+                                    defaultChecked={data.usertype || !usertype ? true : false}
+                                    {...register("usertype", { required: true })}
+                                    aria-invalid={errors.usertype ? "true" : "false"}
+                                    onChange={(e) => setUserType(e.target.value)}
+                                // defaultChecked={data.usertype}
+                                />
+                                    <label className="form-check-label" htmlFor="donation">Single</label>
+                                </>
+                                {/* ) : ( */}
+
+                                <><input
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="radiobutton"
+                                    id="2"
+                                    value="2"
+                                    {...register("usertype", { required: true })}
+                                    defaultChecked={data.usertype ? true : false}
+                                    onChange={(e) => setUserType(e.target.value)}
+                                    aria-invalid={errors.type ? "true" : "false"}
+
+                                />
+                                    <label className="form-check-label" htmlFor="donation">Campaign</label></>
+                                {/* )} */}
                             </div>
-                            <div className="form-check form-check-inline">
-                                {data.type == 1 ? (
+                            {/* <div className="form-check form-check-inline">
+                                {data.usertype == 1 ? (
                                     <><input
                                         className="form-check-input"
                                         type="radio" name="radiobutton"
-                                        id="product_sale"
+                                        id="1"
                                         value="1"
-                                        defaultChecked={data.type}
-                                        {...register("type", { required: true })}
-                                        onChange={(e) => setType(e.target.value)}
+                                        // defaultChecked={data.usertype}
+                                        {...register("usertype", { required: true })}
+                                        onChange={(e) => setUserType(e.target.value)}
                                         aria-invalid={errors.type ? "true" : "false"}
-                                    // defaultChecked={data.type ? true : false}
+                                        defaultChecked={data.usertype ? true : false}
                                     /><label className="form-check-label" htmlFor="product_sale">Single</label></>
                                 ) : (
 
@@ -209,13 +218,14 @@ const Create = ({ current, next, prev }) => {
                                         className="form-check-input"
                                         type="radio"
                                         name="radiobutton"
-                                        id="product_sale"
+                                        id="1"
                                         value="1"
-                                        // checked
-                                        {...register("type", { required: true })}
-                                        // defaultChecked={type === null ? true : false}
+                                        checked={!usertype}
+                                        // checked={!usertype}
+                                        {...register("usertype", { required: true })}
+                                        defaultChecked={usertype === "" ? setUserType("1") : false}
 
-                                        onChange={(e) => setType(e.target.value)}
+                                        onChange={(e) => setUserType(e.target.value)}
                                         aria-invalid={errors.type ? "true" : "false"}
 
                                     />
@@ -223,11 +233,12 @@ const Create = ({ current, next, prev }) => {
 
 
                                 )}
-                            </div>
-                            {errors.type?.type === 'required' && <p style={{ color: 'red' }} role="alert">Type is required</p>}
+                            </div> */}
+                            {errors.usertype?.type === 'required' && <p style={{ color: 'red' }} role="alert">Type is required</p>}
 
                         </div>
                     </div>
+
 
 
 
@@ -255,14 +266,16 @@ const Create = ({ current, next, prev }) => {
                         <div className="form-group mt-3">
                             <label>Web address</label>
                             <input
-                                type="url"
+                                type="text"
                                 className="form-control"
+                                // required={false}
                                 name="address"
                                 placeholder="Web address"
                                 {...register("address", {
-                                    required: true, pattern: {
-                                        value: /^(\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
-                                        message: 'Please enter a valid url'
+                                    required: true,
+                                    pattern: {
+                                        value: /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/,
+
                                     }
                                 })}
                                 aria-invalid={errors.address ? "true" : "false"}
@@ -283,28 +296,30 @@ const Create = ({ current, next, prev }) => {
                                 control={control}
                                 name="description"
                                 defaultValue=""
-                                rules={{ required: true }}
+                                rules={{ required: true, min: 150 }}
 
-                                render={({ field: { value, onChange } }) => {
+                                render={({ field }) => {
                                     return <JoditEditor
-                                        ref={editor}
+                                        ref={field.ref}
                                         // value={description}
                                         // {...register("description", { required: true })}
                                         // config={config}
-                                        value={description}
+                                        value={field.value}
                                         placeholder="start typing"
                                         aria-invalid={errors.description ? "true" : "false"}
                                         tabIndex={1} // tabIndex of textarea
                                         onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
-                                        onChange={setDescription}
+                                        onChange={field.onChange}
                                     />
 
                                 }}
                             />
                             {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
-                            {/* {errors.description?.message && <span>{errors.description.message}</span>} */}
-
-                            {/* {errors.description && errors?.description?.type === "min" && <p style={{ color: 'red' }} role="alert">Description limit is 150 words</p>} */}
+                            {errors.description && errors.description.type === "min" && (
+                                <p style={{ color: 'red' }}>
+                                    min 150 words
+                                </p>
+                            )}
                         </div>
                     </div>
 
@@ -422,7 +437,7 @@ const Create = ({ current, next, prev }) => {
                     </div> */}
                     <div className="col-12 col-md-6">
                         <div className="form-group">
-                            {type == 2 ? (
+                            {usertype == 2 ? (
 
                                 <label>Price per NFT (In MATIC tokens)</label>
                             ) : (
@@ -443,7 +458,7 @@ const Create = ({ current, next, prev }) => {
                     </div>
 
 
-                    {type == 1 ? (
+                    {usertype == 1 ? (
 
                         <div className="col-12 col-md-6">
                             <div className="form-group">
@@ -501,7 +516,7 @@ const Create = ({ current, next, prev }) => {
                             </div>
                         </div>
                     )}
-                    {type == 2 && (
+                    {usertype == 2 && (
 
                         <><div className="col-12 col-md-6">
                             <div className="form-group">
