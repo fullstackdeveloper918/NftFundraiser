@@ -28,6 +28,7 @@ const getBase64 = (file) =>
 const UploadNft = ({ current, prev }) => {
     const editor = useRef(null);
     const { data, setFormValues } = useFormData();
+    console.log(data, 'dataaa')
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
@@ -37,7 +38,7 @@ const UploadNft = ({ current, prev }) => {
     // console.log('nft_description', nft_description)
 
     const [modalShow, setModalShow] = React.useState(false);
-    const [nft_collection_id, setNft_collection_id] = useState({ 0: "0" });
+    const [nft_collection_id, setNft_collection_id] = useState({ 0: '1' });
     // console.log('colldata', coldata)
     // console.log(nft_collection_id)
     // const [coll_id,setCollId] = useState()
@@ -46,6 +47,7 @@ const UploadNft = ({ current, prev }) => {
 
     const [loading, setLoading] = useState(false)
 
+    console.log(nft_collection_id, "nft collections")
     const handleIncrement = () => {
         setCount(prevCount => prevCount + 1);
     };
@@ -93,6 +95,7 @@ const UploadNft = ({ current, prev }) => {
         // 
         return state?.projectdetails?.getcollections
     })
+    console.log('coll', col[0])
     const imaeg = useSelector(state => {
         // 
         return state?.projectdetails?.nftres
@@ -127,6 +130,7 @@ const UploadNft = ({ current, prev }) => {
 
 
     const onFinish = async (values) => {
+        debugger
 
         setLoading(true)
         const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
@@ -143,16 +147,34 @@ const UploadNft = ({ current, prev }) => {
         formData.append('title', data.title)
         formData.append('description', data.description)
         formData.append('address', data.address)
-        formData.append('state', data.state)
+
         formData.append('country', data.country)
+        if (!data.state) {
+
+            formData.append('state', '')
+        } else {
+            formData.append('state', data.state)
+        }
+        if (!data.city) {
+            formData.append('city', '')
+        } else {
+
+            formData.append('city', data.city)
+        }
         formData.append('latitude', lat)
         formData.append('logitude', log)
-        formData.append('city', data.city)
         formData.append('price', data.price)
         formData.append('number_of_nft', data.number_of_nft)
-        formData.append('start_date', data.start_date)
-        formData.append('end_date', data.end_date)
-        formData.append('type', data.usertype)
+        formData.append('image', data.image)
+        if (data.type == 1) {
+            formData.append('start_date', '')
+            formData.append('end_date', '')
+        } else {
+
+            formData.append('start_date', data.start_date)
+            formData.append('end_date', data.end_date)
+        }
+        formData.append('type', data.type)
         formData.append('category_id', data.category_id)
 
 
@@ -292,7 +314,7 @@ const UploadNft = ({ current, prev }) => {
                                                                         rules={[
                                                                             {
                                                                                 required: true,
-                                                                                message: 'Missing  name',
+                                                                                message: 'Name is required',
                                                                             },
                                                                         ]}
                                                                     >
@@ -311,7 +333,7 @@ const UploadNft = ({ current, prev }) => {
                                                                         rules={[
                                                                             {
                                                                                 required: true,
-                                                                                message: 'Missing  description',
+                                                                                message: 'Description is required',
                                                                             },
                                                                         ]}
                                                                     >
@@ -325,12 +347,13 @@ const UploadNft = ({ current, prev }) => {
                                                                             ref={editor}
                                                                             value={'nft_description'}
                                                                             // config={config}
-
+                                                                            // aria-invalid={errors.nft_description ? "true" : "false"}
                                                                             placeholder="start typing"
                                                                             tabIndex={1} // tabIndex of textarea
                                                                             // onBlur={newContent => 'nft_description'(newContent)} // preferred to use only this option to update the content for performance reasons
                                                                             onChange={newContent => { }}
                                                                         />
+                                                                        {/* {errors.nft_description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>} */}
                                                                         {/* }} */}
                                                                         {/* /> */}
                                                                     </Form.Item>
@@ -410,19 +433,9 @@ const UploadNft = ({ current, prev }) => {
 
                                                             {col?.map((item, idx) => (
 
-                                                                <div key={`auc_${idx}`} id={item.id} className="col-md-3 col-12 choose_div">
-                                                                    {/* <Form.Item
-                                                                            {...restField}
-                                                                            name={[name, "nft_collection_id"]}
-                                                                            // getValueFromEvent={getFile}
-                                                                            rules={[
-                                                                                {
-                                                                                    required: true,
-                                                                                    message: 'Please select nft collection',
-                                                                                },
-                                                                            ]}
+                                                                <div key={`auc_${idx}`} id={item.id} className="col-md-3 col-12 choose_div" >
 
-                                                                        > */}
+
 
 
                                                                     <div id={item.id} onClick={() => onHandleClick(index, item.id)} className="card"
@@ -430,8 +443,11 @@ const UploadNft = ({ current, prev }) => {
                                                                             background: "black",
                                                                             marginBottom: "8px",
                                                                             border: nft_collection_id[index] == item.id ? "1px solid #fff" : null
-                                                                        }}>
-                                                                        <div className="card-body">
+                                                                        }}
+
+                                                                    >
+
+                                                                        <div className="card-body"  >
                                                                             <div>
 
 

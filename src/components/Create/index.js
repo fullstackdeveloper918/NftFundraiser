@@ -29,7 +29,7 @@ const UploadNftIndex = () => {
   };
 
   const { setValue } = useForm();
- 
+
   const prev = () => {
     // 
     setCurrent(current - 1);

@@ -11,6 +11,8 @@ import 'reactjs-popup/dist/index.css';
 import styles from "./styles/styles.module.scss"
 import { useFormData } from './Context/context';
 import JoditEditor from 'jodit-react'; import { CityList, CountryList, StateList } from '../../redux/Actions/authAction';
+import UploadImage from '../../shared/Upload';
+import { dataURLtoBlob } from '../../utils/blobfromurl';
 ;
 
 const Create = ({ current, next, prev }) => {
@@ -26,6 +28,7 @@ const Create = ({ current, next, prev }) => {
     console.log('state', state)
     const [city, setCity] = useState("");
     console.log('city', city)
+    const [image, setImage] = useState()
 
     const [collection_id, setCollectionId] = useState(0);
     const [usertype, setUserType] = useState();
@@ -84,8 +87,9 @@ const Create = ({ current, next, prev }) => {
     // console.log(col, 'col')
     const OnSubmit = (data) => {
         debugger
+        const imageBanner = dataURLtoBlob(image)
 
-        setFormValues({ ...data, description, usertype });
+        setFormValues({ ...data, description, type: data?.usertype, image: imageBanner });
         // localStorage.setItem('country', JSON.stringify(country))
         next();
     }
@@ -106,11 +110,12 @@ const Create = ({ current, next, prev }) => {
             setValue('price', data.price)
             setValue('start_date', data.start_date)
             setValue('type', data.usertype)
+            setValue('image', data.image)
 
             setUserType(data.usertype)
             setCountry(data.country)
             setDescription(data.description)
-
+            setImage(data.image)
             setState(data.state)
             setCity(data.city)
 
@@ -162,23 +167,23 @@ const Create = ({ current, next, prev }) => {
 
                     <div className="col-12 ">
                         <div className="form-group mt-3">
-                            <div className="form-check form-check-inline">
+                            <div className="form-check form-check-inline mr-2">
                                 {/* {data.usertype == 2 ? ( */}
-                                <><input
-                                    className="form-check-input"
-                                    type="radio"
-                                    name="radiobutton"
-                                    id="1"
-                                    // checked={!usertype ? true : false}
-
-                                    value="1"
-                                    defaultChecked={data.usertype || !usertype ? true : false}
-                                    {...register("usertype", { required: true })}
-                                    aria-invalid={errors.usertype ? "true" : "false"}
-                                    onChange={(e) => setUserType(e.target.value)}
-                                // defaultChecked={data.usertype}
-                                />
-                                    <label className="form-check-label" htmlFor="donation">Single</label>
+                                <>
+                                    <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        name="radiobutton"
+                                        id="1"
+                                        // checked={data.usertype ? false:tr}
+                                        value="1"
+                                        defaultChecked={data.usertype == 1 ? true : !usertype ? true : false}
+                                        {...register("usertype", { required: true })}
+                                        aria-invalid={errors.usertype ? "true" : "false"}
+                                        onChange={(e) => setUserType(e.target.value)}
+                                    // defaultChecked={data.usertype}
+                                    />
+                                    <label className="form-check-label mr-2" htmlFor="donation">Single</label>
                                 </>
                                 {/* ) : ( */}
 
@@ -189,7 +194,7 @@ const Create = ({ current, next, prev }) => {
                                     id="2"
                                     value="2"
                                     {...register("usertype", { required: true })}
-                                    defaultChecked={data.usertype ? true : false}
+                                    defaultChecked={data.usertype == 2 ? true : false}
                                     onChange={(e) => setUserType(e.target.value)}
                                     aria-invalid={errors.type ? "true" : "false"}
 
@@ -370,7 +375,7 @@ const Create = ({ current, next, prev }) => {
                         </div>
                     </div>
                     <div className="col-md-6 col-12">
-                        <div className="form-group mt-3">
+                        <div className="form-group">
                             <label>City or Region</label>
 
                             <select name="city"
@@ -458,7 +463,7 @@ const Create = ({ current, next, prev }) => {
                     </div>
 
 
-                    {usertype == 1 ? (
+                    {!usertype || data.usertype == 1 ? (
 
                         <div className="col-12 col-md-6">
                             <div className="form-group">
@@ -534,7 +539,8 @@ const Create = ({ current, next, prev }) => {
                                     aria-invalid={errors.start_date ? "true" : "false"} />
                                 {errors.start_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">Start date is required</p>}
                             </div>
-                        </div><div className="col-12 col-md-6">
+                        </div>
+                            <div className="col-12 col-md-6">
                                 <div className="form-group">
                                     <label>Campaign End Date</label>
                                     <input
@@ -548,48 +554,16 @@ const Create = ({ current, next, prev }) => {
                                         {...register("end_date")}
                                         aria-invalid={errors.end_date ? "true" : "false"}
                                     />
+                                    <div className='logo'>
+
+                                        <span className='logo-dis'>end date should be greater then or equal to start date</span>
+                                    </div>
                                     {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}
                                     {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
                                 </div>
                             </div></>
                     )}
-                    {/* {data.type == 2 && (
 
-
-                                        <><div className="col-12 col-md-6">
-                                            <div className="form-group">
-                                                <label>Campaign Start date</label>
-                                                <input
-                                                    type="date"
-                                                    // placeholder='dd-mm-yy'
-                                                    className="form-control"
-                                                    value={data.start_date}
-
-                                                    name="start_date"
-                                                    min={disablePastDate()}
-
-                                                    // placeholder="Start date :"
-                                                    {...register("start_date", { required: true })}
-                                                    aria-invalid={errors.start_date ? "true" : "false"} />
-                                                {errors.start_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">Start date is required</p>}
-                                            </div>
-                                        </div><div className="col-12 col-md-6">
-                                                <div className="form-group">
-                                                    <label>Campaign End Date</label>
-                                                    <input
-                                                        type="date"
-                                                        className="form-control"
-                                                        name="end_date"
-                                                        value={data.end_date}
-
-                                                        min={disablePastDate()}
-                                                        // placeholder="End date"
-                                                        {...register("end_date", { required: true })}
-                                                        aria-invalid={errors.end_date ? "true" : "false"} />
-                                                    {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
-                                                </div>
-                                            </div></>
-                                    )} */}
                     <div className="col-12 col-md-6">
                         <div className="form-group">
                             <label>Category</label>
@@ -606,6 +580,20 @@ const Create = ({ current, next, prev }) => {
                                 ))}
                             </select>
                             {errors.category_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Category is required</p>}
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-6">
+                        <div className="form-group">
+                            <label>Banner image</label>
+                            <UploadImage
+                                imageSrc={image}
+                                // src={image}
+                                initalImag={image}
+                                setImageSrc={setImage}
+                            />
+
+                            {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}
+                            {/* {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>} */}
                         </div>
                     </div>
 
