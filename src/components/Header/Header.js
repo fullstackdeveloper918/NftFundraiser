@@ -189,18 +189,18 @@ const Header = () => {
                     {/* Navbar Action Button */}
                     {/* Navbar Action Button */}
                     <ul className="navbar-nav action">
-                        {address &&
+                        {window.ethereum?.selectedAddress &&
                             <li className="nav-item mr-2">
                                 <a className="btn ml-lg-auto btn-bordered-white" onClick={WalletHandler} style={{ color: '#f8f9fa' }}><i className="icon-wallet mr-md-2" />{add1}...{add2}</a>
                             </li>
                         }
-                        {!address &&
+                        {!window.ethereum?.selectedAddress &&
                             <li className="nav-item ml-3">
                                 <a className="btn ml-lg-auto btn-bordered-white" onClick={WalletHandler} style={{ color: '#f8f9fa' }}><i className="icon-wallet mr-md-2" />CONNECT WALLET</a>
                             </li>
                         }
                     </ul>
-                    {userToken ? (
+                    {window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? (
                         <>
                             <div className="dropdown">
                                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
