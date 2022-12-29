@@ -242,7 +242,7 @@ const LatprojNftDetails = (props) => {
 
 
                             </h5>
-                            <span dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} />
+                            <p dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} />
                             {/* <ReadMore  dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} /> */}
                             {/* <p dangerouslySetInnerHTML={{ __html: latprojdetail.description }} /> */}
                         </div>

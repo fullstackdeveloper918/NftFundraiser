@@ -1874,3 +1874,48 @@ span.matics {
     color: #fff;
     font-size: 12px;
 }
+.price_nft_detail button {
+    margin-bottom: 0 !important;
+    padding: 15px 40px !important;
+    margin-left: 0px !important;
+}
+
+.nothing {
+    background: #16151a;
+color: #fff;
+text-align: center;
+padding: 16px 16px;
+}
+.logo{
+        position: absolute;
+        top: -22px;
+        right: 10px;
+        background: #16151a;
+        padding: 2px;
+        border-radius: 25%;
+        border: 2px solid #ffff;
+        /* background-image: linear-gradient(150deg, #57048a 0%, var(--primary-color) 78%) !important; */
+        border-color: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+}
+.fundraiser_sale{
+    gap: 10px;
+}
+.fundraiser_sale span:first-child {
+    color: #fff !important;
+    font-size: 14px;
+}
+.fundraiser_sale div div {
+    color: #8e8e8e !important;
+    font-weight: 600;
+}
+.card-caption .card-body p {
+    font-size: 14px;
+    font-family: var(--secondary-font);
+}
+.donate-btn button{
+    background-color: transparent !important;
+    border: 1px solid #fff !important;
+}
+.donate-btn {
+    text-align: center;
+}

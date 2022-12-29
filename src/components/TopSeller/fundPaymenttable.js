@@ -65,6 +65,9 @@ const FundTransdataTable = () => {
                         </tbody>
                     </Table>
                 </Panel>
+                <div className='nothing'>
+                            ---
+                        </div>
             </Collapse>
         </div>
     )
