@@ -582,7 +582,7 @@ const Create = ({ current, next, prev }) => {
                             {errors.category_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Category is required</p>}
                         </div>
                     </div>
-                    <div className="col-12 col-md-6">
+                    <div className="col-12 col-md-12">
                         <div className="form-group">
                             <label>Banner image</label>
                             <UploadImage

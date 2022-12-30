@@ -1396,7 +1396,6 @@ h5.user_title {
     background: #16151a;
     padding: 10px;
     /* border-radius: 8px 8px 0px 0; */
-    justify-content: space-between;
 }
 .user-description , .price_nft {
     border: 1px solid #1e1e1e;
@@ -1658,8 +1657,8 @@ span.ant-collapse-header-text {
 }
 .rounded-circle {
     border-radius: 50%!important;
-    height: 60px;
-    width: 60px;
+    height: 40px;
+    width: 40px;
     object-fit: cover;
 }
 .ant-collapse {

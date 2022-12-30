@@ -129,12 +129,16 @@ const ExploreAll = () => {
                                                             <a href="/item-details">
                                                                 <h5 className="mb-0">{item.title.slice(0,22)}..</h5>
                                                             </a>
-                                                            <div className="seller d-flex align-items-center mb-2">
+                                                            <a className="seller d-flex align-items-center mb-2" href="#">
+                                                                 <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />
+                                                                <h6 className="ml-2">{item.user_data.username}</h6>
+                                                             </a>
+                                                            {/* <div className="seller d-flex align-items-center mb-2">
                                                                 <span style={{ color: '#8E8E8E' }}>Owned By</span>
                                                                 <a href="/author">
                                                                     <h6 className="ml-2 mb-0"> @{item?.user_data?.username}</h6>
                                                                 </a>
-                                                            </div>
+                                                            </div> */}
                                                             <div className="card-bottom d-flex justify-content-between">
                                                                 <span>{item.price} MATIC</span>
                                                                 <span>{item.number_of_nft} NFTS</span>
