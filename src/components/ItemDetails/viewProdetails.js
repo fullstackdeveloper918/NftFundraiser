@@ -20,6 +20,7 @@ import LatNftdataTable from './../Explore/latProjNftdata';
 import ProjdataTable from '../Explore/projDetailtable';
 import ReferalPopup from './refralPopup';
 import ReadMore from '../../readMore';
+import { GetMatic } from './GetMAtic';
 
 const ProjDetails = () => {
 
@@ -31,10 +32,13 @@ const ProjDetails = () => {
     const dispatch = useDispatch()
     const [modalShow, setModalShow] = React.useState(false);
     const [modalShowrefer, setModalShowrefer] = React.useState(false);
+    const [matic, setmatic] = useState('')
+    console.log('matic', matic['matic-network']?.cad)
     const latprojdetail = useSelector(state => {
         // 
         return state.projectdetails.latestprojectdetails
     })
+
     const [modalShoww, setModalShoww] = React.useState(false);
     console.log('latproj', latprojdetail?.nft_data)
     const userdet = useSelector(state => {
@@ -46,11 +50,17 @@ const ProjDetails = () => {
         return state.user.userToken
     })
     useEffect(() => {
-        // 
+        GetMatic(setmatic)
         dispatch(LatestProjectDetail(id))
         dispatch(GetUserAction())
 
     }, [id])
+
+    // const getmatic = useSelector(state => {
+    //     debugger
+    //     return state?.latestprojectdetails?.matic
+    // })
+    // console.log(getmatic, 'matic')
 
     const deleteHandler = (id) => {
         dispatch(DeleteProject(id))
@@ -114,12 +124,12 @@ const ProjDetails = () => {
                         <div>
                             <div className="progress_nft mb-3">
                                 <div className='progress_main'><span>
-                                    <span className='nft_price'>{latprojdetail.selling_amount} raised of {latprojdetail.price} Cdn goal (150 of 758 MATIC)</span><small>  </small>
+                                    <span className='nft_price'>${latprojdetail.project_count} raised of ${latprojdetail.price} Cdn goal ({Number(latprojdetail.project_count) * Number(matic['matic-network']?.cad)} of {Number(latprojdetail.price) * Number(matic['matic-network']?.cad)} MATIC )</span><small>  </small>
                                     <div className='progressbar'>
                                         <ProgressBar varient="success" now={latprojdetail.project_percentage} />
                                         {/* <span className="progress-bar bg-success" role="progressbar" style={{ width: "70" }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" now={projdetail.project_percentage}> {projdetail.project_percentage}% </span> */}
                                     </div>
-                                    <p className='donation-count'>2K donations</p>
+                                    <p className='donation-count'>${latprojdetail.project_count} Cdn RAISED</p>
                                 </span>
                                 </div>
 
@@ -156,7 +166,7 @@ const ProjDetails = () => {
                                                     </svg>
                                                     </span>
 
-                                                    <span><div className="progress_name">{items.username} </div> <div>${items.price} Cdn / 40 MATIC ({days_difference} days ago)</div></span>
+                                                    <span><div className="progress_name">{items.username} </div> <div>${items.price} Cdn / {Number(latprojdetail.price) * Number(matic['matic-network']?.cad)} MATIC ({days_difference} days ago)</div></span>
                                                 </div>
                                             </li>
 

@@ -26,6 +26,7 @@ const projectSlice = createSlice({
         nftres: [],
         nftupdate: [],
         updbanner: [],
+        matic: [],
         // liveProjects: [],
         liveProjects: {
             LatestProjects: [],
@@ -70,6 +71,9 @@ const projectSlice = createSlice({
         },
         getProjectList: (state, action) => {
             state.projects = action.payload;
+        },
+        getMatic: (state, action) => {
+            state.matic = action.payload?.data?.data
         },
         getCategoriesList: (state, action) => {
             state.categories = action?.payload?.data?.data;
@@ -145,5 +149,6 @@ export const {
     Nftres,
     updatebanner,
     nftUpd,
-    nftAdd
+    nftAdd,
+    getMatic
 } = projectSlice.actions;

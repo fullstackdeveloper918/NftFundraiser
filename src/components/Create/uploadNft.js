@@ -95,7 +95,6 @@ const UploadNft = ({ current, prev }) => {
         // 
         return state?.projectdetails?.getcollections
     })
-    console.log('coll', col[0])
     const imaeg = useSelector(state => {
         // 
         return state?.projectdetails?.nftres
@@ -130,7 +129,7 @@ const UploadNft = ({ current, prev }) => {
 
 
     const onFinish = async (values) => {
-        debugger
+        // debugger
 
         setLoading(true)
         const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
@@ -269,6 +268,12 @@ const UploadNft = ({ current, prev }) => {
 
                             {(fields, { add, remove }) => (
                                 <>
+                                    <Button className="previous_btn" onClick={() => prev()}>
+                                        <svg width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="none" stroke="#fff" stroke-width="2" d="M2,12 L22,12 M13,3 L22,12 L13,21" transform="matrix(-1 0 0 1 24 0)" />
+                                        </svg>
+                                        Previous
+                                    </Button>
                                     {/* <div className='steps-center'>
 
 
@@ -526,12 +531,7 @@ const UploadNft = ({ current, prev }) => {
                             <div className="col-12">
                                 <button className="btn w-100 mt-3 mt-sm-4 mb-3" type="submit">Create</button>
                             </div>
-                            <Button className="previous_btn" onClick={() => prev()}>
-                                <svg width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill="none" stroke="#fff" stroke-width="2" d="M2,12 L22,12 M13,3 L22,12 L13,21" transform="matrix(-1 0 0 1 24 0)" />
-                                </svg>
-                                Previous
-                            </Button>
+
                         </Form.Item>
                     </Form>
                 </div>

@@ -1874,3 +1874,16 @@ span.matics {
     color: #fff;
     font-size: 12px;
 }
+.swal-button-container {
+    margin: 5px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+button.swal-button.swal-button--continue:after {
+    content: "Continue";
+}
+button.swal-button.swal-button--skip:after {
+    content: "skip";
+}

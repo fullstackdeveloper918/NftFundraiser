@@ -13,6 +13,7 @@ import EditNft from './editNft';
 import DesPopup from './desPopup';
 import ProjdataTable from '../Explore/projDetailtable';
 import ReadMore from '../../readMore';
+import { GetMatic } from '../ItemDetails/GetMAtic';
 
 // import ProgressBar from 'react-bootstrap';
 
@@ -27,6 +28,7 @@ const ProjNftDetails = () => {
         // 
         return state.projectdetails.latestprojectdetails
     })
+    const [matic, setmatic] = useState('')
     const [modalShow, setModalShow] = React.useState(false);
     const [modalShowedit, setModalShowedit] = React.useState(false);
     const [nftId, setNftID] = useState();
@@ -42,6 +44,7 @@ const ProjNftDetails = () => {
     console.log(projdetail, 'projdata')
 
     useEffect((event) => {
+        (GetMatic(setmatic))
         // event.preventDefault()
         dispatch(ProjectDetail(id))
     }, [id])
@@ -103,12 +106,12 @@ const ProjNftDetails = () => {
                             <div>
                                 <div className="progress_nft mb-3">
                                     <div className='progress_main'><span>
-                                        <span className='nft_price'>{projdetail.selling_amount} raised of {projdetail.price} Cdn goal ()</span><small>   </small>
+                                        <span className='nft_price'>${projdetail.project_count} raised of ${projdetail.price} Cdn goal ({Number(projdetail.project_count) * Number(matic['matic-network']?.cad)} of {Number(projdetail.price) * Number(matic['matic-network']?.cad)} MATIC )</span><small>   </small>
                                         <div className='progressbar'>
                                             <ProgressBar varient="success" now={projdetail.project_percentage} />
                                             {/* <span className="progress-bar bg-success" role="progressbar" style={{ width: "70" }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" now={projdetail.project_percentage}> {projdetail.project_percentage}% </span> */}
                                         </div>
-                                        <p className='donation-count'>2K donations</p>
+                                        <p className='donation-count'>${projdetail.project_count} Cdn RAISED</p>
                                     </span>
                                     </div>
 

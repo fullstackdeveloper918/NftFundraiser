@@ -4,6 +4,7 @@ import swal from 'sweetalert';
 import axios from 'axios';
 import { walletSignin } from '../../redux/Actions/authAction';
 import { object } from 'yup';
+import { redirect } from 'next/dist/server/api-utils';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // const contractABI = require('../../src/backend/contracts/artWork.sol/NFTContract.json')
@@ -24,14 +25,14 @@ const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
 const web3 = createAlchemyWeb3(alchemyKey);
 
 export const Roles = {
-  "ADMIN":1,
-  "BUYER":2,
-  "CREATOR":3
+  "ADMIN": 1,
+  "BUYER": 2,
+  "CREATOR": 3
 }
 
 export const creatorWalletUpdate = async (auth_token) => {
   try {
-    
+
     const formData = new FormData();
 
     formData.append('wallet_id', window.ethereum.selectedAddress);
@@ -45,7 +46,7 @@ export const creatorWalletUpdate = async (auth_token) => {
     const response = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/wallet/connect`,
       formData, config
     )
-    
+
     return response
 
   } catch (error) {
@@ -54,13 +55,13 @@ export const creatorWalletUpdate = async (auth_token) => {
   }
 }
 
-export const UpdateWalletAddress = async (role,auth_token = null) => {
+export const UpdateWalletAddress = async (role, auth_token = null) => {
   try {
-    
+
     const formData = new FormData();
- 
+
     formData.append('wallet_id', window.ethereum.selectedAddress);
-    formData.append('role',Roles[role])
+    formData.append('role', Roles[role])
 
     const config = {
       headers: {
@@ -72,7 +73,7 @@ export const UpdateWalletAddress = async (role,auth_token = null) => {
     const response = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/sign_in`,
       formData, config
     )
-    
+
     return response
 
   } catch (error) {
@@ -130,7 +131,7 @@ export const ConnectWallet = async (role) => {
           address: addressArray[0],
         };
 
-        const res = await UpdateWalletAddress(role) 
+        const res = await UpdateWalletAddress(role)
         return {
           ...obj,
           res
@@ -209,7 +210,7 @@ export const getCurrentWalletConnected = async () => {
 
 
 const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }) => {
-
+  debugger
   try {
     const formData = new FormData();
 
@@ -238,6 +239,7 @@ const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }
 };
 
 const UpdateContract = async (collid, contractAddress) => {
+  debugger
   try {
     const formData = new FormData();
 
@@ -333,7 +335,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
 
           await UpdateStatus({ id, token_id: tokid, transaction_hash: receipt.transactionHash, pay_from: receipt.from, pay_to: receipt.to })
           setCurrent(2)
-
+          // return redirect(`nft/details/${id}`)
           // console.log('tokid', tokid)
         }
       })

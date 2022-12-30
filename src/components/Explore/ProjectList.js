@@ -18,7 +18,7 @@ const GetAllProjects = () => {
     console.log(projects, 'projects')
 
     useEffect(() => {
-        dispatch(ProjectList(setLoading))
+        dispatch(ProjectList())
     }, [dispatch])
 
     const deleteHandler = (id) => {
@@ -39,7 +39,10 @@ const GetAllProjects = () => {
                                 {/* Intro */}
                                 <div className="intro text-center mb-4">
                                     {/* <span>Explore</span> */}
-                                    <h3 className="mt-3 mb-0">My Projects</h3>
+                                    {window.ethereum?.selectedAddress && (
+
+                                        <h3 className="mt-3 mb-0">My Projects</h3>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -89,9 +92,16 @@ const GetAllProjects = () => {
                                         )
                                     }) :
                                 <div className="col-12 col-sm-12 col-lg-12">
-                                    <h2 className='allproj2'>
-                                        You have no project yet, <Link to="/create">Create one</Link>
-                                    </h2>
+                                    {window.ethereum?.selectedAddress ? (
+                                        <h2 className='allproj2'>
+                                            You have no project yet, <Link to="/create">Create one</Link>
+                                        </h2>
+
+                                    ) : (
+                                        <h2 className='allproj2'>
+                                            Please connect you wallet to continue, <Link to="/wallet-connect">Connect</Link>
+                                        </h2>
+                                    )}
                                 </div>
                             }
                         </div>

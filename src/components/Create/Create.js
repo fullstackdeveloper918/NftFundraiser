@@ -12,7 +12,7 @@ import styles from "./styles/styles.module.scss"
 import { useFormData } from './Context/context';
 import JoditEditor from 'jodit-react'; import { CityList, CountryList, StateList } from '../../redux/Actions/authAction';
 import UploadImage from '../../shared/Upload';
-import { dataURLtoBlob } from '../../utils/blobfromurl';
+import { blobToDataURl, dataURLtoBlob } from '../../utils/blobfromurl';
 ;
 
 const Create = ({ current, next, prev }) => {
@@ -86,19 +86,20 @@ const Create = ({ current, next, prev }) => {
     })
     // console.log(col, 'col')
     const OnSubmit = (data) => {
-        debugger
+        // debugger
         const imageBanner = dataURLtoBlob(image)
 
-        setFormValues({ ...data, description, type: data?.usertype, image: imageBanner });
+        setFormValues({ ...data, description, type: data?.usertype, image: imageBanner, imageUri: image });
         // localStorage.setItem('country', JSON.stringify(country))
         next();
     }
-
-    useEffect(() => {
+    // const bannerimage =
+    // console.log('bannerimg', bannerimage)
+    useEffect(async () => {
         dispatch(GetCollectionsAction())
         dispatch(CategoriesAction())
         if (prev) {
-            // 
+
             setValue('title', data.title)
             setValue('address', data.address)
             setValue('category_id', data.category_id)
@@ -110,12 +111,12 @@ const Create = ({ current, next, prev }) => {
             setValue('price', data.price)
             setValue('start_date', data.start_date)
             setValue('type', data.usertype)
-            setValue('image', data.image)
+            setValue('image', data.imageUri)
 
             setUserType(data.usertype)
             setCountry(data.country)
             setDescription(data.description)
-            setImage(data.image)
+            setImage(data.imageUri)
             setState(data.state)
             setCity(data.city)
 
@@ -588,7 +589,7 @@ const Create = ({ current, next, prev }) => {
                             <UploadImage
                                 imageSrc={image}
                                 // src={image}
-                                initalImag={image}
+                                initalImag={data.imageUri}
                                 setImageSrc={setImage}
                             />
 

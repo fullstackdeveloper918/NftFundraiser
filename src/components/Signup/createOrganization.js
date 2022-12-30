@@ -136,6 +136,7 @@ const CreateOrganization = ({ formStep, nextFormStep, goBack }) => {
                                                 type="number"
                                                 className="form-control"
                                                 name="goal"
+                                                step="0.01"
                                                 placeholder="Fundraising goal (MATIC)"
                                                 {...register("goal",
                                                     {
@@ -182,13 +183,15 @@ const CreateOrganization = ({ formStep, nextFormStep, goBack }) => {
                                         <div className="form-group mt-3">
                                             <label>Website</label>
                                             <input
-                                                type="url"
+                                                type="text"
                                                 className="form-control"
                                                 name="url"
                                                 placeholder="Website"
                                                 {...register("url", {
-                                                    required: true, pattern: {
-                                                        value: /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/
+                                                    required: true,
+                                                    pattern: {
+                                                        value: /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/,
+
                                                     }
                                                 })}
                                                 // {...register("email")}
@@ -223,23 +226,25 @@ const CreateOrganization = ({ formStep, nextFormStep, goBack }) => {
                                                 control={control}
                                                 name="description"
                                                 defaultValue=""
-                                                {...register("description", { required: true })}
+
+                                                // {...register("description", { required: true })}
+                                                rules={{ required: true, min: 150 }}
                                                 // rules={{
                                                 //     required: true, pattern: {
 
                                                 //         message: "Description is required",
                                                 //     },
                                                 // }}
-                                                render={({ field: { value, onChange } }) => {
+                                                render={({ field }) => {
                                                     return <JoditEditor
-                                                        ref={editor}
-                                                        value={description}
+                                                        ref={field.ref}
+                                                        value={field.value}
                                                         // config={config}
                                                         aria-invalid={errors.description ? "true" : "false"}
                                                         placeholder="start typing"
                                                         tabIndex={1} // tabIndex of textarea
                                                         onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
-                                                        onChange={newContent => { }}
+                                                        onChange={field.onChange}
                                                     />
                                                 }}
                                             />
@@ -393,9 +398,9 @@ const CreateOrganization = ({ formStep, nextFormStep, goBack }) => {
                                     <div className="col-12">
                                         <button className="btn w-100 mt-3 mt-sm-4" type="submit">Create</button>
                                     </div>
-                                    <div className="col-3">
+                                    {/* <div className="col-3">
                                         <button className="btn w-100 mt-3 mt-sm-4" onClick={() => goBack()}>Previous</button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </form>
                         </div>
