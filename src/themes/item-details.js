@@ -8,14 +8,14 @@ import Footer from '../components/Footer/Footer';
 import ModalSearch from '../components/Modal/ModalSearch';
 import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
-import PopularDetails from '../components/Explore/popularDetails';
+import CollectionDetails from '../components/Explore/popularDetails';
 
 class ItemDetails extends Component {
     render() {
         return (
             <div className="main">
                 <Header />
-                <PopularDetails />
+                <CollectionDetails />
                 {/* <LiveAuctions /> */}
                 <Footer />
                 <ModalSearch />
