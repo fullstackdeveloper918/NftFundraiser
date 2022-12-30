@@ -42,26 +42,28 @@ const Collections = () => {
 
                         return (
                             <div key={`cd_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
-                                <div className="card no-hover text-center">
-                                    <div className="image-over">
+                                <div className="card no-hover text-center position-relative">
+                                    <div className="image-over ">
                                         <Link to={`/popularcollection/details/${item.id}`}>
                                             <img className="card-img-top" src={item?.image} alt="" />
                                         </Link>
                                         {/* Seller */}
-                                        <a className="seller">
+                                       
+                                        {/* <a className="seller">
 
-                                            {/* <Link to={`/item-details/${item.id}`} className="seller"> */}
+                                           
                                             <div className="seller-thumb avatar-lg">
                                                 <img className="rounded-circle" src={item?.user_data?.avatar} alt="" />
                                             </div>
-                                        </a>
+                                        </a> */}
                                     </div>
                                     {/* Card Caption */}
                                     <div className="card-caption col-12 p-0">
+                                    <img className='logo' src="/img/logo.png" alt='logo' width={50} height={50}/>
                                         {/* Card Body */}
-                                        <div className="card-body mt-4">
+                                        <div className="card-body">
                                             <Link to={`/item-details/${item.id}`}>
-                                                <h5 className="mb-2">{item.title.slice(0, 16)}<span>...</span></h5>
+                                                <h5 className="mb-0 pb-0 text-left">{item.title.slice(0, 16)}<span>...</span></h5>
                                             </Link>
                                             <span>{item.price}</span>
                                         </div>
