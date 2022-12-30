@@ -183,7 +183,14 @@ const FundraiserDetail = () => {
 
 
                         <div className='custam_col mt-3'>
-                            <h5 class="user_title"><div>Description</div></h5>
+                            <h5 class="user_title ">
+                                <div className='d-flex align-item-center gap-5'>
+                                <svg className='' width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke="/><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z"/></svg>  
+                                    <div>Desription</div>
+                                    
+                                </div>
+                                </h5>
+                          
                             <div className=" no-hover">
                                 {/* <span className="mt-0 mb-2" dangerouslySetInnerHTML={{ __html: funddetail?.organization_detail?.description }} /> */}
                                 <ReadMore data={funddetail?.organization_detail?.description} />

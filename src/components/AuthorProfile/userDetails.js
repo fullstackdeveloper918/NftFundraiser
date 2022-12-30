@@ -81,6 +81,7 @@ const UserTransdataTable = () => {
     return (
         <div>
             <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
+                
                 <Panel header="Item Activity" key="1">
                     <Table responsive >
                         <thead>
@@ -117,8 +118,13 @@ const UserTransdataTable = () => {
                             })}
 
                         </tbody>
+                      
                     </Table>
+                  
                 </Panel>
+                <div className='nothing'>
+                            ---
+                        </div>
             </Collapse>
         </div>
     )
