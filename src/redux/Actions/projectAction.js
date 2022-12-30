@@ -580,3 +580,23 @@ export const AddNftAction = (formData, id, setLoading) => async dispatch => {
         }
     }
 }
+
+export const GetMatic = async () => {
+
+    try {
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+
+            },
+        }
+        // 
+        const res = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=cad`,
+            config
+        )
+        console.log('res', res)
+    } catch (error) {
+        // console.log("error");
+    }
+};

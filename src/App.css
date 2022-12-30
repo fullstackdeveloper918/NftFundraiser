@@ -1873,6 +1873,21 @@ span.matics {
     color: #fff;
     font-size: 12px;
 }
+
+.swal-button-container {
+    margin: 5px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+button.swal-button.swal-button--continue:after {
+    content: "Continue";
+}
+button.swal-button.swal-button--skip:after {
+    content: "skip";
+}
+=======
 .price_nft_detail button {
     margin-bottom: 0 !important;
     padding: 15px 40px !important;
@@ -1934,3 +1949,4 @@ svg.detail-icon , .activity_icon {
     top: 16px;
     left: 15px;
 }
+

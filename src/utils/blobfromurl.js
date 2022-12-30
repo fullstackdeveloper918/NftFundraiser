@@ -6,3 +6,13 @@ export const dataURLtoBlob = (dataurl) => {
     }
     return new Blob([u8arr], { type: mime });
 }
+
+export const blobToDataURl = (blob) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = _e => resolve(reader.result);
+        reader.onerror = _e => reject(reader.error);
+        reader.onabort = _e => reject(new Error("Read aborted"));
+        reader.readAsDataURL(blob);
+    });
+}

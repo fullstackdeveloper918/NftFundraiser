@@ -14,6 +14,7 @@ import { CreateMetaDataAndMint } from './../Wallet/interact';
 import NftPopup from './nftPopup';
 import axios from 'axios';
 import NftdataTable from '../Explore/nftdataTable';
+import { redirect } from 'next/dist/server/api-utils';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -140,6 +141,7 @@ const NftDetails = (props) => {
                             // setContractAdd(receipt?.contractAddress)
                             // UpdateContract(id)
                         }
+
                     })
             } else {
                 mint(nftdetail?.collectionData?.contract_id)
@@ -256,18 +258,17 @@ const NftDetails = (props) => {
                             ) : (
 
                                 <div className='eddlbtton d-flex  align-items-center mt-3'>
-                                    {nftdetail.project_status == 1 ? (
 
-                                        <><button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                            id="nftdetail.id" onClick={() => deployAndMint(id)}>  Mint</button><NftPopup
-                                                show={modalShow}
-                                                current={current}
-                                                onHide={() => setModalShow(false)} /></>
-                                    ) : (
 
-                                        <button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                        >  waiting for approval</button>
-                                    )}
+                                    <><button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                        id="nftdetail.id" onClick={() => deployAndMint(id)}>  Mint</button><NftPopup
+                                            show={modalShow}
+                                            current={current}
+                                            onHide={() => setModalShow(false)} /></>
+
+
+
+
 
                                 </div>
 
