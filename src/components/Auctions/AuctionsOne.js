@@ -50,7 +50,7 @@ const AuctionsOne = ({ key, type }) => {
                 </div>
                 <div className="auctions-slides">
                     <div className="swiper-container slider-mid items">
-                        <div className="swiper-wrapper">
+                        <div className="swiper-wrapper col-12">
                             {/* Single Slide */}
                             {liveProjects?.map((item, idx) => {
                                 return (

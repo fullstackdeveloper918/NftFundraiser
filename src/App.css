@@ -1950,3 +1950,6 @@ svg.detail-icon , .activity_icon {
     left: 15px;
 }
 
+input, select, textarea {
+    border-radius: 5px !important;
+}
