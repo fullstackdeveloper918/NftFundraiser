@@ -1889,8 +1889,9 @@ padding: 16px 16px;
 .logo{
         position: absolute;
         top: -22px;
-        right: 10px;
+        left: 10px;
         background: #16151a;
+        z-index: 1;
         padding: 2px;
         border-radius: 25%;
         border: 2px solid #ffff;
@@ -1918,4 +1919,19 @@ padding: 16px 16px;
 }
 .donate-btn {
     text-align: center;
+}
+.gap-5{
+    gap: 5px;
+}
+.ant-collapse-icon-position-end > .ant-collapse-item > .ant-collapse-header {
+    position: relative;
+    padding: 12px 43px !important;
+    padding-right: 40px;
+}
+
+svg.detail-icon , .activity_icon {
+    position: absolute;
+    z-index: 999;
+    top: 16px;
+    left: 15px;
 }
