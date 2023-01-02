@@ -29,6 +29,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
 import swal from "sweetalert";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export const CreateProjectAction = (params, setLoading) => async dispatch => {
     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
@@ -319,18 +320,24 @@ export const GetCollectionsAction = () => async dispatch => {
         }
     }
 }
-export const CreateCollectionAction = (dat, image) => async dispatch => {
-    debugger
+export const CreateCollectionAction = ({ dat, imageBanner }) => async dispatch => {
+    // debugger
     try {
+        const formData = new FormData()
+        formData.append('title', dat.title)
+        formData.append('description', dat.description)
+        formData.append('short_url', dat.short_url)
+        formData.append('symbol', dat.symbol)
+        formData.append('image', imageBanner)
         const token = localStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
             },
-            // transformRequest: formData => formData
+            transformRequest: formData => formData
         }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createCollection`,
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createCollection`, formData,
             config)
         // dispatch(GetCollectionsAction)
         await dispatch(createCollectionSuccess(res));
