@@ -464,7 +464,7 @@ const Create = ({ current, next, prev }) => {
                     </div>
 
 
-                    {!usertype || data.usertype == 1 ? (
+                    {!usertype || usertype == 1 ? (
 
                         <div className="col-12 col-md-6">
                             <div className="form-group">
@@ -487,8 +487,10 @@ const Create = ({ current, next, prev }) => {
                                 />
                                 {errors.number_of_nft && errors.number_of_nft.type === "max" && (
                                     <p style={{ color: 'red' }}>
-                                        Only 1 nft allowed
+                                        Only 1 nft allowed (select campaign for more than one NFTs)
                                     </p>
+
+
                                 )}
                                 {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required and limit is upto 1</p>}
                                 {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max one length </p>} */}
@@ -592,7 +594,10 @@ const Create = ({ current, next, prev }) => {
                                 initalImag={data.imageUri}
                                 setImageSrc={setImage}
                             />
+                            <div >
 
+                                <span className='logo-dis'>Allowed types: JPG, PNG, GIF</span>
+                            </div>
                             {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}
                             {/* {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>} */}
                         </div>

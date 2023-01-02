@@ -32,7 +32,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export const CreateProjectAction = (params, setLoading) => async dispatch => {
-    debugger
+    // debugger
     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
     // setLoading(true)
@@ -159,7 +159,7 @@ export const NftList = (id) => async dispatch => {
     }
 }
 export const uploadNFT = async (params) => {
-    debugger
+    // debugger
     // const [loading, setLoading] = useState()
     // setLoading(true)
     const token = localStorage.getItem('authToken')

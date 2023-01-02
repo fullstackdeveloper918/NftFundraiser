@@ -34,9 +34,9 @@ const UploadNft = ({ current, prev }) => {
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
     // console.log(data, 'formdta')
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
     // const [nft_description, setNft_description] = useState([])
-    // console.log('nft_description', nft_description)
+    console.log('count', count)
 
     const [modalShow, setModalShow] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: '1' });
@@ -131,21 +131,24 @@ const UploadNft = ({ current, prev }) => {
 
     const onFinish = async (values) => {
         // debugger
-
-        setLoading(true)
-        const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
-
-        const imagesRes = await Promise.all(nftImagepromises).then(res => res)
-        // 
-
-        const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
-        console.log(addedImage, 'add')
-
-        const formData = new FormData()
         try {
+            setLoading(true)
+            const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
 
-            debugger
-            if (uploadNFT.statusCode === 200) {
+            const imagesRes = await Promise.all(nftImagepromises).then(res => res)
+            // 
+
+            const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
+            var str = addedImage;
+            var check = str.includes("https://ipfs.io/ipfs/undefined");
+            // console.log(check)
+            // console.log(addedImage.includes('undefined'), 'add')
+
+            const formData = new FormData()
+
+
+            // debugger
+            if (check === false) {
                 console.log('uploaded')
                 formData.append('title', data.title)
                 formData.append('description', data.description)
@@ -194,7 +197,7 @@ const UploadNft = ({ current, prev }) => {
                 // dispatch(uploadNFT())
                 dispatch(CreateProjectAction(formData, setLoading))
             } else {
-                debugger
+                // debugger
                 console.log('fail')
                 setLoading(false)
                 swal('error!', 'Nft not uploaded', 'error')
@@ -532,7 +535,7 @@ const UploadNft = ({ current, prev }) => {
                                         ))}
 
 
-                                        {(!(data?.number_of_nft == count)) ?
+                                        {!((data?.number_of_nft === count)) ?
                                             <Form.Item>
                                                 <Button type="dashed" onClick={(e) => { add(e); handleIncrement(e); }} block icon={<PlusOutlined />} disabled={data?.number_of_nft == count}>
                                                     Add NFT
