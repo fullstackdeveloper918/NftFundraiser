@@ -32,13 +32,10 @@ const ProjDetails = () => {
     const dispatch = useDispatch()
     const [modalShow, setModalShow] = React.useState(false);
     const [modalShowrefer, setModalShowrefer] = React.useState(false);
-    const [matic, setmatic] = useState('')
-    console.log('matic', matic['matic-network']?.cad)
     const latprojdetail = useSelector(state => {
         // 
         return state.projectdetails.latestprojectdetails
     })
-
     const [modalShoww, setModalShoww] = React.useState(false);
     console.log('latproj', latprojdetail?.nft_data)
     const userdet = useSelector(state => {
@@ -50,17 +47,11 @@ const ProjDetails = () => {
         return state.user.userToken
     })
     useEffect(() => {
-        GetMatic(setmatic)
+        // 
         dispatch(LatestProjectDetail(id))
         dispatch(GetUserAction())
 
     }, [id])
-
-    // const getmatic = useSelector(state => {
-    //     debugger
-    //     return state?.latestprojectdetails?.matic
-    // })
-    // console.log(getmatic, 'matic')
 
     const deleteHandler = (id) => {
         dispatch(DeleteProject(id))
@@ -104,7 +95,7 @@ const ProjDetails = () => {
                         </div>
 
 
-                        <div className="fundraiser mt-3 ">
+                        <div className="fundraiser mt-4 ">
                             <div className='lorem_done'>
                                 <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -120,16 +111,16 @@ const ProjDetails = () => {
 
                     </div>
 
-                    <div className="col-lg-4 col-12 mt-3 mt-lg-0">
+                    <div className="col-lg-4 col-12 mt-4 mt-lg-0">
                         <div>
-                            <div className="progress_nft mb-3">
+                            <div className="progress_nft ">
                                 <div className='progress_main'><span>
-                                    <span className='nft_price'>${latprojdetail.project_count} raised of ${latprojdetail.price} Cdn goal ({Number(latprojdetail.project_count) * Number(matic['matic-network']?.cad)} of {Number(latprojdetail.price) * Number(matic['matic-network']?.cad)} MATIC )</span><small>  </small>
+                                    <span className='nft_price'>{latprojdetail.selling_amount} raised of {latprojdetail.price} Cdn goal (150 of 758 MATIC)</span><small>  </small>
                                     <div className='progressbar'>
                                         <ProgressBar varient="success" now={latprojdetail.project_percentage} />
                                         {/* <span className="progress-bar bg-success" role="progressbar" style={{ width: "70" }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" now={projdetail.project_percentage}> {projdetail.project_percentage}% </span> */}
                                     </div>
-                                    <p className='donation-count'>${latprojdetail.project_count} Cdn RAISED</p>
+                                    <p className='donation-count'>2K donations</p>
                                 </span>
                                 </div>
 
@@ -166,7 +157,7 @@ const ProjDetails = () => {
                                                     </svg>
                                                     </span>
 
-                                                    <span><div className="progress_name">{items.username} </div> <div>${items.price} Cdn / {Number(latprojdetail.price) * Number(matic['matic-network']?.cad)} MATIC ({days_difference} days ago)</div></span>
+                                                    <span><div className="progress_name">{items.username} </div> <div>${items.price} Cdn / 40 MATIC ({days_difference} days ago)</div></span>
                                                 </div>
                                             </li>
 
@@ -184,9 +175,9 @@ const ProjDetails = () => {
                     {/* {userDetail !== null && ( */}
 
                     {/* )} */}
-                    <div className="col-12 col-lg-8 mt-3">
+                    <div className="col-12 col-lg-8 mt-4">
                         <div class="user-description ">
-                            <h5 className='user_title'><div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke="/><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z"/></svg></div><div>Description</div>
+                            <h5 className='user_title gap-5'><div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke="/><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z"/></svg></div><div>Description</div>
                                 {/* <i class="fa-solid fa-pen" ></i>
 						<i class="fa-sharp fa-solid fa-trash"></i> */}
 
@@ -197,7 +188,7 @@ const ProjDetails = () => {
                         </div>
                     </div>
 
-                    <div className='col-12 col-lg-4 mt-3'>
+                    <div className='col-12 col-lg-4 mt-4'>
 
 
                         <div className='table-main-detail position-relative'>
@@ -211,7 +202,7 @@ const ProjDetails = () => {
 
                     </div>
                     <div className='col-12'>
-                        <div className='mt-3'>
+                        <div className='mt-4'>
                             <div className='table-detail'>
                                 <LatNftdataTable />
                             </div>
@@ -219,7 +210,7 @@ const ProjDetails = () => {
 
                     </div>
 
-                    <div className=" col-12 mt-3">
+                    <div className=" col-12 mt-4">
                         <div className="items mt-0 explore-items p-0">
                             <ProjNFTS />
                         </div>

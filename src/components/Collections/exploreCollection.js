@@ -47,39 +47,30 @@ const AllCollections = () => {
                             [...new Map(coll?.map(item =>
                                 [item["title"], item])).values()]?.map((item, idx) => {
                                     return (
-                                        <Link key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item" >
+                                        <Link key={`edth_${idx}`} to={`/popularcollection/details/${item.id}`} className="col-12 col-sm-6 col-lg-3 item explore-item" >
                                             <div>
                                                 <div className="card position-relative ">
                                                     <div className="image-over ">
                                                         <img className="card-img-top" src={item.image} />
                                                     </div>
-                                                 
+
                                                     {/* Card Caption */}
                                                     <div className="card-caption col-12 p-0">
-                                                    <img className='logo' src="/img/logo.png" alt='logo' width={50} height={50}/>
+                                                        <img className='logo' src="/img/logo.png" alt='logo' width={50} height={50} />
                                                         {/* Card Body */}
                                                         <div className="card-body">
                                                             <a>
                                                                 <h5 className="mb-0 mt-3">{item.title}</h5>
                                                             </a>
 
-                                                            <div class=""><p> It is a long established fact that a reader</p></div>
+                                                            <div class=""><p>{item.description.slice(0, 52)}<span>....</span></p></div>
 
-                                                            <div class="mb-2 d-flex align-items-center justify-content-between">
-                                                                <div class="mt-2 mb-2 d-flex text-align-center fundraiser_sale">
-                                                                    <div>
-                                                                        <span>Total Nft's</span>
-                                                                        <div>14</div>
-                                                                        </div>
-                                                                    {/* <div>
-                                                                        <span>Sale</span>
-                                                                        <div>100</div>
-                                                                    </div> */}
+                                                            <div class="mb-2 align-items-center">
+                                                                <div class="mt-2 mb-2 d-flex justify-content-between text-align-center fundraiser_sale">
+                                                                  <span>Total NFTs</span>
+                                                                  <span>{item.nft_data.length}</span>
                                                                  </div>
-                                                                    <span class="share">
-                                                                        <svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#fff" stroke-width="2" d="M18,8 C19.6568542,8 21,6.65685425 21,5 C21,3.34314575 19.6568542,2 18,2 C16.3431458,2 15,3.34314575 15,5 C15,6.65685425 16.3431458,8 18,8 Z M6,15 C7.65685425,15 9,13.6568542 9,12 C9,10.3431458 7.65685425,9 6,9 C4.34314575,9 3,10.3431458 3,12 C3,13.6568542 4.34314575,15 6,15 Z M18,22 C19.6568542,22 21,20.6568542 21,19 C21,17.3431458 19.6568542,16 18,16 C16.3431458,16 15,17.3431458 15,19 C15,20.6568542 16.3431458,22 18,22 Z M16,18 L8,13 M16,6 L8,11"></path></svg>
-                                                                        </span>
-                                                                </div>
+                                                            </div>
                                                             {/* <div className="seller d-flex align-items-center my-3">
                                                                 <span style={{ color: '#8E8E8E' }}>Owned By</span>
                                                                 <a href="/author">

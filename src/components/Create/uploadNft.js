@@ -15,6 +15,8 @@ import 'antd/lib/modal/style/css';
 import 'antd/lib/button/style/css'
 import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
+import swal from 'sweetalert';
+import { useHistory } from 'react-router';
 
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -33,10 +35,10 @@ const UploadNft = ({ current, prev }) => {
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
     // console.log(data, 'formdta')
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
     // const [nft_description, setNft_description] = useState([])
-    // console.log('nft_description', nft_description)
-
+    console.log('count', count)
+    const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: '1' });
     // console.log('colldata', coldata)
@@ -130,65 +132,83 @@ const UploadNft = ({ current, prev }) => {
 
     const onFinish = async (values) => {
         // debugger
+        try {
+            setLoading(true)
+            const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
 
-        setLoading(true)
-        const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
+            const imagesRes = await Promise.all(nftImagepromises).then(res => res)
+            // 
 
-        const imagesRes = await Promise.all(nftImagepromises).then(res => res)
-        // 
+            const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
+            var str = addedImage;
+            var check = str.includes("https://ipfs.io/ipfs/undefined");
+            // console.log(check)
+            // console.log(addedImage.includes('undefined'), 'add')
 
-        const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
-        // 
-
-        const formData = new FormData()
+            const formData = new FormData()
 
 
-        formData.append('title', data.title)
-        formData.append('description', data.description)
-        formData.append('address', data.address)
+            // debugger
+            if (check === false) {
+                console.log('uploaded')
+                formData.append('title', data.title)
+                formData.append('description', data.description)
+                formData.append('address', data.address)
 
-        formData.append('country', data.country)
-        if (!data.state) {
+                formData.append('country', data.country)
+                if (!data.state) {
 
-            formData.append('state', '')
-        } else {
-            formData.append('state', data.state)
+                    formData.append('state', '')
+                } else {
+                    formData.append('state', data.state)
+                }
+                if (!data.city) {
+                    formData.append('city', '')
+                } else {
+
+                    formData.append('city', data.city)
+                }
+                formData.append('latitude', lat)
+                formData.append('logitude', log)
+                formData.append('price', data.price)
+                formData.append('number_of_nft', data.number_of_nft)
+                formData.append('image', data.image)
+                if (data.type == 1) {
+                    formData.append('start_date', '')
+                    formData.append('end_date', '')
+                } else {
+
+                    formData.append('start_date', data.start_date)
+                    formData.append('end_date', data.end_date)
+                }
+                formData.append('type', data.type)
+                formData.append('category_id', data.category_id)
+
+
+                formData.append('nft_image', addedImage)
+                formData.append('nft_name', values?.nfts?.map(x =>
+                    x.nft_name
+                ))
+                // const newlist = newList.push(nft_collection_id);
+                formData.append('nft_collection_id', coll_id)
+                // formData.append('nft_description', nft_description)
+                formData.append('nft_description', values?.nfts?.map(x => x.nft_description))
+                // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
+
+                // dispatch(uploadNFT())
+                dispatch(CreateProjectAction(formData, setLoading, history))
+            } else {
+                // debugger
+                console.log('fail')
+                setLoading(false)
+                swal('error!', 'Nft not uploaded', 'error')
+
+            }
+        } catch (error) {
+            console.log(error, 'error')
         }
-        if (!data.city) {
-            formData.append('city', '')
-        } else {
-
-            formData.append('city', data.city)
-        }
-        formData.append('latitude', lat)
-        formData.append('logitude', log)
-        formData.append('price', data.price)
-        formData.append('number_of_nft', data.number_of_nft)
-        formData.append('image', data.image)
-        if (data.type == 1) {
-            formData.append('start_date', '')
-            formData.append('end_date', '')
-        } else {
-
-            formData.append('start_date', data.start_date)
-            formData.append('end_date', data.end_date)
-        }
-        formData.append('type', data.type)
-        formData.append('category_id', data.category_id)
 
 
-        formData.append('nft_image', addedImage)
-        formData.append('nft_name', values?.nfts?.map(x =>
-            x.nft_name
-        ))
-        // const newlist = newList.push(nft_collection_id);
-        formData.append('nft_collection_id', coll_id)
-        // formData.append('nft_description', nft_description)
-        formData.append('nft_description', values?.nfts?.map(x => x.nft_description))
-        // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
-
-        // dispatch(uploadNFT())
-        dispatch(CreateProjectAction(formData, setLoading))
         // setLoading(false)
 
         // console.log('Received values of form:', values, data)
@@ -405,6 +425,8 @@ const UploadNft = ({ current, prev }) => {
                                                                         </Modal>
                                                                     </div>
                                                                 </div> */}
+
+
                                                             <div className="col-md-1 col-12 nft-remove">
                                                                 <MinusCircleOutlined onClick={(e) => { remove(name); handleDecrement(e); }} />
                                                             </div>
@@ -412,7 +434,7 @@ const UploadNft = ({ current, prev }) => {
                                                             <div className='col-12'>
                                                                 <label className='mt-2 mb-3'>Choose Collection</label>
                                                             </div>
-                                                            <div className="col-md-3 col-12">
+                                                            <div className="col-md-6 col-lg-3 col-12">
 
                                                                 {/* <div className="col-24"> */}
 
@@ -438,7 +460,7 @@ const UploadNft = ({ current, prev }) => {
 
                                                             {col?.map((item, idx) => (
 
-                                                                <div key={`auc_${idx}`} id={item.id} className="col-md-3 col-12 choose_div" >
+                                                                <div key={`auc_${idx}`} id={item.id} className="col-md-6 col-lg-3 col-12 choose_div" >
 
 
 
@@ -467,7 +489,7 @@ const UploadNft = ({ current, prev }) => {
                                                                 </div>
                                                                 // </div>
                                                             ))}
-                                                            <div className="col-md-12 col-12">
+                                                            <div className="col-md-12 col-12 uploadnftpopup">
                                                                 <label>Upload Nft</label>
                                                                 <div>
                                                                     <Form.Item
@@ -516,7 +538,7 @@ const UploadNft = ({ current, prev }) => {
                                         ))}
 
 
-                                        {(!(data?.number_of_nft == count)) ?
+                                        {!((data?.number_of_nft === count)) ?
                                             <Form.Item>
                                                 <Button type="dashed" onClick={(e) => { add(e); handleIncrement(e); }} block icon={<PlusOutlined />} disabled={data?.number_of_nft == count}>
                                                     Add NFT

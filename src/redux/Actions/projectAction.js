@@ -22,14 +22,18 @@ import {
     Nftres,
     updatebanner,
     nftUpd,
-    nftAdd
+    nftAdd,
+    getMatic
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import swal from "sweetalert";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { redirect } from "next/dist/server/api-utils";
 
-export const CreateProjectAction = (params, setLoading) => async dispatch => {
+export const CreateProjectAction = (params, setLoading, history) => async dispatch => {
+    // debugger
     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
     // setLoading(true)
@@ -48,11 +52,12 @@ export const CreateProjectAction = (params, setLoading) => async dispatch => {
             params, config)
         // console.log("resproj", res)
         dispatch(createProjectSuccess(res));
+
         if (res.status === 200) {
             setLoading(false)
-            swal("success", res.data.message, 'success')
-                .then(function () {
-                    window.location = "/projectlist";
+            swal({ title: "success", text: res.data.message, icon: 'success', buttons: false, timer: 1500 })
+                .then(() => {
+                    history.push("/projectlist");
                 });
 
         }
@@ -181,7 +186,8 @@ export const uploadNFT = async (params) => {
             };
         })
         .catch(function (error) {
-            return { success: false };
+            // swal('error!', 'NFT not uploaded', 'error')
+            // uploadNFT(setLoading(false))
         });
     // formData.append('image',params)
 
@@ -318,17 +324,25 @@ export const GetCollectionsAction = () => async dispatch => {
         }
     }
 }
-export const CreateCollectionAction = (params) => async dispatch => {
+export const CreateCollectionAction = ({ dat, imageBanner }) => async dispatch => {
+    // debugger
     try {
+        const formData = new FormData()
+        formData.append('title', dat.title)
+        formData.append('description', dat.description)
+        formData.append('short_url', dat.short_url)
+        formData.append('symbol', dat.symbol)
+        formData.append('image', imageBanner)
         const token = localStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
             },
+            transformRequest: formData => formData
         }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createCollection`,
-            params, config)
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createCollection`, formData,
+            config)
         // dispatch(GetCollectionsAction)
         await dispatch(createCollectionSuccess(res));
         if (res?.status === 200) {
@@ -581,7 +595,7 @@ export const AddNftAction = (formData, id, setLoading) => async dispatch => {
     }
 }
 
-export const GetMatic = async () => {
+export const GetMatic = () => async dispatch => {
 
     try {
 
@@ -590,11 +604,13 @@ export const GetMatic = async () => {
                 'Content-Type': 'application/json',
 
             },
+
         }
         // 
         const res = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=cad`,
             config
         )
+        await dispatch(getMatic(res))
         console.log('res', res)
     } catch (error) {
         // console.log("error");
