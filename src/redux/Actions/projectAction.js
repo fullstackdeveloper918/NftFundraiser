@@ -26,12 +26,13 @@ import {
     getMatic
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import swal from "sweetalert";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { redirect } from "next/dist/server/api-utils";
 
-export const CreateProjectAction = (params, setLoading) => async dispatch => {
+export const CreateProjectAction = (params, setLoading, history) => async dispatch => {
     // debugger
     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
@@ -54,9 +55,9 @@ export const CreateProjectAction = (params, setLoading) => async dispatch => {
 
         if (res.status === 200) {
             setLoading(false)
-            swal("success", res.data.message, 'success')
-                .then(function () {
-                    window.location = "/projectlist";
+            swal({ title: "success", text: res.data.message, icon: 'success', buttons: false, timer: 1500 })
+                .then(() => {
+                    history.push("/projectlist");
                 });
 
         }

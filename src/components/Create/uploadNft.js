@@ -16,6 +16,7 @@ import 'antd/lib/button/style/css'
 import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
 import swal from 'sweetalert';
+import { useHistory } from 'react-router';
 
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -37,7 +38,7 @@ const UploadNft = ({ current, prev }) => {
     const [count, setCount] = useState(1);
     // const [nft_description, setNft_description] = useState([])
     console.log('count', count)
-
+    const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: '1' });
     // console.log('colldata', coldata)
@@ -195,7 +196,7 @@ const UploadNft = ({ current, prev }) => {
                 // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
 
                 // dispatch(uploadNFT())
-                dispatch(CreateProjectAction(formData, setLoading))
+                dispatch(CreateProjectAction(formData, setLoading, history))
             } else {
                 // debugger
                 console.log('fail')

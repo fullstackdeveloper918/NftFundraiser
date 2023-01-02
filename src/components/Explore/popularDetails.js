@@ -17,6 +17,7 @@ import LatNftdataTable from './latProjNftdata';
 import ProjNFTS from '../Auctions/projectnfts';
 import { getPopularCollection } from '../../redux/Slices/popularCollectionSlice';
 import { PopularCollectionActionDetails } from '../../redux/Actions/popularAction';
+import CollectionNFTS from '../Collections/collectionNfts';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -39,114 +40,12 @@ const CollectionDetails = (props) => {
     })
     console.log(coll, 'coll')
     return (
-        // <section className="item-details-area">
-        //     <div className="container">
 
-        //         <div className="row justify-content-between content_project px-0">
-        //             <div className="col-12 col-lg-4">
-        //                 <div className="item-info">
-        //                     <>
-        //                     <div className="item-thumb text-center">
-        //                         <img src={coll.image} alt="" />
-        //                     </div>
-        //                     </>
-        //                 </div>
-        //             </div>
-
-        //             <div className="col-12 col-lg-8">
-        //                 <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
-        //                     <span Class="title_main " style={{ color: '#fff' }}>{coll.title}  </span>
-        //                 </div>
-
-        //                 <div className="content sm:mt-3 mt-lg-2">
-        //                     <div className="card no-hover position-relative">
-        //                         <span className='share'><svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        //                             <path fill="none" stroke="#fff" stroke-width="2" d="M18,8 C19.6568542,8 21,6.65685425 21,5 C21,3.34314575 19.6568542,2 18,2 C16.3431458,2 15,3.34314575 15,5 C15,6.65685425 16.3431458,8 18,8 Z M6,15 C7.65685425,15 9,13.6568542 9,12 C9,10.3431458 7.65685425,9 6,9 C4.34314575,9 3,10.3431458 3,12 C3,13.6568542 4.34314575,15 6,15 Z M18,22 C19.6568542,22 21,20.6568542 21,19 C21,17.3431458 19.6568542,16 18,16 C16.3431458,16 15,17.3431458 15,19 C15,20.6568542 16.3431458,22 18,22 Z M16,18 L8,13 M16,6 L8,11" />
-        //                         </svg></span>
-        //                         <div className="owner align-items-start">
-        //                             <span className='boldertext w-100'>Owned By : </span>
-        //                             <span>{coll.pay_from}</span>
-
-        //                             <a className="owner-meta d-flex align-items-center ml-3" href="/author"> </a>
-        //                         </div>
-
-        //                         <div>
-        //                             <span className='boldertext w-100'>Collection Name : </span>
-        //                             <span> Green and Better World</span>
-        //                         </div>
-        //                         <div className="item-info-list">
-        //                             <ul className="list-unstyled">
-        //                                 <span class='boldertext'>Token :</span>
-        //                                 <span> #{coll.token_id}</span>
-        //                             </ul>
-        //                         </div>
-        //                         <div className='eddlbtton d-flex  align-items-center mt-2'>
-
-        //                             <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-        //                                 id="nftdetail.id" onClick={() => buyHandler()}>  Buy</button>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-
-
-        //             </div>
-
-        //             <div className='col-lg-4 col-12 mt-3 '>
-        //                 <div className='price_nft'>
-        //                     <h5 className='user_title'>
-        //                         Current price
-        //                     </h5>
-        //                     <div className='price_nft_detail'>
-        //                         <div className='nft-price'>
-        //                             <svg fill="#a395f1" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        //                                 <g>
-        //                                     <path fill="none" d="M0 0h24v24H0z" />
-        //                                     <path stroke="#4528dc" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-3.5-8v2H11v2h2v-2h1a2.5 2.5 0 1 0 0-5h-4a.5.5 0 1 1 0-1h5.5V8H13V6h-2v2h-1a2.5 2.5 0 0 0 0 5h4a.5.5 0 1 1 0 1H8.5z" />
-        //                                 </g>
-        //                             </svg>
-        //                             <span>$78</span>
-        //                         </div>
-
-        //                         <div className='sales'>
-        //                             <span>
-        //                                 Creator royalties on secondary sales:
-        //                             </span>
-        //                             <span>5%</span>
-        //                         </div>
-
-        //                     </div>
-        //                 </div>
-        //             </div>
-
-        //             <div className='col-lg-8 col-12'>
-        //                 <div className="profile_detail mt-3">
-
-        //                     <UserTransdataTable />
-        //                 </div>
-        //             </div>
-
-
-        //             <div className="col-12 mt-3">
-        //                 <div class="user-description ">
-        //                     <h5 className='user_title'><div>Description</div></h5>
-        //                     <p dangerouslySetInnerHTML={{ __html: coll.description }} />
-        //                 </div>
-        //             </div>
-
-        //             <div className='col-12 mt-3'>
-        //                 <div className='funddeatil table-detail '>
-        //                     <FundTransdataTable />
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div >
-
-        // </section >
         <section className="item-details-area project-nft-si main-proj-detail">
             <div className="container">
                 <div className="row">
                     <div className='col-12'>
-                        <h3 className="p-0">{coll.title}</h3>
+                        <h3 className="p-0">{coll?.title}</h3>
                     </div>
 
                     <div className="col-12 col-lg-8 relative">
@@ -171,7 +70,7 @@ const CollectionDetails = (props) => {
                         </div>
 
 
-                        <div className="fundraiser mt-3 ">
+                        {/* <div className="fundraiser mt-3 ">
                             <div className='lorem_done'>
                                 <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -182,7 +81,7 @@ const CollectionDetails = (props) => {
                             </div>
 
 
-                        </div>
+                        </div> */}
 
 
                     </div>
@@ -215,7 +114,7 @@ const CollectionDetails = (props) => {
                                 </div> */}
 
 
-                                {coll.user_invest?.slice(0, 3)?.map((items) => {
+                                {coll?.user_invest?.slice(0, 3)?.map((items) => {
                                     const date1 = new Date(items.updated_at)
                                     const date2 = new Date()
                                     const time_difference = date2.getTime() - date1.getTime();
@@ -259,7 +158,7 @@ const CollectionDetails = (props) => {
 
 
                             </h5>
-                            <ReadMore data={coll.description} />
+                            <ReadMore data={coll?.description} />
                             {/* <p dangerouslySetInnerHTML={{ __html: coll.description }} /> */}
                         </div>
                     </div>
@@ -277,20 +176,20 @@ const CollectionDetails = (props) => {
                         </div>
 
                     </div>
-                    <div className='col-12'>
+                    {/* <div className='col-12'>
                         <div className='mt-3'>
                             <div className='table-detail'>
                                 <LatNftdataTable />
                             </div>
                         </div>
 
-                    </div>
-
-                    {/* <div className=" col-12 mt-3">
-                        <div className="items mt-0 explore-items p-0">
-                            <ProjNFTS />
-                        </div>
                     </div> */}
+
+                    <div className=" col-12 mt-3">
+                        <div className="items mt-0 explore-items p-0">
+                            <CollectionNFTS />
+                        </div>
+                    </div>
 
                 </div>
             </div>

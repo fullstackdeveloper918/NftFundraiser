@@ -47,7 +47,7 @@ const AllCollections = () => {
                             [...new Map(coll?.map(item =>
                                 [item["title"], item])).values()]?.map((item, idx) => {
                                     return (
-                                        <Link key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item" >
+                                        <Link key={`edth_${idx}`} to={`/popularcollection/details/${item.id}`} className="col-12 col-sm-6 col-lg-3 item explore-item" >
                                             <div>
                                                 <div className="card position-relative ">
                                                     <div className="image-over ">
