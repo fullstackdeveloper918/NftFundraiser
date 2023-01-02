@@ -187,7 +187,16 @@ const CollectionDetails = (props) => {
 
                     </div>
 
-
+                    <div className="col-lg-4 col-12 mt-3 mt-lg-0">
+                        <div>
+                            <div className="progress_nft mb-3">
+                                <div className='progress_main'><span>
+                                    {/* <span className='nft_price'>${coll.project_count} raised of ${coll.price} Cdn goal ({Number(coll.project_count) * Number(matic['matic-network']?.cad)} of {Number(coll.price) * Number(matic['matic-network']?.cad)} MATIC )</span><small>  </small> */}
+                                    {/* <div className='progressbar'>
+                                        <ProgressBar varient="success" now={coll.project_percentage} />
+                                    </div>
+                                    <p className='donation-count'>${coll.project_count} Cdn RAISED</p> */}
+                                </span>
                                 </div>
 
                                 {/* <div className="d-flex justify-content-start">
@@ -258,6 +267,13 @@ const CollectionDetails = (props) => {
                     <div className='col-12 col-lg-4 mt-3'>
 
 
+                        <div className='table-main-detail position-relative'>
+
+
+
+                            <ProjdataTable
+                            //  id={id}
+                            />
                         </div>
 
                     </div>

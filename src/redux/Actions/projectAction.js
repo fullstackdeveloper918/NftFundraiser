@@ -22,7 +22,8 @@ import {
     Nftres,
     updatebanner,
     nftUpd,
-    nftAdd
+    nftAdd,
+    getMatic
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect } from 'react-router-dom';
@@ -318,7 +319,8 @@ export const GetCollectionsAction = () => async dispatch => {
         }
     }
 }
-export const CreateCollectionAction = (params) => async dispatch => {
+export const CreateCollectionAction = (dat, image) => async dispatch => {
+    debugger
     try {
         const token = localStorage.getItem('authToken')
         const config = {
@@ -326,9 +328,10 @@ export const CreateCollectionAction = (params) => async dispatch => {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
             },
+            // transformRequest: formData => formData
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createCollection`,
-            params, config)
+            config)
         // dispatch(GetCollectionsAction)
         await dispatch(createCollectionSuccess(res));
         if (res?.status === 200) {
@@ -581,7 +584,7 @@ export const AddNftAction = (formData, id, setLoading) => async dispatch => {
     }
 }
 
-export const GetMatic = async () => {
+export const GetMatic = () => async dispatch => {
 
     try {
 
@@ -590,11 +593,13 @@ export const GetMatic = async () => {
                 'Content-Type': 'application/json',
 
             },
+
         }
         // 
         const res = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=cad`,
             config
         )
+        await dispatch(getMatic(res))
         console.log('res', res)
     } catch (error) {
         // console.log("error");
