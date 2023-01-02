@@ -13,7 +13,7 @@ const Collections = () => {
         // 
         return state?.collection?.collection
     })
-    console.log(coll, "coll")
+    console.log(coll, "coll detail")
     useEffect(() => {
 
         dispatch(PopularCollectionAction({}))
@@ -36,7 +36,7 @@ const Collections = () => {
                     </div>
                 </div>
                 <div className="row items">
-                    {coll.slice(0, 8)?.map((item, idx) => {
+                    {coll?.slice(0, 8)?.map((item, idx) => {
 
 
 
@@ -45,7 +45,7 @@ const Collections = () => {
                                 <div>
                                     <div className="card position-relative ">
                                         <div className="image-over ">
-                                            <Link to={`/popularcollection/details/${item.id}`}>
+                                            <Link to={`/popularcollection/details/${item?.id}`}>
                                                 <img className="card-img-top" src={item?.image} alt="" />
                                             </Link>
 
