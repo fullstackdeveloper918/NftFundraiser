@@ -15,6 +15,7 @@ import 'antd/lib/modal/style/css';
 import 'antd/lib/button/style/css'
 import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
+import swal from 'sweetalert';
 
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -138,57 +139,72 @@ const UploadNft = ({ current, prev }) => {
         // 
 
         const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
-        // 
+        console.log(addedImage, 'add')
 
         const formData = new FormData()
+        try {
+
+            debugger
+            if (uploadNFT.statusCode === 200) {
+                console.log('uploaded')
+                formData.append('title', data.title)
+                formData.append('description', data.description)
+                formData.append('address', data.address)
+
+                formData.append('country', data.country)
+                if (!data.state) {
+
+                    formData.append('state', '')
+                } else {
+                    formData.append('state', data.state)
+                }
+                if (!data.city) {
+                    formData.append('city', '')
+                } else {
+
+                    formData.append('city', data.city)
+                }
+                formData.append('latitude', lat)
+                formData.append('logitude', log)
+                formData.append('price', data.price)
+                formData.append('number_of_nft', data.number_of_nft)
+                formData.append('image', data.image)
+                if (data.type == 1) {
+                    formData.append('start_date', '')
+                    formData.append('end_date', '')
+                } else {
+
+                    formData.append('start_date', data.start_date)
+                    formData.append('end_date', data.end_date)
+                }
+                formData.append('type', data.type)
+                formData.append('category_id', data.category_id)
 
 
-        formData.append('title', data.title)
-        formData.append('description', data.description)
-        formData.append('address', data.address)
+                formData.append('nft_image', addedImage)
+                formData.append('nft_name', values?.nfts?.map(x =>
+                    x.nft_name
+                ))
+                // const newlist = newList.push(nft_collection_id);
+                formData.append('nft_collection_id', coll_id)
+                // formData.append('nft_description', nft_description)
+                formData.append('nft_description', values?.nfts?.map(x => x.nft_description))
+                // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
 
-        formData.append('country', data.country)
-        if (!data.state) {
+                // dispatch(uploadNFT())
+                dispatch(CreateProjectAction(formData, setLoading))
+            } else {
+                debugger
+                console.log('fail')
+                setLoading(false)
+                swal('error!', 'Nft not uploaded', 'error')
 
-            formData.append('state', '')
-        } else {
-            formData.append('state', data.state)
+            }
+        } catch (error) {
+            console.log(error, 'error')
         }
-        if (!data.city) {
-            formData.append('city', '')
-        } else {
-
-            formData.append('city', data.city)
-        }
-        formData.append('latitude', lat)
-        formData.append('logitude', log)
-        formData.append('price', data.price)
-        formData.append('number_of_nft', data.number_of_nft)
-        formData.append('image', data.image)
-        if (data.type == 1) {
-            formData.append('start_date', '')
-            formData.append('end_date', '')
-        } else {
-
-            formData.append('start_date', data.start_date)
-            formData.append('end_date', data.end_date)
-        }
-        formData.append('type', data.type)
-        formData.append('category_id', data.category_id)
 
 
-        formData.append('nft_image', addedImage)
-        formData.append('nft_name', values?.nfts?.map(x =>
-            x.nft_name
-        ))
-        // const newlist = newList.push(nft_collection_id);
-        formData.append('nft_collection_id', coll_id)
-        // formData.append('nft_description', nft_description)
-        formData.append('nft_description', values?.nfts?.map(x => x.nft_description))
-        // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
-
-        // dispatch(uploadNFT())
-        dispatch(CreateProjectAction(formData, setLoading))
         // setLoading(false)
 
         // console.log('Received values of form:', values, data)
