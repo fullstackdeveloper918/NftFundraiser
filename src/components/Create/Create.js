@@ -555,7 +555,7 @@ const Create = ({ current, next, prev }) => {
                                         {...register("end_date")}
                                         aria-invalid={errors.end_date ? "true" : "false"}
                                     />
-                                    <div className='logo'>
+                                    <div >
 
                                         <span className='logo-dis'>end date should be greater then or equal to start date</span>
                                     </div>
