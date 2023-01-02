@@ -1887,7 +1887,6 @@ button.swal-button.swal-button--continue:after {
 button.swal-button.swal-button--skip:after {
     content: "skip";
 }
-=======
 .price_nft_detail button {
     margin-bottom: 0 !important;
     padding: 15px 40px !important;
