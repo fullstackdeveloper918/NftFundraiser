@@ -44,7 +44,7 @@ const ProjdataTable = (props) => {
     useEffect(() => {
         dispatch(LatestProjectDetail(id))
         dispatch(ProjectDetail(id))
-        dispatch(PopularCollectionActionDetails({ id }))
+        dispatch(PopularCollectionActionDetails(props.idx))
     }, [id])
 
     const coll = useSelector(state => {

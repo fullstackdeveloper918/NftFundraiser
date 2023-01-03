@@ -149,7 +149,7 @@ const FundraiserDetail = () => {
                             {/* })} */}
                             <h5 class="user_title_1 mt-3 mb-0"><div>Projects</div></h5>
                             <ul className="m-0 custom_lis pl-0 fund_row">
-                                {fundprojdetail && fundprojdetail.length &&
+                                {fundprojdetail && fundprojdetail.length ?
                                     [...new Map(fundprojdetail.map(item =>
                                         [item["title"], item])).values()]?.slice(0, 3)?.map((item, idx) => {
                                             const date1 = new Date(item.created_at)
@@ -175,7 +175,15 @@ const FundraiserDetail = () => {
 
 
                                             )
-                                        })}
+                                        }) :
+                                    <div className="col-12 col-sm-12 col-lg-12">
+
+                                        <span className='allproj2'>
+                                            No Projects
+                                        </span>
+
+                                    </div>
+                                }
                             </ul>
                             <Link className="" to="/all/LatestProjects"><p className='see_all'>See all</p></Link>
 
@@ -184,13 +192,15 @@ const FundraiserDetail = () => {
 
                         <div className='custam_col mt-3'>
                             <h5 class="user_title ">
-                                <div className='d-flex align-item-center'>
-                                     <svg className='' width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke="/><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z"/></svg>  
+
+                                <div className='d-flex align-item-center gap-5'>
+                                    <svg className='' width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg>
+
                                     <div>Desription</div>
-                                    
+
                                 </div>
-                                </h5>
-                          
+                            </h5>
+
                             <div className=" no-hover">
                                 {/* <span className="mt-0 mb-2" dangerouslySetInnerHTML={{ __html: funddetail?.organization_detail?.description }} /> */}
                                 <ReadMore data={funddetail?.organization_detail?.description} />
