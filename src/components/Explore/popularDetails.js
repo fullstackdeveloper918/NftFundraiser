@@ -68,6 +68,16 @@ const CollectionDetails = (props) => {
                     <div className='col-12 col-lg-8 '>
                     <h3 className="p-0">{coll?.title}</h3>
 
+                    <div className='content'>
+                        <div className='card no-hover position-relative'>
+                        <div><span className='boldertext'>Number of NFTs :</span><span> {coll?.nft_data?.length}</span></div>
+                        <div><span className='boldertext'>Chain :</span> <span>Polygon (Matic)</span></div>
+                        <div><span className='boldertext'>Created at:</span>  <span> {/* {days_difference} */}12  days ago</span></div>
+                        <div><span className='boldertext'>Category:</span>  <span>{coll?.category}</span></div>
+                        </div>
+
+                    </div>
+
                         <div className='table-main-detail position-relative'>
 
 
