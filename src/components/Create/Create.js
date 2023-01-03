@@ -302,7 +302,8 @@ const Create = ({ current, next, prev }) => {
                                 control={control}
                                 name="description"
                                 defaultValue=""
-                                rules={{ required: true, min: 150 }}
+                                rules={{ required: true, minLength: 300 }}
+
 
                                 render={({ field }) => {
                                     return <JoditEditor
@@ -311,6 +312,7 @@ const Create = ({ current, next, prev }) => {
                                         // {...register("description", { required: true })}
                                         // config={config}
                                         value={field.value}
+
                                         placeholder="start typing"
                                         aria-invalid={errors.description ? "true" : "false"}
                                         tabIndex={1} // tabIndex of textarea
@@ -321,9 +323,9 @@ const Create = ({ current, next, prev }) => {
                                 }}
                             />
                             {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
-                            {errors.description && errors.description.type === "min" && (
+                            {errors.description && errors.description.type === "minLength" && (
                                 <p style={{ color: 'red' }}>
-                                    min 150 words
+                                    min length of words is 300
                                 </p>
                             )}
                         </div>

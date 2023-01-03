@@ -44,14 +44,14 @@ const CollectionDetails = (props) => {
         <section className="item-details-area project-nft-si main-proj-detail">
             <div className="container">
                 <div className="row">
-      
+
 
                     <div className="col-12 col-lg-4 relative">
                         <div className="item-info" >
 
 
                             <div className="item-thumb text-center">
-                               
+
                                 <img src={coll?.image} alt="first nft" />
                                 {/* : null} */}
                             </div>
@@ -59,21 +59,21 @@ const CollectionDetails = (props) => {
                         </div>
 
 
-                       
+
 
 
                     </div>
 
 
                     <div className='col-12 col-lg-8 '>
-                    <h3 className="p-0">{coll?.title}</h3>
+                        <h3 className="p-0">{coll?.title}</h3>
 
                         <div className='table-main-detail position-relative'>
 
 
 
                             <ProjdataTable
-                            //  id={id}
+                                idx={id}
                             />
                         </div>
 
@@ -84,9 +84,9 @@ const CollectionDetails = (props) => {
                     <div className="col-lg-4 col-12 mt-3 mt-lg-0">
                         <div>
                             <div className=" mb-3">
-                               
 
-                               
+
+
 
 
                                 {coll?.user_invest?.slice(0, 3)?.map((items) => {
@@ -139,7 +139,17 @@ const CollectionDetails = (props) => {
                         </div>
                     </div>
 
-                    
+
+
+                    {/* <div>
+
+                        <ProjdataTable
+                            idx={id}
+                        //  id={id}
+                        />
+                    </div> */}
+
+                    {/* </div> */}
 
                     {/* <div className='col-12'>
                         <div className='mt-3'>
