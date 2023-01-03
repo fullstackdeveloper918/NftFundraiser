@@ -113,7 +113,7 @@ const ProjdataTable = (props) => {
                                         {location.pathname === `/popularcollection/details/${id}` ? (
                                             <>
 
-                                                <td><span>Number of NFTs </span> {coll?.nft_data?.length}<span></span></td>
+                                                <td><span>Number of NFTs </span><span> {coll?.nft_data?.length}</span></td>
                                                 <td><span>Chain </span> <span>Polygon (Matic)</span></td>
                                                 <td><span>Created at</span>  <span>{days_difference} days ago</span> </td>
                                                 <td><span>Category</span>  <span>{coll?.category}</span> </td>

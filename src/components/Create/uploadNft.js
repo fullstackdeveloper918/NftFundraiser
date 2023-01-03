@@ -425,6 +425,8 @@ const UploadNft = ({ current, prev }) => {
                                                                         </Modal>
                                                                     </div>
                                                                 </div> */}
+
+
                                                             <div className="col-md-1 col-12 nft-remove">
                                                                 <MinusCircleOutlined onClick={(e) => { remove(name); handleDecrement(e); }} />
                                                             </div>
@@ -432,7 +434,7 @@ const UploadNft = ({ current, prev }) => {
                                                             <div className='col-12'>
                                                                 <label className='mt-2 mb-3'>Choose Collection</label>
                                                             </div>
-                                                            <div className="col-md-3 col-12">
+                                                            <div className="col-md-6 col-lg-3 col-12">
 
                                                                 {/* <div className="col-24"> */}
 
@@ -458,7 +460,7 @@ const UploadNft = ({ current, prev }) => {
 
                                                             {col?.map((item, idx) => (
 
-                                                                <div key={`auc_${idx}`} id={item.id} className="col-md-3 col-12 choose_div" >
+                                                                <div key={`auc_${idx}`} id={item.id} className="col-md-6 col-lg-3 col-12 choose_div" >
 
 
 
@@ -487,7 +489,7 @@ const UploadNft = ({ current, prev }) => {
                                                                 </div>
                                                                 // </div>
                                                             ))}
-                                                            <div className="col-md-12 col-12">
+                                                            <div className="col-md-12 col-12 uploadnftpopup">
                                                                 <label>Upload Nft</label>
                                                                 <div>
                                                                     <Form.Item

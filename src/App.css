@@ -487,6 +487,13 @@ img.navbar-brand-sticky.desktop_logo {
     display: block;
 }
 @media (max-width:767px){
+    .uploadnftpopup .ant-upload.ant-upload-select.ant-upload-select-picture-card {
+        width: 100%;
+    }
+    .main-proj-detail .item-thumb img {
+        height: 300px !important;
+        /* height: auto; */
+    }
     .nft-remove {
         position: absolute;
         left: 0 !important;
@@ -650,7 +657,7 @@ section.live-auctions-area.single_project-detail .row h3 {
 .modal-dialog.modal-lg.modal-dialog-centered {
     background: #2222228a;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     padding: 0;
     max-width: 100%;
     margin: 0;
@@ -1550,7 +1557,7 @@ div.ant-collapse ,  div.ant-collapse > .ant-collapse-item{
 .nft-remove {
     position: absolute;
     right: 0;
-    top: 25px;
+    top: 58px;
 }
 .fade.edit_nft_popup.modal.show .modal-content {
     max-width: 100%;
@@ -1821,6 +1828,21 @@ section.wallet-connect-area h4 {
     max-width: 200px;
     }
 
+
+    :root .EditImage .popup .control-panel {
+        position: unset !important;
+        width: 450px;
+        margin: 0;
+    }
+    :root .EditImage .popup .image-container {
+        flex-direction: column !important;
+    }
+    :root .EditImage .popup .image-container {
+        flex-direction: column !important;
+        /* align-items: center !important; */
+        align-content: center !important;
+    }
+
 }
 @media (min-width: 991px){
     .progress_nft.mobile_nft.mb-3 {
@@ -1951,4 +1973,70 @@ svg.detail-icon , .activity_icon {
 
 input, select, textarea {
     border-radius: 5px !important;
+}
+.collection_img_popup .image-holder {
+    height: 200px !important;
+}
+.mint_btn button{
+    border: 1px solid #fff !important;
+    margin: 15px 0 !important;
+    background: transparent !important;
+    width: 100%; 
+}
+ .EditImage .popup img {
+    vertical-align: middle;
+    max-height: 450px;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.EditImage .popup .control-panel {
+    position: fixed !important;
+    right: 0 !important;
+    border-left: 2px solid #3c3c3c !important;
+    height: 100%;
+    top: 0 !important;
+    border-radius: 0;
+    background: #1e1d1d;
+    margin: 0;
+}
+.EditImage .popup .image-container {
+    place-content: unset !important;
+}
+
+.jodit-dialog__panel {
+    background: #16151a !important;
+}
+.jodit-dialog__content {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+}
+.jodit-ui-button:hover:not([disabled]) {
+    color: #4528DC !important;
+    background-color: #08080800 !important;
+}
+.jodit-ui-button span.jodit-ui-button__text:hover {
+    color: #4528DC;
+    font-weight: 600;
+}
+span.jodit-ui-button__text {
+    /* color: #fff; */
+    font-weight: 600;
+}
+.price_nft {
+    position: sticky;
+    top: 10px;
+    height: auto !important;
+}
+.item-details-area .content_project .item-thumb {
+	height: 350px;
+	width: 350px;
+	object-position: bottom;
+}
+.demo .nfts_details tr td {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 16px;
+    font-family: var(--secondary-font);
 }

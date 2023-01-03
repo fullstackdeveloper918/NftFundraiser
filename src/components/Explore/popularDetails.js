@@ -44,25 +44,14 @@ const CollectionDetails = (props) => {
         <section className="item-details-area project-nft-si main-proj-detail">
             <div className="container">
                 <div className="row">
-                    <div className='col-12'>
-                        <h3 className="p-0">{coll?.title}</h3>
-                    </div>
+      
 
-                    <div className="col-12 col-lg-8 relative">
+                    <div className="col-12 col-lg-4 relative">
                         <div className="item-info" >
 
 
                             <div className="item-thumb text-center">
-                                {/* {projdetail && projdetail?.nft_data && projdetail?.nft_data?.length ? */}
-                                {/* <div>
-                                <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() => setModalShow(true)}></i>
-
-
-                                <Banner
-                                    id={id}
-                                    show={modalShow}
-                                    onHide={() => setModalShow(false)} />
-                            </div> */}
+                               
                                 <img src={coll?.image} alt="first nft" />
                                 {/* : null} */}
                             </div>
@@ -70,48 +59,34 @@ const CollectionDetails = (props) => {
                         </div>
 
 
-                        {/* <div className="fundraiser mt-3 ">
-                            <div className='lorem_done'>
-                                <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                <span className='cutom_dis'> {coll?.user_data?.organization_detail?.organization_name} is organizing this project.</span>
-                            </div>
-
-
-                        </div> */}
+                       
 
 
                     </div>
 
+
+                    <div className='col-12 col-lg-8 '>
+                    <h3 className="p-0">{coll?.title}</h3>
+
+                        <div className='table-main-detail position-relative'>
+
+
+
+                            <ProjdataTable
+                            //  id={id}
+                            />
+                        </div>
+
+                    </div>
+
+
+
                     <div className="col-lg-4 col-12 mt-3 mt-lg-0">
                         <div>
-                            <div className="progress_nft mb-3">
-                                <div className='progress_main'><span>
-                                    {/* <span className='nft_price'>${coll.project_count} raised of ${coll.price} Cdn goal ({Number(coll.project_count) * Number(matic['matic-network']?.cad)} of {Number(coll.price) * Number(matic['matic-network']?.cad)} MATIC )</span><small>  </small> */}
-                                    {/* <div className='progressbar'>
-                                        <ProgressBar varient="success" now={coll.project_percentage} />
-                                    </div>
-                                    <p className='donation-count'>${coll.project_count} Cdn RAISED</p> */}
-                                </span>
-                                </div>
+                            <div className=" mb-3">
+                               
 
-                                {/* <div className="d-flex justify-content-start">
-                                    <><Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary" onClick={() => setModalShowrefer(true)}>
-                                        Share
-                                    </Button>
-                                    <ReferalPopu
-                                            id={id}
-                                            userRef={userDetail}
-                                            show={modalShowrefer}
-                                            onHide={() => setModalShowrefer(false)} /></>
-
-                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Invest
-                                    </Button>
-                                </div> */}
+                               
 
 
                                 {coll?.user_invest?.slice(0, 3)?.map((items) => {
@@ -150,9 +125,10 @@ const CollectionDetails = (props) => {
                     {/* {userDetail !== null && ( */}
 
                     {/* )} */}
-                    <div className="col-12 col-lg-8 mt-3">
+                    <div className="col-12 col-lg-12 mt-3">
                         <div class="user-description ">
                             <h5 className='user_title'><div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg></div><div>Description</div>
+
                                 {/* <i class="fa-solid fa-pen" ></i>
                     <i class="fa-sharp fa-solid fa-trash"></i> */}
 
@@ -163,19 +139,8 @@ const CollectionDetails = (props) => {
                         </div>
                     </div>
 
-                    <div className='col-12 col-lg-4 mt-3'>
+                    
 
-
-                        <div className='table-main-detail position-relative'>
-
-
-
-                            <ProjdataTable
-                            //  id={id}
-                            />
-                        </div>
-
-                    </div>
                     {/* <div className='col-12'>
                         <div className='mt-3'>
                             <div className='table-detail'>

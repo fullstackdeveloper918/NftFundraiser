@@ -380,7 +380,7 @@ const CreateOrganization = ({ formStep, nextFormStep, goBack }) => {
                                                 {...register("logo", { required: true })}
                                                 aria-invalid={errors.logo ? "true" : "false"}
                                             />
-                                            <div className='logo'>
+                                            <div className='logo_one'>
 
                                                 <span className='logo-dis'>maximum height should be 250 pixels</span>
                                             </div>

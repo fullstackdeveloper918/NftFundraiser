@@ -134,22 +134,27 @@ const ProjNFTS = () => {
                                     <div className="card-caption col-12 p-0">
                                         {/* Card Body */}
                                         <div className="card-body">
-                                            <div className="countdown-times mb-3">
+                                            {/* <div className="countdown-times mb-3">
                                                 <div className="countdown d-flex" data-date={item.end_date} />
-                                            </div>
+                                            </div> */}
                                             <a href="/item-details">
-                                                <h5 className="mb-0">{item.title.toUpperCase()} {item.token_id}</h5>
+                                                <h5 className="mb-0">{item.title.slice(0,16)} {item.token_id}...</h5>
                                             </a>
                                             {/* <a className="seller d-flex align-items-center my-3">
                                                 <img className="avatar-sm rounded-circle"
                                                     src='https://images.unsplash.com/photo-1547555999-14e818e09e33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80' alt="" />
                                                 <span className="ml-2">{item.from}</span>
                                             </a> */}
-                                            <div className="card-bottom d-flex">
-                                                <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 28).toUpperCase() }} /><span></span>
+                                            <div className="card-bottom">
+                                                <span dangerouslySetInnerHTML={{ __html: item.description.slice(0,45) }} />
+                                            </div>
+
+                                            <div className='mint_btn'>
+                                                <a href="#"><button className='btn ml-lg-auto btn-bordered-white'>Mint</button></a>
                                             </div>
 
                                         </div>
+                                       
                                     </div>
                                 </div>
                             </div>

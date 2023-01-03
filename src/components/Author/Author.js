@@ -8,7 +8,7 @@ class Author extends Component {
             <section className="author-area explore-area author-details-area  popular-collections-area">
                 <div className="container">
                     <div className="row justify-content-center">
-                        <div className="col-12 col-md-10">
+                        <div className="col-12 col-md-12">
                             <AuthorProfile />
                         </div>
                     </div>

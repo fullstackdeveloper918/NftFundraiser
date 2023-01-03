@@ -440,7 +440,7 @@ const AddNft = ({ current, prev }) => {
                                                                                 </div>
                                                                                 // </div>
                                                                             ))}
-                                                                            <div className="col-md-12 col-12">
+                                                                            <div className="col-md-12 col-12 ">
                                                                                 <label>Upload Nft</label>
                                                                                 <div>
                                                                                     <Form.Item
