@@ -171,6 +171,7 @@ const CollectionDetails = (props) => {
 
 
                             <ProjdataTable
+                                idx={id}
                             //  id={id}
                             />
                         </div>

@@ -2,7 +2,7 @@
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Modal, Upload } from 'antd';
 import React, { Fragment, useEffect, useState, useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProjectAction, GetCollectionsAction, uploadNFT } from '../../redux/Actions/projectAction';
 import { useFormData } from './Context/context'
@@ -36,7 +36,7 @@ const UploadNft = ({ current, prev }) => {
     const [previewTitle, setPreviewTitle] = useState('');
     // console.log(data, 'formdta')
     const [count, setCount] = useState(1);
-    // const [nft_description, setNft_description] = useState([])
+    const [nft_description, setNft_description] = useState([])
     console.log('count', count)
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
@@ -191,8 +191,8 @@ const UploadNft = ({ current, prev }) => {
                 ))
                 // const newlist = newList.push(nft_collection_id);
                 formData.append('nft_collection_id', coll_id)
-                // formData.append('nft_description', nft_description)
-                formData.append('nft_description', values?.nfts?.map(x => x.nft_description))
+                formData.append('nft_description', nft_description)
+                // formData.append('nft_description', values?.nfts?.map(x => x.nft_description))
                 // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
 
                 // dispatch(uploadNFT())
@@ -350,7 +350,7 @@ const UploadNft = ({ current, prev }) => {
                                                                 <label>Description</label>
                                                                 <div>
 
-                                                                    <Form.Item
+                                                                    {/* <Form.Item
                                                                         {...restField}
                                                                         name={[name, "nft_description"]}
                                                                         // label="Enter name"
@@ -359,29 +359,36 @@ const UploadNft = ({ current, prev }) => {
                                                                             {
                                                                                 required: true,
                                                                                 message: 'Description is required',
+                                                                                min:250
                                                                             },
-                                                                        ]}
-                                                                    >
-                                                                        {/* <Controller
-                                                                            control={control}
-                                                                            name="nft_description"
-                                                                            defaultValue=""
-                                                                            render={({ field: { value, onChange } }) => {
-                                                                                return  */}
-                                                                        <JoditEditor
-                                                                            ref={editor}
-                                                                            value={'nft_description'}
-                                                                            // config={config}
-                                                                            // aria-invalid={errors.nft_description ? "true" : "false"}
-                                                                            placeholder="start typing"
-                                                                            tabIndex={1} // tabIndex of textarea
-                                                                            // onBlur={newContent => 'nft_description'(newContent)} // preferred to use only this option to update the content for performance reasons
-                                                                            onChange={newContent => { }}
-                                                                        />
-                                                                        {/* {errors.nft_description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>} */}
-                                                                        {/* }} */}
-                                                                        {/* /> */}
-                                                                    </Form.Item>
+                                                                        ]} */}
+                                                                    {/* > */}
+                                                                    <Controller
+                                                                        control={control}
+                                                                        name="nft_description"
+                                                                        defaultValue=""
+                                                                        rules={{ required: true, minLength: 300 }}
+                                                                        render={({ field }) => {
+                                                                            return <JoditEditor
+                                                                                ref={field.ref}
+                                                                                value={field.value}
+                                                                                // config={config}
+                                                                                aria-invalid={errors.nft_description ? "true" : "false"}
+                                                                                placeholder="start typing"
+                                                                                tabIndex={1} // tabIndex of textarea
+                                                                                onBlur={newContent => setNft_description(newContent)} // preferred to use only this option to update the content for performance reasons
+                                                                                onChange={field.onChange}
+                                                                            />
+                                                                        }}
+
+
+                                                                    />
+                                                                    {errors.nft_description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
+                                                                    {errors.nft_description && errors.nft_description.type === "minLength" && (
+                                                                        <p style={{ color: 'red' }}>
+                                                                            min length of words is 300
+                                                                        </p>
+                                                                    )}
                                                                 </div>
                                                             </div>
                                                             {/* <div className="col-md-5 col-12">
