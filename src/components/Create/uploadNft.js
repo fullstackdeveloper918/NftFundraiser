@@ -225,6 +225,18 @@ const UploadNft = ({ current, prev }) => {
         setPreviewOpen(true);
         setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
     };
+    // const validateFileType = (
+    //     { type, name }
+    //     allowedTypes?
+    // ) => {
+    //     if (!allowedTypes) {
+    //         return true;
+    //     }
+
+    //     if (type) {
+    //         return allowedTypes.includes(type);
+    //     }
+    // };
 
     const fileProps = {
         name: "file",
@@ -350,20 +362,8 @@ const UploadNft = ({ current, prev }) => {
                                                                 <label>Description</label>
                                                                 <div>
 
-                                                                    {/* <Form.Item
-                                                                        {...restField}
-                                                                        name={[name, "nft_description"]}
-                                                                        // label="Enter name"
-                                                                        // name="name"
-                                                                        rules={[
-                                                                            {
-                                                                                required: true,
-                                                                                message: 'Description is required',
-                                                                                min:250
-                                                                            },
-                                                                        ]} */}
-                                                                    {/* > */}
-                                                                    <Controller
+
+                                                                    {/* <Controller
                                                                         control={control}
                                                                         name="nft_description"
                                                                         defaultValue=""
@@ -372,17 +372,48 @@ const UploadNft = ({ current, prev }) => {
                                                                             return <JoditEditor
                                                                                 ref={field.ref}
                                                                                 value={field.value}
-                                                                                // config={config}
+                                                                                
                                                                                 aria-invalid={errors.nft_description ? "true" : "false"}
                                                                                 placeholder="start typing"
-                                                                                tabIndex={1} // tabIndex of textarea
+                                                                                tabIndex={1} 
                                                                                 onBlur={newContent => setNft_description(newContent)} // preferred to use only this option to update the content for performance reasons
                                                                                 onChange={field.onChange}
                                                                             />
                                                                         }}
 
 
-                                                                    />
+                                                                    /> */}
+                                                                    <Form.Item
+                                                                        {...restField}
+                                                                        name={[name, "nft_description"]}
+                                                                        // label="Enter name"
+                                                                        // name="name"
+                                                                        rules={[
+                                                                            {
+                                                                                required: true,
+                                                                                message: 'Missing  description',
+                                                                            },
+                                                                        ]}
+                                                                    >
+                                                                        {/* <Controller
+                                                                            control={control}
+                                                                            name="nft_description"
+                                                                            defaultValue=""
+                                                                            render={({ field: { value, onChange } }) => {
+                                                                                return  */}
+                                                                        <JoditEditor
+                                                                            ref={editor}
+                                                                            value={'nft_description'}
+                                                                            // config={config}
+
+                                                                            placeholder="start typing"
+                                                                            tabIndex={1} // tabIndex of textarea
+                                                                            // onBlur={newContent => 'nft_description'(newContent)} // preferred to use only this option to update the content for performance reasons
+                                                                            onChange={newContent => { }}
+                                                                        />
+                                                                        {/* }} */}
+                                                                        {/* /> */}
+                                                                    </Form.Item>
                                                                     {errors.nft_description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
                                                                     {errors.nft_description && errors.nft_description.type === "minLength" && (
                                                                         <p style={{ color: 'red' }}>
@@ -507,6 +538,7 @@ const UploadNft = ({ current, prev }) => {
                                                                             {
                                                                                 required: true,
                                                                                 message: 'Please select a image',
+
                                                                             },
                                                                         ]}
 
@@ -516,6 +548,7 @@ const UploadNft = ({ current, prev }) => {
                                                                             {...fileProps}
                                                                             action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                                                             listType="picture-card"
+                                                                            accept='image/PNG'
                                                                             // fileList={fileList}
                                                                             // onChange={onChange}
                                                                             onPreview={handlePreview}
