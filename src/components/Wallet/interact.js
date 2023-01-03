@@ -210,7 +210,7 @@ export const getCurrentWalletConnected = async () => {
 
 
 const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }) => {
-  debugger
+
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -239,7 +239,7 @@ const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }
 };
 
 const UpdateContract = async (collid, contractAddress) => {
-  debugger
+
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -300,8 +300,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
 
   // const addedMetaData = await nft_file_content(JSON.stringify(metaDataObj));
 
-  const contract = await
-    new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
+  const contract = await new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
   // new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A");//loadContract();
 
   try {
@@ -329,7 +328,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
       })
       .on('confirmation', async (confNumber, receipt) => {
         if (confNumber == 1) {
-          debugger
+
           await UpdateContract(collid, contractAddress)
           // await UpdateContract(collid, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
           const tokid = web3.utils.hexToNumber(receipt.logs[0].topics[3])
