@@ -149,9 +149,9 @@ const ProjNFTS = () => {
                                                 <span dangerouslySetInnerHTML={{ __html: item.description.slice(0,45) }} />
                                             </div>
 
-                                            <div className='mint_btn'>
+                                            {/* <div className='mint_btn'>
                                                 <a href="#"><button className='btn ml-lg-auto btn-bordered-white'>Mint</button></a>
-                                            </div>
+                                            </div> */}
 
                                         </div>
                                        
