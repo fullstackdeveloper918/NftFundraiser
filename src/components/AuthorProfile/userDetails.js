@@ -123,7 +123,7 @@ const UserTransdataTable = () => {
                   
                 </Panel>
                 <div className='nothing'>
-                            ---
+                No matching records found
                         </div>
             </Collapse>
         </div>

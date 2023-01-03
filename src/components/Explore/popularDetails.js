@@ -41,7 +41,7 @@ const CollectionDetails = (props) => {
     console.log(coll, 'coll')
     return (
 
-        <section className="item-details-area project-nft-si main-proj-detail">
+        <section className="item-details-area project-nft-si main-proj-detail collection_detail">
             <div className="container">
                 <div className="row">
 
@@ -66,17 +66,17 @@ const CollectionDetails = (props) => {
 
 
                     <div className='col-12 col-lg-8 '>
-                        <h3 className="p-0">{coll?.title}</h3>
+                        <span className="p-0 title_main ">{coll?.title}</span>
 
-                    <div className='content'>
+                    {/* <div className='content content_project'>
                         <div className='card no-hover position-relative'>
                         <div><span className='boldertext'>Number of NFTs :</span><span> {coll?.nft_data?.length}</span></div>
                         <div><span className='boldertext'>Chain :</span> <span>Polygon (Matic)</span></div>
-                        <div><span className='boldertext'>Created at:</span>  <span> {/* {days_difference} */}12  days ago</span></div>
+                        <div><span className='boldertext'>Created at:</span>  <span> {days_difference}12  days ago</span></div>
                         <div><span className='boldertext'>Category:</span>  <span>{coll?.category}</span></div>
                         </div>
 
-                    </div>
+                    </div> */}
 
                         <div className='table-main-detail position-relative'>
 

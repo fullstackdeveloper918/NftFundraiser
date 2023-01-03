@@ -72,7 +72,7 @@ const ProjDetails = () => {
             <div className="container">
                 <div className="row">
                     <div className='col-12'>
-                        <h3 className="p-0">{latprojdetail.title}</h3>
+                        <span className="p-0 title_main">{latprojdetail.title}</span>
                     </div>
 
                     <div className="col-12 col-lg-8 relative">
@@ -114,7 +114,7 @@ const ProjDetails = () => {
                     </div>
 
                     <div className="col-lg-4 col-12 mt-4 mt-lg-0">
-                        <div>
+                        <div className='proj-left'>
                             <div className="progress_nft ">
                                 <div className='progress_main'><span>
                                     <span className='nft_price'>{latprojdetail.selling_amount} raised of {latprojdetail.price} Cdn goal (150 of 758 MATIC)</span><small>  </small>
@@ -166,9 +166,9 @@ const ProjDetails = () => {
                                                 </ul>
                                             )
                                         }) :
-                                    <div className="col-12 col-sm-12 col-lg-12">
+                                    <div className="col-12 col-sm-12 text-center col-lg-12 mt-2 mb-2">
 
-                                        <span className='allproj2'>
+                                        <span className='allproj2 boldertext w-100'>
                                             No user has invested yet
                                         </span>
 

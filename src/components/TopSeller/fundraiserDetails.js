@@ -54,7 +54,7 @@ const FundraiserDetail = () => {
     // }
     // render() {
     return (
-        <section className="item-details-area">
+        <section className="item-details-area fundraise-main">
             <div className="container">
                 <div>
 
@@ -190,7 +190,7 @@ const FundraiserDetail = () => {
                         </div>
 
 
-                        <div className='custam_col mt-3'>
+                        <div className='custam_col mt-3 mt-lg-0'>
                             <h5 class="user_title ">
 
                                 <div className='d-flex align-item-center gap-5'>

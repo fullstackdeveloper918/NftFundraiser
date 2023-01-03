@@ -65,7 +65,7 @@ const ProjNftDetails = () => {
 
                 <div className="row justify-content-between p-0">
                     <div className='col-12'>
-                        <h3 className="my-2 p-0 ">{projdetail.title}</h3>
+                        <span className="my-2 p-0 title_main">{projdetail.title}</span>
                     </div>
 
                     <div className='col-12 col-lg-8'>

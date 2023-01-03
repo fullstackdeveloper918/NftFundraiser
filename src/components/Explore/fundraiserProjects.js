@@ -112,10 +112,10 @@ const GetAllFundraise = () => {
                                                           </svg></span>
                                                         </div>
                                                         
-                                                        <div className='donate-btn'>
+                                                        {/* <div className='donate-btn'>
                                                                 <button className='btn ml-lg-auto btn-bordered-white'>Donate Now</button>
                                                             </div>
-                                                        
+                                                         */}
 
                                                         {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
                                                         {/* <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a> */}
