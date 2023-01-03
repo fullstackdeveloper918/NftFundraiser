@@ -387,7 +387,7 @@ const AuthorProfile = () => {
             <div className="container">
                 {/* <h3 class="p-0">Author Name </h3> */}
                 <div className="row pt-0">
-                    <div className='col-md-8 p-0'>
+                    <div className='col-md-8'>
                         <div className="banner item-thumb text-center">
                             <div>
                                 <i class="fa-solid fa-pen-to-square item-thumb-edit"
@@ -405,12 +405,12 @@ const AuthorProfile = () => {
                             <UserdataTable />
 
                         </div>
-                        <div className="profile_detail mt-3">
+                        <div className="profile_detail mt-3 position-relative">
 
                             <UserTransdataTable />
                         </div>
                     </div>
-                    <div className="col-12 col-md-4">
+                    <div className="col-12 col-md-4 mt-3 mt-lg-0">
                         <div className="profile_main_right card wrap_card no-hover text-center">
 
                             <div className="image-over">

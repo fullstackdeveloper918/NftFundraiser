@@ -536,8 +536,8 @@ span.logo-dis {
 }
 h2.allproj2 {
     color: var(--primary-p-color) !important;
-text-align: center;
-
+    text-align: center;
+    font-size: 20px;
 }
 ::marker {
     color: #fff;

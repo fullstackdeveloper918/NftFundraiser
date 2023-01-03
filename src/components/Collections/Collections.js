@@ -47,7 +47,7 @@ const Collections = () => {
                                             {/* Card Body */}
                                             <div className="card-body">
                                                 <a>
-                                                    <h5 className="mb-0 mt-3">{item.title}</h5>
+                                                    <h5 className="mb-0 ">{item.title}</h5>
                                                 </a>
                                                 <div class=""><p> {item.description.slice(0, 52)}<span>....</span></p></div>
                                                 <div class="mb-2 align-items-center">
