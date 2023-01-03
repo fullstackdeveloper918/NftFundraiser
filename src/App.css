@@ -273,17 +273,18 @@ body header .navbar-expand .navbar-nav.action .btn {
     padding: 9px 10px;
     font-size: 0;
 }
-}
-.auctions-slides .items .item {
-    margin-right: 30px;
- }
- section {
+section {
     width: 100%;
     padding: 80px 0 0 !important;
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
  }
+}
+.auctions-slides .items .item {
+    margin-right: 30px;
+ }
+ 
  section.hero-section {
     padding: 130px 0 !important;
  }
@@ -487,6 +488,12 @@ img.navbar-brand-sticky.desktop_logo {
     display: block;
 }
 @media (max-width:767px){
+    section .btn.btn-bordered-white {
+        margin: 14px 0px;
+    }
+    .row{
+        padding: 0 !important;
+    }
     .uploadnftpopup .ant-upload.ant-upload-select.ant-upload-select-picture-card {
         width: 100%;
     }
@@ -607,7 +614,7 @@ span#inputGroupPrepend2 {
     font-size: 15px;
 }
 .popular-collections-area img.card-img-top {
-    width: 214px;
+    width: 100%;
     height: 161px;
     object-fit: cover;
 }
@@ -1136,7 +1143,6 @@ span.nft_price {
     object-fit: cover;
 }
 .content_project .card {
-    height: 100% !important;
     display: flex;
     gap: 14px;
     flex-direction: column;
@@ -1825,7 +1831,6 @@ section.wallet-connect-area h4 {
     .progress_nft.mobile_nft ul li {
         border-bottom: unset;
         width: 100%;
-    max-width: 200px;
     }
 
 
@@ -2032,7 +2037,7 @@ span.jodit-ui-button__text {
 .item-details-area .content_project .item-thumb , .collection_detail .item-thumb{
 	height: 350px;
     width: 100%;
-	max-width: 350px;
+	/* max-width: 350px; */
 	object-position: bottom;
 }
 .demo .nfts_details tr td {
@@ -2050,4 +2055,32 @@ span.jodit-ui-button__text {
 }
 .content {
     height: calc(100% - 74px) !important;
+}
+.swal2-popup.swal2-modal.swal2-icon-info.swal2-show {
+	background-color: #0D0D10;
+	color: white;
+}
+.swal2-icon.swal2-info {
+	border-color: #aaa !important;
+	color: #aaa !important;
+}
+.progress_nft .lorem_done span:first-child {
+	background-color: #CEB8FF;
+	border-radius: 100px;
+}
+.progress_nft .lorem_done.p-0 span svg {
+	padding: 2px;
+	margin: 6px;
+	border-radius: 0px;
+	background-color: transparent;
+}
+
+
+
+
+@media (max-width: 400px){
+    .proj-left button {
+        width: 100%;
+        margin-top: 10px !important;
+    }
 }
