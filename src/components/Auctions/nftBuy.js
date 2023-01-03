@@ -149,7 +149,8 @@ const LatprojNftDetails = (props) => {
 
                                 <div>
                                     <span className='boldertext w-100'>Collection Name : </span>
-                                    <span> Green and Better World</span>
+                                    <span> {latprojnftdetail?.collectionData?.title}</span>
+
                                 </div>
                                 <div className="item-info-list">
                                     <ul className="list-unstyled">

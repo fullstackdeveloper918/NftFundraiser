@@ -211,6 +211,7 @@ export const getCurrentWalletConnected = async () => {
 
 const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }) => {
   debugger
+  const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
 
@@ -220,12 +221,11 @@ const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }
     formData.append('pay_from', pay_from);
     formData.append('pay_to', pay_to);
 
-    const token = localStorage.getItem('authToken')
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       },
     }
     // 
@@ -240,17 +240,17 @@ const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }
 
 const UpdateContract = async (collid, contractAddress) => {
   debugger
+  const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
 
     formData.append('contract_id', contractAddress);
 
-    const token = localStorage.getItem('authToken')
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       },
     }
     // 
@@ -329,6 +329,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
       })
       .on('confirmation', async (confNumber, receipt) => {
         if (confNumber == 1) {
+          debugger
           await UpdateContract(collid, contractAddress)
           // await UpdateContract(collid, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
           const tokid = web3.utils.hexToNumber(receipt.logs[0].topics[3])
