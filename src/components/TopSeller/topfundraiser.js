@@ -51,8 +51,8 @@ const Fundraiser = () => {
 
                                             {/* Seller Info */}
                                             <div className="seller-info ml-3">
-                                                <a className="seller mb-2">{item?.organization_detail?.organization_name}</a>
-                                                <span dangerouslySetInnerHTML={{ __html: item?.organization_detail?.description?.slice(0, 15) }} />
+                                                <a className="seller mb-2 text-capitalize">{item?.organization_detail?.organization_name}</a>
+                                                {/* <span dangerouslySetInnerHTML={{ __html: item?.organization_detail?.description?.slice(0, 15) }} /> */}
                                                 <span>${item.amount} Raised</span>
                                             </div>
                                         </div>

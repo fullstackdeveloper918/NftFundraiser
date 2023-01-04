@@ -75,7 +75,7 @@ const FundraiserDetail = () => {
                             </div>
 
                         </div>
-                        <div className='lorem_done mt-3'>
+                        <div className='lorem_done mt-4'>
                             <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -147,7 +147,7 @@ const FundraiserDetail = () => {
                             {/* </> */}
                             {/* ) */}
                             {/* })} */}
-                            <h5 class="user_title_1 mt-3 mb-0"><div>Projects</div></h5>
+                            <h5 class="user_title_1 mt-4 mb-0"><div>Projects</div></h5>
                             <ul className="m-0 custom_lis pl-0 fund_row">
                                 {fundprojdetail && fundprojdetail.length ?
                                     [...new Map(fundprojdetail.map(item =>
@@ -190,7 +190,7 @@ const FundraiserDetail = () => {
                         </div>
 
 
-                        <div className='custam_col mt-3 mt-lg-0'>
+                        <div className='custam_col mt-4 mt-lg-0'>
                             <h5 class="user_title ">
 
                                 <div className='d-flex align-item-center gap-5'>
@@ -209,7 +209,7 @@ const FundraiserDetail = () => {
                             </div>
                         </div>
 
-                        <div className='funddeatil mt-3 '>
+                        <div className='funddeatil mt-4 '>
 
                             <FunddataTable />
                         </div>
@@ -361,7 +361,7 @@ const FundraiserDetail = () => {
                             <FunddataTable />
                         </div>
                     </div> */}
-                    <div className='col-12 mt-3 mb-3'>
+                    <div className='col-12 mt-4 mb-3'>
                         <div className='funddeatil table-detail '>
                             <FundTransdataTable />
 

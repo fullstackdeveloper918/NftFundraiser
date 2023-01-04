@@ -41,8 +41,8 @@ const Wallet = () => {
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-8 col-lg-7">
                         {/* Intro */}
-                        <div className="intro text-center">
-                            <span>{data.preHeading}</span>
+                        <div className="intro text-center my-4">
+                            {/* <span>{data.preHeading}</span> */}
                             <h3 className="mt-3 mb-0">{data.heading}</h3>
                             <p>{data.content}</p>
                         </div>

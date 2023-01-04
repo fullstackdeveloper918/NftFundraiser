@@ -1411,11 +1411,17 @@ h5.user_title {
     padding: 10px;
     /* border-radius: 8px 8px 0px 0; */
 }
-.user-description , .price_nft {
+.user-description {
     border: 1px solid #1e1e1e;
     border-radius: 8px;
     padding-bottom: 10px;
     height: 100%;
+}
+ .price_nft {
+    border: 1px solid #1e1e1e;
+    border-radius: 8px;
+    padding-bottom: 10px;
+    
 }
 .user-description >p {
     padding: 0 16px;
@@ -1816,7 +1822,7 @@ section.wallet-connect-area h4 {
     top: 10px;
 }
 @media (max-width: 991px){
-    .desktop_nft .progress_nft.mb-3 {
+    .desktop_nft{
        display: none;
     }
     .progress_nft.mobile_nft .fund_row {
@@ -1967,7 +1973,7 @@ padding: 16px 16px;
 
 svg.detail-icon , .activity_icon {
     position: absolute;
-    z-index: 999;
+    z-index: 1;
     top: 16px;
     left: 15px;
 }
@@ -2025,7 +2031,7 @@ span.jodit-ui-button__text {
     /* color: #fff; */
     font-weight: 600;
 }
-.price_nft , .progress_nft_main {
+.progress_nft_main {
     position: sticky;
     top: 10px;
     height: auto !important;
@@ -2083,9 +2089,14 @@ span.jodit-ui-button__text {
     padding: 4px 16px !important;
 }
 .nft_detail_main td {
-text-align: right;
+    text-align: right;
+    word-break: break-word;
 }
-
+.no-data h2 {
+    color: #4625d6 !important;
+    font-size: 18px;
+    text-align: center;
+}
 
 @media (max-width: 400px){
     .proj-left button {

@@ -80,7 +80,7 @@ const NftDetails = (props) => {
             collid: nftdetail?.collection_id,
             nft_file_content: nftdetail?.nft_file_content,
             id,
-            setMintModalShow
+            setModalShow
         })
     }
 
@@ -175,7 +175,7 @@ const NftDetails = (props) => {
 
     const deployAndMint = async () => {
 
-        setMintModalShow(true)
+        setModalShow(true)
         // mint()
         await deployContract()
         // nftdetail.id()

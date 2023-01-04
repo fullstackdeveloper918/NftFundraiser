@@ -63,7 +63,7 @@ const AllCollections = () => {
                                                                 <h5 className="mb-0 mt-3">{item.title}</h5>
                                                             </a>
 
-                                                            <div class=""><p>{item.description.slice(0, 26)}<span>....</span></p></div>
+                                                            <div class=""><p>{item.description.slice(0, 52)}<span>....</span></p></div>
 
                                                             <div class="mb-2 align-items-center justify-content-between">
                                                                 <div class="mt-2 mb-2 d-flex justify-content-between text-align-center fundraiser_sale">
@@ -109,7 +109,7 @@ const AllCollections = () => {
                                         </Link>
                                     )
                                 }) :
-                            <div className="col-12 col-sm-6 col-lg-3">
+                            <div className="col-12 col-sm-12 col-lg-12 no-data">
                                 <h2>
                                     No Popular Collections
                                 </h2>
