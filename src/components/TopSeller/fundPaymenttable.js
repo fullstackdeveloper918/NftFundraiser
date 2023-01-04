@@ -67,7 +67,7 @@ const FundTransdataTable = () => {
                     </Table>
                 </Panel>
                 <div className='nothing'>
-                No matching records found
+                      No matching records found
                         </div>
             </Collapse>
         </div>
