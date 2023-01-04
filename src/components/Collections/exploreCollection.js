@@ -65,12 +65,12 @@ const AllCollections = () => {
 
                                                             <div class=""><p>{item.description.slice(0, 26)}<span>....</span></p></div>
 
-                                                            <div class="mb-2 d-flex align-items-center justify-content-between">
-                                                                <div class="mt-2 mb-2 d-flex text-align-center fundraiser_sale">
-                                                                    <div>
+                                                            <div class="mb-2 align-items-center justify-content-between">
+                                                                <div class="mt-2 mb-2 d-flex justify-content-between text-align-center fundraiser_sale">
+                                                                  
                                                                         <span>Total Nft's</span>
-                                                                        <div>{item.nft_data.length}</div>
-                                                                    </div>
+                                                                        <span>{item.nft_data.length}</span>
+                                                                   
                                                                     {/* <div>
                                                                         <span>Sale</span>
                                                                         <div>100</div>

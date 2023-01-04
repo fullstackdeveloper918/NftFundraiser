@@ -37,7 +37,7 @@ const UserdataTable = (props) => {
                         <tbody >
 
                             <tr>
-
+                             
                                 <td><span>Name </span> <span>{userdet.username}</span></td>
                                 <td><span>Wallet ID</span>  <span>{userdet.wallet_id}</span></td>
                                 <td><span>Reffers </span> <span>{userdet.reffers}</span></td>

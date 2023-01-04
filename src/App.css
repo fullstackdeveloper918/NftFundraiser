@@ -649,7 +649,7 @@ span , p{
 section.live-auctions-area.single_project-detail {
     padding: 0 !important;
 }
-section.live-auctions-area.single_project-detail .row {
+section.live-auctions-area.single_project-detail .row , .nfts_main .row.explore-items{
     padding: 0 !important;
     margin: 0 -15px;
 }
@@ -1470,7 +1470,7 @@ h5.user_title i , .container.table-main-detail i , .token span i{
     gap: 10px;
 }
 :root .card.add-nft {
-    min-height: 426.6px;
+    min-height: 413.6px;
     justify-content: center;
     align-items: center;
     border: 1px dashed #2a2a2a;
@@ -1508,6 +1508,8 @@ span.cards-icons i {
     display: flex;
     justify-content: space-between;
     padding: 4px 16px;
+    gap: 10px;
+    text-align: right;
     font-family: var(--secondary-font);
 }
 table.nfts_details.table i {
@@ -1530,14 +1532,7 @@ background-color: transparent !important;
 .nfts_details span:nth-child(1) {
     color: #fff;
 }
-.nfts_main{
-    border: 1px solid #1e1e1e;
-    border-radius: 8px;
-}
-.nfts_main .item {
-    margin-top: unset !important;
-    margin-bottom: 10px !important;
-}
+
 .progress_main{
     flex-direction: column;
 }
@@ -2029,12 +2024,12 @@ span.jodit-ui-button__text {
     /* color: #fff; */
     font-weight: 600;
 }
-.price_nft {
+.price_nft , .progress_nft_main {
     position: sticky;
     top: 10px;
     height: auto !important;
 }
-.item-details-area .content_project .item-thumb , .collection_detail .item-thumb{
+.item-details-area .content_project .item-thumb , .item-details-area.project-nft-si.main-proj-detail .collection_detail .item-thumb{
 	height: 350px;
     width: 100%;
 	/* max-width: 350px; */
@@ -2074,8 +2069,21 @@ span.jodit-ui-button__text {
 	border-radius: 0px;
 	background-color: transparent;
 }
-
-
+.nft_detail_main th {
+    color: #FFF;
+    font-weight: 400 !important;
+}
+.nft_detail_main table{
+    font-family: var(--secondary-font) ;
+    font-size: 16px;
+   
+}
+.nft_detail_main th, .nft_detail_main td {
+    padding: 4px 16px !important;
+}
+.nft_detail_main td {
+text-align: right;
+}
 
 
 @media (max-width: 400px){
