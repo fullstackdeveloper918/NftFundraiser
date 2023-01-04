@@ -1251,7 +1251,8 @@ header .navbar-expand {
 .table-detail th {
     color: #fff;
     border: unset !important;
-}   
+    font-weight: 600;
+}  
 :root .container.table-detail tr {
     /* border-bottom: 1px solid #000000 !important; */
     border: unset !important;
