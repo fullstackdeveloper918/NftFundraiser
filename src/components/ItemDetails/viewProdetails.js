@@ -48,6 +48,7 @@ const ProjDetails = () => {
     const log = useSelector(state => {
         return state.user.userToken
     })
+
     useEffect(() => {
         // 
         dispatch(LatestProjectDetail(id))
@@ -80,18 +81,17 @@ const ProjDetails = () => {
 
 
                             <div className="item-thumb text-center">
-                                {/* {projdetail && projdetail?.nft_data && projdetail?.nft_data?.length ? */}
-                                {/* <div>
-                                    <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() => setModalShow(true)}></i>
+                                <><div>
+                                    {latprojdetail?.user_data?.user_id === userdet?.user_id && localStorage.getItem('authToken') &&
+                                        <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() => setModalShow(true)}></i>
 
 
+                                    }
                                     <Banner
                                         id={id}
                                         show={modalShow}
                                         onHide={() => setModalShow(false)} />
-                                </div> */}
-                                <img src={latprojdetail?.image} alt="first nft" />
-                                {/* : null} */}
+                                </div><img src={latprojdetail?.image} alt="first nft" /></>
                             </div>
 
                         </div>
@@ -117,12 +117,12 @@ const ProjDetails = () => {
                         <div className='proj-left'>
                             <div className="progress_nft ">
                                 <div className='progress_main'><span>
-                                    <span className='nft_price'>{latprojdetail.selling_amount} raised of {latprojdetail.price} Cdn goal (150 of 758 MATIC)</span><small>  </small>
+                                    <span className='nft_price'>${latprojdetail.project_count} raised of {latprojdetail.price} Cdn goal (150 of 758 MATIC)</span><small>  </small>
                                     <div className='progressbar'>
                                         <ProgressBar varient="success" now={latprojdetail.project_percentage} />
                                         {/* <span className="progress-bar bg-success" role="progressbar" style={{ width: "70" }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" now={projdetail.project_percentage}> {projdetail.project_percentage}% </span> */}
                                     </div>
-                                    <p className='donation-count'>2K donations</p>
+                                    <p className='donation-count'>${latprojdetail.project_count} RAISED</p>
                                 </span>
                                 </div>
 

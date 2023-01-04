@@ -70,7 +70,7 @@ const GetAllFundraise = () => {
                                                 <div className="image-over position-relative ">
                                                     {/* <i class="fa-solid fa-pen" ></i>
                                                     <i class="fa-sharp fa-solid fa-trash"></i> */}
-                                                    <img className="card-img-top" src={item?.avatar} />
+                                                    <img className="card-img-top" src={item?.organization_detail?.banner_image} />
                                                 </div>
                                                 <div className='token'>
                                                     <span></span>
@@ -79,9 +79,9 @@ const GetAllFundraise = () => {
                                                 <div className="card-caption col-12 p-0">
                                                     {/* Card Body */}
                                                     <div className="card-body">
-                                                        <img className='logo' src="/img/logo.png" alt='logo' width={50} height={50}/>
+                                                        <img className='logo' src="/img/logo.png" alt='logo' width={50} height={50} />
                                                         <a>
-                                                            <h5 className="mb-0 mt-3">Youth for Env'tal Sust & Devt </h5>
+                                                            <h5 className="mb-0 mt-3">{item?.organization_detail?.organization_name} </h5>
                                                         </a>
                                                         {/* <div className="seller d-flex align-items-center my-3">
                                                                     <span>Owned By</span>
@@ -90,28 +90,28 @@ const GetAllFundraise = () => {
                                                                     </a>
                                                                 </div> */}
                                                         <div className=''>
-
-                                                          <p> It is a long established fact that a reader</p>
+                                                            <p dangerouslySetInnerHTML={{ __html: item?.organization_detail?.description?.slice(0, 15) }} />
+                                                            {/* <p> It is a long established fact that a reader</p> */}
 
                                                         </div>
-                                                        
-                                                        <div  className='mb-2 d-flex align-items-center justify-content-between'>
-                                                          <div  className='mt-2 mb-2 d-flex text-align-center fundraiser_sale'>
-                                                          <div>
-                                                                <span>Created</span>
-                                                                <div>148</div>
+
+                                                        {/* <div className='mb-2 d-flex align-items-center justify-content-between'>
+                                                            <div className='mt-2 mb-2 d-flex text-align-center fundraiser_sale'>
+                                                                <div>
+                                                                    <span>Created</span>
+                                                                    <div>148</div>
+                                                                </div>
+                                                                <div>
+                                                                    <span>Sale</span>
+                                                                    <div>100</div>
+                                                                </div>
                                                             </div>
-                                                            <div>
-                                                                 <span>Sale</span>
-                                                                 <div>100</div>
-                                                            </div>
-                                                          </div>
-                                                            
-                                                          <span className='share'><svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                 <path fill="none" stroke="#fff" stroke-width="2" d="M18,8 C19.6568542,8 21,6.65685425 21,5 C21,3.34314575 19.6568542,2 18,2 C16.3431458,2 15,3.34314575 15,5 C15,6.65685425 16.3431458,8 18,8 Z M6,15 C7.65685425,15 9,13.6568542 9,12 C9,10.3431458 7.65685425,9 6,9 C4.34314575,9 3,10.3431458 3,12 C3,13.6568542 4.34314575,15 6,15 Z M18,22 C19.6568542,22 21,20.6568542 21,19 C21,17.3431458 19.6568542,16 18,16 C16.3431458,16 15,17.3431458 15,19 C15,20.6568542 16.3431458,22 18,22 Z M16,18 L8,13 M16,6 L8,11" />
-                                                          </svg></span>
-                                                        </div>
-                                                        
+
+                                                            <span className='share'><svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill="none" stroke="#fff" stroke-width="2" d="M18,8 C19.6568542,8 21,6.65685425 21,5 C21,3.34314575 19.6568542,2 18,2 C16.3431458,2 15,3.34314575 15,5 C15,6.65685425 16.3431458,8 18,8 Z M6,15 C7.65685425,15 9,13.6568542 9,12 C9,10.3431458 7.65685425,9 6,9 C4.34314575,9 3,10.3431458 3,12 C3,13.6568542 4.34314575,15 6,15 Z M18,22 C19.6568542,22 21,20.6568542 21,19 C21,17.3431458 19.6568542,16 18,16 C16.3431458,16 15,17.3431458 15,19 C15,20.6568542 16.3431458,22 18,22 Z M16,18 L8,13 M16,6 L8,11" />
+                                                            </svg></span>
+                                                        </div> */}
+
                                                         {/* <div className='donate-btn'>
                                                                 <button className='btn ml-lg-auto btn-bordered-white'>Donate Now</button>
                                                             </div>

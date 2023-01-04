@@ -13,7 +13,9 @@ const ProjNFTS = () => {
         // 
         return state.projectdetails.latestprojectdetails
     })
-
+    const userdet = useSelector(state => {
+        return state?.user?.userdetail
+    })
     useEffect(() => {
         // 
         dispatch(LatestProjectDetail(id))
@@ -64,18 +66,22 @@ const ProjNFTS = () => {
                                             <div className="card-bottom">
                                                 <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 45) }} />
                                             </div>
+                                            {/* {item?.user_data?.user_id === userdet?.user_id && localStorage.getItem('authToken') && 
 
-                                            {item.is_mint == 0 ? (
-                                                <div className='mint_btn'>
-                                                    <a href="#"><button className='btn ml-lg-auto btn-bordered-white'>Mint</button></a>
-                                                </div>
-                                            ) : (
+                                                {
+                                                    item?.is_mint == 0 ? (
+                                                        <div className='mint_btn'>
+                                                            <a href="#"><button className='btn ml-lg-auto btn-bordered-white'>Mint</button></a>
+                                                        </div>
+                                                    ) : (
 
-                                                <div className='mint_btn'>
-                                                    <a><button className='btn ml-lg-auto btn-bordered-white'>Minted</button></a>
-                                                </div>
-                                            )}
-
+                                                        <div className='mint_btn'>
+                                                            <a><button className='btn ml-lg-auto btn-bordered-white'>Minted</button></a>
+                                                        </div>
+                                                    )
+                                                }
+                                                
+                                            } */}
 
                                         </div>
 
