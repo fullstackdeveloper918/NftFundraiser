@@ -70,7 +70,7 @@ function NftPopup(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <Steps current={props.current} direction='vertical'>
-                        <Step title="Upload" description='Uploading of all media assets and metadata to IPFS' />
+                        <Step title="Deploying contract" description='Uploading of all media assets and metadata to IPFS' />
                         <Step icon={props.current == 0 && <LoadingOutlined type="loading" />} title="Mint" description='Send transaction to create your NFT' />
                         <Step icon={props.current !== 2 ? <LoadingOutlined type="loading" /> : props.current == 2 && <CheckOutlined type="finish" />} title="Approve" description='This transaction is conducted only once per collection' />
 

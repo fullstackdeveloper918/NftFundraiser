@@ -6,7 +6,7 @@ import { GetNftwol, ProjectDetail, ProjectList } from '../../redux/Actions/proje
 import { useLocation, useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
 
-const UserTransdataTable = (props) => {
+const NftTransdataTable = (props) => {
     const dispatch = useDispatch()
 
     const { Panel } = Collapse;
@@ -19,18 +19,16 @@ const UserTransdataTable = (props) => {
         setExpandIconPosition(newExpandIconPosition);
     };
 
-    const userdet = useSelector(state => {
-        return state?.user?.userdetail
-    })
 
-    // const latprojnftdetail = useSelector(state => {
-    //     // 
-    //     return state?.projectdetails?.getnftwoldetails
-    // })
-    // console.log('lattt', latprojnftdetail.nft_history)
-    // useEffect(() => {
-    //     dispatch(GetNftwol(props.id))
-    // }, [props.id])
+
+    const latprojnftdetail = useSelector(state => {
+        // 
+        return state?.projectdetails?.getnftwoldetails
+    })
+    console.log('lattt', latprojnftdetail.nft_history)
+    useEffect(() => {
+        dispatch(GetNftwol(props.id))
+    }, [props.id])
     const location = useLocation()
     return (
         <div className='position-relative'>
@@ -66,7 +64,7 @@ const UserTransdataTable = (props) => {
 
 
                         <tbody>
-                            {userdet?.payment_history?.map((items) => {
+                            {latprojnftdetail?.nft_history?.map((items) => {
                                 return (
                                     <tr>
 
@@ -97,4 +95,4 @@ const UserTransdataTable = (props) => {
     )
 }
 
-export default UserTransdataTable
+export default NftTransdataTable
