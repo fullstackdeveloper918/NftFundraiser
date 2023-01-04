@@ -23,7 +23,7 @@ const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alche
 const NftDetails = (props) => {
 
 
-    const [modalShow, setModalShow] = React.useState(false);
+    const [mintmodalShow, setMintModalShow] = React.useState(false);
     const [current, setCurrent] = React.useState(0)
     const [contractAdd, setContractAdd] = useState('')
     // const [collid, setCollid] = useState('')
@@ -70,7 +70,7 @@ const NftDetails = (props) => {
             collid: nftdetail?.collection_id,
             nft_file_content: nftdetail?.nft_file_content,
             id,
-            setModalShow
+            setMintModalShow
         })
     }
 
@@ -113,7 +113,8 @@ const NftDetails = (props) => {
                     params: [{ chainId: web3.utils.toHex('80001') }],
                 })
 
-                const { address } = await ConnectWallet()
+                // const { address } = await ConnectWallet()
+                const address = window?.ethereum?.selectedAddress
                 const MyNFTContract = new web3.eth.Contract(NFTContract.abi)
                 const gas = await web3.eth.getGasPrice();
                 // const gas = 500000
@@ -164,7 +165,7 @@ const NftDetails = (props) => {
 
     const deployAndMint = async () => {
 
-        setModalShow(true)
+        setMintModalShow(true)
         // mint()
         await deployContract()
         // nftdetail.id()
@@ -262,9 +263,9 @@ const NftDetails = (props) => {
 
                                     <><button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                         id="nftdetail.id" onClick={() => deployAndMint(id)}>  Mint</button><NftPopup
-                                            show={modalShow}
+                                            show={mintmodalShow}
                                             current={current}
-                                            onHide={() => setModalShow(false)} /></>
+                                            onHide={() => setMintModalShow(false)} /></>
 
 
 

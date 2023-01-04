@@ -2,7 +2,7 @@ import { create } from 'ipfs-http-client'
 import { useHistory } from 'react-router-dom'
 import swal from 'sweetalert';
 import axios from 'axios';
-import { walletSignin } from '../../redux/Actions/authAction';
+// import { walletSignin } from '../../redux/Actions/authAction';
 import { object } from 'yup';
 import { redirect } from 'next/dist/server/api-utils';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
@@ -362,6 +362,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
 }
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet }) => {
+  // debugger
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
@@ -381,12 +382,12 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
       // const nftContract = new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
       const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
-      const amountToSendPlatform = ((`${platformFee[0]}` / 100) * 0.03)
+      const amountToSendPlatform = ((`${platformFee[0]?.fees}` / 100) * 0.03)
       const amountToSendowner = ((`${ownerFee[0]}` / 100) * 0.03)
       // // const amountToSend = (amountToSendPlatform - amount, "either")
       // const amountToSend = (0.0005)
       // const amountToSend = ; // Convert to wei value
-      const memory_clients = ['0x2Aaab1bd336819948C3286cE92034CdB95137D8b', ownerWallet[0]]
+      const memory_clients = [platformFee[0].wallets, ownerWallet[0]]
       const memory_amounts = [web3.utils.toWei(`${amountToSendPlatform}`, "ether"), web3.utils.toWei(`${amountToSendowner}`, "ether")]
 
       const transferowner = {
