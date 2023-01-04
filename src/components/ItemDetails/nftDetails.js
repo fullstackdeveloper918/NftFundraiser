@@ -24,11 +24,16 @@ const web3 = createAlchemyWeb3(alchemyKey);
 const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
 const NftDetails = (props) => {
 
+
     const latprojnftdetail = useSelector(state => {
         // 
         return state.projectdetails.getnftwoldetails
     })
     const [modalShow, setModalShow] = React.useState(false);
+
+
+    const [mintmodalShow, setMintModalShow] = React.useState(false);
+
     const [current, setCurrent] = React.useState(0)
     const [contractAdd, setContractAdd] = useState('')
     // const [collid, setCollid] = useState('')
@@ -75,7 +80,7 @@ const NftDetails = (props) => {
             collid: nftdetail?.collection_id,
             nft_file_content: nftdetail?.nft_file_content,
             id,
-            setModalShow
+            setMintModalShow
         })
     }
 
@@ -118,7 +123,8 @@ const NftDetails = (props) => {
                     params: [{ chainId: web3.utils.toHex('80001') }],
                 })
 
-                const { address } = await ConnectWallet()
+                // const { address } = await ConnectWallet()
+                const address = window?.ethereum?.selectedAddress
                 const MyNFTContract = new web3.eth.Contract(NFTContract.abi)
                 const gas = await web3.eth.getGasPrice();
                 // const gas = 500000
@@ -169,7 +175,7 @@ const NftDetails = (props) => {
 
     const deployAndMint = async () => {
 
-        setModalShow(true)
+        setMintModalShow(true)
         // mint()
         await deployContract()
         // nftdetail.id()
@@ -186,9 +192,9 @@ const NftDetails = (props) => {
                             <><div className="item-thumb text-center">
                                 <img src={nftdetail.image} alt="" />
                             </div>
-                               
+
                             </>
-                           
+
                         </div>
                     </div>
 
@@ -293,9 +299,9 @@ const NftDetails = (props) => {
 
                                     <><button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                         id="nftdetail.id" onClick={() => deployAndMint(id)}>  Mint</button><NftPopup
-                                            show={modalShow}
+                                            show={mintmodalShow}
                                             current={current}
-                                            onHide={() => setModalShow(false)} /></>
+                                            onHide={() => setMintModalShow(false)} /></>
 
 
 
@@ -325,18 +331,18 @@ const NftDetails = (props) => {
                     </div> */}
 
 
-              
-<div className="col-8 mt-4">
+
+                    <div className="col-8 mt-4">
                         <div class="user-description ">
                             <h5 className='user_title gap-5'><div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg></div><div>Description</div>
                             </h5>
-                            <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft"/>
+                            <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft" />
                             {/* <ReadMore  dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} /> */}
                             {/* <p dangerouslySetInnerHTML={{ __html: latprojdetail.description }} /> */}
                         </div>
                     </div>
 
-                <div className='col-lg-4 col-12 mt-4'>
+                    <div className='col-lg-4 col-12 mt-4'>
                         <div className='price_nft'>
                             <h5 className='user_title gap-5'>
                                 <div><svg fill="#fff" width="24px" height="24px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g data-name="2. Coin" id="_2._Coin"><path d="M22,9h-.19A2.83,2.83,0,0,0,22,8V6a3,3,0,0,0-3-3H3A3,3,0,0,0,0,6V8a3,3,0,0,0,2.22,2.88A3,3,0,0,0,2,12v2a3,3,0,0,0,.22,1.12A3,3,0,0,0,0,18v2a3,3,0,0,0,2.22,2.88A3,3,0,0,0,2,24v2a3,3,0,0,0,3,3H22A10,10,0,0,0,22,9Zm-9.16,6H5a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H16A10,10,0,0,0,12.84,15ZM2,6A1,1,0,0,1,3,5H19a1,1,0,0,1,1,1V8a1,1,0,0,1-1,1H3A1,1,0,0,1,2,8ZM2,18a1,1,0,0,1,1-1h9.2a10.1,10.1,0,0,0,0,4H3a1,1,0,0,1-1-1Zm3,9a1,1,0,0,1-1-1V24a1,1,0,0,1,1-1h7.84A10,10,0,0,0,16,27Zm17,0a8,8,0,1,1,8-8A8,8,0,0,1,22,27Z" /><path d="M22,16h2a1,1,0,0,0,0-2H23a1,1,0,0,0-2,0v.18A3,3,0,0,0,22,20a1,1,0,0,1,0,2H20a1,1,0,0,0,0,2h1a1,1,0,0,0,2,0v-.18A3,3,0,0,0,22,18a1,1,0,0,1,0-2Z" /></g></svg></div>
@@ -364,24 +370,24 @@ const NftDetails = (props) => {
                         </div>
 
                         <div className=''>
-                        <div className="profile_detail mt-4">
+                            <div className="profile_detail mt-4">
 
-                        <NftdataTable />
+                                <NftdataTable />
+                            </div>
                         </div>
                     </div>
-                    </div>
 
-               
 
-             
-                     {/* <div className='col-12 description'>
+
+
+                    {/* <div className='col-12 description'>
                     <h3 > Description</h3>
                     <div className="card no-hover countdown-times my-4">
             
                         <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft" />
                     </div>
                      </div> */}
-            </div >
+                </div >
             </div>
         </section >
     );

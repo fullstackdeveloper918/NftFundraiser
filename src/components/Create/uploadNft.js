@@ -403,12 +403,12 @@ const UploadNft = ({ current, prev }) => {
                                                                                 return  */}
                                                                         <JoditEditor
                                                                             ref={editor}
-                                                                            value={'nft_description'}
+                                                                            value={nft_description}
                                                                             // config={config}
 
                                                                             placeholder="start typing"
                                                                             tabIndex={1} // tabIndex of textarea
-                                                                            // onBlur={newContent => 'nft_description'(newContent)} // preferred to use only this option to update the content for performance reasons
+                                                                            onBlur={newContent => setNft_description(newContent)} // preferred to use only this option to update the content for performance reasons
                                                                             onChange={newContent => { }}
                                                                         />
                                                                         {/* }} */}

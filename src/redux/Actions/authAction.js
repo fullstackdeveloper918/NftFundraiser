@@ -224,47 +224,49 @@ export const HearAboutList = () => async dispatch => {
     }
 }
 
-export const walletSignin = (params, history) => async dispatch => {
+// export const walletSignin = (params, history) => async dispatch => {
 
-    // 
-    const formData = new FormData();
+//     // 
+//     const formData = new FormData();
 
-    formData.append('wallet_id', params);
-    // 
-    // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
-    try {
-        // const token = localStorage.getItem('authToken')
-        // const token = localStorage.getItem('authToken')
-        const config = {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                // Authorization: `Bearer ${token}`
-            },
+//     formData.append('wallet_id', params);
+//     // 
+//     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
+//     try {
+//         // const token = localStorage.getItem('authToken')
+//         // const token = localStorage.getItem('authToken')
+//         const config = {
+//             headers: {
+//                 'Content-Type': 'multipart/form-data',
+//                 // Authorization: `Bearer ${token}`
+//             },
 
-            // transformRequest: formData => formData
-        }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/sign_in`,
-            formData, config)
-        console.log(res, 'signres')
-        dispatch(wallsignin(res));
-        if (res.status == 200) {
-            localStorage.setItem('auth_token', res.data.data.auth_token)
+//             // transformRequest: formData => formData
+//         }
+//         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/sign_in`,
+//             formData, config)
+//         console.log(res, 'signres')
+//         dispatch(wallsignin(res));
+//         if (res.status == 200) {
+//             localStorage.setItem('auth_token', res.data.data.auth_token)
 
-            if (res.data.data.role == 3) {
-                history.push('/projectlist')
-            } else {
-                if (res.data.data.role == 2) {
-                    history.push('/profile')
+//             if (res.data.data.role == 3) {
+//                 history.push('/projectlist')
+//             } else {
+//                 if (res.data.data.role == 2) {
+//                     history.push('/profile')
 
-                }
-            }
-        }
-    } catch (e) {
-        if (e?.response?.data.message) {
-            swal('error', e.response.data.message, 'error')
-        }
-    }
-}
+//                 }
+//             }
+//         }
+
+//     } catch (e) {
+//         if (e?.response?.data.message) {
+//             swal('error', e.response.data.message, 'error')
+//         }
+//     }
+// }
+
 export const UpdateProfileAction = (formData) => async dispatch => {
 
     // 

@@ -11,6 +11,8 @@ import ReadMore from '../../readMore';
 import FundTransdataTable from '../TopSeller/fundPaymenttable';
 import UserTransdataTable from '../AuthorProfile/userDetails';
 import UserdataTable from '../AuthorProfile/userTransTable';
+import NftTransdataTable from './nftTRansTable';
+import LatNftDataTable from '../Explore/latnftTable';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -36,8 +38,9 @@ const LatprojNftDetails = (props) => {
         // 
         return state.projectdetails.settings
     })
-    // console.log('getSett', getSett)
+    console.log('getSett', getSett)
     const setValue = getSett.find(x => x.key === 'pricing_per_nft')
+    console.log('sett', setValue)
     useEffect(() => {
         dispatch(GetNftwol(id))
         dispatch(GetSettings())
@@ -195,7 +198,9 @@ const LatprojNftDetails = (props) => {
                     <div className='col-lg-8 col-12'>
                         <div className="profile_detail mt-4">
 
-                            <UserTransdataTable />
+                            <LatNftDataTable
+                                id={id}
+                            />
                         </div>
                     </div>
 
@@ -212,8 +217,9 @@ const LatprojNftDetails = (props) => {
 
                     <div className='col-12 mt-4'>
                         <div className='funddeatil table-detail '>
-                            <FundTransdataTable />
-
+                            <NftTransdataTable
+                                id={id}
+                            />
                         </div>
                     </div>
 
