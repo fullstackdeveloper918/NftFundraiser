@@ -47,12 +47,13 @@ const Fundraiser = () => {
                                     <div className="card no-hover">
                                         <div className="single-seller d-flex align-items-center">
 
-                                            <img className="avatar-md rounded-circle" src={item.avatar} alt="" />
+                                            <img className="avatar-md rounded-circle" src={item?.organization_detail?.banner_image} alt="" />
 
                                             {/* Seller Info */}
                                             <div className="seller-info ml-3">
-                                                <a className="seller mb-2">@{item.username}</a>
-                                                <span>{item.amount}</span>
+                                                <a className="seller mb-2">{item?.organization_detail?.organization_name}</a>
+                                                <span dangerouslySetInnerHTML={{ __html: item?.organization_detail?.description?.slice(0, 15) }} />
+                                                <span>${item.amount} Raised</span>
                                             </div>
                                         </div>
                                     </div>
