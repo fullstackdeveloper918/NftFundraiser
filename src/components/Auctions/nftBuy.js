@@ -199,7 +199,7 @@ const LatprojNftDetails = (props) => {
                         <div className="profile_detail mt-4">
 
                             <LatNftDataTable
-                                id={id}
+                            // id={id}
                             />
                         </div>
                     </div>

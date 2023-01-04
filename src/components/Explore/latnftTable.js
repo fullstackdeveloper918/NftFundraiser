@@ -4,7 +4,7 @@ import { Collapse } from 'antd';
 import { NftList, ProjectDetail, ProjectList } from '../../redux/Actions/projectAction';
 import { useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
-const LatNftDataTable = () => {
+const LatNftDataTable = (props) => {
     const dispatch = useDispatch()
     const { Panel } = Collapse;
     const onChange = (key) => {
@@ -15,19 +15,16 @@ const LatNftDataTable = () => {
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
     };
-    const projdetail = useSelector(state => {
-        // 
-        return state?.projectdetails?.projectdetails
-    })
-    console.log(projdetail.nft_data, 'projdatanft')
+
+    // useEffect(() => {
+    //     debugger
+    //     dispatch(NftList(id))
+    // }, [id])
     const latprojnftdetail = useSelector(state => {
         // 
         return state?.projectdetails?.getnftwoldetails
     })
     console.log(latprojnftdetail, 'laptnft')
-    useEffect(() => {
-        dispatch(NftList(id))
-    }, [id])
 
     return (
         <div>

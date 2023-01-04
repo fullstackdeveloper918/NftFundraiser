@@ -109,7 +109,6 @@ const Header = () => {
                         window.location = '/projectlist'
                         break;
 
-
                 }
             });
 

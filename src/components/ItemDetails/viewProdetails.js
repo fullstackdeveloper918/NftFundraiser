@@ -135,7 +135,7 @@ const ProjDetails = () => {
                                             show={modalShowrefer}
                                             onHide={() => setModalShowrefer(false)} /></>
 
-                                    <Button  variant="primary" className=" btn  btn-bordered-white m-0">
+                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
                                         Invest
                                     </Button>
                                 </div>
@@ -234,7 +234,7 @@ const ProjDetails = () => {
 
 
                             <ProjdataTable
-                            //  id={id}
+                                id={id}
                             />
                         </div>
 
@@ -250,7 +250,9 @@ const ProjDetails = () => {
 
                     <div className=" col-12 mt-4">
                         <div className="items mt-0 explore-items p-0">
-                            <ProjNFTS />
+                            <ProjNFTS
+
+                            />
                         </div>
                     </div>
 
