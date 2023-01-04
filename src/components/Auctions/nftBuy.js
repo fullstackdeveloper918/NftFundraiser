@@ -132,7 +132,7 @@ const LatprojNftDetails = (props) => {
 
 
                         </div>
-                        <div className="content sm:mt-3 mt-lg-2">
+                        <div className="content sm:mt-4 mt-lg-2">
                             <div className="card no-hover position-relative">
                                 <span className='share'><svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path fill="none" stroke="#fff" stroke-width="2" d="M18,8 C19.6568542,8 21,6.65685425 21,5 C21,3.34314575 19.6568542,2 18,2 C16.3431458,2 15,3.34314575 15,5 C15,6.65685425 16.3431458,8 18,8 Z M6,15 C7.65685425,15 9,13.6568542 9,12 C9,10.3431458 7.65685425,9 6,9 C4.34314575,9 3,10.3431458 3,12 C3,13.6568542 4.34314575,15 6,15 Z M18,22 C19.6568542,22 21,20.6568542 21,19 C21,17.3431458 19.6568542,16 18,16 C16.3431458,16 15,17.3431458 15,19 C15,20.6568542 16.3431458,22 18,22 Z M16,18 L8,13 M16,6 L8,11" />
@@ -142,8 +142,6 @@ const LatprojNftDetails = (props) => {
                                     <span>{latprojnftdetail.pay_from}</span>
 
                                     <a className="owner-meta d-flex align-items-center ml-3" href="/author">
-                                        {/* <img className="avatar-sm rounded-circle" src="/img/avtar1.png" alt="" /> */}
-                                        {/* <h6 className="ml-2">{latprojnftdetail.pay_from}</h6> */}
                                     </a>
                                 </div>
 
@@ -154,40 +152,20 @@ const LatprojNftDetails = (props) => {
                                 </div>
                                 <div className="item-info-list">
                                     <ul className="list-unstyled">
-                                        {/* <li className="price d-flex">
-                                            <span>Current Price : {nftdetail?.price} MATIC</span>
-                                            <span>Price </span>
-                                            <span>{latprojdetail.price} MATIC</span>
-
-                                        </li> */}
-                                        {/* <li>
-​
-                                        <span dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} />
-                                    </li> */}
-                                        {/* <li> */}
-                                        {/* <span>Volume Traded </span> */}
-                                        {/* {latprojdetail?.nft_data?.map((item, idx) => { */}
-                                        {/*  */}
-
                                         <span class='boldertext'>Token :</span>
                                         <span> #{latprojnftdetail.token_id}</span>
-                                        {/* })} */}
-                                        {/* </li> */}
                                     </ul>
                                 </div>
                                 <div className='eddlbtton d-flex  align-items-center mt-2'>
 
                                     <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                         id="nftdetail.id" onClick={() => buyHandler()}>  Buy</button>
-
-
                                 </div>
-                                {/* <a className="d-block btn btn-bordered-white mt-4" href="/wallet-connect">{initData.btnText}</a> */}
                             </div>
                         </div>
                     </div>
 
-                    <div className='col-lg-4 col-12 mt-3 '>
+                    <div className='col-lg-4 col-12 mt-4 '>
                         <div className='price_nft'>
                             <h5 className='user_title gap-5'>
                                 <div><svg fill="#fff" width="24px" height="24px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g data-name="2. Coin" id="_2._Coin"><path d="M22,9h-.19A2.83,2.83,0,0,0,22,8V6a3,3,0,0,0-3-3H3A3,3,0,0,0,0,6V8a3,3,0,0,0,2.22,2.88A3,3,0,0,0,2,12v2a3,3,0,0,0,.22,1.12A3,3,0,0,0,0,18v2a3,3,0,0,0,2.22,2.88A3,3,0,0,0,2,24v2a3,3,0,0,0,3,3H22A10,10,0,0,0,22,9Zm-9.16,6H5a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H16A10,10,0,0,0,12.84,15ZM2,6A1,1,0,0,1,3,5H19a1,1,0,0,1,1,1V8a1,1,0,0,1-1,1H3A1,1,0,0,1,2,8ZM2,18a1,1,0,0,1,1-1h9.2a10.1,10.1,0,0,0,0,4H3a1,1,0,0,1-1-1Zm3,9a1,1,0,0,1-1-1V24a1,1,0,0,1,1-1h7.84A10,10,0,0,0,16,27Zm17,0a8,8,0,1,1,8-8A8,8,0,0,1,22,27Z" /><path d="M22,16h2a1,1,0,0,0,0-2H23a1,1,0,0,0-2,0v.18A3,3,0,0,0,22,20a1,1,0,0,1,0,2H20a1,1,0,0,0,0,2h1a1,1,0,0,0,2,0v-.18A3,3,0,0,0,22,18a1,1,0,0,1,0-2Z" /></g></svg></div>
@@ -215,20 +193,16 @@ const LatprojNftDetails = (props) => {
                         </div>
                     </div>
                     <div className='col-lg-8 col-12'>
-                        <div className="profile_detail mt-3">
+                        <div className="profile_detail mt-4">
 
                             <UserTransdataTable />
                         </div>
                     </div>
 
 
-                    <div className="col-12 mt-3">
+                    <div className="col-12 mt-4">
                         <div class="user-description ">
                             <h5 className='user_title gap-5'><div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg></div><div>Description</div>
-                                {/* <i class="fa-solid fa-pen" ></i>
-                        <i class="fa-sharp fa-solid fa-trash"></i> */}
-
-
                             </h5>
                             <p dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} />
                             {/* <ReadMore  dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} /> */}
@@ -236,7 +210,7 @@ const LatprojNftDetails = (props) => {
                         </div>
                     </div>
 
-                    <div className='col-12 mt-3'>
+                    <div className='col-12 mt-4'>
                         <div className='funddeatil table-detail '>
                             <FundTransdataTable />
 
