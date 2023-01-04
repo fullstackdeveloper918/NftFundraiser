@@ -329,6 +329,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
       .on('confirmation', async (confNumber, receipt) => {
         if (confNumber == 1) {
 
+
           await UpdateContract(collid, contractAddress)
           // await UpdateContract(collid, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
           const tokid = web3.utils.hexToNumber(receipt.logs[0].topics[3])
