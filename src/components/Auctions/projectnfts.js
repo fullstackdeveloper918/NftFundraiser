@@ -138,6 +138,7 @@ const ProjNFTS = () => {
                                                 <div className="countdown d-flex" data-date={item.end_date} />
                                             </div> */}
 
+
                                             <h5 className="mb-0">{item.title.slice(0, 16)} ...</h5>
 
                                             {/* <a className="seller d-flex align-items-center my-3">
@@ -149,9 +150,9 @@ const ProjNFTS = () => {
                                                 <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 45) }} />
                                             </div>
 
-                                            <div className='mint_btn'>
+                                            {/* <div className='mint_btn'>
                                                 <a href="#"><button className='btn ml-lg-auto btn-bordered-white'>Mint</button></a>
-                                            </div>
+                                            </div> */}
 
                                         </div>
 

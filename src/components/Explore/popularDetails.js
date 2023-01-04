@@ -78,7 +78,7 @@ const CollectionDetails = (props) => {
 
                     </div> */}
 
-                        <div className='table-main-detail position-relative'>
+                        <div className='table-main-detail mt-3 mt-lg-0 position-relative'>
 
 
 
@@ -91,7 +91,7 @@ const CollectionDetails = (props) => {
 
 
 
-                    <div className="col-lg-4 col-12 mt-3 mt-lg-0">
+                    {/* <div className="col-lg-4 col-12 mt-3 mt-lg-0">
                         <div>
                             <div className=" mb-3">
 
@@ -117,7 +117,7 @@ const CollectionDetails = (props) => {
                                                     </svg>
                                                     </span>
 
-                                                    {/* <span><div className="progress_name">{items.username} </div> <div>${items.price} Cdn / {Number(coll.price) * Number(matic['matic-network']?.cad)} MATIC ({days_difference} days ago)</div></span> */}
+                                                   
                                                 </div>
                                             </li>
 
@@ -128,10 +128,10 @@ const CollectionDetails = (props) => {
                                 })}
 
 
-                                {/* <p className='see_all'>See all</p> */}
+                                <p className='see_all'>See all</p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     {/* {userDetail !== null && ( */}
 
                     {/* )} */}

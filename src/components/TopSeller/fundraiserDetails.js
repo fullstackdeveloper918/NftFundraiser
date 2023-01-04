@@ -97,9 +97,9 @@ const FundraiserDetail = () => {
                                 </li>
                             </div>
 
-                            <div className="d-flex justify-content-start">
+                            <div className="d-sm-flex justify-content-start gap-5">
                                 <div>
-                                    <Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary">
+                                    <Button className=" mb-2 mb-sm-0  btn  btn-bordered-white m-0" variant="primary">
                                         Share
                                     </Button>
                                 </div>
@@ -237,10 +237,10 @@ const FundraiserDetail = () => {
 
                             </div>
 
-                            <div className="d-flex justify-content-start">
+                            <div className="d-sm-flex justify-content-start">
                                 <div>
 
-                                    <Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary">
+                                    <Button className=" btn mr-2 btn-bordered-white m-0" variant="primary">
                                         Share
                                     </Button>
 

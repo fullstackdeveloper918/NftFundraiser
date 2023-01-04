@@ -126,8 +126,8 @@ const ProjDetails = () => {
                                 </span>
                                 </div>
 
-                                <div className="d-flex justify-content-start">
-                                    <><Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary" onClick={() => setModalShowrefer(true)}>
+                                <div className="d-sm-flex justify-content-start">
+                                    <><Button className="btn mr-2 btn-bordered-white m-0" variant="primary" onClick={() => setModalShowrefer(true)}>
                                         Share
                                     </Button><ReferalPopup
                                             id={id}
@@ -135,7 +135,7 @@ const ProjDetails = () => {
                                             show={modalShowrefer}
                                             onHide={() => setModalShowrefer(false)} /></>
 
-                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
+                                    <Button  variant="primary" className=" btn  btn-bordered-white m-0">
                                         Invest
                                     </Button>
                                 </div>
