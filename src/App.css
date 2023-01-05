@@ -2097,6 +2097,12 @@ span.jodit-ui-button__text {
     font-size: 18px;
     text-align: center;
 }
+.allproj2 {
+    color: #4B1BBF !important;
+}
+.proj-left.user_icon svg {
+    margin: 0 !important;
+}
 
 @media (max-width: 400px){
     .proj-left button {

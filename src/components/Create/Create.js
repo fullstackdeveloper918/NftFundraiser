@@ -325,7 +325,7 @@ const Create = ({ current, next, prev }) => {
                             {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
                             {errors.description && errors.description.type === "minLength" && (
                                 <p style={{ color: 'red' }}>
-                                    min length of words is 300
+                                    min length of words is 500
                                 </p>
                             )}
                         </div>

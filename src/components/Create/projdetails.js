@@ -165,7 +165,7 @@ const ProjNftDetails = () => {
                                             }) :
                                         <div className="col-12 col-sm-12 text-center col-lg-12 mt-2 mb-2">
 
-                                            <span className='allproj2 boldertext w-100'>
+                                            <span className='allproj2  w-100'>
                                                 No user has invested yet
                                             </span>
 
@@ -175,7 +175,7 @@ const ProjNftDetails = () => {
 
 
 
-                                    <p className='see_all'>See all</p>
+                                 
                                 </div>
                             </div>
                         </div>
