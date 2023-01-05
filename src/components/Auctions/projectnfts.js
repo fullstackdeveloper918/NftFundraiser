@@ -64,7 +64,7 @@ const ProjNFTS = () => {
                                                 <span className="ml-2">{item.from}</span>
                                             </a> */}
                                             <div className="card-bottom">
-                                                <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 45) }} />
+                                                <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 50) }} />
                                             </div>
                                             {/* {item?.user_data?.user_id === userdet?.user_id && localStorage.getItem('authToken') && 
 

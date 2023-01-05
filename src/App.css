@@ -153,7 +153,7 @@ input[type="date"]:focus::before {
 
 .item-details-area .row {
     /* background: #101010; */
-    padding: 20px 10px;
+    /* padding: 20px 10px; */
 }
 @media (max-width:768px){
 .item-details-area h3 {
@@ -328,7 +328,6 @@ footer a.navbar-brand img {
 }
 
 .item-details-area .item-info img , .fundraise-main .item-info img{
-    border-radius: 8px;
     object-fit: cover;
     object-position: center;
     width: 100% !important;
@@ -531,9 +530,10 @@ header .navbar-expand .navbar-nav .nav-link:not(.btn) {
     color: var(--top-nav-item-color);
 }
 img.card-img-top {
-    width: 100%;
-    height: 200px;
+    /* width: 100%;
+    height: 200px; */
     object-fit: cover;
+    aspect-ratio: 1/1;
 }
 span.banner-dis {
     color: var(--primary-p-color) !important;
@@ -1477,7 +1477,7 @@ h5.user_title i , .container.table-main-detail i , .token span i{
     gap: 10px;
 }
 :root .card.add-nft {
-    min-height: 413.6px;
+    height: 100%;
     justify-content: center;
     align-items: center;
     border: 1px dashed #2a2a2a;
@@ -1822,6 +1822,11 @@ section.wallet-connect-area h4 {
     top: 10px;
 }
 @media (max-width: 991px){
+    :root .item-details-area .content_project .item-thumb, :root body .item-details-area.project-nft-si.main-proj-detail.collection_detail .item-thumb {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100% !important;
+    }
     .desktop_nft{
        display: none;
     }
@@ -1886,7 +1891,7 @@ span.share {
 .nft-price {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
 .main-create .ant-collapse-content-box {
     background: #16151a;
@@ -1954,6 +1959,10 @@ padding: 16px 16px;
 .card-caption .card-body p {
     font-size: 14px;
     font-family: var(--secondary-font);
+
+}
+.card-caption .card-body p:after {
+    content: "...";
 }
 .donate-btn button{
     background-color: transparent !important;
@@ -2036,11 +2045,14 @@ span.jodit-ui-button__text {
     top: 10px;
     height: auto !important;
 }
-.item-details-area .content_project .item-thumb , .item-details-area.project-nft-si.main-proj-detail .collection_detail .item-thumb{
-	height: 350px;
+.item-details-area .content_project .item-thumb, :root .item-details-area.project-nft-si.main-proj-detail.collection_detail .item-thumb {
+    height: 350px;
     width: 100%;
-	/* max-width: 350px; */
-	object-position: bottom;
+    max-width: 350px !important;
+    height: 350px !important;
+    object-position: bottom;
+    margin: 0 auto;
+    border-radius: 8px;
 }
 .demo .nfts_details tr td {
     display: flex;
@@ -2091,19 +2103,25 @@ span.jodit-ui-button__text {
 .nft_detail_main td {
     text-align: right;
     word-break: break-word;
+    width: 150px;
 }
 .no-data h2 {
     color: #4625d6 !important;
     font-size: 18px;
     text-align: center;
 }
-.allproj2 {
-    color: #4B1BBF !important;
-}
+
 .proj-left.user_icon svg {
     margin: 0 !important;
 }
-
+body .swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
+    background: rgb(74 74 74 / 40%);
+}
+.price_nft_detail small {
+    font-size: 14px;
+    color: #8e8e8e;
+    font-weight: 500;
+}
 @media (max-width: 400px){
     .proj-left button {
         width: 100%;

@@ -38,7 +38,7 @@ const Footer = () => {
                 icon: 'info',
                 html:
                     'You need to Signup as a Creator to Create a Project',
-                showCloseButton: true,
+                showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:
                     '<i class="fa fa-thumbs-up"></i> Ok!',
@@ -50,7 +50,7 @@ const Footer = () => {
                 icon: 'info',
                 html:
                     'You need to Signup as a Creator to Create a Project',
-                showCloseButton: true,
+                showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:
                     '<i class="fa fa-thumbs-up"></i> Ok!',
@@ -86,7 +86,7 @@ const Footer = () => {
                                 <h4 className="footer-title">Useful Links</h4>
                                 <ul>
                                 <li className="nav-item">
-                            <a onClick={handleCreate} className="nav-link">Create Project</a>
+                            <a onClick={handleCreate} className="">Create Project</a>
                         </li>
                                     {/* <li><Link to="/create" onClick={handleCreate}>Create Project</Link></li> */}
                                     <li><a href={`/all/${"LatestProjects"}`}>Explore NFTs</a></li>
@@ -118,7 +118,7 @@ const Footer = () => {
                             {/* Copyright Area */}
                             <div className="copyright-area d-flex flex-wrap justify-content-center justify-content-sm-between text-center py-4">
                                 {/* Copyright Left */}
-                                <div className="copyright-left">© 2022 Canopy Labs Ltd.</div>
+                                <div className="copyright-left">© 2023 Copyright Karmatica.</div>
                                 {/* Copyright Right */}
                             </div>
                         </div>

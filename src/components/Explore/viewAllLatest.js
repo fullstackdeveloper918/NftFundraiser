@@ -127,7 +127,7 @@ const ExploreAll = () => {
                                                         {/* Card Body */}
                                                         <div className="card-body">
                                                             <a href="/item-details">
-                                                                <h5 className="mb-0">{item.title.slice(0,22)}..</h5>
+                                                                <h5 className="mb-0">{item.title.slice(0,18)}..</h5>
                                                             </a>
                                                             <a className="seller d-flex align-items-center mb-2" href="#">
                                                                  <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />

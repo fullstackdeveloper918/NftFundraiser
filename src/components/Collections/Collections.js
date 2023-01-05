@@ -49,7 +49,7 @@ const Collections = () => {
                                                 <a>
                                                     <h5 className="mb-0 ">{item.title}</h5>
                                                 </a>
-                                                <div class=""><p> {item.description.slice(0, 52)}<span>....</span></p></div>
+                                                <div class=""><p> {item.description.slice(0, 52)}</p></div>
                                                 <div class="mb-2 align-items-center">
                                                     <div class="mt-2 mb-2 d-flex justify-content-between text-align-center fundraiser_sale">
                                                             <span>Total NFTs</span>

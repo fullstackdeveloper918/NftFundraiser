@@ -90,7 +90,7 @@ const GetAllFundraise = () => {
                                                                     </a>
                                                                 </div> */}
                                                         <div className=''>
-                                                            <p dangerouslySetInnerHTML={{ __html: item?.organization_detail?.description?.slice(0, 60) }} />
+                                                            <p dangerouslySetInnerHTML={{ __html: item?.organization_detail?.description?.slice(0, 50) }} />
                                                             {/* <p> It is a long established fact that a reader</p> */}
 
                                                         </div>
@@ -112,9 +112,9 @@ const GetAllFundraise = () => {
                                                             </svg></span>
                                                         </div>
 
-                                                        <div className='donate-btn'>
+                                                        {/* <div className='donate-btn'>
                                                                 <button className='btn ml-lg-auto btn-bordered-white'>Donate Now</button>
-                                                            </div>
+                                                            </div> */}
                                                         
 
                                                         {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}

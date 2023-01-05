@@ -146,7 +146,7 @@ const CollectionNFTS = () => {
                                                 <span className="ml-2">{item.from}</span>
                                             </a> */}
                                             <div className="card-bottom d-flex">
-                                                <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 28).toUpperCase() }} /><span></span>
+                                                <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 50) }} />
                                             </div>
 
                                         </div>

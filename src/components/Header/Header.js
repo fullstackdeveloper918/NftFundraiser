@@ -131,7 +131,7 @@ const Header = () => {
                 icon: 'info',
                 html:
                     'You need to Signup as a Creator to Create a Project',
-                showCloseButton: true,
+                showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:
                     '<i class="fa fa-thumbs-up"></i> Ok!',
@@ -143,7 +143,7 @@ const Header = () => {
                 icon: 'info',
                 html:
                     'You need to Signup as a Creator to Create a Project',
-                showCloseButton: true,
+                showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:
                     '<i class="fa fa-thumbs-up"></i> Ok!',

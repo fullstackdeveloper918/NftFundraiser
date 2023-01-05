@@ -43,7 +43,7 @@ const LatNftDataTable = (props) => {
                                 <td>Polygon (Matic)</td>
                             </tr>
                             <tr>
-                                <th>Contract</th>
+                                <th>Contract ID</th>
                                 <td>{latprojnftdetail?.collectionData?.contract_id}</td>
                             </tr>
                             <tr>

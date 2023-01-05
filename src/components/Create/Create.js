@@ -561,7 +561,7 @@ const Create = ({ current, next, prev }) => {
                                     />
                                     <div >
 
-                                        <span className='logo-dis'>end date should be greater then or equal to start date</span>
+                                        <span className='logo-dis'>End date should be greater then or equal to start date</span>
                                     </div>
                                     {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}
                                     {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
