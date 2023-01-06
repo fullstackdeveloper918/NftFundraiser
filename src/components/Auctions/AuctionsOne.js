@@ -48,7 +48,7 @@ const AuctionsOne = ({ type }) => {
                         </div>
                     </div>
                 </div>
-                <div className="auctions-slides ">
+                <div className="auctions-slides">
                     <div className="swiper-container slider-mid items ">
                         <div className="swiper-wrapper col-12 ">
                             {/* Single Slide */}
