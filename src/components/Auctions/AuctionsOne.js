@@ -12,7 +12,7 @@ const projectTypesMap = {
 }
 
 
-const AuctionsOne = ({ key, type }) => {
+const AuctionsOne = ({ type }) => {
 
     const dispatch = useDispatch()
 
@@ -48,13 +48,14 @@ const AuctionsOne = ({ key, type }) => {
                         </div>
                     </div>
                 </div>
-                <div className="auctions-slides">
-                    <div className="swiper-container slider-mid items">
-                        <div className="swiper-wrapper col-12">
+                <div className="auctions-slides ">
+                    <div className="swiper-container slider-mid items ">
+                        <div className="swiper-wrapper col-12 ">
                             {/* Single Slide */}
+                      
                             {liveProjects?.map((item, idx) => {
                                 return (
-                                    <div key={`auc_${idx}`} className="swiper-slide item">
+                                    <div key={`auc_${item.id}`} className="swiper-slide item">
                                         <Link to={`/projdetails/${item.id}`} className="card">
                                             {/* {item?.nft_data?.map((item, idx) => { */}
                                             {/* return ( */}
