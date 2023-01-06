@@ -34,7 +34,7 @@ import {
     VKShareCount
 } from "react-share";
 // import 'bootstrap/dist/css/bootstrap.min.css';
-function MyVerticallyCenteredModal(props) {
+function ReferalPopup(props) {
     // const [title, setTitle] = useState("");
     // const [description, setDescription] = useState("");
     // const [short_url, setShortUrl] = useState("");
@@ -122,4 +122,4 @@ function MyVerticallyCenteredModal(props) {
     );
 }
 
-export default MyVerticallyCenteredModal
+export default ReferalPopup

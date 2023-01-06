@@ -74,7 +74,7 @@ const Footer = () => {
                             {/* Copyright Area */}
                             <div className="copyright-area d-flex flex-wrap justify-content-center justify-content-sm-between text-center py-4">
                                 {/* Copyright Left */}
-                                <div className="copyright-left">© 2022 Canopy Labs Ltd.</div>
+                                <div className="copyright-left">© 2023 Canopy Labs Ltd.</div>
                                 {/* Copyright Right */}
                             </div>
                         </div>

@@ -17,6 +17,10 @@ import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router';
+import VideoInput from './VideoInput';
+import VideoAudioPLayer from './VideoInput';
+import Dinosaur from './3dModal';
+import DModal from './3dModal';
 
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -41,12 +45,15 @@ const UploadNft = ({ current, prev }) => {
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: '1' });
+    const [nftFileType, setNFtFileType] = useState('Image')
+    console.log('nftFile', nftFileType)
     // console.log('colldata', coldata)
     // console.log(nft_collection_id)
     // const [coll_id,setCollId] = useState()
     const coll_id = (Object.values(nft_collection_id));
     // console.log("collid", coll_id)
-
+    const [source, setSource] = useState('')
+    console.log('source', source)
     const [loading, setLoading] = useState(false)
 
     console.log(nft_collection_id, "nft collections")
@@ -114,7 +121,32 @@ const UploadNft = ({ current, prev }) => {
 
     // console.log('col', col)
 
+    const handleUpload = e => {
+        const filetype = e.target.files[0].type
+        // debugger
+        setSource(e.target.files[0])
 
+        // debugger
+
+        switch (filetype) {
+            case 'image/png':
+            case 'image/jpg':
+            case 'image/gif':
+                setNFtFileType('Image')
+                break;
+            case 'audio/mpeg':
+            case 'audio/ogg':
+            case 'video/mp4':
+            case 'video/webm':
+                setNFtFileType('Player')
+                break;
+            case '':
+                setNFtFileType('modal')
+                break;
+            default:
+                setNFtFileType('Image')
+        }
+    }
 
     const lat = localStorage.getItem('latitude')
     // console.log(lat, 'lattt')
@@ -241,13 +273,18 @@ const UploadNft = ({ current, prev }) => {
     const fileProps = {
         name: "file",
         multiple: false,
-        beforeUpload: () => {
-            return false;
+
+        beforeUpload: file => {
+            const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+            if (!isJpgOrPng) {
+
+                alert('You can only upload JPG/PNG file!');
+            }
         },
         onChange(info) {
             if (info.file.status !== "uploading") {
                 let reader = new FileReader();
-                reader.readAsDataURL(info.file);
+                reader?.readAsDataURL(info.file);
                 // setUploadedImage(info.file);
             }
         }
@@ -544,22 +581,48 @@ const UploadNft = ({ current, prev }) => {
 
                                                                     >
 
-                                                                        <Upload
-                                                                            {...fileProps}
-                                                                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                                                            listType="picture-card"
-                                                                            accept='image/PNG'
-                                                                            // fileList={fileList}
-                                                                            // onChange={onChange}
-                                                                            onPreview={handlePreview}
+                                                                        <input
+                                                                            type="file"
+                                                                            onChange={handleUpload}
                                                                             maxCount={1}
+                                                                            accept=".mov,.mp4,.mp3,.webm.gltf"
+                                                                        />
+                                                                        {nftFileType === 'Player' &&
+                                                                            // onClick={() => onHandleClick(index, item.id)}
+                                                                            <VideoAudioPLayer
 
-                                                                        >
-                                                                            + Upload
-                                                                        </Upload>
+                                                                                vdo={source}
+                                                                                width={400} height={300} />
+
+                                                                        }
+                                                                        {nftFileType === 'modal' &&
+                                                                            <DModal
+                                                                                vdo={source}
+                                                                            />
+
+                                                                        }
+
 
 
                                                                     </Form.Item>
+                                                                    {/* <Form.Item
+                                                                        {...restField}
+                                                                        name={[name, "nft_image"]}
+                                                                        // getValueFromEvent={getFile}
+                                                                        rules={[
+                                                                            {
+                                                                                required: true,
+                                                                                message: 'Please select a MP4 File',
+
+                                                                            },
+                                                                        ]}
+
+                                                                    >
+
+                                                                        <VideoInput width={400} height={300} />
+
+
+                                                                    </Form.Item> */}
                                                                     <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
                                                                         <img
                                                                             alt="example"
@@ -568,6 +631,38 @@ const UploadNft = ({ current, prev }) => {
                                                                             }}
                                                                             src={previewImage} />
                                                                     </Modal>
+
+
+
+
+
+
+
+                                                                    {/* <div className="col-12 col-md-12">
+                                                                        <div className="form-group">
+                                                                            <label>MP4 & MP3 </label>
+                                                                            <VideoInput width={400} height={300} />
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-12 col-md-12">
+                                                                        <div className="form-group">
+                                                                            <label>3D Modal </label>
+                                                                            <Dinosaur />
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-12 col-md-12">
+                                                                        <div className="form-group">
+                                                                           
+
+                                                                        </div>
+                                                                    </div> */}
+
+
+
+
+
                                                                 </div>
                                                             </div>
 

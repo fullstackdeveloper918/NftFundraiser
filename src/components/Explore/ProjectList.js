@@ -58,7 +58,7 @@ const GetAllProjects = () => {
                                                         <div className="image-over relative ">
                                                             {/* <i class="fa-solid fa-pen" ></i>
                                                     <i class="fa-sharp fa-solid fa-trash"></i> */}
-                                                            <img className="card-img-top" src={item?.nft_data[0]?.image} alt={item.nft_data.description} />
+                                                            <img className="card-img-top" src={item?.image} alt={item.nft_data.description} />
                                                         </div>
                                                         <div className='token'>
                                                             <span></span>
@@ -78,8 +78,13 @@ const GetAllProjects = () => {
                                                                 </div>
                                                                 <div className="card-bottom d-flex justify-content-between">
                                                                     <span>{item.price} MATIC</span>
-                                                                    <span>{item.nft_data.length} NFTS </span>
-                                                                    <span> + {item.number_of_nft} NFTS </span>
+                                                                    {item.nft_data.legth == 1 ? (
+
+                                                                        <span>{item.nft_data.length} NFT </span>
+                                                                    ) : (
+                                                                        <><span>{item.nft_data.length} NFTs </span>
+                                                                            <span> + {item.number_of_nft} NFTs </span></>
+                                                                    )}
                                                                 </div>
 
                                                                 {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
