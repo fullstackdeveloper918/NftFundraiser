@@ -56,6 +56,9 @@ function ReferalPopup(props) {
             <Modal.Header >
                 <Modal.Title id="contained-modal-title-vcenter">
                     Refer your friends
+                    <p>Earn Royalties When You Share: <br />10% of NFT for first level referral, 5% for second, 1% for all others</p>
+
+
                 </Modal.Title>
                 <div>
                     <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
