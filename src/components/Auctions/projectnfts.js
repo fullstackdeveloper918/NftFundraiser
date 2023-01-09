@@ -66,6 +66,16 @@ const ProjNFTS = () => {
                                             <div className="card-bottom">
                                                 <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 50) }} />
                                             </div>
+
+                                            <div className='button_group'>
+                                            <div className=''>
+                                                            <a href="#"><button className='btn ml-lg-auto btn-bordered-white'>Buy</button></a>
+                                                        </div>
+
+                                                        <div className=''>
+                                                            <a><button className='btn ml-lg-auto btn-bordered-white'>Invest</button></a>
+                                                        </div>
+                                            </div>
                                             {/* {item?.user_data?.user_id === userdet?.user_id && localStorage.getItem('authToken') && 
 
                                                 {

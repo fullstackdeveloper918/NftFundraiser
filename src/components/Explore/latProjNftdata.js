@@ -185,10 +185,11 @@ const LatNftdataTable = () => {
                                          <span>You don't have any activity yet</span>
                                     </div> */}
                     </Table>
-                </Panel>
-                <div className='nothing'>
+                    <div className='nothing'>
                 No matching records found
                         </div>
+                </Panel>
+               
             </Collapse>
         </div>
     )

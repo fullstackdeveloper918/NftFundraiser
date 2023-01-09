@@ -85,11 +85,11 @@ const NftTransdataTable = (props) => {
 
 
                     </Table>
-
-                </Panel>
-                <div className='nothing'>
+                    <div className='nothing'>
                     No matching records found
                 </div>
+                </Panel>
+                
             </Collapse>
         </div>
     )
