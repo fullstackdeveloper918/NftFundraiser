@@ -156,7 +156,7 @@ const LatNftdataTable = () => {
 
 
                         </thead>
-                        <tbody>
+                        <tbody className='img_table'>
                             {projdetail?.project_activity && projdetail?.project_activity?.length ?
                                 [...new Map(projdetail?.project_activity.map(item =>
                                     [item["title"], item])).values()].map((item, idx) => {

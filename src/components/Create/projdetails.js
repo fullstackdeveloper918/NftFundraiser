@@ -120,9 +120,7 @@ const ProjNftDetails = () => {
                                             {/* <Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary" onClick={() => setModalShowrefer(true)}>
                                         Share
                                     </Button> */}
-                                            <Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary">
-                                                Share
-                                            </Button>
+                                           
                                             {/* <ReferalPopup
                                             id={id}
                                             userRef={userDetail}
@@ -130,9 +128,13 @@ const ProjNftDetails = () => {
                                             onHide={() => setModalShowrefer(false)} /> */}
                                         </>
 
-                                        <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                            Invest
+                                        <a href='#invest'><Button  variant="primary" className=" btn  btn-bordered-white m-0">
+                                             Invest
                                         </Button>
+                                        </a>
+                                        <Button className=" btn  btn-bordered-white m-0 ml-2" variant="primary">
+                                                Share
+                                            </Button>
                                     </div>
                                     {projdetail?.user_invest && projdetail?.user_invest?.length ?
                                         [...new Map(projdetail?.user_invest?.slice(0, 3)?.map(item =>
@@ -236,7 +238,7 @@ const ProjNftDetails = () => {
                 </div>
                 <div className="col-12 mt-4">
                     
-                    <div className='nfts_main'>
+                    <div className='nfts_main' id='invest'>
                         <div className='intro row m-0 p-0'>
 							<div className="intro-content">
 								<span >NFTs</span>
@@ -330,7 +332,7 @@ const ProjNftDetails = () => {
                                                         <span >Creator:</span><span className='ml-2'>{x?.user_data?.username}</span>
                                                     </div> */}
                                                     <div className="d-flex justify-content-between align-items-end mt-1 mb-1">
-                                                        <span dangerouslySetInnerHTML={{ __html: x.description.slice(0, 52) }} /><span>...</span>
+                                                        <span dangerouslySetInnerHTML={{ __html: x.description.slice(0, 52) }} />
                                                     </div>
 
 

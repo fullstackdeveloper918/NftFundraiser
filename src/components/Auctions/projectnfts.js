@@ -64,10 +64,10 @@ const ProjNFTS = () => {
                                                 <span className="ml-2">{item.from}</span>
                                             </a> */}
                                             <div className="card-bottom">
-                                                <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 50) }} />
+                                                <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 50) }} />
                                             </div>
 
-                                            <div className='button_group'>
+                                            <div className='button_group buy-invest-btn'>
                                             <div className=''>
                                                             <a href="#"><button className='btn ml-lg-auto btn-bordered-white'>Buy</button></a>
                                                         </div>

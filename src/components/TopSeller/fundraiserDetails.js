@@ -99,16 +99,17 @@ const FundraiserDetail = () => {
                             </div>
 
                             <div className="d-sm-flex justify-content-start gap-5">
+                            <div>
+                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
+                                        Invest
+                                    </Button>
+                                </div>
                                 <div>
                                     <Button className=" mb-2 mb-sm-0  btn  btn-bordered-white m-0" variant="primary">
                                         Share
                                     </Button>
                                 </div>
-                                <div>
-                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Invest
-                                    </Button>
-                                </div>
+                               
                                 <>
                                     {/* <Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary">
                                         Share
@@ -197,7 +198,7 @@ const FundraiserDetail = () => {
                                 <div className='d-flex align-item-center gap-5'>
                                     <svg className='' width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg>
 
-                                    <div>Desription</div>
+                                    <div>Description</div>
 
                                 </div>
                             </h5>
@@ -239,18 +240,19 @@ const FundraiserDetail = () => {
                             </div>
 
                             <div className="d-sm-flex justify-content-start">
-                                <div>
-
-                                    <Button className=" btn mr-2 btn-bordered-white m-0" variant="primary">
-                                        Share
-                                    </Button>
-
-                                </div>
-                                <div>
+                            <div>
                                     <Button variant="primary" className=" btn  btn-bordered-white m-0">
                                         Invest
                                     </Button>
                                 </div>
+                                <div>
+
+                                    <Button className=" btn ml-2 btn-bordered-white m-0" variant="primary">
+                                        Share
+                                    </Button>
+
+                                </div>
+                               
 
 
 

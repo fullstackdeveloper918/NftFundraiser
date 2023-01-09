@@ -127,7 +127,12 @@ const ProjDetails = () => {
                                 </div>
 
                                 <div className="d-sm-flex justify-content-start">
-                                    <><Button className="btn mr-2 btn-bordered-white m-0" variant="primary" onClick={() => setModalShowrefer(true)}>
+
+                                    <>
+                                    <a href='#invest'><Button variant="primary" className=" btn  btn-bordered-white m-0">
+                                        Invest
+                                    </Button>
+                                    </a><Button className="btn ml-2 btn-bordered-white m-0" variant="primary" onClick={() => setModalShowrefer(true)}>
                                         Share
                                     </Button><ReferalPopup
                                             id={id}
@@ -135,9 +140,9 @@ const ProjDetails = () => {
                                             show={modalShowrefer}
                                             onHide={() => setModalShowrefer(false)} /></>
 
-                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
+                                    {/* <Button variant="primary" className=" btn  btn-bordered-white m-0">
                                         Invest
-                                    </Button>
+                                    </Button> */}
                                 </div>
                                 {latprojdetail?.user_invest && latprojdetail?.user_invest?.length ?
                                     [...new Map(latprojdetail?.user_invest?.slice(0, 3)?.map(item =>
@@ -249,7 +254,7 @@ const ProjDetails = () => {
                     </div>
 
                     <div className=" col-12 mt-4">
-                        <div className="items mt-0 explore-items p-0">
+                        <div id="invest" className="items mt-0 explore-items p-0">
                             <ProjNFTS
 
                             />

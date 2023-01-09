@@ -134,11 +134,11 @@ const CollectionNFTS = () => {
                                     <div className="card-caption col-12 p-0">
                                         {/* Card Body */}
                                         <div className="card-body">
-                                            <div className="countdown-times mb-3">
+                                            {/* <div className="countdown-times mb-3">
                                                 <div className="countdown d-flex" data-date={item.end_date} />
-                                            </div>
+                                            </div> */}
                                             <a href="/item-details">
-                                                <h5 className="mb-0">{item.title.toUpperCase()}</h5>
+                                                <h5 className="mb-0">{item.title.slice(0,20)}...</h5>
                                             </a>
                                             {/* <a className="seller d-flex align-items-center my-3">
                                                 <img className="avatar-sm rounded-circle"

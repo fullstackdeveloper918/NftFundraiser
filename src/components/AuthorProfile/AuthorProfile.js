@@ -401,16 +401,16 @@ const AuthorProfile = () => {
                             </div>
                             <img src={userdet.banner_image} alt="first nft" />
                         </div>
-                        <div className="table-detail mt-3">
+                        <div className="table-detail mt-4">
                             <UserdataTable />
 
                         </div>
-                        <div className="profile_detail mt-3 position-relative">
+                        <div className="profile_detail mt-4 position-relative">
 
                             <UserTransdataTable />
                         </div>
                     </div>
-                    <div className="col-12 col-md-4 mt-3 mt-lg-0">
+                    <div className="col-12 col-md-4 mt-4 mt-lg-0">
                         <div className="profile_main_right card wrap_card no-hover text-center">
 
                             <div className="image-over">
