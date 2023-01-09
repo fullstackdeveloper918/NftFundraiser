@@ -106,7 +106,13 @@ const ProjNftDetails = () => {
                             <div >
                                 <div className="progress_nft mb-3">
                                     <div className='progress_main'><span>
-                                        <span className='nft_price'>${projdetail.project_count} raised of ${projdetail.price} Cdn goal ({Number(projdetail.project_count) * Number(matic['matic-network']?.cad)} of {Number(projdetail.price) * Number(matic['matic-network']?.cad)} MATIC )</span><small>   </small>
+                                        {/* ({Number(projdetail.project_count) * Number(matic['matic-network']?.cad)} of {Number(projdetail.price) * Number(Math.round(matic['matic-network']?.cad))} MATIC ) */}
+                                        <span className='nft_price'> {Number(projdetail.project_count) * Number(matic['matic-network']?.cad)} raised of ${Number(projdetail.price) * Number(Math.round(matic['matic-network']?.cad))} Cdn </span>
+                                        <div>
+                                            {/* <span className='nft_price'>{projdetail.project_count} raised of ${projdetail.price} Cdn </span> */}
+                                            <span className='nft_price'>({projdetail.project_count} of {projdetail.price} MATIC )</span>
+
+                                        </div>
                                         <div className='progressbar'>
                                             <ProgressBar varient="success" now={projdetail.project_percentage} />
                                             {/* <span className="progress-bar bg-success" role="progressbar" style={{ width: "70" }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" now={projdetail.project_percentage}> {projdetail.project_percentage}% </span> */}
@@ -237,14 +243,19 @@ const ProjNftDetails = () => {
                     </div>
                 </div>
                 <div className="col-12 mt-4">
+<<<<<<< HEAD
                     
                     <div className='nfts_main' id='invest'>
+=======
+
+                    <div className='nfts_main'>
+>>>>>>> 2456dd3cfadb05f52ef710eac7777340a19acb71
                         <div className='intro row m-0 p-0'>
-							<div className="intro-content">
-								<span >NFTs</span>
-								<h3 className="w-full mb-0 pt-4">NFTs</h3>
-							</div>
-						</div>
+                            <div className="intro-content">
+                                <span >NFTs</span>
+                                <h3 className="w-full mb-0 pt-4">NFTs</h3>
+                            </div>
+                        </div>
                         <div className="row items mt-0 explore-items px-0">
                             <div className='col-12 col-sm-6 col-lg-3 item explore-item'>
                                 <div className='card no-hover m-0 add-nft '>

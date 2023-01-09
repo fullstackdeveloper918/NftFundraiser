@@ -138,7 +138,7 @@ const Header = () => {
                 confirmButtonAriaLabel: 'Thumbs up, great!',
             })
         }
-        else if (!userToken) {
+        else if (!window.ethereum?.selectedAddress) {
             Swal.fire({
                 icon: 'info',
                 html:

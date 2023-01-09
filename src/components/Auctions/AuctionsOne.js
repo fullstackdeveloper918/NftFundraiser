@@ -82,8 +82,15 @@ const AuctionsOne = ({ type }) => {
                                                         <span className="ml-2 mb-0">{item.user_data.username}</span>
                                                     </a>
                                                     <div className="card-bottom d-flex justify-content-between">
-                                                        <span>{item.price} MATIC</span>
-                                                        <span>{item.number_of_nft} NFTS</span>
+                                                        <span>{Math.round(item.price)} MATIC</span>
+                                                        {item?.number_of_nft == 1 ? (
+
+                                                            <span>{item.number_of_nft} NFT</span>
+                                                        ) : (
+                                                            <span>{item.number_of_nft} NFTs</span>
+                                                        )
+
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>

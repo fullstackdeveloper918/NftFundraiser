@@ -85,9 +85,9 @@ const Footer = () => {
                                 {/* Footer Title */}
                                 <h4 className="footer-title">Useful Links</h4>
                                 <ul>
-                                <li className="nav-item">
-                            <a onClick={handleCreate} className="">Create Project</a>
-                        </li>
+                                    <li className="nav-item">
+                                        <a onClick={handleCreate} className="">Create Project</a>
+                                    </li>
                                     {/* <li><Link to="/create" onClick={handleCreate}>Create Project</Link></li> */}
                                     <li><a href={`/all/${"LatestProjects"}`}>Explore NFTs</a></li>
                                     <li><Link to="/terms&conditions">Terms of Service</Link></li>
@@ -118,8 +118,9 @@ const Footer = () => {
                             {/* Copyright Area */}
                             <div className="copyright-area d-flex flex-wrap justify-content-center justify-content-sm-between text-center py-4">
                                 {/* Copyright Left */}
+
                                 <div className="copyright-left">© 2023 Copyright Karmatica.</div>
-                                {/* Copyright Right */}
+
                             </div>
                         </div>
                     </div>

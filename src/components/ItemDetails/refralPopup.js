@@ -34,7 +34,7 @@ import {
     VKShareCount
 } from "react-share";
 // import 'bootstrap/dist/css/bootstrap.min.css';
-function MyVerticallyCenteredModal(props) {
+function ReferalPopup(props) {
     // const [title, setTitle] = useState("");
     // const [description, setDescription] = useState("");
     // const [short_url, setShortUrl] = useState("");
@@ -56,6 +56,9 @@ function MyVerticallyCenteredModal(props) {
             <Modal.Header >
                 <Modal.Title id="contained-modal-title-vcenter">
                     Refer your friends
+                    <p>Earn Royalties When You Share: <br />10% of NFT for first level referral, 5% for second, 1% for all others</p>
+
+
                 </Modal.Title>
                 <div>
                     <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
@@ -122,4 +125,4 @@ function MyVerticallyCenteredModal(props) {
     );
 }
 
-export default MyVerticallyCenteredModal
+export default ReferalPopup
