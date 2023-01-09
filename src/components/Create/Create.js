@@ -13,7 +13,15 @@ import { useFormData } from './Context/context';
 import JoditEditor from 'jodit-react'; import { CityList, CountryList, StateList } from '../../redux/Actions/authAction';
 import UploadImage from '../../shared/Upload';
 import { blobToDataURl, dataURLtoBlob } from '../../utils/blobfromurl';
-;
+import VideoInput from './VideoInput';
+import Dinosaur from './3dModal';
+
+// import { Suspense } from "react";
+// import ReactDOM from "react-dom";
+// import { Canvas } from '@react-three/fiber';
+// import { OrbitControls, Stats } from '@react-three/drei';
+// import Plane from "./model";
+// import Plane from './gltf';
 
 const Create = ({ current, next, prev }) => {
 
@@ -95,6 +103,7 @@ const Create = ({ current, next, prev }) => {
     }
     // const bannerimage =
     // console.log('bannerimg', bannerimage)
+
     useEffect(async () => {
         dispatch(GetCollectionsAction())
         dispatch(CategoriesAction())
@@ -481,6 +490,7 @@ const Create = ({ current, next, prev }) => {
                                     // defaultValue={1}
                                     // disabled={true}
                                     min={1}
+                                    max={1}
 
                                     placeholder="number of NFT (1 allowed)"
                                     {...register("number_of_nft", { required: true, min: 1, max: 1 })}
@@ -503,22 +513,33 @@ const Create = ({ current, next, prev }) => {
                             <div className="form-group">
                                 <label>Number of NFTs</label>
                                 <input
+                                    // onInput={(e) => {
+                                    //     if (e?.target?.value?.length < e.target.maxLength)
+                                    //         e.target.value = e.target.value.slice(0, e.target.maxLength);
+                                    // }}
                                     type="number"
                                     className="form-control"
                                     name="number_of_nft"
 
                                     // defaultValue={1}
                                     min={1}
+                                    max={10}
+                                    maxLength={10}
+
+                                    // onKeyUp={imposeMinMax()}
+                                    // min=1 max=4 onkeyup=imposeMinMax(this)
+
                                     // disabled={type == 1}
                                     placeholder="Select your number of NFTs (1-10)"
                                     {...register("number_of_nft", { required: true, min: 1, max: 10 })}
+
                                     // {...register("number_of_nft", { maxLength: 12 })}
                                     aria-invalid={errors.number_of_nft ? "true" : "false"}
                                 />
                                 {/* {errors.number_of_nft?.message && <p>{errors.number_of_nft.message}</p>} */}
                                 {errors.number_of_nft && errors.number_of_nft.type === "max" && (
                                     <p style={{ color: 'red' }}>
-                                        Only 10 nfts allowed
+                                        10 NFTs Maximum per Campaign
                                     </p>
                                 )}
                                 {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFTs per project is required with a limit of 10</p>}
@@ -604,6 +625,7 @@ const Create = ({ current, next, prev }) => {
                             {/* {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>} */}
                         </div>
                     </div>
+
 
 
                     <div className="col-12">

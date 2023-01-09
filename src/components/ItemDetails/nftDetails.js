@@ -32,7 +32,7 @@ const NftDetails = (props) => {
     const [modalShow, setModalShow] = React.useState(false);
 
 
-    const [mintmodalShow, setMintModalShow] = React.useState(false);
+    // const [mintmodalShow, setMintModalShow] = React.useState(false);
 
     const [current, setCurrent] = React.useState(0)
     const [contractAdd, setContractAdd] = useState('')

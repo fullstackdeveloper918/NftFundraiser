@@ -10,14 +10,14 @@ import FunddataTable from './fundraiserdetail';
 import FundTransdataTable from './fundPaymenttable';
 import ReadMore from '../../readMore';
 import { Button } from 'react-bootstrap';
-
+import ReferalPopup from '../ItemDetails/refralPopup';
 
 const FundraiserDetail = () => {
     const { user_id } = useParams()
     // const id = useParams()
     // const { id } = useParams()
     const dispatch = useDispatch()
-
+    const [modalShowreferal, setModalShowreferal] = React.useState(false);
     const funddetail = useSelector(state => {
         return state?.fundraiser?.fundraiserdetail
     })
@@ -26,6 +26,15 @@ const FundraiserDetail = () => {
         // 
         return state?.projectdetails?.getfundProjDetails
     })
+    const userdet = useSelector(state => {
+        return state?.user?.userdetail
+    })
+    const userDetail = userdet.referrer_id
+    console.log('userdettt', userDetail)
+    const log = useSelector(state => {
+        return state.user.userToken
+    })
+
     const latprojdetail = useSelector(state => {
         // 
         return state.projectdetails.latestprojectdetails
@@ -63,7 +72,7 @@ const FundraiserDetail = () => {
                     
                 </div> */}
                 <div className="row justify-content-between px-0">
-                <div className='col-12'>
+                    <div className='col-12'>
                         <span className='title_main'>{funddetail?.organization_detail?.organization_name}</span>
                     </div>
                     <div className="col-12 col-lg-8">
@@ -98,57 +107,8 @@ const FundraiserDetail = () => {
                                 </li>
                             </div>
 
-                            <div className="d-sm-flex justify-content-start gap-5">
-                                <div>
-                                    <Button className=" mb-2 mb-sm-0  btn  btn-bordered-white m-0" variant="primary">
-                                        Share
-                                    </Button>
-                                </div>
-                                <div>
-                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Invest
-                                    </Button>
-                                </div>
-                                <>
-                                    {/* <Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary">
-                                        Share
-                                    </Button> */}
-                                    {/* <ReferalPopup
-                                            id={id}
-                                            userRef={userDetail}
-                                            show={modalShowrefer}
-                                            onHide={() => setModalShowrefer(false)} /> */}
-                                </>
 
-                                {/* <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Donate
-                                    </Button> */}
-                            </div>
-                            {/* {fundprojdetail && fundprojdetail.length &&
-                                            [...new Map(fundprojdetail.map(item =>
-                                                [item["title"], item])).values()]?.slice(0, 4)?.map((item, idx) => {
-                                                    const date1 = new Date(item.created_at)
-                                                    const date2 = new Date()
-                                                    // console.log('todat', date2)
-                                                    const time_difference = date2.getTime() - date1.getTime();
-                                                    const days_difference = Math.ceil(time_difference / (1000 * 60 * 60 * 24));
-                                                    // const totaldays = days_difference.slice(0,1)
-                                                    // console.log("daysss", days_difference)
-                                                    return (
-
-                                                        <>
-                                                            <ul className="project_back">
-                                                                <li className='item_title'>
-                                                                    {item.title}
-                                                                </li><li className='item_created'>
-                                                                    {days_difference} days ago
-                                                                    {/* {(item.created_at).diff(new Date, 'day', true)} */}
-                            {/* </li> */}
-                            {/* </ul> */}
-                            {/* </> */}
-                            {/* ) */}
-                            {/* })} */}
-                            <h5 class="user_title_1 mt-4 mb-0"><div>Projects</div></h5>
+                            <h5 class="user_title_1 mt-3 mb-0"><div>Projects</div></h5>
                             <ul className="m-0 custom_lis pl-0 fund_row">
                                 {fundprojdetail && fundprojdetail.length ?
                                     [...new Map(fundprojdetail.map(item =>
@@ -197,7 +157,7 @@ const FundraiserDetail = () => {
                                 <div className='d-flex align-item-center gap-5'>
                                     <svg className='' width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg>
 
-                                    <div>Desription</div>
+                                    <div>Description</div>
 
                                 </div>
                             </h5>
@@ -240,17 +200,23 @@ const FundraiserDetail = () => {
 
                             <div className="d-sm-flex justify-content-start">
                                 <div>
-
-                                    <Button className=" btn mr-2 btn-bordered-white m-0" variant="primary">
-                                        Share
-                                    </Button>
-
-                                </div>
-                                <div>
                                     <Button variant="primary" className=" btn  btn-bordered-white m-0">
                                         Invest
                                     </Button>
                                 </div>
+                                <div>
+
+                                    <Button className=" mb-2 mb-sm-0  btn  btn-bordered-white m-0" variant="primary" onClick={() => setModalShowreferal(true)}>
+                                        Share
+                                    </Button>
+                                    <ReferalPopup
+                                        id={user_id}
+                                        userRef={userDetail}
+                                        show={modalShowreferal}
+                                        onHide={() => setModalShowreferal(false)} />
+
+                                </div>
+
 
 
 

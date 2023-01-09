@@ -34,6 +34,7 @@ const ProjDetails = () => {
     const [modalShow, setModalShow] = React.useState(false);
     const [matic, setMatic] = useState('')
     const [modalShowrefer, setModalShowrefer] = React.useState(false);
+    // const [matic, setmatic] = useState('')
     const latprojdetail = useSelector(state => {
         // 
         return state.projectdetails.latestprojectdetails
@@ -50,7 +51,7 @@ const ProjDetails = () => {
     })
 
     useEffect(() => {
-        // 
+        (GetMatic(setMatic))
         dispatch(LatestProjectDetail(id))
         dispatch(GetUserAction())
 
@@ -117,7 +118,14 @@ const ProjDetails = () => {
                         <div className='proj-left user_icon'>
                             <div className="progress_nft ">
                                 <div className='progress_main'><span>
-                                    <span className='nft_price'>${latprojdetail.project_count} raised of {latprojdetail.price} Cdn goal (150 of 758 MATIC)</span><small>  </small>
+                                    {/* ({Number(latprojdetail.project_count) * Number(matic['matic-network']?.cad)} of {Number(latprojdetail.price) * Number(Math.round(matic['matic-network']?.cad))} MATIC ) */}
+                                    <span className='nft_price'>${Number(latprojdetail.project_count) * Number(matic['matic-network']?.cad)} raised of ${Math.round(Number(latprojdetail.price)) * Number(Math.round(matic['matic-network']?.cad))} Cdn Goal</span>
+                                    <div>
+
+                                        {/* ${Math.round(latprojdetail.project_count)} raised of ${Math.round(latprojdetail.price)} Cdn Goal */}
+                                        <span className='nft_price'>({Math.round(latprojdetail.project_count)} of {Math.round(latprojdetail.price)} MATIC) </span>
+                                    </div>
+                                    {/* <span className='nft_price'>{latprojdetail.project_count} raised of {latprojdetail.price} Cdn goal (150 of 758 MATIC)</span><small>  </small> */}
                                     <div className='progressbar'>
                                         <ProgressBar varient="success" now={latprojdetail.project_percentage} />
                                         {/* <span className="progress-bar bg-success" role="progressbar" style={{ width: "70" }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" now={projdetail.project_percentage}> {projdetail.project_percentage}% </span> */}
@@ -127,6 +135,9 @@ const ProjDetails = () => {
                                 </div>
 
                                 <div className="d-sm-flex justify-content-start">
+                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
+                                        Invest
+                                    </Button>
                                     <><Button className="btn mr-2 btn-bordered-white m-0" variant="primary" onClick={() => setModalShowrefer(true)}>
                                         Share
                                     </Button><ReferalPopup
@@ -135,9 +146,6 @@ const ProjDetails = () => {
                                             show={modalShowrefer}
                                             onHide={() => setModalShowrefer(false)} /></>
 
-                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Invest
-                                    </Button>
                                 </div>
                                 {latprojdetail?.user_invest && latprojdetail?.user_invest?.length ?
                                     [...new Map(latprojdetail?.user_invest?.slice(0, 3)?.map(item =>
