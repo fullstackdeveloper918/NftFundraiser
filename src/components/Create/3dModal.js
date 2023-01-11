@@ -43,8 +43,9 @@ function easeOutCirc(x) {
     return Math.sqrt(1 - Math.pow(x - 1, 4));
 }
 
-const DModal = (props) => {
-    const { vdo } = props
+const DModal = ({ vdo }) => {
+    // debugger
+    // const { vdo } = props
     const refContainer = useRef();
     const [loading, setLoading] = useState(true);
     const [renderer, setRenderer] = useState();
@@ -52,15 +53,25 @@ const DModal = (props) => {
     console.log('source', source)
 
     useEffect(() => {
-        debugger
+        // debugger
         const file = vdo;
-        const url = window.URL.createObjectURL(new Blob([Response.data]));
-        this?.loaders?.gltfLoader?.load(url, (file) => {
+        // if (file?.name?.includes("gltf")) {
 
-        });
-        // const url1 = URL.revokeObjectURL(url);
+        //     const gltfToGlb = gltfPipeline.gltfToGlb;
+        //     const gltf = fsExtra.readJsonSync(file);
+        //     gltfToGlb(gltf).then(function (results) {
+        //         fsExtra.writeFileSync(file, results.glb);
+        //     });
+        //     console.log('yessss')
+        // }
+        // let url = URL.createObjectURL(file);
+        // url = window.URL.createObjectURL(new Blob([url]));
+        // // const url = window.URL.createObjectURL(new Blob([Response.data]));
+        // // this?.loaders?.gltfLoader?.load(url, (file) => {
 
-        setSource(url);
+        // // });
+
+        // setSource(url);
 
         const { current: container } = refContainer;
         if (container && !renderer) {
@@ -101,20 +112,49 @@ const DModal = (props) => {
             controls.minZoom = 0
             controls.target = target;
 
-            loadGLTFModel(url, function (gltf) {
-                const model = gltf.scene;
-                URL.revokeObjectURL(url);
-            }, function () { }, function () {
-                URL.revokeObjectURL(url);
+            const loader = new GLTFLoader()
 
+            loader.load(
+                file,
+                function (gltf) {
+                    gltf.scene.traverse(function (child) {
+                        if (child.isMesh) {
+                            const m = child
+                            m.receiveShadow = true
+                            m.castShadow = true
+                        }
+                        if (child.isLight) {
+                            const l = child
+                            l.castShadow = true
+                            l.shadow.bias = -0.003
+                            l.shadow.mapSize.width = 2048
+                            l.shadow.mapSize.height = 2048
+                        }
+                    })
+                    scene.add(gltf.scene)
+                },
+                (xhr) => {
+                    animate();
+                    setLoading(false);
+                    // mdl(file)
+                    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+                },
+                (error) => {
+                    // debugger
+                    console.log(error)
+                }
+            )
+            // loadGLTFModel(url, function (gltf) {
+            //     const model = gltf.scene;
+            //     URL.revokeObjectURL(url);
+            // }, function () { }, function () {
+            //     URL.revokeObjectURL(url);
+            // }).
 
-                // loadGLTFModel(scene, source, {
-                //     receiveShadow: false,
-                //     castShadow: false
-            }).then(() => {
-                animate();
-                setLoading(false);
-            });
+            // loadGLTFModel(scene, url, {
+            //     receiveShadow: false,
+            //     castShadow: false
+            // })
 
             let req = null;
             let frame = 0;

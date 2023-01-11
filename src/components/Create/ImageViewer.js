@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
+import { dataURLtoBlob } from "../../utils/blobfromurl";
 
-export default function VideoAudioPLayer(props) {
-    // debugger
+export default function ImageViewer(props) {
+    debugger
     const { width, height } = props;
     const { vdo } = props
 
@@ -14,8 +15,12 @@ export default function VideoAudioPLayer(props) {
     useEffect(() => {
         // debugger
         const file = vdo;
-        // const url = URL?.createObjectURL(file);
-        setSource(file);
+        // const url = dataURLtoBlob(file)
+        setSource(URL.createObjectURL(file))
+        // if (file.length) {
+        //     const url = window.URL?.createObjectURL(file);
+        //     setSource(url);
+        // }
 
     }, [vdo])
 
@@ -28,11 +33,11 @@ export default function VideoAudioPLayer(props) {
         <div className="VideoInput">
             {/* {!vdo && <button onClick={handleChoose}>Choose</button>} */}
             {source && (
-                <video
+                <img
                     className="VideoInput_video"
                     width="100%"
                     height={height}
-                    controls
+                    // controls
                     src={source}
                 />
             )}

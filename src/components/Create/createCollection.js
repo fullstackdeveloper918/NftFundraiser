@@ -130,7 +130,10 @@ function MyVerticallyCenteredModal(props) {
                                     setImageSrc={setImage}
                                 />
 
+                                <div >
 
+                                    <span className='logo-dis'>Allowed types: JPG, PNG, GIF<br />Banner should be 1500 px wide x 500 px high</span>
+                                </div>
                             </div>
                         </div>
                     </div>
