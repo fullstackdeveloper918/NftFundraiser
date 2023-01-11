@@ -66,11 +66,7 @@ const Create = ({ current, next, prev }) => {
 
     console.log(states?.data?.data, 'states')
     const cities = useSelector(state => { return state.countries.city })
-    useEffect(() => {
 
-        dispatch(CountryList())
-
-    }, [])
 
     const disablePastDate = () => {
         const today = new Date();
@@ -94,19 +90,20 @@ const Create = ({ current, next, prev }) => {
     })
     // console.log(col, 'col')
     const OnSubmit = (data) => {
-        // debugger
+        debugger
         const imageBanner = dataURLtoBlob(image)
 
         setFormValues({ ...data, description, type: data?.usertype, image: imageBanner, imageUri: image });
         // localStorage.setItem('country', JSON.stringify(country))
-        next();
+        next()
     }
     // const bannerimage =
     // console.log('bannerimg', bannerimage)
 
-    useEffect(async () => {
+    useEffect(() => {
         dispatch(GetCollectionsAction())
         dispatch(CategoriesAction())
+        dispatch(CountryList())
         if (prev) {
 
             setValue('title', data.title)
@@ -311,7 +308,7 @@ const Create = ({ current, next, prev }) => {
                                 control={control}
                                 name="description"
                                 defaultValue=""
-                                rules={{ required: true, minLength: 300 }}
+                                rules={{ required: true, minLength: 100 }}
 
 
                                 render={({ field }) => {
@@ -334,7 +331,7 @@ const Create = ({ current, next, prev }) => {
                             {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
                             {errors.description && errors.description.type === "minLength" && (
                                 <p style={{ color: 'red' }}>
-                                    min length of words is 300
+                                    min length of words is 100
                                 </p>
                             )}
                         </div>
@@ -619,7 +616,7 @@ const Create = ({ current, next, prev }) => {
                             />
                             <div >
 
-                                <span className='logo-dis'>Allowed types: JPG, PNG, GIF</span>
+                                <span className='logo-dis'>Allowed types: JPG, PNG, GIF<br />Banner should be 1500 px wide x 500 px high</span>
                             </div>
                             {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}
                             {/* {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>} */}

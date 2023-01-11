@@ -47,7 +47,7 @@ const ExploreAll = () => {
                         <div className="intro text-center mb-4">
                             {/* <span>Explore</span> */}
                             <h3 className="mt-3 mb-0">{type.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")}</h3>
-                            <p>Mint NFTs that are based on real-life projects or events related to important causes.</p>
+                            <p>Invest in NFTs that are based on real-life projects or events related to important causes</p>
                         </div>
                     </div>
                 </div>
@@ -127,12 +127,12 @@ const ExploreAll = () => {
                                                         {/* Card Body */}
                                                         <div className="card-body">
                                                             <a href="/item-details">
-                                                                <h5 className="mb-0">{item.title.slice(0,22)}..</h5>
+                                                                <h5 className="mb-0">{item.title.slice(0, 22)}..</h5>
                                                             </a>
                                                             <a className="seller d-flex align-items-center mb-2" href="#">
-                                                                 <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />
+                                                                <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />
                                                                 <h6 className="ml-2">{item.user_data.username}</h6>
-                                                             </a>
+                                                            </a>
                                                             {/* <div className="seller d-flex align-items-center mb-2">
                                                                 <span style={{ color: '#8E8E8E' }}>Owned By</span>
                                                                 <a href="/author">

@@ -1,7 +1,7 @@
 
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Modal, Upload } from 'antd';
-import React, { Fragment, useEffect, useState, useRef } from 'react';
+import React, { Fragment, useEffect, useState, useRef, Suspense } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProjectAction, GetCollectionsAction, uploadNFT } from '../../redux/Actions/projectAction';
@@ -17,10 +17,20 @@ import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router';
-import VideoInput from './VideoInput';
+
 import VideoAudioPLayer from './VideoInput';
-import Dinosaur from './3dModal';
+
 import DModal from './3dModal';
+
+import { useGLTF } from "@react-three/drei";
+import ImageViewer from './ImageViewer';
+
+
+
+
+
+
+
 
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -29,9 +39,10 @@ const getBase64 = (file) =>
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
     });
-// import ImgCrop from 'antd-img-crop';
+
 
 const UploadNft = ({ current, prev }) => {
+
     const editor = useRef(null);
     const { data, setFormValues } = useFormData();
     console.log(data, 'dataaa')
@@ -45,7 +56,14 @@ const UploadNft = ({ current, prev }) => {
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: '1' });
-    const [nftFileType, setNFtFileType] = useState('Image')
+    const [nftFileType, setNFtFileType] = useState()
+    const [nft, setNft] = useState()
+    const [nftwidth, setNftwidth] = useState()
+    console.log(nftwidth, 'nftwidth')
+    const [nftHeight, setNftheight] = useState()
+    const [Pimage, setPimage] = useState()
+    console.log(nftHeight, 'nftheight')
+    console.log('nfterror', nft)
     console.log('nftFile', nftFileType)
     // console.log('colldata', coldata)
     // console.log(nft_collection_id)
@@ -55,6 +73,7 @@ const UploadNft = ({ current, prev }) => {
     const [source, setSource] = useState('')
     console.log('source', source)
     const [loading, setLoading] = useState(false)
+    const [modal, setModal] = useState()
 
     console.log(nft_collection_id, "nft collections")
     const handleIncrement = () => {
@@ -64,6 +83,10 @@ const UploadNft = ({ current, prev }) => {
 
     const handleDecrement = () => {
         setCount(prevCount => prevCount - 1);
+    };
+    const previewChange = e => {
+        const pimage = e.target.files[0]
+        setPimage(URL.createObjectURL(pimage))
     };
     // console.log(count, 'count')
 
@@ -109,7 +132,7 @@ const UploadNft = ({ current, prev }) => {
         return state?.projectdetails?.nftres
     })
     // console.log(imaeg, 'imgg')
-
+    // const { nodes, materials } = useGLTF("/img/adamHead.gltf");
     const OnSubmit = (values) => {
         // e.preventDefault
         // setColData(col)
@@ -117,36 +140,80 @@ const UploadNft = ({ current, prev }) => {
         setFormValues(values)
 
     }
+    // program to get the dimensions of an image
+
 
 
     // console.log('col', col)
-
     const handleUpload = e => {
         const filetype = e.target.files[0].type
         // debugger
-        setSource(e.target.files[0])
+        setNft(e.target.files[0])
+        var fr = new FileReader;
 
-        // debugger
+        fr.onload = function () { // file is loaded
+            var img = new Image;
 
-        switch (filetype) {
-            case 'image/png':
-            case 'image/jpg':
-            case 'image/gif':
-                setNFtFileType('Image')
-                break;
-            case 'audio/mpeg':
-            case 'audio/ogg':
-            case 'video/mp4':
-            case 'video/webm':
-                setNFtFileType('Player')
-                break;
-            case '':
-                setNFtFileType('modal')
-                break;
-            default:
-                setNFtFileType('Image')
+            img.onload = function () {
+                // alert(img.width); // image is loaded; sizes are available
+                setNftwidth(img.width)
+                setNftheight(img.height)
+            };
+
+            img.src = fr.result; // is the data URL because called with readAsDataURL
+        };
+
+        fr.readAsDataURL(e.target.files[0]); // I'm using a <input type="file"> for demonstrating
+        if (e.target.files[0].size > 104857600) {
+            alert('Filesize must 100mb or below');
+        } else {
+
+            setSource(URL.createObjectURL(e.target.files[0]))
+
+            switch (filetype) {
+                case 'image/png':
+                case 'image/jpg':
+                case 'image/gif':
+                case 'image/svg':
+                    setNFtFileType('Image')
+                    break;
+                case 'audio/mpeg':
+                case 'audio/ogg':
+                case 'video/mp4':
+                case 'video/webm':
+                    setNFtFileType('Player')
+                    break;
+                case '':
+                    setNFtFileType('modal')
+                    break;
+                default:
+                    setNFtFileType('Image')
+            }
+
+
         }
+
+
+        // if (nftFileType === 'Image' && window.innerHeight > '500' && window.innerWidth > '500') {
+        //     alert("This is  matching")
+        // }
+        // else {
+        //     setNftError('Minimum size should be 500x500')
+        //     alert('This is not matching')
+
+        // }
     }
+    // useEffect(() => {
+
+    //     if (nftFileType === 'Image' && window.innerHeight <= 800 && window.innerWidth < 800) {
+    //         alert("This is not matching")
+    //     }
+    //     // else {
+    //     //     alert('This is not matching')
+    //     //     setNftError('Minimum should be 800x800')
+
+    //     // }
+    // }, [])
 
     const lat = localStorage.getItem('latitude')
     // console.log(lat, 'lattt')
@@ -166,7 +233,9 @@ const UploadNft = ({ current, prev }) => {
         // debugger
         try {
             setLoading(true)
-            const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
+            // debugger
+            // const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
+            const nftImagepromises = values?.nfts?.map(x => uploadNFT(nft))
 
             const imagesRes = await Promise.all(nftImagepromises).then(res => res)
             // 
@@ -201,6 +270,7 @@ const UploadNft = ({ current, prev }) => {
                     formData.append('city', data.city)
                 }
                 formData.append('latitude', lat)
+                formData.append('preview_imag', Pimage)
                 formData.append('logitude', log)
                 formData.append('price', data.price)
                 formData.append('number_of_nft', data.number_of_nft)
@@ -567,7 +637,7 @@ const UploadNft = ({ current, prev }) => {
                                                             <div className="col-md-12 col-12 uploadnftpopup">
                                                                 <label>Upload Nft</label>
                                                                 <div>
-                                                                    <Form.Item
+                                                                    {/* <Form.Item
                                                                         {...restField}
                                                                         name={[name, "nft_image"]}
                                                                         // getValueFromEvent={getFile}
@@ -579,32 +649,84 @@ const UploadNft = ({ current, prev }) => {
                                                                             },
                                                                         ]}
 
-                                                                    >
+                                                                    > */}
 
-                                                                        <input
-                                                                            type="file"
-                                                                            onChange={handleUpload}
-                                                                            maxCount={1}
-                                                                            accept=".mov,.mp4,.mp3,.webm.gltf"
-                                                                        />
-                                                                        {nftFileType === 'Player' &&
-                                                                            // onClick={() => onHandleClick(index, item.id)}
-                                                                            <VideoAudioPLayer
+                                                                    <input
+                                                                        type="file"
+                                                                        onChange={handleUpload}
+                                                                        maxCount={1}
 
-                                                                                vdo={source}
-                                                                                width={400} height={300} />
+                                                                        accept=".mov,.mp4,.mp3,.webm.gltf,.glb,.jpg,.jpeg,.gif,.svg"
+                                                                    />
+                                                                    {nftFileType === 'Image' &&
+                                                                        <div>
+                                                                            {nftFileType === 'Image' && nftHeight >= 500 && nftwidth >= 500 ? (
+                                                                                <img
+                                                                                    width={200}
+                                                                                    height={200}
+                                                                                    src={source}
 
-                                                                        }
-                                                                        {nftFileType === 'modal' &&
+
+
+
+                                                                                />
+                                                                            ) : (
+                                                                                <p style={{ color: 'red' }}>Minimum size should be 500x500</p>
+                                                                            )
+                                                                                // <ImageViewer vdo={source} width={400} height={300} />
+                                                                            }
+                                                                        </div>
+                                                                    }
+
+                                                                    {nftFileType === 'Player' &&
+                                                                        <div className="VideoInput">
+                                                                            {/* {!vdo && <button onClick={handleChoose}>Choose</button>} */}
+                                                                            {/* {source && ( */}
+                                                                            <video
+                                                                                className="VideoInput_video"
+                                                                                width="100%"
+                                                                                // height={height}
+                                                                                controls
+                                                                                src={source}
+                                                                            />
+                                                                            {/* )} */}
+                                                                            {/* <div className="VideoInput_footer">{vdo || "Nothing selectd"}</div> */}
+                                                                            <div>
+                                                                                <label>Preview Image</label>
+                                                                                <p>Because you’ve included multimedia, you’ll need to provide an image (PNG, JPG, or GIF) for the card display of your item</p>                                                                      </div>
+                                                                            <input
+                                                                                type='file'
+                                                                                onChange={previewChange}
+                                                                            />
+                                                                            <img
+                                                                                width={200}
+                                                                                height={200}
+                                                                                src={Pimage}
+                                                                            />
+                                                                        </div>}
+                                                                    {nftFileType === 'modal' &&
+                                                                        <div>
                                                                             <DModal
                                                                                 vdo={source}
+                                                                            // mdl={setModal}
                                                                             />
+                                                                            <div>
+                                                                                <label>Preview Image</label>
+                                                                                <p>Because you’ve included multimedia, you’ll need to provide an image (PNG, JPG, or GIF) for the card display of your item</p>                                                                      </div>
+                                                                            <input
+                                                                                type='file'
+                                                                                onChange={previewChange}
+                                                                            />
+                                                                            <img
+                                                                                width={200}
+                                                                                height={200}
+                                                                                src={Pimage}
+                                                                            />
+                                                                        </div>
+                                                                    }
 
-                                                                        }
 
-
-
-                                                                    </Form.Item>
+                                                                    {/* </Form.Item> */}
                                                                     {/* <Form.Item
                                                                         {...restField}
                                                                         name={[name, "nft_image"]}
@@ -623,14 +745,6 @@ const UploadNft = ({ current, prev }) => {
 
 
                                                                     </Form.Item> */}
-                                                                    <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
-                                                                        <img
-                                                                            alt="example"
-                                                                            style={{
-                                                                                width: '100%',
-                                                                            }}
-                                                                            src={previewImage} />
-                                                                    </Modal>
 
 
 
