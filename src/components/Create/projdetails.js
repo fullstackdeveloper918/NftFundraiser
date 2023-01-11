@@ -126,7 +126,7 @@ const ProjNftDetails = () => {
                                             {/* <Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary" onClick={() => setModalShowrefer(true)}>
                                         Share
                                     </Button> */}
-                                           
+
                                             {/* <ReferalPopup
                                             id={id}
                                             userRef={userDetail}
@@ -134,13 +134,13 @@ const ProjNftDetails = () => {
                                             onHide={() => setModalShowrefer(false)} /> */}
                                         </>
 
-                                        <a href='#invest'><Button  variant="primary" className=" btn  btn-bordered-white m-0">
-                                             Invest
+                                        <a href='#invest'><Button variant="primary" className=" btn  btn-bordered-white m-0">
+                                            Invest
                                         </Button>
                                         </a>
                                         <Button className=" btn  btn-bordered-white m-0 ml-2" variant="primary">
-                                                Share
-                                            </Button>
+                                            Share
+                                        </Button>
                                     </div>
                                     {projdetail?.user_invest && projdetail?.user_invest?.length ?
                                         [...new Map(projdetail?.user_invest?.slice(0, 3)?.map(item =>
@@ -183,7 +183,7 @@ const ProjNftDetails = () => {
 
 
 
-                                 
+
                                 </div>
                             </div>
                         </div>
@@ -243,13 +243,12 @@ const ProjNftDetails = () => {
                     </div>
                 </div>
                 <div className="col-12 mt-4">
-<<<<<<< HEAD
-                    
-                    <div className='nfts_main' id='invest'>
-=======
 
-                    <div className='nfts_main'>
->>>>>>> 2456dd3cfadb05f52ef710eac7777340a19acb71
+
+                    <div className='nfts_main' id='invest'>
+
+
+
                         <div className='intro row m-0 p-0'>
                             <div className="intro-content">
                                 <span >NFTs</span>
