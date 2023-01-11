@@ -90,7 +90,7 @@ const Create = ({ current, next, prev }) => {
     })
     // console.log(col, 'col')
     const OnSubmit = (data) => {
-        debugger
+
         const imageBanner = dataURLtoBlob(image)
 
         setFormValues({ ...data, description, type: data?.usertype, image: imageBanner, imageUri: image });
