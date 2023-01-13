@@ -138,7 +138,7 @@ const ProjDetails = () => {
                                     <Button variant="primary" className=" btn  btn-bordered-white m-0">
                                         Invest
                                     </Button>
-                                    <><Button className="btn mr-2 btn-bordered-white m-0" variant="primary" onClick={() => setModalShowrefer(true)}>
+                                    <><Button className="btn ml-2 btn-bordered-white m-0" variant="primary" onClick={() => setModalShowrefer(true)}>
                                         Share
                                     </Button><ReferalPopup
                                             id={slug}

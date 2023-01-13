@@ -199,6 +199,11 @@ const FundraiserDetail = () => {
 
                             <div className="d-sm-flex justify-content-start">
                                 <div>
+                                    <Button variant="primary" className=" btn  btn-bordered-white m-0 mr-2">
+                                        Invest
+                                    </Button>
+                                </div>
+                                <div>
 
                                     <Button className=" mb-2 mb-sm-0  btn  btn-bordered-white m-0" variant="primary" onClick={() => setModalShowreferal(true)}>
                                         Share
@@ -210,11 +215,7 @@ const FundraiserDetail = () => {
                                         onHide={() => setModalShowreferal(false)} />
 
                                 </div>
-                                <div>
-                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Invest
-                                    </Button>
-                                </div>
+
 
 
 

@@ -127,7 +127,9 @@ const ProjNftDetails = () => {
                                     </div>
 
                                     <div className="d-flex justify-content-start">
-
+                                        <Button variant="primary" className=" btn mr-2 btn-bordered-white m-0">
+                                            Invest
+                                        </Button>
                                         <>
                                             {projdetail?.nft_data && projdetail?.nft_data && projdetail?.nft_data.length > 0 && projdetail?.nft_data[0]?.is_mint == 0 ? (
 
@@ -147,9 +149,7 @@ const ProjNftDetails = () => {
                                         </>
 
 
-                                        <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                            Invest
-                                        </Button>
+
                                     </div>
                                     {projdetail?.user_invest && projdetail?.user_invest?.length ?
                                         [...new Map(projdetail?.user_invest?.slice(0, 3)?.map(item =>
