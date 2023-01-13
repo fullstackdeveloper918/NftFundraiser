@@ -1,9 +1,11 @@
 
-
 /* new */
 body{
     background-color: #09080d !important;
 }
+html {
+    scroll-behavior: smooth;
+  }
 p, label , .h4 , span ,input{
     color: #fff;
 }
@@ -71,10 +73,10 @@ input , textarea{
     justify-content: center;
 }
 .card-body button {
-    background: #000 !important;
+    /* background: #000 !important; */
     color: #fff !important;
     margin: 0 !important;
-    border: 1px solid #cccccc14 !important;
+    /* border: 1px solid #cccccc14 !important; */
     /* padding-top: 0; */
 }
 .card-body div {
@@ -85,6 +87,7 @@ input , textarea{
     font-weight: 400!important;
     font-size: 14px !important;
     color: #515151 !important;
+    text-transform: capitalize;
 }
 .creator-dropdown {
     min-width: 10rem !important;
@@ -153,16 +156,9 @@ input[type="date"]:focus::before {
 
 .item-details-area .row {
     /* background: #101010; */
-    padding: 20px 10px;
+    /* padding: 20px 10px; */
 }
-@media (max-width:768px){
-.item-details-area h3 {
-    padding: 20px 0px 0px 10px;
-}
-.termsandconditions {
-    padding: 0px 0px 50px 10px;
-}
-}
+
 .auctions-slides .items .item {
     margin-right: 30px;
  }
@@ -240,47 +236,7 @@ input[type="date"]:focus::before {
     padding: 20px 0px 0px 0px;
 } */
 
-@media (max-width:768px){
-.item-details-area h3 {
-    padding: 20px 0px 0px 10px;
-}
-.termsandconditions {
-    padding: 0px 0px 50px 10px;
-}
-body h1{
-    font-size: 35px !important;
-}
-.button-group a {
-    margin-top: 10px;
-    margin-right: 5px;
-}
-:root section.hero-section {
-    padding: 80px 0 !important;
-}
-.intro {
-    display: block !important;
-}
-.intro-content h3 {
-    font-size: 30px;
-}
-svg.svg-inline--fa.fa-user.fa-w-14 {
-    font-size: 16px;
-}
-a.creator-button div {
-    display: none;
-}
-body header .navbar-expand .navbar-nav.action .btn {
-    padding: 9px 10px;
-    font-size: 0;
-}
-section {
-    width: 100%;
-    padding: 80px 0 0 !important;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
- }
-}
+
 .auctions-slides .items .item {
     margin-right: 30px;
  }
@@ -292,11 +248,7 @@ section {
     padding: 100px 0;
     margin-top: 100px;
  }
-@media (max-width: 1200px){
-    .hero-section h1{
-        font-size: 50px;
-    }
-}
+
 .item-details-area {
     padding: 130px 0px 0px !important;
 }
@@ -328,7 +280,6 @@ footer a.navbar-brand img {
 }
 
 .item-details-area .item-info img , .fundraise-main .item-info img{
-    border-radius: 8px;
     object-fit: cover;
     object-position: center;
     width: 100% !important;
@@ -396,15 +347,7 @@ header .navbar-expand .dropdown:hover > .dropdown-menu {
     padding: 13px 5px !important;
 }
 
-@media (max-width: 1245px){
-    ul.creator-dropdown.dropdown-menu {
-        left: -74px !important;
-    }
-    :root header .navbar-expand .dropdown:hover > .dropdown-menu:after {
-        content: "";
-        left: 106px;
-    }
-}
+
 
 nav .header .navbar-nav.items li a:hover , .dropdown ul li a:hover , .card-body a h5:hover , .explore-menu label span:hover{
     color: #4528DC !important;
@@ -487,38 +430,6 @@ img.mobile-logo {
 img.navbar-brand-sticky.desktop_logo {
     display: block;
 }
-@media (max-width:767px){
-    section .btn.btn-bordered-white {
-        margin: 14px 0px;
-    }
-    .row{
-        padding: 0 !important;
-    }
-    .uploadnftpopup .ant-upload.ant-upload-select.ant-upload-select-picture-card {
-        width: 100%;
-    }
-    .main-proj-detail .item-thumb , .fundraise-main .item-info {
-        height: 300px !important;
-        /* height: auto; */
-    }
-    .nft-remove {
-        position: absolute;
-        left: 0 !important;
-        top: 16px !important;
-        text-align: right !important;
-    }
-    img.mobile-logo {
-        display: block;
-    }
-    img.navbar-brand-sticky.desktop_logo {
-        display: none;
-    }
-  
-    /* .project_img {
-        left: 70px;
-        right: 0 !important;
-    } */
-}
 .modal-header .icon-close {
     color: #fff;
 }
@@ -531,9 +442,10 @@ header .navbar-expand .navbar-nav .nav-link:not(.btn) {
     color: var(--top-nav-item-color);
 }
 img.card-img-top {
-    width: 100%;
-    height: 200px;
+    /* width: 100%;
+    height: 200px; */
     object-fit: cover;
+    aspect-ratio: 1/1;
 }
 span.banner-dis {
     color: var(--primary-p-color) !important;
@@ -755,24 +667,7 @@ span.cutom_dis {
 .jodit-toolbar-button__trigger svg {
     fill: white;
 }
-@media (max-width:768px){
-    .author-area .item-form {
-        padding: 40px 15px;
-    }
-    .stepperline {
-        word-break: normal;
-        height: 13px;
-        overflow: hidden;
-        width: 59px;
-        margin: 1px 0px 0px 15px;
-    }
-     .orgicon1line {
-        width: 50px !important;
-    }
-    span.title_main {
-        font-size: 30px !important;
-    }
-    }
+
     input[type="date"]::before {
         color: var(--primary-p-color);
         content: attr(placeholder) " ";
@@ -929,7 +824,7 @@ section{
     display: flex;
     align-items: center;
     gap: 12px;
-    border: 1px solid #cccccc0d !important;
+    /* border: 1px solid #cccccc0d !important; */
 }
 button.ant-btn.ant-btn-default.previous_btn span{
     color: #fff !important;
@@ -1052,24 +947,7 @@ section.explore-area {
     height: 40px;
     border: 1px solid #1d1c1c !important;
 }
-@media (max-width: 600px){
-    .input-group.author_detail {
-        border-radius: 30px !important;
-        padding: 13px 0px !important;
-        margin: 0;
-        gap: 10px;
-    }
-    .input-group.author_detail div {
-        flex-direction: column;
-        /* text-align: left; */
-    }
-    .input-group.author_detail div label {
-        width: 90%;
-    }
-    .input-group.author_detail input {
-        height: 40px !important;
-    }
-}
+
 .btn.btn-bordered-white {
   
     margin: 24px 0px;
@@ -1231,12 +1109,12 @@ header .navbar-expand {
 }
 .ant-collapse-content {
     color: #8e8e8e !important;
-    border: unset !important;
+    /* border: unset !important; */
     background-color: black !important;
 }
 .ant-collapse-content tr {
     color: #8e8e8e !important;
-    border-top: 1px solid #16151a;
+    /* border-top: 1px solid #16151a; */
     background-color: #09080d;
 }
 .table-detail tr:nth-child(odd){
@@ -1251,20 +1129,21 @@ header .navbar-expand {
 .table-detail th {
     color: #fff;
     border: unset !important;
-}   
+    font-weight: 600;
+}  
 :root .container.table-detail tr {
     /* border-bottom: 1px solid #000000 !important; */
-    border: unset !important;
+    /* border: unset !important; */
 }
 :root .table-detail thead tr {
     background: #09080d !important;
 }
 .container.table-detail table.table-detail.table * {
-    border: none;
+    /* border: none; */
 }
 .container.table-detail .ant-collapse {
-    border: 1px solid #1e1e1e;
-    border-radius: 12px;
+    /* border: 1px solid #1e1e1e; */
+    /* border-radius: 12px; */
     overflow: hidden;
     background: transparent;
 }
@@ -1279,7 +1158,7 @@ header .navbar-expand {
     padding: 0px;
 }
 .table-detail td {
-    border: unset;
+    /* border: unset; */
 }
 .table-detail tr:last-child {
     border-bottom:none;
@@ -1302,7 +1181,7 @@ header .navbar-expand {
     display: flex;
     align-items: center;
     position: relative;
-    padding: 12px 16px !important;
+    padding: 14px 16px !important;
 }
 .user_title .fa-trash {
     color: #ffffff;
@@ -1348,12 +1227,7 @@ a:not(.btn), a:link:not(.btn), a:visited:not(.btn), a:hover:not(.btn), a:active:
 .table-detail .ant-collapse.ant-collapse-icon-position-end {
     width: 100%;
 }
-@media (max-width: 850px){
-    .project-total-detail {
-        gap: 10px !important;
-        flex-direction: column;
-    }
-}
+
 .banner_img {
     width: 100%;
 }
@@ -1410,11 +1284,18 @@ h5.user_title {
     padding: 10px;
     /* border-radius: 8px 8px 0px 0; */
 }
-.user-description , .price_nft {
+.user-description {
     border: 1px solid #1e1e1e;
     border-radius: 8px;
     padding-bottom: 10px;
     height: 100%;
+    overflow: hidden;
+}
+ .price_nft {
+    border: 1px solid #1e1e1e;
+    border-radius: 8px;
+    padding-bottom: 10px;
+    
 }
 .user-description >p {
     padding: 0 16px;
@@ -1470,7 +1351,7 @@ h5.user_title i , .container.table-main-detail i , .token span i{
     gap: 10px;
 }
 :root .card.add-nft {
-    min-height: 413.6px;
+    height: 100%;
     justify-content: center;
     align-items: center;
     border: 1px dashed #2a2a2a;
@@ -1519,7 +1400,7 @@ table.nfts_details.table i {
 }
 
 .table-main-detail .ant-collapse {
-border: unset !important;
+/* border: unset !important; */
 background-color: transparent !important;
 }
 
@@ -1550,7 +1431,7 @@ background-color: transparent !important;
     /* background: #16151a; */
 }
 div.ant-collapse ,  div.ant-collapse > .ant-collapse-item{
-    border: 1px solid #1e1e1e;
+    /* border: 1px solid #1e1e1e00; */
 }
 .card.choose_div {
     padding: 1.2rem;
@@ -1599,7 +1480,7 @@ div.ant-collapse ,  div.ant-collapse > .ant-collapse-item{
     color: #fff;
 }
 .ant-collapse-item {
-    border-radius: 8px;
+    /* border-radius: 8px; */
 }
 :root .btn.btn-bordered-white {
     line-height: 7px !important;
@@ -1635,7 +1516,7 @@ span.ant-collapse-header-text {
     border-top: 0px !important;
 }
 .ant-collapse {
-    border-radius: 10px !important;
+    /* border-radius: 10px !important; */
     overflow: hidden !important;
     background-color: transparent !important;
     font-family: var(--secondary-font);
@@ -1670,7 +1551,7 @@ span.ant-collapse-header-text {
     object-fit: cover;
 }
 .ant-collapse {
-    border: 1px solid #1E1E1E !important;
+    /* border: 1px solid #1E1E1E !important; */
 }
 .wrap_card .btn.btn-bordered-white {
     margin: 0px 24px 0px;
@@ -1814,45 +1695,13 @@ section.wallet-connect-area h4 {
     position: sticky;
     top: 10px;
 }
-@media (max-width: 991px){
-    .desktop_nft .progress_nft.mb-3 {
-       display: none;
-    }
-    .progress_nft.mobile_nft .fund_row {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    .progress_nft.mobile_nft ul li {
-        border-bottom: unset;
-        width: 100%;
-    }
-
-
-    :root .EditImage .popup .control-panel {
-        position: unset !important;
-        width: 450px;
-        margin: 0;
-    }
-    :root .EditImage .popup .image-container {
-        flex-direction: column !important;
-    }
-    :root .EditImage .popup .image-container {
-        flex-direction: column !important;
-        /* align-items: center !important; */
-        align-content: center !important;
-    }
-
-}
-@media (min-width: 991px){
-    .progress_nft.mobile_nft.mb-3 {
-       display: none;
-    }
-    
+.table tbody+tbody {
+    border-top: 2px solid #08080800 !important;
 }
 .table td, .table th {
     vertical-align: middle !important;
     padding: 12px 16px;
+    border: unset;
 }
 .funddeatil.mt-3 table {
     margin-top: 0.5rem;
@@ -1879,7 +1728,7 @@ span.share {
 .nft-price {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
 .main-create .ant-collapse-content-box {
     background: #16151a;
@@ -1917,9 +1766,10 @@ button.swal-button.swal-button--skip:after {
 
 .nothing {
     background: #16151a;
-color: #fff;
+    color: var(--primary-p-color);
+    font-size: 16px;
 text-align: center;
-padding: 16px 16px;
+padding: 12px 16px;
 }
 .logo{
         position: absolute;
@@ -1947,6 +1797,10 @@ padding: 16px 16px;
 .card-caption .card-body p {
     font-size: 14px;
     font-family: var(--secondary-font);
+
+}
+.card-caption .card-body p:first-child :after {
+    content: "...";
 }
 .donate-btn button{
     background-color: transparent !important;
@@ -1966,7 +1820,7 @@ padding: 16px 16px;
 
 svg.detail-icon , .activity_icon {
     position: absolute;
-    z-index: 999;
+    z-index: 1;
     top: 16px;
     left: 15px;
 }
@@ -2024,16 +1878,20 @@ span.jodit-ui-button__text {
     /* color: #fff; */
     font-weight: 600;
 }
-.price_nft , .progress_nft_main {
+.progress_nft_main {
     position: sticky;
     top: 10px;
     height: auto !important;
 }
-.item-details-area .content_project .item-thumb , .item-details-area.project-nft-si.main-proj-detail .collection_detail .item-thumb{
-	height: 350px;
+.item-details-area .content_project .item-thumb{
+    height: 350px;
     width: 100%;
-	/* max-width: 350px; */
-	object-position: bottom;
+    max-width: 350px !important;
+    height: 350px !important;
+    object-position: bottom;
+    margin: 0 auto;
+    background: #16151a;
+    border-radius: 8px;
 }
 .demo .nfts_details tr td {
     display: flex;
@@ -2082,13 +1940,356 @@ span.jodit-ui-button__text {
     padding: 4px 16px !important;
 }
 .nft_detail_main td {
-text-align: right;
+    text-align: right;
+    word-break: break-word;
+    min-width: 157px;
+}
+.no-data h2 {
+    color: #4625d6 !important;
+    font-size: 18px;
+    text-align: center;
 }
 
+.proj-left.user_icon svg {
+    margin: 0 !important;
+}
+body .swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
+    background: rgb(74 74 74 / 40%);
+}
+.price_nft_detail small {
+    font-size: 14px;
+    color: #8e8e8e;
+    font-weight: 500;
+}
+.table-main-detail {
+    /* border: 1px solid #1e1e1e; */
+    /* border-radius: 8px; */
+}
+.ant-collapse {
+    border: 1px solid #1e1e1e !important;
+    border-bottom: 0 !important;
+    border-radius: 8px !important;
+    border-color: #1e1e1e !important;
+}
+.ant-collapse > .ant-collapse-item {
+    border-bottom:  1px solid #1e1e1e !important;
+    border-color: #1e1e1e !important;
+}
+.button_group {
+    display: flex;
+    margin-top: 9px;
+    gap:5px;
+}
+.button_group .btn {
+    padding: 16px 20px;
+}
+.buy-invest-btn{
+    margin-top: 15px;
+}
+tbody.img_table td {
+    padding: 8px 16px !important;
+}
+table.nfts_details.table td:first-child , .profile_detail .table tr:first-child{
+    padding-top: 16px !important;
+}
+table.nfts_details.table td:last-child , .profile_detail .table tr:first-child{
+    padding-bottom: 16px !important;
+}
+.table {
+    margin-bottom: 0 !important;
+}
+.ant-collapse-content > .ant-collapse-content-box {
+    padding: 0px  0 !important;
+}
+.img_table .rounded-circle {
+    border-radius: 50%!important;
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+}
+.profile_detail.mt-4 .table-responsive {
+    padding: 16px 0;
+}
 
-@media (max-width: 400px){
-    .proj-left button {
-        width: 100%;
-        margin-top: 10px !important;
+.logo-dis-img {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.logo-dis-img span{
+    color: #8e8e8e !important;
+}
+.uploadnftpopup-input {
+    border: 1px dashed rgb(204, 204, 204);
+    position: relative;
+    height: 257px;
+    border-radius: 8px;
+    z-index: 999;
+}
+
+.uploadnftpopup-input input {
+    opacity: 0;
+    height: 257px;
+    cursor: pointer;
+}
+.uploadnftpopup-input-img , .VideoInput{
+    position: absolute;
+    top: 0px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}
+.uploadnftpopup-input-img img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+.filter-main-name {
+    /* border: 1px solid #8e8e8e; */
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 16px;
+    background-color: #16151a;
+    display: flex;
+    justify-content: space-between;
+}
+.filter-main {
+    margin-top: 10px;
+}
+.filter-main li {
+    padding: 10px 0;
+    list-style: none;
+    margin: 1rem 0;
+    /* border-bottom: 1px solid #1e1e1e; */
+}
+.filter-main ul {
+    padding: 10px 20px;
+    background: #16151a;
+    border-radius: 25px;
+}
+.filter {
+    position: relative;
+    width: 250px;
+}
+.uploadnftpopup-input-img.uploadnftpopup-secound{
+    z-index: -1 !important;
+}
+.upload-secound-input{
+    z-index: 999 !important;
+}
+.uploadnftpopup_content {
+    margin: 20px 0px;
+}
+:root .main-create .ant-collapse-header {
+    padding: 16px !important;
+    background: #16151a!important;
+}
+.uploadnftpopup-input.Icon_cam {
+    /* background-image: url('./img/camera.png'); */
+    background-position: center;
+    background-size: cover;
+}
+video.VideoInput_video {
+    height: 240px;
+}
+body .btn.btn-bordered-white {
+    border: 3px solid #fff;
+}
+@media (min-width: 991px){
+    .progress_nft.mobile_nft.mb-3 {
+       display: none;
+    }
+    
+}
+
+@media (max-width: 1245px){
+    ul.creator-dropdown.dropdown-menu {
+        left: -74px !important;
+    }
+    :root header .navbar-expand .dropdown:hover > .dropdown-menu:after {
+        content: "";
+        left: 106px;
     }
 }
+
+@media (max-width: 1200px){
+    .hero-section h1{
+        font-size: 50px;
+        }
+    }
+
+@media (max-width: 991px){
+    .popular-collections-area img.card-img-top {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        aspect-ratio: 1/1 !important;
+    }
+
+    :root .item-details-area .content_project .item-thumb, :root body .item-details-area.project-nft-si.main-proj-detail.collection_detail .item-thumb {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100% !important;
+    }
+    .desktop_nft{
+       display: none;
+    }
+    .progress_nft.mobile_nft .fund_row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .progress_nft.mobile_nft ul li {
+        border-bottom: unset;
+        width: 100%;
+    }
+
+
+    :root .EditImage .popup .control-panel {
+        position: unset !important;
+        width: 450px;
+        margin: 0;
+    }
+    :root .EditImage .popup .image-container {
+        flex-direction: column !important;
+    }
+    :root .EditImage .popup .image-container {
+        flex-direction: column !important;
+        /* align-items: center !important; */
+        align-content: center !important;
+    }
+
+}
+
+@media (max-width:767px){
+    section .btn.btn-bordered-white {
+        margin: 14px 0px;
+    }
+    .row{
+        padding: 0 !important;
+    }
+    .uploadnftpopup .ant-upload.ant-upload-select.ant-upload-select-picture-card {
+        width: 100%;
+    }
+    .main-proj-detail .item-thumb , .fundraise-main .item-info {
+        height: 300px !important;
+        /* height: auto; */
+    }
+    .nft-remove {
+        position: absolute;
+        left: 0 !important;
+        top: 16px !important;
+        text-align: right !important;
+    }
+    img.mobile-logo {
+        display: block;
+    }
+    img.navbar-brand-sticky.desktop_logo {
+        display: none;
+    }
+  
+    /* .project_img {
+        left: 70px;
+        right: 0 !important;
+    } */
+}
+
+@media (max-width:768px){
+    .author-area .item-form {
+        padding: 40px 15px;
+    }
+    .stepperline {
+        word-break: normal;
+        height: 13px;
+        overflow: hidden;
+        width: 59px;
+        margin: 1px 0px 0px 15px;
+    }
+     .orgicon1line {
+        width: 50px !important;
+    }
+    span.title_main {
+        font-size: 30px !important;
+    }
+    .item-details-area h3 {
+        padding: 20px 0px 0px 10px;
+    }
+    .termsandconditions {
+        padding: 0px 0px 50px 10px;
+    }
+    body h1{
+        font-size: 35px !important;
+    }
+    .button-group a {
+        margin-top: 10px;
+        margin-right: 5px;
+    }
+    :root section.hero-section {
+        padding: 80px 0 !important;
+    }
+    .intro {
+        display: block !important;
+    }
+    .intro-content h3 {
+        font-size: 30px;
+    }
+    svg.svg-inline--fa.fa-user.fa-w-14 {
+        font-size: 16px;
+    }
+    a.creator-button div {
+        display: none;
+    }
+    body header .navbar-expand .navbar-nav.action .btn {
+        padding: 9px 10px;
+        font-size: 0;
+    }
+    section {
+        width: 100%;
+        padding: 80px 0 0 !important;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+     }
+    }
+    
+@media (max-width: 850px){
+    .project-total-detail {
+        gap: 10px !important;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px){
+        .input-group.author_detail {
+            border-radius: 30px !important;
+            padding: 13px 0px !important;
+            margin: 0;
+            gap: 10px;
+        }
+        .input-group.author_detail div {
+            flex-direction: column;
+            /* text-align: left; */
+        }
+        .input-group.author_detail div label {
+            width: 90%;
+        }
+        .input-group.author_detail input {
+            height: 40px !important;
+        }
+    }
+@media (max-width: 440px){
+    .uploadnftpopup-input {
+        height: 157px;
+    }
+    video.VideoInput_video {
+        height: 130px;
+    }
+}
+@media (max-width: 400px){
+        .proj-left button {
+            width: 100%;
+            margin-top: 10px !important;
+        }
+    }

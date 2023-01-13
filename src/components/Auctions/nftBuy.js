@@ -168,6 +168,17 @@ const LatprojNftDetails = (props) => {
                         </div>
                     </div>
 
+                    
+                    <div className="col-12 col-lg-8 mt-4">
+                        <div class="user-description ">
+                            <h5 className='user_title gap-5'><div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg></div><div>Description</div>
+                            </h5>
+                            <p dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} />
+                            {/* <ReadMore  dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} /> */}
+                            {/* <p dangerouslySetInnerHTML={{ __html: latprojdetail.description }} /> */}
+                        </div>
+                    </div>
+
                     <div className='col-lg-4 col-12 mt-4 '>
                         <div className='price_nft'>
                             <h5 className='user_title gap-5'>
@@ -176,13 +187,9 @@ const LatprojNftDetails = (props) => {
                             </h5>
                             <div className='price_nft_detail'>
                                 <div className='nft-price'>
-                                    <svg fill="#a395f1" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <g>
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path stroke="#4528dc" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-3.5-8v2H11v2h2v-2h1a2.5 2.5 0 1 0 0-5h-4a.5.5 0 1 1 0-1h5.5V8H13V6h-2v2h-1a2.5 2.5 0 0 0 0 5h4a.5.5 0 1 1 0 1H8.5z" />
-                                        </g>
-                                    </svg>
-                                    <span>${latprojnftdetail.amount}</span>
+                                <svg viewBox="0 0 20 20" width="24px" height="24px"  fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="10" fill="#8247E5"></circle><path d="M12.97 8.055a.75.75 0 0 0-.732 0l-1.678.972-1.141.635-1.68.972a.751.751 0 0 1-.731 0l-1.335-.76a.727.727 0 0 1-.366-.614V7.76c0-.254.13-.486.366-.613l1.313-.74a.751.751 0 0 1 .732 0l1.313.74c.215.127.366.36.366.613v.973l1.141-.656v-.972a.684.684 0 0 0-.366-.614L7.74 5.095a.751.751 0 0 0-.732 0L4.532 6.49a.684.684 0 0 0-.365.614v2.811c0 .254.129.487.365.614l2.476 1.395a.75.75 0 0 0 .732 0l1.679-.951 1.14-.656 1.68-.951a.75.75 0 0 1 .731 0l1.313.74c.216.127.366.36.366.613v1.5c0 .255-.129.487-.366.614l-1.313.761a.751.751 0 0 1-.732 0l-1.313-.74a.727.727 0 0 1-.366-.613v-.973l-1.14.656v.972c0 .254.129.487.366.613l2.475 1.396a.751.751 0 0 0 .732 0l2.475-1.396a.727.727 0 0 0 .366-.613v-2.811a.684.684 0 0 0-.366-.614L12.97 8.055Z" fill="#fff"></path></svg>
+                                    <span>{latprojnftdetail.amount}</span>
+                                    <span><small>$120</small></span>
                                 </div>
 
                                 <div className='sales'>
@@ -194,8 +201,8 @@ const LatprojNftDetails = (props) => {
 
                             </div>
                         </div>
-                    </div>
-                    <div className='col-lg-8 col-12'>
+
+                        <div className=''>
                         <div className="profile_detail mt-4">
 
                             <LatNftDataTable
@@ -203,17 +210,10 @@ const LatprojNftDetails = (props) => {
                             />
                         </div>
                     </div>
-
-
-                    <div className="col-12 mt-4">
-                        <div class="user-description ">
-                            <h5 className='user_title gap-5'><div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg></div><div>Description</div>
-                            </h5>
-                            <p dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} />
-                            {/* <ReadMore  dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} /> */}
-                            {/* <p dangerouslySetInnerHTML={{ __html: latprojdetail.description }} /> */}
-                        </div>
                     </div>
+  
+
+
 
                     <div className='col-12 mt-4'>
                         <div className='funddeatil table-detail '>

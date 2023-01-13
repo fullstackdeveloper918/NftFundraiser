@@ -156,7 +156,7 @@ const LatNftdataTable = () => {
 
 
                         </thead>
-                        <tbody>
+                        <tbody className='img_table'>
                             {projdetail?.project_activity && projdetail?.project_activity?.length ?
                                 [...new Map(projdetail?.project_activity.map(item =>
                                     [item["title"], item])).values()].map((item, idx) => {
@@ -181,14 +181,15 @@ const LatNftdataTable = () => {
                                 </>
                             }
                         </tbody>
-                        {/* <div  className='text-align-center'>
-                                         <span>You don't have any activity yet</span>
-                                    </div> */}
+                        <div className='nothing'>
+                            No matching records found
+                        </div>
                     </Table>
+                    <div className='nothing'>
+                        No matching records found
+                    </div>
                 </Panel>
-                <div className='nothing'>
-                    No matching records found
-                </div>
+
             </Collapse>
         </div>
     )

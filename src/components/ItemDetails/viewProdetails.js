@@ -115,7 +115,7 @@ const ProjDetails = () => {
                     </div>
 
                     <div className="col-lg-4 col-12 mt-4 mt-lg-0">
-                        <div className='proj-left'>
+                        <div className='proj-left user_icon'>
                             <div className="progress_nft ">
                                 <div className='progress_main'><span>
                                     {/* ({Number(latprojdetail.project_count) * Number(matic['matic-network']?.cad)} of {Number(latprojdetail.price) * Number(Math.round(matic['matic-network']?.cad))} MATIC ) */}
@@ -135,16 +135,26 @@ const ProjDetails = () => {
                                 </div>
 
                                 <div className="d-sm-flex justify-content-start">
-                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Invest
-                                    </Button>
-                                    <><Button className="btn ml-2 btn-bordered-white m-0" variant="primary" onClick={() => setModalShowrefer(true)}>
-                                        Share
-                                    </Button><ReferalPopup
+
+
+                                    <>
+                                        <a href='#invest'><Button variant="primary" className=" btn  btn-bordered-white m-0">
+                                            Invest
+                                        </Button>
+
+
+
+                                        </a>
+                                        <Button className="btn ml-2 btn-bordered-white m-0" variant="primary" onClick={() => setModalShowrefer(true)}>
+
+
+                                            Share
+                                        </Button><ReferalPopup
                                             id={slug}
                                             userRef={userDetail}
                                             show={modalShowrefer}
                                             onHide={() => setModalShowrefer(false)} /></>
+
 
                                 </div>
                                 {latprojdetail?.user_invest && latprojdetail?.user_invest?.length ?
@@ -161,8 +171,8 @@ const ProjDetails = () => {
                                                         <div className='lorem_done p-0'>
                                                             <span><svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                                <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                                <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#494c4e" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#494c4e" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                                             </svg>
                                                             </span>
 
@@ -176,7 +186,7 @@ const ProjDetails = () => {
                                         }) :
                                     <div className="col-12 col-sm-12 text-center col-lg-12 mt-2 mb-2">
 
-                                        <span className='allproj2 boldertext w-100'>
+                                        <span className='allproj2 w-100'>
                                             No user has invested yet
                                         </span>
 
@@ -257,7 +267,7 @@ const ProjDetails = () => {
                     </div>
 
                     <div className=" col-12 mt-4">
-                        <div className="items mt-0 explore-items p-0">
+                        <div id="invest" className="items mt-0 explore-items p-0">
                             <ProjNFTS
 
                             />

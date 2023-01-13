@@ -90,7 +90,7 @@ const Create = ({ current, next, prev }) => {
     })
     // console.log(col, 'col')
     const OnSubmit = (data) => {
-        // debugger
+
 
         const imageBanner = dataURLtoBlob(image)
 
@@ -580,7 +580,7 @@ const Create = ({ current, next, prev }) => {
                                     />
                                     <div >
 
-                                        <span className='logo-dis'>end date should be greater then or equal to start date</span>
+                                        <span className='logo-dis'>End date should be greater then or equal to start date</span>
                                     </div>
                                     {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}
                                     {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
@@ -617,7 +617,9 @@ const Create = ({ current, next, prev }) => {
                             />
                             <div >
 
-                                <span className='logo-dis'>Allowed types: JPG, PNG, GIF<br />Banner should be 1500 px wide x 500 px high</span>
+                                <div className='logo-dis logo-dis-img'>
+                                    <span>Allowed types: JPG, PNG, GIF</span><span>Banner should be 1500 px wide x 500 px high</span>
+                                </div>
                             </div>
                             {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}
                             {/* {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>} */}

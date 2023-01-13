@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Author from '../Author/Author';
 import CollItem from './bread-crumb';
+import ReadMore from '../../readMore';
 
 const CollectionDetails = () => {
 
@@ -150,7 +151,8 @@ const CollectionDetails = () => {
                                 </div>
 
                             </div>
-                            <p>{coldetail.description}</p>
+
+                          <ReadMore data={coldetail?.description} />
 
 
 

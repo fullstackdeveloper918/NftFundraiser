@@ -2,9 +2,10 @@ import React, { Component, useEffect } from 'react';
 import axios from 'axios';
 import { getFooter } from '../../redux/Actions/footerAction';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
-
+import { ConnectWallet, getCurrentWalletConnected, Roles } from '../Wallet/interact';
+import Swal from 'sweetalert2';
 
 const Footer = () => {
 
@@ -18,6 +19,46 @@ const Footer = () => {
         dispatch(getFooter())
     }, [])
     // console.log(footer, 'footer')
+    const userRole = useSelector(state => {
+        return state.user.userdetail.role
+    })
+    // console.log(userRole)
+    const userToken = useSelector(state => {
+        return state.user.userToken
+    })
+
+    const history = useHistory()
+    const handleCreate = () => {
+
+        if (Roles["CREATOR"] == userRole) {
+            history.push('/create')
+        }
+        else if (Roles["BUYER"] == userRole) {
+            Swal.fire({
+                icon: 'info',
+                html:
+                    'You need to Signup as a Creator to Create a Project',
+                showCloseButton: false,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Ok!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+            })
+        }
+        else if (!userToken) {
+            Swal.fire({
+                icon: 'info',
+                html:
+                    'You need to Signup as a Creator to Create a Project',
+                showCloseButton: false,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Ok!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+            })
+        }
+
+    }
     return (
 
 
@@ -44,7 +85,10 @@ const Footer = () => {
                                 {/* Footer Title */}
                                 <h4 className="footer-title">Useful Links</h4>
                                 <ul>
-                                    <li><Link to="/create">Create Project</Link></li>
+                                    <li className="nav-item">
+                                        <a onClick={handleCreate} className="">Create Project</a>
+                                    </li>
+                                    {/* <li><Link to="/create" onClick={handleCreate}>Create Project</Link></li> */}
                                     <li><a href={`/all/${"LatestProjects"}`}>Explore NFTs</a></li>
                                     <li><Link to="/terms&conditions">Terms of Service</Link></li>
                                 </ul>
@@ -74,8 +118,9 @@ const Footer = () => {
                             {/* Copyright Area */}
                             <div className="copyright-area d-flex flex-wrap justify-content-center justify-content-sm-between text-center py-4">
                                 {/* Copyright Left */}
-                                <div className="copyright-left">© 2023 Canopy Labs Ltd.</div>
-                                {/* Copyright Right */}
+
+                                <div className="copyright-left">© 2023 Copyright Karmatica.</div>
+
                             </div>
                         </div>
                     </div>

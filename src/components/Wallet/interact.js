@@ -422,7 +422,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
           // modalShow(false)
         })
         .on('error', function (error) {
-
+alert()
         })
         .then(function (receipt) {
           // will be fired once the receipt is mined
