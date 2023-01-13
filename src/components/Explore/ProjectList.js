@@ -78,7 +78,7 @@ const GetAllProjects = () => {
                                                                 </div>
                                                                 <div className="card-bottom d-flex justify-content-between">
                                                                     <span>{item.price} MATIC</span>
-                                                                    {item.nft_data.legth == 1 ? (
+                                                                    {item.nft_data.length == 1 ? (
 
                                                                         <span>{item.nft_data.length} NFT </span>
                                                                     ) : (

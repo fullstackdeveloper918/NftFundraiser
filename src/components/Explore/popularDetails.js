@@ -43,10 +43,13 @@ const CollectionDetails = (props) => {
 
         <section className="item-details-area project-nft-si main-proj-detail collection_detail">
             <div className="container">
+                <div className='col-12 col-lg-12 '>
+                    <span className="p-0 title_main ">{coll?.title}</span>
+                </div>
                 <div className="row">
 
 
-                    <div className="col-12 col-lg-4 relative">
+                    <div className="col-12 col-lg-8 relative">
                         <div className="item-info" >
 
 
@@ -65,10 +68,20 @@ const CollectionDetails = (props) => {
                     </div>
 
 
-                    <div className='col-12 col-lg-8 '>
-                        <span className="p-0 title_main ">{coll?.title}</span>
+                    <div className='col-12 col-lg-4 '>
+                        <div class="user-description ">
+                            <h5 className='user_title gap-5'><div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg></div><div>Description</div>
 
-                    {/* <div className='content content_project'>
+                                {/* <i class="fa-solid fa-pen" ></i>
+                    <i class="fa-sharp fa-solid fa-trash"></i> */}
+
+
+                            </h5>
+                            <ReadMore data={coll?.description?.slice(0, 505)} />
+                            {/* <p dangerouslySetInnerHTML={{ __html: coll.description }} /> */}
+                        </div>
+
+                        {/* <div className='content content_project'>
                         <div className='card no-hover position-relative'>
                         <div><span className='boldertext'>Number of NFTs :</span><span> {coll?.nft_data?.length}</span></div>
                         <div><span className='boldertext'>Chain :</span> <span>Polygon (Matic)</span></div>
@@ -77,7 +90,7 @@ const CollectionDetails = (props) => {
                         </div>
 
                     </div> */}
-
+                        {/* 
                         <div className='table-main-detail mt-3 mt-lg-0 position-relative'>
 
 
@@ -85,7 +98,7 @@ const CollectionDetails = (props) => {
                             <ProjdataTable
                                 idx={id}
                             />
-                        </div>
+                        </div> */}
 
                     </div>
 
@@ -136,22 +149,28 @@ const CollectionDetails = (props) => {
 
                     {/* )} */}
                     <div className="col-12 col-lg-12 mt-3">
-                        <div class="user-description ">
-                            <h5 className='user_title'><div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg></div><div>Description</div>
+                        {/* <div className='row'>
+                            <div className='filter'>
+                                <div className='filter-main-name'>
+                                    <div>Short</div>
+                                    <div>
+                                        <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="0" fill="none" width="24" height="24"/><g><path d="M7 10l5 5 5-5" fill="#fff"/></g></svg>
+                                    </div>
+                                </div>
+                                <div className='filter-main'>
+                                    <ul>
+                                        <li>Latest</li>
+                                        <li>Oldest</li>
+                                        <li>Price:Low to Heigh</li>
+                                        <li>Price:Heigh to Low </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div> */}
 
-                                {/* <i class="fa-solid fa-pen" ></i>
-                    <i class="fa-sharp fa-solid fa-trash"></i> */}
 
 
-                            </h5>
-                            <ReadMore data={coll?.description} />
-                            {/* <p dangerouslySetInnerHTML={{ __html: coll.description }} /> */}
-                        </div>
-                    </div>
-
-
-
-                    {/* <div>
+                        {/* <div>
 
                         <ProjdataTable
                             idx={id}
@@ -159,9 +178,9 @@ const CollectionDetails = (props) => {
                         />
                     </div> */}
 
-                    {/* </div> */}
+                        {/* </div> */}
 
-                    {/* <div className='col-12'>
+                        {/* <div className='col-12'>
                         <div className='mt-3'>
                             <div className='table-detail'>
                                 <LatNftdataTable />
@@ -170,15 +189,15 @@ const CollectionDetails = (props) => {
 
                     </div> */}
 
-                    <div className=" col-12 mt-3">
-                        <div className="items mt-0 explore-items p-0">
-                            <CollectionNFTS />
+                        <div className=" col-12 mt-3">
+                            <div className="items mt-0 explore-items p-0">
+                                <CollectionNFTS />
+                            </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
-
+                    </div>
         </section>
     );
 }

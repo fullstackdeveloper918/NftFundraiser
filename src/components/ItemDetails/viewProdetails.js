@@ -135,19 +135,14 @@ const ProjDetails = () => {
                                 </div>
 
                                 <div className="d-sm-flex justify-content-start">
-<<<<<<< HEAD
+
 
                                     <>
                                     <a href='#invest'><Button variant="primary" className=" btn  btn-bordered-white m-0">
                                         Invest
                                     </Button>
                                     </a><Button className="btn ml-2 btn-bordered-white m-0" variant="primary" onClick={() => setModalShowrefer(true)}>
-=======
-                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Invest
-                                    </Button>
-                                    <><Button className="btn mr-2 btn-bordered-white m-0" variant="primary" onClick={() => setModalShowrefer(true)}>
->>>>>>> 2456dd3cfadb05f52ef710eac7777340a19acb71
+
                                         Share
                                     </Button><ReferalPopup
                                             id={id}
@@ -155,12 +150,7 @@ const ProjDetails = () => {
                                             show={modalShowrefer}
                                             onHide={() => setModalShowrefer(false)} /></>
 
-<<<<<<< HEAD
-                                    {/* <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Invest
-                                    </Button> */}
-=======
->>>>>>> 2456dd3cfadb05f52ef710eac7777340a19acb71
+
                                 </div>
                                 {latprojdetail?.user_invest && latprojdetail?.user_invest?.length ?
                                     [...new Map(latprojdetail?.user_invest?.slice(0, 3)?.map(item =>

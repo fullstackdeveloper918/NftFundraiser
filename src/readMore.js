@@ -17,4 +17,5 @@ const ReadMore = ({ data }) => {
         </p>
     );
 };
+
 export default ReadMore

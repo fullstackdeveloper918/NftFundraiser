@@ -65,16 +65,15 @@ const FundraiserDetail = () => {
     return (
         <section className="item-details-area fundraise-main">
             <div className="container">
-                {/* <div>
+                <div>
 
                 </div>
                 <div class="row py-0">
-                    
-                </div> */}
-                <div className="row justify-content-between px-0">
-                    <div className='col-12'>
+                    <div className='col-12 p-0'>
                         <span className='title_main'>{funddetail?.organization_detail?.organization_name}</span>
                     </div>
+                </div>
+                <div className="row justify-content-between p-0">
                     <div className="col-12 col-lg-8">
                         <div className="item-info">
 
@@ -85,7 +84,7 @@ const FundraiserDetail = () => {
                             </div>
 
                         </div>
-                        <div className='lorem_done mt-4'>
+                        <div className='lorem_done mt-3'>
                             <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -107,31 +106,6 @@ const FundraiserDetail = () => {
                                 </li>
                             </div>
 
-<<<<<<< HEAD
-                            <div className="d-sm-flex justify-content-start gap-5">
-                            <div>
-                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Invest
-                                    </Button>
-                                </div>
-                                <div>
-                                    <Button className=" mb-2 mb-sm-0  btn  btn-bordered-white m-0" variant="primary">
-                                        Share
-                                    </Button>
-                                </div>
-                               
-                                <>
-                                    {/* <Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary">
-                                        Share
-                                    </Button> */}
-                                    {/* <ReferalPopup
-                                            id={id}
-                                            userRef={userDetail}
-                                            show={modalShowrefer}
-                                            onHide={() => setModalShowrefer(false)} /> */}
-                                </>
-=======
->>>>>>> 2456dd3cfadb05f52ef710eac7777340a19acb71
 
                             <h5 class="user_title_1 mt-3 mb-0"><div>Projects</div></h5>
                             <ul className="m-0 custom_lis pl-0 fund_row">
@@ -176,7 +150,7 @@ const FundraiserDetail = () => {
                         </div>
 
 
-                        <div className='custam_col mt-4 mt-lg-0'>
+                        <div className='custam_col mt-3 mt-lg-0'>
                             <h5 class="user_title ">
 
                                 <div className='d-flex align-item-center gap-5'>
@@ -195,7 +169,7 @@ const FundraiserDetail = () => {
                             </div>
                         </div>
 
-                        <div className='funddeatil mt-4 '>
+                        <div className='funddeatil mt-3 '>
 
                             <FunddataTable />
                         </div>
@@ -224,25 +198,8 @@ const FundraiserDetail = () => {
                             </div>
 
                             <div className="d-sm-flex justify-content-start">
-<<<<<<< HEAD
-                            <div>
-=======
-                                <div>
->>>>>>> 2456dd3cfadb05f52ef710eac7777340a19acb71
-                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
-                                        Invest
-                                    </Button>
-                                </div>
                                 <div>
 
-<<<<<<< HEAD
-                                    <Button className=" btn ml-2 btn-bordered-white m-0" variant="primary">
-                                        Share
-                                    </Button>
-
-                                </div>
-                               
-=======
                                     <Button className=" mb-2 mb-sm-0  btn  btn-bordered-white m-0" variant="primary" onClick={() => setModalShowreferal(true)}>
                                         Share
                                     </Button>
@@ -253,8 +210,11 @@ const FundraiserDetail = () => {
                                         onHide={() => setModalShowreferal(false)} />
 
                                 </div>
-
->>>>>>> 2456dd3cfadb05f52ef710eac7777340a19acb71
+                                <div>
+                                    <Button variant="primary" className=" btn  btn-bordered-white m-0">
+                                        Invest
+                                    </Button>
+                                </div>
 
 
 
@@ -276,7 +236,7 @@ const FundraiserDetail = () => {
                                             return (
                                                 <li>
                                                     <div className='lorem_done p-0'>
-                                                        <span><svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" mirror-in-rtl="true">
+                                                        <span><svg width="32px" height="32px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" mirror-in-rtl="true">
                                                             <path fill="#494c4e" d="M8 6H5c-.553 0-1-.448-1-1s.447-1 1-1h3c.553 0 1 .448 1 1s-.447 1-1 1zM13 10H5c-.553 0-1-.448-1-1s.447-1 1-1h8c.553 0 1 .448 1 1s-.447 1-1 1zM13 14H5c-.553 0-1-.448-1-1s.447-1 1-1h8c.553 0 1 .448 1 1s-.447 1-1 1z" />
                                                             <path fill="#494c4e" d="M18 2v8c0 .55-.45 1-1 1s-1-.45-1-1V2.5c0-.28-.22-.5-.5-.5h-13c-.28 0-.5.22-.5.5v19c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5V21c0-.55.45-1 1-1s1 .45 1 1v1c0 1.1-.9 2-2 2H2c-1.1 0-2-.9-2-2V2C0 .9.9 0 2 0h14c1.1 0 2 .9 2 2z" />
                                                             <path fill="#494c4e" d="M23.87 11.882c.31.54.045 1.273-.595 1.643l-9.65 5.57c-.084.05-.176.086-.265.11l-2.656.66c-.37.092-.72-.035-.88-.314-.162-.278-.09-.65.17-.913l1.907-1.958c.063-.072.137-.123.214-.167.004-.01.012-.015.012-.015l9.65-5.57c.64-.37 1.408-.234 1.72.305l.374.65z" />
@@ -366,7 +326,7 @@ const FundraiserDetail = () => {
                             <FunddataTable />
                         </div>
                     </div> */}
-                    <div className='col-12 mt-4 mb-3'>
+                    <div className='col-12 mt-3 mb-3'>
                         <div className='funddeatil table-detail '>
                             <FundTransdataTable />
 

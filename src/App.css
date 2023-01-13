@@ -1883,7 +1883,7 @@ span.jodit-ui-button__text {
     top: 10px;
     height: auto !important;
 }
-.item-details-area .content_project .item-thumb, :root .item-details-area.project-nft-si.main-proj-detail.collection_detail .item-thumb {
+.item-details-area .content_project .item-thumb{
     height: 350px;
     width: 100%;
     max-width: 350px !important;
@@ -2011,7 +2011,92 @@ table.nfts_details.table td:last-child , .profile_detail .table tr:first-child{
     padding: 16px 0;
 }
 
+.logo-dis-img {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
 
+.logo-dis-img span{
+    color: #8e8e8e !important;
+}
+.uploadnftpopup-input {
+    border: 1px dashed rgb(204, 204, 204);
+    position: relative;
+    height: 257px;
+    border-radius: 8px;
+    z-index: 999;
+}
+
+.uploadnftpopup-input input {
+    opacity: 0;
+    height: 257px;
+    cursor: pointer;
+}
+.uploadnftpopup-input-img , .VideoInput{
+    position: absolute;
+    top: 0px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}
+.uploadnftpopup-input-img img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+.filter-main-name {
+    /* border: 1px solid #8e8e8e; */
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 16px;
+    background-color: #16151a;
+    display: flex;
+    justify-content: space-between;
+}
+.filter-main {
+    margin-top: 10px;
+}
+.filter-main li {
+    padding: 10px 0;
+    list-style: none;
+    margin: 1rem 0;
+    /* border-bottom: 1px solid #1e1e1e; */
+}
+.filter-main ul {
+    padding: 10px 20px;
+    background: #16151a;
+    border-radius: 25px;
+}
+.filter {
+    position: relative;
+    width: 250px;
+}
+.uploadnftpopup-input-img.uploadnftpopup-secound{
+    z-index: -1 !important;
+}
+.upload-secound-input{
+    z-index: 999 !important;
+}
+.uploadnftpopup_content {
+    margin: 20px 0px;
+}
+:root .main-create .ant-collapse-header {
+    padding: 16px !important;
+    background: #16151a!important;
+}
+.uploadnftpopup-input.Icon_cam {
+    /* background-image: url('./img/camera.png'); */
+    background-position: center;
+    background-size: cover;
+}
+video.VideoInput_video {
+    height: 240px;
+}
+body .btn.btn-bordered-white {
+    border: 3px solid #fff;
+}
 @media (min-width: 991px){
     .progress_nft.mobile_nft.mb-3 {
        display: none;
@@ -2194,7 +2279,14 @@ table.nfts_details.table td:last-child , .profile_detail .table tr:first-child{
             height: 40px !important;
         }
     }
-
+@media (max-width: 440px){
+    .uploadnftpopup-input {
+        height: 157px;
+    }
+    video.VideoInput_video {
+        height: 130px;
+    }
+}
 @media (max-width: 400px){
         .proj-left button {
             width: 100%;

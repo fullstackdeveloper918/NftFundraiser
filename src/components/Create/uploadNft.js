@@ -441,7 +441,7 @@ const UploadNft = ({ current, prev }) => {
                                             //     align="baseline"
                                             // >
                                             <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
-                                                <Panel header="Details" key="1">
+                                                <Panel header="Details" key="1" className='p-0'>
                                                     <Fragment>
                                                         {/* <div>Artwork {index}</div> */}
                                                         <div className="row relative">
@@ -634,9 +634,10 @@ const UploadNft = ({ current, prev }) => {
                                                                 </div>
                                                                 // </div>
                                                             ))}
-                                                            <div className="col-md-12 col-12 uploadnftpopup">
+                                                        <div className='col-12'>
+                                                        <div className="col-lg-6 col-12 uploadnftpopup p-0 mb-4">
                                                                 <label>Upload Nft</label>
-                                                                <div>
+                                                                <div className="position-relative" style={{backgroundImage:"url('/img/camera.png')", backgroundSize:"contain",backgroundRepeat: "no-repeat"}}>
                                                                     {/* <Form.Item
                                                                         {...restField}
                                                                         name={[name, "nft_image"]}
@@ -650,7 +651,7 @@ const UploadNft = ({ current, prev }) => {
                                                                         ]}
 
                                                                     > */}
-
+                                                                <div className='uploadnftpopup-input Icon_cam' >
                                                                     <input
                                                                         type="file"
                                                                         onChange={handleUpload}
@@ -658,8 +659,9 @@ const UploadNft = ({ current, prev }) => {
 
                                                                         accept=".mov,.mp4,.mp3,.webm.gltf,.glb,.jpg,.jpeg,.gif,.svg"
                                                                     />
+                                                                    </div>
                                                                     {nftFileType === 'Image' &&
-                                                                        <div>
+                                                                        <div className='uploadnftpopup-input-img'>
                                                                             {nftFileType === 'Image' && nftHeight >= 500 && nftwidth >= 500 ? (
                                                                                 <img
                                                                                     width={200}
@@ -679,7 +681,8 @@ const UploadNft = ({ current, prev }) => {
                                                                     }
 
                                                                     {nftFileType === 'Player' &&
-                                                                        <div className="VideoInput">
+                                                                        <div >
+                                                                             <div className="VideoInput">
                                                                             {/* {!vdo && <button onClick={handleChoose}>Choose</button>} */}
                                                                             {/* {source && ( */}
                                                                             <video
@@ -689,21 +692,10 @@ const UploadNft = ({ current, prev }) => {
                                                                                 controls
                                                                                 src={source}
                                                                             />
+                                                                            </div>
                                                                             {/* )} */}
                                                                             {/* <div className="VideoInput_footer">{vdo || "Nothing selectd"}</div> */}
-                                                                            <div>
-                                                                                <label>Preview Image</label>
-                                                                                <p>Because you’ve included multimedia, you’ll need to provide an image (PNG, JPG, or GIF) for the card display of your item</p>                                                                      </div>
-                                                                            <input
-                                                                                type='file'
-                                                                                onChange={previewChange}
-                                                                            />
-                                                                            <img
-                                                                                width={200}
-                                                                                height={200}
-                                                                                src={Pimage}
-                                                                            />
-                                                                        </div>}
+                                                                          
                                                                     {nftFileType === 'modal' &&
                                                                         <div>
                                                                             <DModal
@@ -725,6 +717,32 @@ const UploadNft = ({ current, prev }) => {
                                                                         </div>
                                                                     }
 
+                                                                            <div className='uploadnftpopup_content'>
+                                                                                <label >Preview Image</label>
+                                                                                <p>Because you’ve included multimedia, you’ll need to provide an image (PNG, JPG, or GIF) for the card display of your item</p>                                                                   
+                                                                            </div>    
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                <div className='uploadnftpopup-input upload-secound-input'  style={{backgroundImage:"url('/img/camera.png')", backgroundSize:"contain",backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>
+                                                                            <input
+                                                                                type='file'
+                                                                                onChange={previewChange}
+
+
+                                                                            />
+                                                                            <div className='uploadnftpopup-input-img  uploadnftpopup-secound'>
+                                                                            <img
+                                                                              
+                                                                                src={Pimage}
+                                                                            />
+                                                                            </div>
+                                                                               </div>
+                                                                        </div>}
 
                                                                     {/* </Form.Item> */}
                                                                     {/* <Form.Item
@@ -779,7 +797,8 @@ const UploadNft = ({ current, prev }) => {
 
                                                                 </div>
                                                             </div>
-
+              
+                                                        </div>
                                                         </div>
                                                     </Fragment>
                                                 </Panel>
