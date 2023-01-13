@@ -14,15 +14,16 @@ import DesPopup from './desPopup';
 import ProjdataTable from '../Explore/projDetailtable';
 import ReadMore from '../../readMore';
 import { GetMatic } from '../ItemDetails/GetMAtic';
+import ReferalPopup from '../ItemDetails/refralPopup';
 
 // import ProgressBar from 'react-bootstrap';
 
 const ProjNftDetails = () => {
-    const deleteHandler = (id) => {
-        dispatch(DeleteProject(id))
-    }
+    // const deleteHandler = (id) => {
+    //     dispatch(DeleteProject(slug))
+    // }
 
-    const { id } = useParams()
+    const { slug } = useParams()
     // console.log(id, 'idd')
     const latprojdetail = useSelector(state => {
         // 
@@ -41,14 +42,18 @@ const ProjNftDetails = () => {
         // 
         return state?.projectdetails?.projectdetails
     })
-    console.log(projdetail, 'projdata')
+    console.log(projdetail?.nft_data && projdetail?.nft_data && projdetail?.nft_data.length && projdetail?.nft_data[0]?.is_mint, 'projdata')
+
 
     useEffect((event) => {
         (GetMatic(setmatic))
         // event.preventDefault()
-        dispatch(ProjectDetail(id))
-    }, [id])
-
+        dispatch(ProjectDetail(slug))
+    }, [slug])
+    const userdet = useSelector(state => {
+        return state?.user?.userdetail
+    })
+    const userDetail = userdet.referrer_id
 
     // const deleteHandler = (id) => {
     //     dispatch(DeleteProject(id))
@@ -76,7 +81,7 @@ const ProjNftDetails = () => {
                                     <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() =>
                                         setModalShow(true)}></i>
                                     <Banner
-                                        id={id}
+                                        id={slug}
                                         show={modalShow}
                                         onHide={() => setModalShow(false)} />
                                 </div>
@@ -122,19 +127,25 @@ const ProjNftDetails = () => {
                                     </div>
 
                                     <div className="d-flex justify-content-start">
+
                                         <>
-                                            {/* <Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary" onClick={() => setModalShowrefer(true)}>
-                                        Share
-                                    </Button> */}
-                                            <Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary">
-                                                Share
-                                            </Button>
-                                            {/* <ReferalPopup
-                                            id={id}
-                                            userRef={userDetail}
-                                            show={modalShowrefer}
-                                            onHide={() => setModalShowrefer(false)} /> */}
+                                            {projdetail?.nft_data && projdetail?.nft_data && projdetail?.nft_data.length > 0 && projdetail?.nft_data[0]?.is_mint == 0 ? (
+
+                                                <Button className=" btn  btn-bordered-white m-0 mr-2" variant="primary">
+                                                    Share
+                                                </Button>
+                                            ) : (
+                                                <><Button className=" btn  btn-bordered-white m-0 mr-2" onClick={() => setModalShowrefer(true)} variant="primary">
+                                                    Share
+                                                </Button><ReferalPopup
+                                                        id={slug}
+                                                        userRef={userDetail}
+                                                        show={modalShowrefer}
+                                                        onHide={() => setModalShowrefer(false)} /></>
+
+                                            )}
                                         </>
+
 
                                         <Button variant="primary" className=" btn  btn-bordered-white m-0">
                                             Invest
@@ -211,7 +222,7 @@ const ProjNftDetails = () => {
                                     <i class="fa-solid fa-pen" onClick={() =>
                                         setModalShowDes(true)}></i>
                                     <DesPopup
-                                        id={id}
+                                        id={slug}
                                         show={modalShowDes}
                                         onHide={() => setModalShowDes(false)} />
                                 </div>
@@ -225,7 +236,7 @@ const ProjNftDetails = () => {
                         <div className='container table-main-detail position-relative'>
 
                             <ProjdataTable
-                                id={id}
+                                id={slug}
                             />
                         </div>
                     </div>
@@ -252,7 +263,7 @@ const ProjNftDetails = () => {
                         <div className="row items mt-0 explore-items px-0">
                             <div className='col-12 col-sm-6 col-lg-3 item explore-item'>
                                 <div className='card no-hover m-0 add-nft '>
-                                    {projdetail.number_of_nft === projdetail?.nft_data?.length ? (
+                                    {projdetail.number_of_nft == projdetail?.nft_data?.length ? (
 
                                         <div class="image-over relative">
 
@@ -283,6 +294,7 @@ const ProjNftDetails = () => {
 
                             {projdetail?.nft_data?.map((x, idx) => {
                                 // {projdetail?.map((item, idx) => {
+                                // const image_preview = URL.revokeObjectURL(x.preview_imag)
                                 return (
                                     <div key={`eds_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item ">
 
@@ -292,8 +304,13 @@ const ProjNftDetails = () => {
 
                                             {/* <i class="fa-sharp fa-solid fa-trash"></i> */}
                                             <div className="image-over relative">
-                                                <Link to={`/nft/details/${x.id}`}>
-                                                    <img className="card-img-top" src={x.image} alt="" />
+                                                <Link to={`/nft/details/${x.slug}`}>
+                                                    {x.extention === 'mp4' || x.extention === 'modal' ? (
+
+                                                        <img className="card-img-top" src={x.preview_imag} alt="" />
+                                                    ) : (
+                                                        <img className="card-img-top" src={x.image} alt="" />
+                                                    )}
                                                 </Link>
                                                 <div className='token'>
                                                     <span>#{x?.token_id}</span>
@@ -302,7 +319,7 @@ const ProjNftDetails = () => {
 
                                                             <div>
                                                                 <i className="fa-solid fa-pen" onClick={(e) => {
-                                                                    setNftID(x.id)
+                                                                    setNftID(x.slug)
                                                                     e.preventDefault();
                                                                     setModalShowedit(true)
                                                                 }
@@ -311,7 +328,7 @@ const ProjNftDetails = () => {
 
                                                                     <EditNft
                                                                         // debugger
-                                                                        id={id}
+                                                                        id={slug}
                                                                         nft_id={nftId}
                                                                         show={modalShowedit}
                                                                         onHide={() => setModalShowedit(false)} />
@@ -344,7 +361,7 @@ const ProjNftDetails = () => {
                                                         {x.is_mint == 0 ? (
 
                                                             <button>
-                                                                <a href='#'>Mint</a>
+                                                                <Link to={`/nft/details/${x.slug}`}>Mint</Link>
                                                             </button>
                                                         ) : (
                                                             <button disabled>

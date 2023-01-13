@@ -27,13 +27,13 @@ const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alche
 const CollectionDetails = (props) => {
     const dispatch = useDispatch()
 
-    const id = useParams();
+    const slug = useParams();
 
     useEffect(() => {
-        dispatch(PopularCollectionActionDetails(id))
+        dispatch(PopularCollectionActionDetails(slug))
 
 
-    }, [id])
+    }, [slug])
     const coll = useSelector(state => {
         // 
         return state?.collection?.collectiondetail
@@ -68,7 +68,7 @@ const CollectionDetails = (props) => {
                     <div className='col-12 col-lg-8 '>
                         <span className="p-0 title_main ">{coll?.title}</span>
 
-                    {/* <div className='content content_project'>
+                        {/* <div className='content content_project'>
                         <div className='card no-hover position-relative'>
                         <div><span className='boldertext'>Number of NFTs :</span><span> {coll?.nft_data?.length}</span></div>
                         <div><span className='boldertext'>Chain :</span> <span>Polygon (Matic)</span></div>
@@ -83,7 +83,7 @@ const CollectionDetails = (props) => {
 
 
                             <ProjdataTable
-                                idx={id}
+                                idx={slug}
                             />
                         </div>
 

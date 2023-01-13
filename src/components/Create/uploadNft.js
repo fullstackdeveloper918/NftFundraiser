@@ -74,6 +74,8 @@ const UploadNft = ({ current, prev }) => {
     console.log('source', source)
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState()
+    const [NFtFileExtension, setNFtExtension] = useState()
+    const [preview, setPreview] = useState()
 
     console.log(nft_collection_id, "nft collections")
     const handleIncrement = () => {
@@ -84,9 +86,25 @@ const UploadNft = ({ current, prev }) => {
     const handleDecrement = () => {
         setCount(prevCount => prevCount - 1);
     };
-    const previewChange = e => {
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    };
+    const previewChange = async (e) => {
         const pimage = e.target.files[0]
-        setPimage(URL.createObjectURL(pimage))
+        const base64 = await convertToBase64(pimage);
+        setPimage(base64)
+
+
+        setPreview(pimage)
     };
     // console.log(count, 'count')
 
@@ -147,6 +165,7 @@ const UploadNft = ({ current, prev }) => {
     // console.log('col', col)
     const handleUpload = e => {
         const filetype = e.target.files[0].type
+        setNFtExtension(filetype)
         // debugger
         setNft(e.target.files[0])
         var fr = new FileReader;
@@ -184,12 +203,20 @@ const UploadNft = ({ current, prev }) => {
                     setNFtFileType('Player')
                     break;
                 case '':
+                    // if (nft?.name?.str.includes(".glb")) {
+
                     setNFtFileType('modal')
+                    // }
                     break;
                 default:
                     setNFtFileType('Image')
             }
+            // switch (nft?.name?.str.includes(".glb")) {
 
+            //     case '':
+            //         setNFtFileType('modal')
+            //         break;
+            // }
 
         }
 
@@ -239,8 +266,10 @@ const UploadNft = ({ current, prev }) => {
 
             const imagesRes = await Promise.all(nftImagepromises).then(res => res)
             // 
-
+            // debugger
             const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
+
+            const addedImagetype = imagesRes?.map(x => x?.data?.data?.extension)
             var str = addedImage;
             var check = str.includes("https://ipfs.io/ipfs/undefined");
             // console.log(check)
@@ -288,6 +317,7 @@ const UploadNft = ({ current, prev }) => {
 
 
                 formData.append('nft_image', addedImage)
+                formData.append('extention', addedImagetype)
                 formData.append('nft_name', values?.nfts?.map(x =>
                     x.nft_name
                 ))

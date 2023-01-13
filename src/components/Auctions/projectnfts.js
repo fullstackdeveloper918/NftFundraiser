@@ -8,7 +8,7 @@ const ProjNFTS = () => {
 
 
     const dispatch = useDispatch()
-    const { id } = useParams();
+    const { slug } = useParams();
     const latprojdetail = useSelector(state => {
         // 
         return state.projectdetails.latestprojectdetails
@@ -18,9 +18,9 @@ const ProjNFTS = () => {
     })
     useEffect(() => {
         // 
-        dispatch(LatestProjectDetail(id))
+        dispatch(LatestProjectDetail(slug))
 
-    }, [id])
+    }, [slug])
     return (
         <section className="live-auctions-area single_project-detail">
             <div className="container">
@@ -43,7 +43,7 @@ const ProjNFTS = () => {
                                 <div className="card">
 
                                     <div className="image-over">
-                                        <Link to={`/nftprojdetails/${item.id}`}>
+                                        <Link to={`/nftprojdetails/${item.slug}`}>
                                             <img className="card-img-top" src={item.image} alt="" />
                                         </Link>
                                     </div>

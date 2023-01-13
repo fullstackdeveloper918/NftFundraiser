@@ -15,7 +15,7 @@ const ProjdataTable = (props) => {
         console.log(key);
     };
     const [modalShowproj, setModalShowproj] = React.useState(false);
-    const { id } = useParams()
+    const { slug } = useParams()
     const [expandIconPosition, setExpandIconPosition] = useState('end');
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
@@ -42,10 +42,10 @@ const ProjdataTable = (props) => {
     // })
     console.log(userdet.user_id, 'uid')
     useEffect(() => {
-        dispatch(LatestProjectDetail(id))
-        dispatch(ProjectDetail(id))
+        dispatch(LatestProjectDetail(slug))
+        dispatch(ProjectDetail(slug))
         dispatch(PopularCollectionActionDetails(props.idx))
-    }, [id])
+    }, [slug])
 
     const coll = useSelector(state => {
         // 
@@ -91,7 +91,7 @@ const ProjdataTable = (props) => {
                                         <tr>Country : {item.name}</tr>
                                     )
                                 })} */}
-                                {location.pathname === `/projdetails/${id}` ? (
+                                {location.pathname === `/projdetails/${slug}` ? (
 
                                     <>
                                         {/* <td><span>Owned By:</span> <span>{latprojdetail?.user_data?.username}</span> </td> */}
@@ -110,7 +110,7 @@ const ProjdataTable = (props) => {
                                         <td><span>Price </span> <span> {latprojdetail?.price} </span> </td></>
                                 ) : (
                                     <>
-                                        {location.pathname === `/popularcollection/details/${id}` ? (
+                                        {location.pathname === `/popularcollection/details/${slug}` ? (
                                             <>
 
                                                 <td><span>Number of NFTs </span><span> {coll?.nft_data?.length}</span></td>

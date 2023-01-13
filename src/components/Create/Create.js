@@ -90,7 +90,8 @@ const Create = ({ current, next, prev }) => {
     })
     // console.log(col, 'col')
     const OnSubmit = (data) => {
-        debugger
+        // debugger
+
         const imageBanner = dataURLtoBlob(image)
 
         setFormValues({ ...data, description, type: data?.usertype, image: imageBanner, imageUri: image });
@@ -488,7 +489,7 @@ const Create = ({ current, next, prev }) => {
                                     // disabled={true}
                                     min={1}
                                     max={1}
-
+                                    maxLength={1}
                                     placeholder="number of NFT (1 allowed)"
                                     {...register("number_of_nft", { required: true, min: 1, max: 1 })}
                                     // {...register("number_of_nft", { maxLength: 12 })}

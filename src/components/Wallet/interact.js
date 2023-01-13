@@ -209,7 +209,7 @@ export const getCurrentWalletConnected = async () => {
 
 
 
-const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }) => {
+const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from, pay_to }) => {
 
   const token = localStorage.getItem('authToken')
   try {
@@ -229,7 +229,7 @@ const UpdateStatus = async ({ id, token_id, transaction_hash, pay_from, pay_to }
       },
     }
     // 
-    await axios.post(`${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${id}`,
+    await axios.post(`${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${slug}`,
       formData, config
     )
   } catch (error) {
@@ -290,7 +290,7 @@ export const sendFileToIPFS = async (fileImg) => {
   }
 }
 
-export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content }) => {
+export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content }) => {
 
   // const metaDataObj = {
   //   name: _name,
@@ -334,7 +334,7 @@ export const CreateMetaDataAndMint = async ({ id, _imgBuffer, _des, _name, setCu
           // await UpdateContract(collid, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
           const tokid = web3.utils.hexToNumber(receipt.logs[0].topics[3])
 
-          await UpdateStatus({ id, token_id: tokid, transaction_hash: receipt.transactionHash, pay_from: receipt.from, pay_to: receipt.to })
+          await UpdateStatus({ slug, token_id: tokid, transaction_hash: receipt.transactionHash, pay_from: receipt.from, pay_to: receipt.to })
           setCurrent(2)
           // return redirect(`nft/details/${id}`)
           // console.log('tokid', tokid)

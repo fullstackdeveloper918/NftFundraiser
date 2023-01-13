@@ -25,7 +25,7 @@ export const PopularCollectionAction = createAsyncThunk(
     })
 export const PopularCollectionActionDetails = createAsyncThunk(
     "auth/collection",
-    async ({ id }, thunkAPI) => {
+    async ({ slug }, thunkAPI) => {
         // 
         try {
             const config = {
@@ -33,7 +33,7 @@ export const PopularCollectionActionDetails = createAsyncThunk(
                     'Content-Type': 'application/json',
                 },
             }
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getPopularConnectionByIdx/${id}`, config)
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getPopularConnectionByIdx/${slug}`, config)
             // console.log(res, 'resddd')
             thunkAPI.dispatch(getPopularCollectiondetails(res));
 

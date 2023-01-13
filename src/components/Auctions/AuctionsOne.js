@@ -55,11 +55,11 @@ const AuctionsOne = ({ key, type }) => {
                             {liveProjects?.map((item, idx) => {
                                 return (
                                     <div key={`auc_${idx}`} className="swiper-slide item">
-                                        <Link to={`/projdetails/${item.id}`} className="card">
+                                        <Link to={`/projdetails/${item.slug}`} className="card">
                                             {/* {item?.nft_data?.map((item, idx) => { */}
                                             {/* return ( */}
                                             <div className="image-over">
-                                                <Link to={`/projdetails/${item.id}`}>
+                                                <Link to={`/projdetails/${item.slug}`}>
                                                     <img className="card-img-top" src={item?.image} alt="" />
                                                 </Link>
 

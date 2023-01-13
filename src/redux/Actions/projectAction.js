@@ -71,7 +71,7 @@ export const CreateProjectAction = (params, setLoading, history) => async dispat
     }
 }
 
-export const ProjectDetail = (id) => async dispatch => {
+export const ProjectDetail = (slug) => async dispatch => {
     // 
     const token = localStorage.getItem('authToken')
     try {
@@ -81,7 +81,7 @@ export const ProjectDetail = (id) => async dispatch => {
                 Authorization: `Bearer ${token}`
             },
         }
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/project/details/${id}`,
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/project/details/${slug}`,
             config)
         // console.log(res?.data?.data[0]?.image, 'proj')
         // console.log('details', res)
@@ -92,7 +92,8 @@ export const ProjectDetail = (id) => async dispatch => {
         }
     }
 }
-export const LatestProjectDetail = (id) => async dispatch => {
+export const LatestProjectDetail = (slug) => async dispatch => {
+    // debugger
     // 
     try {
         const config = {
@@ -100,7 +101,7 @@ export const LatestProjectDetail = (id) => async dispatch => {
                 'Content-Type': 'application/json',
             },
         }
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjectDetails/${id}`,
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjectDetails/${slug}`,
             config)
         // console.log(res, 'ressssss')
         dispatch(getLatestProjectDetail(res));
@@ -137,8 +138,7 @@ export const ProjectList = () => async dispatch => {
     }
 }
 
-export const NftList = (id) => async dispatch => {
-    // debugger
+export const NftList = (slug) => async dispatch => {
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -147,7 +147,7 @@ export const NftList = (id) => async dispatch => {
                 'Authorization': `Bearer ${token}`
             },
         }
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getNftDetailByIdx/${id}`,
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getNftDetailByIdx/${slug}`,
             config)
 
         // console.log(res, 'proj')
@@ -228,7 +228,6 @@ export const getPublicLiveProjects = createAsyncThunk(
     })
 
 export const UpdateProject = (props, params) => async dispatch => {
-
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -272,9 +271,10 @@ export const DeleteProject = (id) => async dispatch => {
         // console.log(res.status, 'proj')
         await dispatch(deleteProject(res));
         if (res.status === 200) {
-            swal("success", res.data.message, 'success').then(function () {
-                window.location = "/projectlist";
-            });
+            dispatch(ProjectList())
+            // swal("success", res.data.message, 'success').then(function () {
+            //     window.location = "/projectlist";
+            // });
 
         }
     } catch (e) {
@@ -457,7 +457,7 @@ export const GetSettings = () => async dispatch => {
     }
 }
 
-export const GetNftwol = ({ id }) => async dispatch => {
+export const GetNftwol = ({ slug }) => async dispatch => {
     try {
         const config = {
             headers: {
@@ -465,7 +465,7 @@ export const GetNftwol = ({ id }) => async dispatch => {
             },
         }
 
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getNftDetailByIdxWithoutLogin/${id}`,
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getNftDetailByIdxWithoutLogin/${slug}`,
             config)
 
         await dispatch(getNftwolDetails(res));
@@ -476,7 +476,7 @@ export const GetNftwol = ({ id }) => async dispatch => {
         }
     }
 }
-export const GetfundraiserProject = (user_id) => async dispatch => {
+export const GetfundraiserProject = (slug) => async dispatch => {
     // 
     try {
         const config = {
@@ -485,7 +485,7 @@ export const GetfundraiserProject = (user_id) => async dispatch => {
             },
         }
 
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getProjectByfundraiserIdx/${user_id}`,
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getProjectByfundraiserIdx/${slug}`,
             config)
 
         await dispatch(getfundprojdetails(res));
