@@ -44,7 +44,7 @@ function ReferalPopup(props) {
     const OnSubmit = (data) => {
         // dispatch(CreateCollectionAction(data))
     }
-    const url = window.location.href + '/' + props.userRef
+    const url = window.location.href + `?refid=${props.userRef}`
     // const Refurl = window.location.href + '/' + props.id + '/' + props.userRef
     return (
         <Modal
@@ -102,7 +102,7 @@ function ReferalPopup(props) {
                                 <TelegramShareButton url={'www.telegram.com' + '/' + url} title="Reffral code "><TelegramIcon size={32} round={true} /></TelegramShareButton>
                                 <InstapaperShareButton url={'www.instagram.com' + '/' + url} title="Reffral code ">  <InstapaperIcon size={32} round={true} /></InstapaperShareButton>
                                 <LinkedinShareButton url={'www.linkedin.com' + '/' + url} title="Reffral code ">  <LinkedinIcon size={32} round={true} /></LinkedinShareButton>
-                                <EmailShareButton url={'www.gmail.com' + '/' + url} title="Reffral code " ><EmailIcon size={32} round={true} /></EmailShareButton>
+                                <EmailShareButton url={url} title="Reffral code " ><EmailIcon size={32} round={true} /></EmailShareButton>
                             </div>
                         </div>
                         <div className="col-2 p-0 text-right">

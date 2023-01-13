@@ -40,7 +40,7 @@ const NftDetails = (props) => {
     // console.log('collid', collid)
     // console.log('contAddre', contractAdd)
     // console.log('current', current)
-    const { id } = useParams();
+    const slug = useParams();
     // console.log(id, 'idd')
     const projdetail = useSelector(state => {
         // 
@@ -63,11 +63,11 @@ const NftDetails = (props) => {
 
     // console.log('collupdate', collupdate)
     useEffect(() => {
-        // 
-        dispatch(NftList(id))
-        dispatch(ProjectDetail(id))
+        // debugger
+        dispatch(NftList(slug.id))
+        dispatch(ProjectDetail(slug.id))
         // dispatch(GetSettings())
-    }, [id])
+    }, [slug])
 
 
     const mint = (contractAddress) => {
@@ -79,7 +79,7 @@ const NftDetails = (props) => {
             setCurrent,
             collid: nftdetail?.collection_id,
             nft_file_content: nftdetail?.nft_file_content,
-            id,
+            slug,
             setModalShow
         })
     }
@@ -190,7 +190,7 @@ const NftDetails = (props) => {
                             {/* {latprojdetail?.map((item, key) => ( */}
 
                             <><div className="item-thumb text-center">
-                                <img src={nftdetail.image} alt="" />
+                                <img src={nftdetail.preview_imag} alt="" />
                             </div>
 
                             </>
@@ -246,7 +246,7 @@ const NftDetails = (props) => {
 
 
                                         <><button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                            id="nftdetail.id" onClick={() => deployAndMint(id)}>  Mint</button><NftPopup
+                                            id="nftdetail.id" onClick={() => deployAndMint(slug)}>  Mint</button><NftPopup
                                                 show={modalShow}
                                                 current={current}
                                                 onHide={() => setModalShow(false)} /></>

@@ -61,12 +61,12 @@ const MyRouts = () => {
           {/* <Route exact path="/projectlist" component={ExploreThree} /> */}
           <Route exact path="/explore-4" component={ExploreFour} />
           <Route exact path="/auctions" component={Auctions} />
-          <Route exact path="/popularcollection/details/:id" component={ItemDetails} />
-          <Route exact path="/projdetails/:id" component={latprojDetails} />
-          <Route exact path="/nftprojdetails/:id" component={latnftprojDetails} />
+          <Route exact path="/popularcollection/details/:slug" component={ItemDetails} />
+          <Route exact path="/projdetails/:slug" component={latprojDetails} />
+          <Route exact path="/nftprojdetails/:slug" component={latnftprojDetails} />
           <Route exact path="/fundraiser/detail/:user_id" component={FundDetail} />
           <Route exact path="/myfundraiser/detail/:user_id" component={FundraiserProjects} />
-          <Route exact path="/projnftdetails/:id" component={ProjNft} />
+          <Route exact path="/projnftdetails/:slug" component={ProjNft} />
           <Route exact path="/allfundraise" component={AllFundraiser} />
           <Route exact path="/all/fundraise/projects/:user_id" component={AllFundraiserProjects} />
           <Route exact path="/nft/details/:id" component={Nft} />

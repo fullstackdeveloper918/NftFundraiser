@@ -94,7 +94,7 @@ const CollectionNFTS = () => {
 
 
     const dispatch = useDispatch()
-    const { id } = useParams();
+    const { slug } = useParams();
     const collNft = useSelector(state => {
         // 
         return state?.collection?.collectiondetail
@@ -126,7 +126,7 @@ const CollectionNFTS = () => {
                                 <div className="card">
 
                                     <div className="image-over">
-                                        <Link to={`/nftprojdetails/${item.id}`}>
+                                        <Link to={`/nftprojdetails/${item.slug}`}>
                                             <img className="card-img-top" src={item.image} alt="" />
                                         </Link>
                                     </div>

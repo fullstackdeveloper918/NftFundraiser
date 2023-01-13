@@ -52,49 +52,51 @@ const AuctionsOne = ({ type }) => {
                     <div className="swiper-container slider-mid items ">
                         <div className="swiper-wrapper col-12 ">
                             {/* Single Slide */}
-                      
+
                             {liveProjects?.map((item, idx) => {
                                 return (
-                                    <div key={`auc_${item.id}`} className="swiper-slide item">
-                                        <Link to={`/projdetails/${item.id}`} className="card">
-                                            {/* {item?.nft_data?.map((item, idx) => { */}
-                                            {/* return ( */}
-                                            <div className="image-over">
-                                                <Link to={`/projdetails/${item.id}`}>
-                                                    <img className="card-img-top" src={item?.image} alt="" />
-                                                </Link>
 
-                                            </div>
-                                            {/* ) */}
-                                            {/* })} */}
-                                            {/* Card Caption */}
-                                            <div className="card-caption col-12 p-0">
-                                                {/* Card Body */}
-                                                <div className="card-body">
-                                                    {/* <div className="countdown-times ">
+                                    <div key={`auc_${item.id}`} className="swiper-slide item">
+
+
+                                        {/* {item?.nft_data?.map((item, idx) => { */}
+                                        {/* return ( */}
+                                        <div className="image-over">
+                                            <Link to={`/projdetails/${item.slug}`}>
+                                                <img className="card-img-top" src={item?.image} alt="" />
+                                            </Link>
+
+                                        </div>
+                                        {/* ) */}
+                                        {/* })} */}
+                                        {/* Card Caption */}
+                                        <div className="card-caption col-12 p-0">
+                                            {/* Card Body */}
+                                            <div className="card-body">
+                                                {/* <div className="countdown-times ">
                                                         <div className="countdown d-flex justify-content-center" data-date={item.date} />
                                                     </div> */}
-                                                    <a href="#">
-                                                        <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
-                                                    </a>
-                                                    <a className="seller d-flex align-items-center mb-2" href="#">
-                                                        <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />
-                                                        <span className="ml-2 mb-0">{item.user_data.username}</span>
-                                                    </a>
-                                                    <div className="card-bottom d-flex justify-content-between">
-                                                        <span>{Math.round(item.price)} MATIC</span>
-                                                        {item?.number_of_nft == 1 ? (
+                                                <a href="#">
+                                                    <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
+                                                </a>
+                                                <a className="seller d-flex align-items-center mb-2" href="#">
+                                                    <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />
+                                                    <span className="ml-2 mb-0">{item.user_data.username}</span>
+                                                </a>
+                                                <div className="card-bottom d-flex justify-content-between">
+                                                    <span>{Math.round(item.price)} MATIC</span>
+                                                    {item?.number_of_nft == 1 ? (
 
-                                                            <span>{item.number_of_nft} NFT</span>
-                                                        ) : (
-                                                            <span>{item.number_of_nft} NFTs</span>
-                                                        )
+                                                        <span>{item.number_of_nft} NFT</span>
+                                                    ) : (
+                                                        <span>{item.number_of_nft} NFTs</span>
+                                                    )
 
-                                                        }
-                                                    </div>
+                                                    }
                                                 </div>
                                             </div>
-                                        </Link>
+                                        </div>
+
                                     </div>
                                 );
                             })}

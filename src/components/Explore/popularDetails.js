@@ -27,13 +27,13 @@ const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alche
 const CollectionDetails = (props) => {
     const dispatch = useDispatch()
 
-    const id = useParams();
+    const slug = useParams();
 
     useEffect(() => {
-        dispatch(PopularCollectionActionDetails(id))
+        dispatch(PopularCollectionActionDetails(slug))
 
 
-    }, [id])
+    }, [slug])
     const coll = useSelector(state => {
         // 
         return state?.collection?.collectiondetail
@@ -96,7 +96,7 @@ const CollectionDetails = (props) => {
 
 
                             <ProjdataTable
-                                idx={id}
+                                idx={slug}
                             />
                         </div> */}
 

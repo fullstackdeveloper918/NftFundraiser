@@ -46,7 +46,7 @@ function DesPopup(props) {
     const [country, setCountry] = useState()
     const [type, setType] = useState()
     const dispatch = useDispatch()
-    const id = useParams()
+    const slug = useParams()
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
     const [description, setDescription] = useState();
 
@@ -113,7 +113,6 @@ function DesPopup(props) {
         }
         formData.append('type', data.type)
         formData.append('category_id', data.category_id)
-
 
         dispatch(UpdateProject(props.id, formData))
     }

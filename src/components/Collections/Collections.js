@@ -37,7 +37,7 @@ const Collections = () => {
                                 <div>
                                     <div className="card position-relative ">
                                         <div className="image-over ">
-                                            <Link to={`/popularcollection/details/${item?.id}`}>
+                                            <Link to={`/popularcollection/details/${item?.slug}`}>
                                                 <img className="card-img-top" src={item?.image} alt="" />
                                             </Link>
                                         </div>
@@ -52,8 +52,8 @@ const Collections = () => {
                                                 <div class=""><p> {item.description.slice(0, 52)}</p></div>
                                                 <div class="mb-2 align-items-center">
                                                     <div class="mt-2 mb-2 d-flex justify-content-between text-align-center fundraiser_sale">
-                                                            <span>Total NFTs</span>
-                                                            <span>{item.nft_data.length}</span>
+                                                        <span>Total NFTs</span>
+                                                        <span>{item.nft_data.length}</span>
                                                     </div>
                                                 </div>
                                                 {/* <div className="seller d-flex align-items-center my-3">

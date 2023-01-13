@@ -91,6 +91,7 @@ const Create = ({ current, next, prev }) => {
     // console.log(col, 'col')
     const OnSubmit = (data) => {
 
+
         const imageBanner = dataURLtoBlob(image)
 
         setFormValues({ ...data, description, type: data?.usertype, image: imageBanner, imageUri: image });
@@ -488,7 +489,7 @@ const Create = ({ current, next, prev }) => {
                                     // disabled={true}
                                     min={1}
                                     max={1}
-
+                                    maxLength={1}
                                     placeholder="number of NFT (1 allowed)"
                                     {...register("number_of_nft", { required: true, min: 1, max: 1 })}
                                     // {...register("number_of_nft", { maxLength: 12 })}
@@ -618,7 +619,7 @@ const Create = ({ current, next, prev }) => {
 
                                 <div className='logo-dis logo-dis-img'>
                                     <span>Allowed types: JPG, PNG, GIF</span><span>Banner should be 1500 px wide x 500 px high</span>
-                                    </div>
+                                </div>
                             </div>
                             {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}
                             {/* {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>} */}

@@ -26,7 +26,7 @@ import FormItem from 'antd/es/form/FormItem';
 const ProjDetails = () => {
 
 
-    const { id } = useParams();
+    const { slug } = useParams();
     // console.log(id, 'idd')
     const [tok, setTok] = useState('')
     // console.log('tok', tok)
@@ -52,13 +52,13 @@ const ProjDetails = () => {
 
     useEffect(() => {
         (GetMatic(setMatic))
-        dispatch(LatestProjectDetail(id))
+        dispatch(LatestProjectDetail(slug))
         dispatch(GetUserAction())
 
-    }, [id])
+    }, [slug])
 
-    const deleteHandler = (id) => {
-        dispatch(DeleteProject(id))
+    const deleteHandler = (slug) => {
+        dispatch(DeleteProject(slug))
     }
 
     const projdetail = useSelector(state => {
@@ -89,7 +89,7 @@ const ProjDetails = () => {
 
                                     }
                                     <Banner
-                                        id={id}
+                                        id={slug}
                                         show={modalShow}
                                         onHide={() => setModalShow(false)} />
                                 </div><img src={latprojdetail?.image} alt="first nft" /></>
@@ -145,7 +145,7 @@ const ProjDetails = () => {
 
                                         Share
                                     </Button><ReferalPopup
-                                            id={id}
+                                            id={slug}
                                             userRef={userDetail}
                                             show={modalShowrefer}
                                             onHide={() => setModalShowrefer(false)} /></>
@@ -247,7 +247,7 @@ const ProjDetails = () => {
 
 
                             <ProjdataTable
-                                id={id}
+                                id={slug}
                             />
                         </div>
 

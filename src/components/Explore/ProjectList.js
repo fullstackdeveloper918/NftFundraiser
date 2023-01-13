@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { ProjectList } from '../../redux/Actions/projectAction';
 import Loader from '../Loader/loader';
 import { DeleteProject } from './../../redux/Actions/projectAction';
@@ -21,8 +22,26 @@ const GetAllProjects = () => {
         dispatch(ProjectList())
     }, [dispatch])
 
-    const deleteHandler = (id) => {
-        dispatch(DeleteProject(id))
+    const showDeleteHandler = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // debugger
+                dispatch(DeleteProject(id))
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }
+        })
     }
 
     return (
@@ -52,13 +71,16 @@ const GetAllProjects = () => {
                                 [...new Map(projects.map(item =>
                                     [item["title"], item])).values()].map((item, idx) => {
                                         return (
-                                            <Link key={`edth_${idx}`} to={`/projnftdetails/${item.id}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
+                                            <Link key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
                                                 <div>
+                                                    {/* <button onClick={() => showDeleteHandler()}>delete</button> */}
                                                     <div className="card project_cards">
                                                         <div className="image-over relative ">
-                                                            {/* <i class="fa-solid fa-pen" ></i>
-                                                    <i class="fa-sharp fa-solid fa-trash"></i> */}
-                                                            <img className="card-img-top" src={item?.image} alt={item.nft_data.description} />
+                                                            <i class="fa-sharp fa-solid fa-trash" onClick={() => showDeleteHandler(item.id)}></i>
+                                                            <Link to={`/projnftdetails/${item.slug}`}>
+                                                                {/* <i class="fa-solid fa-pen" ></i> */}
+                                                                <img className="card-img-top" src={item?.image} alt={item.nft_data.description} />
+                                                            </Link>
                                                         </div>
                                                         <div className='token'>
                                                             <span></span>
