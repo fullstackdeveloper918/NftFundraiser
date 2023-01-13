@@ -181,9 +181,9 @@ const LatNftdataTable = () => {
                                 </>
                             }
                         </tbody>
-                        <div className='nothing'>
+                        {/* <div className='nothing col-spam-5' colspan="5">
                             No matching records found
-                        </div>
+                        </div> */}
                     </Table>
                     <div className='nothing'>
                         No matching records found
