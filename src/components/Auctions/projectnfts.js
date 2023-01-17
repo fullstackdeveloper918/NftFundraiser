@@ -68,13 +68,13 @@ const ProjNFTS = () => {
                                             </div>
 
                                             <div className='button_group buy-invest-btn'>
-                                            <div className=''>
-                                                            <a href="#"><button className='btn ml-lg-auto btn-bordered-white'>Buy</button></a>
-                                                        </div>
+                                                <div className=''>
+                                                    <Link to={`/nftprojdetails/${item.slug}`}><button className='btn ml-lg-auto btn-bordered-white'>Buy</button></Link>
+                                                </div>
 
-                                                        <div className=''>
-                                                            <a><button className='btn ml-lg-auto btn-bordered-white'>Invest</button></a>
-                                                        </div>
+                                                <div className=''>
+                                                    <a><button className='btn ml-lg-auto btn-bordered-white'>Invest</button></a>
+                                                </div>
                                             </div>
                                             {/* {item?.user_data?.user_id === userdet?.user_id && localStorage.getItem('authToken') && 
 

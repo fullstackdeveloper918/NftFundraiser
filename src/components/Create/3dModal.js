@@ -189,7 +189,7 @@ const DModal = ({ vdo }) => {
     return (
 
         <div
-            style={{ height: "300px", width: "330px", position: "relative" }}
+            style={{ height: "270px", width: "300px", position: "relative" }}
             ref={refContainer}
         >
 

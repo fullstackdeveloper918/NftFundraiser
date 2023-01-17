@@ -318,7 +318,7 @@ const ProjNftDetails = () => {
                                             {/* <i class="fa-sharp fa-solid fa-trash"></i> */}
                                             <div className="image-over relative">
                                                 <Link to={`/nft/details/${x.slug}`}>
-                                                    {x.extention === 'mp4' || x.extention === 'modal' ? (
+                                                    {x.extention === 'mp4' || x.extention === 'glb' ? (
 
                                                         <img className="card-img-top" src={x.preview_imag} alt="" />
                                                     ) : (
