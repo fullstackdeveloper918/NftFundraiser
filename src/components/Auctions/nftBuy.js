@@ -173,11 +173,8 @@ const LatprojNftDetails = (props) => {
 
                                     <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                         id="nftdetail.id" onClick={() => buyHandler()}>  Buy</button>
-                                </div>
-                                <div className='eddlbtton d-flex  align-items-center mt-2'>
 
-                                <div>
-                                <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                    <button className="btn  btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                     onClick={() =>
                                         setBidModalShow(true)}>Place a bid</button>
                                     <BidPopup
@@ -186,6 +183,11 @@ const LatprojNftDetails = (props) => {
                                        projid = {latprojnftdetail.project_id}
                                         show={bidmodalShow}
                                         onHide={() => setBidModalShow(false)} />
+                                </div>
+                                <div className='eddlbtton bitbtn d-flex  align-items-center mt-2'>
+
+                                <div>
+                                
                                 </div>
                                 </div>
                             </div>

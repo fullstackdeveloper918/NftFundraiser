@@ -17,6 +17,7 @@ const onSubmit = ()=>{
 
     return (
         <Modal
+        className='bidbtn'
             {...props}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
