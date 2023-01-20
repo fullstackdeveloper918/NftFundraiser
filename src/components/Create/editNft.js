@@ -1,12 +1,11 @@
 
 
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Space, Upload } from 'antd';
-import TextArea from 'antd/lib/input/TextArea';
+
+import { Button, Form, Input, } from 'antd';
+
 import Modal from 'react-bootstrap/Modal';
-import React, { Fragment, useEffect, useState, useRef, useMemo } from 'react';
-import { useForm } from 'react-hook-form';
-import { create } from 'ipfs-http-client'
+import React, { Fragment, useEffect, useState, useRef } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProjectAction, GetCollectionsAction, NftList, UpdateNft, uploadNFT } from '../../redux/Actions/projectAction';
 import { useFormData } from './Context/context'
@@ -20,9 +19,10 @@ import 'antd/lib/button/style/css'
 import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
 import { useParams } from 'react-router';
-import UploadImage from '../../shared/Upload';
-import { dataURLtoBlob } from '../../utils/blobfromurl';
+
 import CollPopup from './createCollection';
+import DModal from './3dModal';
+import swal from 'sweetalert';
 
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -36,201 +36,217 @@ const getBase64 = (file) =>
 const EditNft = (props) => {
 
     const editor = useRef(null);
-    const [fileList, setFileList] = useState([])
-    // const { data, setFormValues } = useFormData();
-    const [previewOpen, setPreviewOpen] = useState(false);
-    const [previewImage, setPreviewImage] = useState('');
-    const [previewTitle, setPreviewTitle] = useState('');
-    // console.log(data, 'formdta')
-    const [count, setCount] = useState(0);
-    // const [nft_description, setNft_description] = useState([])
-    // console.log('nft_description', nft_description)
 
-    const [modalShow, setModalShow] = React.useState(false);
-    const [modalShoww, setModalShoww] = React.useState(false);
+    const [nftFileType, setNFtFileType] = useState('Image')
+
+    const [nft, setNft] = useState()
+    const [nftwidth, setNftwidth] = useState()
+
+    const [nftHeight, setNftheight] = useState()
+    const [Pimage, setPimage] = useState()
+
+
+    const [previewnft, setPreviewnft] = useState()
+    const [preview, setPreview] = useState()
+    const [source, setSource] = useState()
+
+
     const [modalShowcoll, setModalShowcoll] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: "0" });
+
     console.log(nft_collection_id, "sdfasf")
-    const [items, setItems] = useState([]);
-    const [coldata, setColData] = useState();
-    const [allcol, setAllColl] = useState()
+
     const [form] = Form.useForm()
 
-    const [image, setImage] = useState('')
+
+
+    const [image, setImage] = useState()
 
     const [loading, setLoading] = useState(false)
-    const handleDecrement = () => {
-        setCount(prevCount => prevCount - 1);
-    };
-
 
     const defaultValues = {
         setNft_description: '',
     }
 
-    const id = useParams()
+
     const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
 
     const dispatch = useDispatch()
-    const col = useSelector(state => {
-        // 
-        return state?.projectdetails?.getcollections
-    })
-
-    console.log(props.nft_id, "nftid")
 
     useEffect(() => {
-        // event.preventDefault()
+        dispatch(GetCollectionsAction())
         dispatch(NftList(props.nft_id, props.id))
     }, [props.nft_id, props.id])
+
+    const col = useSelector(state => {
+        return state?.projectdetails?.getcollections
+    })
 
 
 
     const nftdetail = useSelector(state => {
-        // 
         return state.projectdetails.nftlist
-
     })
-    console.log("nftdet", nftdetail)
+
+    const handleUpload = (e) => {
+
+        const filetype = e.target.files[0].type;
+
+        var fr = new FileReader();
+
+        fr.onload = function () {
+
+            var img = new Image();
+            img.onload = function () {
+
+                setNftwidth(img.width);
+                setNftheight(img.height);
+            };
+
+            img.src = fr.result; // is the data URL because called with readAsDataURL
+        };
+
+        fr.readAsDataURL(e.target.files[0]); // I'm using a <input type="file"> for demonstrating
+        if (e.target.files[0].size > 104857600) {
+            alert("Filesize must 100mb or below");
+        } else {
+            setSource(URL.createObjectURL(e.target.files[0]));
+            setNft(e.target.files[0]);
+
+            switch (filetype) {
+                case "image/png":
+                case "image/jpg":
+                case "image/gif":
+                case "image/svg":
+                    setNFtFileType("Image");
+                    //   setSourceType("I") 
+                    break;
+                case "audio/mpeg":
+                case "audio/ogg":
+                case "video/mp4":
+                case "video/webm":
+                    setNFtFileType("Player");
+                    break;
+                case "":
 
 
+                    setNFtFileType("modal");
+
+                    break;
+                default:
+                    setNFtFileType("Image");
+            }
+
+
+        }
+
+
+
+    };
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    };
+    const previewChange = async (e, index) => {
+
+        const pimage = e.target.files[0]
+        const base64 = await convertToBase64(pimage);
+        setPimage(base64)
+
+
+        setPreview(URL.createObjectURL(pimage))
+    };
     useEffect(() => {
+
         form.setFieldsValue({
             nfts: [{
                 nft_name: nftdetail.title,
                 nft_description: nftdetail.description,
                 nft_collection_id: nftdetail.collection_id,
                 nft_image: nftdetail.image,
+                preview_imag: nftdetail.preview_imag,
             }]
 
         })
+
         setImage(nftdetail.image)
+        setNFtFileType(nftdetail.extention)
+        setPreviewnft(nftdetail.preview_imag)
         setNft_collection_id(nftdetail.collection_id)
+
 
     }, [form, nftdetail])
 
-    useEffect(() => {
-
-        dispatch(GetCollectionsAction())
-
-    }, []);
-
-
     const onFinish = async (values) => {
+
         try {
-            // setLoading(true)
 
-            if (image.charAt(0) === 'd') {
+            setLoading(true)
+            if (source) {
 
-                const nftImagepromises = [uploadNFT(dataURLtoBlob(image))]
-                // setLoading(true)
-                // const nftImagepromises = nfts?.map(x => uploadNFT(x?.image))
+                const nftImagepromises = [uploadNFT(nft)]
+
                 const imagesRes = await Promise.all(nftImagepromises).then(res => res)
-                // const imagesRes = await (nftImagepromises).then(res => res)
-                // 
 
                 const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
-                // const addedImage = ipfsBaseUrl + image
+
+                var str = addedImage;
+                var check = str.includes("https://ipfs.io/ipfs/undefined");
+
+                if (check === false) {
+                    const formData = new FormData()
+
+                    formData.append('image', addedImage)
+                    formData.append('title', values?.nfts?.map(x =>
+                        x.nft_name
+                    ))
 
 
-                const formData = new FormData()
+                    formData.append('collection_id', nft_collection_id)
+                    formData.append('preview_imag', Pimage)
+                    formData.append('extention', nftFileType)
 
+                    formData.append('description', values?.nfts?.map(x => x.nft_description))
 
+                    dispatch(UpdateNft(formData, props, setLoading))
+                } else {
+                    console.log('fail')
 
-
-
-                formData.append('image', addedImage)
-                formData.append('title', values?.nfts?.map(x =>
-                    x.nft_name
-                ))
-                // const newlist = newList.push(nft_collection_id);
-                formData.append('collection_id', nft_collection_id)
-                // formData.append('nft_description', nft_description)
-                formData.append('description', values?.nfts?.map(x => x.nft_description))
-                // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
-
-                // dispatch(uploadNFT())
-                // debugger
-                dispatch(UpdateNft(formData, props, setLoading))
+                    swal('error!', 'Nft not uploaded', 'error')
+                }
             } else {
-                // const nftImagepromises = uploadNFT(image)
-                // // setLoading(true)
-                // const nftImagepromises = nfts?.map(x => uploadNFT(x?.image))
-                // const imagesRes = await Promise.all(nftImagepromises).then(res => res)
-                // // const imagesRes = await (nftImagepromises).then(res => res)
-                // // 
-
-                // const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
-                // // const addedImage = ipfsBaseUrl + image
-
 
                 const formData = new FormData()
-
-
-
-
 
                 formData.append('image', image)
                 formData.append('title', values?.nfts?.map(x =>
                     x.nft_name
-                ))
-                // const newlist = newList.push(nft_collection_id);
-                formData.append('collection_id', nft_collection_id)
-                // formData.append('nft_description', nft_description)
-                formData.append('description', values?.nfts?.map(x => x.nft_description))
-                // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
 
-                // dispatch(uploadNFT())
-                // debugger
+                ))
+                formData.append('extention', nftFileType)
+                formData.append('preview_imag', previewnft)
+
+                formData.append('collection_id', nft_collection_id)
+
+                formData.append('description', values?.nfts?.map(x => x.nft_description))
+
                 dispatch(UpdateNft(formData, props, setLoading))
             }
 
-            // setLoading(false)
-
-            // console.log('Received values of form:', values, data)
         } catch (error) {
             console.log(error)
         }
 
     };
-    const handleCancel = () => setPreviewOpen(false);
 
-    const handlePreview = async (file) => {
-        if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj);
-        }
-        setPreviewImage(file.url || file.preview);
-        setPreviewOpen(true);
-        setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
-    };
-
-    const fileProps = {
-        name: "file",
-        multiple: false,
-        beforeUpload: () => {
-            return false;
-        },
-        onChange(info) {
-            if (info.file.status !== "uploading") {
-                let reader = new FileReader();
-                reader.readAsDataURL(info.file);
-                // setUploadedImage(info.file);
-            } else {
-            }
-        }
-    };
-
-
-
-    const { Panel } = Collapse;
-    const [expandIconPosition, setExpandIconPosition] = useState('end');
-
-    const onPositionChange = (newExpandIconPosition) => {
-        setExpandIconPosition(newExpandIconPosition);
-    };
-    const onChange = (key) => {
-        console.log(key);
-    };
     const nfts = [
         {
             key: 0,
@@ -241,8 +257,8 @@ const EditNft = (props) => {
     ];
 
     return (
-        // <section className="author-area">
-        <div >
+
+        <div className="main-create" >
             {loading ? (
                 <Loader />
             ) : (
@@ -266,44 +282,19 @@ const EditNft = (props) => {
                             <Form form={form} name="dynamic_form_nest_item" initialValues={{
                                 nfts: nfts, defaultValues
                             }}
-                                // onSubmit={(event) => handleSubmit(event)}
+
                                 onFinish={(event) => onFinish(event)}
                                 autoComplete="off" className="item-form card no-hover">
                                 <Form.List name="nfts">
 
                                     {(fields, { add, remove }) => (
                                         <>
-                                            {/* <div className='steps-center'>
 
-
-                                                <div className='orgicon1'>
-
-                                                    <i className=" fa-solid fa-circle-check" style={{}}> Step 1</i>
-                                                </div>
-
-                                                <div className='orgicon1line'>
-                                                    <span style={{}}> ----------------------------- </span>
-
-                                                </div>
-                                                <div className='orgicon2'>
-
-                                                    <i className="fa-regular fa-circle" style={{}}> Step 2</i>
-                                                </div>
-                                            </div> */}
                                             <>
                                                 {fields.map(({ key, name, ...restField }, index) => (
-                                                    // <Space
-                                                    //     key={key}
-                                                    //     style={{
-                                                    //         display: 'flex',
-                                                    //         marginBottom: 8,
-                                                    //     }}
-                                                    //     align="baseline"
-                                                    // >
-                                                    // <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
-                                                    // <Panel header="Details" key="1">
+
                                                     <Fragment>
-                                                        {/* <div>Artwork {index}</div> */}
+
                                                         <div className="row relative">
 
                                                             <div className="col-12">
@@ -314,8 +305,7 @@ const EditNft = (props) => {
                                                                     <Form.Item
                                                                         {...restField}
                                                                         name={[name, "nft_name"]}
-                                                                        // label="Enter name"
-                                                                        // name="name"
+
                                                                         rules={[
                                                                             {
                                                                                 required: true,
@@ -334,8 +324,7 @@ const EditNft = (props) => {
                                                                     <Form.Item
                                                                         {...restField}
                                                                         name={[name, "nft_description"]}
-                                                                        // label="Enter name"
-                                                                        // name="name"
+
                                                                         rules={[
                                                                             {
                                                                                 required: true,
@@ -343,20 +332,14 @@ const EditNft = (props) => {
                                                                             },
                                                                         ]}
                                                                     >
-                                                                        {/* <Controller
-                                                                            control={control}
-                                                                            name="nft_description"
-                                                                            defaultValue=""
-                                                                            render={({ field: { value, onChange } }) => {
-                                                                                return  */}
                                                                         <JoditEditor
                                                                             ref={editor}
                                                                             value={'nft_description'}
-                                                                            // config={config}
+
 
                                                                             placeholder="start typing"
                                                                             tabIndex={1} // tabIndex of textarea
-                                                                            // onBlur={newContent => 'nft_description'(newContent)} // preferred to use only this option to update the content for performance reasons
+
                                                                             onChange={newContent => { }}
                                                                         />
                                                                         {/* }} */}
@@ -365,16 +348,12 @@ const EditNft = (props) => {
                                                                 </div>
                                                             </div>
 
-                                                            {/* <div className="col-md-1 col-12 nft-remove">
-                                                                        <MinusCircleOutlined onClick={(e) => { remove(name); handleDecrement(e); }} />
-                                                                    </div> */}
-                                                            {/* </div> */}
+
                                                             <div className='col-12'>
                                                                 <label className='mt-2 mb-3'>Choose Collection</label>
                                                             </div>
                                                             <div className="col-md-6 col-lg-3 col-12">
 
-                                                                {/* <div className="col-24"> */}
 
                                                                 <div className="form-group">
 
@@ -399,18 +378,7 @@ const EditNft = (props) => {
                                                             {col?.map((item, idx) => (
 
                                                                 <div key={`auc_${idx}`} id={item.id} className="col-md-6 col-lg-3 col-12 choose_div">
-                                                                    {/* <Form.Item
-                                                                            {...restField}
-                                                                            name={[name, "nft_collection_id"]}
-                                                                            // getValueFromEvent={getFile}
-                                                                            rules={[
-                                                                                {
-                                                                                    required: true,
-                                                                                    message: 'Please select nft collection',
-                                                                                },
-                                                                            ]}
 
-                                                                        > */}
 
 
                                                                     <div id={item.id} onClick={() => setNft_collection_id(item.id)} className="card"
@@ -429,62 +397,187 @@ const EditNft = (props) => {
 
                                                                         </div>
                                                                     </div>
-                                                                    {/* </Form.Item> */}
 
                                                                 </div>
-                                                                // </div>
-                                                            ))}
-                                                            <div className="col-md-12 col-12 ">
-                                                                <label>Upload Nft</label>
-                                                                <div>
-                                                                    <Form.Item
-                                                                        {...restField}
-                                                                        name={[name, "nft_image"]}
-                                                                        // getValueFromEvent={getFile}
-                                                                        rules={[
-                                                                            {
-                                                                                required: true,
-                                                                                message: 'Please select a image',
-                                                                            },
-                                                                        ]}
 
+                                                            ))}
+
+                                                            <div className="col-12">
+                                                                <div className="col-lg-6 col-12 uploadnftpopup p-0 mb-4">
+                                                                    <label className="mt-3">Upload Nft</label>
+                                                                    <div
+                                                                        className="position-relative upload_nft"
+                                                                        style={{
+                                                                            backgroundImage: "url('')",
+                                                                            backgroundSize: "contain",
+                                                                            backgroundRepeat: "no-repeat",
+                                                                        }}
                                                                     >
 
-                                                                        {/* <Upload
-                                                                                    {...fileProps}
-                                                                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                                                                    listType="picture-card"
-                                                                                    // fileList={fileList}
-                                                                                    // onChange={onChange}
-                                                                                    src={'/img/nft.png'}
-                                                                                    onPreview={handlePreview}
-                                                                                    maxCount={1}
+                                                                        <div
+                                                                            className={
+                                                                                nftFileType === "Player" || nftFileType === "modal"
+                                                                                    ? " inputdragVedio"
+                                                                                    : "inputtdrag"
+                                                                            }
+                                                                        >
+                                                                            <input
+                                                                                type="file"
+                                                                                onChange={handleUpload}
+                                                                                maxCount={1}
+                                                                                accept=".mov,.mp4,.mp3,.webm.gltf,.glb,.jpg,.jpeg,.gif,.svg"
+                                                                            />
 
-                                                                                >
-                                                                                    + Upload
-                                                                                </Upload> */}
-                                                                        <UploadImage
-                                                                            imageSrc={image}
-                                                                            // src={image}
-                                                                            initalImag={image}
-                                                                            setImageSrc={setImage}
-                                                                        />
-                                                                    </Form.Item>
-                                                                    {/* <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
-                                                                                <img
-                                                                                    alt="example"
-                                                                                    style={{
-                                                                                        width: '100%',
-                                                                                    }}
-                                                                                    src={previewImage} />
-                                                                            </Modal> */}
+                                                                            {(nftFileType === "Image") &&
+                                                                                <div>
+
+                                                                                    {source ? (
+
+                                                                                        <img
+                                                                                            src={source}
+                                                                                            className="nft-image"
+                                                                                        />
+                                                                                    ) : (
+                                                                                        <img
+                                                                                            src={image}
+                                                                                            className="nft-image"
+                                                                                        />
+                                                                                    )}
+
+                                                                                </div>
+                                                                            }
+
+                                                                            {nftFileType === "Player" &&
+                                                                                <div>
+
+                                                                                    {source ? (
+
+                                                                                        <video
+
+                                                                                            width="100%"
+
+                                                                                            controls
+                                                                                            src={source}
+
+                                                                                        />
+                                                                                    ) : (
+                                                                                        <video
+
+                                                                                            width="100%"
+
+                                                                                            controls
+                                                                                            src={image}
+
+                                                                                        />
+                                                                                    )}
+                                                                                    <div className="uploadnftpopup_content">
+                                                                                        <label>Preview Image</label>
+                                                                                        <p>
+                                                                                            Because you’ve included
+                                                                                            multimedia, you’ll need to provide
+                                                                                            an image (PNG, JPG, or GIF) for
+                                                                                            the card display of your item
+                                                                                        </p>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        className="uploadnftpopup-input upload-secound-input inputtdrag"
+                                                                                        style={{
+                                                                                            backgroundImage:
+                                                                                                "url('')",
+                                                                                            backgroundSize: "contain",
+                                                                                            backgroundRepeat: "no-repeat",
+                                                                                            backgroundPosition: "center",
+                                                                                        }}
+                                                                                    >
+                                                                                        <input
+                                                                                            type="file"
+                                                                                            onChange={previewChange}
+                                                                                        />
+                                                                                        <div className="uploadnftpopup-input-img  uploadnftpopup-secound">
+                                                                                            {!preview ? (
+
+                                                                                                <img
+                                                                                                    className="preview_image"
+                                                                                                    src={previewnft}
+
+                                                                                                />
+                                                                                            ) : (
+
+                                                                                                <img
+                                                                                                    className="preview_image"
+                                                                                                    src={preview}
+
+                                                                                                />
+                                                                                            )}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            }
+
+
+
+
+                                                                            {nftFileType === "modal" &&
+                                                                                <div>
+                                                                                    {!source ? (
+                                                                                        <DModal
+                                                                                            vdo={image}
+
+                                                                                        />
+                                                                                    ) : (
+                                                                                        <DModal
+                                                                                            vdo={source}
+
+                                                                                        />
+                                                                                    )}
+
+                                                                                    <div className="uploadnftpopup_content">
+                                                                                        <label>Preview Image</label>
+                                                                                        <p className="">
+                                                                                            Because you’ve included multimedia,
+                                                                                            you’ll need to provide an image
+                                                                                            (PNG, JPG, or GIF) for the card
+                                                                                            display of your item
+                                                                                        </p>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        className="uploadnftpopup-input upload-secound-input inputtdrag"
+                                                                                        style={{
+                                                                                            backgroundImage:
+                                                                                                "url('')",
+                                                                                            backgroundSize: "contain",
+                                                                                            backgroundRepeat: "no-repeat",
+                                                                                            backgroundPosition: "center",
+                                                                                        }}
+                                                                                    >
+                                                                                        <input
+                                                                                            type="file"
+                                                                                            onChange={previewChange}
+                                                                                        />
+                                                                                        <div className="uploadnftpopup-input-img  uploadnftpopup-secound">
+                                                                                            {!preview ? (
+                                                                                                <img
+                                                                                                    className="preview_image"
+                                                                                                    src={previewnft} />
+                                                                                            ) : (
+
+                                                                                                <img
+                                                                                                    className="preview_image"
+                                                                                                    src={preview} />
+                                                                                            )}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            }
+                                                                        </div>
+
+                                                                    </div>
                                                                 </div>
                                                             </div>
 
                                                         </div>
                                                     </Fragment>
-                                                    // </Panel>
-                                                    // </Collapse>
+
                                                 ))}
 
 
@@ -502,8 +595,7 @@ const EditNft = (props) => {
                         </div>
                     </Modal.Body>
                 </Modal>
-            )
-            }
+            )}
         </div >
     );
 };

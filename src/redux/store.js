@@ -5,6 +5,7 @@ import { projectReducer } from './Slices/projectSlice'
 import { footerReducer } from './Slices/footerSlice'
 import { fundraiserReducer } from './Slices/fundraiserSlice'
 import { collectionReducer } from './Slices/popularCollectionSlice'
+import { contactReducer } from './Slices/contactSlice';
 
 const reducer = combineReducers({
     user: authReducer,
@@ -24,6 +25,7 @@ const reducer = combineReducers({
     getcollections: collectionReducer,
     getcollectiondetails: collectionReducer,
     getSocialmediaIcons: projectReducer,
+    contact: contactReducer,
     // userDetail: authReducer,
 
     // Nftlist: projectReducer

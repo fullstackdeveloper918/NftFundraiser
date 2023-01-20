@@ -38,6 +38,7 @@ const ProjNftDetails = () => {
     const [modalShowrefer, setModalShowrefer] = React.useState(false);
     const dispatch = useDispatch()
     const [modalShowDes, setModalShowDes] = React.useState(false);
+   
     const projdetail = useSelector(state => {
         // 
         return state?.projectdetails?.projectdetails
@@ -292,7 +293,7 @@ const ProjNftDetails = () => {
 
 
 
-                                            <Link to={`/addnft/${projdetail.id}`}>
+                                            <Link to={`/addnft/${projdetail.slug}`}>
 
                                                 + Add NFT </Link>
 
@@ -318,7 +319,7 @@ const ProjNftDetails = () => {
                                             {/* <i class="fa-sharp fa-solid fa-trash"></i> */}
                                             <div className="image-over relative">
                                                 <Link to={`/nft/details/${x.slug}`}>
-                                                    {x.extention === 'mp4' || x.extention === 'glb' ? (
+                                                    {x.extention === 'Player' || x.extention === 'modal'  ? (
 
                                                         <img className="card-img-top" src={x.preview_imag} alt="" />
                                                     ) : (

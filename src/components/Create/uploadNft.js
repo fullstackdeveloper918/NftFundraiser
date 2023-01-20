@@ -1,8 +1,8 @@
 
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Modal, Upload } from 'antd';
-import React, { Fragment, useEffect, useState, useRef, Suspense } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Button, Form, Input } from 'antd';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
+import {  useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProjectAction, GetCollectionsAction, uploadNFT } from '../../redux/Actions/projectAction';
 import { useFormData } from './Context/context'
@@ -17,19 +17,7 @@ import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router';
-
-import VideoAudioPLayer from './VideoInput';
-
 import DModal from './3dModal';
-
-import { useGLTF } from "@react-three/drei";
-import ImageViewer from './ImageViewer';
-
-
-
-
-
-
 
 
 const getBase64 = (file) =>
@@ -71,13 +59,20 @@ const UploadNft = ({ current, prev }) => {
     const coll_id = (Object.values(nft_collection_id));
     // console.log("collid", coll_id)
     const [source, setSource] = useState([])
+    const [sourceType, setSourceType] = useState()
+  
+    // console.log('stype',stype)
+    console.log('sourcetype',sourceType)
     console.log('source', source)
+
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState()
     const [NFtFileExtension, setNFtExtension] = useState()
     const [preview, setPreview] = useState([])
 
     console.log(nft_collection_id, "nft collections")
+
+    
     const handleIncrement = () => {
         setCount(prevCount => prevCount + 1);
     };
@@ -115,6 +110,7 @@ const UploadNft = ({ current, prev }) => {
     // console.log(count, 'count')
 
     function onHandleClick(index, item) {
+
         setNft_collection_id(previ => {
             previ[index] = item
             return {
@@ -143,7 +139,12 @@ const UploadNft = ({ current, prev }) => {
         defaultValues
     });
     useEffect(() => {
+  
         register("nft_description");
+        // let sType = source?.map((element) => element);
+        // console.log('stype',sType)
+        // setSourceType(sType) 
+    
     }, [register]);
 
     // const ipfsClient = create('http://127.0.0.1:5001')
@@ -230,10 +231,13 @@ const UploadNft = ({ current, prev }) => {
             // setNFtFileType(type)
 
             setSource(prevState => {
+                // debugger
                 prevState[index] = { file: e.target.files[0] , type: type  }
+                setSourceType(type)
     
                 return [...prevState]
             })
+            
            
             // switch (nft?.name?.str.includes(".glb")) {
 
@@ -271,12 +275,13 @@ const UploadNft = ({ current, prev }) => {
     // console.log(log, 'logggg')
 
     // const desdata = { nft_description() }
+   
     useEffect(() => {
 
         dispatch(GetCollectionsAction())
+        
 
-
-    }, []);
+    }, [])
 
 
     const onFinish = async (values) => {
@@ -300,7 +305,7 @@ const UploadNft = ({ current, prev }) => {
 
             const formData = new FormData()
 
-
+// debugger
             if (check === false) {
                 console.log('uploaded')
                 formData.append('title', data.title)
@@ -339,7 +344,7 @@ const UploadNft = ({ current, prev }) => {
 
 
                 formData.append('nft_image', addedImage)
-                formData.append('extention', addedImagetype)
+                formData.append('extention', sourceType)
                 formData.append('nft_name', values?.nfts?.map(x =>
                     x.nft_name
                 ))
@@ -445,6 +450,7 @@ const UploadNft = ({ current, prev }) => {
     return (
         // <section className="author-area">
         <div className="main-create">
+           
             {loading ? (
                 <Loader />
             ) : (
@@ -500,6 +506,8 @@ const UploadNft = ({ current, prev }) => {
                                                 </div> */}
                                     <>
                                         {fields.map(({ key, name, ...restField }, index) => (
+                                             
+                                            // setSourceType(source[index]?.file),
                                             // <Space
                                             //     key={key}
                                             //     style={{
@@ -679,7 +687,7 @@ const UploadNft = ({ current, prev }) => {
                                                                                 className="collection_btn"
                                                                                 onClick={() => setModalShow(true)}
                                                                             >
-                                                                                <i className="fa-regular fa-plus"></i>{" "}
+                                                                                <i className="f1a-regular fa-plus"></i>{" "}
                                                                                 Create Collection
                                                                             </Button>
 
