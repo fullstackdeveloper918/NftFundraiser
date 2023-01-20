@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { ProjectList } from '../../redux/Actions/projectAction';
 import Loader from '../Loader/loader';
 import { DeleteProject } from './../../redux/Actions/projectAction';
-
+import swal from 'sweetalert';
 
 const GetAllProjects = () => {
     const [loading, setLoading] = useState()    // console.log(projc, 'projc')
@@ -23,25 +23,24 @@ const GetAllProjects = () => {
     }, [dispatch])
 
     const showDeleteHandler = (id) => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // debugger
-                dispatch(DeleteProject(id))
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
+       debugger
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this project!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+            dispatch(DeleteProject(id))
+              swal("Poof! Your project has been deleted!", {
+                icon: "success",
+              });
+            } else {
+              swal("Your project is safe!");
             }
-        })
+          });
     }
 
     return (
