@@ -13,9 +13,6 @@ import { useFormData } from './Context/context';
 import JoditEditor from 'jodit-react'; import { CityList, CountryList, StateList } from '../../redux/Actions/authAction';
 import UploadImage from '../../shared/Upload';
 import { blobToDataURl, dataURLtoBlob } from '../../utils/blobfromurl';
-import VideoInput from './VideoInput';
-import Dinosaur from './3dModal';
-import jQuery from 'jquery';
 // import { Suspense } from "react";
 // import ReactDOM from "react-dom";
 // import { Canvas } from '@react-three/fiber';
@@ -129,16 +126,7 @@ const Create = ({ current, next, prev }) => {
 
             setValue('end_date', data.end_date)
         }
-        // $('.equipCatValidation').on('keydown keyup change', function(e){
-        //     if ($(this).val() > 1 
-        //         && e.keyCode !== 1 // keycode for delete
-        //         && e.keyCode !== 1 // keycode for backspace
-        //        ) {
-        //        e.preventDefault();
-        //        $(this).val(1);
-        //     }
-        // });
-
+        
     }, [data])
 
     const cat = useSelector(state => {
@@ -167,17 +155,16 @@ const Create = ({ current, next, prev }) => {
         //     debugger
         // }
     };
-    // const [dateError,setErrordate] = useState("")
-    // function checkDateValidation(start_date, end_date) {
-    //     // check the dates
-    //     if ((new Date(start_date) > new Date(end_date)) || (new Date(end_date) < new Date(start_date))) {
-    //         // set date error validation true 
-    //         setErrordate("should be gtr")
-    //     } else {
-    //         // null or false date error validation 
-    //     }
-    // }
-  
+    function imposeMinMax(el){
+        if(el?.value != ""){
+          if(parseInt(el?.value) < parseInt(el?.min)){
+            el.value = el?.min;
+          }
+          if(parseInt(el?.value) > parseInt(el?.max)){
+            el.value = el.max;
+          }
+        }
+      }
     return (
 
         <div className={current === 0 ? styles.showForm : styles.hideForm}>
@@ -446,7 +433,7 @@ const Create = ({ current, next, prev }) => {
 
                                     className="form-control"
                                     name="number_of_nft"
-                                    class="equipCatValidation"
+                                   
                                     // value='1'
                                     // defaultValue={1}
                                     // defaultValue={1}
@@ -454,6 +441,7 @@ const Create = ({ current, next, prev }) => {
                                     min={1}
                                     max={1}
                                     maxLength={1}
+                                    onKeyUp={imposeMinMax()}
                                     placeholder="number of NFT (1 allowed)"
                                     {...register("number_of_nft", { required: true, min: 1, max: 1 })}
                                     // {...register("number_of_nft", { maxLength: 12 })}
