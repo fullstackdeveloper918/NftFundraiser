@@ -15,7 +15,7 @@ import UploadImage from '../../shared/Upload';
 import { blobToDataURl, dataURLtoBlob } from '../../utils/blobfromurl';
 import VideoInput from './VideoInput';
 import Dinosaur from './3dModal';
-
+import jQuery from 'jquery';
 // import { Suspense } from "react";
 // import ReactDOM from "react-dom";
 // import { Canvas } from '@react-three/fiber';
@@ -129,6 +129,15 @@ const Create = ({ current, next, prev }) => {
 
             setValue('end_date', data.end_date)
         }
+        // $('.equipCatValidation').on('keydown keyup change', function(e){
+        //     if ($(this).val() > 1 
+        //         && e.keyCode !== 1 // keycode for delete
+        //         && e.keyCode !== 1 // keycode for backspace
+        //        ) {
+        //        e.preventDefault();
+        //        $(this).val(1);
+        //     }
+        // });
 
     }, [data])
 
@@ -136,6 +145,7 @@ const Create = ({ current, next, prev }) => {
         // 
         return state?.projectdetails?.categories
     })
+
     const handleChangeCountry = (event) => {
         // 👇 Get input value from "event"
         setCountry(event.currentTarget.value);
@@ -167,6 +177,7 @@ const Create = ({ current, next, prev }) => {
     //         // null or false date error validation 
     //     }
     // }
+  
     return (
 
         <div className={current === 0 ? styles.showForm : styles.hideForm}>
@@ -401,55 +412,7 @@ const Create = ({ current, next, prev }) => {
                             {/* {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">City is required</p>} */}
                         </div>
                     </div>
-                    {/* <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>State or Province</label>
-                            <Controller
-                                control={control}
-                                name="state"
-                                render={({ field: { onChange, onBlur, value, ref } }) => (
-
-                                    <GeoLocation
-                                       
-
-                                        onChange={setState}
-                                        geoId={country}
-                                        onBlur={onBlur}
-                                        selected={value}
-                                    
-                                    />
-                                )}
-                            />
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>City or Region</label>
-                            <Controller
-                                control={control}
-                                name="city"
-                                render={({ field: { onChange, onBlur, value, ref } }) => (
-                                    <GeoLocation
-                                        // locationTitle="City"
-                                        // isCity
-                                        // setValue={data.city}
-                                        onChange={setCity}
-                                        geoId={state}
-
-                                        onBlur={onBlur}
-                                        selected={value}
-                                        required={true}
-                                        // onChange={onChange}
-
-
-                                        // {...register("city", { required: true })}
-                                        aria-invalid={errors.city ? "true" : "false"}
-                                    />
-                                )}
-                            />
-                            {errors.city?.type === 'required' && <p style={{ color: 'red' }} role="alert">city is required</p>}
-                        </div>
-                    </div> */}
+                    
                     <div className="col-12 col-md-6">
                         <div className="form-group">
                             {usertype == 2 ? (
@@ -479,10 +442,11 @@ const Create = ({ current, next, prev }) => {
                             <div className="form-group">
                                 <label>Number of NFTs</label>
                                 <input
-                                    type="number"
+                                    type="text"
 
                                     className="form-control"
                                     name="number_of_nft"
+                                    class="equipCatValidation"
                                     // value='1'
                                     // defaultValue={1}
                                     // defaultValue={1}

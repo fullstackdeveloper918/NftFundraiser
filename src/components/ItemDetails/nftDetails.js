@@ -17,6 +17,10 @@ import axios from 'axios';
 import NftdataTable from '../Explore/nftdataTable';
 import { redirect } from 'next/dist/server/api-utils';
 import LatprojNftDetails from '../Auctions/nftBuy';
+import DModal from '../Create/3dModal';
+
+
+
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -190,6 +194,8 @@ const NftDetails = (props) => {
                             {/* {latprojdetail?.map((item, key) => ( */}
 
                             <><div className="item-thumb text-center align-items-center d-flex">
+                                {nftdetail.extention === "Player" &&
+                                
                                 <video
                                     // className="VideoInput_video"
                                     width="100%"
@@ -198,7 +204,17 @@ const NftDetails = (props) => {
                                     src={nftdetail.image}
                                 // onChange={setSource}
                                 />
-                                {/* <img src={nftdetail.preview_imag} alt="" /> */}
+    }
+    {nftdetail.extention === "modal" && 
+     <DModal
+     vdo={nftdetail.image}
+ // mdl={setModal}
+ />
+    }
+    {nftdetail.extention === "Image" && 
+    
+                              <img src={nftdetail.image} alt="" /> 
+    }
                             </div>
 
                             </>

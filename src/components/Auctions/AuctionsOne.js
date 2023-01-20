@@ -62,7 +62,7 @@ const AuctionsOne = ({ type }) => {
                                         {/* {item?.nft_data?.map((item, idx) => { */}
                                         {/* return ( */}
                                         <div className="image-over">
-                                            <Link to={`/projdetails/${item.slug}`}>
+                                            <Link to={`/projects/${item.slug}`}>
                                                 <img className="card-img-top" src={item?.image} alt="" />
                                             </Link>
 

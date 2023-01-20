@@ -33,8 +33,11 @@ import {
     TumblrShareCount,
     VKShareCount
 } from "react-share";
+import { Tooltip } from 'react-bootstrap';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 function ReferalPopup(props) {
+
+  const [copy, setCopy] = useState(false)
     // const [title, setTitle] = useState("");
     // const [description, setDescription] = useState("");
     // const [short_url, setShortUrl] = useState("");
@@ -54,12 +57,23 @@ function ReferalPopup(props) {
             centered
         >
             <Modal.Header >
+                {window.ethereum?.selectedAddress ? (
+
                 <Modal.Title id="contained-modal-title-vcenter">
                     Refer your friends
                     <p>Earn Royalties When You Share: <br />10% of NFT for first level referral, 5% for second, 1% for all others</p>
 
 
                 </Modal.Title>
+                ):(
+            <Modal.Title id="contained-modal-title-vcenter">
+                           
+                                <p>Earn When You Share: <br />20% of NFT sales for first level referral </p>
+<p style={{color:"red"}}>Connect your wallet to earn referral income in MATIC when you share projects</p>
+
+
+                            </Modal.Title>
+                )}
                 <div>
                     <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
                 </div>
@@ -96,22 +110,28 @@ function ReferalPopup(props) {
 
                             <hr />
                             <div className="refer-icons">
-                                <TwitterShareButton url={'www.twitter.com' + '/' + url} title="Reffral code "> <TwitterIcon size={32} round={true} /></TwitterShareButton>
-                                <FacebookShareButton url={'www.facebook.com' + '/' + url} title="Reffral code "> <FacebookIcon size={32} round={true} /></FacebookShareButton>
-                                <WhatsappShareButton url={'https://web.whatsapp.com/' + '/' + url} title="Reffral code "><WhatsappIcon size={32} round={true} /></WhatsappShareButton>
-                                <TelegramShareButton url={'www.telegram.com' + '/' + url} title="Reffral code "><TelegramIcon size={32} round={true} /></TelegramShareButton>
-                                <InstapaperShareButton url={'www.instagram.com' + '/' + url} title="Reffral code ">  <InstapaperIcon size={32} round={true} /></InstapaperShareButton>
-                                <LinkedinShareButton url={'www.linkedin.com' + '/' + url} title="Reffral code ">  <LinkedinIcon size={32} round={true} /></LinkedinShareButton>
-                                <EmailShareButton url={url} title="Reffral code " ><EmailIcon size={32} round={true} /></EmailShareButton>
+                                <TwitterShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" > <TwitterIcon size={32} round={true} /></TwitterShareButton>
+                                <FacebookShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" > <FacebookIcon size={32} round={true} /></FacebookShareButton>
+                                <WhatsappShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" ><WhatsappIcon size={32} round={true} /></WhatsappShareButton>
+                                <TelegramShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" ><TelegramIcon size={32} round={true} /></TelegramShareButton>
+                                <InstapaperShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" >  <InstapaperIcon size={32} round={true} /></InstapaperShareButton>
+                                <LinkedinShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" > <LinkedinIcon size={32} round={true} /></LinkedinShareButton>
+                                <EmailShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" ><EmailIcon size={32} round={true} /></EmailShareButton>
                             </div>
                         </div>
                         <div className="col-2 p-0 text-right">
-                            <CopyToClipboard text={url}>
+                            <CopyToClipboard text={url} >
                                 <div className='copy'>
 
-                                    <a> <i className="fa-sharp fa-solid fa-copy"></i></a>
+                                    <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={()=> setCopy(false)}></i></a>
                                 </div>
                             </CopyToClipboard>
+                            {copy == true && 
+                            <span>Copied!</span>
+                            
+                        }
+                        
+                            
                         </div>
                     </div>
 

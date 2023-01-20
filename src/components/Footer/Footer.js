@@ -103,6 +103,7 @@ const Footer = () => {
                                     <li><a target="_blank" href="https://www.canopycrypto.io/our-team/">About Us</a></li>
                                     {/* <li><Link to='/https://www.canopycrypto.io/our-team/'>About Us</Link></li> */}
                                     <li><Link to='/contact'>Get Support</Link></li>
+                                    <li><Link to='/rewards'>Rewards</Link></li>
                                 </ul>
                             </div>
                         </div>
