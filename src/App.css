@@ -2020,7 +2020,7 @@ table.nfts_details.table td:last-child , .profile_detail .table tr:first-child{
 .logo-dis-img span{
     color: #8e8e8e !important;
 }
-.uploadnftpopup-input {
+/* .uploadnftpopup-input {
     border: 1px dashed rgb(204, 204, 204);
     position: relative;
     height: 257px;
@@ -2044,7 +2044,7 @@ table.nfts_details.table td:last-child , .profile_detail .table tr:first-child{
     width: 100%;
     object-fit: cover;
     height: 100%;
-}
+} */
 .filter-main-name {
     /* border: 1px solid #8e8e8e; */
     border-radius: 25px;
@@ -2064,7 +2064,7 @@ table.nfts_details.table td:last-child , .profile_detail .table tr:first-child{
     margin: 1rem 0;
     /* border-bottom: 1px solid #1e1e1e; */
 }
-.filter-main ul {
+/* .filter-main ul {
     padding: 10px 20px;
     background: #16151a;
     border-radius: 25px;
@@ -2081,19 +2081,18 @@ table.nfts_details.table td:last-child , .profile_detail .table tr:first-child{
 }
 .uploadnftpopup_content {
     margin: 20px 0px;
-}
+} */
 :root .main-create .ant-collapse-header {
     padding: 16px !important;
     background: #16151a!important;
 }
-.uploadnftpopup-input.Icon_cam {
-    /* background-image: url('./img/camera.png'); */
+/* .uploadnftpopup-input.Icon_cam {
     background-position: center;
     background-size: cover;
 }
 video.VideoInput_video {
     height: 240px;
-}
+} */
 body .btn.btn-bordered-white {
     border: 3px solid #fff;
 }
@@ -2109,6 +2108,142 @@ body .btn.btn-bordered-white {
 }
 .break-all{
     word-break: break-all;
+}
+/* U P L O A D N F T I M A G E  */
+.position-relative.upload_nft{
+    max-width: 300px;
+    width: 100%;
+}
+.nft-image{
+    width: 100%;
+}
+.inputtdrag::after {
+    position: absolute;
+    background-image:"url('../public/img/camera.png')";
+    width: 100%;
+    content: 'Upload NFT';
+    top: 0px;
+    color: white;
+    text-align: center;
+    margin: auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 17px 0px;
+    border-radius: 7px;
+    border: 2px solid #c1c1c1;
+    border-style: dashed;
+    z-index: 1;
+    padding: 49% 0px;
+}
+.inputdragVedio::after {
+    position: absolute;
+    background-color: transparent;
+    width: 100%;
+    content: 'Upload NFT';
+    top: 0px;
+    color: white;
+    text-align: center;
+    margin: auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 17px 0px;
+    border-radius: 7px;
+    border: 2px solid #c1c1c1;
+    border-style: dashed;
+    z-index: 1; 
+    background-color: #16151a;
+}
+.inputdragVedio .inputtdrag::after {
+    content: '' !important;
+}
+
+.inputtdrag {
+    height: auto;
+    position: relative;
+    height: 300px;
+}
+.inputtdrag input{
+    z-index: 999;
+    position: absolute;
+    opacity: 0;
+    max-width: 300px;
+    width: 100%;
+    height: 300px;
+    cursor: pointer;
+}
+.nft-image {
+    z-index: 2;
+    position: absolute;
+    width: 96%;
+    height: 97%;
+    object-fit: contain;
+    background-color: black;
+    margin: 6px;
+}
+.preview_image {
+    z-index: 2;
+    position: absolute;
+    width: 92%;
+    height: 91%;
+    object-fit: contain;
+    background-color: black;
+    margin: 6px;
+}
+.uploadnftpopup-input.upload-secound-input.inputtdrag {
+    max-width: 150px;
+    height: 150px;
+}
+.uploadnftpopup-input.upload-secound-input.inputtdrag input {
+    z-index: 999;
+    position: absolute;
+    opacity: 0;	
+    cursor: pointer;
+    width: 100%;
+}
+:root .inputdragVedio video {
+    margin-top:60px;
+    border-radius: 7px;
+    border: 2px solid #c1c1c1;
+    border-style: dashed;
+    border-top: 0px ;
+    min-height: 235px;
+}
+:root .inputdragVedio canvas{
+    margin-top:60px;
+    border-radius: 7px;
+    border: 2px solid #c1c1c1;
+    border-style: dashed;
+    border-top: 0px ;
+    min-height: 235px;
+
+}
+.inputdragVedio input{
+    z-index: 9999 !important;
+    position: absolute;
+    opacity: 0;
+    max-width: 300px;
+    width: 100%;
+    cursor: pointer;
+}
+.uploadnftpopup_content {
+    padding: 20px 0px;
+}
+.uploadnftpopup-input.upload-secound-input.inputtdrag:after{
+    padding: 41% 0px;
+}
+.inputdragVedio .uploadnftpopup-input.upload-secound-input.inputtdrag input {
+	height: 150px;
+}
+.inputdragVedio .uploadnftpopup-input-img.uploadnftpopup-secound {
+	height: 150px;
+}
+.inputdragVedio .uploadnftpopup-input-img.uploadnftpopup-secound img {
+	height: 76%;
+	width: 92%;
+	object-fit: contain;
+>>>>>>> 7aac56f84624f5b27fcd5ff5d20ca5a09763c910
 }
 @media (min-width: 991px){
     .progress_nft.mobile_nft.mb-3 {
@@ -2202,11 +2337,7 @@ body .btn.btn-bordered-white {
     img.navbar-brand-sticky.desktop_logo {
         display: none;
     }
-  
-    /* .project_img {
-        left: 70px;
-        right: 0 !important;
-    } */
+
 }
 
 @media (max-width:768px){
@@ -2267,14 +2398,14 @@ body .btn.btn-bordered-white {
      }
     }
     
-@media (max-width: 850px){
-    .project-total-detail {
-        gap: 10px !important;
-        flex-direction: column;
+    @media (max-width: 850px){
+        .project-total-detail {
+            gap: 10px !important;
+            flex-direction: column;
+        }
     }
-}
 
-@media (max-width: 600px){
+    @media (max-width: 600px){
         .input-group.author_detail {
             border-radius: 30px !important;
             padding: 13px 0px !important;
@@ -2291,18 +2422,24 @@ body .btn.btn-bordered-white {
         .input-group.author_detail input {
             height: 40px !important;
         }
-    }
-@media (max-width: 440px){
-    .uploadnftpopup-input {
-        height: 157px;
-    }
-    video.VideoInput_video {
-        height: 130px;
-    }
-}
-@media (max-width: 400px){
-        .proj-left button {
-            width: 100%;
-            margin-top: 10px !important;
+        .nft-image {
+            height: 92%;
         }
     }
+    @media (max-width: 440px){
+        .uploadnftpopup-input {
+            height: 157px;
+        }
+        video.VideoInput_video {
+            height: 130px;
+        }
+    }
+    @media (max-width: 400px){
+            .proj-left button {
+                width: 100%;
+                margin-top: 10px !important;
+            }
+        }
+
+
+    

@@ -561,7 +561,7 @@ export const UpdateNft = (formData, props, setLoading) => async dispatch => {
         }
     }
 }
-export const AddNftAction = (formData, id, setLoading) => async dispatch => {
+export const AddNftAction = (formData, slug, setLoading) => async dispatch => {
     // debugger
     const token = localStorage.getItem('authToken')
     try {
@@ -572,7 +572,7 @@ export const AddNftAction = (formData, id, setLoading) => async dispatch => {
             },
             transformRequest: formData => formData
         }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/nft/create/${id}`,
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/nft/create/${slug}`,
             formData, config)
         // 
         // console.log(res, 'coll rres')
@@ -583,7 +583,7 @@ export const AddNftAction = (formData, id, setLoading) => async dispatch => {
             swal("success", "updated", 'success').then(function () {
                 // dispatch(ProjectDetail(props.id))
                 // dispatch(LatestProjectDetail(params))
-                window.location = `/projnftdetails/${id}`;
+                window.location = `/projnftdetails/${slug}`;
             });
 
         }

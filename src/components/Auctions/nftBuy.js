@@ -13,6 +13,7 @@ import UserTransdataTable from '../AuthorProfile/userDetails';
 import UserdataTable from '../AuthorProfile/userTransTable';
 import NftTransdataTable from './nftTRansTable';
 import LatNftDataTable from '../Explore/latnftTable';
+import BidPopup from './bidPopup';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -23,6 +24,7 @@ const LatprojNftDetails = (props) => {
     const dispatch = useDispatch()
     const [ownwallet, setOwnWallet] = useState('')
     const [ownFee, setOwnFee] = useState('')
+    const [bidmodalShow, setBidModalShow] = React.useState(false);
     const [platformFee, setPlatformFee] = useState('')
     console.log('own', ownwallet)
     const id = useParams();
@@ -67,6 +69,14 @@ const LatprojNftDetails = (props) => {
 
         })
     }
+    // const bidHandler = () =>{
+// if(window.ethereum?.selectedAddress){
+//     debugger
+//     dispatch(BidPopup())
+// }else{
+//     ConnectWallet()
+// }
+    // }
     return (
         <section className="item-details-area">
             <div className="container">
@@ -164,6 +174,20 @@ const LatprojNftDetails = (props) => {
                                     <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                         id="nftdetail.id" onClick={() => buyHandler()}>  Buy</button>
                                 </div>
+                                <div className='eddlbtton d-flex  align-items-center mt-2'>
+
+                                <div>
+                                <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                    onClick={() =>
+                                        setBidModalShow(true)}>Place a bid</button>
+                                    <BidPopup
+                                   
+                                       id = {latprojnftdetail.id}
+                                       projid = {latprojnftdetail.project_id}
+                                        show={bidmodalShow}
+                                        onHide={() => setBidModalShow(false)} />
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -189,7 +213,7 @@ const LatprojNftDetails = (props) => {
                                 <div className='nft-price'>
                                 <svg viewBox="0 0 20 20" width="24px" height="24px"  fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="10" fill="#8247E5"></circle><path d="M12.97 8.055a.75.75 0 0 0-.732 0l-1.678.972-1.141.635-1.68.972a.751.751 0 0 1-.731 0l-1.335-.76a.727.727 0 0 1-.366-.614V7.76c0-.254.13-.486.366-.613l1.313-.74a.751.751 0 0 1 .732 0l1.313.74c.215.127.366.36.366.613v.973l1.141-.656v-.972a.684.684 0 0 0-.366-.614L7.74 5.095a.751.751 0 0 0-.732 0L4.532 6.49a.684.684 0 0 0-.365.614v2.811c0 .254.129.487.365.614l2.476 1.395a.75.75 0 0 0 .732 0l1.679-.951 1.14-.656 1.68-.951a.75.75 0 0 1 .731 0l1.313.74c.216.127.366.36.366.613v1.5c0 .255-.129.487-.366.614l-1.313.761a.751.751 0 0 1-.732 0l-1.313-.74a.727.727 0 0 1-.366-.613v-.973l-1.14.656v.972c0 .254.129.487.366.613l2.475 1.396a.751.751 0 0 0 .732 0l2.475-1.396a.727.727 0 0 0 .366-.613v-2.811a.684.684 0 0 0-.366-.614L12.97 8.055Z" fill="#fff"></path></svg>
                                     <span>{latprojnftdetail.amount}</span>
-                                    <span><small>$120</small></span>
+                                    {/* <span><small>$120</small></span> */}
                                 </div>
 
                                 <div className='sales'>

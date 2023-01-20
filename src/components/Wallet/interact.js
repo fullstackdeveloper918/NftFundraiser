@@ -422,11 +422,111 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
           // modalShow(false)
         })
         .on('error', function (error) {
-alert()
+
         })
         .then(function (receipt) {
           // will be fired once the receipt is mined
         })
+    } catch (error) {
+      // 
+      alert(error)
+
+    }
+  }
+}
+
+const UpdateBid = async ({ amount,project_id,nft_id,pay_to,pay_from }) => {
+debugger
+  const token = localStorage.getItem('authToken')
+  try {
+    const formData = new FormData();
+
+    formData.append('amount', amount);
+    formData.append('project_id', project_id);
+    formData.append('nft_id', nft_id);
+    formData.append('pay_from', pay_from);
+    formData.append('pay_to', pay_to);
+
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+    }
+    // 
+    await axios.post(`${process.env.REACT_APP_BACKEND_API}api/project/bids`,
+      formData, config
+    )
+  } catch (error) {
+    // 
+    // console.log("error");
+  }
+};
+
+export const BidNft = async (id,projid) => {
+ 
+  if (!isMetaMaskInstalled()) {
+    swal('oops!', 'No wallet found. Please install MetaMask', 'error')
+
+  } else {
+    try {
+
+
+      const addressArray = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+      const obj = {
+        status: "👆🏽 Write a message in the text-field above.",
+        address: addressArray[0],
+      };
+
+      // const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
+      // const nftContract = new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
+      // const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
+      // const amountToSendPlatform = ((`${platformFee[0]?.fees}` / 100) * 0.03)
+      // const amountToSendowner = ((`${ownerFee[0]}` / 100) * 0.03)
+      // // const amountToSend = (amountToSendPlatform - amount, "either")
+      // const amountToSend = (0.0005)
+      // const amountToSend = ; // Convert to wei value
+      // const memory_clients = [platformFee[0].wallets, ownerWallet[0]]
+      // const memory_amounts = [web3.utils.toWei(`${amountToSendPlatform}`, "ether"), web3.utils.toWei(`${amountToSendowner}`, "ether")]
+
+      web3.eth.sendTransaction(
+        {from:window.ethereum?.selectedAddress,
+        to:"0xB79722911A09502fb54De1f7769F6624C301810a",
+        value: web3.utils.toWei("0.01"), 
+        data: "0xdf"
+            }, function(err, transactionHash) {
+      if (!err)
+        console.log(transactionHash + " success"); 
+        UpdateBid({amount: "0.03",project_id:projid ,nft_id: id, pay_to:"0xB79722911A09502fb54De1f7769F6624C301810a",pay_from:window.ethereum?.selectedAddress })
+    });
+      // await web3.eth.sendTransaction(transferbid)
+      //   .on('transactionHash', function (hash) {
+      //     let txHash = hash
+      //     // console.log('tx', txHash)
+
+
+      //   })
+      //   .on('receipt', function (receipt) {
+      //     // console.log(receipt, 'recipt')
+      //   })
+      //   .on('confirmation', async (confNumber, receipt) => {
+      //     // 
+      //     console.log(receipt, 'conf')
+      //     // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
+      //     // setModeShow(false)
+
+      //     // modalShow(false)
+      //   })
+      //   .on('error', function (error) {
+
+      //   })
+      //   .then(function (receipt) {
+      //     // will be fired once the receipt is mined
+      //   })
     } catch (error) {
       // 
       alert(error)

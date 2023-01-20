@@ -44,7 +44,7 @@ function easeOutCirc(x) {
 }
 
 const DModal = ({ vdo }) => {
-    // debugger
+    debugger
     // const { vdo } = props
     const refContainer = useRef();
     const [loading, setLoading] = useState(true);
@@ -189,7 +189,7 @@ const DModal = ({ vdo }) => {
     return (
 
         <div
-            style={{ height: "300px", width: "330px", position: "relative" }}
+            style={{ height: "270px", width: "300px", position: "relative" }}
             ref={refContainer}
         >
 
