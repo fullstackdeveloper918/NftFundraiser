@@ -169,7 +169,7 @@ const LatprojNftDetails = (props) => {
                                         <span> #{latprojnftdetail.token_id}</span>
                                     </ul>
                                 </div>
-                                <div className='eddlbtton d-flex  align-items-center mt-2'>
+                                <div className='eddlbtton d-flex gap-5 align-items-center mt-2'>
 
                                     <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                         id="nftdetail.id" onClick={() => buyHandler()}>  Buy</button>
