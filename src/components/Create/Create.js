@@ -13,9 +13,6 @@ import { useFormData } from './Context/context';
 import JoditEditor from 'jodit-react'; import { CityList, CountryList, StateList } from '../../redux/Actions/authAction';
 import UploadImage from '../../shared/Upload';
 import { blobToDataURl, dataURLtoBlob } from '../../utils/blobfromurl';
-import VideoInput from './VideoInput';
-import Dinosaur from './3dModal';
-
 // import { Suspense } from "react";
 // import ReactDOM from "react-dom";
 // import { Canvas } from '@react-three/fiber';
@@ -129,13 +126,14 @@ const Create = ({ current, next, prev }) => {
 
             setValue('end_date', data.end_date)
         }
-
+        
     }, [data])
 
     const cat = useSelector(state => {
         // 
         return state?.projectdetails?.categories
     })
+
     const handleChangeCountry = (event) => {
         // 👇 Get input value from "event"
         setCountry(event.currentTarget.value);
@@ -157,16 +155,16 @@ const Create = ({ current, next, prev }) => {
         //     debugger
         // }
     };
-    // const [dateError,setErrordate] = useState("")
-    // function checkDateValidation(start_date, end_date) {
-    //     // check the dates
-    //     if ((new Date(start_date) > new Date(end_date)) || (new Date(end_date) < new Date(start_date))) {
-    //         // set date error validation true 
-    //         setErrordate("should be gtr")
-    //     } else {
-    //         // null or false date error validation 
-    //     }
-    // }
+    function imposeMinMax(el){
+        if(el?.value != ""){
+          if(parseInt(el?.value) < parseInt(el?.min)){
+            el.value = el?.min;
+          }
+          if(parseInt(el?.value) > parseInt(el?.max)){
+            el.value = el.max;
+          }
+        }
+      }
     return (
 
         <div className={current === 0 ? styles.showForm : styles.hideForm}>
@@ -401,55 +399,7 @@ const Create = ({ current, next, prev }) => {
                             {/* {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">City is required</p>} */}
                         </div>
                     </div>
-                    {/* <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>State or Province</label>
-                            <Controller
-                                control={control}
-                                name="state"
-                                render={({ field: { onChange, onBlur, value, ref } }) => (
-
-                                    <GeoLocation
-                                       
-
-                                        onChange={setState}
-                                        geoId={country}
-                                        onBlur={onBlur}
-                                        selected={value}
-                                    
-                                    />
-                                )}
-                            />
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>City or Region</label>
-                            <Controller
-                                control={control}
-                                name="city"
-                                render={({ field: { onChange, onBlur, value, ref } }) => (
-                                    <GeoLocation
-                                        // locationTitle="City"
-                                        // isCity
-                                        // setValue={data.city}
-                                        onChange={setCity}
-                                        geoId={state}
-
-                                        onBlur={onBlur}
-                                        selected={value}
-                                        required={true}
-                                        // onChange={onChange}
-
-
-                                        // {...register("city", { required: true })}
-                                        aria-invalid={errors.city ? "true" : "false"}
-                                    />
-                                )}
-                            />
-                            {errors.city?.type === 'required' && <p style={{ color: 'red' }} role="alert">city is required</p>}
-                        </div>
-                    </div> */}
+                    
                     <div className="col-12 col-md-6">
                         <div className="form-group">
                             {usertype == 2 ? (
@@ -479,10 +429,11 @@ const Create = ({ current, next, prev }) => {
                             <div className="form-group">
                                 <label>Number of NFTs</label>
                                 <input
-                                    type="number"
+                                    type="text"
 
                                     className="form-control"
                                     name="number_of_nft"
+                                   
                                     // value='1'
                                     // defaultValue={1}
                                     // defaultValue={1}
@@ -490,6 +441,7 @@ const Create = ({ current, next, prev }) => {
                                     min={1}
                                     max={1}
                                     maxLength={1}
+                                    onKeyUp={imposeMinMax()}
                                     placeholder="number of NFT (1 allowed)"
                                     {...register("number_of_nft", { required: true, min: 1, max: 1 })}
                                     // {...register("number_of_nft", { maxLength: 12 })}

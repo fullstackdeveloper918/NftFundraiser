@@ -632,7 +632,7 @@ const AddNft = ({ current, prev }) => {
                                                             ))}
                                                             <div className="col-12">
                                                                 <div className="col-lg-6 col-12 uploadnftpopup p-0 mb-4">
-                                                                    <label className="mt-3">Upload Nft</label>
+                                                                    <label className="mt-3">Upload NFT</label>
                                                                     <div
                                                                         className="position-relative upload_nft"
                                                                         style={{

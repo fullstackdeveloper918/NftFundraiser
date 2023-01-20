@@ -93,7 +93,7 @@ const ProjdataTable = (props) => {
                                         <tr>Country : {item.name}</tr>
                                     )
                                 })} */}
-                                {location.pathname === `/projdetails/${slug}` ? (
+                                {location.pathname === `/projects/${slug}` ? (
 
                                     <>
                                         {/* <td><span>Owned By:</span> <span>{latprojdetail?.user_data?.username}</span> </td> */}

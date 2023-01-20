@@ -14,6 +14,7 @@ import UserdataTable from '../AuthorProfile/userTransTable';
 import NftTransdataTable from './nftTRansTable';
 import LatNftDataTable from '../Explore/latnftTable';
 import BidPopup from './bidPopup';
+import DModal from '../Create/3dModal';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -91,7 +92,27 @@ const LatprojNftDetails = (props) => {
                                 {/* {latprojdetail?.nft_data?.map((item, idx) => { */}
                                 {/*  */}
                                 {/* return ( */}
+                                {latprojnftdetail.extention === "PLayer" &&
+                                <video
+                                // className="VideoInput_video"
+                                width="100%"
+                                // height={height}
+                                controls
+                                src={latprojnftdetail.image}
+                            // onChange={setSource}
+                            />
+                                }
+
+                                {latprojnftdetail.extention === "modal" && 
+                                  <DModal
+                                  vdo={latprojnftdetail.image}
+                              
+                              />
+                                }
+                                {   latprojnftdetail.extention == null && 
+                                
                                 <img src={latprojnftdetail.image} alt="" />
+                                }
                                 {/* ) */}
                                 {/* })} */}
                             </div>
@@ -169,7 +190,17 @@ const LatprojNftDetails = (props) => {
                                         <span> #{latprojnftdetail.token_id}</span>
                                     </ul>
                                 </div>
-                                <div className='eddlbtton d-flex gap-5 align-items-center mt-2'>
+
+                                <div className="item-info-list">
+                                    <ul className="list-unstyled">
+                                        <li><span class='boldertext'>Affiliate first sale royalties: 20%</span></li>
+                                       <li><span class='boldertext'>NFT creator royalties: 10% </span></li> 
+                                        <li><span class='boldertext'>Affiliate secondary royalties: 5% </span></li>
+
+                                        
+                                    </ul>
+                                </div>
+                                <div className='eddlbtton d-flex  align-items-center mt-2'>
 
                                     <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                         id="nftdetail.id" onClick={() => buyHandler()}>  Buy</button>
