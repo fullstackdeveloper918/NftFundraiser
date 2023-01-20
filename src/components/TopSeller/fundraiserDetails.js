@@ -65,15 +65,11 @@ const FundraiserDetail = () => {
     return (
         <section className="item-details-area fundraise-main">
             <div className="container">
-                <div>
-
-                </div>
-                <div class="row py-0">
-                    <div className='col-12 p-0'>
+          
+                <div className="row justify-content-between p-0">
+                <div className='col-12'>
                         <span className='title_main'>{funddetail?.organization_detail?.organization_name}</span>
                     </div>
-                </div>
-                <div className="row justify-content-between p-0">
                     <div className="col-12 col-lg-8">
                         <div className="item-info">
 

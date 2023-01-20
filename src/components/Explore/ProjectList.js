@@ -90,7 +90,7 @@ const GetAllProjects = () => {
                                                             {/* Card Body */}
                                                             <div className="card-body">
                                                                 <a>
-                                                                    <h5 className="mb-0 pb-0">{item.title.slice(0, 20)}</h5>
+                                                                    <h5 className="mb-0 pb-0 break-all">{item.title.slice(0, 16)}</h5>
                                                                 </a>
                                                                 <div className="seller d-flex align-items-center my-2">
                                                                     <span>Owned By</span>

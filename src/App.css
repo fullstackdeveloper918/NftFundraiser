@@ -1922,10 +1922,10 @@ span.jodit-ui-button__text {
 	border-radius: 100px;
 }
 .progress_nft .lorem_done.p-0 span svg {
-	padding: 2px;
-	margin: 6px;
-	border-radius: 0px;
-	background-color: transparent;
+    padding: 5px;
+    margin: 3px;
+    border-radius: 0px;
+    background-color: transparent;
 }
 .nft_detail_main th {
     color: #FFF;
@@ -2096,6 +2096,19 @@ video.VideoInput_video {
 }
 body .btn.btn-bordered-white {
     border: 3px solid #fff;
+}
+.card .fa-solid.fa-trash {
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+    padding: 4px 17px;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 11px;
+    position: absolute;
+    top: 30px;
+    margin-right: 6px;
+}
+.break-all{
+    word-break: break-all;
 }
 @media (min-width: 991px){
     .progress_nft.mobile_nft.mb-3 {
