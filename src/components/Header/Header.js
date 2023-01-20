@@ -209,7 +209,7 @@ const Header = () => {
                                     {/* <li>{userdet?.username}</li> */}
                                     <li>{userdet?.email}</li>
                                     <li><button type='button' class="dropdown-item"><Link to='/profile'>My Profile</Link></button></li>
-                                    <li><button type='button' class="dropdown-item"><a href='/projectlist'>My Projects</a></button></li>
+                                    <li><button type='button' class="dropdown-item"><Link to='/projectlist'>My Projects</Link></button></li>
                                     {userRole == 3 && (
 
                                         <li><button type='button' class="dropdown-item"><Link to={`/fundraiser/detail/${userdet.user_id}`}>Fundraise</Link></button></li>
