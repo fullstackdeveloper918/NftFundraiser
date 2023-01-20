@@ -14,6 +14,7 @@ import UserdataTable from '../AuthorProfile/userTransTable';
 import NftTransdataTable from './nftTRansTable';
 import LatNftDataTable from '../Explore/latnftTable';
 import BidPopup from './bidPopup';
+import DModal from '../Create/3dModal';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -82,7 +83,11 @@ const LatprojNftDetails = (props) => {
             <div className="container">
 
                 <div className="row justify-content-between content_project px-0">
+                <div className='py-0 col-12 mt-2 mb-2 mt-lg-0 mb-lg-0'>
+                        <span Class="title_main " style={{ color: '#fff' }}>{latprojnftdetail.title}  </span>
+                </div>
                     <div className="col-12 col-lg-4">
+                   
                         <div className="item-info">
                             {/* {latprojdetail?.map((item, key) => ( */}
 
@@ -91,7 +96,27 @@ const LatprojNftDetails = (props) => {
                                 {/* {latprojdetail?.nft_data?.map((item, idx) => { */}
                                 {/*  */}
                                 {/* return ( */}
+                                {latprojnftdetail.extention === "PLayer" &&
+                                <video
+                                // className="VideoInput_video"
+                                width="100%"
+                                // height={height}
+                                controls
+                                src={latprojnftdetail.image}
+                            // onChange={setSource}
+                            />
+                                }
+
+                                {latprojnftdetail.extention === "modal" && 
+                                  <DModal
+                                  vdo={latprojnftdetail.image}
+                              
+                              />
+                                }
+                                {   latprojnftdetail.extention == null && 
+                                
                                 <img src={latprojnftdetail.image} alt="" />
+                                }
                                 {/* ) */}
                                 {/* })} */}
                             </div>
@@ -139,12 +164,12 @@ const LatprojNftDetails = (props) => {
                     </div>
 
                     <div className="col-12 col-lg-8">
-                        <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
+                        {/* <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
 
                             <span Class="title_main " style={{ color: '#fff' }}>{latprojnftdetail.title}  </span>
 
 
-                        </div>
+                        </div> */}
                         <div className="content sm:mt-4 mt-lg-2">
                             <div className="card no-hover position-relative">
                                 <span className='share'><svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -164,12 +189,42 @@ const LatprojNftDetails = (props) => {
 
                                 </div>
                                 <div className="item-info-list">
-                                    <ul className="list-unstyled">
+                                    <ul className="list-unstyled mb-0">
                                         <span class='boldertext'>Token :</span>
                                         <span> #{latprojnftdetail.token_id}</span>
                                     </ul>
                                 </div>
-                                <div className='eddlbtton d-flex gap-5 align-items-center mt-2'>
+
+                                <div>
+                                    <span className='boldertext w-100'>Affiliate first sale royalties: </span>
+                                    <span> 20%</span>
+
+                                </div>
+
+                                <div>
+                                    <span className='boldertext w-100'>NFT creator royalties: </span>
+                                    <span> 10%</span>
+
+                                </div>
+
+                                <div>
+                                    <span className='boldertext w-100'>Affiliate secondary royalties</span>
+                                    <span> 5%</span>
+
+                                </div>
+
+                                <div className='eddlbtton d-flex gap- align-items-center mt-2'>
+
+                                {/* <div className="item-info-list">
+                                    <ul className="list-unstyled">
+                                        <li><span class='boldertext'>Affiliate first sale royalties: 20%</span></li>
+                                       <li><span class='boldertext'>NFT creator royalties: 10% </span></li> 
+                                        <li><span class='boldertext'>Affiliate secondary royalties: 5% </span></li>
+
+                                        
+                                    </ul>
+                                </div> */}
+                                <div className='eddlbtton d-flex gap-10  align-items-center mt-2'>
 
                                     <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                         id="nftdetail.id" onClick={() => buyHandler()}>  Buy</button>
@@ -192,6 +247,7 @@ const LatprojNftDetails = (props) => {
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
 
                     
