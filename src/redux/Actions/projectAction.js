@@ -616,3 +616,40 @@ export const GetMatic = () => async dispatch => {
         // console.log("error");
     }
 };
+export const getBid = (id) => async dispatch => {
+    try {
+        const token = localStorage.getItem('authToken')
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/getBidsDetailByIdx/${id}}`,
+            config)
+        await dispatch(res)
+        console.log('res bid', res)
+    } catch (error) {
+        // console.log("error");
+    }
+};
+export const UpdateBId = ({ id, status }) => async dispatch => {
+    debugger
+    try {
+        const token = localStorage.getItem('authToken')
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/change_bids_status/${id}}`,
+            { status: status }, config)
+        await dispatch(res)
+        console.log('res bid', res)
+    } catch (error) {
+        // console.log("error");
+    }
+};

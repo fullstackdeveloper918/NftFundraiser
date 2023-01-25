@@ -176,7 +176,7 @@ const ProjDetails = () => {
                                                             </svg>
                                                             </span>
 
-                                                            <span><div className="progress_name">{item.username} </div> <div>${item.price} Cdn / {Number(latprojdetail.price) * Number(matic['matic-network']?.cad)} MATIC ({days_difference} days ago)</div></span>
+                                                            <span><div className="progress_name">{item.username} </div> <div>${item.price} Cdn / {Math.round(Number(latprojdetail.price) * Number(matic['matic-network']?.cad))} MATIC ({days_difference} days ago)</div></span>
                                                         </div>
                                                     </li>
 
