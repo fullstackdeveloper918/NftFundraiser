@@ -64,8 +64,8 @@ const LatprojNftDetails = (props) => {
             sellingCount: latprojnftdetail.selling_count,
             platformFee: ([latprojnftdetail.payment_flow?.karmatica_fee]),
 
-            ownerFee: ([latprojnftdetail.payment_flow?.project_data.fees]),
-            ownerWallet: ([latprojnftdetail.payment_flow?.project_data.wallets]),
+            ownerFee: ([latprojnftdetail.payment_flow?.project_data?.fees]),
+            ownerWallet: ([latprojnftdetail.payment_flow?.project_data?.wallets]),
             flow: ([latprojnftdetail.payment_flow])
 
         })
@@ -227,11 +227,11 @@ const LatprojNftDetails = (props) => {
                                 <div className='eddlbtton d-flex gap-10  align-items-center mt-2'>
 
                                     <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                        id="nftdetail.id" onClick={() => buyHandler()}>  Buy</button>
+                                        id="nftdetail.id" onClick={() => buyHandler()}>Buy Now</button>
 
                                     <button className="btn  btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                     onClick={() =>
-                                        setBidModalShow(true)}>Place a bid</button>
+                                        setBidModalShow(true)}>Place Bid</button>
                                     <BidPopup
                                    
                                        id = {latprojnftdetail.id}

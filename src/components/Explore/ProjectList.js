@@ -23,24 +23,24 @@ const GetAllProjects = () => {
     }, [dispatch])
 
     const showDeleteHandler = (id) => {
-       debugger
+        debugger
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this project!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-            dispatch(DeleteProject(id))
-              swal("Poof! Your project has been deleted!", {
-                icon: "success",
-              });
-            } else {
-              swal("Your project is safe!");
-            }
-          });
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    dispatch(DeleteProject(id))
+                    swal("Poof! Your project has been deleted!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Your project is safe!");
+                }
+            });
     }
 
     return (
@@ -120,7 +120,7 @@ const GetAllProjects = () => {
                                 <div className="col-12 col-sm-12 col-lg-12">
                                     {window.ethereum?.selectedAddress ? (
                                         <h2 className='allproj2'>
-                                            You have no project yet, <Link to="/create">Create one</Link>
+                                            You have no projects yet, <Link to="/create">create one now</Link>
                                         </h2>
 
                                     ) : (

@@ -174,7 +174,10 @@ const Header = () => {
                             <a onClick={handleCreate} className="nav-link">Create</a>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/all/${"LatestProjects"}`} className="nav-link">Latest Projects</Link>
+                            <Link to={`/all/${"LatestProjects"}`} className="nav-link">Latest</Link>
+                        </li>
+                        <li className="nav-item">
+                            <a target="_blank" href="https://changelly.com/?from=btc&to=matic&amount=0.1&ref_id=_-GPCBjccW7TMMjO"  className="nav-link">Swap</a>
                         </li>
                     </ul>
                     {/* Navbar Toggler */}

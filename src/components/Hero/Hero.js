@@ -105,7 +105,7 @@ const Hero = () => {
                 <div className="row">
                     <div className="col-12 col-md-6 col-lg-7">
 
-                        <h1 className="mt-4">Invest in NFTs to help fund projects and earn income.</h1>
+                        <h1 className="mt-4">Invest in NFTs to fund projects and earn income for the common good.</h1>
                         {/* <p>Earn rewards by referring your friends.</p> */}
                         {/* Buttons */}
                         <div className="button-group">
