@@ -56,7 +56,7 @@ function ReferalPopup(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <Modal.Header >
+            <Modal.Header className=' align-items-start'>
                 {window.ethereum?.selectedAddress ? (
 
                 <Modal.Title id="contained-modal-title-vcenter">
@@ -66,7 +66,7 @@ function ReferalPopup(props) {
 
                 </Modal.Title>
                 ):(
-            <Modal.Title id="contained-modal-title-vcenter">
+            <Modal.Title id="contained-modal-title-vcenter ">
                            
                                 <p>Earn When You Share: <br />20% of NFT sales for first level referral </p>
 <p style={{color:"red"}}>Connect your wallet to earn referral income in MATIC when you share projects</p>
@@ -78,7 +78,7 @@ function ReferalPopup(props) {
                     <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
                 </div>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className='refer-frnd'>
                 <form className="item-form card no-hover">
                     <div className="row">
 

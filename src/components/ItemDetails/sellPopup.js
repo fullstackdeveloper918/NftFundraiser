@@ -143,20 +143,21 @@ function SellPopup(props) {
         >
             <Modal.Header >
 
-                <div>
-                    <a>List for sale</a> <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
+                <div className='d-flex justify-content-between w-full'>
+                    <label className='modal-title h4 '>List for sale</label> <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
                 </div>
             </Modal.Header>
             <Modal.Body>
-                <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
+                <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover form-sell">
                     <div className="row">
 
                         <div className="col-12 ">
-                            <div className="form-group mt-3">
-                                <label>Choose a type of sale</label>
-                                <div className="form-check form-check-inline mr-2">
+                            <div className="form-group">
+                                <div className='mb-3'>Choose a type of sale</div>
+                                <div className="gap-5 form-check flex-wrap form-check-inline mr-2 w-full">
                                     {/* {data.usertype == 2 ? ( */}
-                                    <>
+                                    <div className='d-flex'>
+                                         <>
                                         <input
                                             className="form-check-input"
                                             type="radio"
@@ -171,10 +172,13 @@ function SellPopup(props) {
 
                                         />
                                         <label className="form-check-label mr-2" htmlFor="buy">Fixed Price</label>
-                                    </>
+                                         </>
 
+                                    </div>
 
-                                    <><input
+                                    <div className='d-flex'>
+                                        <>
+                                        <input
                                         className="form-check-input"
                                         type="radio"
                                         name="radiobutton"
@@ -186,7 +190,10 @@ function SellPopup(props) {
                                         aria-invalid={errors.auctiontype ? "true" : "false"}
 
                                     />
-                                        <label className="form-check-label" htmlFor="auction">English Auction</label></>
+                                        <label className="form-check-label" htmlFor="auction">English Auction</label>
+                                       
+                                        </>
+                                        </div>
                                     {/* )} */}
                                 </div>
 
@@ -197,7 +204,7 @@ function SellPopup(props) {
                         <div className="col-md-12 col-12">
                             {/* {type == 1 && ( */}
 
-                            <div className="form-group mt-3">
+                            <div className="form-group m-0">
                                 <label>Set Price</label>
                                 <input
                                     type="number"
@@ -213,7 +220,7 @@ function SellPopup(props) {
                             {/* )} */}
                         </div>
                         <>
-                            <label>Set Duration</label>
+                            <div className='col-12 my-3'>Set Duration</div>
                             <div className="col-12 col-md-6">
                                 <div className="form-group">
                                     <label>Start date</label>
@@ -250,11 +257,13 @@ function SellPopup(props) {
                                     {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
                                 </div>
                             </div></>
-                        <button type="submit" className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                            <div className='text-center w-full'>
+                        <button type="submit" className="mt-2  mb-0 btn btn-bordered-white" style={{ color: '#FFF' }}
                             id="nftdetail.id" onClick={() => deployAndMint(slug)}>Mint</button><NftPopup
                             show={modalShow}
                             current={current}
                             onHide={() => setModalShow(false)} />
+                            </div>
                     </div>
 
 

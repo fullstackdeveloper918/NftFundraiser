@@ -128,7 +128,7 @@ const ProjNftDetails = () => {
                                     </div>
 
                                     <div className="d-flex justify-content-start">
-                                        <a href='#invest'><Button variant="primary" className=" btn  btn-bordered-white m-0">
+                                        <a href='#invest'><Button variant="primary" className=" btn py-2 btn-bordered-white m-0">
                                             Invest
                                         </Button>
                                         </a>

@@ -134,7 +134,7 @@ const ProjDetails = () => {
                                 </span>
                                 </div>
 
-                                <div className="d-sm-flex justify-content-start">
+                                <div className="d-flex flex-wrap gap-5 justify-content-start">
 
 
                                     <>
@@ -145,7 +145,7 @@ const ProjDetails = () => {
 
 
                                         </a>
-                                        <Button className="btn ml-2 btn-bordered-white m-0" variant="primary" onClick={() => setModalShowrefer(true)}>
+                                        <Button className="btn sm:ml-2 btn-bordered-white m-0" variant="primary" onClick={() => setModalShowrefer(true)}>
 
 
                                             Share

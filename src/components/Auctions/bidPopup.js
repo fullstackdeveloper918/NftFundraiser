@@ -17,7 +17,6 @@ const onSubmit = ()=>{
 
     return (
         <Modal
-        className='bidbtn'
             {...props}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
@@ -26,7 +25,7 @@ const onSubmit = ()=>{
             <Modal.Header >
 
                 <div>
-                    <a>Place a bid</a>
+                    <div className='modal-title h4 '>Place a bid</div>
                     {/* <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a> */}
                 </div>
             </Modal.Header>
@@ -34,11 +33,12 @@ const onSubmit = ()=>{
                 <form onSubmit={handleSubmit(onSubmit)} className="item-form card no-hover">
                     <div className="row">
 
-                        <div className="col-12">
+                        <div className="col-12 pb-2">
                             <label>You are about to place a bid for SICKOS from SICKOS COLLECTIVE collection.</label>
                         </div>
                         <div className="col-12">
-                            <span>{window.ethereum?.selectedAddress}</span>
+                        <label>Token no:</label>
+                            <div class="bidinput">{window.ethereum?.selectedAddress}</div>
                         </div>
                         <div className="col-12">
                             <div className="form-group">

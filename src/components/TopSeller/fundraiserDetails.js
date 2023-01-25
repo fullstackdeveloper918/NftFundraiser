@@ -193,7 +193,7 @@ const FundraiserDetail = () => {
 
                             </div>
 
-                            <div className="d-sm-flex justify-content-start">
+                            <div className="d-flex gap-5 flex-wrap justify-content-start">
                                 <div>
                                     <Button variant="primary" className=" btn  btn-bordered-white m-0 mr-2">
                                         Invest

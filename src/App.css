@@ -2249,6 +2249,27 @@ body .btn.btn-bordered-white {
 	width: 92%;
 	object-fit: contain;
 }
+.form-sell .form-check-inline .form-check-input {
+    width: 34px !important;
+}
+.modal-content .card {
+    padding: 0rem !important;
+    background: #09080d;
+}
+.modal-content .modal-body {
+    padding: 1rem !important;
+}
+.modal-content .form-group input {
+    background-color: #17171b !important;
+}
+.bidinput{
+    background-color: #17171b !important;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.refer-frnd.modal-body {
+    padding: 20px 30px !important;
+}
 @media (min-width: 991px){
     .progress_nft.mobile_nft.mb-3 {
        display: none;

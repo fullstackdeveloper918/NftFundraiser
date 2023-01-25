@@ -106,7 +106,7 @@ const CollectionNFTS = () => {
     }, [dispatch])
     return (
         <section className="live-auctions-area single_project-detail">
-            <div className="container">
+            <div className="container p-0">
                 <div className='intro row m-0'>
                     <div className="intro-content">
                         <span style={{ marginLeft: "0px" }}>NFTs</span>

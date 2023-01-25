@@ -44,7 +44,7 @@ const NftdataTable = (props) => {
                                 <td>Polygon (Matic)</td>
                             </tr><tr>
                                     <th>Contract</th>
-                                    <td>{nftdetail.collectionData?.contract_id.slice(0, 5)}.....{nftdetail.collectionData?.contract_id.slice(39, 42)}</td>
+                                    <td>{nftdetail.collectionData?.contract_id?.slice(0, 5)}.....{nftdetail.collectionData?.contract_id?.slice(39, 42)}</td>
                                 </tr><tr>
                                     <th>Token ID</th>
                                     <td>{nftdetail.token_id}</td>
