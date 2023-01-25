@@ -429,32 +429,32 @@ const Create = ({ current, next, prev }) => {
                             <div className="form-group">
                                 <label>Number of NFTs</label>
                                 <input
-                                    type="text"
+                                    type="number"
 
                                     className="form-control"
                                     name="number_of_nft"
                                    
-                                    // value='1'
+                                    value='1'
+                                    defaultValue={1}
                                     // defaultValue={1}
-                                    // defaultValue={1}
-                                    // disabled={true}
+                                    disabled
                                     min={1}
                                     max={1}
                                     maxLength={1}
-                                    onKeyUp={imposeMinMax()}
+                                    // onKeyUp={imposeMinMax()}
                                     placeholder="number of NFT (1 allowed)"
                                     {...register("number_of_nft", { required: true, min: 1, max: 1 })}
                                     // {...register("number_of_nft", { maxLength: 12 })}
                                     aria-invalid={errors.number_of_nft ? "true" : "false"}
                                 />
-                                {errors.number_of_nft && errors.number_of_nft.type === "max" && (
+                                {/* {errors.number_of_nft && errors.number_of_nft.type === "max" && (
                                     <p style={{ color: 'red' }}>
                                         Only 1 nft allowed (select campaign for more than one NFTs)
                                     </p>
 
 
-                                )}
-                                {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required and limit is upto 1</p>}
+                                )} */}
+                                {/* {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required and limit is upto 1</p>} */}
                                 {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max one length </p>} */}
                             </div>
                         </div>
@@ -570,7 +570,7 @@ const Create = ({ current, next, prev }) => {
                             <div >
 
                                 <div className='logo-dis logo-dis-img'>
-                                    <span>Allowed types: JPG, PNG, GIF</span><span>Banner should be 1500 px wide x 500 px high</span>
+                                    <span>Allowed types: JPG, PNG, GIF</span><span>Banner should be 500 px wide x 800 px high, 10MB max</span>
                                 </div>
                             </div>
                             {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}
