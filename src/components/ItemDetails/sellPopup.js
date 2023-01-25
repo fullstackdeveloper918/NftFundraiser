@@ -24,23 +24,20 @@ function SellPopup(props) {
     const [current, setCurrent] = React.useState(0)
     const dispatch = useDispatch()
     const slug = useParams()
-    const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
     const [modalShow, setModalShow] = React.useState(false);
+    const [auctiontype, setAuctionType] = useState("1")
+    console.log(auctiontype, 'auctiontype')
+
+    const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
 
     const OnSubmit = (data) => {
+        debugger
+        console.log(data, 'dtaaa')
     }
+
     const nftdetail = useSelector(state => {
-        // 
         return state.projectdetails.nftlist
-
     })
-    // console.log(nftdetail, 'latprojdetail')
-    const collupdate = useSelector(state => {
-        return state?.projectdetails?.collectiondetails
-    })
-
-    // console.log('collupdate', collupdat
-
 
     const mint = (contractAddress) => {
         CreateMetaDataAndMint({
@@ -123,6 +120,20 @@ function SellPopup(props) {
         await deployContract()
         // nftdetail.id()
     }
+    const disablePastDate = () => {
+        const today = new Date();
+        const dd = String(today.getDate() + 1).padStart(2, "0");
+        const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        const yyyy = today.getFullYear();
+        return yyyy + "-" + mm + "-" + dd;
+    };
+
+    const today = new Date();
+    const numberOfDaysToAdd = 30;
+    const date = today.setDate(today.getDate());
+    const date1 = today.setDate(today.getDate() + numberOfDaysToAdd);
+    const defaultValue = new Date(date).toISOString().split('T')[0] // yyyy-mm-dd
+    const defaultValue1 = new Date(date1).toISOString().split('T')[0] // yyyy-mm-dd
     return (
         <Modal
             {...props}
@@ -151,17 +162,17 @@ function SellPopup(props) {
                                             type="radio"
                                             name="radiobutton"
                                             id="1"
-                                            // checked={data.usertype ? false:tr}
+                                            defaultChecked
                                             value="1"
-                                        // defaultChecked={data.usertype == 1 ? true : !usertype ? true : false}
-                                        // {...register("usertype", { required: true })}
-                                        // aria-invalid={errors.usertype ? "true" : "false"}
-                                        // onChange={(e) => setUserType(e.target.value)}
-                                        // defaultChecked={data.usertype}
+
+                                            {...register("auctiontype", { required: true })}
+                                            aria-invalid={errors.auctiontype ? "true" : "false"}
+                                            onChange={(e) => setAuctionType(e.target.value)}
+
                                         />
-                                        <label className="form-check-label mr-2" htmlFor="donation">Fixed Price</label>
+                                        <label className="form-check-label mr-2" htmlFor="buy">Fixed Price</label>
                                     </>
-                                    {/* ) : ( */}
+
 
                                     <><input
                                         className="form-check-input"
@@ -169,17 +180,17 @@ function SellPopup(props) {
                                         name="radiobutton"
                                         id="2"
                                         value="2"
-                                    // {...register("usertype", { required: true })}
-                                    // defaultChecked={data.usertype == 2 ? true : false}
-                                    // onChange={(e) => setUserType(e.target.value)}
-                                    // aria-invalid={errors.type ? "true" : "false"}
+                                        {...register("auctiontype", { required: true })}
+
+                                        onChange={(e) => setAuctionType(e.target.value)}
+                                        aria-invalid={errors.auctiontype ? "true" : "false"}
 
                                     />
-                                        <label className="form-check-label" htmlFor="donation">English Auction</label></>
+                                        <label className="form-check-label" htmlFor="auction">English Auction</label></>
                                     {/* )} */}
                                 </div>
 
-                                {/* {errors.usertype?.type === 'required' && <p style={{ color: 'red' }} role="alert">Type is required</p>} */}
+                                {errors.auctiontype?.type === 'required' && <p style={{ color: 'red' }} role="alert">Type is required</p>}
 
                             </div>
                         </div>
@@ -189,60 +200,57 @@ function SellPopup(props) {
                             <div className="form-group mt-3">
                                 <label>Set Price</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="form-control"
-                                    name="title"
-                                    placeholder="Set price"
-                                // {...register("title", { required: true, pattern: { value: /[A-Za-z]/ } })}
-                                // aria-invalid={errors.title ? "true" : "false"}
+                                    name="price"
+                                    {...register("price", { required: true })}
+                                    aria-invalid={errors.price ? "true" : "false"}
                                 />
                                 {/* {errors.title && errors.title?.type === 'pattern' && <p style={{ color: 'red' }} role="alert">Only VarChar allowed</p>} */}
-                                {/* {errors.title?.type === 'required' && <p style={{ color: 'red' }} role="alert">Title is required</p>} */}
+                                {errors.price?.type === 'required' && <p style={{ color: 'red' }} role="alert">price is required</p>}
 
                             </div>
                             {/* )} */}
                         </div>
-                        <><div className="col-12 col-md-6">
-                            <div className="form-group">
-                                <label>Start date</label>
-                                <input
-                                    type="date"
-                                    // placeholder='dd-mm-yy'
-                                    // hidden={data.type == 1}
-                                    className="form-control"
-                                    name="start_date"
-                                // min={disablePastDate()}
+                        <>
+                            <label>Set Duration</label>
+                            <div className="col-12 col-md-6">
+                                <div className="form-group">
+                                    <label>Start date</label>
+                                    <input
+                                        type="date"
+                                        // placeholder='dd-mm-yy'
+                                        // hidden={data.type == 1}
+                                        defaultValue={defaultValue}
+                                        className="form-control"
+                                        name="start_date"
+                                        min={disablePastDate()}
 
-                                // placeholder="Start date :"
-                                // {...register("start_date", { required: true })}
-                                // aria-invalid={errors.start_date ? "true" : "false"} 
-                                />
-                                {/* {errors.start_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">Start date is required</p>} */}
+                                        {...register("start_date", { required: true })}
+                                    // aria-invalid={errors.start_date ? "true" : "false"} 
+                                    />
+                                    {/* {errors.start_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">Start date is required</p>} */}
+                                </div>
                             </div>
-                        </div>
                             <div className="col-12 col-md-6">
                                 <div className="form-group">
                                     <label>End Date</label>
                                     <input
                                         type="date"
-                                        // hidden={data.type == 1}
                                         className="form-control"
                                         name="end_date"
-                                    // min={disablePastDate()}
-
-                                    // placeholder="End date"
-                                    // {...register("end_date")}
-                                    // aria-invalid={errors.end_date ? "true" : "false"}
+                                        min={disablePastDate()}
+                                        defaultValue={defaultValue1}
+                                        {...register("end_date")}
+                                        aria-invalid={errors.end_date ? "true" : "false"}
                                     />
                                     <div >
 
-                                        {/* <span className='logo-dis'>End date should be greater then or equal to start date</span> */}
                                     </div>
-                                    {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}
-                                    {/* {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>} */}
+                                    {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
                                 </div>
                             </div></>
-                        <button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                        <button type="submit" className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                             id="nftdetail.id" onClick={() => deployAndMint(slug)}>Mint</button><NftPopup
                             show={modalShow}
                             current={current}
