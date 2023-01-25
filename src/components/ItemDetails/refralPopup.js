@@ -61,7 +61,7 @@ function ReferalPopup(props) {
 
                 <Modal.Title id="contained-modal-title-vcenter">
                     Refer your friends
-                    <p>Earn Royalties When You Share: <br />10% of NFT for first level referral, 5% for second, 1% for all others</p>
+                    <p>Earn Royalties When You Share: <br />30% of NFTs for first level and 5% for secondary referrals.</p>
 
 
                 </Modal.Title>
@@ -91,6 +91,7 @@ function ReferalPopup(props) {
                                     className="form-control"
                                     name="display_name"
                                     value={url}
+                                    disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false:true}
                                 // required
                                 // placeholder="Enter collection name"
                                 // {...register('title')}
@@ -123,7 +124,7 @@ function ReferalPopup(props) {
                             <CopyToClipboard text={url} >
                                 <div className='copy'>
 
-                                    <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={()=> setCopy(false)}></i></a>
+                                    <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={()=> setCopy(false)} disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false:true}></i></a>
                                 </div>
                             </CopyToClipboard>
                             {copy == true && 

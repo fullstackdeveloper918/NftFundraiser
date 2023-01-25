@@ -256,7 +256,9 @@ const ProjNftDetails = () => {
                 <div className='col-12 mt-4'>
                     <div className='container table-detail'>
 
-                        <LatNftdataTable />
+                        <LatNftdataTable
+                       
+                        />
 
 
                     </div>

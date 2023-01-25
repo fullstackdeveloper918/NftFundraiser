@@ -68,9 +68,9 @@ const ProjNFTS = () => {
                                             </div>
 
                                             <div className='button_group buy-invest-btn'>
-                                                <div className=''>
+                                                {/* <div className=''>
                                                     <Link to={`/nftprojdetails/${item.slug}`}><button className='btn ml-lg-auto btn-bordered-white'>Buy</button></Link>
-                                                </div>
+                                                </div> */}
 
                                                 <div className=''>
                                                     <a><button className='btn ml-lg-auto btn-bordered-white'>Invest</button></a>

@@ -26,7 +26,7 @@ const Rewards = () => {
                             </svg>
                         </div>
                         <h3>How Creator and Referral MATIC Rewards Work</h3>
-                        <span className='termsandconditions'><li>Affiliates get 20% on first level NFT referred sales</li> 
+                        <span className='termsandconditions'><li>Affiliates get 30% on first level NFT referred sales</li> 
 <li>Creators get 10% of secondary NFT sales for the lifetime of the project.</li>
 <li>Affiliates receive 5% of secondary purchases.</li>
 <br />
