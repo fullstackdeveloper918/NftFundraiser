@@ -87,37 +87,8 @@ const NftDetails = (props) => {
         })
     }
 
-
-    // const UpdateContract = async (id) => {
-    //     
-
-    //     const formData = new FormData();
-
-    //     formData.append('contract_id', cont);
-    //     const token = localStorage.getItem('authToken')
-
-
-    //     try {
-    //         const config = {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'Authorization': `Bearer ${token}`
-    //             },
-    //             transformRequest: formData => formData
-    //         }
-    //         // 
-    //         await axios.post(`${process.env.REACT_APP_BACKEND_API}api/updateContract/${id}`,
-    //             formData, config
-    //         )
-    //     } catch (error) {
-    //         
-    //         console.log("error");
-    //     }
-    // };
-
-
     const deployContract = async () => {
-        // 
+
         try {
             if (nftdetail?.collectionData?.contract_id == null) {
 
@@ -284,11 +255,13 @@ const NftDetails = (props) => {
                                     <div className='eddlbtton d-flex  align-items-center mt-3'>
 
 
-                                        <><button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                        <>
+                                        <button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                             id="nftdetail.id" onClick={() => deployAndMint(slug)}>  Mint</button><NftPopup
                                                 show={modalShow}
                                                 current={current}
-                                                onHide={() => setModalShow(false)} /></>
+                                                onHide={() => setModalShow(false)} />
+                                                </>
 
 
 

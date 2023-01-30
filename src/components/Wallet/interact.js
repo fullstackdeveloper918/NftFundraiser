@@ -209,8 +209,8 @@ export const getCurrentWalletConnected = async () => {
 
 
 
-const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from, pay_to }) => {
-
+export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from, pay_to, type, end_date, start_date, price }) => {
+  debugger
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -220,6 +220,10 @@ const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from, pay_to
     formData.append('transaction_hash', transaction_hash);
     formData.append('pay_from', pay_from);
     formData.append('pay_to', pay_to);
+    formData.append('type', type.type)
+    formData.append('price', type.price)
+    formData.append('start_date', type.start_date)
+    formData.append('end_date', type.end_date)
 
 
     const config = {
@@ -290,8 +294,8 @@ export const sendFileToIPFS = async (fileImg) => {
   }
 }
 
-export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content }) => {
-
+export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date }) => {
+  debugger
   // const metaDataObj = {
   //   name: _name,
   //   description: _des,
@@ -334,7 +338,8 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, set
           // await UpdateContract(collid, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
           const tokid = web3.utils.hexToNumber(receipt.logs[0].topics[3])
 
-          await UpdateStatus({ slug, token_id: tokid, transaction_hash: receipt.transactionHash, pay_from: receipt.from, pay_to: receipt.to })
+          // console.log(startdate)
+          await UpdateStatus({ slug: slug.id, token_id: tokid, transaction_hash: receipt.transactionHash, pay_from: receipt.from, pay_to: receipt.to, type, price, start_date, end_date })
           setCurrent(2)
           // return redirect(`nft/details/${id}`)
           // console.log('tokid', tokid)
@@ -435,8 +440,8 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
   }
 }
 
-const UpdateBid = async ({ amount,project_id,nft_id,pay_to,pay_from }) => {
-debugger
+const UpdateBid = async ({ amount, project_id, nft_id, pay_to, pay_from }) => {
+  debugger
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -464,8 +469,8 @@ debugger
   }
 };
 
-export const BidNft = async (id,projid) => {
- 
+export const BidNft = async (id, projid) => {
+
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
@@ -494,15 +499,16 @@ export const BidNft = async (id,projid) => {
       // const memory_amounts = [web3.utils.toWei(`${amountToSendPlatform}`, "ether"), web3.utils.toWei(`${amountToSendowner}`, "ether")]
 
       web3.eth.sendTransaction(
-        {from:window.ethereum?.selectedAddress,
-        to:"0xB79722911A09502fb54De1f7769F6624C301810a",
-        value: web3.utils.toWei("0.01"), 
-        data: "0xdf"
-            }, function(err, transactionHash) {
-      if (!err)
-        console.log(transactionHash + " success"); 
-        UpdateBid({amount: "0.03",project_id:projid ,nft_id: id, pay_to:"0xB79722911A09502fb54De1f7769F6624C301810a",pay_from:window.ethereum?.selectedAddress })
-    });
+        {
+          from: window.ethereum?.selectedAddress,
+          to: "0xB79722911A09502fb54De1f7769F6624C301810a",
+          value: web3.utils.toWei("0.01"),
+          data: "0xdf"
+        }, function (err, transactionHash) {
+          if (!err)
+            console.log(transactionHash + " success");
+          UpdateBid({ amount: "0.03", project_id: projid, nft_id: id, pay_to: "0xB79722911A09502fb54De1f7769F6624C301810a", pay_from: window.ethereum?.selectedAddress })
+        });
       // await web3.eth.sendTransaction(transferbid)
       //   .on('transactionHash', function (hash) {
       //     let txHash = hash
