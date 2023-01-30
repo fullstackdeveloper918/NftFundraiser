@@ -56,18 +56,7 @@ const onSubmit = ()=>{
                             </div>
                         </div>
                         <hr />
-                        <div className="col-12">
-                            <div className="form-group">
-                                
-                               
-
-                                {/* <textarea value={value} onChange={setDescription}></textarea> */}
-
-
-
-
-                            </div>
-                        </div>
+                        
                         <div className="col-12">
                             <button className="btn w-100 mt-3 mt-sm-4" type="submit">Pay with wallet </button>
                         </div>

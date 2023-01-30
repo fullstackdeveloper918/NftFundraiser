@@ -128,7 +128,7 @@ function ReferalPopup(props) {
                                 </div>
                             </CopyToClipboard>
                             {copy == true && 
-                            <span>Copied!</span>
+                            <span className='copytext'>Copied!</span>
                             
                         }
                         

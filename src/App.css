@@ -2266,9 +2266,16 @@ body .btn.btn-bordered-white {
     background-color: #17171b !important;
     padding: 10px;
     margin-bottom: 10px;
+    height: 40px;
 }
 .refer-frnd.modal-body {
     padding: 20px 30px !important;
+}
+.copytext{
+    position: absolute;
+    width: 60px;
+    top: 32px;
+    left: 0;
 }
 @media (min-width: 991px){
     .progress_nft.mobile_nft.mb-3 {
