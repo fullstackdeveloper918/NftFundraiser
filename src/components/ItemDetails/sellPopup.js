@@ -47,7 +47,6 @@ function SellPopup(props) {
     })
 
     const mint = (contractAddress, type, start_date, end_date, price) => {
-        debugger
         // auctiondata.map((item) => {
         //     setPrice(item.price)
         // })
@@ -140,7 +139,6 @@ function SellPopup(props) {
     // }
 
     const OnSubmit = async (data) => {
-        debugger
         setModalShow(true)
         // mint()
         await deployContract({ type: data.auctiontype, end_date: data.end_date, start_date: data.start_date, price: data.price })

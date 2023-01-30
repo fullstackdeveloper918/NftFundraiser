@@ -209,8 +209,7 @@ export const getCurrentWalletConnected = async () => {
 
 
 
-export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from, pay_to, type, end_date, start_date, price }) => {
-  debugger
+export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from, pay_to, type }) => {
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -295,7 +294,6 @@ export const sendFileToIPFS = async (fileImg) => {
 }
 
 export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date }) => {
-  debugger
   // const metaDataObj = {
   //   name: _name,
   //   description: _des,

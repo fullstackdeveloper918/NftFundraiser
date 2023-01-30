@@ -37,7 +37,7 @@ import { Tooltip } from 'react-bootstrap';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 function ReferalPopup(props) {
 
-  const [copy, setCopy] = useState(false)
+    const [copy, setCopy] = useState(false)
     // const [title, setTitle] = useState("");
     // const [description, setDescription] = useState("");
     // const [short_url, setShortUrl] = useState("");
@@ -59,20 +59,20 @@ function ReferalPopup(props) {
             <Modal.Header className=' align-items-start'>
                 {window.ethereum?.selectedAddress ? (
 
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Refer your friends
-                    <p>Earn Royalties When You Share: <br />30% of NFTs for first level and 5% for secondary referrals.</p>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Refer your friends
+                        <p>Earn Royalties When You Share: <br />30% of NFTs for first level and 5% for secondary referrals.</p>
 
 
-                </Modal.Title>
-                ):(
-            <Modal.Title id="contained-modal-title-vcenter ">
-                           
-                                <p>Earn When You Share: <br />20% of NFT sales for first level referral </p>
-<p style={{color:"red"}}>Connect your wallet to earn referral income in MATIC when you share projects</p>
+                    </Modal.Title>
+                ) : (
+                    <Modal.Title id="contained-modal-title-vcenter ">
+
+                        <p>Earn When You Share: <br />20% of NFT sales for first level referral </p>
+                        <p style={{ color: "red" }}>Connect your wallet to earn referral income in MATIC when you share projects</p>
 
 
-                            </Modal.Title>
+                    </Modal.Title>
                 )}
                 <div>
                     <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
@@ -91,7 +91,7 @@ function ReferalPopup(props) {
                                     className="form-control"
                                     name="display_name"
                                     value={url}
-                                    disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false:true}
+                                    disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false : true}
                                 // required
                                 // placeholder="Enter collection name"
                                 // {...register('title')}
@@ -124,15 +124,15 @@ function ReferalPopup(props) {
                             <CopyToClipboard text={url} >
                                 <div className='copy'>
 
-                                    <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={()=> setCopy(false)} disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false:true}></i></a>
+                                    <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={() => setCopy(false)} disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false : true}></i></a>
                                 </div>
                             </CopyToClipboard>
-                            {copy == true && 
-                            <span className='copytext'>Copied!</span>
-                            
-                        }
-                        
-                            
+                            {copy == true &&
+                                <span className='copytext'>Copied!</span>
+
+                            }
+
+
                         </div>
                     </div>
 
