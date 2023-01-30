@@ -9,11 +9,11 @@ import { BidNft } from '../Wallet/interact';
 
 function BidPopup(props) {
     const dispatch = useDispatch()
-const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
-const onSubmit = ()=>{
-    debugger
-    BidNft(props.id,props.projid)
-}
+    const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
+    const onSubmit = () => {
+        debugger
+        BidNft(props.id, props.projid)
+    }
 
     return (
         <Modal
@@ -37,7 +37,7 @@ const onSubmit = ()=>{
                             <label>You are about to place a bid for SICKOS from SICKOS COLLECTIVE collection.</label>
                         </div>
                         <div className="col-12">
-                        <label>Token no:</label>
+                            <label>Token no:</label>
                             <div class="bidinput">{window.ethereum?.selectedAddress}</div>
                         </div>
                         <div className="col-12">
@@ -56,7 +56,7 @@ const onSubmit = ()=>{
                             </div>
                         </div>
                         <hr />
-                        
+
                         <div className="col-12">
                             <button className="btn w-100 mt-3 mt-sm-4" type="submit">Pay with wallet </button>
                         </div>

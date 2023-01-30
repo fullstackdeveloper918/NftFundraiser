@@ -238,7 +238,6 @@ const NftDetails = (props) => {
 
 
 
-
                                 </div>
                                 {/* {nftdetail.is_mint == 1 ? (
 
@@ -311,15 +310,15 @@ const NftDetails = (props) => {
                             </div>
                         </div>
                     </div>
-                    
-                    <div className='col-lg-8 col-12'>
-                            <div className="profile_detail mt-4">
 
-                                <NftdataTable
-                                    slug={slug}
-                                />
-                            </div>
+                    <div className='col-lg-8 col-12'>
+                        <div className="profile_detail mt-4">
+
+                            <NftdataTable
+                                slug={slug}
+                            />
                         </div>
+                    </div>
                     <div className='col-12 mt-4'>
                         <div className='container table-detail'>
 

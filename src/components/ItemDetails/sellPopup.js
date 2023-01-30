@@ -180,18 +180,18 @@ function SellPopup(props) {
             centered
         >
             <Modal.Header >
-
-                <div>
-                    <a>List for sale</a> <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
+                <div className='d-flex justify-content-between w-full'>
+                    <label className='modal-title h4 '>List for sale</label> <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
                 </div>
             </Modal.Header>
             <Modal.Body>
-                <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
+                <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover form-sell">
                     <div className="row">
 
                         <div className="col-12 ">
-                            <div className="form-group mt-3">
-                                <label>Choose a type of sale</label>
+                            <div className="form-group">
+                                <div className='mb-3'>Choose a type of sale</div>
+
                                 <div className="form-check form-check-inline mr-2">
                                     {/* {data.usertype == 2 ? ( */}
                                     <>
@@ -234,7 +234,7 @@ function SellPopup(props) {
                         <div className="col-md-12 col-12">
                             {/* {type == 1 && ( */}
 
-                            <div className="form-group mt-3">
+                            <div className="form-group m-0">
                                 <label>Set Price</label>
                                 <input
                                     type="number"
@@ -250,7 +250,7 @@ function SellPopup(props) {
                             {/* )} */}
                         </div>
                         <>
-                            <label>Set Duration </label>
+                            <label className='col-12 my-3'>Set Duration </label>
                             <div className="col-12 col-md-6">
                                 <div className="form-group">
                                     <label>Start date</label>
@@ -296,11 +296,13 @@ function SellPopup(props) {
                                 <span>sale duration: 30 days (default),  60 days, 90 days</span>
                             )}
                         </>
-                        <button type="submit" className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                            id="nftdetail.id">Mint</button><NftPopup
-                            show={modalShow}
-                            current={current}
-                            onHide={() => setModalShow(false)} />
+                        <div className='w-full text-center'>
+                            <button type="submit" className=" mb-0 btn btn-bordered-white" style={{ color: '#FFF' }}
+                                id="nftdetail.id">Mint</button><NftPopup
+                                show={modalShow}
+                                current={current}
+                                onHide={() => setModalShow(false)} />
+                        </div>
                     </div>
 
 
