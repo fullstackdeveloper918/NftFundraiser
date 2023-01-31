@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { GetUserAction } from '../../redux/Actions/authAction';
+import { CountSet, GetUserAction } from '../../redux/Actions/authAction';
 import swal from 'sweetalert';
 import { loginSuccess, logoutSuccess } from '../../redux/Slices/authSlice';
 import { ConnectWallet, getCurrentWalletConnected, Roles } from '../Wallet/interact';
 import Swal from 'sweetalert2';
 import { isCancel } from 'axios';
+import moment from "moment";
 
 const Header = () => {
     const dispatch = useDispatch()
@@ -56,6 +57,12 @@ const Header = () => {
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
+    // const names = Object?.keys(userdet?.notification?.status);
+    // console.log(names)
+    const notiHandler = () => {
+        // debugger
+        dispatch(CountSet())
+    }
 
     const WalletHandler = async () => {
         const response = await ConnectWallet("BUYER")
@@ -71,26 +78,7 @@ const Header = () => {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)
 
-            // swal({
-            //     title: "Are you sure?",
-            //     text: "You will  be able to add it back again!",
-            //     type: "warning",
-            //     showCancelButton: true,
-            //     confirmButtonColor: "#DD6B55",
-            //     confirmButtonText: "Yes, delete it!",
-            //     cancelButtonText: "Cancel",
-            //     closeOnConfirm: false,
-            //     closeOnCancel: false
-            // },
-            //     function (isConfirm) {
-            //         if (isConfirm) {
-            //             window.location = '/profile'
-            //         } else {
-            //             if (isCancel) {
-            //                 window.location = '/projectlist'
-            //             }
-            //         }
-            //     });
+
             swal({
                 title: "Welcome to Karmatica!!!",
                 text: "Karmatica would like to know more about yourself. Update your profile",
@@ -177,10 +165,31 @@ const Header = () => {
                             <Link to={`/all/${"LatestProjects"}`} className="nav-link">Latest</Link>
                         </li>
                         <li className="nav-item">
-                            <a target="_blank" href="https://changelly.com/?from=btc&to=matic&amount=0.1&ref_id=_-GPCBjccW7TMMjO"  className="nav-link">Swap</a>
+                            <a target="_blank" href="https://changelly.com/?from=btc&to=matic&amount=0.1&ref_id=_-GPCBjccW7TMMjO" className="nav-link">Swap</a>
                         </li>
                     </ul>
                     {/* Navbar Toggler */}
+                    {window.ethereum?.selectedAddress &&
+                        <div className="dropdown notification relative">
+                            <i className="btn btn-secondary dropdown-toggle fa-sharp fa-solid fa-bell  text-white w-auto m-0 " type="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={() => notiHandler()} ></i>
+                            {userdet?.notification_count > 0 &&
+
+                                <small className='dropdown-notification'>{userdet?.notification_count}</small>
+                            }
+                            <ul className="creator-dropdown dropdown-menu notification-menu dropdown-scrollbar" aria-labelledby="dropdownMenuButton1">
+
+                                {userdet?.notification?.map((item) => {
+                                    return (
+
+                                        <><li>{item.title}</li><span>{moment(item.created_at).format("ddd D MMM YY")}</span></>
+                                    )
+                                })}
+
+
+                            </ul>
+
+                        </div>
+                    }
                     <ul className="navbar-nav toggle">
                         <li className="nav-item">
                             <a href="#" className="nav-link" data-toggle="modal" data-target="#menu">
@@ -192,9 +201,12 @@ const Header = () => {
                     {/* Navbar Action Button */}
                     <ul className="navbar-nav action">
                         {window.ethereum?.selectedAddress &&
-                            <li className="nav-item mr-2">
-                                <a className="btn ml-lg-auto btn-bordered-white" onClick={WalletHandler} style={{ color: '#f8f9fa' }}><i className="icon-wallet mr-md-2" />{add1}...{add2}</a>
-                            </li>
+                            <>
+
+                                <li className="nav-item mr-2">
+                                    <a className="btn ml-lg-auto btn-bordered-white" onClick={WalletHandler} style={{ color: '#f8f9fa' }}><i className="icon-wallet mr-md-2" />{add1}...{add2}</a>
+                                </li>
+                            </>
                         }
                         {!window.ethereum?.selectedAddress &&
                             <li className="nav-item ml-3">
@@ -204,7 +216,7 @@ const Header = () => {
                     </ul>
                     {window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? (
                         <>
-                            <div className="dropdown">
+                            <div className="dropdown dropdown_login">
                                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i className="fa fa-solid fa-user"></i>
                                 </button>
@@ -236,7 +248,7 @@ const Header = () => {
                     )}
                 </div>
             </nav>
-        </header>
+        </header >
     )
 }
 export default Header;

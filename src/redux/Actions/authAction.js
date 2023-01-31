@@ -300,3 +300,33 @@ export const UpdateProfileAction = (formData) => async dispatch => {
         }
     }
 }
+export const CountSet = () => async dispatch => {
+    // debugger
+    // 
+    const token = localStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+
+                Authorization: `Bearer ${token}`
+            },
+
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/notification/update`,
+            {}, config)
+        // 
+        console.log(res, 'update rres')
+        // await dispatch(res);
+
+        if (res.status === 200) {
+            // debugger
+            await dispatch(GetUserAction())
+
+
+        }
+    } catch (e) {
+        if (e?.response?.data?.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}

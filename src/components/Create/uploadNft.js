@@ -2,7 +2,7 @@
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import React, { Fragment, useEffect, useState, useRef } from 'react';
-import {  useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProjectAction, GetCollectionsAction, uploadNFT } from '../../redux/Actions/projectAction';
 import { useFormData } from './Context/context'
@@ -60,9 +60,9 @@ const UploadNft = ({ current, prev }) => {
     // console.log("collid", coll_id)
     const [source, setSource] = useState([])
     const [sourceType, setSourceType] = useState()
-  
+
     // console.log('stype',stype)
-    console.log('sourcetype',sourceType)
+    console.log('sourcetype', sourceType)
     console.log('source', source)
 
     const [loading, setLoading] = useState(false)
@@ -72,7 +72,7 @@ const UploadNft = ({ current, prev }) => {
 
     console.log(nft_collection_id, "nft collections")
 
-    
+
     const handleIncrement = () => {
         setCount(prevCount => prevCount + 1);
     };
@@ -93,14 +93,14 @@ const UploadNft = ({ current, prev }) => {
             };
         });
     };
-    const previewChange = async (e,index) => {
+    const previewChange = async (e, index) => {
         const pimage = e.target.files[0]
         const base64 = await convertToBase64(pimage);
         setPimage(base64)
 
         setPreview(prevState => {
             // debugger
-            prevState[index] =  e?.target?.files[0] 
+            prevState[index] = e?.target?.files[0]
 
             return [...prevState]
         })
@@ -139,12 +139,12 @@ const UploadNft = ({ current, prev }) => {
         defaultValues
     });
     useEffect(() => {
-  
+
         register("nft_description");
         // let sType = source?.map((element) => element);
         // console.log('stype',sType)
         // setSourceType(sType) 
-    
+
     }, [register]);
 
     // const ipfsClient = create('http://127.0.0.1:5001')
@@ -180,8 +180,8 @@ const UploadNft = ({ current, prev }) => {
         setNFtExtension(filetype)
         // debugger
         setNft(e.target.files[0])
-        
-        
+
+
 
         var fr = new FileReader;
 
@@ -232,13 +232,13 @@ const UploadNft = ({ current, prev }) => {
 
             setSource(prevState => {
                 // debugger
-                prevState[index] = { file: e.target.files[0] , type: type  }
+                prevState[index] = { file: e.target.files[0], type: type }
                 setSourceType(type)
-    
+
                 return [...prevState]
             })
-            
-           
+
+
             // switch (nft?.name?.str.includes(".glb")) {
 
             //     case '':
@@ -275,11 +275,11 @@ const UploadNft = ({ current, prev }) => {
     // console.log(log, 'logggg')
 
     // const desdata = { nft_description() }
-   
+
     useEffect(() => {
 
         dispatch(GetCollectionsAction())
-        
+
 
     }, [])
 
@@ -305,7 +305,7 @@ const UploadNft = ({ current, prev }) => {
 
             const formData = new FormData()
 
-// debugger
+            // debugger
             if (check === false) {
                 console.log('uploaded')
                 formData.append('title', data.title)
@@ -450,7 +450,7 @@ const UploadNft = ({ current, prev }) => {
     return (
         // <section className="author-area">
         <div className="main-create">
-           
+
             {loading ? (
                 <Loader />
             ) : (
@@ -506,7 +506,7 @@ const UploadNft = ({ current, prev }) => {
                                                 </div> */}
                                     <>
                                         {fields.map(({ key, name, ...restField }, index) => (
-                                             
+
                                             // setSourceType(source[index]?.file),
                                             // <Space
                                             //     key={key}
@@ -769,11 +769,11 @@ const UploadNft = ({ current, prev }) => {
                                                                                 accept=".mov,.mp4,.mp3,.webm.gltf,.glb,.jpg,.jpeg,.gif,.svg"
                                                                             />
 
-                                                                            {source?.length && source?.[index] && source[index]?.type === "Image" &&  
+                                                                            {source?.length && source?.[index] && source[index]?.type === "Image" &&
                                                                                 <div>
                                                                                     {/* {nftFileType === "Image" && nftHeight >= 500 && nftwidth >= 500 ? ( */}
                                                                                     {source?.length && source?.[index] && source[index]?.type === "Image" && (
-                                                                                  
+
 
                                                                                         <img
                                                                                             src={URL.createObjectURL(source[index].file)}
@@ -790,7 +790,7 @@ const UploadNft = ({ current, prev }) => {
                                                                                 </div>
                                                                             }
 
-                                                                            {source?.length && source?.[index] && source[index]?.type === "Player" && 
+                                                                            {source?.length && source?.[index] && source[index]?.type === "Player" &&
                                                                                 <div>
                                                                                     {/* { source?.length && source?.[index] && source[index]?.type === "Player" && ( */}
                                                                                     <video
@@ -801,7 +801,7 @@ const UploadNft = ({ current, prev }) => {
                                                                                         src={source?.length && source?.[index] && URL.createObjectURL(source[index]?.file)}
                                                                                     // onChange={setSource}
                                                                                     />
-                                                                                     {/* )} */}
+                                                                                    {/* )} */}
                                                                                     <div className="uploadnftpopup_content">
                                                                                         <label>Preview Image</label>
                                                                                         <p>
@@ -824,25 +824,25 @@ const UploadNft = ({ current, prev }) => {
                                                                                         <input
                                                                                             type="file"
                                                                                             onChange={e => previewChange(e, index)}
-                                                                                            // onChange={previewChange}
+                                                                                        // onChange={previewChange}
                                                                                         />
                                                                                         {preview?.length && preview?.[index] &&
-                                                                                        <div className="uploadnftpopup-input-img  uploadnftpopup-secound">
-                                                                                            {preview?.length && preview?.[index] && (
-                                                                                            <img
-                                                                                                className="preview_image"
-                                                                                                src={URL.createObjectURL(preview[index])}
-                                                                                              
-                                                                                                
-                                                                                                // onChange={setPimage}
-                                                                                            />
-                                                                                                  ) }
-                                                                                        </div>
-                                                                                          }
+                                                                                            <div className="uploadnftpopup-input-img  uploadnftpopup-secound">
+                                                                                                {preview?.length && preview?.[index] && (
+                                                                                                    <img
+                                                                                                        className="preview_image"
+                                                                                                        src={URL.createObjectURL(preview[index])}
+
+
+                                                                                                    // onChange={setPimage}
+                                                                                                    />
+                                                                                                )}
+                                                                                            </div>
+                                                                                        }
                                                                                     </div>
 
                                                                                 </div>
-                                                                            }  
+                                                                            }
 
                                                                             {/* )} */}
                                                                             {/* <div className="VideoInput_footer">{vdo || "Nothing selectd"}</div> */}
@@ -853,7 +853,7 @@ const UploadNft = ({ current, prev }) => {
                                                                                         vdo={source?.length && source?.[index] && URL.createObjectURL(source[index]?.file)}
                                                                                     // mdl={setModal}
                                                                                     />
-                                                                                    
+
                                                                                     <div className="uploadnftpopup_content">
                                                                                         <label>Preview Image</label>
                                                                                         <p className="">
@@ -877,15 +877,15 @@ const UploadNft = ({ current, prev }) => {
                                                                                             type="file"
                                                                                             onChange={e => previewChange(e, index)}
                                                                                         />
-                                                                                         {preview?.length && preview?.[index] &&
-                                                                                        <div className="uploadnftpopup-input-img  uploadnftpopup-secound">
-                                                                                             {preview?.length && preview?.[index] && (
-                                                                                            <img 
-                                                                                            className="preview_image"
-                                                                                            src={URL.createObjectURL(preview[index])} />
-                                                                                             )}
-                                                                                        </div>
-                                                                                          }
+                                                                                        {preview?.length && preview?.[index] &&
+                                                                                            <div className="uploadnftpopup-input-img  uploadnftpopup-secound">
+                                                                                                {preview?.length && preview?.[index] && (
+                                                                                                    <img
+                                                                                                        className="preview_image"
+                                                                                                        src={URL.createObjectURL(preview[index])} />
+                                                                                                )}
+                                                                                            </div>
+                                                                                        }
                                                                                     </div>
                                                                                 </div>
                                                                             )}

@@ -87,7 +87,7 @@ const Create = ({ current, next, prev }) => {
     })
     // console.log(col, 'col')
     const OnSubmit = (data) => {
-
+        debugger
 
         const imageBanner = dataURLtoBlob(image)
 
@@ -126,7 +126,7 @@ const Create = ({ current, next, prev }) => {
 
             setValue('end_date', data.end_date)
         }
-        
+
     }, [data])
 
     const cat = useSelector(state => {
@@ -155,16 +155,16 @@ const Create = ({ current, next, prev }) => {
         //     debugger
         // }
     };
-    function imposeMinMax(el){
-        if(el?.value != ""){
-          if(parseInt(el?.value) < parseInt(el?.min)){
-            el.value = el?.min;
-          }
-          if(parseInt(el?.value) > parseInt(el?.max)){
-            el.value = el.max;
-          }
+    function imposeMinMax(el) {
+        if (el?.value != "") {
+            if (parseInt(el?.value) < parseInt(el?.min)) {
+                el.value = el?.min;
+            }
+            if (parseInt(el?.value) > parseInt(el?.max)) {
+                el.value = el.max;
+            }
         }
-      }
+    }
     return (
 
         <div className={current === 0 ? styles.showForm : styles.hideForm}>
@@ -399,7 +399,7 @@ const Create = ({ current, next, prev }) => {
                             {/* {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">City is required</p>} */}
                         </div>
                     </div>
-                    
+
                     <div className="col-12 col-md-6">
                         <div className="form-group">
                             {usertype == 2 ? (
@@ -433,7 +433,7 @@ const Create = ({ current, next, prev }) => {
 
                                     className="form-control"
                                     name="number_of_nft"
-                                   
+
                                     value='1'
                                     defaultValue={1}
                                     // defaultValue={1}

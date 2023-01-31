@@ -71,23 +71,23 @@ const LatprojNftDetails = (props) => {
         })
     }
     // const bidHandler = () =>{
-// if(window.ethereum?.selectedAddress){
-//     debugger
-//     dispatch(BidPopup())
-// }else{
-//     ConnectWallet()
-// }
+    // if(window.ethereum?.selectedAddress){
+    //     debugger
+    //     dispatch(BidPopup())
+    // }else{
+    //     ConnectWallet()
+    // }
     // }
     return (
         <section className="item-details-area">
             <div className="container">
 
                 <div className="row justify-content-between content_project px-0">
-                <div className='py-0 col-12 mt-2 mb-2 mt-lg-0 mb-lg-0'>
+                    <div className='py-0 col-12 mt-2 mb-2 mt-lg-0 mb-lg-0'>
                         <span Class="title_main " style={{ color: '#fff' }}>{latprojnftdetail.title}  </span>
-                </div>
+                    </div>
                     <div className="col-12 col-lg-4">
-                   
+
                         <div className="item-info">
                             {/* {latprojdetail?.map((item, key) => ( */}
 
@@ -97,25 +97,25 @@ const LatprojNftDetails = (props) => {
                                 {/*  */}
                                 {/* return ( */}
                                 {latprojnftdetail.extention === "PLayer" &&
-                                <video
-                                // className="VideoInput_video"
-                                width="100%"
-                                // height={height}
-                                controls
-                                src={latprojnftdetail.image}
-                            // onChange={setSource}
-                            />
+                                    <video
+                                        // className="VideoInput_video"
+                                        width="100%"
+                                        // height={height}
+                                        controls
+                                        src={latprojnftdetail.image}
+                                    // onChange={setSource}
+                                    />
                                 }
 
-                                {latprojnftdetail.extention === "modal" && 
-                                  <DModal
-                                  vdo={latprojnftdetail.image}
-                              
-                              />
+                                {latprojnftdetail.extention === "modal" &&
+                                    <DModal
+                                        vdo={latprojnftdetail.image}
+
+                                    />
                                 }
-                                {   latprojnftdetail.extention == null && 
-                                
-                                <img src={latprojnftdetail.image} alt="" />
+                                {latprojnftdetail.extention == null &&
+
+                                    <img src={latprojnftdetail.image} alt="" />
                                 }
                                 {/* ) */}
                                 {/* })} */}
@@ -215,7 +215,7 @@ const LatprojNftDetails = (props) => {
 
                                 <div className='eddlbtton d-flex gap- align-items-center mt-2'>
 
-                                {/* <div className="item-info-list">
+                                    {/* <div className="item-info-list">
                                     <ul className="list-unstyled">
                                         <li><span class='boldertext'>Affiliate first sale royalties: 20%</span></li>
                                        <li><span class='boldertext'>NFT creator royalties: 10% </span></li> 
@@ -224,33 +224,35 @@ const LatprojNftDetails = (props) => {
                                         
                                     </ul>
                                 </div> */}
-                                <div className='eddlbtton flex-wrap d-flex gap-10  align-items-center mt-2'>
+                                    <div className='eddlbtton flex-wrap d-flex gap-10  align-items-center mt-2'>
 
-                                    <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                        id="nftdetail.id" onClick={() => buyHandler()}>Buy Now</button>
+                                        <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                            id="nftdetail.id" onClick={() => buyHandler()}>Buy Now</button>
 
-                                    <button className="btn  btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                    onClick={() =>
-                                        setBidModalShow(true)}>Place Bid</button>
-                                    <BidPopup
-                                   
-                                       id = {latprojnftdetail.id}
-                                       projid = {latprojnftdetail.project_id}
-                                        show={bidmodalShow}
-                                        onHide={() => setBidModalShow(false)} />
-                                </div>
-                                <div className='eddlbtton bitbtn d-flex  align-items-center mt-2'>
+                                        <button className="btn  btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                            onClick={() =>
+                                                setBidModalShow(true)}>Place Bid</button>
+                                        <BidPopup
 
-                                <div>
-                                
-                                </div>
+                                            id={latprojnftdetail.id}
+                                            projid={latprojnftdetail.project_id}
+                                            projtitle={latprojnftdetail.title}
+                                            projcoll={latprojnftdetail?.collectionData?.title}
+                                            show={bidmodalShow}
+                                            onHide={() => setBidModalShow(false)} />
+                                    </div>
+                                    <div className='eddlbtton bitbtn d-flex  align-items-center mt-2'>
+
+                                        <div>
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
 
-                    
+
                     <div className="col-12 col-lg-8 mt-4">
                         <div class="user-description ">
                             <h5 className='user_title gap-5'><div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg></div><div>Description</div>
@@ -269,7 +271,7 @@ const LatprojNftDetails = (props) => {
                             </h5>
                             <div className='price_nft_detail'>
                                 <div className='nft-price'>
-                                <svg viewBox="0 0 20 20" width="24px" height="24px"  fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="10" fill="#8247E5"></circle><path d="M12.97 8.055a.75.75 0 0 0-.732 0l-1.678.972-1.141.635-1.68.972a.751.751 0 0 1-.731 0l-1.335-.76a.727.727 0 0 1-.366-.614V7.76c0-.254.13-.486.366-.613l1.313-.74a.751.751 0 0 1 .732 0l1.313.74c.215.127.366.36.366.613v.973l1.141-.656v-.972a.684.684 0 0 0-.366-.614L7.74 5.095a.751.751 0 0 0-.732 0L4.532 6.49a.684.684 0 0 0-.365.614v2.811c0 .254.129.487.365.614l2.476 1.395a.75.75 0 0 0 .732 0l1.679-.951 1.14-.656 1.68-.951a.75.75 0 0 1 .731 0l1.313.74c.216.127.366.36.366.613v1.5c0 .255-.129.487-.366.614l-1.313.761a.751.751 0 0 1-.732 0l-1.313-.74a.727.727 0 0 1-.366-.613v-.973l-1.14.656v.972c0 .254.129.487.366.613l2.475 1.396a.751.751 0 0 0 .732 0l2.475-1.396a.727.727 0 0 0 .366-.613v-2.811a.684.684 0 0 0-.366-.614L12.97 8.055Z" fill="#fff"></path></svg>
+                                    <svg viewBox="0 0 20 20" width="24px" height="24px" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="10" fill="#8247E5"></circle><path d="M12.97 8.055a.75.75 0 0 0-.732 0l-1.678.972-1.141.635-1.68.972a.751.751 0 0 1-.731 0l-1.335-.76a.727.727 0 0 1-.366-.614V7.76c0-.254.13-.486.366-.613l1.313-.74a.751.751 0 0 1 .732 0l1.313.74c.215.127.366.36.366.613v.973l1.141-.656v-.972a.684.684 0 0 0-.366-.614L7.74 5.095a.751.751 0 0 0-.732 0L4.532 6.49a.684.684 0 0 0-.365.614v2.811c0 .254.129.487.365.614l2.476 1.395a.75.75 0 0 0 .732 0l1.679-.951 1.14-.656 1.68-.951a.75.75 0 0 1 .731 0l1.313.74c.216.127.366.36.366.613v1.5c0 .255-.129.487-.366.614l-1.313.761a.751.751 0 0 1-.732 0l-1.313-.74a.727.727 0 0 1-.366-.613v-.973l-1.14.656v.972c0 .254.129.487.366.613l2.475 1.396a.751.751 0 0 0 .732 0l2.475-1.396a.727.727 0 0 0 .366-.613v-2.811a.684.684 0 0 0-.366-.614L12.97 8.055Z" fill="#fff"></path></svg>
                                     <span>{latprojnftdetail.amount}</span>
                                     {/* <span><small>$120</small></span> */}
                                 </div>
@@ -285,15 +287,15 @@ const LatprojNftDetails = (props) => {
                         </div>
 
                         <div className=''>
-                        <div className="profile_detail mt-4">
+                            <div className="profile_detail mt-4">
 
-                            <LatNftDataTable
-                            // id={id}
-                            />
+                                <LatNftDataTable
+                                // id={id}
+                                />
+                            </div>
                         </div>
                     </div>
-                    </div>
-  
+
 
 
 

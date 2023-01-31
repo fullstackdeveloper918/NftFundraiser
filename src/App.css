@@ -323,7 +323,7 @@ ul.creator-dropdown.dropdown-menu li {
 .dropdown-item a{
 color:#fff !important;
 }
-:root header .navbar-expand .dropdown:hover > .dropdown-menu:after {
+:root header .navbar-expand .dropdown_login:hover > .dropdown-menu:after {
     content: "";
     height: 15px;
     width: 15px;
@@ -333,7 +333,7 @@ color:#fff !important;
     left: 76px;
     transform: rotate(45deg);
 }
-header .navbar-expand .dropdown:hover > .dropdown-menu {
+header .navbar-expand .dropdown_login:hover > .dropdown-menu {
     box-shadow: 0px 0px 7px #302f2f87 !important;
     padding: 10px;
     margin-top: 0px !important;
@@ -2277,6 +2277,65 @@ body .btn.btn-bordered-white {
     top: 32px;
     left: 0;
 }
+.notification {
+    font-size: 25px;
+    margin: 0 15px;
+    position: relative;
+}
+small.dropdown-notification {
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+    position: absolute;
+    left: 17px;
+    border-radius: 25px;
+    padding: 0 8px;
+    font-size: 12px;
+    font-weight: 900;
+    top: 14px;
+}
+ul.creator-dropdown.dropdown-menu {
+    /* position: absolute; */
+    left: -70px;
+}
+
+.notification-menu {
+    box-shadow: 0px 0px 7px #302f2f87 !important;
+    padding: 10px;
+    margin-top: 0px !important;
+    visibility: unset;
+    opacity: 1;
+    color: #fff;
+    text-align: left;
+    background-color: #252329 !important;
+    list-style: none;
+    position: absolute;
+    /* width: 250px; */
+    left: -90px;
+    width: max-content;
+    display:none;
+}
+.notification-menu-open{
+    display: block;
+}
+
+.notification .btn.btn-secondary.dropdown-toggle:after {
+    display: none;
+    content: "";
+}
+ul.creator-dropdown.notification-menu:after {
+    content: "";
+    height: 15px;
+    width: 15px;
+    background-color: #252329 !important;
+    position: absolute;
+    top: -8px;
+    left: 70px;
+    transform: rotate(45deg);
+}
+.notification .btn.btn-secondary.dropdown-toggle {
+    background: unset;
+    padding: 0;
+    font-size: 20px;
+}
 @media (min-width: 991px){
     .progress_nft.mobile_nft.mb-3 {
        display: none;
@@ -2288,7 +2347,7 @@ body .btn.btn-bordered-white {
     ul.creator-dropdown.dropdown-menu {
         left: -74px !important;
     }
-    :root header .navbar-expand .dropdown:hover > .dropdown-menu:after {
+    :root header .navbar-expand .dropdown_login:hover > .dropdown-menu:after {
         content: "";
         left: 106px;
     }
@@ -2474,4 +2533,9 @@ body .btn.btn-bordered-white {
         }
 
 
-    
+        .dropdown-scrollbar
+        {
+            height: 250px;
+            overflow: scroll;
+        
+        }
