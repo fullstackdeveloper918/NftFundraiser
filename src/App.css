@@ -230,7 +230,7 @@ input[type="date"]:focus::before {
     line-height: 0;
     direction: ltr;
     overflow: hidden;
-    z-index: 0;
+    z-index: -1;
 }
 /* .item-details-area h3 {
     padding: 20px 0px 0px 0px;
@@ -316,6 +316,7 @@ footer a.navbar-brand img {
 ul.creator-dropdown.dropdown-menu li {
     font-size: 15px !important;
     font-weight: 600 !important;
+    line-height: 22px;
 }
 .dropdown-item {
     padding: 0;
@@ -533,8 +534,11 @@ span#inputGroupPrepend2 {
 .styles_hideForm__Dhvgw .orgicon1line {
     width: 150px;
 }
- form span {
-    color: white !important;
+form span {
+    color: #6b6b6b !important;
+}
+form .salewrap {
+    color: #5d5d5d !important;
 }
 section.work-area p {
     color: #8e8e8e !important;
@@ -2285,16 +2289,22 @@ body .btn.btn-bordered-white {
 small.dropdown-notification {
     background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
     position: absolute;
-    left: 17px;
-    border-radius: 25px;
-    padding: 0 8px;
-    font-size: 12px;
+    left: 13px;
+    border-radius: 100px;
+    padding: 0px 0px 0px;
+    font-size: 10px;
     font-weight: 900;
-    top: 14px;
+    top: 18px;
+    z-index: 1;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 ul.creator-dropdown.dropdown-menu {
     /* position: absolute; */
-    left: -70px;
+    left: 0px;
 }
 
 .notification-menu {
@@ -2533,9 +2543,48 @@ ul.creator-dropdown.notification-menu:after {
         }
 
 
-        .dropdown-scrollbar
-        {
-            height: 250px;
-            overflow: scroll;
+        .dropdown-scrollbar {
+            height: auto;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            max-width: 260px;
+            max-height: 350px;
+        }
+        .dropdown-scrollbar::-webkit-scrollbar-thumb {
+            background: #afafaf;
+        }
+        .dropdown-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .dropdown-scrollbar::-webkit-scrollbar-track {
+            background: #323232;
+        }
+        li.btn_wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #3f3f3f;
+            padding-bottom: 10px;
+        }
+        .btn_wrap button {
+            background: transparent;
+            border: 0px;
+            font-size: 12px;
+        }
+        .btn_wrap span {
+            font-size: 12px !important;
+            line-height: 12px;
+        }
         
+        .noty_all {
+            border-radius: 100px !important;
+            font-size: 14px;
+            padding: 4px 13px;
+            float: right;
+            background-color: transparent;
+            border: none;
+            color: lightgray;
+        }
+        .noty_all a{
+            color: lightgray !important;
         }

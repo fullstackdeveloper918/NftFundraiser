@@ -59,10 +59,6 @@ const NftTransdataTable = (props) => {
                         </thead>
 
 
-
-
-
-
                         <tbody>
                             {latprojnftdetail?.nft_history?.map((items) => {
                                 return (
@@ -86,10 +82,12 @@ const NftTransdataTable = (props) => {
 
                     </Table>
                     <div className='nothing'>
-                    No matching records found
-                </div>
+                        {latprojnftdetail?.nft_history?.length == 0 &&
+                            <span> No matching records found</span>
+                        }
+                    </div>
                 </Panel>
-                
+
             </Collapse>
         </div>
     )

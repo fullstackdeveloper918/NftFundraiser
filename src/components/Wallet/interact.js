@@ -339,6 +339,7 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, set
           // console.log(startdate)
           await UpdateStatus({ slug: slug.id, token_id: tokid, transaction_hash: receipt.transactionHash, pay_from: receipt.from, pay_to: receipt.to, type, price, start_date, end_date })
           setCurrent(2)
+          // history.push(`nft/details/${slug.id}`)
           // return redirect(`nft/details/${id}`)
           // console.log('tokid', tokid)
         }
@@ -364,7 +365,39 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, set
   }
 }
 
-export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet }) => {
+const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to, tokenId, values) => {
+  const token = localStorage.getItem('authToken')
+  try {
+    const formData = new FormData();
+
+    formData.append('price', nft_id.values);
+    formData.append('txd_id', nft_id.txd_id);
+    formData.append('project_id', nft_id.proj_id);
+    formData.append('nft_id', nft_id.nft_id);
+    formData.append('pay_from', nft_id.payFrom);
+    formData.append('pay_to', nft_id.pay_to);
+    formData.append('token_id', nft_id.tokenId);
+    formData.append('ref_id', nft_id.refid);
+
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+    }
+    // 
+    await axios.post(`${process.env.REACT_APP_BACKEND_API}api/transaction/store`,
+      formData, config
+    )
+  } catch (error) {
+    // 
+    // console.log("error");
+  }
+};
+
+
+export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id }) => {
   // debugger
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
@@ -417,8 +450,8 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
           // console.log(receipt, 'recipt')
         })
         .on('confirmation', async (confNumber, receipt) => {
-          // 
           console.log(receipt, 'conf')
+          UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: receipt.to, tokenId, values })
           // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
           // setModeShow(false)
 
@@ -439,7 +472,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
 }
 
 const UpdateBid = async ({ amount, project_id, nft_id, pay_to, pay_from }) => {
-  debugger
+  // debugger
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();

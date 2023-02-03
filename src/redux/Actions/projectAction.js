@@ -635,7 +635,7 @@ export const getBid = (id) => async dispatch => {
     }
 };
 export const UpdateBId = ({ id, status }) => async dispatch => {
-    debugger
+    // debugger
     try {
         const token = localStorage.getItem('authToken')
         const config = {

@@ -8,11 +8,11 @@ import { BidNft } from '../Wallet/interact';
 
 
 function BidPopup(props) {
-    debugger
+    // debugger
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
     const onSubmit = () => {
-        debugger
+        // debugger
         BidNft(props.id, props.projid)
     }
 
@@ -35,7 +35,7 @@ function BidPopup(props) {
                     <div className="row">
 
                         <div className="col-12 pb-2">
-                            <label>You are about to place a bid for {props.projtitle.toUpperCase()} from {props.projcoll.toUpperCase()}.</label>
+                            <label>You are about to place a bid for {props.projtitle?.toUpperCase()} from {props.projcoll?.toUpperCase()}.</label>
                         </div>
                         <div className="col-12">
                             <label>Wallet address:</label>

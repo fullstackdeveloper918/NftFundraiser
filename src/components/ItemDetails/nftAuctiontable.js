@@ -37,7 +37,6 @@ const NftAuctiondataTable = (props) => {
     }, [props.slug.id])
 
     const acceptHandler = (id) => {
-        debugger
 
         console.log("accept", id)
         getBid(props)
@@ -79,7 +78,14 @@ const NftAuctiondataTable = (props) => {
                                         <td>{item.pay_from?.slice(0, 4)}...{item.pay_from?.slice(35, 44)}</td>
                                         {/* <td>{item.pay_to?.slice(0, 4)}...{item.pay_to?.slice(35, 44)}</td> */}
                                         <td>{item.txd_id?.slice(0, 4)}...{item.txd_id?.slice(35, 44)}</td>
-                                        <td><button type="submit" onClick={() => acceptHandler(item.id, setBidStatus("2"))}>Accept</button></td>
+                                        <td>
+                                            {item.status == 1 ? (
+
+                                                <button type="submit" onClick={() => acceptHandler(item.id, setBidStatus("2"))}>Accept</button>
+                                            ) : (
+                                                <a>Confirmed</a>
+                                            )}
+                                        </td>
                                     </tr>
                                 )
                             })}

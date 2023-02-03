@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { dataURLtoBlob } from "../../utils/blobfromurl";
 
 export default function ImageViewer(props) {
-    debugger
     const { width, height } = props;
     const { vdo } = props
 

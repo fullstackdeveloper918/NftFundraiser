@@ -1,6 +1,6 @@
 import React, { Component, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { DeleteProject, GetSettings, LatestProjectDetail, NftList, ProjectDetail, UpdateCollection } from '../../redux/Actions/projectAction';
 import { getProjectDetail } from '../../redux/Slices/projectSlice';
@@ -27,7 +27,7 @@ const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
 const NftDetails = (props) => {
-
+    const history = useHistory()
 
     const latprojnftdetail = useSelector(state => {
         // 
@@ -60,10 +60,6 @@ const NftDetails = (props) => {
         return state.projectdetails.nftlist
 
     })
-    // console.log(nftdetail, 'latprojdetail')
-    const collupdate = useSelector(state => {
-        return state?.projectdetails?.collectiondetails
-    })
 
     // console.log('collupdate', collupdate)
     useEffect(() => {
@@ -73,87 +69,8 @@ const NftDetails = (props) => {
     }, [slug])
 
 
-    const mint = (contractAddress) => {
-        CreateMetaDataAndMint({
-            _name: nftdetail.title,
-            _des: nftdetail.description,
-            _imgBuffer: nftdetail.image,
-            contractAddress,
-            setCurrent,
-            collid: nftdetail?.collection_id,
-            nft_file_content: nftdetail?.nft_file_content,
-            slug,
-            setModalShow
-        })
-    }
 
-    const deployContract = async () => {
 
-        try {
-            if (nftdetail?.collectionData?.contract_id == null) {
-
-                await window.ethereum.request({
-                    method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: web3.utils.toHex('80001') }],
-                })
-
-                // const { address } = await ConnectWallet()
-                const address = window?.ethereum?.selectedAddress
-                const MyNFTContract = new web3.eth.Contract(NFTContract.abi)
-                const gas = await web3.eth.getGasPrice();
-                // const gas = 500000
-
-                MyNFTContract.deploy({
-                    data: NFTContract.bytecode,
-                    arguments: [nftdetail?.collectionData?.title, nftdetail?.collectionData?.symbol],
-                }).send({
-                    from: address,
-                })
-                    .on('error', (error) => {
-                        // console.log(error)
-                    })
-                    .on('transactionHash', (transactionHash) => {
-                        // console.log(transactionHash, "transactionHash")
-                    })
-                    .on('receipt', (receipt) => {
-                        // receipt will contain deployed contract address
-                        // console.log(receipt, "reciept")
-                    })
-                    .on('confirmation', (confNumber, receipt) => {
-                        // console.log(receipt.contractAddress, "confirmRecipet")
-                        if (confNumber == 1) {
-                            mint(receipt?.contractAddress)
-                            // setContractAdd(receipt?.contractAddress)
-                            // UpdateContract(id)
-                        }
-
-                    })
-            } else {
-                mint(nftdetail?.collectionData?.contract_id)
-            }
-            return {
-                success: true,
-                // status: ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>" + txHash
-                status: ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>"
-            }
-        } catch (error) {
-            // 
-            alert("went wrong")
-            return {
-                success: false,
-                status: ":disappointed_relieved: Something went wrong: " + error.message
-            }
-        }
-
-    }
-
-    const deployAndMint = async () => {
-
-        setModalShow(true)
-        // mint()
-        await deployContract()
-        // nftdetail.id()
-    }
     return (
 
         <section className="item-details-area">
@@ -224,21 +141,32 @@ const NftDetails = (props) => {
                                         <span> #{nftdetail.token_id}</span>
                                     </ul>
                                 </div>
-                                <div className='eddlbtton d-flex  align-items-center mt-3'>
+                                {nftdetail.is_mint == 0 ? (
+
+                                    <div className='eddlbtton d-flex  align-items-center mt-3'>
 
 
-                                    <><button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                        onClick={() => setSellModalShow(true)}>  Sell</button>
-                                        <SellPopup
-                                            show={sellmodalShow}
+                                        <><button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                            onClick={() => setSellModalShow(true)}>  Sell</button>
+                                            <SellPopup
+                                                show={sellmodalShow}
 
-                                            onHide={() => setSellModalShow(false)} />
-                                    </>
+                                                onHide={() => setSellModalShow(false)} />
+                                        </>
+
+                                    </div>
+                                ) : (
+
+                                    <div className='eddlbtton d-flex  align-items-center mt-3'>
 
 
+                                        <><button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                            disabled>Ready to purchase</button>
 
+                                        </>
 
-                                </div>
+                                    </div>
+                                )}
                                 {/* {nftdetail.is_mint == 1 ? (
 
                                     <div className='eddlbtton d-flex  align-items-center mt-3'>

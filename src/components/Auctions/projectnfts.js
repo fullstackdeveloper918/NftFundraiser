@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getPublicLiveProjects, LatestProjectDetail } from '../../redux/Actions/projectAction';
 
-const ProjNFTS = () => {
+const ProjNFTS = (props) => {
 
 
     const dispatch = useDispatch()
     const { slug } = useParams();
+
     const latprojdetail = useSelector(state => {
         // 
         return state.projectdetails.latestprojectdetails
@@ -43,7 +44,7 @@ const ProjNFTS = () => {
                                 <div className="card">
 
                                     <div className="image-over">
-                                        <Link to={`/nftprojdetails/${item.slug}`}>
+                                        <Link to={`/nftprojdetails/${item.slug}?refid=${props.refid}`}>
                                             <img className="card-img-top" src={item.image} alt="" />
                                         </Link>
                                     </div>

@@ -45,6 +45,7 @@ import AllFundraiser from "../themes/allFundproj";
 import AllFundraiserProjects from "../themes/fund-projects";
 import FundraiserProjects from "../themes/fundraise";
 import NftReward from "../themes/rwrd";
+import Notifi from "../themes/allnot";
 // import { NavLink } from "react-router-dom";
 
 const MyRouts = () => {
@@ -58,6 +59,7 @@ const MyRouts = () => {
           <Route exact path="/" component={ThemeOne} />
           <Route exact path="/explore-1" component={ExploreOne} />
           <Route exact path="/projectlist" component={ExploreTwo} />
+          <Route exact path="/allnotifications" component={Notifi} />
           <Route exact path="/updateproject/:id" component={ProjectUpdate} />
           {/* <Route exact path="/projectlist" component={ExploreThree} /> */}
           <Route exact path="/explore-4" component={ExploreFour} />

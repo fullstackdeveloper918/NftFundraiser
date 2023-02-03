@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { Nftprice, Nftdeatil } from './nftprice'
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { DeleteProject, GetNftwol, GetSettings, LatestProjectDetail, NftList, ProjectDetail, UpdateCollection } from '../../redux/Actions/projectAction';
 import Web3 from 'web3';
 
@@ -23,6 +23,10 @@ const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alche
 
 const LatprojNftDetails = (props) => {
     const dispatch = useDispatch()
+
+    const search = useLocation().search;
+    const refid = new URLSearchParams(search).get('refid');
+    console.log(refid, 'refid')
     const [ownwallet, setOwnWallet] = useState('')
     const [ownFee, setOwnFee] = useState('')
     const [bidmodalShow, setBidModalShow] = React.useState(false);
@@ -34,6 +38,7 @@ const LatprojNftDetails = (props) => {
         // 
         return state.projectdetails.getnftwoldetails
     })
+    console.log(latprojnftdetail.extention, 'latext')
     // console.log('paymentflow', [latprojnftdetail.payment_flow?.project_data.wallets])
 
 
@@ -51,7 +56,6 @@ const LatprojNftDetails = (props) => {
 
     }, [id])
     const buyHandler = () => {
-
         // setOwnWallet([latprojnftdetail.payment_flow?.project_data.wallets])
         // setOwnFee([latprojnftdetail.payment_flow?.project_data.fees])
         // setPlatformFee([latprojnftdetail.payment_flow?.karmatica_fee])
@@ -66,13 +70,18 @@ const LatprojNftDetails = (props) => {
 
             ownerFee: ([latprojnftdetail.payment_flow?.project_data?.fees]),
             ownerWallet: ([latprojnftdetail.payment_flow?.project_data?.wallets]),
-            flow: ([latprojnftdetail.payment_flow])
+            flow: ([latprojnftdetail.payment_flow]),
+            refid: refid,
+            proj_id: latprojnftdetail.project_id,
+            nft_id: latprojnftdetail.id,
+
 
         })
     }
     // const bidHandler = () =>{
     // if(window.ethereum?.selectedAddress){
     //     debugger
+
     //     dispatch(BidPopup())
     // }else{
     //     ConnectWallet()
@@ -113,53 +122,16 @@ const LatprojNftDetails = (props) => {
 
                                     />
                                 }
-                                {latprojnftdetail.extention == null &&
+                                {latprojnftdetail.extention === 'Image' &&
 
                                     <img src={latprojnftdetail.image} alt="" />
                                 }
                                 {/* ) */}
                                 {/* })} */}
                             </div>
-                                {/* Netstorm Tab */}
-                                {/* <ul className="netstorm-tab nav nav-tabs" id="nav-tab">
-                                    <><li>
-                                        <a className="active" id="nav-home-tab" data-toggle="pill" href="#nav-home">
-                                            <h5 className="m-0">{initData.tab_1}</h5>
-                                        </a>
-                                    </li><li>
-                                            <a id="nav-contact-tab" data-toggle="pill" href="#nav-contact">
-                                                <h5 className="m-0">{initData.tab_3}</h5>
-                                            </a>
-                                        </li></>
-                                </ul> */}
+
                             </>
-                            {/* ))
-                            } */}
-                            {/* <div className="tab-content" id="nav-tabContent">
-                                <div className="tab-pane fade show active" id="nav-home">
-                                    <ul className="list-unstyled">
-                                        {tabData_1.map((item, idx) => {
-                                            return (
-                                                <li className="single-tab-list d-flex align-items-center">
-                                                    <img className="avatar-sm rounded-circle mr-3" src={item.img} alt="" />
-                                                    <p className="m-0">Bid listed for <strong>{item.price}</strong> {item.time} <br />by <a href="/author">{nftdetail?.user_data?.username}</a></p>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
-                                </div>
-​
-                                <div className="tab-pane fade" id="nav-contact">
-                                    <div className="owner-meta d-flex align-items-center mt-3">
-                                        <span>Owner</span>
-                                        <a className="owner d-flex align-items-center ml-2" href="/author">
-                                            <img className="avatar-sm rounded-circle" src={initData.ownerImg} alt="" />
-                                            <h6 className="ml-2">{nftdetail?.user_data?.username}</h6>
-                                        </a>
-                                    </div>
-                                    <p className="mt-2">Created : {dayjs(nftdetail?.created_at).format("DD MMM YYYY")}</p>
-                                </div>
-                            </div> */}
+
                         </div>
                     </div>
 
@@ -225,21 +197,23 @@ const LatprojNftDetails = (props) => {
                                     </ul>
                                 </div> */}
                                     <div className='eddlbtton flex-wrap d-flex gap-10  align-items-center mt-2'>
+                                        {latprojnftdetail.type == 1 ? (
 
-                                        <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                            id="nftdetail.id" onClick={() => buyHandler()}>Buy Now</button>
+                                            <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                                id="nftdetail.id" onClick={() => buyHandler()}>Buy Now</button>
+                                        ) : (
 
-                                        <button className="btn  btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                            onClick={() =>
-                                                setBidModalShow(true)}>Place Bid</button>
-                                        <BidPopup
+                                            <><button className="btn  btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                                onClick={() => setBidModalShow(true)}>Place Bid</button><BidPopup
 
-                                            id={latprojnftdetail.id}
-                                            projid={latprojnftdetail.project_id}
-                                            projtitle={latprojnftdetail.title}
-                                            projcoll={latprojnftdetail?.collectionData?.title}
-                                            show={bidmodalShow}
-                                            onHide={() => setBidModalShow(false)} />
+                                                    id={latprojnftdetail.id}
+                                                    projid={latprojnftdetail.project_id}
+                                                    projtitle={latprojnftdetail.title}
+                                                    projcoll={latprojnftdetail?.collectionData?.title}
+                                                    show={bidmodalShow}
+                                                    onHide={() => setBidModalShow(false)} /></>
+                                        )}
+
                                     </div>
                                     <div className='eddlbtton bitbtn d-flex  align-items-center mt-2'>
 

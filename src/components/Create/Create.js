@@ -4,21 +4,14 @@ import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { CategoriesAction, GetCollectionsAction } from '../../redux/Actions/projectAction';
-import GeoLocation from './geoLocation';
-// import { yupResolver } from '@hookform/resolvers/yup';
-// import * as yup from 'yup';
+
 import 'reactjs-popup/dist/index.css';
 import styles from "./styles/styles.module.scss"
 import { useFormData } from './Context/context';
 import JoditEditor from 'jodit-react'; import { CityList, CountryList, StateList } from '../../redux/Actions/authAction';
 import UploadImage from '../../shared/Upload';
 import { blobToDataURl, dataURLtoBlob } from '../../utils/blobfromurl';
-// import { Suspense } from "react";
-// import ReactDOM from "react-dom";
-// import { Canvas } from '@react-three/fiber';
-// import { OrbitControls, Stats } from '@react-three/drei';
-// import Plane from "./model";
-// import Plane from './gltf';
+
 
 const Create = ({ current, next, prev }) => {
 
@@ -43,6 +36,7 @@ const Create = ({ current, next, prev }) => {
     //     description: yup.string().required()
     //     // password: yup.string().required(),
     // });
+    const [nonft, setNonft] = useState('1')
     function onHandleClick(event) {
         setCollectionId(event.currentTarget.id);
     };
@@ -73,12 +67,8 @@ const Create = ({ current, next, prev }) => {
         return yyyy + "-" + mm + "-" + dd;
     };
 
-
-
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({
         mode: "all",
-
-
     });
 
     const col = useSelector(state => {
@@ -86,8 +76,7 @@ const Create = ({ current, next, prev }) => {
         return state?.projectdetails?.getcollections
     })
     // console.log(col, 'col')
-    const OnSubmit = (data) => {
-        debugger
+    const onSubmit = (data) => {
 
         const imageBanner = dataURLtoBlob(image)
 
@@ -139,7 +128,7 @@ const Create = ({ current, next, prev }) => {
         setCountry(event.currentTarget.value);
         const formData = new FormData()
         formData.append('country_id', event.currentTarget.value)
-        dispatch(StateList(formData))        // if (country) {
+        dispatch(StateList(formData)) // if (country) {
 
         //     debugger
         // }
@@ -168,7 +157,7 @@ const Create = ({ current, next, prev }) => {
     return (
 
         <div className={current === 0 ? styles.showForm : styles.hideForm}>
-            <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
+            <form onSubmit={handleSubmit(onSubmit)} className="item-form card no-hover">
                 <div className="row">
 
                     <div className="col-12 ">
@@ -208,43 +197,7 @@ const Create = ({ current, next, prev }) => {
                                     <label className="form-check-label" htmlFor="donation">Campaign</label></>
                                 {/* )} */}
                             </div>
-                            {/* <div className="form-check form-check-inline">
-                                {data.usertype == 1 ? (
-                                    <><input
-                                        className="form-check-input"
-                                        type="radio" name="radiobutton"
-                                        id="1"
-                                        value="1"
-                                        // defaultChecked={data.usertype}
-                                        {...register("usertype", { required: true })}
-                                        onChange={(e) => setUserType(e.target.value)}
-                                        aria-invalid={errors.type ? "true" : "false"}
-                                        defaultChecked={data.usertype ? true : false}
-                                    /><label className="form-check-label" htmlFor="product_sale">Single</label></>
-                                ) : (
 
-
-
-                                    <><input
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="radiobutton"
-                                        id="1"
-                                        value="1"
-                                        checked={!usertype}
-                                        // checked={!usertype}
-                                        {...register("usertype", { required: true })}
-                                        defaultChecked={usertype === "" ? setUserType("1") : false}
-
-                                        onChange={(e) => setUserType(e.target.value)}
-                                        aria-invalid={errors.type ? "true" : "false"}
-
-                                    />
-                                        <label className="form-check-label" htmlFor="product_sale">Single</label></>
-
-
-                                )}
-                            </div> */}
                             {errors.usertype?.type === 'required' && <p style={{ color: 'red' }} role="alert">Type is required</p>}
 
                         </div>
@@ -434,13 +387,16 @@ const Create = ({ current, next, prev }) => {
                                     className="form-control"
                                     name="number_of_nft"
 
-                                    value='1'
-                                    defaultValue={1}
+                                    value={nonft}
+                                    // onChange={nonft}
+                                    defaultValue={nonft}
                                     // defaultValue={1}
-                                    disabled
+                                    // disabled={true}
                                     min={1}
                                     max={1}
+
                                     maxLength={1}
+                                    // onChange={setNonft("1")}
                                     // onKeyUp={imposeMinMax()}
                                     placeholder="number of NFT (1 allowed)"
                                     {...register("number_of_nft", { required: true, min: 1, max: 1 })}
@@ -577,6 +533,7 @@ const Create = ({ current, next, prev }) => {
                             {/* {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>} */}
                         </div>
                     </div>
+
 
 
 

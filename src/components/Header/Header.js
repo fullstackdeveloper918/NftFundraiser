@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { CountSet, GetUserAction } from '../../redux/Actions/authAction';
+import { CountSet, GetUserAction, NotiDelete } from '../../redux/Actions/authAction';
 import swal from 'sweetalert';
 import { loginSuccess, logoutSuccess } from '../../redux/Slices/authSlice';
 import { ConnectWallet, getCurrentWalletConnected, Roles } from '../Wallet/interact';
@@ -63,7 +63,9 @@ const Header = () => {
         // debugger
         dispatch(CountSet())
     }
-
+    const deleteHandler = (id) => {
+        dispatch(NotiDelete(id))
+    }
     const WalletHandler = async () => {
         const response = await ConnectWallet("BUYER")
         const { res } = response
@@ -181,11 +183,17 @@ const Header = () => {
                                 {userdet?.notification?.map((item) => {
                                     return (
 
-                                        <><li>{item.title}</li><span>{moment(item.created_at).format("ddd D MMM YY")}</span></>
+                                        <><li>{item.title}</li>
+                                            <li className='btn_wrap'><span>{moment(item.created_at).format("ddd D MMM YY")}</span>
+                                                <span><button type='submit' onClick={() => deleteHandler(item.id)}>Clear</button></span></li></>
                                     )
                                 })}
-
-
+                                {userdet?.notification?.length > 0 &&
+                                    <span><button type='submit' className='noty_all'><Link to='/allnotifications'>See all</Link></button></span>
+                                }
+                                {userdet?.notification?.length == 0 &&
+                                    <li>No Notification</li>
+                                }
                             </ul>
 
                         </div>

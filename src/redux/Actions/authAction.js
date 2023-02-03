@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createOrganizationSuccess, getAnnualRevenueList, getCityList, getCountryList, getHearAboutList, getStateList, loginSuccess, registerFail, registerSuccess, updateprofile, userDetail, wallsignin, } from "../Slices/authSlice";
+import { allnotification, createOrganizationSuccess, getAnnualRevenueList, getCityList, getCountryList, getHearAboutList, getStateList, loginSuccess, registerFail, registerSuccess, updateprofile, userDetail, wallsignin, } from "../Slices/authSlice";
 import swal from "sweetalert";
 // import { useNavigate } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit'
@@ -324,6 +324,61 @@ export const CountSet = () => async dispatch => {
 
 
         }
+    } catch (e) {
+        if (e?.response?.data?.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const NotiDelete = (id) => async dispatch => {
+    // 
+    const token = localStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+
+                Authorization: `Bearer ${token}`
+            },
+
+        }
+        const res = await axios.delete(`${process.env.REACT_APP_BACKEND_API}api/notification/delete/${id}`,
+            config)
+        // 
+        console.log(res, 'delete rres')
+        // await dispatch(res);
+
+        if (res.status === 200) {
+            // debugger
+            await dispatch(GetUserAction())
+
+
+        }
+    } catch (e) {
+        if (e?.response?.data?.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+
+export const AllNoti = () => async dispatch => {
+
+    const token = localStorage.getItem('authToken')
+
+    try {
+        const config = {
+            headers: {
+
+                Authorization: `Bearer ${token}`
+            },
+
+        }
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getAllNotification`,
+            config)
+        // 
+        console.log(res, 'allnoti rres')
+        await dispatch(allnotification(res));
+
+
     } catch (e) {
         if (e?.response?.data?.message) {
             swal('error', e.response.data.message, 'error')

@@ -18,6 +18,7 @@ const authSlice = createSlice({
         countries: [],
         states: [],
         city: [],
+        noti: [],
         annualRevenue: [],
         hereAbout: [],
         updpro: [],
@@ -34,6 +35,10 @@ const authSlice = createSlice({
         registerFail: (state, action) => {
             // 
             state.message = action.payload.response.data.message
+        },
+        allnotification: (state, action) => {
+
+            state.noti = action.payload.data.data
         },
         updateprofile: (state, action) => {
             // 
@@ -90,6 +95,7 @@ const authSlice = createSlice({
 export const authReducer = authSlice.reducer
 
 export const {
+    allnotification,
     registerSuccess,
     createOrganizationSuccess,
     getCountryList,

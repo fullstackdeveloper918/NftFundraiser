@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import JoditEditor from 'jodit-react';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import Web3 from 'web3';
 import React from 'react';
 import { CityList, StateList } from '../../redux/Actions/authAction';
@@ -21,6 +21,7 @@ const web3 = createAlchemyWeb3(alchemyKey);
 const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
 
 function SellPopup(props) {
+    const history = useHistory()
     const [current, setCurrent] = React.useState(0)
     const dispatch = useDispatch()
     const slug = useParams()
@@ -291,9 +292,9 @@ function SellPopup(props) {
                             </div>
                             {auctiontype == 1 ? (
 
-                                <span>sale duration: 30 days (default),  60 days, 90 days after which the listing may expire and be removed</span>
+                                <span className='col-12 salewrap'>sale duration: 30 days (default),  60 days, 90 days after which the listing may expire and be removed</span>
                             ) : (
-                                <span>sale duration: 30 days (default),  60 days, 90 days</span>
+                                <span className='col-12 salewrap'>sale duration: 30 days (default),  60 days, 90 days</span>
                             )}
                         </>
                         <div className='w-full text-center'>
@@ -301,7 +302,8 @@ function SellPopup(props) {
                                 id="nftdetail.id">Mint</button><NftPopup
                                 show={modalShow}
                                 current={current}
-                                onHide={() => setModalShow(false)} />
+                                onHide={() => setModalShow(false)}
+                            />
                         </div>
                     </div>
 

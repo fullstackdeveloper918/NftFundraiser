@@ -22,12 +22,14 @@ import ReferalPopup from './refralPopup';
 import ReadMore from '../../readMore';
 import { GetMatic } from './GetMAtic';
 import FormItem from 'antd/es/form/FormItem';
-
+import { useLocation } from "react-router-dom";
 const ProjDetails = () => {
 
 
     const { slug } = useParams();
-    // console.log(id, 'idd')
+    const search = useLocation().search;
+    const refid = new URLSearchParams(search).get('refid');
+    console.log(refid, 'refid')
     const [tok, setTok] = useState('')
     // console.log('tok', tok)
     const dispatch = useDispatch()
@@ -269,7 +271,7 @@ const ProjDetails = () => {
                     <div className=" col-12 mt-4">
                         <div id="invest" className="items mt-0 explore-items p-0">
                             <ProjNFTS
-
+                                refid={refid}
                             />
                         </div>
                     </div>

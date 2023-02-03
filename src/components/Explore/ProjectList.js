@@ -23,7 +23,7 @@ const GetAllProjects = () => {
     }, [dispatch])
 
     const showDeleteHandler = (id) => {
-        debugger
+        // debugger
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this project!",
