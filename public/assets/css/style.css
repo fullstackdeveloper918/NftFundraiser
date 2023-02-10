@@ -3105,6 +3105,7 @@ span.box-count span:first-child {
   border-radius: 6px;
   border-bottom: unset;
   overflow: hidden;
+  background-color: #000 !important;
 }
 .form-group.pricing-detail p span:nth-child(1) {
   color: #fff !important;

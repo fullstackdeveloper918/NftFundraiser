@@ -2588,3 +2588,33 @@ ul.creator-dropdown.notification-menu:after {
         .noty_all a{
             color: lightgray !important;
         }
+   
+        .modal-dialog.modal-lg {
+            
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .fade.edit_nft_popup.modal.show {
+            background: #2222228a;
+        }
+        .modal-content input{
+           background: #17171b !important;
+        }
+        .nft-edit-icon {
+            top: 10px;
+            z-index: 1;
+            right: 30px;
+            /* background: red; */
+        }
+        .nft-edit-icon i {
+            background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+            padding: 5px 15px;
+            color: #fff;
+            border-radius: 20px;
+            top: 10px;
+            font-size: 12px;
+        }
+        div#werwer {
+            height: auto;
+        }

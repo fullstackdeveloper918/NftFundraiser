@@ -90,7 +90,7 @@ const NftDetails = (props) => {
                             <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
 
 
-                                <div>
+                                <div className='position-absolute nft-edit-icon'>
                                     <i className="fa-solid fa-pen" onClick={(e) => {
                                         setNftID(slug)
                                         e.preventDefault();
@@ -139,12 +139,12 @@ const NftDetails = (props) => {
 
 
                     <div className="col-12 col-lg-8 mt-4 mt-sm-0">
-                        <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
+                        <div className=' card no-hover py-0 mt-2 mb-2 mt-lg-0 mb-lg-0 '>
 
                             <span Class="title_main " style={{ color: '#fff' }}>{nftdetail?.title} </span>
 
-                            <div>
-                                <i className="fa-solid fa-pen" onClick={(e) => {
+                            <div className='nft-edit-icon position-absolute mt-2'>
+                                <i className="fa-solid fa-pen " onClick={(e) => {
                                     setNftID(slug)
                                     e.preventDefault();
                                     setModalShowedit(true)
@@ -222,13 +222,13 @@ const NftDetails = (props) => {
 
 
                     <div className="col-12 md:col-8 mt-4">
-                        <div class="">
+                        <div class="user-description ">
                             <h5 className='user_title gap-5'><div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg></div><div>Description</div>
                             </h5>
                             <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
 
 
-                                <div>
+                                <div className='nft-edit-icon position-absolute mt-2'>
                                     <i className="fa-solid fa-pen" onClick={(e) => {
                                         setNftID(slug)
                                         e.preventDefault();
@@ -246,7 +246,7 @@ const NftDetails = (props) => {
                                     }
                                 </div>
                             </div>
-                            <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft" />
+                            <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft " />
                             {/* <ReadMore  dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} /> */}
                             {/* <p dangerouslySetInnerHTML={{ __html: latprojdetail.description }} /> */}
                         </div>

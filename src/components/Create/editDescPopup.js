@@ -269,7 +269,7 @@ const EditNftDesc = (props) => {
                 // centered
                 >
                     <Modal.Header >
-                        <Modal.Title id="contained-modal-title-vcenter">
+                        <Modal.Title id="contained-modal-title-vcenter h-auto">
                             Update NFT
                         </Modal.Title>
                         <div>
@@ -277,7 +277,7 @@ const EditNftDesc = (props) => {
                         </div>
                     </Modal.Header>
                     <Modal.Body>
-                        <div>
+                        <div className='col-12'>
                             <Form form={form} name="dynamic_form_nest_item" initialValues={{
                                 nfts: nfts, defaultValues
                             }}

@@ -259,7 +259,7 @@ const EditNftImage = (props) => {
 
     return (
 
-        <div className="main-create" >
+        <div className="main-create">
             {loading ? (
                 <Loader />
             ) : (
@@ -271,7 +271,7 @@ const EditNftImage = (props) => {
                 // centered
                 >
                     <Modal.Header >
-                        <Modal.Title id="contained-modal-title-vcenter">
+                        <Modal.Title id="contained-modal-title-vcenter h-auto">
                             Update NFT
                         </Modal.Title>
                         <div>
@@ -279,7 +279,7 @@ const EditNftImage = (props) => {
                         </div>
                     </Modal.Header>
                     <Modal.Body>
-                        <div>
+                        <div className="col-12">
                             <Form form={form} name="dynamic_form_nest_item" initialValues={{
                                 nfts: nfts, defaultValues
                             }}
@@ -296,7 +296,7 @@ const EditNftImage = (props) => {
 
                                                     <Fragment>
 
-                                                        <div className="row relative">
+                                                        <div className="row relative ">
 
 
 
@@ -308,7 +308,7 @@ const EditNftImage = (props) => {
 
 
                                                             <div className="col-12">
-                                                                <div className="col-lg-6 col-12 uploadnftpopup p-0 mb-4">
+                                                                <div className="col-lg-12 col-12 uploadnftpopup p-0 mb-4">
                                                                     <label className="mt-3">Upload NFT</label>
                                                                     <div
                                                                         className="position-relative upload_nft"
@@ -316,6 +316,7 @@ const EditNftImage = (props) => {
                                                                             backgroundImage: "url('')",
                                                                             backgroundSize: "contain",
                                                                             backgroundRepeat: "no-repeat",
+                                                                            margin: "0 auto",
                                                                         }}
                                                                     >
 

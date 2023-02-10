@@ -263,10 +263,11 @@ const EditNftName = (props) => {
                 <Loader />
             ) : (
 
-                <Modal className="edit_nft_popup"
+                <Modal 
                     {...props}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
+                    centered
                 // centered
                 >
                     <Modal.Header >
@@ -278,7 +279,7 @@ const EditNftName = (props) => {
                         </div>
                     </Modal.Header>
                     <Modal.Body>
-                        <div>
+                        <div className='col-12 item-form card no-hover'>
                             <Form form={form} name="dynamic_form_nest_item" initialValues={{
                                 nfts: nfts, defaultValues
                             }}
