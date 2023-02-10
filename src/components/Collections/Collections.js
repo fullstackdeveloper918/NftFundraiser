@@ -47,13 +47,19 @@ const Collections = () => {
                                             {/* Card Body */}
                                             <div className="card-body">
                                                 <a>
-                                                    <h5 className="mb-0 ">{item.title}</h5>
+                                                    <h5 className="mb-0 ">{item.title.slice(0, 15)}...</h5>
                                                 </a>
-                                                <div class=""><p> {item.description.slice(0, 52)}</p></div>
+                                                <div class=""><p> {item.description.slice(0, 52)}...</p></div>
                                                 <div class="mb-2 align-items-center">
                                                     <div class="mt-2 mb-2 d-flex justify-content-between text-align-center fundraiser_sale">
-                                                        <span>Total NFTs</span>
-                                                        <span>{item.nft_data.length}</span>
+                                                        {item?.nft_data.length == 1 ? (
+
+                                                            <span>{item?.nft_data.length} NFT</span>
+                                                        ) : (
+                                                            <span>{item?.nft_data.length} NFTs</span>
+                                                        )
+
+                                                        }
                                                     </div>
                                                 </div>
                                                 {/* <div className="seller d-flex align-items-center my-3">

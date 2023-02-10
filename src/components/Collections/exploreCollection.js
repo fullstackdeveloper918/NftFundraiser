@@ -47,7 +47,7 @@ const AllCollections = () => {
                             [...new Map(coll?.map(item =>
                                 [item["title"], item])).values()]?.map((item, idx) => {
                                     return (
-                                        <Link key={`edth_${idx}`} to={`/popularcollection/details/${item.id}`} className="col-12 col-sm-6 col-lg-3 item explore-item" >
+                                        <Link key={`edth_${idx}`} to={`/popularcollection/details/${item.slug}`} className="col-12 col-sm-6 col-lg-3 item explore-item" >
                                             <div>
                                                 <div className="card position-relative ">
                                                     <div className="image-over ">
@@ -60,17 +60,24 @@ const AllCollections = () => {
                                                         {/* Card Body */}
                                                         <div className="card-body">
                                                             <a>
-                                                                <h5 className="mb-0 mt-3">{item.title}</h5>
+                                                                <h5 className="mb-0 mt-3">{item.title.slice(0, 15)}...</h5>
                                                             </a>
 
-                                                            <div class=""><p>{item.description.slice(0, 50)}</p></div>
+                                                            <div class=""><p>{item.description.slice(0, 50)}...</p></div>
 
                                                             <div class="mb-2 align-items-center justify-content-between">
                                                                 <div class="mt-2 mb-2 d-flex justify-content-between text-align-center fundraiser_sale">
-                                                                  
-                                                                        <span>Total Nft's</span>
-                                                                        <span>{item.nft_data.length}</span>
-                                                                   
+                                                                    {item?.nft_data.length == 1 ? (
+
+                                                                        <span>{item.nft_data.length} NFT</span>
+                                                                    ) : (
+                                                                        <span>{item.nft_data.length} NFTs</span>
+                                                                    )
+
+                                                                    }
+                                                                    {/* <span>Total NFTs</span>
+                                                                    <span>{item.nft_data.length}</span> */}
+
                                                                     {/* <div>
                                                                         <span>Sale</span>
                                                                         <div>100</div>

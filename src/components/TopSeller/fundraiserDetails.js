@@ -65,9 +65,9 @@ const FundraiserDetail = () => {
     return (
         <section className="item-details-area fundraise-main">
             <div className="container">
-          
+
                 <div className="row justify-content-between p-0">
-                <div className='col-12'>
+                    <div className='col-12'>
                         <span className='title_main'>{funddetail?.organization_detail?.organization_name}</span>
                     </div>
                     <div className="col-12 col-lg-8">
@@ -199,7 +199,7 @@ const FundraiserDetail = () => {
                                         Invest
                                     </Button>
                                 </div>
-                                <div>
+                                {/* <div>
 
                                     <Button className=" mb-2 mb-sm-0  btn  btn-bordered-white m-0" variant="primary" onClick={() => setModalShowreferal(true)}>
                                         Share
@@ -210,7 +210,7 @@ const FundraiserDetail = () => {
                                         show={modalShowreferal}
                                         onHide={() => setModalShowreferal(false)} />
 
-                                </div>
+                                </div> */}
 
 
 

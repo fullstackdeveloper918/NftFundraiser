@@ -15,6 +15,7 @@ import ProjdataTable from '../Explore/projDetailtable';
 import ReadMore from '../../readMore';
 import { GetMatic } from '../ItemDetails/GetMAtic';
 import ReferalPopup from '../ItemDetails/refralPopup';
+import Swal from 'sweetalert2';
 
 // import ProgressBar from 'react-bootstrap';
 
@@ -138,7 +139,10 @@ const ProjNftDetails = () => {
 
                                         {projdetail?.nft_data && projdetail?.nft_data && projdetail?.nft_data.length > 0 && projdetail?.nft_data[0]?.is_mint == 0 ? (
 
-                                            <Button className=" btn  btn-bordered-white m-0 ml-2" variant="primary">
+                                            <Button className=" btn  btn-bordered-white m-0 ml-2" variant="primary" onClick={() => Swal.fire(
+                                                'Please mint your NFTs',
+
+                                            )}>
                                                 Share
                                             </Button>
                                         ) : (
