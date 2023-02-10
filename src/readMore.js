@@ -10,7 +10,7 @@ const ReadMore = ({ data }) => {
 
     return (
         <p className="text">
-            <span className="mt-0 mb-2" dangerouslySetInnerHTML={{ __html: isReadMore ? data?.slice(0, 1000) : data }} />
+            <span className="mt-0 mb-2" dangerouslySetInnerHTML={{ __html: isReadMore ? data?.slice(0, 500) : data }} />
             <span onClick={toggleReadMore} className="read-or-hide">
                 {isReadMore ? "...read more" : " show less"}
             </span>
