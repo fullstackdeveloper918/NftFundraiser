@@ -4,9 +4,6 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { BidNft } from '../Wallet/interact';
 
-
-
-
 function BidPopup(props) {
     // debugger
     const dispatch = useDispatch()
@@ -48,12 +45,6 @@ function BidPopup(props) {
                                     type="number"
                                     placeholder='Enter bid'
                                 />
-
-                                {/* <textarea value={value} onChange={setDescription}></textarea> */}
-
-
-
-
                             </div>
                         </div>
                         <hr />

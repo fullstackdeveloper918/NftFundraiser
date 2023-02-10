@@ -79,7 +79,7 @@ const Header = () => {
         else if (res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data?.role) {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)
-
+            history.push('/create')
 
             swal({
                 title: "Welcome to Karmatica!!!",

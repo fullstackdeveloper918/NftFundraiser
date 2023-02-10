@@ -1,6 +1,6 @@
 import React, { Component, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useLocation, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { DeleteProject, GetSettings, LatestProjectDetail, NftList, ProjectDetail, UpdateCollection } from '../../redux/Actions/projectAction';
 import { getProjectDetail } from '../../redux/Slices/projectSlice';
@@ -21,6 +21,9 @@ import NftdataTable from '../Explore/nftdataTable';
 import LatNftdataTable from '../Explore/latProjNftdata';
 import NftAuctiondataTable from './nftAuctiontable';
 import SellPopup from './sellPopup';
+import EditNftName from '../Create/editNftNamepopup';
+import EditNftDesc from '../Create/editDescPopup';
+import EditNftImage from '../Create/nftImageeditPopup';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -28,14 +31,19 @@ const web3 = createAlchemyWeb3(alchemyKey);
 const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
 const NftDetails = (props) => {
     const history = useHistory()
-
+    const [nftId, setNftID] = useState();
+    const search = useLocation().search;
+    const projslug = new URLSearchParams(search).get('project');
+    console.log(projslug, 'projslug')
     const latprojnftdetail = useSelector(state => {
         // 
         return state.projectdetails.getnftwoldetails
     })
     const [modalShow, setModalShow] = React.useState(false);
     const [sellmodalShow, setSellModalShow] = React.useState(false);
-
+    const [modalShowedit, setModalShowedit] = React.useState(false);
+    const [modalShoweditdes, setModalShoweditdes] = React.useState(false);
+    const [modalShoweditimg, setModalShoweditimg] = React.useState(false);
     // const [mintmodalShow, setMintModalShow] = React.useState(false);
 
     const [current, setCurrent] = React.useState(0)
@@ -79,7 +87,27 @@ const NftDetails = (props) => {
                     <div className="col-12 col-md-4 ">
                         <div className="item-info">
                             {/* {latprojdetail?.map((item, key) => ( */}
+                            <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
 
+
+                                <div>
+                                    <i className="fa-solid fa-pen" onClick={(e) => {
+                                        setNftID(slug)
+                                        e.preventDefault();
+                                        setModalShoweditimg(true)
+                                    }
+                                    } ></i>
+                                    {modalShoweditimg &&
+
+                                        <EditNftImage
+                                            // debugger
+                                            id={projslug}
+                                            nft_id={nftId}
+                                            show={modalShoweditimg}
+                                            onHide={() => setModalShoweditimg(false)} />
+                                    }
+                                </div>
+                            </div>
                             <><div className="item-thumb text-center align-items-center d-flex">
                                 {nftdetail.extention === "Player" &&
 
@@ -115,6 +143,23 @@ const NftDetails = (props) => {
 
                             <span Class="title_main " style={{ color: '#fff' }}>{nftdetail?.title} </span>
 
+                            <div>
+                                <i className="fa-solid fa-pen" onClick={(e) => {
+                                    setNftID(slug)
+                                    e.preventDefault();
+                                    setModalShowedit(true)
+                                }
+                                } ></i>
+                                {modalShowedit &&
+
+                                    <EditNftName
+                                        // debugger
+                                        id={projslug}
+                                        nft_id={nftId}
+                                        show={modalShowedit}
+                                        onHide={() => setModalShowedit(false)} />
+                                }
+                            </div>
 
                         </div>
                         <div className="content sm:mt-3 mt-lg-2">
@@ -167,36 +212,7 @@ const NftDetails = (props) => {
 
                                     </div>
                                 )}
-                                {/* {nftdetail.is_mint == 1 ? (
 
-                                    <div className='eddlbtton d-flex  align-items-center mt-3'>
-
-                                        <div className=" mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF', width: "100%" }}
-                                        >  Ready to purchase</div>
-
-
-                                    </div>
-
-                                ) : (
-
-                                    <div className='eddlbtton d-flex  align-items-center mt-3'>
-
-
-                                        <>
-                                        <button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                            id="nftdetail.id" onClick={() => deployAndMint(slug)}>  Mint</button><NftPopup
-                                                show={modalShow}
-                                                current={current}
-                                                onHide={() => setModalShow(false)} />
-                                                </>
-
-
-
-
-
-                                    </div>
-
-                                )} */}
                             </div>
                         </div>
                     </div>
@@ -209,6 +225,27 @@ const NftDetails = (props) => {
                         <div class="">
                             <h5 className='user_title gap-5'><div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg></div><div>Description</div>
                             </h5>
+                            <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
+
+
+                                <div>
+                                    <i className="fa-solid fa-pen" onClick={(e) => {
+                                        setNftID(slug)
+                                        e.preventDefault();
+                                        setModalShoweditdes(true)
+                                    }
+                                    } ></i>
+                                    {modalShoweditdes &&
+
+                                        <EditNftDesc
+                                            // debugger
+                                            id={projslug}
+                                            nft_id={nftId}
+                                            show={modalShoweditdes}
+                                            onHide={() => setModalShoweditdes(false)} />
+                                    }
+                                </div>
+                            </div>
                             <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft" />
                             {/* <ReadMore  dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} /> */}
                             {/* <p dangerouslySetInnerHTML={{ __html: latprojdetail.description }} /> */}

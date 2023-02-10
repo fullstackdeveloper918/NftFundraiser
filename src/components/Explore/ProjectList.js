@@ -75,7 +75,10 @@ const GetAllProjects = () => {
                                                     {/* <button onClick={() => showDeleteHandler()}>delete</button> */}
                                                     <div className="card project_cards">
                                                         <div className="image-over relative ">
-                                                            <i class="fa-sharp fa-solid fa-trash" onClick={() => showDeleteHandler(item.id)}></i>
+                                                            {item.is_nft_mintted !== 1 &&
+
+                                                                <i class="fa-sharp fa-solid fa-trash" onClick={() => showDeleteHandler(item.id)}></i>
+                                                            }
                                                             <Link to={`/projnftdetails/${item.slug}`}>
                                                                 {/* <i class="fa-solid fa-pen" ></i> */}
                                                                 <img className="card-img-top" src={item?.image} alt={item.nft_data.description} />

@@ -44,7 +44,7 @@ function easeOutCirc(x) {
 }
 
 const DModal = ({ vdo }) => {
-    debugger
+    // debugger
     // const { vdo } = props
     const refContainer = useRef();
     const [loading, setLoading] = useState(true);

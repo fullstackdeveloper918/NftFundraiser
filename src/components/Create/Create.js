@@ -25,6 +25,8 @@ const Create = ({ current, next, prev }) => {
     const [state, setState] = useState("");
     console.log('state', state)
     const [city, setCity] = useState("");
+    const [price, setPrice] = useState("");
+    console.log('price', price)
     console.log('city', city)
     const [image, setImage] = useState()
 
@@ -351,6 +353,104 @@ const Create = ({ current, next, prev }) => {
                             </select>
                             {/* {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">City is required</p>} */}
                         </div>
+
+                        {!usertype || usertype == 1 ? (
+
+                            <div className="col-12 col-md-12 pl-0 pr-0">
+                                <div className="form-group">
+                                    <label>Number of NFTs</label>
+                                    <input
+                                        type="number"
+
+                                        className="form-control"
+                                        name="number_of_nft"
+
+                                        value={nonft}
+                                        // onChange={nonft}
+                                        defaultValue={nonft}
+                                        // defaultValue={1}
+                                        // disabled={true}
+                                        min={1}
+                                        max={1}
+
+                                        maxLength={1}
+                                        // onChange={setNonft("1")}
+                                        // onKeyUp={imposeMinMax()}
+                                        placeholder="number of NFT (1 allowed)"
+                                        {...register("number_of_nft", { required: true, min: 1, max: 1 })}
+                                        // {...register("number_of_nft", { maxLength: 12 })}
+                                        aria-invalid={errors.number_of_nft ? "true" : "false"}
+                                    />
+                                    {/* {errors.number_of_nft && errors.number_of_nft.type === "max" && (
+            <p style={{ color: 'red' }}>
+                Only 1 nft allowed (select campaign for more than one NFTs)
+            </p>
+
+
+        )} */}
+                                    {/* {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required and limit is upto 1</p>} */}
+                                    {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max one length </p>} */}
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="col-12 col-md-12 pl-0 pr-0">
+                                <div className="form-group">
+                                    <label>Number of NFTs</label>
+                                    <input
+                                        // onInput={(e) => {
+                                        //     if (e?.target?.value?.length < e.target.maxLength)
+                                        //         e.target.value = e.target.value.slice(0, e.target.maxLength);
+                                        // }}
+                                        type="number"
+                                        className="form-control"
+                                        name="number_of_nft"
+
+                                        // defaultValue={1}
+                                        min={1}
+                                        max={10}
+                                        maxLength={10}
+
+                                        // onKeyUp={imposeMinMax()}
+                                        // min=1 max=4 onkeyup=imposeMinMax(this)
+
+                                        // disabled={type == 1}
+                                        placeholder="Select your number of NFTs (1-10)"
+                                        {...register("number_of_nft", { required: true, min: 1, max: 10 })}
+
+                                        // {...register("number_of_nft", { maxLength: 12 })}
+                                        aria-invalid={errors.number_of_nft ? "true" : "false"}
+                                    />
+                                    {/* {errors.number_of_nft?.message && <p>{errors.number_of_nft.message}</p>} */}
+                                    {errors.number_of_nft && errors.number_of_nft.type === "max" && (
+                                        <p style={{ color: 'red' }}>
+                                            10 NFTs Maximum per Campaign
+                                        </p>
+                                    )}
+                                    {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFTs per project is required with a limit of 10</p>}
+                                    {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max length exceeded</p>} */}
+                                </div>
+                            </div>
+                        )}
+
+
+                        <div className="col-12 col-md-12 pr-0 pl-0">
+                            <div className="form-group">
+                                <label>Category</label>
+                                <select name="category_id"
+                                    {...register("category_id", { required: true })}
+                                >
+                                    aria-invalid={errors.category_id ? "true" : "false"}
+                                    <option value="" disabled selected style={{ color: "#495057" }}>Select category </option>
+                                    {cat?.map((option, key) => (
+
+                                        <option key={key.id} value={option.id} >
+                                            {option.title}
+                                        </option>
+                                    ))}
+                                </select>
+                                {errors.category_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Category is required</p>}
+                            </div>
+                        </div>
                     </div>
 
                     <div className="col-12 col-md-6">
@@ -369,90 +469,21 @@ const Create = ({ current, next, prev }) => {
                                 name="price"
                                 placeholder="Price"
                                 {...register("price", { required: true })}
+                                onChange={(e) => setPrice(e.target.value)}
                                 aria-invalid={errors.price ? "true" : "false"}
                             />
                             {errors.price?.type === 'required' && <p style={{ color: 'red' }} role="alert">Price is required</p>}
                         </div>
+                        <div className="">
+                            <div className="form-group pricing-detail">
+                                <p><span>Price</span> <span>{price ? price : '--'} MATIC</span></p>
+                                <p><span>Karmatica Fee</span><span>1%</span></p>
+                                <p><span>You will receive </span><span>{99 * price / 100 ? 99 * price / 100 : "--"} MATIC</span></p>
+                            </div>
+                        </div>
                     </div>
 
 
-                    {!usertype || usertype == 1 ? (
-
-                        <div className="col-12 col-md-6">
-                            <div className="form-group">
-                                <label>Number of NFTs</label>
-                                <input
-                                    type="number"
-
-                                    className="form-control"
-                                    name="number_of_nft"
-
-                                    value={nonft}
-                                    // onChange={nonft}
-                                    defaultValue={nonft}
-                                    // defaultValue={1}
-                                    // disabled={true}
-                                    min={1}
-                                    max={1}
-
-                                    maxLength={1}
-                                    // onChange={setNonft("1")}
-                                    // onKeyUp={imposeMinMax()}
-                                    placeholder="number of NFT (1 allowed)"
-                                    {...register("number_of_nft", { required: true, min: 1, max: 1 })}
-                                    // {...register("number_of_nft", { maxLength: 12 })}
-                                    aria-invalid={errors.number_of_nft ? "true" : "false"}
-                                />
-                                {/* {errors.number_of_nft && errors.number_of_nft.type === "max" && (
-                                    <p style={{ color: 'red' }}>
-                                        Only 1 nft allowed (select campaign for more than one NFTs)
-                                    </p>
-
-
-                                )} */}
-                                {/* {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required and limit is upto 1</p>} */}
-                                {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max one length </p>} */}
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="col-12 col-md-6">
-                            <div className="form-group">
-                                <label>Number of NFTs</label>
-                                <input
-                                    // onInput={(e) => {
-                                    //     if (e?.target?.value?.length < e.target.maxLength)
-                                    //         e.target.value = e.target.value.slice(0, e.target.maxLength);
-                                    // }}
-                                    type="number"
-                                    className="form-control"
-                                    name="number_of_nft"
-
-                                    // defaultValue={1}
-                                    min={1}
-                                    max={10}
-                                    maxLength={10}
-
-                                    // onKeyUp={imposeMinMax()}
-                                    // min=1 max=4 onkeyup=imposeMinMax(this)
-
-                                    // disabled={type == 1}
-                                    placeholder="Select your number of NFTs (1-10)"
-                                    {...register("number_of_nft", { required: true, min: 1, max: 10 })}
-
-                                    // {...register("number_of_nft", { maxLength: 12 })}
-                                    aria-invalid={errors.number_of_nft ? "true" : "false"}
-                                />
-                                {/* {errors.number_of_nft?.message && <p>{errors.number_of_nft.message}</p>} */}
-                                {errors.number_of_nft && errors.number_of_nft.type === "max" && (
-                                    <p style={{ color: 'red' }}>
-                                        10 NFTs Maximum per Campaign
-                                    </p>
-                                )}
-                                {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFTs per project is required with a limit of 10</p>}
-                                {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max length exceeded</p>} */}
-                            </div>
-                        </div>
-                    )}
                     {usertype == 2 && (
 
                         <><div className="col-12 col-md-6">
@@ -495,26 +526,7 @@ const Create = ({ current, next, prev }) => {
                                 </div>
                             </div></>
                     )}
-
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>Category</label>
-                            <select name="category_id"
-                                {...register("category_id", { required: true })}
-                            >
-                                aria-invalid={errors.category_id ? "true" : "false"}
-                                <option value="" disabled selected style={{ color: "#495057" }}>Select category </option>
-                                {cat?.map((option, key) => (
-
-                                    <option key={key.id} value={option.id} >
-                                        {option.title}
-                                    </option>
-                                ))}
-                            </select>
-                            {errors.category_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Category is required</p>}
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-12">
+                    <div className=" col-12">
                         <div className="form-group">
                             <label>Banner image</label>
                             <UploadImage

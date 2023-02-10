@@ -398,12 +398,19 @@ const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to,
 
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id }) => {
-  // debugger
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
   } else {
     try {
+
+      let wallets = []
+      let fee = []
+
+      wallets = [...wallets, ...flow[0].buyer_data.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets]
+      fee = [...fee, ...flow[0].buyer_data.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees]
+      console.log(fee)
+      console.log(wallets)
 
 
       const addressArray = await window.ethereum.request({
@@ -418,13 +425,26 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
       // const nftContract = new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
       const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
-      const amountToSendPlatform = ((`${platformFee[0]?.fees}` / 100) * 0.03)
+      // const amountToSendPlatform = ((`${platformFee[0]?.fees}` / 100) * 0.03)
+      // const amountToSend = (({ fee } / 100) * 0.03)
+      // console.log('amou', amountToSend)
       const amountToSendowner = ((`${ownerFee[0]}` / 100) * 0.03)
+      // const walletToSend = (({ wallets } / 100) * 0.03)
+      // console.log('walle', walletToSend)
       // // const amountToSend = (amountToSendPlatform - amount, "either")
       // const amountToSend = (0.0005)
       // const amountToSend = ; // Convert to wei value
-      const memory_clients = [platformFee[0].wallets, ownerWallet[0]]
-      const memory_amounts = [web3.utils.toWei(`${amountToSendPlatform}`, "ether"), web3.utils.toWei(`${amountToSendowner}`, "ether")]
+      const memory_clients = wallets.map(wal => {
+
+        return (`${wal}`)
+      })
+
+
+
+      const memory_amounts = fee.map(amt => {
+        const amountToSend = ((amt / 100) * 0.03)
+        return web3.utils.toWei(`${amountToSend}`, "ether")
+      })
 
       const transferowner = {
         'from': window.ethereum?.selectedAddress,

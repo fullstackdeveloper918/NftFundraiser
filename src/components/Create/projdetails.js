@@ -320,7 +320,7 @@ const ProjNftDetails = () => {
 
                                             {/* <i class="fa-sharp fa-solid fa-trash"></i> */}
                                             <div className="image-over relative">
-                                                <Link to={`/nft/details/${x.slug}`}>
+                                                <Link to={`/nft/details/${x.slug}?project=${slug}`}>
                                                     {x.extention === 'Player' || x.extention === 'modal' ? (
 
                                                         <img className="card-img-top" src={x.preview_imag} alt="" />
@@ -332,24 +332,25 @@ const ProjNftDetails = () => {
                                                     <span>#{x?.token_id}</span>
                                                     <span className='cards-icons'>
                                                         {x.is_mint == 0 &&
+                                                            <Link to={`/nft/details/${x.slug}?project=${slug}`} ><i className="fa-solid fa-pen" /></Link>
+                                                            // <div>
+                                                            //     <i className="fa-solid fa-pen" 
+                                                            //     onClick={(e) => {
+                                                            //         setNftID(x.slug)
+                                                            //         e.preventDefault();
+                                                            //         setModalShowedit(true)
+                                                            //     }
+                                                            //     } ></i>
+                                                            //     {modalShowedit &&
 
-                                                            <div>
-                                                                <i className="fa-solid fa-pen" onClick={(e) => {
-                                                                    setNftID(x.slug)
-                                                                    e.preventDefault();
-                                                                    setModalShowedit(true)
-                                                                }
-                                                                } ></i>
-                                                                {modalShowedit &&
-
-                                                                    <EditNft
-                                                                        // debugger
-                                                                        id={slug}
-                                                                        nft_id={nftId}
-                                                                        show={modalShowedit}
-                                                                        onHide={() => setModalShowedit(false)} />
-                                                                }
-                                                            </div>
+                                                            //         <EditNft
+                                                            //             debugger
+                                                            //             id={slug}
+                                                            //             nft_id={nftId}
+                                                            //             show={modalShowedit}
+                                                            //             onHide={() => setModalShowedit(false)} />
+                                                            //     }
+                                                            // </div>
                                                         }
                                                     </span>
                                                 </div>

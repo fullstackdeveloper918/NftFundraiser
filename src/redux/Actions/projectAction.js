@@ -153,6 +153,7 @@ export const NftList = (slug) => async dispatch => {
         // console.log(res, 'proj')
         await dispatch(getNftList(res));
 
+
     } catch (e) {
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
@@ -529,6 +530,7 @@ export const UpdateBanner = (formData, params) => async dispatch => {
     }
 }
 export const UpdateNft = (formData, props, setLoading) => async dispatch => {
+
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -538,7 +540,7 @@ export const UpdateNft = (formData, props, setLoading) => async dispatch => {
             },
             transformRequest: formData => formData
         }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/nft/update/${props.id}/${props.nft_id}`,
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/nft/update/${props.id}/${props.nft_id?.id}`,
             formData, config)
         // 
         // console.log(res, 'coll rres')
@@ -547,11 +549,12 @@ export const UpdateNft = (formData, props, setLoading) => async dispatch => {
         if (res.status === 200) {
             swal("success", "updated", 'success')
             setLoading(false)
+            dispatch(NftList(props.nft_id?.id))
             dispatch(ProjectDetail(props.id))
-                .then(function () {
-                    window.location = `/projnftdetails/${props.id}`;
+            // .then(function () {
+            //     window.location = `/nft/details/${props.nft_id?.id}?project=${props.id}`;
 
-                });
+            // });
 
         }
     } catch (e) {

@@ -15,6 +15,7 @@ import NftTransdataTable from './nftTRansTable';
 import LatNftDataTable from '../Explore/latnftTable';
 import BidPopup from './bidPopup';
 import DModal from '../Create/3dModal';
+import Timer from './timer';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -38,7 +39,7 @@ const LatprojNftDetails = (props) => {
         // 
         return state.projectdetails.getnftwoldetails
     })
-    console.log(latprojnftdetail.extention, 'latext')
+    console.log(latprojnftdetail, 'latext')
     // console.log('paymentflow', [latprojnftdetail.payment_flow?.project_data.wallets])
 
 
@@ -87,6 +88,12 @@ const LatprojNftDetails = (props) => {
     //     ConnectWallet()
     // }
     // }
+    // const yestTime = "9:24:49 PM"
+    // const timeNow = new Date()?.toLocaleTimeString() - yestTime()
+    // console.log("time now", timeNow)
+    // const yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
+    // console.log('yestwe', yesterday)
+
     return (
         <section className="item-details-area">
             <div className="container">
@@ -185,7 +192,7 @@ const LatprojNftDetails = (props) => {
 
                                 </div>
 
-                                <div className='eddlbtton d-flex gap- align-items-center mt-2'>
+                                <div className='eddlbtton d-flex gap- align-items-center mt-2 justify-content-between'>
 
                                     {/* <div className="item-info-list">
                                     <ul className="list-unstyled">
@@ -215,6 +222,9 @@ const LatprojNftDetails = (props) => {
                                         )}
 
                                     </div>
+                                    <Timer
+                                        time={latprojnftdetail.end_date}
+                                    />
                                     <div className='eddlbtton bitbtn d-flex  align-items-center mt-2'>
 
                                         <div>
