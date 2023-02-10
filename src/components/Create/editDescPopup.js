@@ -269,7 +269,7 @@ const EditNftDesc = (props) => {
                 // centered
                 >
                     <Modal.Header >
-                        <Modal.Title id="contained-modal-title-vcenter h-auto">
+                        <Modal.Title id="contained-modal-title-vcenter ">
                             Update NFT
                         </Modal.Title>
                         <div>
