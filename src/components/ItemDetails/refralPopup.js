@@ -34,9 +34,10 @@ import {
     VKShareCount
 } from "react-share";
 import { Tooltip } from 'react-bootstrap';
+import { useLocation } from 'react-router';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 function ReferalPopup(props) {
-
+    const location = useLocation();
     const [copy, setCopy] = useState(false)
     // const [title, setTitle] = useState("");
     // const [description, setDescription] = useState("");
@@ -48,6 +49,8 @@ function ReferalPopup(props) {
         // dispatch(CreateCollectionAction(data))
     }
     const url = window.location.href + `?refid=${props.userRef}`
+    const userprojurl = `https://app.karmatica.io/projnftdetails/${props.id}` + `?refid=${props.userRef}`
+    console.log(userprojurl)
     // const Refurl = window.location.href + '/' + props.id + '/' + props.userRef
     return (
         <Modal
@@ -90,7 +93,7 @@ function ReferalPopup(props) {
                                     type="text"
                                     className="form-control"
                                     name="display_name"
-                                    value={url}
+                                    value={location.pathname === `/projnftdetails/${props.id}` ? userprojurl : url}
                                     disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false : true}
                                 // required
                                 // placeholder="Enter collection name"
@@ -111,22 +114,44 @@ function ReferalPopup(props) {
 
                             <hr />
                             <div className="refer-icons">
-                                <TwitterShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" > <TwitterIcon size={32} round={true} /></TwitterShareButton>
-                                <FacebookShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" > <FacebookIcon size={32} round={true} /></FacebookShareButton>
-                                <WhatsappShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" ><WhatsappIcon size={32} round={true} /></WhatsappShareButton>
-                                <TelegramShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" ><TelegramIcon size={32} round={true} /></TelegramShareButton>
-                                <InstapaperShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" >  <InstapaperIcon size={32} round={true} /></InstapaperShareButton>
-                                <LinkedinShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" > <LinkedinIcon size={32} round={true} /></LinkedinShareButton>
-                                <EmailShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales" ><EmailIcon size={32} round={true} /></EmailShareButton>
+                                {location.pathname === `/projnftdetails/${props.id}` ? (
+                                    <>  <TwitterShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" > <TwitterIcon size={32} round={true} /></TwitterShareButton>
+                                        <FacebookShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" > <FacebookIcon size={32} round={true} /></FacebookShareButton>
+                                        <WhatsappShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" ><WhatsappIcon size={32} round={true} /></WhatsappShareButton>
+                                        <TelegramShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" ><TelegramIcon size={32} round={true} /></TelegramShareButton>
+                                        <InstapaperShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" >  <InstapaperIcon size={32} round={true} /></InstapaperShareButton>
+                                        <LinkedinShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" > <LinkedinIcon size={32} round={true} /></LinkedinShareButton>
+                                        <EmailShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" ><EmailIcon size={32} round={true} /></EmailShareButton></>
+                                ) : (
+
+                                    <><TwitterShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales"><TwitterIcon size={32} round={true} /></TwitterShareButton>
+                                        <FacebookShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales"> <FacebookIcon size={32} round={true} /></FacebookShareButton>
+                                        <WhatsappShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales"><WhatsappIcon size={32} round={true} /></WhatsappShareButton>
+                                        <TelegramShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales"><TelegramIcon size={32} round={true} /></TelegramShareButton>
+                                        <InstapaperShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales">  <InstapaperIcon size={32} round={true} /></InstapaperShareButton>
+                                        <LinkedinShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales"> <LinkedinIcon size={32} round={true} /></LinkedinShareButton>
+                                        <EmailShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales"><EmailIcon size={32} round={true} /></EmailShareButton></>
+                                )
+                                }
                             </div>
                         </div>
                         <div className="col-2 p-0 text-right">
-                            <CopyToClipboard text={url} >
-                                <div className='copy'>
+                            {location.pathname === `/projnftdetails/${props.id}` ? (
+                                <CopyToClipboard text={userprojurl} >
+                                    <div className='copy'>
 
-                                    <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={() => setCopy(false)} disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false : true}></i></a>
-                                </div>
-                            </CopyToClipboard>
+                                        <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={() => setCopy(false)} disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false : true}></i></a>
+                                    </div>
+                                </CopyToClipboard>
+                            ) : (
+
+                                <CopyToClipboard text={url} >
+                                    <div className='copy'>
+
+                                        <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={() => setCopy(false)} disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false : true}></i></a>
+                                    </div>
+                                </CopyToClipboard>
+                            )}
                             {copy == true &&
                                 <span className='copytext'>Copied!</span>
 
