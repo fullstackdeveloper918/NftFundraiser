@@ -28,22 +28,22 @@ const ExploreAll = () => {
         }))
     }, [dispatch, type])
 
-  
+
     return (
 
         <section className="explore-area">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-8 col-lg-7">
-                       
+
                         <div className="intro text-center mb-4">
-                           
+
                             <h3 className="mt-3 mb-0">{type.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")}</h3>
                             <p>Invest in NFTs that are based on real-life projects or events related to important causes</p>
                         </div>
                     </div>
                 </div>
-               
+
                 <div className="row items explore-items h-auto">
                     {liveProjects && liveProjects.length ?
                         [...new Map(liveProjects?.map(item =>
@@ -61,9 +61,9 @@ const ExploreAll = () => {
                                                     <div className="card-caption col-12 p-0">
                                                         {/* Card Body */}
                                                         <div className="card-body">
-                                                            <a href="/item-details">
-                                                                <h5 className="mb-0">{item.title.slice(0, 22)}..</h5>
-                                                            </a>
+                                                            {/* <a href="/item-details"> */}
+                                                            <h5 className="mb-0">{item.title.slice(0, 15)}...</h5>
+                                                            {/* </a> */}
                                                             <a className="seller d-flex align-items-center mb-2" href="#">
                                                                 <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />
                                                                 <h6 className="ml-2">{item.user_data.username}</h6>
@@ -75,15 +75,15 @@ const ExploreAll = () => {
                                                                 </a>
                                                             </div> */}
                                                             <div className="card-bottom d-flex justify-content-between">
-                                                            <span>{Math.round(item.price)} MATIC</span>
-                                                    {item?.number_of_nft == 1 ? (
+                                                                <span>{Math.round(item.price)} MATIC</span>
+                                                                {item?.number_of_nft == 1 ? (
 
-                                                        <span>{item.number_of_nft} NFT</span>
-                                                    ) : (
-                                                        <span>{item.number_of_nft} NFTs</span>
-                                                    )
+                                                                    <span>{item.number_of_nft} NFT</span>
+                                                                ) : (
+                                                                    <span>{item.number_of_nft} NFTs</span>
+                                                                )
 
-                                                    }
+                                                                }
                                                             </div>
                                                             {/* <a className="btn btn-bordered-white btn-smaller mt-3" href="/wallet-connect"><i className="icon-handbag mr-2" />dfg</a> */}
                                                         </div>

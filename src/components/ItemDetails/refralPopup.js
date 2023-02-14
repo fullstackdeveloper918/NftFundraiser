@@ -71,7 +71,7 @@ function ReferalPopup(props) {
                 ) : (
                     <Modal.Title id="contained-modal-title-vcenter ">
 
-                        <p>Earn When You Share: <br />20% of NFT sales for first level referral </p>
+                        <p>Earn When You Share: <br />30% of NFT sales for first level referral </p>
                         <p style={{ color: "red" }}>Connect your wallet to earn referral income in MATIC when you share projects</p>
 
 
@@ -115,22 +115,22 @@ function ReferalPopup(props) {
                             <hr />
                             <div className="refer-icons">
                                 {location.pathname === `/projnftdetails/${props.id}` ? (
-                                    <>  <TwitterShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" > <TwitterIcon size={32} round={true} /></TwitterShareButton>
-                                        <FacebookShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" > <FacebookIcon size={32} round={true} /></FacebookShareButton>
-                                        <WhatsappShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" ><WhatsappIcon size={32} round={true} /></WhatsappShareButton>
-                                        <TelegramShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" ><TelegramIcon size={32} round={true} /></TelegramShareButton>
-                                        <InstapaperShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" >  <InstapaperIcon size={32} round={true} /></InstapaperShareButton>
-                                        <LinkedinShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" > <LinkedinIcon size={32} round={true} /></LinkedinShareButton>
-                                        <EmailShareButton url={userprojurl} title="Share project when logged in with wallet to earn 20% of NFT sales" ><EmailIcon size={32} round={true} /></EmailShareButton></>
+                                    <>  <TwitterShareButton url={userprojurl} title="Share project when logged in with wallet to earn 30% of NFT sales" > <TwitterIcon size={32} round={true} /></TwitterShareButton>
+                                        <FacebookShareButton url={userprojurl} title="Share project when logged in with wallet to earn 30% of NFT sales" > <FacebookIcon size={32} round={true} /></FacebookShareButton>
+                                        <WhatsappShareButton url={userprojurl} title="Share project when logged in with wallet to earn 30% of NFT sales" ><WhatsappIcon size={32} round={true} /></WhatsappShareButton>
+                                        <TelegramShareButton url={userprojurl} title="Share project when logged in with wallet to earn 30% of NFT sales" ><TelegramIcon size={32} round={true} /></TelegramShareButton>
+                                        <InstapaperShareButton url={userprojurl} title="Share project when logged in with wallet to earn 30% of NFT sales" >  <InstapaperIcon size={32} round={true} /></InstapaperShareButton>
+                                        <LinkedinShareButton url={userprojurl} title="Share project when logged in with wallet to earn 30% of NFT sales" > <LinkedinIcon size={32} round={true} /></LinkedinShareButton>
+                                        <EmailShareButton url={userprojurl} title="Share project when logged in with wallet to earn 30% of NFT sales" ><EmailIcon size={32} round={true} /></EmailShareButton></>
                                 ) : (
 
-                                    <><TwitterShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales"><TwitterIcon size={32} round={true} /></TwitterShareButton>
-                                        <FacebookShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales"> <FacebookIcon size={32} round={true} /></FacebookShareButton>
-                                        <WhatsappShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales"><WhatsappIcon size={32} round={true} /></WhatsappShareButton>
-                                        <TelegramShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales"><TelegramIcon size={32} round={true} /></TelegramShareButton>
-                                        <InstapaperShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales">  <InstapaperIcon size={32} round={true} /></InstapaperShareButton>
-                                        <LinkedinShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales"> <LinkedinIcon size={32} round={true} /></LinkedinShareButton>
-                                        <EmailShareButton url={url} title="Share project when logged in with wallet to earn 20% of NFT sales"><EmailIcon size={32} round={true} /></EmailShareButton></>
+                                    <><TwitterShareButton url={url} title="Share project when logged in with wallet to earn 30% of NFT sales"><TwitterIcon size={32} round={true} /></TwitterShareButton>
+                                        <FacebookShareButton url={url} title="Share project when logged in with wallet to earn 30% of NFT sales"> <FacebookIcon size={32} round={true} /></FacebookShareButton>
+                                        <WhatsappShareButton url={url} title="Share project when logged in with wallet to earn 30% of NFT sales"><WhatsappIcon size={32} round={true} /></WhatsappShareButton>
+                                        <TelegramShareButton url={url} title="Share project when logged in with wallet to earn 30% of NFT sales"><TelegramIcon size={32} round={true} /></TelegramShareButton>
+                                        <InstapaperShareButton url={url} title="Share project when logged in with wallet to earn 30% of NFT sales">  <InstapaperIcon size={32} round={true} /></InstapaperShareButton>
+                                        <LinkedinShareButton url={url} title="Share project when logged in with wallet to earn 30% of NFT sales"> <LinkedinIcon size={32} round={true} /></LinkedinShareButton>
+                                        <EmailShareButton url={url} title="Share project when logged in with wallet to earn 30% of NFT sales"><EmailIcon size={32} round={true} /></EmailShareButton></>
                                 )
                                 }
                             </div>

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { Roles } from '../Wallet/interact';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 const Hero = () => {
     const history = useHistory()
@@ -83,16 +83,16 @@ const Hero = () => {
                     '<i class="fa fa-thumbs-up"></i> Ok!',
                 confirmButtonAriaLabel: 'Thumbs up, great!',
             })
-        } 
-        else if(!userToken) {
+        }
+        else if (!userToken && !localStorage.getItem('authToken')) {
             Swal.fire({
                 icon: 'info',
                 html:
-                  'You need to Signup as a Creator to Create a Project',
+                    'You need to Signup as a Creator to Create a Project',
                 // showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:
-                  '<i class="fa fa-thumbs-up"></i> Ok!',
+                    '<i class="fa fa-thumbs-up"></i> Ok!',
                 confirmButtonAriaLabel: 'Thumbs up, great!',
             })
         }
@@ -105,11 +105,11 @@ const Hero = () => {
                 <div className="row">
                     <div className="col-12 col-md-6 col-lg-7">
 
-                        <h1 className="mt-4">Invest in NFTs to fund projects and earn income for the common good.</h1>
+                        <h1 className="mt-4">Create NFTs to fund real-life projects. Earn up to 30% by sharing.</h1>
                         {/* <p>Earn rewards by referring your friends.</p> */}
                         {/* Buttons */}
                         <div className="button-group">
-                            <a className="btn btn-bordered-white" href={`/all/${"LatestProjects"}`}><i className="icon-rocket mr-2" />Explore</a>
+                            <Link className="btn btn-bordered-white" to={`/all/${"LatestProjects"}`}><i className="icon-rocket mr-2" />Explore</Link>
                             <a className="btn btn-bordered-white" onClick={handleCreate}><i className="icon-note mr-2" />Create </a>
                         </div>
                     </div>

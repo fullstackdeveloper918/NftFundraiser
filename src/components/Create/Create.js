@@ -3,7 +3,7 @@ import React, { Component, useEffect, useState, useRef, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { CategoriesAction, GetCollectionsAction } from '../../redux/Actions/projectAction';
+import { CategoriesAction, CreateProjectAction, GetCollectionsAction } from '../../redux/Actions/projectAction';
 
 import 'reactjs-popup/dist/index.css';
 import styles from "./styles/styles.module.scss"
@@ -29,6 +29,7 @@ const Create = ({ current, next, prev }) => {
     console.log('price', price)
     console.log('city', city)
     const [image, setImage] = useState()
+    const [loading, setLoading] = useState(false)
 
     const [collection_id, setCollectionId] = useState(0);
     const [usertype, setUserType] = useState();
@@ -48,6 +49,7 @@ const Create = ({ current, next, prev }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
+
 
     const { countries } = useSelector(state => state.countries)
 
@@ -155,6 +157,32 @@ const Create = ({ current, next, prev }) => {
                 el.value = el.max;
             }
         }
+    }
+
+    const today = new Date();
+    const numberOfDaysToAdd = 30;
+    const date = today.setDate(today.getDate());
+    const date1 = today.setDate(today.getDate() + numberOfDaysToAdd);
+    const defaultValue = new Date(date).toISOString().substr(0, 10) // yyyy-mm-dd
+    const defaultValue1 = new Date(date1).toISOString().substr(0, 10) // yyyy-mm-dd
+
+    const handleSubmitDraft = (data) => {
+        const imageBanner = dataURLtoBlob(image)
+        const formData = new FormData()
+        for (const [key, value] of Object.entries(data)) {
+            formData.append(key, value)
+        }
+
+        formData.append("type", data.usertype)
+        formData.append("image", imageBanner)
+        formData.append("status", 3)
+        formData.append("on_which_step_left", 0)
+        if (data.usertype == 1) {
+            formData.append('start_date', '')
+            formData.append('end_date', '')
+        }
+
+        dispatch(CreateProjectAction(formData, setLoading, history))
     }
     return (
 
@@ -495,6 +523,7 @@ const Create = ({ current, next, prev }) => {
                                     // hidden={data.type == 1}
                                     className="form-control"
                                     name="start_date"
+                                    defaultValue={defaultValue}
                                     min={disablePastDate()}
 
                                     // placeholder="Start date :"
@@ -511,6 +540,7 @@ const Create = ({ current, next, prev }) => {
                                         // hidden={data.type == 1}
                                         className="form-control"
                                         name="end_date"
+                                        defaultValue={defaultValue1}
                                         min={disablePastDate()}
 
                                         // placeholder="End date"
@@ -533,6 +563,7 @@ const Create = ({ current, next, prev }) => {
                                 imageSrc={image}
                                 // src={image}
                                 initalImag={data.imageUri}
+
                                 setImageSrc={setImage}
                             />
                             <div >
@@ -549,7 +580,12 @@ const Create = ({ current, next, prev }) => {
 
 
 
-                    <div className="col-12">
+                    <div className="col-6">
+                        <button className="btn w-100 mt-3 mt-sm-4" onClick={handleSubmit(handleSubmitDraft)}>
+                            Save as Draft
+                        </button>
+                    </div>
+                    <div className="col-6">
                         <button className="btn w-100 mt-3 mt-sm-4" type="submit">Next</button>
                     </div>
                 </div>

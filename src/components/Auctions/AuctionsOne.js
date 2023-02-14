@@ -43,7 +43,10 @@ const AuctionsOne = ({ type }) => {
                                 <h3 className="mt-3 mb-0">{type.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")}</h3>
                             </div>
                             <div className="intro-btn">
-                                <a className="btn content-btn" href={`/all/${type}`}>View All</a>
+                                {liveProjects?.length > 4 &&
+
+                                    <Link to={`/all/${type}`} style={{ color: 'white' }} ><a className="btn content-btn">View All</a></Link>
+                                }
                             </div>
                         </div>
                     </div>
@@ -56,7 +59,7 @@ const AuctionsOne = ({ type }) => {
                             {liveProjects?.map((item, idx) => {
                                 return (
 
-                                    <div key={`auc_${item.id}`} className="swiper-slide item">
+                                    <div key={`auc_${item.id}`} className="swiper-slide item card">
 
 
                                         {/* {item?.nft_data?.map((item, idx) => { */}

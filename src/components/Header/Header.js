@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { CountSet, GetUserAction, NotiDelete } from '../../redux/Actions/authAction';
 import swal from 'sweetalert';
 import { loginSuccess, logoutSuccess } from '../../redux/Slices/authSlice';
@@ -9,11 +9,13 @@ import { ConnectWallet, getCurrentWalletConnected, Roles } from '../Wallet/inter
 import Swal from 'sweetalert2';
 import { isCancel } from 'axios';
 import moment from "moment";
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
+    const location = useLocation();
     const dispatch = useDispatch()
     const [address, setAddress] = useState(null)
-
+    const [active, setActive] = useState(null)
     const add1 = address?.slice(0, 4).toUpperCase()
     const add2 = address?.slice(35, 44).toUpperCase()
 
@@ -157,14 +159,14 @@ const Header = () => {
                     {/* Navbar */}
                     <ul className="navbar-nav items mx-auto">
                         <li className="nav-item dropdown">
-                            <Link className="nav-link" to="/">Explore</Link>
+                            <NavLink exact activeClassName="navbar__link--active" className="nav-link" to="/">Explore</NavLink>
                         </li>
                         {/* {log !== null && ( */}
-                        <li className="nav-item">
-                            <a onClick={handleCreate} className="nav-link">Create</a>
+                        <li className="nav-item" >
+                            <a onClick={() => handleCreate()} className={location.pathname === `/create` && "nav-link-active"} activeClassName={location.pathname === `/create` && "navbar__link--active"} >Create</a>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/all/${"LatestProjects"}`} className="nav-link">Latest</Link>
+                            <NavLink exact activeClassName="navbar__link--active" to={`/all/${"LatestProjects"}`} className="nav-link">Latest</NavLink>
                         </li>
                         <li className="nav-item">
                             <a target="_blank" href="https://changelly.com/?from=btc&to=matic&amount=0.1&ref_id=_-GPCBjccW7TMMjO" className="nav-link">Swap</a>

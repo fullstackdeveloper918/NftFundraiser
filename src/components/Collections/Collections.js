@@ -25,7 +25,10 @@ const Collections = () => {
                                 <h3 className="mt-3 mb-0">Popular Collections</h3>
                             </div>
                             <div className="intro-btn">
-                                <Link className="btn content-btn text-left" to="/allcollections">Explore More</Link>
+                                {coll?.length > 8 &&
+
+                                    <Link className="btn content-btn text-left" to="/allcollections">Explore More</Link>
+                                }
                             </div>
                         </div>
                     </div>
@@ -43,7 +46,7 @@ const Collections = () => {
                                         </div>
                                         {/* Card Caption */}
                                         <div className="card-caption col-12 p-0">
-                                            <img className='logo' src="/img/logo.png" alt='logo' width={50} height={50} />
+                                            <img className='logo' src={item?.organization_detail?.logo} alt='logo' width={50} height={50} />
                                             {/* Card Body */}
                                             <div className="card-body">
                                                 <a>

@@ -86,10 +86,10 @@ const Footer = () => {
                                 <h4 className="footer-title">Useful Links</h4>
                                 <ul>
                                     <li className="nav-item">
-                                        <a onClick={handleCreate} className="">Create Project</a>
+                                        <a onClick={() => handleCreate()} className="">Create Project</a>
                                     </li>
                                     {/* <li><Link to="/create" onClick={handleCreate}>Create Project</Link></li> */}
-                                    <li><a href={`/all/${"LatestProjects"}`}>Explore NFTs</a></li>
+                                    <li><Link to={`/all/${"LatestProjects"}`}>Explore NFTs</Link></li>
                                     <li><Link to="/terms&conditions">Terms of Service</Link></li>
                                 </ul>
                             </div>

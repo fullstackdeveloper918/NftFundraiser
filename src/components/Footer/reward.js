@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getFooter } from '../../redux/Actions/footerAction'
 
 const Rewards = () => {
-    
+
     // console.log(footer, 'footer')
     return (
         <section className="item-details-area">
@@ -26,21 +26,21 @@ const Rewards = () => {
                             </svg>
                         </div>
                         <h3>How Creator and Referral MATIC Rewards Work</h3>
-                        <span className='termsandconditions'><li>Affiliates get 30% on first level NFT referred sales</li> 
-<li>Creators get 10% of secondary NFT sales for the lifetime of the project.</li>
-<li>Affiliates receive 5% of secondary purchases.</li>
-<br />
-<h5>NFT sale to BUYER 1 </h5> 
-79% goes to Creator <br />
-20% goes to Affiliate (if applicable)<br/>
-1% to Karmatica<br />
-<br />
-<h5>NFT resold from BUYER 1 to BUYER 2 via Affiliate</h5>
-84% goes to BUYER 1<br />
-10% goes to NFT Creator<br />
-5% goes to Affiliate <br />
-1% to Karmatica<br />
-</span>
+                        <span className='termsandconditions'><li>Affiliates get 30% on first level NFT referred sales</li>
+                            <li>Creators get 10% of secondary NFT sales for the lifetime of the project.</li>
+                            <li>Affiliates receive 5% of secondary purchases.</li>
+                            <br />
+                            <h5>NFT sale to BUYER 1 </h5>
+                            69% goes to Creator <br />
+                            30% goes to Affiliate<br />
+                            1% to Karmatica<br />
+                            <br />
+                            <h5>NFT resold from BUYER 1 to BUYER 2 via Affiliate</h5>
+                            84% goes to BUYER 1<br />
+                            10% goes to NFT Creator<br />
+                            5% goes to Affiliate <br />
+                            1% to Karmatica<br />
+                        </span>
                     </div>
 
 

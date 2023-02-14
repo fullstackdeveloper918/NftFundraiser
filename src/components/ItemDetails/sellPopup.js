@@ -217,6 +217,7 @@ function SellPopup(props) {
                                         type="radio"
                                         name="radiobutton"
                                         id="2"
+                                        disabled
                                         onChange={autionTypeChange}
                                         value="2"
                                         {...register("auctiontype", { required: true })}
