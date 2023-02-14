@@ -46,7 +46,7 @@ const AddNft = ({ current, prev }) => {
     const [Pimage, setPimage] = useState()
     console.log(nftHeight, 'nftheight')
     const [modalShow, setModalShow] = React.useState(false);
-    const [nft_collection_id, setNft_collection_id] = useState({ 0: "0" });
+    const [nft_collection_id, setNft_collection_id] = useState({ 0: "1" });
     const [NFtFileExtension, setNFtExtension] = useState()
     const [source, setSource] = useState([])
     const [preview, setPreview] = useState([])
@@ -488,35 +488,7 @@ const AddNft = ({ current, prev }) => {
                                                                                     Choose Collection
                                                                                 </label>
                                                                             </div>
-                                                                            <div className="col-md-6 col-lg-3 col-12">
-                                                                                {/* <div className="col-24"> */}
 
-                                                                                <div className="form-group">
-                                                                                    <div
-                                                                                        className="card choose_div"
-                                                                                        style={{
-                                                                                            background: "black",
-                                                                                            marginBottom: "8px",
-                                                                                        }}
-                                                                                    >
-                                                                                        <div className="card-body ">
-                                                                                            <Button
-                                                                                                variant="primary"
-                                                                                                className="collection_btn"
-                                                                                                onClick={() => setModalShow(true)}
-                                                                                            >
-                                                                                                <i className="f1a-regular fa-plus"></i>{" "}
-                                                                                                Create Collection
-                                                                                            </Button>
-
-                                                                                            <MyVerticallyCenteredModal
-                                                                                                show={modalShow}
-                                                                                                onHide={() => setModalShow(false)}
-                                                                                            />
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
 
                                                                             {col?.map((item, idx) => (
                                                                                 <div
@@ -547,6 +519,35 @@ const AddNft = ({ current, prev }) => {
                                                                                 </div>
                                                                                 // </div>
                                                                             ))}
+                                                                            <div className="col-md-6 col-lg-3 col-12">
+                                                                                {/* <div className="col-24"> */}
+
+                                                                                <div className="form-group">
+                                                                                    <div
+                                                                                        className="card choose_div"
+                                                                                        style={{
+                                                                                            background: "black",
+                                                                                            marginBottom: "8px",
+                                                                                        }}
+                                                                                    >
+                                                                                        <div className="card-body ">
+                                                                                            <Button
+                                                                                                variant="primary"
+                                                                                                className="collection_btn"
+                                                                                                onClick={() => setModalShow(true)}
+                                                                                            >
+                                                                                                <i className="f1a-regular fa-plus"></i>{" "}
+                                                                                                Create Collection
+                                                                                            </Button>
+
+                                                                                            <MyVerticallyCenteredModal
+                                                                                                show={modalShow}
+                                                                                                onHide={() => setModalShow(false)}
+                                                                                            />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                             <div className="col-12">
                                                                                 <div className="col-lg-6 col-12 uploadnftpopup p-0 mb-4">
                                                                                     <label className="mt-3">Upload NFT</label>
@@ -590,13 +591,20 @@ const AddNft = ({ current, prev }) => {
                                                                                             {source?.length && source?.[index] && source[index]?.type === "Image" &&
                                                                                                 <div>
                                                                                                     {/* {nftFileType === "Image" && nftHeight >= 500 && nftwidth >= 500 ? ( */}
-                                                                                                    {source?.length && source?.[index] && source[index]?.type === "Image" && (
+                                                                                                    {source?.length && source?.[index] && source[index]?.type === "Image" && nftHeight >= 500 && nftwidth >= 500 ? (
 
 
                                                                                                         <img
                                                                                                             src={URL.createObjectURL(source[index].file)}
                                                                                                             className="nft-image"
                                                                                                         />
+                                                                                                    ) : (
+                                                                                                        <p style={{ color: "red", marginLeft: '10px' }}>
+                                                                                                            Minimum size should be 500x500
+                                                                                                        </p>
+
+
+
                                                                                                     )}
                                                                                                     {/* : (
                                                                                         <p style={{ color: "red" }}>

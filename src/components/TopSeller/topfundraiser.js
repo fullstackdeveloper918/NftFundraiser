@@ -14,7 +14,7 @@ const Fundraiser = () => {
     const fund = useSelector(state => {
         return state?.fundraiser?.fundraiser
     })
-    // console.log(fund, 'fdd')
+    console.log(fund, 'fdd')
 
     useEffect(() => {
         dispatch(TopFundraiserAction({}))
@@ -33,7 +33,10 @@ const Fundraiser = () => {
                                 <h3 className="mt-3 mb-0">Top Fundraisers</h3>
                             </div>
                             <div className="intro-btn">
-                                <Link className="btn content-btn" to='/allfundraise'>View All</Link>
+                                {fund?.length > 5 &&
+
+                                    <Link className="btn content-btn" to='/allfundraise'>View All</Link>
+                                }
                             </div>
                         </div>
                     </div>

@@ -24,6 +24,7 @@ import CollPopup from './createCollection';
 import DModal from './3dModal';
 import swal from 'sweetalert';
 
+
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -165,7 +166,6 @@ const EditNftImage = (props) => {
         setPreview(URL.createObjectURL(pimage))
     };
     useEffect(() => {
-
         form.setFieldsValue({
             nfts: [{
                 nft_name: nftdetail.title,
@@ -186,6 +186,7 @@ const EditNftImage = (props) => {
     }, [form, nftdetail])
 
     const onFinish = async (values) => {
+        // debugger
 
         try {
 
@@ -219,7 +220,7 @@ const EditNftImage = (props) => {
                     dispatch(UpdateNft(formData, props, setLoading))
                 } else {
                     console.log('fail')
-                    setLoading(false)
+                    // setLoading(false)
                     swal('error!', 'Nft not uploaded', 'error')
                 }
             } else {
@@ -243,7 +244,7 @@ const EditNftImage = (props) => {
 
         } catch (error) {
             console.log(error)
-            setLoading(false)
+            // setLoading(false)
         }
 
     };

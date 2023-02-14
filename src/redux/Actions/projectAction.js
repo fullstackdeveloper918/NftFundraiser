@@ -33,7 +33,6 @@ import { useForm } from "react-hook-form";
 import { redirect } from "next/dist/server/api-utils";
 
 export const CreateProjectAction = (params, setLoading, history) => async dispatch => {
-    // debugger
     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
     // setLoading(true)
@@ -530,6 +529,7 @@ export const UpdateBanner = (formData, params) => async dispatch => {
     }
 }
 export const UpdateNft = (formData, props, setLoading) => async dispatch => {
+    // debugger
 
     const token = localStorage.getItem('authToken')
     try {

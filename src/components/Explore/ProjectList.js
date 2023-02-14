@@ -96,9 +96,9 @@ const GetAllProjects = () => {
                                                                 </a>
                                                                 <div className="seller d-flex align-items-center my-2">
                                                                     <span>Owned By</span>
-                                                                    <a href="/author">
-                                                                        <h6 className="ml-2 mb-0">You</h6>
-                                                                    </a>
+
+                                                                    <h6 className="ml-2 mb-0">You</h6>
+
                                                                 </div>
                                                                 <div className="card-bottom d-flex justify-content-between">
                                                                     <span>{item.price} MATIC</span>
