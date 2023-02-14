@@ -48,7 +48,7 @@ const AuctionsOne = ({ type }) => {
                         </div>
                     </div>
                 </div>
-                <div className="auctions-slides">
+                <div className="auctions-slides ">
                     <div className="swiper-container slider-mid items ">
                         <div className="swiper-wrapper col-12 ">
                             {/* Single Slide */}
@@ -79,10 +79,16 @@ const AuctionsOne = ({ type }) => {
                                                 <a href="#">
                                                     <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
                                                 </a>
-                                                <a className="seller d-flex align-items-center mb-2" href="#">
-                                                    <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />
-                                                    <span className="ml-2 mb-0">{item.user_data.username}</span>
-                                                </a>
+                                                <div className="seller d-flex align-items-center my-3" href="#">
+                                                <span>Owned By</span> 
+                                                {/* <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" /> */}
+                                                
+                                                <a href='#'>
+                                                        <h6 className="ml-2 mb-0">{item.user_data.username}</h6>
+                                                    </a>
+
+                                                    {/* <span className="ml-2 mb-0">{item.user_data.username}</span> */}
+                                                </div>
                                                 <div className="card-bottom d-flex justify-content-between">
                                                     <span>{Math.round(item.price)} MATIC</span>
                                                     {item?.number_of_nft == 1 ? (
@@ -94,18 +100,30 @@ const AuctionsOne = ({ type }) => {
 
                                                     }
                                                 </div>
-                                            </div>
+                                              
+                                                <a className="btn btn-bordered-white btn-smaller mt-3 mb-0" href="/login"><i className="icon-handbag mr-2" />Buy</a>              </div>
+                                            
+
+                                           
                                         </div>
 
                                     </div>
+
+
+
                                 );
                             })}
                         </div>
+                        
                         <div className="swiper-pagination" />
                     </div>
                 </div>
             </div>
         </section>
+
+            
+
+
     )
 }
 export default AuctionsOne;

@@ -5,8 +5,18 @@ import Swal from 'sweetalert2';
 import { Roles } from '../Wallet/interact';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { getPublicLiveProjects } from '../../redux/Actions/projectAction';
 
-const Hero = () => {
+
+
+
+const projectTypesMap = {
+    "LatestProjects": 2,
+    "RecentCampaigns": 1
+}
+const Hero = ({ type }) => {
     const history = useHistory()
 
     var options = {
@@ -39,7 +49,20 @@ const Hero = () => {
     const userToken = useSelector(state => {
         return state.user.userToken
     })
+    const dispatch = useDispatch()
 
+    const liveProjects = useSelector(state => {
+        return state?.projectdetails?.liveProjects[type]
+    })
+    console.log(liveProjects, 'liveeproj')
+    useEffect(() => {
+        dispatch(getPublicLiveProjects({
+            cursor: 1,
+            type: projectTypesMap[type],
+            projectType: type,
+        }))
+
+    }, [dispatch])
     const currentLocation = () => {
         // 
         if (navigator.geolocation) {
@@ -102,7 +125,7 @@ const Hero = () => {
     return (
         <section className="hero-section">
             <div className="container">
-                <div className="row">
+                <div className="row justify-content-between">
                     <div className="col-12 col-md-6 col-lg-7">
 
                         <h1 className="mt-4">Invest in NFTs to fund projects and earn income for the common good.</h1>
@@ -113,8 +136,63 @@ const Hero = () => {
                             <a className="btn btn-bordered-white" onClick={handleCreate}><i className="icon-note mr-2" />Create </a>
                         </div>
                     </div>
-                </div>
+  
+                    <div className='col-12 col-md-6 col-lg-4 auction-slider auctions-slides'>
+            {liveProjects?.slice(0,1).map((item, idx) => {
+                                return (
+
+                                    <div key={`auc_${item.id}`} className="item card">
+
+
+                                        {/* {item?.nft_data?.map((item, idx) => { */}
+                                        {/* return ( */}
+                                        <div className="image-over">
+                                            <Link to={`/projects/${item.slug}`}>
+                                                {/* <img className="card-img-top" src={item?.image} alt="" /> */}
+                                                <img class="card-img-top" src="https://clickthemart.com/storage/project_img/2023-02-09-11-37-271675942647." alt=""></img>
+                                            </Link>
+
+                                        </div>
+                                        {/* ) */}
+                                        {/* })} */}
+                                        {/* Card Caption */}
+                                        <div className="card-caption col-12 p-0">
+                                            {/* Card Body */}
+                                            <div className="card-body">
+                                                {/* <div className="countdown-times ">
+                                                        <div className="countdown d-flex justify-content-center" data-date={item.date} />
+                                                    </div> */}
+                                                <a href="#">
+                                                    <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
+                                                </a>
+                                                <a className="seller d-flex align-items-center mb-2" href="#">
+                                                    <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />
+                                                    <span className="ml-2 mb-0">{item.user_data.username}</span>
+                                                </a>
+                                                <div className="card-bottom d-flex justify-content-between">
+                                                    <span>{Math.round(item.price)} MATIC</span>
+                                                    {item?.number_of_nft == 1 ? (
+
+                                                        <span>{item.number_of_nft} NFT</span>
+                                                    ) : (
+                                                        <span>{item.number_of_nft} NFTs</span>
+                                                    )
+
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    
+                                    
+                                );
+                            })}
             </div>
+                </div>
+   
+            </div>
+         
             {/* Shape */}
             <div className="shape">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 465" version="1.1">

@@ -34,18 +34,50 @@ const Collections = () => {
                     {coll?.slice(0, 8)?.map((item, idx) => {
                         return (
                             <div key={`cd_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
-                                <div>
+
+<div className="card no-hover text-center">
+                <div className="image-over">
+                             <Link to={`/popularcollection/details/${item?.slug}`}>
+                                                <img className="card-img-top" src={item?.image} alt="" />
+                                            </Link>
+                    {/* Seller */}
+                    <a className="seller" >
+                        <div className="seller-thumb avatar-lg">
+                        <img className='' src="/img/logo.png" alt='logo' width={50} height={50} />
+                        </div>
+                    </a>
+                </div>
+                {/* Card Caption */}
+                <div className="card-caption col-12 p-0">
+                    {/* Card Body */}
+                    <div className="card-body mt-4">
+                    <a>
+                                                    <h5 className="mb-0 ">{item.title.slice(0, 12)} </h5>
+                                                </a>
+                                                <div class="mb-2 align-items-center">
+                                                    <div class="mt-2 mb-2 d-flex justify-content-center text-align-center gap-5">
+                                                        <span>Total NFTs:</span>
+                                                        <span>{item.nft_data.length}</span>
+                                                    </div>
+                                                </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+                                {/* <div>
                                     <div className="card position-relative ">
                                         <div className="image-over ">
                                             <Link to={`/popularcollection/details/${item?.slug}`}>
                                                 <img className="card-img-top" src={item?.image} alt="" />
                                             </Link>
-                                        </div>
+                                        </div> */}
                                         {/* Card Caption */}
-                                        <div className="card-caption col-12 p-0">
-                                            <img className='logo' src="/img/logo.png" alt='logo' width={50} height={50} />
+                                        {/* <div className="card-caption col-12 p-0">
+                                            <img className='logo' src="/img/logo.png" alt='logo' width={50} height={50} /> */}
                                             {/* Card Body */}
-                                            <div className="card-body">
+                                            {/* <div className="card-body">
                                                 <a>
                                                     <h5 className="mb-0 ">{item.title}</h5>
                                                 </a>
@@ -55,7 +87,7 @@ const Collections = () => {
                                                         <span>Total NFTs</span>
                                                         <span>{item.nft_data.length}</span>
                                                     </div>
-                                                </div>
+                                                </div> */}
                                                 {/* <div className="seller d-flex align-items-center my-3">
                                                                 <span style={{ color: '#8E8E8E' }}>Owned By</span>
                                                                 <a href="/author">
@@ -75,11 +107,11 @@ const Collections = () => {
                                                             </div> */}
                                                 {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
                                                 {/* <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a> */}
-                                            </div>
+                                            {/* </div> */}
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    // </div>
+                                // </div>
+                            // </div>
                         )
                     })}
                 </div>

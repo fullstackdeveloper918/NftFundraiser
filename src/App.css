@@ -518,9 +518,9 @@ span#inputGroupPrepend2 {
 .intro span {   
     font-size: 16px;
 }
-.card .card-body{
+/* .card .card-body{
     padding: 20px 0 0 !important;
-}
+} */
 .seller-info.ml-3 span {
     color: #8e8e8e !important;
     font-family: var(--secondary-font) !important;
@@ -612,9 +612,9 @@ section.live-auctions-area.single_project-detail .row h3 {
 .card .card-caption .card-bottom span {
     font-size: 14px;
 }
-.card-body h5 {
+/* .card-body h5 {
     padding-bottom: 10px;
-}
+} */
 .container.single_project-detail .row h3 {
     width: 100% !important;
     padding-left: 15px !important;
@@ -927,8 +927,11 @@ button.ant-btn.ant-btn-default.previous_btn span{
     font-size: 15px;
     font-weight: 200 !important;
 }
-:root .auctions-slides span {
+/* :root .auctions-slides span {
     color: #fffbfb !important;
+} */
+.live-auctions-area .card .card-body a h5 {
+    text-transform: capitalize;
 }
 section.explore-area {
     padding: 130px 0 0 0 !important;
@@ -2103,7 +2106,7 @@ video.VideoInput_video {
     height: 240px;
 } */
 body .btn.btn-bordered-white {
-    border: 3px solid #fff;
+    border: 2px solid #fff;
 }
 .card .fa-solid.fa-trash {
     background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
@@ -2617,4 +2620,23 @@ ul.creator-dropdown.notification-menu:after {
         }
         div#werwer {
             height: auto;
+        }
+       .auction-slider.auctions-slides  span {
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: unset !important;
+            color: #ffff !important;
+            background: unset;
+        }
+       .auction-slider.auctions-slides  span:after{
+            display: none;
+        }
+        .auction-slider.auctions-slides img.card-img-top {
+            aspect-ratio: unset !important;
+        }
+
+        .auction-slider.auctions-slides .item.card {
+            color: black;
+            background-image: linear-gradient(150deg, white -200%, #0e0e0e 78%);
+            transform: translate3d(0px, 10px, 10px);
+            border: 1px solid #282828;
         }

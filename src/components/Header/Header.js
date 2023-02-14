@@ -218,7 +218,7 @@ const Header = () => {
                         }
                         {!window.ethereum?.selectedAddress &&
                             <li className="nav-item ml-3">
-                                <a className="btn ml-lg-auto btn-bordered-white" onClick={WalletHandler} style={{ color: '#f8f9fa' }}><i className="icon-wallet mr-md-2" />CONNECT WALLET</a>
+                                <a className="btn ml-lg-auto btn-bordered-white" onClick={WalletHandler} style={{ color: '#f8f9fa' }}><i className="icon-wallet mr-md-2" />Connect Wallet</a>
                             </li>
                         }
                     </ul>
@@ -246,7 +246,7 @@ const Header = () => {
                             <li className="nav-item ml-3">
                                 <a className="creator-button btn ml-md-auto btn-bordered-white"
                                     onClick={() => history.push('/wallet-connect')}><i className="fa fa-user" />
-                                    <div>CREATOR</div></a>
+                                    <div>Creator</div></a>
                                 {/* <Link to="/login" className="creator-button btn ml-md-auto btn-bordered-white">
                                     <i className="fa fa-user" />
                                     <div>CREATOR</div>

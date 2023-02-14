@@ -1803,7 +1803,7 @@ header .navbar-expand .dropdown .dropdown-item.active, header .navbar-expand .dr
 }
 
 .live-auctions-area .card .seller span {
-  color: var(--white-color);
+  /* color: var(--white-color); */
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
