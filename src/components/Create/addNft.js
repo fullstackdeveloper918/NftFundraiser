@@ -356,7 +356,7 @@ const AddNft = ({ current, prev }) => {
 
 
                                 <div>
-
+        
                                     {loading ? (
                                         <Loader />
                                     ) : (

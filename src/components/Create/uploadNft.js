@@ -670,65 +670,67 @@ const UploadNft = ({ current, prev }) => {
                                                                     Choose Collection
                                                                 </label>
                                                             </div>
-                                                            <div className="col-md-6 col-lg-3 col-12">
-                                                                {/* <div className="col-24"> */}
+                                                            <div className='d-flex gap-10'>
+                                                                <div className="">
+                                                                    {/* <div className="col-24"> */}
 
-                                                                <div className="form-group">
-                                                                    <div
-                                                                        className="card choose_div"
-                                                                        style={{
-                                                                            background: "black",
-                                                                            marginBottom: "8px",
-                                                                        }}
-                                                                    >
-                                                                        <div className="card-body ">
-                                                                            <Button
-                                                                                variant="primary"
-                                                                                className="collection_btn"
-                                                                                onClick={() => setModalShow(true)}
-                                                                            >
-                                                                                <i className="f1a-regular fa-plus"></i>{" "}
-                                                                                Create Collection
-                                                                            </Button>
+                                                                    <div className="form-group">
+                                                                        <div
+                                                                            className="card choose_div"
+                                                                            style={{
+                                                                                background: "black",
+                                                                                marginBottom: "8px",
+                                                                            }}
+                                                                        >
+                                                                            <div className="card-body ">
+                                                                                <Button
+                                                                                    variant="primary"
+                                                                                    className="collection_btn"
+                                                                                    onClick={() => setModalShow(true)}
+                                                                                >
+                                                                                    <i className="f1a-regular fa-plus"></i>{" "}
+                                                                                    Create Collection
+                                                                                </Button>
 
-                                                                            <MyVerticallyCenteredModal
-                                                                                show={modalShow}
-                                                                                onHide={() => setModalShow(false)}
-                                                                            />
+                                                                                <MyVerticallyCenteredModal
+                                                                                    show={modalShow}
+                                                                                    onHide={() => setModalShow(false)}
+                                                                                />
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
-                                                            {col?.map((item, idx) => (
-                                                                <div
-                                                                    key={`auc_${idx}`}
-                                                                    id={item.id}
-                                                                    className="col-md-6 col-lg-3 col-12 choose_div"
-                                                                >
+                                                                {col?.map((item, idx) => (
                                                                     <div
+                                                                        key={`auc_${idx}`}
                                                                         id={item.id}
-                                                                        onClick={() =>
-                                                                            onHandleClick(index, item.id)
-                                                                        }
-                                                                        className="card"
-                                                                        style={{
-                                                                            background: "black",
-                                                                            marginBottom: "8px",
-                                                                            border:
-                                                                                nft_collection_id[index] == item.id
-                                                                                    ? "1px solid #fff"
-                                                                                    : null,
-                                                                        }}
+                                                                        className="choose_div"
                                                                     >
-                                                                        <div className="card-body">
-                                                                            <div>{item.title}</div>
+                                                                        <div
+                                                                            id={item.id}
+                                                                            onClick={() =>
+                                                                                onHandleClick(index, item.id)
+                                                                            }
+                                                                            className=""
+                                                                            style={{
+                                                                                background: "black",
+                                                                                marginBottom: "8px",
+                                                                                border:
+                                                                                    nft_collection_id[index] == item.id
+                                                                                        ? "1px solid #fff"
+                                                                                        : null,
+                                                                            }}
+                                                                        >
+                                                                           
+                                                                                <div>{item.title}</div>
+                                                                            
                                                                         </div>
+                                                                        {/* </Form.Item> */}
                                                                     </div>
-                                                                    {/* </Form.Item> */}
-                                                                </div>
-                                                                // </div>
-                                                            ))}
+                                                                    // </div>
+                                                                ))}
+                                                            </div>
                                                             <div className="col-12">
                                                                 <div className="col-lg-6 col-12 uploadnftpopup p-0 mb-4">
                                                                     <label className="mt-3">Upload NFT</label>

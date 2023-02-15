@@ -50,7 +50,7 @@ const AuctionsOne = ({ type }) => {
                 </div>
                 <div className="auctions-slides ">
                     <div className="swiper-container slider-mid items ">
-                        <div className="swiper-wrapper col-12 ">
+                        <div className="swiper-wrapper  ">
                             {/* Single Slide */}
 
                             {liveProjects?.map((item, idx) => {
@@ -100,8 +100,11 @@ const AuctionsOne = ({ type }) => {
 
                                                     }
                                                 </div>
-                                              
-                                                <a className="btn btn-bordered-white btn-smaller mt-3 mb-0" href="/login"><i className="icon-handbag mr-2" />Buy</a>              </div>
+                                                <div className='d-flex justify-content-between'>
+                                                            <a className="btn btn-bordered-white btn-smaller mt-3 mb-0" href="/login">Invest</a>
+                                                             <a className="btn btn-bordered-white btn-smaller mt-3 mb-0" href="/login">Share</a>
+                                                             </div>
+                                              </div>
                                             
 
                                            

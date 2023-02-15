@@ -54,7 +54,7 @@ class Authors extends Component {
                                             {/* Card Body */}
                                             <div className="card-body mt-4">
                                                 <a href="/author">
-                                                    <h5>{item.author}</h5>
+                                                    <h5 >{item.author}</h5>
                                                 </a>
                                                 <a className="btn btn-bordered-white btn-smaller" href="#">{item.btnText}</a>
                                             </div>

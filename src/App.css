@@ -71,6 +71,10 @@ input , textarea{
     align-items: center;
     display: flex;
     justify-content: center;
+    min-height: 0px;
+    padding: 12px;
+    border-radius: 8px;
+    color: #ffff;
 }
 .card-body button {
     /* background: #000 !important; */
@@ -512,9 +516,7 @@ span#inputGroupPrepend2 {
     border: none;
     border-radius: 0px;
 }
-.popular-collections-area .card .card-body {
-    padding: 35px 0 0 !important;
-}
+
 .intro span {   
     font-size: 16px;
 }
@@ -610,7 +612,7 @@ section.live-auctions-area.single_project-detail .row h3 {
     color: var(--primary-p-color) !important; 
 }
 .card .card-caption .card-bottom span {
-    font-size: 14px;
+    font-size: 16px;
 }
 /* .card-body h5 {
     padding-bottom: 10px;
@@ -618,9 +620,6 @@ section.live-auctions-area.single_project-detail .row h3 {
 .container.single_project-detail .row h3 {
     width: 100% !important;
     padding-left: 15px !important;
-}
-.card.no-hover {
-    margin-bottom: 10px;
 }
 /* 28-11-22 */
 span.title_main {
@@ -932,6 +931,10 @@ button.ant-btn.ant-btn-default.previous_btn span{
 } */
 .live-auctions-area .card .card-body a h5 {
     text-transform: capitalize;
+    font-weight: 600;
+}
+.card .card-body a h5{
+    font-weight: 600 !important;
 }
 section.explore-area {
     padding: 130px 0 0 0 !important;
@@ -2639,4 +2642,7 @@ ul.creator-dropdown.notification-menu:after {
             background-image: linear-gradient(150deg, white -200%, #0e0e0e 78%);
             transform: translate3d(0px, 10px, 10px);
             border: 1px solid #282828;
+        }
+        .inputtdrag {
+            color: #16151a;
         }
