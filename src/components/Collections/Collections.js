@@ -25,7 +25,10 @@ const Collections = () => {
                                 <h3 className="mt-3 mb-0">Popular Collections</h3>
                             </div>
                             <div className="intro-btn">
-                                <Link className="btn content-btn text-left" to="/allcollections">Explore More</Link>
+                                {coll?.length > 8 &&
+
+                                    <Link className="btn content-btn text-left" to="/allcollections">Explore More</Link>
+                                }
                             </div>
                         </div>
                     </div>
@@ -44,6 +47,7 @@ const Collections = () => {
                                         <a className="seller" >
                                             <div className="seller-thumb avatar-lg">
                                                 <img className='rounded-circle' src="/img/logo.png" alt='logo' width={50} height={50} />
+                                                {/* <img className='' src="/img/logo.png" alt='logo' width={50} height={50} /> */}
                                             </div>
                                         </a>
                                     </div>
@@ -55,6 +59,10 @@ const Collections = () => {
                                                 <h5 className="">{item.title.slice(0, 12)} </h5>
                                             </a>
                                             <div class="align-items-center">
+                                                <div class="d-flex justify-content-center text-align-center gap-5">
+                                                {/* <h5 className="mb-0 ">{item.title.slice(0, 12)} </h5> */}
+                                          
+                                            <div class=" align-items-center">
                                                 <div class="d-flex justify-content-center text-align-center gap-5">
                                                     <span>Total NFTs:</span>
                                                     <span>{item.nft_data.length}</span>
@@ -78,6 +86,15 @@ const Collections = () => {
                                             <img className='logo' src="/img/logo.png" alt='logo' width={50} height={50} /> */}
                                 {/* Card Body */}
                                 {/* <div className="card-body">
+
+                                {/* <div className="card-caption col-12 p-0">
+                                            <img className='logo' src="/img/logo.png" alt='logo' width={50} height={50} /> */}
+
+                                {/* <div className="card-caption col-12 p-0">
+                                    <img className='logo' src={item?.organization_detail?.logo} alt='logo' width={50} height={50} /> */}
+
+                                    {/* Card Body */}
+                                    {/* <div className="card-body">
                                                 <a>
                                                     <h5 className="mb-0 ">{item.title.slice(0, 15)}...</h5>
                                                 </a>
@@ -95,6 +112,7 @@ const Collections = () => {
                                                     </div>
                                                 </div> */}
                                 {/* <div className="seller d-flex align-items-center my-3">
+                                    {/* <div className="seller d-flex align-items-center my-3">
                                                                 <span style={{ color: '#8E8E8E' }}>Owned By</span>
                                                                 <a href="/author">
                                                                     <h6 className="ml-2 mb-0">{item?.user_data?.username}</h6>
@@ -105,6 +123,11 @@ const Collections = () => {
                                                                 <span>{item.number_of_nft} NFTS</span>
                                                             </div> */}
                                 {/* <div>
+                                    {/* <div className="card-bottom d-flex justify-content-between">
+                                                                <span>{item.price} MATIC</span>
+                                                                <span>{item.number_of_nft} NFTS</span>
+                                                            </div> */}
+                                    {/* <div>
                                                                 {item.status == '1' ?
                                                                     <Button>Donation</Button>
                                                                     :
@@ -114,10 +137,15 @@ const Collections = () => {
                                 {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
                                 {/* <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a> */}
                                 {/* </div> */}
-                            </div>
-                            // </div>
-                            // </div>
-                            // </div>
+                            {/* </div> */}
+                         {/* </div> */}
+                                    {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
+                                    {/* <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a> */}
+                                    {/* </div> */}
+                                {/* </div> */}
+                                   </div>
+                             </div>
+                        </div>
                         )
                     })}
                 </div>

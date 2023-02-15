@@ -90,14 +90,15 @@ const NftDetails = (props) => {
                             <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
 
 
-                                <div className='position-absolute nft-edit-icon'>
-                                    <i className="fa-solid fa-pen" onClick={(e) => {
+                                <div >
+                                    <div className='position-absolute nft-edit-icon'><i className="fa-solid fa-pen" onClick={(e) => {
                                         setNftID(slug)
                                         e.preventDefault();
                                         setModalShoweditimg(true)
                                     }
                                     } ></i>
-                                    {modalShoweditimg &&
+                                    </div>
+                                    <div className='loader-img'>{modalShoweditimg &&
 
                                         <EditNftImage
                                             // debugger
@@ -106,6 +107,7 @@ const NftDetails = (props) => {
                                             show={modalShoweditimg}
                                             onHide={() => setModalShoweditimg(false)} />
                                     }
+                                    </div>
                                 </div>
                             </div>
                             <><div className="item-thumb text-center align-items-center d-flex">

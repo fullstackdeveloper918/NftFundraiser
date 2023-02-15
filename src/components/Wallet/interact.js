@@ -378,6 +378,7 @@ const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to,
     formData.append('pay_to', nft_id.pay_to);
     formData.append('token_id', nft_id.tokenId);
     formData.append('ref_id', nft_id.refid);
+    formData.append('status', '1');
 
 
     const config = {
@@ -397,8 +398,7 @@ const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to,
 };
 
 
-export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id }) => {
-  debugger
+export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg }) => {
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
@@ -408,8 +408,9 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       let wallets = []
       let fee = []
 
-      wallets = [...wallets, ...flow[0].buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fee[0]?.wallets, flow[0]?.project_data[0]?.wallets]
-      fee = [...fee, ...flow[0].buyer_data?.map(x => x.fees), flow[0]?.karmatica_fee[0]?.fees, flow[0]?.project_data[0]?.fees]
+
+      wallets = [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets]
+      fee = [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees]
       console.log(fee)
       console.log(wallets)
 
@@ -471,8 +472,17 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
           // console.log(receipt, 'recipt')
         })
         .on('confirmation', async (confNumber, receipt) => {
-          console.log(receipt, 'conf')
-          UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: receipt.to, tokenId, values })
+          if (confNumber == 1) {
+            console.log(confNumber, 'counttrans')
+            console.log(receipt, 'conf')
+            // localStorage.setItem('txd_id', receipt.transactionHash)
+            // localStorage.setItem('pay_to', receipt.receipt.to)
+            UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: receipt.to, tokenId, values })
+            loadingg(false)
+            swal("success", "Confirmed", 'success').then(function () {
+              window.location = `/`;
+            });
+          }
           // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
           // setModeShow(false)
 
