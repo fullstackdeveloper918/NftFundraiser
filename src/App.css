@@ -2693,3 +2693,10 @@ ul.creator-dropdown.notification-menu:after {
   p.caption.image-caption {
     display: none !important;
 }
+i.fa-solid.fa-share-nodes {
+    margin-left: unset !important;
+    /* position: unset; */
+}
+h6{
+    font-weight: 600 !important;
+}
