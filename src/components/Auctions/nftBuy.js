@@ -181,7 +181,7 @@ const LatprojNftDetails = (props) => {
 
                                 <div>
                                     <span className='boldertext w-100'>Affiliate first sale royalties: </span>
-                                    <span> 20%</span>
+                                    <span> 30%</span>
 
                                 </div>
 
@@ -209,18 +209,18 @@ const LatprojNftDetails = (props) => {
                                     </ul>
                                 </div> */}
                                     <div className='eddlbtton flex-wrap d-flex gap-10  align-items-center mt-2'>
-                                        {latprojnftdetail.type == 1 ? (
+                                        {/* {latprojnftdetail.type == 1 ? ( */}
 
-                                            <><button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                                id="nftdetail.id" onClick={() => { buyHandler(); setBuyModalShow(true); setLoading(true) }}>Buy Now</button><BuyPopup
-                                                    show={buymodalShow}
-                                                    loading={loading}
+                                        <><button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                            id="nftdetail.id" onClick={() => { buyHandler(); setBuyModalShow(true); setLoading(true) }}>Buy Now</button><BuyPopup
+                                                show={buymodalShow}
+                                                loading={loading}
 
 
-                                                    onHide={() => setBuyModalShow(false)} /></>
-                                        ) : (
+                                                onHide={() => setBuyModalShow(false)} /></>
+                                        {/* ) : ( */}
 
-                                            <><button className="btn  btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                        {/* <><button className="btn  btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                                 onClick={() => setBidModalShow(true)}>Place Bid</button><BidPopup
 
                                                     id={latprojnftdetail.id}
@@ -229,7 +229,7 @@ const LatprojNftDetails = (props) => {
                                                     projcoll={latprojnftdetail?.collectionData?.title}
                                                     show={bidmodalShow}
                                                     onHide={() => setBidModalShow(false)} /></>
-                                        )}
+                                        )} */}
 
                                     </div>
                                     <Timer

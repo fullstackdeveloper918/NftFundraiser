@@ -21,28 +21,16 @@ const AuthorProfile = () => {
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
+    console.log(userdet, 'user')
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm();
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(GetUserAction())
 
-    }, [])
-    useEffect(() => {
-        if (userdet && Object.keys(userdet).length) {
-
-            setValue("avatar", userdet.avatar)
-            setValue("username", userdet.username)
-            setValue("email", userdet.email)
-
-        }
-
-    }, [userdet])
     const onSubmit = (data) => {
         const formData = new FormData()
 
         // formData.append('image', data.image[0])
         formData.append('username', data.username)
-        formData.append('email', userdet.email)
+        formData.append('email', data.address)
         dispatch(UpdateProfileAction(formData))
 
     }
@@ -127,12 +115,17 @@ const AuthorProfile = () => {
                                                 type="email"
                                                 className="form-control"
                                                 name="email"
-                                                value={userdet.email}
-                                                {...register("address")}
-                                                aria-invalid={errors.address ? "true" : "false"}
+                                                disabled={userdet.role == 3 ? true : false}
+                                                // value={userdet.role == 3 && userdet.email}
+                                                placeholder="email"
+                                                {...register("email")}
+                                                aria-invalid={errors.email ? "true" : "false"}
                                             />
                                             {/* {errors.address?.type === 'required' && <p style={{ color: 'red' }} role="alert">Address is required</p>} */}
-                                            {/* <i class="fa-solid fa-pen"></i> */}
+                                            {userdet.role == 2 &&
+
+                                                <i class="fa-solid fa-pen"></i>
+                                            }
                                         </label>
 
                                         {/* Social Icons */}

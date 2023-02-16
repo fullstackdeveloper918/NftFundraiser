@@ -46,12 +46,14 @@ function SellPopup(props) {
     const nftdetail = useSelector(state => {
         return state.projectdetails.nftlist
     })
+    console.log('nftdetail', nftdetail)
 
     const mint = (contractAddress, type, start_date, end_date, price) => {
         // auctiondata.map((item) => {
         //     setPrice(item.price)
         // })
         CreateMetaDataAndMint({
+
             _name: nftdetail.title,
             _des: nftdetail.description,
             _imgBuffer: nftdetail.image,
@@ -60,6 +62,7 @@ function SellPopup(props) {
             collid: nftdetail?.collection_id,
             nft_file_content: nftdetail?.nft_file_content,
             slug,
+            dispatch: dispatch,
             setModalShow,
 
             // auctiondata

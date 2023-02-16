@@ -42,6 +42,7 @@ const EditNftImage = (props) => {
 
     const [nft, setNft] = useState()
     const [nftwidth, setNftwidth] = useState()
+    const [size, setSize] = useState()
 
     const [nftHeight, setNftheight] = useState()
     const [Pimage, setPimage] = useState()
@@ -336,6 +337,7 @@ const EditNftImage = (props) => {
                                                                             />
 
                                                                             {(nftFileType === "Image") &&
+
                                                                                 <div>
 
                                                                                     {source ? (
@@ -349,10 +351,14 @@ const EditNftImage = (props) => {
                                                                                             src={image}
                                                                                             className="nft-image"
                                                                                         />
+
+
                                                                                     )}
 
                                                                                 </div>
+
                                                                             }
+
 
                                                                             {nftFileType === "Player" &&
                                                                                 <div>
@@ -476,8 +482,8 @@ const EditNftImage = (props) => {
                                                                                     </div>
                                                                                 </div>
                                                                             }
-                                                                        </div>
 
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>

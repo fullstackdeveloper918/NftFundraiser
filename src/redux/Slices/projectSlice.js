@@ -20,6 +20,7 @@ const projectSlice = createSlice({
         collectiondetails: [],
         getSocialmediaIcons: [],
         getfundProjDetails: [],
+        getmostProjActivity: [],
         getnftwoldetails: [],
         settings: [],
         nftadd: [],
@@ -68,6 +69,9 @@ const projectSlice = createSlice({
         getfundprojdetails: (state, action) => {
             // 
             state.getfundProjDetails = action?.payload?.data?.data;
+        },
+        getmostprojactivity: (state, action) => {
+            state.getmostProjActivity = action?.payload?.data?.data;
         },
         getProjectList: (state, action) => {
             state.projects = action.payload;
@@ -148,6 +152,7 @@ export const {
     getfundprojdetails,
     Nftres,
     updatebanner,
+    getmostprojactivity,
     nftUpd,
     nftAdd,
     getMatic

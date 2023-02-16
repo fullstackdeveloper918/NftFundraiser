@@ -23,7 +23,8 @@ import {
     updatebanner,
     nftUpd,
     nftAdd,
-    getMatic
+    getMatic,
+    getmostprojactivity
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Redirect, useHistory } from 'react-router-dom';
@@ -564,8 +565,7 @@ export const UpdateNft = (formData, props, setLoading) => async dispatch => {
         }
     }
 }
-export const AddNftAction = (formData, slug, setLoading) => async dispatch => {
-    // debugger
+export const AddNftAction = (formData, projid, slug, setLoading) => async dispatch => {
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -575,7 +575,7 @@ export const AddNftAction = (formData, slug, setLoading) => async dispatch => {
             },
             transformRequest: formData => formData
         }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/nft/create/${slug}`,
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/nft/create/${projid}`,
             formData, config)
         // 
         // console.log(res, 'coll rres')
@@ -586,7 +586,7 @@ export const AddNftAction = (formData, slug, setLoading) => async dispatch => {
             swal("success", "updated", 'success').then(function () {
                 // dispatch(ProjectDetail(props.id))
                 // dispatch(LatestProjectDetail(params))
-                window.location = `/projnftdetails/${slug}`;
+                window.location = `/projnftdetails/${slug.id}`;
             });
 
         }
@@ -656,3 +656,23 @@ export const UpdateBId = ({ id, status }) => async dispatch => {
         // console.log("error");
     }
 };
+
+export const GetMostactivityProject = () => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getMostActivityProject`,
+            config)
+
+        await dispatch(getmostprojactivity(res));
+
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}

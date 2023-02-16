@@ -81,7 +81,7 @@ const Header = () => {
         else if (res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data?.role) {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)
-            history.push('/create')
+            // history.push('/create')
 
             swal({
                 title: "Welcome to Karmatica!!!",
@@ -98,7 +98,7 @@ const Header = () => {
                         break;
 
                     case "skip":
-                        window.location = '/projectlist'
+                        window.location = '/all/LatestProjects'
                         break;
 
                 }
@@ -234,10 +234,10 @@ const Header = () => {
                                     {/* <li>{userdet?.username}</li> */}
                                     <li>{userdet?.email}</li>
                                     <li><button type='button' class="dropdown-item"><Link to='/profile'>My Profile</Link></button></li>
-                                    <li><button type='button' class="dropdown-item"><Link to='/projectlist'>My Projects</Link></button></li>
                                     {userRole == 3 && (
+                                        <><li><button type='button' class="dropdown-item"><Link to='/projectlist'>My Projects</Link></button></li>
 
-                                        <li><button type='button' class="dropdown-item"><Link to={`/fundraiser/detail/${userdet.user_id}`}>Fundraise</Link></button></li>
+                                            <li><button type='button' class="dropdown-item"><Link to={`/fundraiser/detail/${userdet.user_id}`}>Fundraise</Link></button></li></>
                                     )}
                                     <li><button type='button' class="dropdown-item" onClick={LogoutHandler}><a href='/'>Logout</a></button></li>
                                 </ul>
