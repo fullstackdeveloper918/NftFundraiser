@@ -285,25 +285,16 @@ const ProjNftDetails = () => {
                             </div>
                         </div>
                         <div className="row items mt-0 explore-items px-0">
-                            <div className='col-12 col-sm-6 col-lg-3 item explore-item'>
-                                <div className='card no-hover m-0 add-nft '>
-                                    {projdetail.number_of_nft == projdetail?.nft_data?.length ? (
+                            {projdetail.number_of_nft != projdetail?.nft_data?.length && (
+                                <div className='col-12 col-sm-6 col-lg-3 item explore-item'>
+                                    <div className='card no-hover m-0 add-nft '>
+
 
                                         <div class="image-over relative">
 
 
 
-
-                                            <span>No NFT left to add</span>
-
-
-                                        </div>
-                                    ) : (
-                                        <div class="image-over relative">
-
-
-
-                                            <Link to={`/addnft/${projdetail.slug}`}>
+                                            <Link to={`/addnft/${projdetail.slug}?projectid=${projdetail.id}`}>
 
                                                 + Add NFT </Link>
 
@@ -311,9 +302,9 @@ const ProjNftDetails = () => {
 
                                         </div>
 
-                                    )}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
 
 
                             {projdetail?.nft_data?.map((x, idx) => {

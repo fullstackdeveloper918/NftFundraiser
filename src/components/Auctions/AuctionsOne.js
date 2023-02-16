@@ -83,10 +83,10 @@ const AuctionsOne = ({ type }) => {
                                                     <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
                                                 </a>
                                                 <div className="seller d-flex align-items-center my-3" href="#">
-                                                <span>Owned By</span> 
-                                                {/* <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" /> */}
-                                                
-                                                <a href='#'>
+                                                    <span>Owned By</span>
+                                                    {/* <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" /> */}
+
+                                                    <a href='#'>
                                                         <h6 className="ml-2 mb-0">{item.user_data.username}</h6>
                                                     </a>
 
@@ -103,11 +103,11 @@ const AuctionsOne = ({ type }) => {
 
                                                     }
                                                 </div>
-                                              
-                                                <a className="btn btn-bordered-white btn-smaller mt-3 mb-0" href="/login"><i className="icon-handbag mr-2" />Buy</a>              </div>
-                                            
 
-                                           
+                                                <Link to={`/projects/${item.slug}`} style={{ color: "white" }}> <a className="btn btn-bordered-white btn-smaller mt-3 mb-0" ><i className="icon-handbag mr-2" />Buy</a> </Link></div>
+
+
+
                                         </div>
 
                                     </div>
@@ -117,14 +117,14 @@ const AuctionsOne = ({ type }) => {
                                 );
                             })}
                         </div>
-                        
+
                         <div className="swiper-pagination" />
                     </div>
                 </div>
             </div>
         </section>
 
-            
+
 
 
     )

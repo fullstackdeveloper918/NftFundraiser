@@ -49,6 +49,8 @@ const UploadNft = ({ current, prev }) => {
     const [nftwidth, setNftwidth] = useState()
     console.log(nftwidth, 'nftwidth')
     const [nftHeight, setNftheight] = useState()
+    const [size, setSize] = useState()
+    console.log(size, 'size')
     const [Pimage, setPimage] = useState()
     console.log(nftHeight, 'nftheight')
     console.log('nfterror', nft)
@@ -189,7 +191,7 @@ const UploadNft = ({ current, prev }) => {
             var img = new Image;
 
             img.onload = function () {
-                // alert(img.width); // image is loaded; sizes are available
+                setSize(e.target.files[0].size); // image is loaded; sizes are available
                 setNftwidth(img.width)
                 setNftheight(img.height)
             };
@@ -773,7 +775,7 @@ const UploadNft = ({ current, prev }) => {
                                                                             {source?.length && source?.[index] && source[index]?.type === "Image" &&
                                                                                 <div>
                                                                                     {/* {nftFileType === "Image" && nftHeight >= 500 && nftwidth >= 500 ? ( */}
-                                                                                    {source?.length && source?.[index] && source[index]?.type === "Image" && nftHeight >= 500 && nftwidth >= 500 ? (
+                                                                                    {source?.length && source?.[index] && source[index]?.type === "Image" && nftHeight >= 500 && nftwidth >= 500 && size <= "1000000" ? (
 
 
                                                                                         <img
@@ -781,9 +783,14 @@ const UploadNft = ({ current, prev }) => {
                                                                                             className="nft-image"
                                                                                         />
                                                                                     ) : (
-                                                                                        <p style={{ color: "red", marginLeft: '10px' }}>
-                                                                                            Minimum size should be 500x500
-                                                                                        </p>
+                                                                                        <>
+                                                                                            <p style={{ color: "red", marginLeft: '10px' }}>
+                                                                                                Image width & height should be 500x500
+                                                                                            </p>
+                                                                                            <p style={{ color: "red", marginLeft: '10px' }}>
+                                                                                                Image size should be max 1mb
+                                                                                            </p>
+                                                                                        </>
                                                                                     )
 
                                                                                     }

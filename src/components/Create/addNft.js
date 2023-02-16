@@ -17,7 +17,7 @@ import 'antd/lib/button/style/css'
 import swal from 'sweetalert';
 import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import DModal from './3dModal';
 
 const getBase64 = (file) =>
@@ -40,6 +40,7 @@ const AddNft = ({ current, prev }) => {
     // console.log('nft_description', nft_description)
     const [nftFileType, setNFtFileType] = useState()
     const [nft, setNft] = useState()
+    const [size, setSize] = useState()
     const [nftwidth, setNftwidth] = useState()
     console.log(nftwidth, 'nftwidth')
     const [nftHeight, setNftheight] = useState()
@@ -59,7 +60,9 @@ const AddNft = ({ current, prev }) => {
     // console.log("collid", coll_id)
 
     const [loading, setLoading] = useState(false)
-
+    const search = useLocation().search;
+    const projid = new URLSearchParams(search).get('projectid');
+    console.log(projid, 'projid')
     const handleIncrement = () => {
         setCount(prevCount => prevCount + 1);
     };
@@ -79,7 +82,7 @@ const AddNft = ({ current, prev }) => {
         }
         );
     };
-    const { slug } = useParams()
+    const slug = useParams()
     // function descc(e) {
     //     setNft_description(prev => [...prev, nft_description]);
     // };
@@ -153,6 +156,7 @@ const AddNft = ({ current, prev }) => {
             var img = new Image;
 
             img.onload = function () {
+                setSize(e.target.files[0].size);
                 // alert(img.width); // image is loaded; sizes are available
                 setNftwidth(img.width)
                 setNftheight(img.height)
@@ -270,7 +274,7 @@ const AddNft = ({ current, prev }) => {
                 formData.append('preview_imag', Pimage)
                 formData.append('extention', sourceType)
                 // dispatch(uploadNFT())
-                dispatch(AddNftAction(formData, slug, setLoading))
+                dispatch(AddNftAction(formData, projid, slug, setLoading))
                 // setLoading(false)
             } else {
                 // debugger
@@ -591,7 +595,7 @@ const AddNft = ({ current, prev }) => {
                                                                                             {source?.length && source?.[index] && source[index]?.type === "Image" &&
                                                                                                 <div>
                                                                                                     {/* {nftFileType === "Image" && nftHeight >= 500 && nftwidth >= 500 ? ( */}
-                                                                                                    {source?.length && source?.[index] && source[index]?.type === "Image" && nftHeight >= 500 && nftwidth >= 500 ? (
+                                                                                                    {source?.length && source?.[index] && source[index]?.type === "Image" && nftHeight >= 500 && nftwidth >= 500 && size <= "1000000" ? (
 
 
                                                                                                         <img
@@ -599,9 +603,14 @@ const AddNft = ({ current, prev }) => {
                                                                                                             className="nft-image"
                                                                                                         />
                                                                                                     ) : (
-                                                                                                        <p style={{ color: "red", marginLeft: '10px' }}>
-                                                                                                            Minimum size should be 500x500
-                                                                                                        </p>
+                                                                                                        <>
+                                                                                                            <p style={{ color: "red", marginLeft: '10px' }}>
+                                                                                                                Minimum size should be 500x500
+                                                                                                            </p>
+                                                                                                            <p style={{ color: "red", marginLeft: '10px' }}>
+                                                                                                                Image size should be max 1mb
+                                                                                                            </p>
+                                                                                                        </>
 
 
 

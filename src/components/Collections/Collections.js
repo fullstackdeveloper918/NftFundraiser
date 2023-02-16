@@ -46,7 +46,7 @@ const Collections = () => {
                                         {/* Seller */}
                                         <a className="seller" >
                                             <div className="seller-thumb avatar-lg">
-                                                <img className='' src="/img/logo.png" alt='logo' width={50} height={50} />
+                                                <img className='' src={item?.user_data?.avatar} alt='logo' width={50} height={50} />
                                             </div>
                                         </a>
                                     </div>
@@ -123,7 +123,7 @@ const Collections = () => {
                                     {/* <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a> */}
                                     {/* </div> */}
                                 </div>
-                                    // </div>
+                            </div>
                             // </div>
                             // </div>
                         )

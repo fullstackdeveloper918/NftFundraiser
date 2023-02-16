@@ -2,6 +2,7 @@ import { create } from 'ipfs-http-client'
 import { useHistory } from 'react-router-dom'
 import swal from 'sweetalert';
 import axios from 'axios';
+import { NftList } from '../../redux/Actions/projectAction';
 // import { walletSignin } from '../../redux/Actions/authAction';
 import { object } from 'yup';
 import { redirect } from 'next/dist/server/api-utils';
@@ -234,6 +235,7 @@ export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from,
     // 
     await axios.post(`${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${slug}`,
       formData, config
+
     )
   } catch (error) {
     // 
@@ -242,7 +244,6 @@ export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from,
 };
 
 const UpdateContract = async (collid, contractAddress) => {
-
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -293,7 +294,7 @@ export const sendFileToIPFS = async (fileImg) => {
   }
 }
 
-export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date }) => {
+export const CreateMetaDataAndMint = async ({ dispatch, slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date }) => {
   // const metaDataObj = {
   //   name: _name,
   //   description: _des,
@@ -331,14 +332,20 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, set
       .on('confirmation', async (confNumber, receipt) => {
         if (confNumber == 1) {
 
+          if (collid != 1) {
 
-          await UpdateContract(collid, contractAddress)
+            await UpdateContract(collid, contractAddress)
+          }
+
+
           // await UpdateContract(collid, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
           const tokid = web3.utils.hexToNumber(receipt.logs[0].topics[3])
 
           // console.log(startdate)
           await UpdateStatus({ slug: slug.id, token_id: tokid, transaction_hash: receipt.transactionHash, pay_from: receipt.from, pay_to: receipt.to, type, price, start_date, end_date })
           setCurrent(2)
+          await dispatch(NftList(slug.id))
+
           // history.push(`nft/details/${slug.id}`)
           // return redirect(`nft/details/${id}`)
           // console.log('tokid', tokid)
