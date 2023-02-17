@@ -2629,7 +2629,8 @@ ul.creator-dropdown.notification-menu:after {
        .auction-slider.auctions-slides  span {
             -webkit-background-clip: unset !important;
             -webkit-text-fill-color: unset !important;
-            color: #ffff !important;
+            /* color: #ffff !important; */
+            text-transform: inherit;
             background: unset;
         }
        .auction-slider.auctions-slides  span:after{
@@ -2641,9 +2642,11 @@ ul.creator-dropdown.notification-menu:after {
 
         .auction-slider.auctions-slides .item.card {
             color: black;
-            background-image: linear-gradient(150deg, white -200%, #0e0e0e 78%);
+            /* background-image: linear-gradient(150deg, white -200%, #0e0e0e 78%); */
             transform: translate3d(0px, 10px, 10px);
-            border: 1px solid #282828;
+            /* border: 1px solid #282828; */
+            background-color: #16151a;
+            box-shadow: 10px 0px 65px #000000;
         }
         .inputtdrag {
             color: #16151a;
@@ -2693,3 +2696,67 @@ ul.creator-dropdown.notification-menu:after {
   p.caption.image-caption {
     display: none !important;
 }
+i.fa-solid.fa-share-nodes {
+    margin-left: unset !important;
+    /* position: unset; */
+}
+h6{
+    font-weight: 600 !important;
+}
+.nft-price img {
+    width: 30px;
+}
+.edit-buttons {
+    position: absolute;
+    top: -230px;
+    left: -6px;
+    width: 100%;
+    justify-content: right !important;
+    gap: 10px;
+}
+.edit-buttons a {
+    padding: 7px 20px;
+}
+.edit-buttons {
+    /* display: none !important; */
+    visibility: hidden !important;
+}
+.auctions-slides-card:hover .edit-buttons{
+    display: block !important;
+    text-align: right;
+    transition: 0.3s ease-in-out;
+    visibility: visible !important;
+}
+.hero-section .auction-slider.auctions-slides .item.card {
+    min-width: 250px;
+    width: 200px;
+    padding: 10px;
+}
+.hero-section  .auction-slider.auctions-slides img.card-img-top {
+    aspect-ratio: unset !important;
+    /* height: 230px; */
+    height: -webkit-fill-available;
+}
+.hero-section .image-over {
+    height: 230px;
+    overflow: hidden;
+    border-radius: 2px;
+}
+.hero-section .card .card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 15px 0 0;
+}
+.hero-section .item.card{
+    animation: mymove 5s ease-in-out infinite;
+}
+@keyframes mymove {
+    0%   {top: 0px; }
+    /* 25%  {top: 50px; } */
+    50%  {top: 30px;}
+    /* 75%  {top: 100px; } */
+    100% {top: 0px;}
+  }
+

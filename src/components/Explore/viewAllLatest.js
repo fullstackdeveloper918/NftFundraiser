@@ -94,7 +94,7 @@ const ExploreAll = () => {
 
                               <a href="#">
                                 <h6 className="ml-2 mb-0">
-                                  {item.user_data.username}
+                                  {item.user_data.username .slice(0 ,12)}
                                 </h6>
                               </a>
 
@@ -109,19 +109,20 @@ const ExploreAll = () => {
                               )}
                             </div>
                             <div className="d-flex justify-content-between">
-                              <a
-                                className="btn btn-bordered-white btn-smaller mt-3 mb-0"
-                                href="/login"
-                              >
-                                Invest
-                              </a>
-                              <a
-                                className="btn btn-bordered-white btn-smaller mt-3 mb-0"
-                                href="/login"
-                              >
-                                Share
-                              </a>
-                            </div>
+                          <a
+                            className="btn btn-bordered-white btn-smaller mt-3 mb-0"
+                            href="/login"
+                          ><i className="icon-handbag mr-1" />
+                            Invest
+                          </a>
+                          <a
+                            className="btn btn-bordered-white btn-smaller mt-3 mb-0"
+                            href="/login"
+                          ><i class="fa-solid fa-share-nodes mr-1 text-white"></i>
+                          
+                            Share
+                          </a>
+                        </div>
                           </div>
                         </div>
                       </div>
