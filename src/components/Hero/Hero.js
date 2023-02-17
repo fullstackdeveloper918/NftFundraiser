@@ -160,10 +160,10 @@ const Hero = ({ type }) => {
 
                                 <div className="card-body">
 
-                                    <a href="#">
+                                    {/* <a href="#">
                                         <h5 className="mb-0">{mostactivityProjects[0]?.title?.slice(0, 16)}</h5>
-                                    </a>
-                                    <a className="seller d-flex align-items-center mb-2" href="#">
+                                    </a> */}
+                                    {/* <a className="seller d-flex align-items-center mb-2" href="#">
                                         <img className="avatar-sm rounded-circle" src={mostactivityProjects[0]?.user_data?.avatar} alt="" />
                                         <span className="ml-2 mb-0">{mostactivityProjects[0]?.user_data?.username}</span>
                                     </a>
@@ -177,7 +177,7 @@ const Hero = ({ type }) => {
                                         )
 
                                         }
-                                    </div>
+                                    </div> */}
 
                                     {/* ) */}
                                     {/* })} */}
@@ -189,7 +189,7 @@ const Hero = ({ type }) => {
                                                         <div className="countdown d-flex justify-content-center" data-date={item.date} />
                                                     </div> */}
                                             <a href="#">
-                                                <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
+                                                <h5 className="mb-0">{mostactivityProjects[0]?.title?.slice(0, 16)}</h5>
                                             </a>
                                             
                                             <div
@@ -201,7 +201,7 @@ const Hero = ({ type }) => {
 
                               <a href="#">
                                 <h6 className="ml-2 mb-0">
-                                  {item.user_data.username .slice(0 ,12)}
+                                  {mostactivityProjects[0]?.user_data.username?.slice(0 ,12)}
                                 </h6>
                               </a>
 

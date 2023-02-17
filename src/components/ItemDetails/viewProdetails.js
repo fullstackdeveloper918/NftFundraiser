@@ -108,7 +108,7 @@ const ProjDetails = () => {
                     <div className="col-lg-4 col-12 mt-4 mt-lg-0">
                         <div className='proj-left user_icon'>
                             <div className="progress_nft ">
-                                <div className='progress_main'><span>
+                                <div className='progress_main '><span>
                                     {/* ({Number(latprojdetail.project_count) * Number(matic['matic-network']?.cad)} of {Number(latprojdetail.price) * Number(Math.round(matic['matic-network']?.cad))} MATIC ) */}
                                     <span className='nft_price'>${Number(latprojdetail.project_count) * Number(matic['matic-network']?.cad)} raised of ${Math.round(Number(latprojdetail.price)) * Number(Math.round(matic['matic-network']?.cad))} Cdn Goal</span>
                                     <div>
@@ -121,7 +121,7 @@ const ProjDetails = () => {
                                         <ProgressBar varient="success" now={latprojdetail.project_percentage} />
                                         {/* <span className="progress-bar bg-success" role="progressbar" style={{ width: "70" }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" now={projdetail.project_percentage}> {projdetail.project_percentage}% </span> */}
                                     </div>
-                                    <p className='donation-count'>${latprojdetail.project_count} RAISED</p>
+                                    <p className='donation-count'> ${latprojdetail.project_count} RAISED</p>
                                 </span>
                                 </div>
 
@@ -157,7 +157,7 @@ const ProjDetails = () => {
                                             const days_difference = Math.ceil(time_difference / (1000 * 60 * 60 * 24));
                                             console.log('days', days_difference)
                                             return (
-                                                <ul className="m-0 custom_lis pl-0">
+                                                <ul className="m-0 custom_lis pl-0 ">
                                                     <li>
                                                         <div className='lorem_done p-0'>
                                                             <span><svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -167,7 +167,7 @@ const ProjDetails = () => {
                                                             </svg>
                                                             </span>
 
-                                                            <span><div className="progress_name">{item.username} </div> <div>${item.price} Cdn / {Math.round(Number(latprojdetail.price) * Number(matic['matic-network']?.cad))} MATIC ({days_difference} days ago)</div></span>
+                                                            <span><div className="progress_name">{item.username} </div> <div> ${item.price} Cdn / {Math.round(Number(latprojdetail.price) * Number(matic['matic-network']?.cad))} MATIC ({days_difference} days ago)</div></span>
                                                         </div>
                                                     </li>
 
