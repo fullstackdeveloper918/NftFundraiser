@@ -299,16 +299,6 @@ const EditNftImage = (props) => {
                                                     <Fragment>
 
                                                         <div className="row relative ">
-
-
-
-
-
-
-
-
-
-
                                                             <div className="col-12">
                                                                 <div className="col-lg-12 col-12 uploadnftpopup p-0 mb-4">
                                                                     <label className="mt-3">Upload NFT</label>
@@ -340,20 +330,28 @@ const EditNftImage = (props) => {
 
                                                                                 <div>
 
-                                                                                    {source ? (
-
-                                                                                        <img
-                                                                                            src={source}
-                                                                                            className="nft-image"
-                                                                                        />
-                                                                                    ) : (
-                                                                                        <img
-                                                                                            src={image}
-                                                                                            className="nft-image"
-                                                                                        />
-
-
-                                                                                    )}
+                                                                                    {source ?
+                                                                                        nftHeight >= 500 && nftwidth >= 500 && size <= "1000000" ?
+                                                                                            (
+                                                                                                <img
+                                                                                                    src={source}
+                                                                                                    className="nft-image"
+                                                                                                />
+                                                                                            ) : (
+                                                                                                <>
+                                                                                                    <p style={{ color: "red", marginLeft: '10px' }}>
+                                                                                                        Minimum size should be 500x500
+                                                                                                    </p>
+                                                                                                    <p style={{ color: "red", marginLeft: '10px' }}>
+                                                                                                        Image size should be max 1mb
+                                                                                                    </p>
+                                                                                                </>
+                                                                                            ) : (
+                                                                                            <img
+                                                                                                src={image}
+                                                                                                className="nft-image"
+                                                                                            />
+                                                                                        )}
 
                                                                                 </div>
 

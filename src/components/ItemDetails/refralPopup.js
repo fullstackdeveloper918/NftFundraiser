@@ -49,7 +49,7 @@ function ReferalPopup(props) {
         // dispatch(CreateCollectionAction(data))
     }
     const url = window.location.href + `?refid=${props.userRef}`
-    const userprojurl = `https://app.karmatica.io/projnftdetails/${props.id}` + `?refid=${props.userRef}`
+    const userprojurl = `https://app.karmatica.io/projects/${props.id}` + `?refid=${props.userRef}`
     console.log(userprojurl)
     // const Refurl = window.location.href + '/' + props.id + '/' + props.userRef
     return (

@@ -160,10 +160,10 @@ const Hero = ({ type }) => {
 
                                 <div className="card-body">
 
-                                    <a href="#">
+                                    <a >
                                         <h5 className="mb-0">{mostactivityProjects[0]?.title?.slice(0, 16)}</h5>
                                     </a>
-                                    <a className="seller d-flex align-items-center mb-2" href="#">
+                                    <a className="seller d-flex align-items-center mb-2">
                                         <img className="avatar-sm rounded-circle" src={mostactivityProjects[0]?.user_data?.avatar} alt="" />
                                         <span className="ml-2 mb-0">{mostactivityProjects[0]?.user_data?.username}</span>
                                     </a>

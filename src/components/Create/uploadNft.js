@@ -674,7 +674,41 @@ const UploadNft = ({ current, prev }) => {
                                                                 </label>
                                                             </div>
                                                             <div className='d-flex flex-wrap gap-10 col-12'>
-                                                                <div className="">
+
+
+
+                                                                {col?.map((item, idx) => (
+                                                                    <div
+                                                                        key={`auc_${idx}`}
+                                                                        id={item.id}
+                                                                        className="choose_div"
+                                                                    >
+                                                                        <div
+                                                                            id={item.id}
+                                                                            onClick={() =>
+                                                                                onHandleClick(index, item.id)
+                                                                            }
+                                                                            className=""
+                                                                            style={{
+                                                                                background: "black",
+                                                                                marginBottom: "8px",
+                                                                                border:
+                                                                                    nft_collection_id[index] == item.id
+                                                                                        ? "1px solid #fff"
+                                                                                        : null,
+                                                                            }}
+                                                                        >
+
+                                                                            <div>{item.title}</div>
+
+                                                                        </div>
+                                                                        {/* </Form.Item> */}
+                                                                    </div>
+
+
+
+                                                                ))}
+                                                                <div className="col-md-6 col-lg-3 col-12">
                                                                     {/* <div className="col-24"> */}
 
                                                                     <div className="form-group">
@@ -702,82 +736,20 @@ const UploadNft = ({ current, prev }) => {
                                                                             </div>
                                                                         </div>
                                                                     </div>
+
                                                                 </div>
-
-
-                                                                {col?.map((item, idx) => (
-                                                                    <div
-                                                                        key={`auc_${idx}`}
-                                                                        id={item.id}
-                                                                        className="choose_div"
-                                                                    >
+                                                                <div className="col-12">
+                                                                    <div className="col-lg-6 col-12 uploadnftpopup p-0 mb-4">
+                                                                        <label className="mt-3">Upload NFT</label>
                                                                         <div
-                                                                            id={item.id}
-                                                                            onClick={() =>
-                                                                                onHandleClick(index, item.id)
-                                                                            }
-                                                                            className=""
+                                                                            className="position-relative upload_nft"
                                                                             style={{
-                                                                                background: "black",
-                                                                                marginBottom: "8px",
-                                                                                border:
-                                                                                    nft_collection_id[index] == item.id
-                                                                                        ? "1px solid #fff"
-                                                                                        : null,
+                                                                                backgroundImage: "url('')",
+                                                                                backgroundSize: "contain",
+                                                                                backgroundRepeat: "no-repeat",
                                                                             }}
                                                                         >
-                                                                           
-                                                                                <div>{item.title}</div>
-                                                                            
-                                                                        </div>
-                                                                        {/* </Form.Item> */}
-                                                                    </div>
-
-                                                        
-                                                               
-                                                            ))}
-                                                            <div className="col-md-6 col-lg-3 col-12">
-                                                                {/* <div className="col-24"> */}
-
-                                                                <div className="form-group">
-                                                                    <div
-                                                                        className="card choose_div"
-                                                                        style={{
-                                                                            background: "black",
-                                                                            marginBottom: "8px",
-                                                                        }}
-                                                                    >
-                                                                        <div className="card-body ">
-                                                                            <Button
-                                                                                variant="primary"
-                                                                                className="collection_btn"
-                                                                                onClick={() => setModalShow(true)}
-                                                                            >
-                                                                                <i className="f1a-regular fa-plus"></i>{" "}
-                                                                                Create Collection
-                                                                            </Button>
-
-                                                                            <MyVerticallyCenteredModal
-                                                                                show={modalShow}
-                                                                                onHide={() => setModalShow(false)}
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                            <div className="col-12">
-                                                                <div className="col-lg-6 col-12 uploadnftpopup p-0 mb-4">
-                                                                    <label className="mt-3">Upload NFT</label>
-                                                                    <div
-                                                                        className="position-relative upload_nft"
-                                                                        style={{
-                                                                            backgroundImage: "url('')",
-                                                                            backgroundSize: "contain",
-                                                                            backgroundRepeat: "no-repeat",
-                                                                        }}
-                                                                    >
-                                                                        {/* <Form.Item
+                                                                            {/* <Form.Item
                                                                             {...restField}
                                                                             name={[name, "nft_image"]}
                                                                             // getValueFromEvent={getFile}
@@ -790,149 +762,149 @@ const UploadNft = ({ current, prev }) => {
                                                                             ]}
     
                                                                         > */}
-                                                                        {/* <div className='uploadnftpopup-input Icon_cam' > */}
-                                                                        <div
-                                                                            className={
-                                                                                source[index]?.type === "Player" || source[index]?.type === "modal"
-                                                                                    ? " inputdragVedio"
-                                                                                    : "inputtdrag"
-                                                                            }
-                                                                        >
-                                                                            <input
-                                                                                type="file"
-                                                                                // onChange={handleUpload}
-                                                                                maxCount={1}
-                                                                                onChange={e => handleUpload(e, index)}
-                                                                                accept=".mov,.mp4,.mp3,.webm.gltf,.glb,.jpg,.jpeg,.gif,.svg"
-                                                                            />
+                                                                            {/* <div className='uploadnftpopup-input Icon_cam' > */}
+                                                                            <div
+                                                                                className={
+                                                                                    source[index]?.type === "Player" || source[index]?.type === "modal"
+                                                                                        ? " inputdragVedio"
+                                                                                        : "inputtdrag"
+                                                                                }
+                                                                            >
+                                                                                <input
+                                                                                    type="file"
+                                                                                    // onChange={handleUpload}
+                                                                                    maxCount={1}
+                                                                                    onChange={e => handleUpload(e, index)}
+                                                                                    accept=".mov,.mp4,.mp3,.webm.gltf,.glb,.jpg,.jpeg,.gif,.svg"
+                                                                                />
 
-                                                                            {source?.length && source?.[index] && source[index]?.type === "Image" &&
-                                                                                <div>
-                                                                                    {/* {nftFileType === "Image" && nftHeight >= 500 && nftwidth >= 500 ? ( */}
-                                                                                    {source?.length && source?.[index] && source[index]?.type === "Image" && nftHeight >= 500 && nftwidth >= 500 && size <= "1000000" ? (
-
-
-                                                                                        <img
-                                                                                            src={URL.createObjectURL(source[index].file)}
-                                                                                            className="nft-image"
-                                                                                        />
-                                                                                    ) : (
-                                                                                        <>
-                                                                                            <p style={{ color: "red", marginLeft: '10px' }}>
-                                                                                                Image width & height should be 500x500
-                                                                                            </p>
-                                                                                            <p style={{ color: "red", marginLeft: '10px' }}>
-                                                                                                Image size should be max 1mb
-                                                                                            </p>
-                                                                                        </>
-                                                                                    )
-
-                                                                                    }
-                                                                                </div>
-                                                                            }
-
-                                                                            {source?.length && source?.[index] && source[index]?.type === "Player" &&
-                                                                                <div>
-                                                                                    {/* { source?.length && source?.[index] && source[index]?.type === "Player" && ( */}
-                                                                                    <video
-                                                                                        // className="VideoInput_video"
-                                                                                        width="100%"
-                                                                                        // height={height}
-                                                                                        controls
-                                                                                        src={source?.length && source?.[index] && URL.createObjectURL(source[index]?.file)}
-                                                                                    // onChange={setSource}
-                                                                                    />
-                                                                                    {/* )} */}
-                                                                                    <div className="uploadnftpopup_content">
-                                                                                        <label>Preview Image</label>
-                                                                                        <p>
-                                                                                            Because you’ve included
-                                                                                            multimedia, you’ll need to provide
-                                                                                            an image (PNG, JPG, or GIF) for
-                                                                                            the card display of your item
-                                                                                        </p>
-                                                                                    </div>
-                                                                                    <div
-                                                                                        className="uploadnftpopup-input upload-secound-input inputtdrag"
-                                                                                        style={{
-                                                                                            backgroundImage:
-                                                                                                "url('')",
-                                                                                            backgroundSize: "contain",
-                                                                                            backgroundRepeat: "no-repeat",
-                                                                                            backgroundPosition: "center",
-                                                                                        }}
-                                                                                    >
-                                                                                        <input
-                                                                                            type="file"
-                                                                                            onChange={e => previewChange(e, index)}
-                                                                                        // onChange={previewChange}
-                                                                                        />
-                                                                                        {preview?.length && preview?.[index] &&
-                                                                                            <div className="uploadnftpopup-input-img  uploadnftpopup-secound">
-                                                                                                {preview?.length && preview?.[index] && (
-                                                                                                    <img
-                                                                                                        className="preview_image"
-                                                                                                        src={URL.createObjectURL(preview[index])}
+                                                                                {source?.length && source?.[index] && source[index]?.type === "Image" &&
+                                                                                    <div>
+                                                                                        {/* {nftFileType === "Image" && nftHeight >= 500 && nftwidth >= 500 ? ( */}
+                                                                                        {source?.length && source?.[index] && source[index]?.type === "Image" && nftHeight >= 500 && nftwidth >= 500 && size <= "1000000" ? (
 
 
-                                                                                                    // onChange={setPimage}
-                                                                                                    />
-                                                                                                )}
-                                                                                            </div>
+                                                                                            <img
+                                                                                                src={URL.createObjectURL(source[index].file)}
+                                                                                                className="nft-image"
+                                                                                            />
+                                                                                        ) : (
+                                                                                            <>
+                                                                                                <p style={{ color: "red", marginLeft: '10px' }}>
+                                                                                                    Image width & height should be 500x500
+                                                                                                </p>
+                                                                                                <p style={{ color: "red", marginLeft: '10px' }}>
+                                                                                                    Image size should be max 1mb
+                                                                                                </p>
+                                                                                            </>
+                                                                                        )
+
                                                                                         }
                                                                                     </div>
+                                                                                }
 
-                                                                                </div>
-                                                                            }
-
-                                                                            {/* )} */}
-                                                                            {/* <div className="VideoInput_footer">{vdo || "Nothing selectd"}</div> */}
-
-                                                                            {source?.length && source?.[index] && source[index]?.type === "modal" && (
-                                                                                <div>
-                                                                                    <DModal
-                                                                                        vdo={source?.length && source?.[index] && URL.createObjectURL(source[index]?.file)}
-                                                                                    // mdl={setModal}
-                                                                                    />
-
-                                                                                    <div className="uploadnftpopup_content">
-                                                                                        <label>Preview Image</label>
-                                                                                        <p className="">
-                                                                                            Because you’ve included multimedia,
-                                                                                            you’ll need to provide an image
-                                                                                            (PNG, JPG, or GIF) for the card
-                                                                                            display of your item
-                                                                                        </p>
-                                                                                    </div>
-                                                                                    <div
-                                                                                        className="uploadnftpopup-input upload-secound-input inputtdrag"
-                                                                                        style={{
-                                                                                            backgroundImage:
-                                                                                                "url('')",
-                                                                                            backgroundSize: "contain",
-                                                                                            backgroundRepeat: "no-repeat",
-                                                                                            backgroundPosition: "center",
-                                                                                        }}
-                                                                                    >
-                                                                                        <input
-                                                                                            type="file"
-                                                                                            onChange={e => previewChange(e, index)}
+                                                                                {source?.length && source?.[index] && source[index]?.type === "Player" &&
+                                                                                    <div>
+                                                                                        {/* { source?.length && source?.[index] && source[index]?.type === "Player" && ( */}
+                                                                                        <video
+                                                                                            // className="VideoInput_video"
+                                                                                            width="100%"
+                                                                                            // height={height}
+                                                                                            controls
+                                                                                            src={source?.length && source?.[index] && URL.createObjectURL(source[index]?.file)}
+                                                                                        // onChange={setSource}
                                                                                         />
-                                                                                        {preview?.length && preview?.[index] &&
-                                                                                            <div className="uploadnftpopup-input-img  uploadnftpopup-secound">
-                                                                                                {preview?.length && preview?.[index] && (
-                                                                                                    <img
-                                                                                                        className="preview_image"
-                                                                                                        src={URL.createObjectURL(preview[index])} />
-                                                                                                )}
-                                                                                            </div>
-                                                                                        }
+                                                                                        {/* )} */}
+                                                                                        <div className="uploadnftpopup_content">
+                                                                                            <label>Preview Image</label>
+                                                                                            <p>
+                                                                                                Because you’ve included
+                                                                                                multimedia, you’ll need to provide
+                                                                                                an image (PNG, JPG, or GIF) for
+                                                                                                the card display of your item
+                                                                                            </p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            className="uploadnftpopup-input upload-secound-input inputtdrag"
+                                                                                            style={{
+                                                                                                backgroundImage:
+                                                                                                    "url('')",
+                                                                                                backgroundSize: "contain",
+                                                                                                backgroundRepeat: "no-repeat",
+                                                                                                backgroundPosition: "center",
+                                                                                            }}
+                                                                                        >
+                                                                                            <input
+                                                                                                type="file"
+                                                                                                onChange={e => previewChange(e, index)}
+                                                                                            // onChange={previewChange}
+                                                                                            />
+                                                                                            {preview?.length && preview?.[index] &&
+                                                                                                <div className="uploadnftpopup-input-img  uploadnftpopup-secound">
+                                                                                                    {preview?.length && preview?.[index] && (
+                                                                                                        <img
+                                                                                                            className="preview_image"
+                                                                                                            src={URL.createObjectURL(preview[index])}
+
+
+                                                                                                        // onChange={setPimage}
+                                                                                                        />
+                                                                                                    )}
+                                                                                                </div>
+                                                                                            }
+                                                                                        </div>
+
                                                                                     </div>
-                                                                                </div>
-                                                                            )}
-                                                                        </div>
-                                                                        {/* </Form.Item> */}
-                                                                        {/* <Form.Item
+                                                                                }
+
+                                                                                {/* )} */}
+                                                                                {/* <div className="VideoInput_footer">{vdo || "Nothing selectd"}</div> */}
+
+                                                                                {source?.length && source?.[index] && source[index]?.type === "modal" && (
+                                                                                    <div>
+                                                                                        <DModal
+                                                                                            vdo={source?.length && source?.[index] && URL.createObjectURL(source[index]?.file)}
+                                                                                        // mdl={setModal}
+                                                                                        />
+
+                                                                                        <div className="uploadnftpopup_content">
+                                                                                            <label>Preview Image</label>
+                                                                                            <p className="">
+                                                                                                Because you’ve included multimedia,
+                                                                                                you’ll need to provide an image
+                                                                                                (PNG, JPG, or GIF) for the card
+                                                                                                display of your item
+                                                                                            </p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            className="uploadnftpopup-input upload-secound-input inputtdrag"
+                                                                                            style={{
+                                                                                                backgroundImage:
+                                                                                                    "url('')",
+                                                                                                backgroundSize: "contain",
+                                                                                                backgroundRepeat: "no-repeat",
+                                                                                                backgroundPosition: "center",
+                                                                                            }}
+                                                                                        >
+                                                                                            <input
+                                                                                                type="file"
+                                                                                                onChange={e => previewChange(e, index)}
+                                                                                            />
+                                                                                            {preview?.length && preview?.[index] &&
+                                                                                                <div className="uploadnftpopup-input-img  uploadnftpopup-secound">
+                                                                                                    {preview?.length && preview?.[index] && (
+                                                                                                        <img
+                                                                                                            className="preview_image"
+                                                                                                            src={URL.createObjectURL(preview[index])} />
+                                                                                                    )}
+                                                                                                </div>
+                                                                                            }
+                                                                                        </div>
+                                                                                    </div>
+                                                                                )}
+                                                                            </div>
+                                                                            {/* </Form.Item> */}
+                                                                            {/* <Form.Item
                                                                             {...restField}
                                                                             name={[name, "nft_image"]}
                                                                             // getValueFromEvent={getFile}
@@ -951,7 +923,7 @@ const UploadNft = ({ current, prev }) => {
     
                                                                         </Form.Item> */}
 
-                                                                        {/* <div className="col-12 col-md-12">
+                                                                            {/* <div className="col-12 col-md-12">
                                                                             <div className="form-group">
                                                                                 <label>MP4 & MP3 </label>
                                                                                 <VideoInput width={400} height={300} />
@@ -971,10 +943,10 @@ const UploadNft = ({ current, prev }) => {
     
                                                                             </div>
                                                                         </div> */}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
                                                         </div>
                                                     </Fragment>
                                                 </Panel>

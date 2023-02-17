@@ -1,5 +1,5 @@
 
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -18,6 +18,7 @@ const AuthorProfile = () => {
     const [modalShowadd, setModalShowadd] = React.useState(false);
     const [modalShow, setModalShow] = React.useState(false);
     const [modalShowavatar, setModalShowavatar] = React.useState(false);
+    const [loading, setLoading] = useState('')
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
@@ -30,7 +31,7 @@ const AuthorProfile = () => {
 
         // formData.append('image', data.image[0])
         formData.append('username', data.username)
-        formData.append('email', data.address)
+        formData.append('email', data.email)
         dispatch(UpdateProfileAction(formData))
 
     }

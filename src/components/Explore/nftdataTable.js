@@ -42,9 +42,9 @@ const NftdataTable = (props) => {
                             <><tr>
                                 <th>Blockchain</th>
                                 <td>Polygon (Matic)</td>
-                            </tr><tr>
-                                    <th>Contract</th>
-                                    <td>{nftdetail.collectionData?.contract_id?.slice(0, 5)}.....{nftdetail.collectionData?.contract_id?.slice(39, 42)}</td>
+                            </tr><tr className='contract-address'>
+                                    <th >Contract</th>
+                                    <td><a target="_blank" href={`https://mumbai.polygonscan.com/address/${nftdetail?.collectionData?.contract_id}`} >{nftdetail.collectionData?.contract_id?.slice(0, 5)}.....{nftdetail.collectionData?.contract_id?.slice(39, 42)}</a></td>
                                 </tr><tr>
                                     <th>Token ID</th>
                                     <td>{nftdetail.token_id}</td>
