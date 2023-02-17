@@ -128,7 +128,7 @@ const Hero = ({ type }) => {
     return (
         <section className="hero-section">
             <div className="container">
-                <div className="row justify-content-between">
+                <div className="row ">
                     <div className="col-12 col-md-6 col-lg-7">
 
                         <h1 className="mt-4">Create NFTs to fund real-life projects. Earn up to 30% by sharing.</h1>
@@ -168,21 +168,33 @@ const Hero = ({ type }) => {
                                             <a href="#">
                                                 <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
                                             </a>
-                                            <a className="seller d-flex align-items-center mb-2" href="#">
-                                                <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" />
-                                                <span className="ml-2 mb-0">{item.user_data.username}</span>
-                                            </a>
-                                            <div className="card-bottom d-flex justify-content-between">
-                                                <span>{Math.round(item.price)} MATIC</span>
-                                                {item?.number_of_nft == 1 ? (
+                                            
+                                            <div
+                              className="seller d-flex align-items-center my-2"
+                              href="#"
+                            >
+                              <span>Owned By</span>
+                              {/* <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" /> */}
 
-                                                    <span>{item.number_of_nft} NFT</span>
-                                                ) : (
-                                                    <span>{item.number_of_nft} NFTs</span>
-                                                )
+                              <a href="#">
+                                <h6 className="ml-2 mb-0">
+                                  {item.user_data.username .slice(0 ,12)}
+                                </h6>
+                              </a>
 
-                                                }
-                                            </div>
+                              {/* <span className="ml-2 mb-0">{item.user_data.username}</span> */}
+                            </div>
+                            {/* <div className="card-bottom d-flex justify-content-between">
+                              <span>{Math.round(item.price)} MATIC</span>
+                              {item?.number_of_nft == 1 ? (
+                                <span>{item.number_of_nft} NFT</span>
+                              ) : (
+                                <span>{item.number_of_nft} NFTs</span>
+                              )}
+                            </div> */}
+
+                                            
+                                            
                                         </div>
                                     </div>
 

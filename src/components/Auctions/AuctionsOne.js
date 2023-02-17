@@ -57,7 +57,7 @@ const AuctionsOne = ({ type }) => {
                 return (
                   <div
                     key={`auc_${item.id}`}
-                    className="swiper-slide item card"
+                    className="swiper-slide item card position-relative auctions-slides-card"
                   >
                     {/* {item?.nft_data?.map((item, idx) => { */}
                     {/* return ( */}
@@ -97,27 +97,29 @@ const AuctionsOne = ({ type }) => {
 
                           {/* <span className="ml-2 mb-0">{item.user_data.username}</span> */}
                         </div>
-                        <div className="card-bottom d-flex justify-content-between">
-                          <span>{Math.round(item.price)} MATIC</span>
+                        <div className="card-bottom d-flex justify-content-between nft-price">
+                      
+                          <span>  <img src='../img/image14.png' />{Math.round(item.price)} MATIC</span>
                           {item?.number_of_nft == 1 ? (
                             <span>{item.number_of_nft} NFT</span>
                           ) : (
                             <span>{item.number_of_nft} NFTs</span>
                           )}
                         </div>
-                        <div className="d-flex justify-content-between">
+                        <div className="d-flex justify-content-between edit-buttons">
                           <a
-                            className="btn btn-bordered-white btn-smaller mt-3 mb-0"
+                            className="btn  btn-smaller mt-3 mb-0"
                             href="/login"
-                          ><i className="icon-handbag mr-2" />
-                            Invest
+                          ><i className="icon-handbag" />
+                          {/* <i className="fa-solid fa-sack-dssollar"></i> */}
+                           
                           </a>
                           <a
-                            className="btn btn-bordered-white btn-smaller mt-3 mb-0"
+                            className="btn  btn-smaller mt-3 ml-2 mb-0"
                             href="/login"
-                          ><i class="fa-solid fa-share-nodes mr-2 text-white"></i>
+                          ><i class="fa-solid fa-share-nodes text-white"></i>
                           
-                            Share
+                          
                           </a>
                         </div>
                       </div>
