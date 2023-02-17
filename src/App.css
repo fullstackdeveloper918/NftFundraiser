@@ -2693,3 +2693,9 @@ ul.creator-dropdown.notification-menu:after {
   p.caption.image-caption {
     display: none !important;
 }
+.contract-address td a:hover{
+    color: #4528dc !important;
+}
+.contract-address td a{
+    color: #8e8e8e !important;
+}

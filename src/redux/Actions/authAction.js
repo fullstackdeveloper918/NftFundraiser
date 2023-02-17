@@ -224,49 +224,6 @@ export const HearAboutList = () => async dispatch => {
     }
 }
 
-// export const walletSignin = (params, history) => async dispatch => {
-
-//     // 
-//     const formData = new FormData();
-
-//     formData.append('wallet_id', params);
-//     // 
-//     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
-//     try {
-//         // const token = localStorage.getItem('authToken')
-//         // const token = localStorage.getItem('authToken')
-//         const config = {
-//             headers: {
-//                 'Content-Type': 'multipart/form-data',
-//                 // Authorization: `Bearer ${token}`
-//             },
-
-//             // transformRequest: formData => formData
-//         }
-//         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/sign_in`,
-//             formData, config)
-//         console.log(res, 'signres')
-//         dispatch(wallsignin(res));
-//         if (res.status == 200) {
-//             localStorage.setItem('auth_token', res.data.data.auth_token)
-
-//             if (res.data.data.role == 3) {
-//                 history.push('/projectlist')
-//             } else {
-//                 if (res.data.data.role == 2) {
-//                     history.push('/profile')
-
-//                 }
-//             }
-//         }
-
-//     } catch (e) {
-//         if (e?.response?.data.message) {
-//             swal('error', e.response.data.message, 'error')
-//         }
-//     }
-// }
-
 export const UpdateProfileAction = (formData) => async dispatch => {
 
     // 
@@ -287,7 +244,7 @@ export const UpdateProfileAction = (formData) => async dispatch => {
 
         if (res.status === 200) {
             dispatch(GetUserAction())
-            swal("success", "updated", 'success')
+            // swal("success", "updated", 'success')
             // .then(function () {
             // dispatch(ProjectDetail(params))
             // window.location = "/projectlist";
@@ -330,6 +287,34 @@ export const CountSet = () => async dispatch => {
         }
     }
 }
+
+export const AllNoti = () => async dispatch => {
+
+
+    const token = localStorage.getItem('authToken')
+
+    try {
+        const config = {
+            headers: {
+
+                Authorization: `Bearer ${token}`
+            },
+
+        }
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getAllNotification`,
+            config)
+        // 
+        console.log(res, 'allnoti rres')
+        await dispatch(allnotification(res));
+
+
+    } catch (e) {
+        if (e?.response?.data?.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+
 export const NotiDelete = (id) => async dispatch => {
     // 
     const token = localStorage.getItem('authToken')
@@ -350,35 +335,10 @@ export const NotiDelete = (id) => async dispatch => {
         if (res.status === 200) {
             // debugger
             await dispatch(GetUserAction())
+            await dispatch(AllNoti())
 
 
         }
-    } catch (e) {
-        if (e?.response?.data?.message) {
-            swal('error', e.response.data.message, 'error')
-        }
-    }
-}
-
-export const AllNoti = () => async dispatch => {
-
-    const token = localStorage.getItem('authToken')
-
-    try {
-        const config = {
-            headers: {
-
-                Authorization: `Bearer ${token}`
-            },
-
-        }
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getAllNotification`,
-            config)
-        // 
-        console.log(res, 'allnoti rres')
-        await dispatch(allnotification(res));
-
-
     } catch (e) {
         if (e?.response?.data?.message) {
             swal('error', e.response.data.message, 'error')

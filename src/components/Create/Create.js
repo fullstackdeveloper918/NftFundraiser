@@ -394,7 +394,7 @@ const Create = ({ current, next, prev }) => {
                                         name="number_of_nft"
 
                                         value={nonft}
-                                        // onChange={nonft}
+                                        onChange={() => setNonft('1')}
                                         defaultValue={nonft}
                                         // defaultValue={1}
                                         // disabled={true}
@@ -544,7 +544,7 @@ const Create = ({ current, next, prev }) => {
                                         min={disablePastDate()}
 
                                         // placeholder="End date"
-                                        {...register("end_date")}
+                                        {...register("end_date", { required: true })}
                                         aria-invalid={errors.end_date ? "true" : "false"}
                                     />
                                     <div >

@@ -59,6 +59,10 @@ const Footer = () => {
         }
 
     }
+
+    function getYear() {
+        return new Date().getFullYear();
+    }
     return (
 
 
@@ -120,7 +124,7 @@ const Footer = () => {
                             <div className="copyright-area d-flex flex-wrap justify-content-center justify-content-sm-between text-center py-4">
                                 {/* Copyright Left */}
 
-                                <div className="copyright-left">© 2023 Copyright Karmatica.</div>
+                                <div className="copyright-left">© {getYear()} Copyright Karmatica.</div>
 
                             </div>
                         </div>

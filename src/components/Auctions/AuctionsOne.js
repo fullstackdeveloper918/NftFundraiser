@@ -105,14 +105,15 @@ const AuctionsOne = ({ type }) => {
                                                 </div>
 
                                                 <div className='d-flex justify-content-between'>
-                                                    <a className="btn btn-bordered-white btn-smaller mt-3 mb-0" href="/login">Invest</a>
-                                                    <a className="btn btn-bordered-white btn-smaller mt-3 mb-0" href="/login">Share</a>
+                                                    <Link to={`/projects/${item.slug}`} style={{ color: "white" }}><a className="btn btn-bordered-white btn-smaller mt-3 mb-0" href="/login">Invest</a></Link>
+                                                    <Link to={`/projects/${item.slug}`} style={{ color: "white" }}> <a className="btn btn-bordered-white btn-smaller mt-3 mb-0" href="/login">Share</a></Link>
                                                 </div>
 
 
 
 
-                                                <Link to={`/projects/${item.slug}`} style={{ color: "white" }}> <a className="btn btn-bordered-white btn-smaller mt-3 mb-0" ><i className="icon-handbag mr-2" />Buy</a> </Link></div>
+                                                {/* <Link to={`/projects/${item.slug}`} style={{ color: "white" }}> <a className="btn btn-bordered-white btn-smaller mt-3 mb-0" ><i className="icon-handbag mr-2" />Buy</a> </Link> */}
+                                            </div>
 
 
 

@@ -4,6 +4,8 @@ import { Collapse } from 'antd';
 import { NftList, ProjectDetail, ProjectList } from '../../redux/Actions/projectAction';
 import { useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+const { CONTRACT_ADDRESS_URL } = process.env;
 const LatNftDataTable = (props) => {
     const dispatch = useDispatch()
     const { Panel } = Collapse;
@@ -42,9 +44,9 @@ const LatNftDataTable = (props) => {
                                 <th>Blockchain</th>
                                 <td>Polygon (Matic)</td>
                             </tr>
-                            <tr>
+                            <tr className='contract-address'>
                                 <th>Contract ID</th>
-                                <td> {latprojnftdetail?.collectionData?.contract_id?.slice(0, 5)}.....{latprojnftdetail?.collectionData?.contract_id?.slice(39, 42)}</td>
+                                <td> <a target="_blank" href={`https://mumbai.polygonscan.com/address/${latprojnftdetail?.collectionData?.contract_id}`} >{latprojnftdetail?.collectionData?.contract_id?.slice(0, 5)}.....{latprojnftdetail?.collectionData?.contract_id?.slice(39, 42)}</a></td>
                                 {/* <td>{latprojnftdetail?.collectionData?.contract_id}</td> */}
                             </tr>
                             <tr>

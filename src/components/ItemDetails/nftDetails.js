@@ -87,29 +87,32 @@ const NftDetails = (props) => {
                     <div className="col-12 col-md-4 ">
                         <div className="item-info">
                             {/* {latprojdetail?.map((item, key) => ( */}
-                            <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
+                            {nftdetail.is_mint == 0 &&
+
+                                <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
 
 
-                                <div >
-                                    <div className='position-absolute nft-edit-icon'><i className="fa-solid fa-pen" onClick={(e) => {
-                                        setNftID(slug)
-                                        e.preventDefault();
-                                        setModalShoweditimg(true)
-                                    }
-                                    } ></i>
-                                    </div>
-                                    <div className='loader-img'>{modalShoweditimg &&
+                                    <div >
+                                        <div className='position-absolute nft-edit-icon'><i className="fa-solid fa-pen" onClick={(e) => {
+                                            setNftID(slug)
+                                            e.preventDefault();
+                                            setModalShoweditimg(true)
+                                        }
+                                        } ></i>
+                                        </div>
+                                        <div className='loader-img'>{modalShoweditimg &&
 
-                                        <EditNftImage
-                                            // debugger
-                                            id={projslug}
-                                            nft_id={nftId}
-                                            show={modalShoweditimg}
-                                            onHide={() => setModalShoweditimg(false)} />
-                                    }
+                                            <EditNftImage
+                                                // debugger
+                                                id={projslug}
+                                                nft_id={nftId}
+                                                show={modalShoweditimg}
+                                                onHide={() => setModalShoweditimg(false)} />
+                                        }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                             <><div className="item-thumb text-center align-items-center d-flex">
                                 {nftdetail.extention === "Player" &&
 
@@ -144,24 +147,25 @@ const NftDetails = (props) => {
                         <div className=' card no-hover py-0 mt-2 mb-2 mt-lg-0 mb-lg-0 '>
 
                             <span Class="title_main " style={{ color: '#fff' }}>{nftdetail?.title} </span>
+                            {nftdetail.is_mint == 0 &&
+                                <div className='nft-edit-icon position-absolute mt-2'>
+                                    <i className="fa-solid fa-pen " onClick={(e) => {
+                                        setNftID(slug)
+                                        e.preventDefault();
+                                        setModalShowedit(true)
+                                    }
+                                    } ></i>
+                                    {modalShowedit &&
 
-                            <div className='nft-edit-icon position-absolute mt-2'>
-                                <i className="fa-solid fa-pen " onClick={(e) => {
-                                    setNftID(slug)
-                                    e.preventDefault();
-                                    setModalShowedit(true)
-                                }
-                                } ></i>
-                                {modalShowedit &&
-
-                                    <EditNftName
-                                        // debugger
-                                        id={projslug}
-                                        nft_id={nftId}
-                                        show={modalShowedit}
-                                        onHide={() => setModalShowedit(false)} />
-                                }
-                            </div>
+                                        <EditNftName
+                                            // debugger
+                                            id={projslug}
+                                            nft_id={nftId}
+                                            show={modalShowedit}
+                                            onHide={() => setModalShowedit(false)} />
+                                    }
+                                </div>
+                            }
 
                         </div>
                         <div className="content sm:mt-3 mt-lg-2">
@@ -229,24 +233,25 @@ const NftDetails = (props) => {
                             </h5>
                             <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
 
+                                {nftdetail?.is_mint == 0 &&
+                                    <div className='nft-edit-icon position-absolute mt-2'>
+                                        <i className="fa-solid fa-pen" onClick={(e) => {
+                                            setNftID(slug)
+                                            e.preventDefault();
+                                            setModalShoweditdes(true)
+                                        }
+                                        } ></i>
+                                        {modalShoweditdes &&
 
-                                <div className='nft-edit-icon position-absolute mt-2'>
-                                    <i className="fa-solid fa-pen" onClick={(e) => {
-                                        setNftID(slug)
-                                        e.preventDefault();
-                                        setModalShoweditdes(true)
-                                    }
-                                    } ></i>
-                                    {modalShoweditdes &&
-
-                                        <EditNftDesc
-                                            // debugger
-                                            id={projslug}
-                                            nft_id={nftId}
-                                            show={modalShoweditdes}
-                                            onHide={() => setModalShoweditdes(false)} />
-                                    }
-                                </div>
+                                            <EditNftDesc
+                                                // debugger
+                                                id={projslug}
+                                                nft_id={nftId}
+                                                show={modalShoweditdes}
+                                                onHide={() => setModalShoweditdes(false)} />
+                                        }
+                                    </div>
+                                }
                             </div>
                             <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft " />
                             {/* <ReadMore  dangerouslySetInnerHTML={{ __html: latprojnftdetail.description }} /> */}

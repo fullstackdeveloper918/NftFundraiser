@@ -325,8 +325,7 @@ export const GetCollectionsAction = () => async dispatch => {
         }
     }
 }
-export const CreateCollectionAction = ({ dat, imageBanner }) => async dispatch => {
-    // debugger
+export const CreateCollectionAction = ({ dat, imageBanner, props }) => async dispatch => {
     try {
         const formData = new FormData()
         formData.append('title', dat.title)
@@ -349,7 +348,8 @@ export const CreateCollectionAction = ({ dat, imageBanner }) => async dispatch =
         if (res?.status === 200) {
 
             await dispatch(GetCollectionsAction());
-            swal("success", 'Collection Created', 'success')
+            props.onHide(false)
+            // swal("success", 'Collection Created', 'success')
             // .then(function () {
             //     onClick={() => props.onHide()}
             // });

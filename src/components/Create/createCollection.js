@@ -20,7 +20,7 @@ function MyVerticallyCenteredModal(props) {
         const imageBanner = dataURLtoBlob(image)
         // 
         // data.preventDefault()
-        dispatch(CreateCollectionAction({ dat, imageBanner }))
+        dispatch(CreateCollectionAction({ dat, imageBanner, props }))
         // console.log(data?.statusCode)
 
     }
@@ -49,9 +49,9 @@ function MyVerticallyCenteredModal(props) {
                                     type="text"
                                     className="form-control"
                                     name="title"
-                                    required
+                                    aria-invalid={errors.title ? "true" : "false"}
                                     placeholder="Enter collection name"
-                                    {...register('title')}
+                                    {...register('title', { required: true })}
                                 // value={title}
                                 // onChange={(e) => {
 
@@ -60,6 +60,7 @@ function MyVerticallyCenteredModal(props) {
                                 />
 
                             </div>
+                            {errors.title?.type === 'required' && <p style={{ color: 'red' }} role="alert">collection name is required</p>}
                         </div>
 
                         <div className="col-6">
@@ -69,15 +70,16 @@ function MyVerticallyCenteredModal(props) {
                                     type="text"
                                     className="form-control"
                                     name="symbol"
-                                    required
+                                    aria-invalid={errors.symbol ? "true" : "false"}
                                     placeholder="Enter token symbol"
-                                    {...register('symbol')}
+                                    {...register('symbol', { required: true })}
                                 // value={symbol}
                                 // onChange={(e) => {
 
                                 //     setSymbol(e.target.value);
                                 // }} 
                                 />
+                                {errors.symbol?.type === 'required' && <p style={{ color: 'red' }} role="alert">symbol is required</p>}
 
 
                             </div>
@@ -89,8 +91,8 @@ function MyVerticallyCenteredModal(props) {
                                     type="text"
                                     className="form-control"
                                     name="description"
-                                    required
-                                    {...register('description')}
+                                    aria-invalid={errors.description ? "true" : "false"}
+                                    {...register('description', { required: true })}
                                     // value={description}
                                     // onChange={(e) => {
 
@@ -98,7 +100,7 @@ function MyVerticallyCenteredModal(props) {
                                     // }}
                                     placeholder="Spread some words about your collection"
                                 />
-
+                                {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">description is required</p>}
                             </div>
 
                         </div>
@@ -108,17 +110,18 @@ function MyVerticallyCenteredModal(props) {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    required
+                                    aria-invalid={errors.short_url ? "true" : "false"}
                                     name="short_url"
                                     placeholder="Web URL"
-                                    {...register('short_url')}
+
+                                    {...register('short_url', { required: true })}
                                 // value={short_url}
                                 // onChange={(e) => {
 
                                 //     setShortUrl(e.target.value);
                                 // }} 
                                 />
-
+                                {errors.short_url?.type === 'required' && <p style={{ color: 'red' }} role="alert">Web URL is required</p>}
                             </div>
                         </div>
                         <div className="col-12 col-md-12">
