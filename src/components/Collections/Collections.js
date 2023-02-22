@@ -65,8 +65,15 @@ const Collections = () => {
 
                                                     <div class=" align-items-center">
                                                         <div class="d-flex justify-content-center text-align-center gap-5">
-                                                            <span>Total NFTs:</span>
-                                                            <span>{item.nft_data.length}</span>
+                                                            {item?.nft_data.length == 1 ? (
+
+                                                                <span>Total NFT :</span>
+                                                            ) : (
+                                                                <span>Total NFTs :</span>
+                                                            )
+
+                                                            }
+                                                            <span>{item?.nft_data?.length}</span>
                                                         </div>
                                                     </div>
                                                 </div>

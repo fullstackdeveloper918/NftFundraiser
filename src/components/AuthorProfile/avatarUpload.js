@@ -27,7 +27,7 @@ function AvatarUpload(props) {
         formData.append('avatar', avatar)
         formData.append('username', userdet.username)
         // formData.append('banner_image', banner_image)
-        dispatch(UpdateProfileAction(formData))
+        dispatch(UpdateProfileAction(formData, props))
     }
 
     return (
@@ -39,7 +39,7 @@ function AvatarUpload(props) {
         >
             <Modal.Header >
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Profile Banner
+                    User Image
                 </Modal.Title>
                 <div>
                     <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>

@@ -1,14 +1,11 @@
 import axios from "axios";
 import {
     createProjectSuccess,
-    deleteProduct,
     getProjectDetail,
     getProjectList,
     createFail,
     publicLiveProjects,
     deleteProject,
-    getLatestProjectList,
-    getTopFundraiser,
     getLatestProjectDetail,
     getCategoriesList,
     createCollectionSuccess,
@@ -19,19 +16,15 @@ import {
     getSettings,
     getNftwolDetails,
     getfundprojdetails,
-    Nftres,
     updatebanner,
     nftUpd,
     nftAdd,
     getMatic,
-    getmostprojactivity
+    getmostprojactivity,
+    getbuyednftdetails
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { Redirect, useHistory } from 'react-router-dom';
 import swal from "sweetalert";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { redirect } from "next/dist/server/api-utils";
 
 export const CreateProjectAction = (params, setLoading, history) => async dispatch => {
     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
@@ -207,13 +200,15 @@ export const getPublicLiveProjects = createAsyncThunk(
 
     async (params, thunkAPI) => {
         try {
-            const { type, projectType } = params
+            const { projectType } = params
+            const latitude = localStorage.getItem('latitude')
+            const longitude = localStorage.getItem('longitude')
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             }
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=&latitude=&longitude=&search_keyword=&category_id=&type`, config)
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=&latitude=${latitude}&longitude=${longitude}&search_keyword=&category_id=&type`, config)
             // console.log(res, 'projres')
             thunkAPI.dispatch(publicLiveProjects({
                 res: res,
@@ -669,6 +664,27 @@ export const GetMostactivityProject = () => async dispatch => {
             config)
 
         await dispatch(getmostprojactivity(res));
+
+    } catch (e) {
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const GetbuyedNftDetails = (slug) => async dispatch => {
+    const token = localStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+        }
+
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getPurchaseNftDetailByIdx/${slug?.slug}`,
+            config)
+
+        await dispatch(getbuyednftdetails(res));
 
     } catch (e) {
         if (e?.response?.data.message) {

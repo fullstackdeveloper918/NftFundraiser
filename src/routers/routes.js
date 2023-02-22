@@ -1,17 +1,14 @@
 import React from "react";
-import { BrowserRouter, BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // importing all the themes
 import ThemeOne from "../themes/theme-one";
 import ExploreOne from "../themes/explore-one";
 import ExploreTwo from "../themes/project-list";
-import ReadProject from "../components/Explore/ProjectList";
 import ExploreFour from "../themes/latestProjects";
 import Auctions from "../themes/auctions";
 import ItemDetails from "../themes/item-details";
 import Activity from "../themes/activity";
-import Blog from "../themes/blog";
-import BlogSingle from "../themes/blog-single";
 import HelpCenter from "../themes/help-center";
 import Authors from "../themes/authors";
 import Author from "../themes/author";
@@ -27,16 +24,12 @@ import TermsCond from "../themes/term&cond";
 import All from "../themes/viewalllatest";
 import ColExplore from "../themes/exploreCollections";
 import Aboutus from "../themes/Aboutus";
-import LiveAuctions from "../components/Auctions/AuctionsTwo";
-import NewestProj from "../themes/newestproj";
 import latprojDetails from "../themes/latproj-details";
 import Showcollections from "../themes/showcollections";
-import Collectiondetails from "../themes/collectn-details";
 import CollectionDetail from "../themes/collectn-details";
 import ProjNft from "../themes/projnft-details";
 import Nft from './../themes/nft-list';
 import FundDetail from "../themes/fund-detail";
-import { useEffect } from "react";
 import latnftprojDetails from "../themes/Latnft";
 import ScrollToTop from "../ScrollToTop";
 import EditNft from "../components/Create/editNft";
@@ -46,7 +39,9 @@ import AllFundraiserProjects from "../themes/fund-projects";
 import FundraiserProjects from "../themes/fundraise";
 import NftReward from "../themes/rwrd";
 import Notifi from "../themes/allnot";
-// import { NavLink } from "react-router-dom";
+import BuyedNft from "../themes/buyed-nft";
+import BuyNftDetail from "../themes/buyNft-details";
+
 
 const MyRouts = () => {
 
@@ -63,6 +58,8 @@ const MyRouts = () => {
           <Route exact path="/updateproject/:id" component={ProjectUpdate} />
           {/* <Route exact path="/projectlist" component={ExploreThree} /> */}
           <Route exact path="/explore-4" component={ExploreFour} />
+          <Route exact path="/my/nfts" component={BuyedNft} />
+          <Route exact path="/my/nfts-detail/:slug" component={BuyNftDetail} />
           <Route exact path="/rewards" component={NftReward} />
           <Route exact path="/auctions" component={Auctions} />
           <Route exact path="/popularcollection/details/:slug" component={ItemDetails} />
@@ -77,8 +74,6 @@ const MyRouts = () => {
           <Route exact path="/nftedit/:id/:id" component={EditNft} />
           <Route exact path="/addnft/:id" component={AddNFT} />
           <Route exact path="/activity" component={Activity} />
-          <Route exact path="/blog" component={Blog} />
-          <Route exact path="/blog-single" component={BlogSingle} />
           <Route exact path="/help-center" component={HelpCenter} />
           <Route exact path="/authors" component={Authors} />
           <Route exact path="/profile" component={Author} />

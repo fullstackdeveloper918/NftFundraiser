@@ -42,8 +42,8 @@ const UserdataTable = (props) => {
 
                                 <td><span>Name </span> <span>{userdet.username}</span></td>
                                 <td><span>Wallet ID</span>  <span>{userdet.wallet_id}</span></td>
-                                <td><span>Reffers </span> <span>{userdet.referrers}</span></td>
-                                <td><span>Refferal Amount </span> <span>{userdet.referral_amount} KARMATICA token</span></td>
+                                <td><span>Number of Referrals </span> <span>{userdet.referrers}</span></td>
+                                <td><span>Referral Amount </span> <span>{userdet.referral_amount} KARMATICA token</span></td>
                                 <td><span>Fundraised </span> <span>{userdet.total_fundraised} MATIC</span></td>
 
                             </tr>

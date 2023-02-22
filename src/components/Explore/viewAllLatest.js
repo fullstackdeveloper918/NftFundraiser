@@ -19,6 +19,8 @@ const ExploreAll = () => {
     return state?.projectdetails?.liveProjects[type];
   });
   console.log(liveProjects?.nft_data?.image, "live");
+
+
   useEffect(() => {
     //
     dispatch(
@@ -80,49 +82,47 @@ const ExploreAll = () => {
                             {/* <div className="countdown-times ">
                                                         <div className="countdown d-flex justify-content-center" data-date={item.date} />
                                                     </div> */}
-                            <a href="#">
+                            <a >
                               <h5 className="mb-0">
                                 {item.title.slice(0, 15)}
                               </h5>
                             </a>
                             <div
                               className="seller d-flex align-items-center my-3"
-                              href="#"
+
                             >
                               <span>Owned By</span>
                               {/* <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" /> */}
 
-                              <a href="#">
+                              <a >
                                 <h6 className="ml-2 mb-0">
-                                  {item.user_data.username .slice(0 ,12)}
+                                  {item.user_data.username.slice(0, 12)}
                                 </h6>
                               </a>
 
                               {/* <span className="ml-2 mb-0">{item.user_data.username}</span> */}
                             </div>
-                            <div className="card-bottom d-flex justify-content-between">
-                              <span>{Math.round(item.price)} MATIC</span>
+                            <div className="card-bottom d-flex justify-content-between nft-price">
+                              <span><img className="mr-1" src='../img/image14.png' />{Math.round(item.price)} MATIC</span>
                               {item?.number_of_nft == 1 ? (
                                 <span>{item.number_of_nft} NFT</span>
                               ) : (
                                 <span>{item.number_of_nft} NFTs</span>
                               )}
                             </div>
-                            <div className="d-flex justify-content-between">
-                          <a
-                            className="btn btn-bordered-white btn-smaller mt-3 mb-0"
-                            href="/login"
-                          ><i className="icon-handbag mr-1" />
-                            Invest
-                          </a>
-                          <a
-                            className="btn btn-bordered-white btn-smaller mt-3 mb-0"
-                            href="/login"
-                          ><i class="fa-solid fa-share-nodes mr-1 text-white"></i>
-                          
-                            Share
-                          </a>
-                        </div>
+                            <div className="d-flex justify-content-between edit-buttons nft-price mt-2">
+                              <Link to={`/projects/${item.slug}`} style={{ color: "white" }} className="btn  btn-smaller mt-3 mb-0">
+
+
+                                <i className="icon-handbag" />
+                                {/* <i className="fa-solid fa-sack-dssollar"></i> */}
+                              </Link>
+                              <Link to={`/projects/${item.slug}`} className="btn  btn-smaller mt-3 ml-2 mb-0" style={{ color: "white" }}>
+
+
+                                <i class="fa-solid fa-share-nodes text-white"></i>
+                              </Link>
+                            </div>
                           </div>
                         </div>
                       </div>

@@ -3,6 +3,9 @@
 body{
     background-color: #09080d !important;
 }
+iframe {
+    pointer-events: none;
+  }
 html {
     scroll-behavior: smooth;
   }
@@ -1098,8 +1101,8 @@ span.nft_price {
     color: #fff !important;
 }
 .mint button {
-    width: 100%;
-    margin-top: 15px !important;
+    /* width: 100%;
+    margin-top: 15px !important; */
     background-color: transparent !important;
     border: 1px solid #ffff !important;
     border-radius: 25px !important;
@@ -1622,8 +1625,8 @@ span.ant-collapse-header-text {
     top: 12px;
     background-color: #000;
 }
-from.Edite_able input {
-    font-size: 14px;
+.Edite_able input {
+    text-transform: unset !important;
 }
 ul.project_back {
     display: flex;
@@ -1665,6 +1668,7 @@ span.read-or-hide {
     color: #4B1BBF;
     cursor: pointer;
     text-transform: capitalize;
+    float: right;
 }
 .modal-body form.item-form.card.no-hover select {
     background-color: black !important;
@@ -2661,6 +2665,10 @@ ul.creator-dropdown.notification-menu:after {
     font-weight: 800;
     margin-top: 10px !important;
         }
+        .loading .main-create {
+            background: transparent !important;
+        }
+        
         .loader-img .main-create {
     position: absolute;
     z-index: 99;
@@ -2722,7 +2730,7 @@ h6{
     /* display: none !important; */
     visibility: hidden !important;
 }
-.auctions-slides-card:hover .edit-buttons{
+.card:hover .edit-buttons{
     display: block !important;
     text-align: right;
     transition: 0.3s ease-in-out;
@@ -2766,5 +2774,15 @@ h6{
     color: #4528dc !important;
 }
 .contract-address td a{
+    color: #8e8e8e !important;
+}
+.nfts-detail .card-body {
+    padding: 25px 0 0 !important;
+}
+.purchase_btn{
+    border: 2px solid #8e8e8e;
+    /* width: auto !important; */
+    padding: 10px 20px;
+    border-radius: 25px;
     color: #8e8e8e !important;
 }

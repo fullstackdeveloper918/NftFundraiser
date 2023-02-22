@@ -2,7 +2,7 @@ export const TOKEN_KEY = localStorage.getItem('authToken')
 
 
 export const logout = () => {
-    localStorage.removeItem("authToken");
+  localStorage.removeItem("authToken");
 }
 
 export const isLogin = () => {

@@ -122,7 +122,7 @@ const Header = () => {
             Swal.fire({
                 icon: 'info',
                 html:
-                    'You need to Signup as a Creator to Create a Project',
+                    'Sign up as a Creator to start a project and upload NFTs',
                 showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:
@@ -134,7 +134,7 @@ const Header = () => {
             Swal.fire({
                 icon: 'info',
                 html:
-                    'You need to Signup as a Creator to Create a Project',
+                    'Sign up as a Creator to start a project and upload NFTs',
                 showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:
@@ -230,10 +230,13 @@ const Header = () => {
                                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i className="fa fa-solid fa-user"></i>
                                 </button>
-                                <ul class="creator-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ left: '-37%' }}>
+                                <ul className="creator-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ left: '-37%' }}>
                                     {/* <li>{userdet?.username}</li> */}
                                     <li>{userdet?.email}</li>
                                     <li><button type='button' class="dropdown-item"><Link to='/profile'>My Profile</Link></button></li>
+                                    {userRole == 2 &&
+                                        <li><button type='button' class="dropdown-item"><Link to='/my/nfts'>Purchased NFTs</Link></button></li>
+                                    }
                                     {userRole == 3 && (
                                         <><li><button type='button' class="dropdown-item"><Link to='/projectlist'>My Projects</Link></button></li>
 

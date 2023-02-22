@@ -119,6 +119,40 @@ const CollectionNFTS = () => {
 
                     {collNft?.nft_data?.map((item, idx) => {
                         return (
+                            // <div key={`auct_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
+                            //     {/* <div className="intro text-center">
+                            //         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati <br /> dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p>
+                            //     </div> */}
+                            //     <div className="card">
+
+                            //         <div className="image-over">
+                            //             <Link to={`/nftprojdetails/${item.slug}`}>
+                            //                 <img className="card-img-top" src={item.image} alt="" />
+                            //             </Link>
+                            //         </div>
+                            //         {/* Card Caption */}
+                            //         <div className="card-caption col-12 p-0">
+                            //             {/* Card Body */}
+                            //             <div className="card-body">
+                            //                 {/* <div className="countdown-times mb-3">
+                            //                     <div className="countdown d-flex" data-date={item.end_date} />
+                            //                 </div> */}
+                            //                 <a href="/item-details">
+                            //                     <h5 className="mb-0">{item.title.slice(0,20)}...</h5>
+                            //                 </a>
+                            //                 {/* <a className="seller d-flex align-items-center my-3">
+                            //                     <img className="avatar-sm rounded-circle"
+                            //                         src='https://images.unsplash.com/photo-1547555999-14e818e09e33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80' alt="" />
+                            //                     <span className="ml-2">{item.from}</span>
+                            //                 </a> */}
+                            //                 <div className="card-bottom d-flex">
+                            //                     <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 50) }} />
+                            //                 </div>
+
+                            //             </div>
+                            //         </div>
+                            //     </div>
+                            // </div>
                             <div key={`auct_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
                                 {/* <div className="intro text-center">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati <br /> dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p>
@@ -131,30 +165,35 @@ const CollectionNFTS = () => {
                                         </Link>
                                     </div>
                                     {/* Card Caption */}
-                                    <div className="card-caption col-12 p-0">
+                                    <div className="card-caption col-12 p-0 nfts-detail">
                                         {/* Card Body */}
                                         <div className="card-body">
-                                            {/* <div className="countdown-times mb-3">
-                                                <div className="countdown d-flex" data-date={item.end_date} />
-                                            </div> */}
-                                            <a href="/item-details">
-                                                <h5 className="mb-0">{item.title.slice(0,20)}...</h5>
-                                            </a>
-                                            {/* <a className="seller d-flex align-items-center my-3">
-                                                <img className="avatar-sm rounded-circle"
-                                                    src='https://images.unsplash.com/photo-1547555999-14e818e09e33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80' alt="" />
-                                                <span className="ml-2">{item.from}</span>
-                                            </a> */}
-                                            <div className="card-bottom d-flex">
-                                                <span dangerouslySetInnerHTML={{ __html: item.description.slice(0, 50) }} />
+
+
+
+                                            <h5 className="mb-0">{item.title.slice(0, 16)} ...</h5>
+
+                                            <div className="card-bottom mt-1">
+                                                <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 50) }} />
                                             </div>
 
+
+                                            <div className='d-flex justify-content-between button_group buy-invest-btn align-items-center nft-price'>
+                                                <a> <button className='btn py-2 ml-lg-auto btn-bordered-white'><i className="icon-handbag mr-1" /> <Link to={`/nftprojdetails/${item.slug}`} style={{ color: "white" }}>Invest</Link></button></a>
+                                                <a> <img className="mr-1" src='../../img/image14.png' />{item.price}</a>
+                                            </div>
+
+
+
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         );
                     })}
+
+
                 </div>
                 {/* {
                 <div className="row">

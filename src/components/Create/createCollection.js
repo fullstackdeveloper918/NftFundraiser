@@ -141,7 +141,7 @@ function MyVerticallyCenteredModal(props) {
                         </div>
                     </div>
                     {/* <div className="modal-footer"> */}
-                    <Button type="submit" className="btn btn-primary">Create</Button>
+                    <Button key="create-collection" type="submit" className="btn btn-primary">Create</Button>
                     {/* </div> */}
                 </form>
             </Modal.Body>

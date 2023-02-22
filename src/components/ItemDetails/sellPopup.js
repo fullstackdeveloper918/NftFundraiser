@@ -75,7 +75,6 @@ function SellPopup(props) {
     }
 
     const deployContract = async (type, start_date, end_date, price) => {
-
         try {
             if (nftdetail?.collectionData?.contract_id == null) {
 
@@ -134,31 +133,15 @@ function SellPopup(props) {
 
     }
 
-    // const deployAndMint = async () => {
 
-    //     setModalShow(true)
-    //     // mint()
-    //     await deployContract()
-    //     // nftdetail.id()
-    // }
 
     const OnSubmit = async (data) => {
         setModalShow(true)
-        // mint()
+
         await deployContract({ type: data.auctiontype, end_date: data.end_date, start_date: data.start_date, price: data.price })
-        // nftdetail.id()
+
         console.log(data, 'dtaaa')
-        // setEnddate(data.end_date)
-        // setPrice(data.price)
-        // setAuctionType(data.auctiontype)
-        // setStartdate(data.start_date)
-        // const formData = new FormData()
-        // formData.append('type', data.auctiontype)
-        // formData.append('price', data.price)
-        // formData.append('start_date', data.start_date)
-        // formData.append('end_date', data.end_date)
-        // dispatch(UpdateStatus({ ...data }))
-        // setAuctiondata({ ...data })
+
     }
 
 

@@ -102,12 +102,12 @@ const GetAllProjects = () => {
                                                                 </div>
                                                                 <div className="card-bottom d-flex justify-content-between">
                                                                     <span>{item.price} MATIC</span>
-                                                                    {item.nft_data.length == 1 ? (
+                                                                    {item?.number_of_nft == 1 ? (
 
-                                                                        <span>{item.nft_data.length} NFT </span>
+                                                                        <span>{item?.number_of_nft} NFT </span>
                                                                     ) : (
-                                                                        <><span>{item.nft_data.length} NFTs </span>
-                                                                            <span> + {item.number_of_nft} NFTs </span></>
+                                                                        // <><span>{item.nft_data.length} NFTs </span>
+                                                                        <span> +{item.number_of_nft} NFTs </span>
                                                                     )}
                                                                 </div>
 
@@ -136,7 +136,8 @@ const GetAllProjects = () => {
                         </div>
                     </div>
                 </section>
-            )}
+            )
+            }
         </>
     );
 

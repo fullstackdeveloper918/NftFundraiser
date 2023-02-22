@@ -65,8 +65,8 @@ const Create = ({ current, next, prev }) => {
 
     const disablePastDate = () => {
         const today = new Date();
-        const dd = String(today.getDate() + 1).padStart(2, "0");
-        const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        const dd = String(today.getDate() + 0).padStart(2, "0");
+        const mm = String(today.getMonth() + 0).padStart(2, "0"); //January is 0!
         const yyyy = today.getFullYear();
         return yyyy + "-" + mm + "-" + dd;
     };
@@ -161,7 +161,7 @@ const Create = ({ current, next, prev }) => {
 
     const today = new Date();
     const numberOfDaysToAdd = 30;
-    const date = today.setDate(today.getDate());
+    const date = today.setDate(today.getDate())
     const date1 = today.setDate(today.getDate() + numberOfDaysToAdd);
     const defaultValue = new Date(date).toISOString().substr(0, 10) // yyyy-mm-dd
     const defaultValue1 = new Date(date1).toISOString().substr(0, 10) // yyyy-mm-dd
@@ -523,8 +523,8 @@ const Create = ({ current, next, prev }) => {
                                     // hidden={data.type == 1}
                                     className="form-control"
                                     name="start_date"
-                                    defaultValue={defaultValue}
                                     min={disablePastDate()}
+                                    defaultValue={defaultValue}
 
                                     // placeholder="Start date :"
                                     {...register("start_date", { required: true })}

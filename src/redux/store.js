@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { authReducer, userDetail } from '../redux/Slices/authSlice'
+import { authReducer } from '../redux/Slices/authSlice'
 import { combineReducers } from '@reduxjs/toolkit'
 import { projectReducer } from './Slices/projectSlice'
 import { footerReducer } from './Slices/footerSlice'

@@ -1,28 +1,20 @@
-import { create } from 'ipfs-http-client'
-import { useHistory } from 'react-router-dom'
+
 import swal from 'sweetalert';
 import axios from 'axios';
 import { NftList } from '../../redux/Actions/projectAction';
-// import { walletSignin } from '../../redux/Actions/authAction';
-import { object } from 'yup';
-import { redirect } from 'next/dist/server/api-utils';
+
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-// const contractABI = require('../../src/backend/contracts/artWork.sol/NFTContract.json')
+
 const contractABI = require('../../backend/contracts/artWork.sol/NFTContract.json')
 
-// const contractAddress = "0xE915A57e52A1f5a432b15727EA79e2542d435087";
-// connect to a different API
-// const ipfsClient = create('http://127.0.0.1:5001')
 
 function isMetaMaskInstalled() {
   return Boolean(window.ethereum);
 }
 
-const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
-// const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
-// const ipfsBaseUrl = ('http://208.113.134.142:8080/')
-// const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
+// const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
+
 const web3 = createAlchemyWeb3(alchemyKey);
 
 export const Roles = {
@@ -152,7 +144,7 @@ export const ConnectWallet = async (role) => {
             <p>
               {" "}
               🦊{" "}
-              <a target="_blank" href={`https://metamask.io/download.html`}>
+              <a target="_blank" rel="noreferrer" href={`https://metamask.io/download.html`}>
                 You must install Metamask, a virtual Ethereum wallet, in your
                 browser.
               </a>
@@ -197,7 +189,7 @@ export const getCurrentWalletConnected = async () => {
           <p>
             {" "}
             🦊{" "}
-            <a target="_blank" href={`https://metamask.io/download.html`}>
+            <a target="_blank" rel="noreferrer" href={`https://metamask.io/download.html`}>
               You must install Metamask, a virtual Ethereum wallet, in your
               browser.
             </a>
@@ -295,13 +287,7 @@ export const sendFileToIPFS = async (fileImg) => {
 }
 
 export const CreateMetaDataAndMint = async ({ dispatch, slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date }) => {
-  // const metaDataObj = {
-  //   name: _name,
-  //   description: _des,
-  //   image: _imgBuffer,
-  // }
 
-  // const addedMetaData = await nft_file_content(JSON.stringify(metaDataObj));
 
   const contract = await new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
   // new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A");//loadContract();
@@ -484,10 +470,10 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
             console.log(receipt, 'conf')
             // localStorage.setItem('txd_id', receipt.transactionHash)
             // localStorage.setItem('pay_to', receipt.receipt.to)
-            UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: receipt.to, tokenId, values })
+            UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: window.ethereum?.selectedAddress, tokenId, values })
             loadingg(false)
             swal("success", "Confirmed", 'success').then(function () {
-              window.location = `/`;
+              window.location = `/my/nfts`;
             });
           }
           // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)

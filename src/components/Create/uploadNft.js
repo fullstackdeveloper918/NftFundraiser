@@ -21,52 +21,27 @@ import { useHistory } from 'react-router';
 import DModal from './3dModal';
 
 
-const getBase64 = (file) =>
-    new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
-    });
-
-
 const UploadNft = ({ current, prev }) => {
 
     const editor = useRef(null);
     const { data, setFormValues } = useFormData();
-    console.log(data, 'dataaa')
-    const [previewOpen, setPreviewOpen] = useState(false);
-    const [previewImage, setPreviewImage] = useState('');
-    const [previewTitle, setPreviewTitle] = useState('');
-    // console.log(data, 'formdta')
+
     const [count, setCount] = useState(1);
     const [nft_description, setNft_description] = useState([])
-    console.log('count', count)
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: '1' });
     const [nftFileType, setNFtFileType] = useState()
     const [nft, setNft] = useState()
     const [nftwidth, setNftwidth] = useState()
-    console.log(nftwidth, 'nftwidth')
     const [nftHeight, setNftheight] = useState()
     const [size, setSize] = useState()
-    console.log(size, 'size')
     const [Pimage, setPimage] = useState()
-    console.log(nftHeight, 'nftheight')
-    console.log('nfterror', nft)
-    console.log('nftFile', nftFileType)
-    // console.log('colldata', coldata)
-    // console.log(nft_collection_id)
-    // const [coll_id,setCollId] = useState()
+
     const coll_id = (Object.values(nft_collection_id));
-    // console.log("collid", coll_id)
     const [source, setSource] = useState([])
     const [sourceType, setSourceType] = useState()
 
-    // console.log('stype',stype)
-    console.log('sourcetype', sourceType)
-    console.log('source', source)
 
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState()
@@ -122,21 +97,12 @@ const UploadNft = ({ current, prev }) => {
         }
         );
     };
-    // function onHandleClickNft(index, source) {
-    //     debugger
 
-    //     );
-    // };
-    // function descc(e) {
-    //     setNft_description(prev => [...prev, nft_description]);
-    // };
 
     const defaultValues = {
         setNft_description: '',
     }
-    // this.setState(prev => ({
-    //     item: prev.item.map(item => item.name === 'xjz' ? { ...item, age: '10' } : item)
-    // }))
+
     const { register, handleSubmit, formState: { errors }, watch, control, setValue } = useForm({
         mode: 'all',
         defaultValues
@@ -242,35 +208,8 @@ const UploadNft = ({ current, prev }) => {
             })
 
 
-            // switch (nft?.name?.str.includes(".glb")) {
-
-            //     case '':
-            //         setNFtFileType('modal')
-            //         break;
-            // }
-
         }
-
-        // if (nftFileType === 'Image' && window.innerHeight > '500' && window.innerWidth > '500') {
-        //     alert("This is  matching")
-        // }
-        // else {
-        //     setNftError('Minimum size should be 500x500')
-        //     alert('This is not matching')
-
-        // }
     }
-    // useEffect(() => {
-
-    //     if (nftFileType === 'Image' && window.innerHeight <= 800 && window.innerWidth < 800) {
-    //         alert("This is not matching")
-    //     }
-    //     // else {
-    //     //     alert('This is not matching')
-    //     //     setNftError('Minimum should be 800x800')
-
-    //     // }
-    // }, [])
 
     const lat = localStorage.getItem('latitude')
     // console.log(lat, 'lattt')
@@ -288,7 +227,6 @@ const UploadNft = ({ current, prev }) => {
 
 
     const onFinish = async (values) => {
-        // debugger
         try {
             setLoading(true)
             // debugger
@@ -351,16 +289,14 @@ const UploadNft = ({ current, prev }) => {
                 formData.append('nft_name', values?.nfts?.map(x =>
                     x.nft_name
                 ))
-                // const newlist = newList.push(nft_collection_id);
+
                 formData.append('nft_collection_id', coll_id)
                 formData.append('nft_description', nft_description)
-                // formData.append('nft_description', values?.nfts?.map(x => x.nft_description))
-                // formData.append('nft_collection_id', values?.nfts?.map(x => x.nft_collection_id))
 
-                // dispatch(uploadNFT())
+
                 dispatch(CreateProjectAction(formData, setLoading, history))
             } else {
-                // debugger
+
                 console.log('fail')
                 setLoading(false)
                 swal('error!', 'Nft not uploaded', 'error')
@@ -370,23 +306,19 @@ const UploadNft = ({ current, prev }) => {
             console.log(error, 'error')
         }
 
-
-        // setLoading(false)
-
-        // console.log('Received values of form:', values, data)
-
     };
-    // console.log('title', localStorage.getItem('title'))
-    const handleCancel = () => setPreviewOpen(false);
 
-    const handlePreview = async (file) => {
-        if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj);
-        }
-        setPreviewImage(file.url || file.preview);
-        setPreviewOpen(true);
-        setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
-    };
+    // // console.log('title', localStorage.getItem('title'))
+    // const handleCancel = () => setPreviewOpen(false);
+
+    // const handlePreview = async (file) => {
+    //     if (!file.url && !file.preview) {
+    //         file.preview = await getBase64(file.originFileObj);
+    //     }
+    //     setPreviewImage(file.url || file.preview);
+    //     setPreviewOpen(true);
+    //     setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
+    // };
     // const validateFileType = (
     //     { type, name }
     //     allowedTypes?
@@ -452,10 +384,12 @@ const UploadNft = ({ current, prev }) => {
 
     return (
         // <section className="author-area">
-        <div className="main-create">
+        <div className="main-create ">
 
             {loading ? (
-                <Loader />
+                <><Loader /><div className="form-group m-0">
+                    <span>Processing...</span>
+                </div></>
             ) : (
                 <div className={current === 1 ? styles.showForm : styles.hideForm}>
                     <Form
@@ -729,10 +663,7 @@ const UploadNft = ({ current, prev }) => {
                                                                                     Create Collection
                                                                                 </Button>
 
-                                                                                <MyVerticallyCenteredModal
-                                                                                    show={modalShow}
-                                                                                    onHide={() => setModalShow(false)}
-                                                                                />
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -977,12 +908,16 @@ const UploadNft = ({ current, prev }) => {
                         </Form.List>
                         <Form.Item>
                             <div className="col-12">
-                                <button className="btn w-100 mt-3 mt-sm-4 mb-3" type="submit">
+                                <button key="create-project" className="btn w-100 mt-3 mt-sm-4 mb-3" type="submit">
                                     Create
                                 </button>
                             </div>
                         </Form.Item>
                     </Form>
+                    <MyVerticallyCenteredModal
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                    />
                 </div>
             )}
         </div>

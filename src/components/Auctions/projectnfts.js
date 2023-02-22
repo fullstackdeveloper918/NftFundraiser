@@ -49,59 +49,25 @@ const ProjNFTS = (props) => {
                                         </Link>
                                     </div>
                                     {/* Card Caption */}
-                                    <div className="card-caption col-12 p-0">
+                                    <div className="card-caption col-12 p-0 nfts-detail">
                                         {/* Card Body */}
                                         <div className="card-body">
-                                            {/* <div className="countdown-times mb-3">
-                                                <div className="countdown d-flex" data-date={item.end_date} />
-                                            </div> */}
+
 
 
                                             <h5 className="mb-0">{item.title.slice(0, 16)} ...</h5>
 
-                                            {/* <a className="seller d-flex align-items-center my-3">
-                                                <img className="avatar-sm rounded-circle"
-                                                    src='https://images.unsplash.com/photo-1547555999-14e818e09e33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80' alt="" />
-                                                <span className="ml-2">{item.from}</span>
-                                            </a> */}
-                                            <div className="card-bottom">
+                                            <div className="card-bottom mt-1">
                                                 <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 50) }} />
                                             </div>
 
-                                            {/* <div className=''>
-                                                    <Link to={`/nftprojdetails/${item.slug}`}><button className='btn ml-lg-auto btn-bordered-white'>Buy</button></Link>
-                                                </div> */}
 
-                                            <div className='d-flex justify-content-between button_group buy-invest-btn align-items-center'>
-                                                <a><button className='btn py-2 ml-lg-auto btn-bordered-white'><Link to={`/nftprojdetails/${item.slug}`} style={{ color: "white" }}>Invest</Link></button></a>
-                                                <a>{item.price}</a>
+                                            <div className='d-flex justify-content-between button_group buy-invest-btn align-items-center nft-price'>
+                                                <a> <button className='btn py-2 ml-lg-auto btn-bordered-white'><i className="icon-handbag mr-1" /> <Link to={`/nftprojdetails/${item.slug}`} style={{ color: "white" }}>Invest</Link></button></a>
+                                                <a> <img className="mr-1" src='../img/image14.png' />{item.price}</a>
                                             </div>
 
-                                            <div className='button_group buy-invest-btn'>
-                                                {/* <div className=''>
-                                                    <Link to={`/nftprojdetails/${item.slug}`}><button className='btn ml-lg-auto btn-bordered-white'>Buy</button></Link>
-                                                </div> */}
 
-                                                <div className=''>
-
-                                                </div>
-                                            </div>
-                                            {/* {item?.user_data?.user_id === userdet?.user_id && localStorage.getItem('authToken') && 
-
-                                                {
-                                                    item?.is_mint == 0 ? (
-                                                        <div className='mint_btn'>
-                                                            <a href="#"><button className='btn ml-lg-auto btn-bordered-white'>Mint</button></a>
-                                                        </div>
-                                                    ) : (
-
-                                                        <div className='mint_btn'>
-                                                            <a><button className='btn ml-lg-auto btn-bordered-white'>Minted</button></a>
-                                                        </div>
-                                                    )
-                                                }
-                                                
-                                            } */}
 
                                         </div>
 
@@ -111,13 +77,7 @@ const ProjNFTS = (props) => {
                         );
                     })}
                 </div>
-                {/* {
-                <div className="row">
-                    <div className="col-12 text-center">
-                        <a className="btn btn-bordered-white mt-5">Load More</a>
-                    </div>
-                </div>
-               } */}
+
             </div>
         </section >
     );

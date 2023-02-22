@@ -116,7 +116,7 @@ const ProjNftDetails = () => {
                                 <div className="progress_nft mb-3">
                                     <div className='progress_main'><span>
                                         {/* ({Number(projdetail.project_count) * Number(matic['matic-network']?.cad)} of {Number(projdetail.price) * Number(Math.round(matic['matic-network']?.cad))} MATIC ) */}
-                                        <span className='nft_price'> {Number(projdetail.project_count) * Number(matic['matic-network']?.cad)} raised of ${Number(projdetail.price) * Number(Math.round(matic['matic-network']?.cad))} Cdn </span>
+                                        <span className='nft_price'>${Number(projdetail.project_count) * Number(matic['matic-network']?.cad)} raised of ${Number(projdetail.price) * Number(Math.round(matic['matic-network']?.cad))} Cdn </span>
                                         <div>
                                             {/* <span className='nft_price'>{projdetail.project_count} raised of ${projdetail.price} Cdn </span> */}
                                             <span className='nft_price'>({projdetail.project_count} of {projdetail.price} MATIC )</span>
@@ -373,23 +373,28 @@ const ProjNftDetails = () => {
                                                     </div>
 
 
-                                                    <div className='mint'>
+                                                    <div className='mint d-flex justify-content-between button_group buy-invest-btn align-items-center nft-price' >
                                                         {x.is_mint == 0 ? (
 
-                                                            <button>
+                                                            <button className='btn py-2 ml-lg-auto btn-bordered-white'>
                                                                 <Link to={`/nft/details/${x.slug}`}>Sell</Link>
                                                             </button>
                                                         ) : (
-                                                            <button disabled>
+                                                            <button className='btn py-2 ml-lg-auto btn-bordered-white' disabled>
                                                                 <a >Minted</a>
                                                             </button>
+
                                                         )}
+                                                        <a> <img className="mr-1" src='../img/image14.png' />{x.price}</a>
                                                     </div>
 
-                                                    <div className="card-bottom d-flex justify-content-between">
-                                                        {/* <span>{item.price}</span> */}
-                                                        {/* <span><i className="icon-heart mr-2" />{item.likes}</span> */}
-                                                    </div>
+
+
+                                                    {/* <div className='d-flex justify-content-between button_group buy-invest-btn align-items-center nft-price'>
+                                                <a> <button className='btn py-2 ml-lg-auto btn-bordered-white'><i className="icon-handbag mr-1" /> <Link to={`/nftprojdetails/${item.slug}`} style={{ color: "white" }}>Invest</Link></button></a>
+                                                <a> <img className="mr-1" src='../img/image14.png' />{item.price}</a>
+                                            </div> */}
+
                                                 </div>
                                             </div>
                                         </div>

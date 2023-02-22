@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import ReactImagePickerEditor, { ImagePickerConf } from 'react-image-picker-editor';
+import { React } from 'react';
+import ReactImagePickerEditor from 'react-image-picker-editor';
 
 import 'react-image-picker-editor/dist/index.css'
 

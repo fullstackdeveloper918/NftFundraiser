@@ -102,7 +102,7 @@ const Hero = ({ type }) => {
             Swal.fire({
                 icon: 'info',
                 html:
-                    'You need to Signup as a Creator to Create a Project',
+                    'Sign up as a Creator to start a project and upload NFTs',
                 // showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:
@@ -114,7 +114,7 @@ const Hero = ({ type }) => {
             Swal.fire({
                 icon: 'info',
                 html:
-                    'You need to Signup as a Creator to Create a Project',
+                    'Sign up as a Creator to start a project and upload NFTs',
                 // showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:
@@ -131,7 +131,7 @@ const Hero = ({ type }) => {
                 <div className="row ">
                     <div className="col-12 col-md-6 col-lg-7">
 
-                        <h1 className="mt-4">Create NFTs to fund real-life projects. Earn up to 30% by sharing.</h1>
+                        <h1 className="mt-4">Create NFTs to fund real-life projects. Earn up to 30% by sharing with friends.</h1>
                         {/* <p>Earn rewards by referring your friends.</p> */}
                         {/* Buttons */}
                         <div className="button-group">
@@ -158,26 +158,8 @@ const Hero = ({ type }) => {
 
                             <div className="card-caption col-12 p-0">
 
-                                <div className="card-body">
+                                <div className="card-body pt-0">
 
-                                    <a >
-                                        <h5 className="mb-0">{mostactivityProjects[0]?.title?.slice(0, 16)}</h5>
-                                    </a>
-                                    <a className="seller d-flex align-items-center mb-2">
-                                        <img className="avatar-sm rounded-circle" src={mostactivityProjects[0]?.user_data?.avatar} alt="" />
-                                        <span className="ml-2 mb-0">{mostactivityProjects[0]?.user_data?.username}</span>
-                                    </a>
-                                    <div className="card-bottom d-flex justify-content-between">
-                                        <span>{Math.round(mostactivityProjects[0]?.price)} MATIC</span>
-                                        {mostactivityProjects[0]?.number_of_nft == 1 ? (
-
-                                            <span>{mostactivityProjects[0]?.number_of_nft} NFT</span>
-                                        ) : (
-                                            <span>{mostactivityProjects[0]?.number_of_nft} NFTs</span>
-                                        )
-
-                                        }
-                                    </div>
 
                                     {/* ) */}
                                     {/* })} */}
@@ -188,26 +170,26 @@ const Hero = ({ type }) => {
                                             {/* <div className="countdown-times ">
                                                         <div className="countdown d-flex justify-content-center" data-date={item.date} />
                                                     </div> */}
-                                            <a href="#">
-                                                <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
+                                            <a >
+                                                <h5 className="mb-0">{mostactivityProjects[0]?.title?.slice(0, 16)}</h5>
                                             </a>
-                                            
+
                                             <div
-                              className="seller d-flex align-items-center my-2"
-                              href="#"
-                            >
-                              <span>Owned By</span>
-                              {/* <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" /> */}
+                                                className="seller d-flex align-items-center my-2"
 
-                              <a href="#">
-                                <h6 className="ml-2 mb-0">
-                                  {item.user_data.username .slice(0 ,12)}
-                                </h6>
-                              </a>
+                                            >
+                                                <span>Owned By</span>
+                                                {/* <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" /> */}
 
-                              {/* <span className="ml-2 mb-0">{item.user_data.username}</span> */}
-                            </div>
-                            {/* <div className="card-bottom d-flex justify-content-between">
+                                                <a >
+                                                    <h6 className="ml-2 mb-0">
+                                                        {mostactivityProjects[0]?.user_data.username?.slice(0, 12)}
+                                                    </h6>
+                                                </a>
+
+                                                {/* <span className="ml-2 mb-0">{item.user_data.username}</span> */}
+                                            </div>
+                                            {/* <div className="card-bottom d-flex justify-content-between">
                               <span>{Math.round(item.price)} MATIC</span>
                               {item?.number_of_nft == 1 ? (
                                 <span>{item.number_of_nft} NFT</span>
@@ -216,8 +198,8 @@ const Hero = ({ type }) => {
                               )}
                             </div> */}
 
-                                            
-                                            
+
+
                                         </div>
                                     </div>
 

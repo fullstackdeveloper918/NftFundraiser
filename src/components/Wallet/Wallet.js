@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom'
-import { ConnectWallet, Roles } from './interact';
+import { ConnectWallet } from './interact';
 import { useDispatch } from 'react-redux'
 import { loginSuccess } from '../../redux/Slices/authSlice';
 
@@ -26,12 +26,12 @@ const Wallet = () => {
         const res = await ConnectWallet("CREATOR")
 
         if (res?.res?.response?.status === 401) {
-           history.push('/signup')
+            history.push('/signup')
         }
         else {
-          dispatch(loginSuccess(res?.res))
-          localStorage.setItem('authToken',res?.res?.data?.data?.auth_token)
-          history.push('/projectlist')
+            dispatch(loginSuccess(res?.res))
+            localStorage.setItem('authToken', res?.res?.data?.data?.auth_token)
+            history.push('/projectlist')
         }
     }
 

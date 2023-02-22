@@ -37,7 +37,7 @@ const Footer = () => {
             Swal.fire({
                 icon: 'info',
                 html:
-                    'You need to Signup as a Creator to Create a Project',
+                    'Sign up as a Creator to start a project and upload NFTs',
                 showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:
@@ -49,7 +49,7 @@ const Footer = () => {
             Swal.fire({
                 icon: 'info',
                 html:
-                    'You need to Signup as a Creator to Create a Project',
+                    'Sign up as a Creator to start a project and upload NFTs',
                 showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:

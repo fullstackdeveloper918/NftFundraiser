@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import { React } from 'react';
 
 const data = {
     preHeading: "How It Works",

@@ -1,8 +1,6 @@
 
-import React, { useState } from 'react'
+import { React } from 'react'
 import { useDispatch, useSelector, } from 'react-redux'
-import { Register } from '../../redux/Actions/authAction'
-import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import * as Yup from 'yup'

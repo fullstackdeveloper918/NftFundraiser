@@ -41,6 +41,7 @@ const ProjDetails = () => {
         // 
         return state.projectdetails.latestprojectdetails
     })
+    console.log("latround", Number(Math.round(latprojdetail.project_count)) * Number(Math.round(matic['matic-network']?.cad)))
     const [modalShoww, setModalShoww] = React.useState(false);
     console.log('latproj', latprojdetail?.nft_data)
     const userdet = useSelector(state => {
@@ -73,7 +74,7 @@ const ProjDetails = () => {
 
                             <div className="item-thumb text-center">
                                 <><div>
-                                    {latprojdetail?.user_data?.user_id == userdet?.user_id && localStorage.getItem('authToken') &&
+                                    {latprojdetail?.user_data?.user_id === userdet?.user_id && localStorage.getItem('authToken') &&
                                         <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() => setModalShow(true)}></i>
 
 
@@ -110,7 +111,7 @@ const ProjDetails = () => {
                             <div className="progress_nft ">
                                 <div className='progress_main'><span>
                                     {/* ({Number(latprojdetail.project_count) * Number(matic['matic-network']?.cad)} of {Number(latprojdetail.price) * Number(Math.round(matic['matic-network']?.cad))} MATIC ) */}
-                                    <span className='nft_price'>${Number(latprojdetail.project_count) * Number(matic['matic-network']?.cad)} raised of ${Math.round(Number(latprojdetail.price)) * Number(Math.round(matic['matic-network']?.cad))} Cdn Goal</span>
+                                    <span className='nft_price'>${Number(Math.round(latprojdetail.project_count)) * Number(Math.round(matic['matic-network']?.cad))} raised of ${Math.round(Number(latprojdetail.price)) * Number(Math.round(matic['matic-network']?.cad))} Cdn Goal</span>
                                     <div>
 
                                         {/* ${Math.round(latprojdetail.project_count)} raised of ${Math.round(latprojdetail.price)} Cdn Goal */}

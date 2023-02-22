@@ -26,7 +26,7 @@ function BannerUpload(props) {
         // formData.append('avatar', userdet.avatar)
         formData.append('username', userdet.username)
         formData.append('banner_image', banner_image)
-        dispatch(UpdateProfileAction(formData))
+        dispatch(UpdateProfileAction(formData, props))
     }
 
     return (

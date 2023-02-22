@@ -1,23 +1,20 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { TopFundraiserDetail } from '../../redux/Actions/fundraiserAction';
-import ProgressBar from "@ramonak/react-progress-bar";
 import { GetfundraiserProject } from '../../redux/Actions/projectAction';
-import dayjs from 'dayjs'
 import { Link } from 'react-router-dom';
 import FunddataTable from './fundraiserdetail';
 import FundTransdataTable from './fundPaymenttable';
 import ReadMore from '../../readMore';
 import { Button } from 'react-bootstrap';
-import ReferalPopup from '../ItemDetails/refralPopup';
+import Swal from 'sweetalert2';
 
 const FundraiserDetail = () => {
     const { user_id } = useParams()
     // const id = useParams()
     // const { id } = useParams()
     const dispatch = useDispatch()
-    const [modalShowreferal, setModalShowreferal] = React.useState(false);
     const funddetail = useSelector(state => {
         return state?.fundraiser?.fundraiserdetail
     })
@@ -62,6 +59,22 @@ const FundraiserDetail = () => {
     //     })
     // }
     // render() {
+    const investHandler = () => {
+
+        if (!window.ethereum?.selectedAddress) {
+            Swal.fire({
+                icon: 'warning',
+                html:
+                    'Connect Wallet to Invest',
+                showCloseButton: false,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Ok!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+
+            })
+        }
+    }
     return (
         <section className="item-details-area fundraise-main">
             <div className="container">
@@ -86,6 +99,7 @@ const FundraiserDetail = () => {
                                 <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
+                            {/* <img src={funddetail?.user_data?.avatar} width="28px" height="28px" viewBox="0 0 24 24" fill="none" /> */}
 
                             <span className='cutom_dis'> {funddetail?.organization_detail?.organization_name} is organizing this fundraiser.</span>
                         </div>
@@ -194,23 +208,15 @@ const FundraiserDetail = () => {
                             </div>
 
                             <div className="d-flex gap-5 flex-wrap justify-content-start">
+
                                 <div>
-                                    <Button variant="primary" className=" btn  btn-bordered-white m-0 mr-2">
+
+                                    <Button variant="primary" onClick={() => investHandler()} className=" btn  btn-bordered-white m-0 mr-2">
                                         Invest
                                     </Button>
+
                                 </div>
-                                {/* <div>
 
-                                    <Button className=" mb-2 mb-sm-0  btn  btn-bordered-white m-0" variant="primary" onClick={() => setModalShowreferal(true)}>
-                                        Share
-                                    </Button>
-                                    <ReferalPopup
-                                        id={user_id}
-                                        userRef={userDetail}
-                                        show={modalShowreferal}
-                                        onHide={() => setModalShowreferal(false)} />
-
-                                </div> */}
 
 
 

@@ -10,6 +10,7 @@ import UserdataTable from "./userDetails";
 import Banner from "../Create/editBanner";
 import AvatarUpload from "./avatarUpload";
 import BannerUpload from "./bannerUpload";
+import { Link } from "react-router-dom";
 // const BASE_URL = "https://my-json-server.typicode.com/themeland/netstorm-json-1/author";
 
 const AuthorProfile = () => {
@@ -98,11 +99,13 @@ const AuthorProfile = () => {
                             <form onSubmit={handleSubmit(onSubmit)} className="item-form card no-hover p-0">
 
                                 <div className="card-body">
-                                    <from className="Edite_able">
+                                    <from className="Edite_able" >
                                         <label>
                                             <input
                                                 type="text"
                                                 className="form-control"
+
+                                                style={{ textTransform: 'none' }}
                                                 name="username"
                                                 placeholder="username"
                                                 {...register("username", { required: true })}
@@ -114,7 +117,7 @@ const AuthorProfile = () => {
                                         <label>
                                             <input
                                                 type="email"
-                                                className="form-control"
+                                                className="form-control "
                                                 name="email"
                                                 disabled={userdet.role == 3 ? true : false}
                                                 // value={userdet.role == 3 && userdet.email}
@@ -130,7 +133,7 @@ const AuthorProfile = () => {
                                         </label>
 
                                         {/* Social Icons */}
-                                        <div className="social-icons d-flex justify-content-center my-3">
+                                        {/* <div className="social-icons d-flex justify-content-center my-3">
                                             <svg
                                                 class="svg-inline--fa fa-facebook-f fa-w-10"
                                                 aria-hidden="true"
@@ -195,10 +198,20 @@ const AuthorProfile = () => {
                                                     d="M384 254.7v52.1c-18.4 4.2-36.9 6.1-52.1 6.1-36.9 77.4-103 143.8-125.1 156.2-14 7.9-27.1 8.4-42.7-.8C137 452 34.2 367.7 0 102.7h74.5C93.2 261.8 139 343.4 189.3 404.5c27.9-27.9 54.8-65.1 75.6-106.9-49.8-25.3-80.1-80.9-80.1-145.6 0-65.6 37.7-115.1 102.2-115.1 114.9 0 106.2 127.9 81.6 181.5 0 0-46.4 9.2-63.5-20.5 3.4-11.3 8.2-30.8 8.2-48.5 0-31.3-11.3-46.6-28.4-46.6-18.2 0-30.8 17.1-30.8 50 .1 79.2 59.4 118.7 129.9 101.9z"
                                                 ></path>
                                             </svg>
-                                        </div>
+                                        </div> */}
                                         <button className="btn btn-bordered-white btn-smaller" type="submit" >
                                             Update
                                         </button>
+                                        <div>
+                                            <br />
+                                            {userdet.role == 3 ? (
+                                                <>You are logged in as a Creator/merchant<br />
+                                                    <span>click here to <Link to="/create">create project</Link></span></>
+
+                                            ) : (
+                                                <span>You are logged in as a Buyer</span>
+                                            )}
+                                        </div>
                                     </from>
                                 </div>
                             </form>

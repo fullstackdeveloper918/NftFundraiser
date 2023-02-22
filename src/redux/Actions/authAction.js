@@ -1,9 +1,9 @@
 import axios from "axios";
-import { allnotification, createOrganizationSuccess, getAnnualRevenueList, getCityList, getCountryList, getHearAboutList, getStateList, loginSuccess, registerFail, registerSuccess, updateprofile, userDetail, wallsignin, } from "../Slices/authSlice";
+import { allnotification, createOrganizationSuccess, getAnnualRevenueList, getCityList, getCountryList, getHearAboutList, getStateList, loginSuccess, updateprofile, userDetail } from "../Slices/authSlice";
 import swal from "sweetalert";
-// import { useNavigate } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { creatorWalletUpdate } from "../../components/Wallet/interact";
+import Swal from "sweetalert2";
 
 export const Register = createAsyncThunk(
     "auth/register",
@@ -224,9 +224,8 @@ export const HearAboutList = () => async dispatch => {
     }
 }
 
-export const UpdateProfileAction = (formData) => async dispatch => {
+export const UpdateProfileAction = (formData, props) => async dispatch => {
 
-    // 
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -243,7 +242,18 @@ export const UpdateProfileAction = (formData) => async dispatch => {
         await dispatch(updateprofile(res));
 
         if (res.status === 200) {
+
+            Swal.fire({
+                icon: 'success',
+                html:
+                    'User information saved',
+                showCloseButton: false,
+                showConfirmButton: false,
+                focusConfirm: false,
+                timer: 1000
+            })
             dispatch(GetUserAction())
+            props.onHide(false)
             // swal("success", "updated", 'success')
             // .then(function () {
             // dispatch(ProjectDetail(params))

@@ -1,6 +1,4 @@
-import React, { Component, useEffect } from 'react';
-import axios from 'axios';
-import { getTopFundraiser } from '../../redux/Slices/projectSlice';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TopFundraiserAction } from '../../redux/Actions/fundraiserAction';
 import { Link } from 'react-router-dom';

@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-// Slice
-const userToken = localStorage.getItem('authToken')
-    // ? JSON.parse(localStorage.getItem('user'))
-    ? localStorage.getItem('authToken')
-    : null
+// // Slice
+// const userToken = localStorage.getItem('authToken')
+//     // ? JSON.parse(localStorage.getItem('user'))
+//     ? localStorage.getItem('authToken')
+//     : null
 const projectSlice = createSlice({
     name: 'project',
 
@@ -21,6 +21,7 @@ const projectSlice = createSlice({
         getSocialmediaIcons: [],
         getfundProjDetails: [],
         getmostProjActivity: [],
+        getBuyedNftdetails: [],
         getnftwoldetails: [],
         settings: [],
         nftadd: [],
@@ -72,6 +73,9 @@ const projectSlice = createSlice({
         },
         getmostprojactivity: (state, action) => {
             state.getmostProjActivity = action?.payload?.data?.data;
+        },
+        getbuyednftdetails: (state, action) => {
+            state.getBuyedNftdetails = action?.payload?.data?.data;
         },
         getProjectList: (state, action) => {
             state.projects = action.payload;
@@ -143,6 +147,7 @@ export const {
     getLatestProjectList,
     getCategoriesList,
     getCollections,
+    getbuyednftdetails,
     getCollectionDetails,
     getSocialmediaIcons,
     getNftList,
