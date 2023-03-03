@@ -142,6 +142,44 @@ export const CreateOrganizationAction = (params) => async dispatch => {
         }
     }
 }
+export const CreateOrganizationAfterRoleChange = createAsyncThunk(
+    "auth/register",
+    async (params, thunkAPI) => {
+        // debugger
+        try {
+            const token = localStorage.getItem('authToken')
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                transformRequest: formData => formData
+            }
+
+            //create oraginization creator login
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/createOrganizationDetails`,
+                params, config)
+
+            // await creatorWalletUpdate(res?.data?.data?.auth_token)
+
+            // thunkAPI.dispatch(loginSuccess(res));
+
+            if (res.status === 200) {
+                thunkAPI.dispatch(GetUserAction())
+                swal("success", res.data.message, 'success').then(function () {
+                    window.location = "/create";
+                });
+            }
+
+        } catch (e) {
+            if (e?.response?.data) {
+                if (e?.response?.data.message) {
+
+                    swal('error', e?.response?.data?.message, 'error')
+                }
+            }
+        }
+    })
 
 export const CountryList = () => async dispatch => {
     try {
@@ -348,6 +386,37 @@ export const NotiDelete = (id) => async dispatch => {
             await dispatch(AllNoti())
 
 
+        }
+    } catch (e) {
+        if (e?.response?.data?.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const ChangeUserRole = (history) => async dispatch => {
+    // debugger
+    const token = localStorage.getItem('authToken')
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/change_user_roles`, "",
+            config)
+        // 
+        console.log(res, 'user role')
+        // await dispatch(res);
+
+        if (res.status === 200) {
+            // debugger
+            await dispatch(GetUserAction())
+            if (res?.data?.data?.organization === false) {
+                history.push('/create/organization')
+            } else {
+                history.push("/")
+            }
         }
     } catch (e) {
         if (e?.response?.data?.message) {

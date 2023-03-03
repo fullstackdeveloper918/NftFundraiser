@@ -179,7 +179,12 @@ const CollectionNFTS = () => {
 
 
                                             <div className='d-flex justify-content-between button_group buy-invest-btn align-items-center nft-price'>
-                                                <a> <button className='btn py-2 ml-lg-auto btn-bordered-white'><i className="icon-handbag mr-1" /> <Link to={`/nftprojdetails/${item.slug}`} style={{ color: "white" }}>Invest</Link></button></a>
+                                                {item.sold_nft == 1 ? (
+                                                    <a> <button className='btn py-2 ml-lg-auto btn-bordered-white' disabled><i className="icon-handbag mr-1" />SOLD OUT</button></a>
+                                                ) : (
+
+                                                    <a> <button className='btn py-2 ml-lg-auto btn-bordered-white'><i className="icon-handbag mr-1" /> <Link to={`/nftprojdetails/${item.slug}`} style={{ color: "white" }}>Invest</Link></button></a>
+                                                )}
                                                 <a> <img className="mr-1" src='../../img/image14.png' />{item.price}</a>
                                             </div>
 

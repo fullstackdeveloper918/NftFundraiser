@@ -1747,6 +1747,7 @@ span.share {
     display: flex;
     align-items: center;
     gap: 10px;
+    align-items: self-end;
 }
 .main-create .ant-collapse-content-box {
     background: #16151a;
@@ -2785,4 +2786,108 @@ h6{
     padding: 10px 20px;
     border-radius: 25px;
     color: #8e8e8e !important;
+}
+.nfts_main .card-body div {
+    min-height: 42px;
+}
+.dropdown_login .fa-user {
+    margin: 0 !important;
+    color: #FFF;
+}
+.dropdown_login ul.creator-dropdown.dropdown-menu li button:hover {
+    color: var(--primary-color) !important;
+}
+.dropdown_login ul.creator-dropdown.dropdown-menu li button {
+    color: #fff !important;
+    font-family: 'Poppins' !important;
+}
+
+
+  .disabled {
+    background-color: #707070;
+    left: 2px;
+  }
+  /* .dropdown_login .ant-space-item {
+    border: 1px solid #474747 !important;
+    background-color: rgb(0 0 0 / 38%) !important;
+    padding: 4px !important;
+    border-radius: 25px !important;
+}
+.dropdown_login .ant-switch {
+    background-color: rgb(0 0 0 / 1%) !important;
+} */
+.dropdown_login .ant-space-item:focus-visible {
+    outline: unset !important;
+}
+.dropdown_login .ant-switch:focus-visible {
+    outline: unset !important;
+}
+.ant-switch {
+    padding: 5px !important;
+    height: auto !important;
+
+}
+.dropdown_login  .ant-switch-handle {
+    position: absolute;
+    top: 7px !important;
+    left: 6px ;
+    width: 18px;
+    height: 18px;
+    transition: all 0.2s ease-in-out;
+}
+.dropdown_login .ant-switch-checked {
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+}
+.dropdown_login .ant-switch-handle::before {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    bottom: 0;
+    left: -2px;
+    background-color: #fff;
+    border-radius: 9px;
+    box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
+    transition: all 0.2s ease-in-out;
+    content: '';
+}
+
+.SwitchContainer {
+    display: flex;
+    background-color: #707070;
+    align-items: center;
+    border-radius: 35px;
+    width: max-content;
+    height: max-content;
+  }
+  
+  .ToggleItem {
+    height: 40px;
+    width: 80px;
+    display: flex;
+    border-radius: 35px;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .Text {
+    color: white;
+    font-size: 14px;
+  }
+  /* .background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10vw;
+    height: 10vh;
+  } */
+  .ToggleItem.ToggleItem-first ,   .ToggleItem.ToggleItem-sec {
+    /* background: red !important; */
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+}
+.referal img {
+    max-width: 20px;
+    object-fit: cover;
+    width: 100%;
 }

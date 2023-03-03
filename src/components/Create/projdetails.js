@@ -1,15 +1,11 @@
-import dayjs from 'dayjs';
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, ProgressBar } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { DeleteProject, GetCollectionDetails, ProjectDetail } from '../../redux/Actions/projectAction';
-import latprojDetails from '../../themes/latproj-details';
+import { ProjectDetail } from '../../redux/Actions/projectAction';
 import LatNftdataTable from '../Explore/latProjNftdata';
-import NftdataTable from '../Explore/nftdataTable';
 import Banner from './editBanner';
-import EditNft from './editNft';
 import DesPopup from './desPopup';
 import ProjdataTable from '../Explore/projDetailtable';
 import ReadMore from '../../readMore';
@@ -44,7 +40,7 @@ const ProjNftDetails = () => {
         // 
         return state?.projectdetails?.projectdetails
     })
-    console.log(projdetail?.nft_data && projdetail?.nft_data && projdetail?.nft_data.length && projdetail?.nft_data[0]?.is_mint, 'projdata')
+    // console.log(projdetail?.nft_data && projdetail?.nft_data && projdetail?.nft_data.length && projdetail?.nft_data[0]?.is_mint, 'projdata')
 
 
     useEffect((event) => {
@@ -206,10 +202,6 @@ const ProjNftDetails = () => {
                                         </div>
                                     }
 
-
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -319,14 +311,29 @@ const ProjNftDetails = () => {
 
                                             {/* <i class="fa-sharp fa-solid fa-trash"></i> */}
                                             <div className="image-over relative">
-                                                <Link to={`/nft/details/${x.slug}?project=${slug}`}>
-                                                    {x.extention === 'Player' || x.extention === 'modal' ? (
+                                                {x.user_id == projdetail.user_id ? (
+                                                    <>
+                                                        {/* <Link to={`/nft/details/${x.slug}?project=${slug}`}> */}
+                                                        <Link to={`/nft/details/${x.slug}`}>
+                                                            {x.extention === 'Player' || x.extention === 'modal' ? (
 
-                                                        <img className="card-img-top" src={x.preview_imag} alt="" />
-                                                    ) : (
-                                                        <img className="card-img-top" src={x.image} alt="" />
-                                                    )}
-                                                </Link>
+                                                                <img className="card-img-top" src={x.preview_imag} alt="" />
+                                                            ) : (
+                                                                <img className="card-img-top" src={x.image} alt="" />
+                                                            )}
+                                                        </Link>
+
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        {x.extention === 'Player' || x.extention === 'modal' ? (
+
+                                                            <img className="card-img-top" src={x.preview_imag} alt="" />
+                                                        ) : (
+                                                            <img className="card-img-top" src={x.image} alt="" />
+                                                        )}
+                                                    </>
+                                                )}
                                                 <div className='token'>
                                                     <span>#{x?.token_id}</span>
                                                     <span className='cards-icons'>
@@ -368,8 +375,8 @@ const ProjNftDetails = () => {
                                                     {/* <div className='creater mt-1 mb-1'>
                                                         <span >Creator:</span><span className='ml-2'>{x?.user_data?.username}</span>
                                                     </div> */}
-                                                    <div className="d-flex justify-content-between align-items-end mt-1 mb-1">
-                                                        <span dangerouslySetInnerHTML={{ __html: x.description.slice(0, 52) }} />
+                                                    <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">
+                                                        <span className='align-self-start' dangerouslySetInnerHTML={{ __html: x.description.slice(0, 52) }} />
                                                     </div>
 
 
@@ -380,12 +387,22 @@ const ProjNftDetails = () => {
                                                                 <Link to={`/nft/details/${x.slug}`}>Sell</Link>
                                                             </button>
                                                         ) : (
-                                                            <button className='btn py-2 ml-lg-auto btn-bordered-white' disabled>
-                                                                <a >Minted</a>
-                                                            </button>
+
+                                                            <>
+                                                                {x.user_id !== projdetail.user_id ? (
+                                                                    <button className='btn py-2 ml-lg-auto btn-bordered-white' disabled>
+                                                                        <a >SOLD OUT</a>
+                                                                    </button>
+                                                                ) : (
+                                                                    <button className='btn py-2 ml-lg-auto btn-bordered-white' disabled>
+                                                                        <a >Minted</a>
+                                                                    </button>
+                                                                )}
+                                                            </>
+
 
                                                         )}
-                                                        <a> <img className="mr-1" src='../img/image14.png' />{x.price}</a>
+                                                        <a> <img className="mr-1" src='../img/image14.png' />{x.amount}</a>
                                                     </div>
 
 

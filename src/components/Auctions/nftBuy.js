@@ -6,6 +6,7 @@ import { DeleteProject, GetNftwol, GetSettings, LatestProjectDetail, NftList, Pr
 import Web3 from 'web3';
 
 import { BuyNft, ConnectWallet } from '../Wallet/interact';
+import { updateReffid } from '../Wallet/interact';
 import { useState } from 'react';
 import ReadMore from '../../readMore';
 import FundTransdataTable from '../TopSeller/fundPaymenttable';
@@ -17,6 +18,8 @@ import BidPopup from './bidPopup';
 import DModal from '../Create/3dModal';
 import Timer from './timer';
 import BuyPopup from './buyPopup';
+import { GetMatic } from './../ItemDetails/GetMAtic';
+import { GetUserAction } from '../../redux/Actions/authAction';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -30,9 +33,12 @@ const LatprojNftDetails = (props) => {
     const refid = new URLSearchParams(search).get('refid');
     console.log(refid, 'refid')
     const [ownwallet, setOwnWallet] = useState('')
+    const [matic, setMatic] = useState('')
     const [ownFee, setOwnFee] = useState('')
     const [bidmodalShow, setBidModalShow] = React.useState(false);
     const [buymodalShow, setBuyModalShow] = React.useState(false);
+    const [referalid, setReferalid] = useState("")
+
     const [platformFee, setPlatformFee] = useState('')
     console.log('own', ownwallet)
     const id = useParams();
@@ -41,7 +47,9 @@ const LatprojNftDetails = (props) => {
         // 
         return state.projectdetails.getnftwoldetails
     })
-    console.log(latprojnftdetail, 'latext')
+    console.log('matic', matic['matic-network']?.cad * latprojnftdetail?.amount)
+    console.log((latprojnftdetail?.amount * Math.round(matic['matic-network']?.cad)), 'latext')
+    // console.log("latround", Number(Math.round(latprojdetail.project_count)) * Number(Math.round(matic['matic-network']?.cad)))
     // console.log('paymentflow', [latprojnftdetail.payment_flow?.project_data.wallets])
 
 
@@ -52,16 +60,24 @@ const LatprojNftDetails = (props) => {
     console.log('getSett', getSett)
     const setValue = getSett.find(x => x.key === 'pricing_per_nft')
     console.log('sett', setValue)
+    const userdet = useSelector(state => {
+        return state?.user?.userdetail
+    })
     useEffect(() => {
+        (GetMatic(setMatic))
+        dispatch(GetUserAction())
         dispatch(GetNftwol(id))
         dispatch(GetSettings())
 
 
     }, [id])
+
     const buyHandler = () => {
+
         // setOwnWallet([latprojnftdetail.payment_flow?.project_data.wallets])
         // setOwnFee([latprojnftdetail.payment_flow?.project_data.fees])
         // setPlatformFee([latprojnftdetail.payment_flow?.karmatica_fee])
+
 
         BuyNft({
 
@@ -75,15 +91,21 @@ const LatprojNftDetails = (props) => {
             ownerFee: ([latprojnftdetail.payment_flow?.project_data?.fees]),
             ownerWallet: ([latprojnftdetail.payment_flow?.project_data?.wallets]),
             flow: ([latprojnftdetail.payment_flow]),
+
             refid: refid,
             proj_id: latprojnftdetail.project_id,
             nft_id: latprojnftdetail.id,
             loadingg: setLoading,
+            modal: setBuyModalShow,
 
 
 
 
         })
+    }
+    const reffHandler = async () => {
+        await updateReffid({ tokenId: latprojnftdetail.token_id, refid, nft_id: latprojnftdetail.id })
+        await buyHandler()
     }
     // const bidHandler = () =>{
     // if(window.ethereum?.selectedAddress){
@@ -210,14 +232,34 @@ const LatprojNftDetails = (props) => {
                                 </div> */}
                                     <div className='eddlbtton flex-wrap d-flex gap-10  align-items-center mt-2'>
                                         {/* {latprojnftdetail.type == 1 ? ( */}
+                                        {latprojnftdetail.sold_nft == 1 ? (
+                                            <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" disabled>SOLD OUT</button>
+                                        ) : (
 
-                                        <><button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                            id="nftdetail.id" onClick={() => { buyHandler(); setBuyModalShow(true); setLoading(true) }}>Buy Now</button><BuyPopup
-                                                show={buymodalShow}
-                                                loading={loading}
+                                            <>
+                                                {latprojnftdetail.user_id === userdet.user_id ? (
+                                                    <div className='eddlbtton d-flex  align-items-center mt-3'>
 
 
-                                                onHide={() => setBuyModalShow(false)} /></>
+                                                        <><span className="purchase_btn  mt-3 d-flex align-items-center justify-content-center py-1 mx-2"
+                                                            disabled>Your NFT is now ready to purchase</span>
+
+                                                        </>
+
+                                                    </div>
+
+                                                ) : (
+
+                                                    <><button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                                        id="nftdetail.id" onClick={() => { reffHandler(); setBuyModalShow(true); setLoading(true); }}>Buy Now</button><BuyPopup
+                                                            show={buymodalShow}
+                                                            loading={loading}
+
+
+                                                            onHide={() => setBuyModalShow(false)} /></>
+                                                )}
+                                            </>
+                                        )}
                                         {/* ) : ( */}
 
                                         {/* <><button className="btn  btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
@@ -267,7 +309,7 @@ const LatprojNftDetails = (props) => {
                                 <div className='nft-price'>
                                     <img src='../img/image14.png' />
                                     {/* <svg viewBox="0 0 20 20" width="24px" height="24px" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="10" fill="#8247E5"></circle><path d="M12.97 8.055a.75.75 0 0 0-.732 0l-1.678.972-1.141.635-1.68.972a.751.751 0 0 1-.731 0l-1.335-.76a.727.727 0 0 1-.366-.614V7.76c0-.254.13-.486.366-.613l1.313-.74a.751.751 0 0 1 .732 0l1.313.74c.215.127.366.36.366.613v.973l1.141-.656v-.972a.684.684 0 0 0-.366-.614L7.74 5.095a.751.751 0 0 0-.732 0L4.532 6.49a.684.684 0 0 0-.365.614v2.811c0 .254.129.487.365.614l2.476 1.395a.75.75 0 0 0 .732 0l1.679-.951 1.14-.656 1.68-.951a.75.75 0 0 1 .731 0l1.313.74c.216.127.366.36.366.613v1.5c0 .255-.129.487-.366.614l-1.313.761a.751.751 0 0 1-.732 0l-1.313-.74a.727.727 0 0 1-.366-.613v-.973l-1.14.656v.972c0 .254.129.487.366.613l2.475 1.396a.751.751 0 0 0 .732 0l2.475-1.396a.727.727 0 0 0 .366-.613v-2.811a.684.684 0 0 0-.366-.614L12.97 8.055Z" fill="#fff"></path></svg> */}
-                                    <span>{latprojnftdetail.amount}</span>
+                                    <span><small>{latprojnftdetail.amount}  / ${latprojnftdetail.amount * Math.round(matic['matic-network']?.cad)} Cdn </small></span>
                                     {/* <span><small>$120</small></span> */}
                                 </div>
 

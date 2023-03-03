@@ -87,9 +87,7 @@ const CreateOrganization = ({ formStep, nextFormStep, goBack }) => {
     }, [])
 
 
-    if (organization) {
-        history.push('/')
-    }
+
 
     return (
         <section className="author-area">

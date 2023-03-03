@@ -10,6 +10,7 @@ import ModalSearch from '../components/Modal/ModalSearch';
 import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
 import Fundraiser from '../components/TopSeller/topfundraiser';
+import Resell from '../components/Auctions/resellNft';
 
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
             <Header />
             <Hero />
             <Auctions key="latestProjects" type={"LatestProjects"} />
+            <Resell />
 
             <Fundraiser />
             <Collections />

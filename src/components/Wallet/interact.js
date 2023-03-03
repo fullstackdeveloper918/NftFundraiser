@@ -2,6 +2,7 @@
 import swal from 'sweetalert';
 import axios from 'axios';
 import { NftList } from '../../redux/Actions/projectAction';
+import { useState } from 'react';
 
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
@@ -288,7 +289,6 @@ export const sendFileToIPFS = async (fileImg) => {
 
 export const CreateMetaDataAndMint = async ({ dispatch, slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date }) => {
 
-
   const contract = await new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
   // new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A");//loadContract();
 
@@ -390,20 +390,61 @@ const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to,
   }
 };
 
+export const updateReffid = async ({ tokenId, refid, nft_id, }) => {
+  // debugger
+  const token = localStorage.getItem('authToken')
+  try {
+    const formData = new FormData();
 
-export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg }) => {
+    formData.append('token_id', tokenId);
+    formData.append('ref_id', refid);
+    formData.append('nft_id', nft_id);
+
+
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+    }
+    // 
+    const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/getUserPercentage`,
+      formData, config
+    )
+    // await dispatch(res())
+    // const reffee = localStorage.setItem('refamount', res?.data?.data?.referral_fees[0]?.fees)
+    if (res?.status === 200) {
+      await localStorage.setItem('refamount', res?.data?.data?.referral_fees[0]?.fees)
+    }
+
+    // if (res.status === 200) {
+    // setRefamount(res?.data?.data)
+    // }
+  } catch (error) {
+    // 
+    // console.log("error");
+  }
+};
+export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal }) => {
+  // debugger
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
   } else {
+
     try {
+      // if (refid == null) {
+      //   setReferalid("")
+
+      // }
 
       let wallets = []
       let fee = []
 
 
-      wallets = [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets]
-      fee = [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees]
+      wallets = refid === "null" ? [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets] : [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets, refid]
+      fee = refid === "null" ? [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees] : [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, localStorage.getItem('refamount')]
       console.log(fee)
       console.log(wallets)
 
@@ -419,16 +460,10 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
 
       const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
       // const nftContract = new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
-      const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
-      // const amountToSendPlatform = ((`${platformFee[0]?.fees}` / 100) * 0.03)
-      // const amountToSend = (({ fee } / 100) * 0.03)
-      // console.log('amou', amountToSend)
-      const amountToSendowner = ((`${ownerFee[0]}` / 100) * 0.03)
-      // const walletToSend = (({ wallets } / 100) * 0.03)
-      // console.log('walle', walletToSend)
-      // // const amountToSend = (amountToSendPlatform - amount, "either")
-      // const amountToSend = (0.0005)
-      // const amountToSend = ; // Convert to wei value
+      // const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
+
+      // const amountToSendowner = ((`${ownerFee[0]}` / 100) * 0.03)
+
       const memory_clients = wallets.map(wal => {
 
         return (`${wal}`)
@@ -482,14 +517,18 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
           // modalShow(false)
         })
         .on('error', function (error) {
-
+          // console.log(error.message, "error")
+          swal('error', JSON.stringify(error.message, 'error'))
+          // alert(JSON.stringify(error.message))
+          modal(false)
+          loadingg(false)
         })
         .then(function (receipt) {
           // will be fired once the receipt is mined
         })
     } catch (error) {
-      // 
-      alert(error)
+      console.log(JSON.stringify(error.message))
+      // alert(JSON.stringify(error.message))
 
     }
   }

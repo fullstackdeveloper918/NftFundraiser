@@ -428,7 +428,6 @@ export const UpdateCollection = (id, params) => async dispatch => {
     }
 }
 export const GetSettings = () => async dispatch => {
-    // 
     try {
         const config = {
             headers: {
@@ -440,6 +439,7 @@ export const GetSettings = () => async dispatch => {
         // 
         // console.log(res, 'sett rres')
         await dispatch(getSettings(res));
+
         // if (res.status === 200) {
         //     swal("success", res.data.message, 'success').then(function () {
         //         window.location = "/projectlist";
@@ -692,3 +692,29 @@ export const GetbuyedNftDetails = (slug) => async dispatch => {
         }
     }
 }
+
+export const ResellNft = (params, props) => async dispatch => {
+    // debugger
+    try {
+        const token = localStorage.getItem('authToken')
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+
+        }
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/create_resale_nft`,
+            params, config)
+        await dispatch(res())
+        if (res?.status === 200) {
+            await dispatch(GetbuyedNftDetails(props.slug?.slug))
+            props.onHide(false)
+        }
+    } catch (e) {
+        // console.log("error");
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+};

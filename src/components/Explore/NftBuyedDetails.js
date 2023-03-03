@@ -25,6 +25,7 @@ import EditNftName from '../Create/editNftNamepopup';
 import EditNftDesc from '../Create/editDescPopup';
 import EditNftImage from '../Create/nftImageeditPopup';
 import NftBuydataTable from './NftBuyData';
+import { GetMatic } from '../ItemDetails/GetMAtic';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -43,6 +44,7 @@ const BuyedNftDetails = (props) => {
     //     return state.projectdetails.getnftwoldetails
     // })
     const [modalShow, setModalShow] = React.useState(false);
+    const [matic, setMatic] = useState('')
     const [sellmodalShow, setSellModalShow] = React.useState(false);
     const [modalShowedit, setModalShowedit] = React.useState(false);
     const [modalShoweditdes, setModalShoweditdes] = React.useState(false);
@@ -61,9 +63,9 @@ const BuyedNftDetails = (props) => {
         return state?.projectdetails?.getBuyedNftdetails
 
     })
-
-    console.log('nftdetail', nftdetail)
+    // console.log("nftmint", nftdetail.is_mint)
     useEffect(() => {
+        (GetMatic(setMatic))
         dispatch(GetbuyedNftDetails(slug))
         // dispatch(GetSettings())
     }, [slug])
@@ -185,7 +187,19 @@ const BuyedNftDetails = (props) => {
                                         <span> #{nftdetail.token_id}</span>
                                     </ul>
                                 </div>
-                                {nftdetail.is_mint == 0 ? (
+                                {nftdetail.nft_type === "1" ? (
+                                    <div className='eddlbtton d-flex  align-items-center mt-3'>
+
+
+                                        <><span className="purchase_btn  mt-3 d-flex align-items-center justify-content-center py-1 mx-2"
+                                            disabled>Your NFT is now ready to purchase</span>
+
+                                        </>
+
+                                    </div>
+
+
+                                ) : (
 
                                     <div className='eddlbtton d-flex  align-items-center mt-3'>
 
@@ -193,19 +207,14 @@ const BuyedNftDetails = (props) => {
                                         <><button className="w-full btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                             onClick={() => setSellModalShow(true)}>  Sell</button>
                                             <SellPopup
+
                                                 show={sellmodalShow}
+                                                slug={slug}
 
-                                                onHide={() => setSellModalShow(false)} />
-                                        </>
-
-                                    </div>
-                                ) : (
-
-                                    <div className='eddlbtton d-flex  align-items-center mt-3'>
-
-
-                                        <><span className="purchase_btn  mt-3 d-flex align-items-center justify-content-center py-1 mx-2"
-                                            disabled>Ready to purchase</span>
+                                                onHide={() => setSellModalShow(false)}
+                                                nftid={nftdetail.id}
+                                                ismint={nftdetail.is_mint}
+                                            />
 
                                         </>
 
@@ -260,10 +269,12 @@ const BuyedNftDetails = (props) => {
                             </h5>
                             <div className='price_nft_detail'>
                                 <div className='nft-price'>
-                                    <img src='../../img/image14.png' />
+                                    {/* <img src='../../img/image14.png' /> */}
                                     {/* <svg viewBox="0 0 20 20" width="24px" height="24px" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="10" fill="#8247E5"></circle><path d="M12.97 8.055a.75.75 0 0 0-.732 0l-1.678.972-1.141.635-1.68.972a.751.751 0 0 1-.731 0l-1.335-.76a.727.727 0 0 1-.366-.614V7.76c0-.254.13-.486.366-.613l1.313-.74a.751.751 0 0 1 .732 0l1.313.74c.215.127.366.36.366.613v.973l1.141-.656v-.972a.684.684 0 0 0-.366-.614L7.74 5.095a.751.751 0 0 0-.732 0L4.532 6.49a.684.684 0 0 0-.365.614v2.811c0 .254.129.487.365.614l2.476 1.395a.75.75 0 0 0 .732 0l1.679-.951 1.14-.656 1.68-.951a.75.75 0 0 1 .731 0l1.313.74c.216.127.366.36.366.613v1.5c0 .255-.129.487-.366.614l-1.313.761a.751.751 0 0 1-.732 0l-1.313-.74a.727.727 0 0 1-.366-.613v-.973l-1.14.656v.972c0 .254.129.487.366.613l2.475 1.396a.751.751 0 0 0 .732 0l2.475-1.396a.727.727 0 0 0 .366-.613v-2.811a.684.684 0 0 0-.366-.614L12.97 8.055Z" fill="#fff"></path></svg> */}
                                     {/* <span>{latprojnftdetail.amount}</span> */}
-                                    <span><small>${nftdetail.amount}</small></span>
+                                    <img src='../../img/image14.png' />
+                                    <span><small>{nftdetail.amount} / ${nftdetail.amount * Math.round(matic['matic-network']?.cad)} Cdn</small> </span>
+                                    {/* <span><small>${nftdetail.amount}</small></span> */}
                                 </div>
 
                                 <div className='sales'>

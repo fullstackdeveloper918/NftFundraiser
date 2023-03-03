@@ -387,9 +387,8 @@ const UploadNft = ({ current, prev }) => {
         <div className="main-create ">
 
             {loading ? (
-                <><Loader /><div className="form-group m-0">
-                    <span>Processing...</span>
-                </div></>
+                <Loader />
+
             ) : (
                 <div className={current === 1 ? styles.showForm : styles.hideForm}>
                     <Form

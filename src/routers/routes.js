@@ -41,6 +41,10 @@ import NftReward from "../themes/rwrd";
 import Notifi from "../themes/allnot";
 import BuyedNft from "../themes/buyed-nft";
 import BuyNftDetail from "../themes/buyNft-details";
+import { createOrganizationafterRoleChange } from "../themes/rolechange-organization";
+import ResellDetail from "../themes/resell-details";
+import AllResellNft from "../themes/allresellNfts";
+import AllReraltrans from "../themes/all-refrals";
 
 
 const MyRouts = () => {
@@ -54,16 +58,19 @@ const MyRouts = () => {
           <Route exact path="/" component={ThemeOne} />
           <Route exact path="/explore-1" component={ExploreOne} />
           <Route exact path="/projectlist" component={ExploreTwo} />
+          <Route exact path="/create/organization" component={createOrganizationafterRoleChange} />
           <Route exact path="/allnotifications" component={Notifi} />
           <Route exact path="/updateproject/:id" component={ProjectUpdate} />
           {/* <Route exact path="/projectlist" component={ExploreThree} /> */}
           <Route exact path="/explore-4" component={ExploreFour} />
+          <Route exact path="/nft/resell/details/:slug" component={ResellDetail} />
           <Route exact path="/my/nfts" component={BuyedNft} />
           <Route exact path="/my/nfts-detail/:slug" component={BuyNftDetail} />
           <Route exact path="/rewards" component={NftReward} />
           <Route exact path="/auctions" component={Auctions} />
           <Route exact path="/popularcollection/details/:slug" component={ItemDetails} />
           <Route exact path="/projects/:slug" component={latprojDetails} />
+          <Route exact path="/referals-detail" component={AllReraltrans} />
           <Route exact path="/nftprojdetails/:slug" component={latnftprojDetails} />
           <Route exact path="/fundraiser/detail/:user_id" component={FundDetail} />
           <Route exact path="/myfundraiser/detail/:user_id" component={FundraiserProjects} />
@@ -79,6 +86,7 @@ const MyRouts = () => {
           <Route exact path="/profile" component={Author} />
           <Route exact path="/terms&conditions" component={TermsCond} />
           <Route exact path="/all/:type" component={All} />
+          <Route exact path="/all/resll/nfts" component={AllResellNft} />
           <Route exact path="/aboutus" component={Aboutus} />
           <Route exact path="/allcollections" component={ColExplore} />
           <Route exact path="/wallet-connect" component={WalletConnect} />

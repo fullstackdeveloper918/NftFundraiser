@@ -1,11 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { CreateCollectionAction, UpdateProject } from '../../redux/Actions/projectAction';
+import { CreateCollectionAction, ResellNft, UpdateProject } from '../../redux/Actions/projectAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import JoditEditor from 'jodit-react';
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useLocation, useParams } from 'react-router';
 import Web3 from 'web3';
 import React from 'react';
 import { CityList, StateList } from '../../redux/Actions/authAction';
@@ -35,11 +35,8 @@ function SellPopup(props) {
     const [auctiondata, setAuctiondata] = useState("")
     const [price, setPrice] = useState("")
     const [startdate, setStartdate] = useState("")
-    console.log(startdate, 'startdata')
-    console.log(price, 'price')
     const [enddate, setEnddate] = useState("")
-    console.log(enddate, 'enddate')
-    console.log(auctiontype, 'auctiontype')
+    const location = useLocation();
 
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
 
@@ -49,6 +46,7 @@ function SellPopup(props) {
     console.log('nftdetail', nftdetail)
 
     const mint = (contractAddress, type, start_date, end_date, price) => {
+
         // auctiondata.map((item) => {
         //     setPrice(item.price)
         // })
@@ -134,13 +132,24 @@ function SellPopup(props) {
     }
 
 
-
+    console.log('mint', props.ismint)
     const OnSubmit = async (data) => {
+
         setModalShow(true)
+        const formData = new FormData()
+        formData.append("nft_id", props.nftid)
+        formData.append("type", data.auctiontype)
+        formData.append("end_date", data.end_date)
+        formData.append("start_date", data.start_date)
+        formData.append("price", data.price)
+        {
+            props.ismint == 1 ? (
 
-        await deployContract({ type: data.auctiontype, end_date: data.end_date, start_date: data.start_date, price: data.price })
-
-        console.log(data, 'dtaaa')
+                dispatch(ResellNft(formData, props))
+            ) : (
+                await deployContract({ type: data.auctiontype, end_date: data.end_date, start_date: data.start_date, price: data.price })
+            )
+        }
 
     }
 
@@ -285,12 +294,21 @@ function SellPopup(props) {
                             )}
                         </>
                         <div className='w-full text-center'>
-                            <button type="submit" className=" mb-0 btn btn-bordered-white" style={{ color: '#FFF' }}
-                                id="nftdetail.id">Mint</button><NftPopup
-                                show={modalShow}
-                                current={current}
-                                onHide={() => setModalShow(false)}
-                            />
+                            {props.ismint == 1 ? (
+                                <button type="submit" className=" mb-0 btn btn-bordered-white" style={{ color: '#FFF' }}
+                                >Sell</button>
+                            ) : (
+                                <>
+
+                                    <button type="submit" className=" mb-0 btn btn-bordered-white" style={{ color: '#FFF' }}
+                                        id="nftdetail.id">Mint</button><NftPopup
+                                        show={modalShow}
+                                        current={current}
+                                        onHide={() => setModalShow(false)}
+                                    />
+                                </>
+
+                            )}
                         </div>
                     </div>
 
