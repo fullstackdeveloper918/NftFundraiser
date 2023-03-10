@@ -188,25 +188,27 @@ const Hero = ({ type }) => {
                                             {/* <div className="countdown-times ">
                                                         <div className="countdown d-flex justify-content-center" data-date={item.date} />
                                                     </div> */}
-                                            <a href="#">
-                                                <h5 className="mb-0">{mostactivityProjects[0]?.title?.slice(0, 16)}</h5>
-                                            </a>
+
+                                            {/* <a > */}
+                                            <h5 className="mb-0">{mostactivityProjects[0]?.title?.slice(0, 16)}</h5>
+                                            {/* </a> */}
+
 
                                             <div
                                                 className="seller d-flex align-items-center my-2"
-                                                >
+                                            >
 
-                              <a href="#">
-                                <h6 className="ml-2 mb-0">
-                                  {mostactivityProjects[0]?.user_data.username?.slice(0 ,12)}
-                                </h6>
-                              </a>
-
-                                                <a >
+                                                <a href="#">
                                                     <h6 className="ml-2 mb-0">
                                                         {mostactivityProjects[0]?.user_data.username?.slice(0, 12)}
                                                     </h6>
                                                 </a>
+
+                                                {/* <a > */}
+                                                <h6 className="ml-2 mb-0">
+                                                    {mostactivityProjects[0]?.user_data.username?.slice(0, 12)}
+                                                </h6>
+                                                {/* </a> */}
 
                                                 {/* <span className="ml-2 mb-0">{item.user_data.username}</span> */}
                                             </div>

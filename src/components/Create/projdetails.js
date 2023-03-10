@@ -314,7 +314,7 @@ const ProjNftDetails = () => {
                                                 {x.user_id == projdetail.user_id ? (
                                                     <>
                                                         {/* <Link to={`/nft/details/${x.slug}?project=${slug}`}> */}
-                                                        <Link to={`/nft/details/${x.slug}`}>
+                                                        <Link to={`/nft/details/${x.slug}?project=${slug}`}>
                                                             {x.extention === 'Player' || x.extention === 'modal' ? (
 
                                                                 <img className="card-img-top" src={x.preview_imag} alt="" />
@@ -325,14 +325,14 @@ const ProjNftDetails = () => {
 
                                                     </>
                                                 ) : (
-                                                    <>
+                                                    <Link to={`/nft/details/${x.slug}?project=${slug}`}>
                                                         {x.extention === 'Player' || x.extention === 'modal' ? (
 
                                                             <img className="card-img-top" src={x.preview_imag} alt="" />
                                                         ) : (
                                                             <img className="card-img-top" src={x.image} alt="" />
                                                         )}
-                                                    </>
+                                                    </Link>
                                                 )}
                                                 <div className='token'>
                                                     <span>#{x?.token_id}</span>

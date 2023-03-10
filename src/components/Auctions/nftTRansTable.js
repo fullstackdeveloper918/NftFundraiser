@@ -43,7 +43,7 @@ const NftTransdataTable = (props) => {
                         <thead>
 
 
-                            <tr>
+                            <tr >
 
                                 <th>NFT</th>
                                 <th>Project</th>
@@ -62,7 +62,7 @@ const NftTransdataTable = (props) => {
                         <tbody>
                             {latprojnftdetail?.nft_history?.map((items) => {
                                 return (
-                                    <tr>
+                                    <tr className='contract-address'>
 
                                         <td>#{items.nft_id}</td>
                                         <td>#{items.project_id}</td>

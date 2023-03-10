@@ -82,11 +82,11 @@ const ExploreAll = () => {
                             {/* <div className="countdown-times ">
                                                         <div className="countdown d-flex justify-content-center" data-date={item.date} />
                                                     </div> */}
-                            <a >
-                              <h5 className="mb-0">
-                                {item.title.slice(0, 15)}
-                              </h5>
-                            </a>
+                            {/* <a > */}
+                            <h5 className="mb-0">
+                              {item.title.slice(0, 15)}
+                            </h5>
+                            {/* </a> */}
                             <div
                               className="seller d-flex align-items-center my-3"
 
@@ -94,11 +94,11 @@ const ExploreAll = () => {
                               <span>Owned By</span>
                               {/* <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" /> */}
 
-                              <a >
-                                <h6 className="ml-2 mb-0">
-                                  {item.user_data.username.slice(0, 12)}
-                                </h6>
-                              </a>
+                              {/* <a > */}
+                              <h6 className="ml-2 mb-0">
+                                {item.user_data.username.slice(0, 12)}
+                              </h6>
+                              {/* </a> */}
 
                               {/* <span className="ml-2 mb-0">{item.user_data.username}</span> */}
                             </div>

@@ -107,7 +107,7 @@ const CollectionNFTS = () => {
     return (
         <section className="live-auctions-area single_project-detail">
             <div className="container p-0">
-                <div className='intro row m-0'>
+                <div className='intro row ml-0 mr-0 mt-3'>
                     <div className="intro-content">
                         <span style={{ marginLeft: "0px" }}>NFTs</span>
                         <h3 className="w-full mb-0">NFTs</h3>

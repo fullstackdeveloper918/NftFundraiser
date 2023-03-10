@@ -569,7 +569,7 @@ const Create = ({ current, next, prev }) => {
                             <div >
 
                                 <div className='logo-dis logo-dis-img'>
-                                    <span>Allowed types: JPG, PNG, GIF</span><span>Banner should be 500 px wide x 800 px high, 10MB max</span>
+                                    <span>Allowed types: JPG, PNG, GIF</span><span>Banner should be 800 px wide x 500 px high, 10MB max</span>
                                 </div>
                             </div>
                             {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}

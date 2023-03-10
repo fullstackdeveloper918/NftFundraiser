@@ -172,6 +172,8 @@ const Header = () => {
                         <img className="mobile-logo" src="/img/logo.png" alt="" />
                     </Link>
                     <div className="ml-auto" />
+
+
                     {/* Navbar */}
                     <ul className="navbar-nav items mx-auto">
                         <li className="nav-item">
@@ -187,6 +189,7 @@ const Header = () => {
                         <li className="nav-item">
                             <a target="_blank" href="https://changelly.com/?from=btc&to=matic&amount=0.1&ref_id=_-GPCBjccW7TMMjO" className="nav-link">Swap</a>
                         </li>
+
                     </ul>
                     {/* Navbar Toggler */}
                     {window.ethereum?.selectedAddress &&
@@ -196,6 +199,7 @@ const Header = () => {
 
                                 <small className='dropdown-notification'>{userdet?.notification_count}</small>
                             }
+
                             <ul className="creator-dropdown dropdown-menu notification-menu dropdown-scrollbar" aria-labelledby="dropdownMenuButton1">
 
                                 {userdet?.notification?.map((item) => {
@@ -251,7 +255,7 @@ const Header = () => {
                                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i className="fa fa-solid fa-user"></i>
                                 </button>
-                                <ul className="creator-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ left: '-37%' }}>
+                                <ul className="creator-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     {/* <li>{userdet?.username}</li> */}
                                     <div className="background">
                                         <div className="SwitchContainer">
@@ -296,7 +300,7 @@ const Header = () => {
                                     {userRole == 2 && (
                                         <li><button type='button' class="dropdown-item"><Link to='/my/nfts'><i class="fa-regular fa-file-image" style={{ color: 'white', display: "table-cell" }} /> My NFTs</Link></button></li>
                                     )}
-                                    <li><button type='button' class="dropdown-item"><Link to='/referals-detail'> My Referrals</Link></button></li>
+                                    <li><button type='button' class="dropdown-item"><Link to='/referals-detail'><i class="fa-solid fa-coins" style={{ color: 'white', display: "table-cell" }}></i> My Referrals</Link></button></li>
                                     {userRole == 3 && (
                                         <><li><button type='button' class="dropdown-item"><Link to='/projectlist'><i class="fa-regular fa-file" style={{ color: 'white', display: "table-cell" }}></i> My Projects</Link></button></li>
 
@@ -329,6 +333,7 @@ const Header = () => {
                 </div>
             </nav >
         </header >
+
     )
 }
 export default Header;

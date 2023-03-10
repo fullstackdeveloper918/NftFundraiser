@@ -35,7 +35,6 @@ const getBase64 = (file) =>
 // import ImgCrop from 'antd-img-crop';
 
 const EditNftImage = (props) => {
-
     const editor = useRef(null);
 
     const [nftFileType, setNFtFileType] = useState('Image')
@@ -187,7 +186,6 @@ const EditNftImage = (props) => {
     }, [form, nftdetail])
 
     const onFinish = async (values) => {
-        // debugger
 
         try {
 
@@ -245,7 +243,7 @@ const EditNftImage = (props) => {
 
         } catch (error) {
             console.log(error)
-            // setLoading(false)
+            setLoading(false)
         }
 
     };
@@ -331,7 +329,7 @@ const EditNftImage = (props) => {
                                                                                 <div>
 
                                                                                     {source ?
-                                                                                        nftHeight >= 500 && nftwidth >= 500 && size <= "1000000" ?
+                                                                                        nftHeight >= 500 && nftwidth >= 500 ?
                                                                                             (
                                                                                                 <img
                                                                                                     src={source}

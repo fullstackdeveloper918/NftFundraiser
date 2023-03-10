@@ -322,8 +322,9 @@ footer a.navbar-brand img {
 }
 ul.creator-dropdown.dropdown-menu li {
     font-size: 15px !important;
-    font-weight: 600 !important;
+    font-weight: 700!important;
     line-height: 22px;
+    padding: 10px 0px 0px;
 }
 .dropdown-item {
     padding: 0;
@@ -335,21 +336,21 @@ color:#fff !important;
     content: "";
     height: 15px;
     width: 15px;
-    background-color: #252329 !important;
+    background-color: #1e1e1e !important;
     position: absolute;
     top: -8px;
-    left: 76px;
+    left: 38px;
     transform: rotate(45deg);
 }
 header .navbar-expand .dropdown_login:hover > .dropdown-menu {
     box-shadow: 0px 0px 7px #302f2f87 !important;
-    padding: 10px;
+    padding: 30px 20px 20px;
     margin-top: 0px !important;
     visibility: unset;
     opacity: 1;
     color: #fff;
     text-align: left;
-    background-color: #252329 !important;
+    background-color: #1e1e1e !important;
 }
 .dropdown{
     padding: 13px 5px !important;
@@ -2366,7 +2367,7 @@ ul.creator-dropdown.notification-menu:after {
     
 }
 
-@media (max-width: 1245px){
+/* @media (max-width: 1245px){
     ul.creator-dropdown.dropdown-menu {
         left: -74px !important;
     }
@@ -2374,7 +2375,19 @@ ul.creator-dropdown.notification-menu:after {
         content: "";
         left: 106px;
     }
+} */
+@media (max-width: 1550px){
+    :root ul.creator-dropdown.dropdown-menu {
+        left: unset !important;
+        right: 0px;
+    }
+    :root header .navbar-expand .dropdown_login:hover > .dropdown-menu:after {
+        content: "";
+        left: unset !important;
+        right: 46px;
+    }
 }
+
 
 @media (max-width: 1200px){
     .hero-section h1{
@@ -2858,27 +2871,28 @@ h6{
     transition: all 0.2s ease-in-out;
     content: '';
 }
-
 .SwitchContainer {
     display: flex;
-    background-color: #707070;
+    background-color: #2a2a2a;
     align-items: center;
     border-radius: 35px;
     width: max-content;
     height: max-content;
-  }
+}
   
   .ToggleItem {
     height: 40px;
-    width: 80px;
+    width: 100px;
     display: flex;
     border-radius: 35px;
     align-items: center;
     justify-content: center;
     padding: 8px 12px;
     cursor: pointer;
-  }
-  
+}
+.ToggleItem:hover {
+    background: rgb(60 31 215) !important;
+}
   .Text {
     color: white;
     font-size: 14px;
@@ -2898,4 +2912,7 @@ h6{
     max-width: 20px;
     object-fit: cover;
     width: 100%;
+}
+.dropdown-item a i {
+    padding: 0px 5px 0px 0px;
 }
