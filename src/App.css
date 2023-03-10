@@ -2540,6 +2540,12 @@ ul.creator-dropdown.notification-menu:after {
         }
     }
     @media (max-width: 440px){
+        .notification {
+            margin: 0 0px;
+        }
+        .dropdown.dropdown_login .btn {
+            padding: 16px 20px;
+        }
         .uploadnftpopup-input {
             height: 157px;
         }
@@ -2691,8 +2697,10 @@ ul.creator-dropdown.notification-menu:after {
   
   .navbar__link--active {
     border-bottom: 3px solid #4528DC !important;
-    transition: border-bottom .5s ease-in-out;
-  }
+    /* transition: border-bottom .5s ease-in-out; */
+    width: min-content !important;
+    border-radius: unset !important;
+}
 /* .nav-link-active:hover {
     transform: translateY(-2px);
   } */
