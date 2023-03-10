@@ -174,11 +174,11 @@ const Header = () => {
                     <div className="ml-auto" />
                     {/* Navbar */}
                     <ul className="navbar-nav items mx-auto">
-                        <li className="nav-item dropdown">
+                        <li className="nav-item">
                             <NavLink exact activeClassName="navbar__link--active" className="nav-link" to="/">Explore</NavLink>
                         </li>
                         {/* {log !== null && ( */}
-                        <li className="nav-item" >
+                        <li className="nav-item text-left nav-main" >
                             <a onClick={() => handleCreate()} className={location.pathname === `/create` && "nav-link-active"} activeClassName={location.pathname === `/create` && "navbar__link--active"} >Create</a>
                         </li>
                         <li className="nav-item">

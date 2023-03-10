@@ -81,7 +81,8 @@ const AuctionsOne = ({ type }) => {
                           </a>
                         </div>
                         <div className="card-bottom d-flex justify-content-between nft-price" >
-                          <span><img className="mr-1" src='../img/image14.png' />{Math.round(item.price)} MATIC</span>
+                       
+                          <span><img className="mr-1"src='../img/image14.png' />{Math.round(item.price)} MATIC</span>
                           {item?.number_of_nft == 1 ? (
                             <span>{item.number_of_nft} NFT</span>
                           ) : (
@@ -89,16 +90,20 @@ const AuctionsOne = ({ type }) => {
                           )}
                         </div>
                         <div className="d-flex justify-content-between edit-buttons nft-price ">
-                          <Link to={`/projects/${item.slug}`} style={{ color: "white" }} className="btn  btn-smaller mt-3 mb-0">
-
-
-                            <i className="icon-handbag" />
-                          </Link>
-                          <Link to={`/projects/${item.slug}`} className="btn  btn-smaller mt-3 ml-2 mb-0" style={{ color: "white" }}>
-
-
-                            <i class="fa-solid fa-share-nodes text-white"></i>
-                          </Link>
+                          <a
+                            className="btn  btn-smaller mt-3 mb-0"
+                            href="/login"
+                          ><i className="icon-handbag" />
+                          {/* <i className="fa-solid fa-sack-dssollar"></i> */}
+                           
+                          </a>
+                          <a
+                            className="btn  btn-smaller mt-3 ml-2 mb-0"
+                            href="/login"
+                          ><i class="fa-solid fa-share-nodes text-white"></i>
+                          
+                          
+                          </a>
                         </div>
                       </div>
                     </div>

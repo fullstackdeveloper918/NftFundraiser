@@ -160,6 +160,24 @@ const Hero = ({ type }) => {
 
                                 <div className="card-body pt-0">
 
+                                    {/* <a href="#">
+                                        <h5 className="mb-0">{mostactivityProjects[0]?.title?.slice(0, 16)}</h5>
+                                    </a> */}
+                                    {/* <a className="seller d-flex align-items-center mb-2" href="#">
+                                        <img className="avatar-sm rounded-circle" src={mostactivityProjects[0]?.user_data?.avatar} alt="" />
+                                        <span className="ml-2 mb-0">{mostactivityProjects[0]?.user_data?.username}</span>
+                                    </a>
+                                    <div className="card-bottom d-flex justify-content-between">
+                                        <span>{Math.round(mostactivityProjects[0]?.price)} MATIC</span>
+                                        {mostactivityProjects[0]?.number_of_nft == 1 ? (
+
+                                            <span>{mostactivityProjects[0]?.number_of_nft} NFT</span>
+                                        ) : (
+                                            <span>{mostactivityProjects[0]?.number_of_nft} NFTs</span>
+                                        )
+
+                                        }
+                                    </div> */}
 
                                     {/* ) */}
                                     {/* })} */}
@@ -170,16 +188,19 @@ const Hero = ({ type }) => {
                                             {/* <div className="countdown-times ">
                                                         <div className="countdown d-flex justify-content-center" data-date={item.date} />
                                                     </div> */}
-                                            <a >
+                                            <a href="#">
                                                 <h5 className="mb-0">{mostactivityProjects[0]?.title?.slice(0, 16)}</h5>
                                             </a>
 
                                             <div
                                                 className="seller d-flex align-items-center my-2"
+                                                >
 
-                                            >
-                                                <span>Owned By</span>
-                                                {/* <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" /> */}
+                              <a href="#">
+                                <h6 className="ml-2 mb-0">
+                                  {mostactivityProjects[0]?.user_data.username?.slice(0 ,12)}
+                                </h6>
+                              </a>
 
                                                 <a >
                                                     <h6 className="ml-2 mb-0">
