@@ -70,54 +70,54 @@ const GetAllProjects = () => {
                                 [...new Map(projects.map(item =>
                                     [item["title"], item])).values()].map((item, idx) => {
                                         return (
-                                            <Link key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
-                                                <div>
-                                                    {/* <button onClick={() => showDeleteHandler()}>delete</button> */}
-                                                    <div className="card project_cards">
-                                                        <div className="image-over relative ">
-                                                            {item.is_nft_mintted !== 1 &&
+                                            // <Link key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
+                                            <div className="col-12 col-sm-6 col-lg-3 item explore-item">
+                                                {/* <button onClick={() => showDeleteHandler()}>delete</button> */}
+                                                <div className="card project_cards">
+                                                    <div className="image-over relative ">
+                                                        {item.is_nft_mintted !== 1 &&
 
-                                                                <i class="fa-sharp fa-solid fa-trash" onClick={() => showDeleteHandler(item.id)}></i>
-                                                            }
-                                                            <Link to={`/projnftdetails/${item.slug}`}>
-                                                                {/* <i class="fa-solid fa-pen" ></i> */}
-                                                                <img className="card-img-top" src={item?.image} alt={item.nft_data.description} />
-                                                            </Link>
-                                                        </div>
-                                                        <div className='token'>
-                                                            <span></span>
-                                                        </div>
-                                                        {/* Card Caption */}
-                                                        <div className="card-caption col-12 p-0">
-                                                            {/* Card Body */}
-                                                            <div className="card-body">
-                                                                <a>
-                                                                    <h5 className="mb-0 pb-0 break-all">{item.title.slice(0, 16)}</h5>
-                                                                </a>
-                                                                <div className="seller d-flex align-items-center my-2">
-                                                                    <span>Owned By</span>
+                                                            <i class="fa-sharp fa-solid fa-trash" onClick={() => showDeleteHandler(item.id)}></i>
+                                                        }
+                                                        <Link to={`/projnftdetails/${item.slug}`}>
+                                                            {/* <i class="fa-solid fa-pen" ></i> */}
+                                                            <img className="card-img-top" src={item?.image} alt={item.nft_data.description} />
+                                                        </Link>
+                                                    </div>
+                                                    <div className='token'>
+                                                        <span></span>
+                                                    </div>
+                                                    {/* Card Caption */}
+                                                    <div className="card-caption col-12 p-0">
+                                                        {/* Card Body */}
+                                                        <div className="card-body">
+                                                            {/* <a> */}
+                                                            <h5 className="mb-0 pb-0 break-all">{item.title.slice(0, 16)}</h5>
+                                                            {/* </a> */}
+                                                            <div className="seller d-flex align-items-center my-2">
+                                                                <span>Owned By</span>
 
-                                                                    <h6 className="ml-2 mb-0">You</h6>
+                                                                <h6 className="ml-2 mb-0">You</h6>
 
-                                                                </div>
-                                                                <div className="card-bottom d-flex justify-content-between">
-                                                                    <span>{item.price} MATIC</span>
-                                                                    {item?.number_of_nft == 1 ? (
-
-                                                                        <span>{item?.number_of_nft} NFT </span>
-                                                                    ) : (
-                                                                        // <><span>{item.nft_data.length} NFTs </span>
-                                                                        <span> +{item.number_of_nft} NFTs </span>
-                                                                    )}
-                                                                </div>
-
-                                                                {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
-                                                                {/* <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a> */}
                                                             </div>
+                                                            <div className="card-bottom d-flex justify-content-between">
+                                                                <span>{item.price} MATIC</span>
+                                                                {item?.number_of_nft == 1 ? (
+
+                                                                    <span>{item?.number_of_nft} NFT </span>
+                                                                ) : (
+                                                                    // <><span>{item.nft_data.length} NFTs </span>
+                                                                    <span> +{item.number_of_nft} NFTs </span>
+                                                                )}
+                                                            </div>
+
+                                                            {/* <a className="btn btn-bordered-white btn-smaller mt-3"> <Link to={`/updateproject/${item.id}`}>Edit</Link></a> */}
+                                                            {/* <a className="btn btn-bordered-white btn-smaller mt-3" onClick={() => deleteHandler(item.id)}>Delete</a> */}
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </Link>
+                                            </div>
+                                            // </Link>
                                         )
                                     }) :
                                 <div className="col-12 col-sm-12 col-lg-12">

@@ -391,7 +391,6 @@ const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to,
 };
 
 export const updateReffid = async ({ tokenId, refid, nft_id, }) => {
-  // debugger
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -427,7 +426,6 @@ export const updateReffid = async ({ tokenId, refid, nft_id, }) => {
   }
 };
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal }) => {
-  // debugger
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 

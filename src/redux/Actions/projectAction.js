@@ -131,9 +131,11 @@ export const ProjectList = () => async dispatch => {
     }
 }
 
-export const NftList = (slug) => async dispatch => {
+export const NftList = (slug, setLoading) => async dispatch => {
     const token = localStorage.getItem('authToken')
+    setLoading(true)
     try {
+
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -145,11 +147,14 @@ export const NftList = (slug) => async dispatch => {
 
         // console.log(res, 'proj')
         await dispatch(getNftList(res));
+        setLoading(false)
+
 
 
     } catch (e) {
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
+            setLoading(false)
         }
     }
 }
@@ -525,7 +530,6 @@ export const UpdateBanner = (formData, params) => async dispatch => {
     }
 }
 export const UpdateNft = (formData, props, setLoading) => async dispatch => {
-    // debugger
 
     const token = localStorage.getItem('authToken')
     try {
@@ -547,6 +551,7 @@ export const UpdateNft = (formData, props, setLoading) => async dispatch => {
             setLoading(false)
             dispatch(NftList(props.nft_id?.id))
             dispatch(ProjectDetail(props.id))
+            props.onHide(false)
             // .then(function () {
             //     window.location = `/nft/details/${props.nft_id?.id}?project=${props.id}`;
 
@@ -646,6 +651,7 @@ export const UpdateBId = ({ id, status }) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/change_bids_status/${id}}`,
             { status: status }, config)
         await dispatch(res)
+
         console.log('res bid', res)
     } catch (error) {
         // console.log("error");

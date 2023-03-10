@@ -213,11 +213,7 @@ const LatprojNftDetails = (props) => {
 
                                 </div>
 
-                                <div>
-                                    <span className='boldertext w-100'>Affiliate secondary royalties : </span>
-                                    <span> 5%</span>
 
-                                </div>
 
                                 <div className='eddlbtton d-flex gap- align-items-center mt-2 justify-content-between'>
 
@@ -313,12 +309,12 @@ const LatprojNftDetails = (props) => {
                                     {/* <span><small>$120</small></span> */}
                                 </div>
 
-                                <div className='sales'>
+                                {/* <div className='sales'>
                                     <span>
                                         Creator royalties on secondary sales:
                                     </span>
                                     <span>5%</span>
-                                </div>
+                                </div> */}
 
                             </div>
                         </div>

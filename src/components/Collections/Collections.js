@@ -44,21 +44,21 @@ const Collections = () => {
                                             <img className="card-img-top" src={item?.image} alt="" />
                                         </Link>
                                         {/* Seller */}
-                                        <a className="seller" >
+                                        <div className="seller" >
                                             <div className="seller-thumb avatar-lg">
 
                                                 <img className='rounded-circle' src={item?.user_data?.avatar} alt='logo' width={50} height={50} />
 
                                             </div>
-                                        </a>
+                                        </div>
                                     </div>
                                     {/* Card Caption */}
                                     <div className="card-caption col-12 p-0">
                                         {/* Card Body */}
                                         <div className="card-body mt-4">
-                                            <a>
-                                                <h5 className="">{item.title.slice(0, 12)} </h5>
-                                            </a>
+                                            {/* <a> */}
+                                            <h5 className="">{item.title.slice(0, 12)} </h5>
+                                            {/* </a> */}
                                             <div class="align-items-center">
                                                 <div class="d-flex justify-content-center text-align-center gap-5">
                                                     {/* <h5 className="mb-0 ">{item.title.slice(0, 12)} </h5> */}

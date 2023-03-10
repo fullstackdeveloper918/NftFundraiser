@@ -258,105 +258,105 @@ const EditNftDesc = (props) => {
     return (
 
         <div className="main-create" >
-            {loading ? (
+            {/* {loading ? (
                 <Loader />
-            ) : (
+            ) : ( */}
 
-                <Modal className="edit_nft_popup"
-                    {...props}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                // centered
-                >
-                    <Modal.Header >
-                        <Modal.Title id="contained-modal-title-vcenter ">
-                            Update NFT
-                        </Modal.Title>
-                        <div>
-                            <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
-                        </div>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className='col-12'>
-                            <Form form={form} name="dynamic_form_nest_item" initialValues={{
-                                nfts: nfts, defaultValues
-                            }}
+            <Modal className="edit_nft_popup"
+                {...props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+            // centered
+            >
+                <Modal.Header >
+                    <Modal.Title id="contained-modal-title-vcenter ">
+                        Update NFT
+                    </Modal.Title>
+                    <div>
+                        <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
+                    </div>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className='col-12'>
+                        <Form form={form} name="dynamic_form_nest_item" initialValues={{
+                            nfts: nfts, defaultValues
+                        }}
 
-                                onFinish={(event) => onFinish(event)}
-                                autoComplete="off" className="item-form card no-hover">
-                                <Form.List name="nfts">
+                            onFinish={(event) => onFinish(event)}
+                            autoComplete="off" className="item-form card no-hover">
+                            <Form.List name="nfts">
 
-                                    {(fields, { add, remove }) => (
+                                {(fields, { add, remove }) => (
+                                    <>
+
                                         <>
+                                            {fields.map(({ key, name, ...restField }, index) => (
 
-                                            <>
-                                                {fields.map(({ key, name, ...restField }, index) => (
+                                                <Fragment>
 
-                                                    <Fragment>
+                                                    <div className="row relative">
 
-                                                        <div className="row relative">
+                                                        <div className="col-12">
+                                                            <label>Name</label>
 
-                                                            <div className="col-12">
-                                                                <label>Name</label>
+                                                            <label>Description</label>
+                                                            <div>
 
-                                                                <label>Description</label>
-                                                                <div>
+                                                                <Form.Item
+                                                                    {...restField}
+                                                                    name={[name, "nft_description"]}
 
-                                                                    <Form.Item
-                                                                        {...restField}
-                                                                        name={[name, "nft_description"]}
-
-                                                                        rules={[
-                                                                            {
-                                                                                required: true,
-                                                                                message: 'Missing  description',
-                                                                            },
-                                                                        ]}
-                                                                    >
-                                                                        <JoditEditor
-                                                                            ref={editor}
-                                                                            value={'nft_description'}
+                                                                    rules={[
+                                                                        {
+                                                                            required: true,
+                                                                            message: 'Missing  description',
+                                                                        },
+                                                                    ]}
+                                                                >
+                                                                    <JoditEditor
+                                                                        ref={editor}
+                                                                        value={'nft_description'}
 
 
-                                                                            placeholder="start typing"
-                                                                            tabIndex={1} // tabIndex of textarea
+                                                                        placeholder="start typing"
+                                                                        tabIndex={1} // tabIndex of textarea
 
-                                                                            onChange={newContent => { }}
-                                                                        />
-                                                                        {/* }} */}
-                                                                        {/* /> */}
-                                                                    </Form.Item>
-                                                                </div>
+                                                                        onChange={newContent => { }}
+                                                                    />
+                                                                    {/* }} */}
+                                                                    {/* /> */}
+                                                                </Form.Item>
                                                             </div>
-
-
-
-
-
-
-
-
                                                         </div>
-                                                    </Fragment>
-
-                                                ))}
 
 
-                                            </></>
-                                    )}
 
-                                </Form.List>
-                                <Form.Item>
-                                    <div className="col-12">
-                                        <button className="btn w-100 mb-3" type="submit">Update </button>
-                                    </div>
 
-                                </Form.Item>
-                            </Form>
-                        </div>
-                    </Modal.Body>
-                </Modal>
-            )}
+
+
+
+
+                                                    </div>
+                                                </Fragment>
+
+                                            ))}
+
+
+                                        </></>
+                                )}
+
+                            </Form.List>
+                            <Form.Item>
+                                <div className="col-12">
+                                    <button className="btn w-100 mb-3" type="submit">Update </button>
+                                </div>
+
+                            </Form.Item>
+                        </Form>
+                    </div>
+                </Modal.Body>
+            </Modal>
+            {/* )} */}
         </div >
     );
 };

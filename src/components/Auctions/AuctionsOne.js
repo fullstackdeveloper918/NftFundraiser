@@ -67,18 +67,18 @@ const AuctionsOne = ({ type }) => {
                     <div className="card-caption col-12 p-0">
                       <div className="card-body">
 
-                        <a>
-                          <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
-                        </a>
+                        {/* <a> */}
+                        <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
+                        {/* </a> */}
                         <div
                           className="seller d-flex align-items-center my-3"
                         >
                           <span>Owned By</span>
-                          <a>
-                            <h6 className="ml-2 mb-0">
-                              {item.user_data.username.slice(0, 12)}
-                            </h6>
-                          </a>
+                          {/* <a> */}
+                          <h6 className="ml-2 mb-0">
+                            {item.user_data.username.slice(0, 12)}
+                          </h6>
+                          {/* </a> */}
                         </div>
                         <div className="card-bottom d-flex justify-content-between nft-price" >
                           <span><img className="mr-1" src='../img/image14.png' />{Math.round(item.price)} MATIC</span>
