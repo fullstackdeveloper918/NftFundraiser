@@ -1,6 +1,6 @@
 
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Tooltip } from 'antd';
 import React, { Fragment, useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +19,7 @@ import Loader from '../Loader/loader';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router';
 import DModal from './3dModal';
+import ProTypePopup from './ProjectTypePopup';
 
 
 const UploadNft = ({ current, prev }) => {
@@ -27,9 +28,11 @@ const UploadNft = ({ current, prev }) => {
     const { data, setFormValues } = useFormData();
 
     const [count, setCount] = useState(1);
+    console.log("count", count)
     const [nft_description, setNft_description] = useState([])
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
+    const [projmodalShow, setProjModalShow] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: '1' });
     const [nftFileType, setNFtFileType] = useState()
     const [nft, setNft] = useState()
@@ -37,6 +40,12 @@ const UploadNft = ({ current, prev }) => {
     const [nftHeight, setNftheight] = useState()
     const [size, setSize] = useState()
     const [Pimage, setPimage] = useState()
+    const [startDate, setStartDate] = useState("")
+    console.log("startdate", startDate)
+    const [endDate, setEndDate] = useState("")
+    console.log("enddate", endDate)
+    const [numberofNfts, setNumberofNfts] = useState("")
+    console.log("noof nfts", numberofNfts)
 
     const coll_id = (Object.values(nft_collection_id));
     const [source, setSource] = useState([])
@@ -47,12 +56,19 @@ const UploadNft = ({ current, prev }) => {
     const [modal, setModal] = useState()
     const [NFtFileExtension, setNFtExtension] = useState()
     const [preview, setPreview] = useState([])
+    console.log('previwimg', preview[0])
+    const [projtype, setProjType] = useState("1")
 
     console.log(nft_collection_id, "nft collections")
+    const [nftName, setNftName] = useState([])
+    console.log("nftName", nftName)
 
 
     const handleIncrement = () => {
+        // if (startDate && endDate && numberofNfts) {
+
         setCount(prevCount => prevCount + 1);
+        // }
     };
 
 
@@ -267,20 +283,22 @@ const UploadNft = ({ current, prev }) => {
                     formData.append('city', data.city)
                 }
                 formData.append('latitude', lat)
-                formData.append('preview_imag', Pimage)
                 formData.append('logitude', log)
                 formData.append('price', data.price)
-                formData.append('number_of_nft', data.number_of_nft)
+
                 formData.append('image', data.image)
-                if (data.type == 1) {
+                if (projtype == 1) {
+                    formData.append('preview_imag', "")
+                    formData.append('number_of_nft', "1")
                     formData.append('start_date', '')
                     formData.append('end_date', '')
                 } else {
-
-                    formData.append('start_date', data.start_date)
-                    formData.append('end_date', data.end_date)
+                    formData.append('preview_imag', Pimage)
+                    formData.append('number_of_nft', numberofNfts)
+                    formData.append('start_date', startDate)
+                    formData.append('end_date', endDate)
                 }
-                formData.append('type', data.type)
+                formData.append('type', projtype)
                 formData.append('category_id', data.category_id)
 
 
@@ -381,7 +399,19 @@ const UploadNft = ({ current, prev }) => {
         },
 
     ];
+    const nftNameHandler = (event, index) => {
+        // debugger
+        setNftName(prevState => {
+            return {
+                ...prevState,
+                [index]: event?.target?.value
+            }
+        })
+    }
 
+
+    const headerDetail = Object?.values(nftName)
+    console.log("headerdata", headerDetail)
     return (
         // <section className="author-area">
         <div className="main-create ">
@@ -400,6 +430,7 @@ const UploadNft = ({ current, prev }) => {
                         // onSubmit={(event) => handleSubmit(event)}
                         onFinish={(event) => onFinish(event)}
                         onSubmit={OnSubmit}
+                        onChange={nftNameHandler}
                         autoComplete="off"
                         className="item-form card no-hover"
                     >
@@ -452,12 +483,12 @@ const UploadNft = ({ current, prev }) => {
                                             //     }}
                                             //     align="baseline"
                                             // >
-                                            <Collapse
-                                                defaultActiveKey={["1"]}
+                                            <Collapse accordion
+                                                defaultActiveKey={[count]}
                                                 onChange={onChange}
                                                 expandIconPosition={expandIconPosition}
                                             >
-                                                <Panel header="Details" key="1" className="p-0">
+                                                <Panel key={count} header={[nftName[index] ? nftName[index].slice(0, 10) : "Detail", source[index]?.type === "Image" ? <div> <img src={URL.createObjectURL(source[index].file)} /></div> : <div> <img src={preview?.[index] && window.URL.createObjectURL(preview[index])} /></div>]} className="p-0">
                                                     <Fragment>
                                                         {/* <div>Artwork {index}</div> */}
                                                         <div className="row relative">
@@ -477,7 +508,7 @@ const UploadNft = ({ current, prev }) => {
                                                                         ]}
                                                                     >
                                                                         {/* <label>Name</label> */}
-                                                                        <Input placeholder="Name" />
+                                                                        <Input placeholder="Name" onChange={e => nftNameHandler(e, index)} />
                                                                     </Form.Item>
                                                                 </div>
                                                                 <label>Description</label>
@@ -527,10 +558,9 @@ const UploadNft = ({ current, prev }) => {
 
                                                                             placeholder="start typing"
                                                                             tabIndex={1} // tabIndex of textarea
-                                                                            onBlur={(newContent) =>
-                                                                                setNft_description(newContent)
-                                                                            } // preferred to use only this option to update the content for performance reasons
-                                                                            onChange={(newContent) => { }}
+                                                                            onBlur={(newContent, e) => setNft_description(newContent)}
+                                                                            // preferred to use only this option to update the content for performance reasons
+                                                                            onChange={(e) => { }}
                                                                         />
                                                                         {/* }} */}
                                                                         {/* /> */}
@@ -884,22 +914,50 @@ const UploadNft = ({ current, prev }) => {
                                         ))}
 
                                         {/* {!((data?.number_of_nft === count)) ? */}
-                                        <Form.Item>
-                                            <Button
-                                                type="dashed"
-                                                onClick={(e) => {
-                                                    add(e);
-                                                    handleIncrement(e);
+                                        {sourceType &&
+
+                                            <Form.Item>
+                                                <Tooltip title={count == 1 ? "Switch to Campaign for multiple NFTs" : 'Add more NFTs'} color='#4528dc'>
+                                                    <Button
+                                                        type="dashed"
+                                                        onClick={(e) => {
+                                                            {
+                                                                count == 1 &&
+                                                                    setProjModalShow(true)
+                                                            }
+
+                                                            // {
+                                                            //     count == 2 &&
 
 
-                                                }}
-                                                block
-                                                icon={<PlusOutlined />}
-                                                disabled={data?.number_of_nft == count}
-                                            >
-                                                Add NFT
-                                            </Button>
-                                        </Form.Item>
+                                                            // }
+                                                            {
+                                                                numberofNfts && startDate && endDate &&
+                                                                    add(e)
+                                                                setProjType("2")
+                                                                handleIncrement(e);
+                                                                // setPannelKey(pannelKey + 1)
+
+                                                            };
+                                                            // {startDate && endDate && numberofNfts && 
+
+
+                                                            // }
+
+                                                        }}
+                                                        block
+
+                                                        icon={<PlusOutlined />}
+                                                    // disabled={data?.number_of_nft == count}
+                                                    >
+                                                        Add NFT
+                                                    </Button>
+                                                </Tooltip>
+
+                                            </Form.Item>
+
+
+                                        }
                                         {/* : null} */}
                                     </>
                                 </>
@@ -913,13 +971,23 @@ const UploadNft = ({ current, prev }) => {
                             </div>
                         </Form.Item>
                     </Form>
+                    <ProTypePopup
+                        show={projmodalShow}
+                        onHide={() => setProjModalShow(false)}
+                        enddate={setEndDate}
+                        startdate={setStartDate}
+                        nftno={setNumberofNfts}
+
+                    />
                     <MyVerticallyCenteredModal
                         show={modalShow}
                         onHide={() => setModalShow(false)}
                     />
+
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
     )
 }
 export default UploadNft

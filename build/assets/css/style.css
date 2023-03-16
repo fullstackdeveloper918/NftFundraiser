@@ -1486,7 +1486,7 @@ header .navbar-expand .dropdown .dropdown-item.active, header .navbar-expand .dr
   margin-top: 0;
 }
 
-.menu .nav-link:not(.btn) {
+.menu .nav-link:not(.btn) , .nav-main a {
   font-size: 1rem;
   font-weight: 400;
   border: 1px solid var(--primary-l-color);
@@ -1503,7 +1503,7 @@ header .navbar-expand .dropdown .dropdown-item.active, header .navbar-expand .dr
   color: var(--primary-color);
 }
 
-.menu .nav-link:first-child {
+.menu .nav-link:first-child , .nav-main a {
   padding-left: 0;
   padding-right: 0;
   display: -webkit-box;

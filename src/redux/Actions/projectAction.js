@@ -530,7 +530,7 @@ export const UpdateBanner = (formData, params) => async dispatch => {
     }
 }
 export const UpdateNft = (formData, props, setLoading) => async dispatch => {
-
+    debugger
     const token = localStorage.getItem('authToken')
     try {
         const config = {

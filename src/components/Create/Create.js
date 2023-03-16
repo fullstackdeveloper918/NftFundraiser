@@ -8,7 +8,7 @@ import { CategoriesAction, CreateProjectAction, GetCollectionsAction } from '../
 import 'reactjs-popup/dist/index.css';
 import styles from "./styles/styles.module.scss"
 import { useFormData } from './Context/context';
-import JoditEditor from 'jodit-react'; import { CityList, CountryList, StateList } from '../../redux/Actions/authAction';
+import JoditEditor from 'jodit-react'; import { CityList, CountryList, GetUserAction, StateList } from '../../redux/Actions/authAction';
 import UploadImage from '../../shared/Upload';
 import { blobToDataURl, dataURLtoBlob } from '../../utils/blobfromurl';
 
@@ -31,8 +31,9 @@ const Create = ({ current, next, prev }) => {
     const [image, setImage] = useState()
     const [loading, setLoading] = useState(false)
 
+
     const [collection_id, setCollectionId] = useState(0);
-    const [usertype, setUserType] = useState();
+    const [usertype, setUserType] = useState("1");
     console.log("type", usertype)
 
     // const schema = yup.object().shape({
@@ -49,7 +50,8 @@ const Create = ({ current, next, prev }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
-
+    const [countryName, setCountryName] = useState(" ")
+    console.log(countryName, 'countryname')
 
     const { countries } = useSelector(state => state.countries)
 
@@ -62,7 +64,10 @@ const Create = ({ current, next, prev }) => {
     console.log(states?.data?.data, 'states')
     const cities = useSelector(state => { return state.countries.city })
 
-
+    const userdet = useSelector(state => {
+        return state?.user?.userdetail
+    })
+    console.log("userCountry", userdet.organization_detail?.country_id)
     const disablePastDate = () => {
         const today = new Date();
         const dd = String(today.getDate() + 0).padStart(2, "0");
@@ -81,10 +86,9 @@ const Create = ({ current, next, prev }) => {
     })
     // console.log(col, 'col')
     const onSubmit = (data) => {
-
         const imageBanner = dataURLtoBlob(image)
 
-        setFormValues({ ...data, description, type: data?.usertype, image: imageBanner, imageUri: image });
+        setFormValues({ ...data, description, type: usertype, image: imageBanner, imageUri: image });
         // localStorage.setItem('country', JSON.stringify(country))
         next()
     }
@@ -92,6 +96,9 @@ const Create = ({ current, next, prev }) => {
     // console.log('bannerimg', bannerimage)
 
     useEffect(() => {
+        // debugger
+
+        dispatch(GetUserAction())
         dispatch(GetCollectionsAction())
         dispatch(CategoriesAction())
         dispatch(CountryList())
@@ -104,9 +111,9 @@ const Create = ({ current, next, prev }) => {
             setValue('state', data.state)
             setValue('city', data.city)
             setValue('description', data.description)
-            setValue('number_of_nft', data.number_of_nft)
+            // setValue('number_of_nft', data.number_of_nft)
             setValue('price', data.price)
-            setValue('start_date', data.start_date)
+            // setValue('start_date', data.start_date)
             setValue('type', data.usertype)
             setValue('image', data.imageUri)
 
@@ -117,8 +124,9 @@ const Create = ({ current, next, prev }) => {
             setState(data.state)
             setCity(data.city)
 
-            setValue('end_date', data.end_date)
+            // setValue('end_date', data.end_date)
         }
+        handleChangeCountry()
 
     }, [data])
 
@@ -129,9 +137,16 @@ const Create = ({ current, next, prev }) => {
 
     const handleChangeCountry = (event) => {
         // 👇 Get input value from "event"
-        setCountry(event.currentTarget.value);
         const formData = new FormData()
-        formData.append('country_id', event.currentTarget.value)
+        if (event?.currentTarget?.value) {
+
+            setCountry(event?.currentTarget?.value);
+            formData.append('country_id', event?.currentTarget?.value)
+        } else {
+            setCountryName(userdet?.organization_detail?.country)
+            setCountry(userdet?.organization_detail?.country_id);
+            formData.append('country_id', userdet?.organization_detail?.country_id)
+        }
         dispatch(StateList(formData)) // if (country) {
 
         //     debugger
@@ -173,7 +188,7 @@ const Create = ({ current, next, prev }) => {
             formData.append(key, value)
         }
 
-        formData.append("type", data.usertype)
+        // formData.append("type", data.usertype)
         formData.append("image", imageBanner)
         formData.append("status", 3)
         formData.append("on_which_step_left", 0)
@@ -190,27 +205,23 @@ const Create = ({ current, next, prev }) => {
             <form onSubmit={handleSubmit(onSubmit)} className="item-form card no-hover">
                 <div className="row">
 
-                    <div className="col-12 ">
+                    {/* <div className="col-12 ">
                         <div className="form-group mt-3">
                             <div className="form-check form-check-inline mr-2">
-                                {/* {data.usertype == 2 ? ( */}
                                 <>
                                     <input
                                         className="form-check-input"
                                         type="radio"
                                         name="radiobutton"
                                         id="1"
-                                        // checked={data.usertype ? false:tr}
                                         value="1"
                                         defaultChecked={data.usertype == 1 ? true : !usertype ? true : false}
                                         {...register("usertype", { required: true })}
                                         aria-invalid={errors.usertype ? "true" : "false"}
                                         onChange={(e) => setUserType(e.target.value)}
-                                    // defaultChecked={data.usertype}
                                     />
                                     <label className="form-check-label mr-2" htmlFor="donation">Single</label>
                                 </>
-                                {/* ) : ( */}
 
                                 <><input
                                     className="form-check-input"
@@ -225,13 +236,12 @@ const Create = ({ current, next, prev }) => {
 
                                 />
                                     <label className="form-check-label" htmlFor="donation">Campaign</label></>
-                                {/* )} */}
                             </div>
 
                             {errors.usertype?.type === 'required' && <p style={{ color: 'red' }} role="alert">Type is required</p>}
 
                         </div>
-                    </div>
+                    </div> */}
 
 
 
@@ -322,13 +332,14 @@ const Create = ({ current, next, prev }) => {
 
                     <div className="col-md-6 col-12">
                         <div className="form-group mt-3">
+
                             <label>Country</label>
 
                             <select name="country"
 
                                 {...register("country", { required: true })} onChange={handleChangeCountry}>
                                 aria-invalid={errors?.country ? "true" : "false"}
-                                <option value="" disabled selected style={{ color: "#495057" }}>Select your country</option>
+                                <option >{countryName}</option>
                                 {countries?.data?.data?.map((option, key) => (
                                     <>
 
@@ -382,7 +393,7 @@ const Create = ({ current, next, prev }) => {
                             {/* {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">City is required</p>} */}
                         </div>
 
-                        {!usertype || usertype == 1 ? (
+                        {/* {!usertype || usertype == 1 ? (
 
                             <div className="col-12 col-md-12 pl-0 pr-0">
                                 <div className="form-group">
@@ -396,28 +407,16 @@ const Create = ({ current, next, prev }) => {
                                         value={nonft}
                                         onChange={() => setNonft('1')}
                                         defaultValue={nonft}
-                                        // defaultValue={1}
-                                        // disabled={true}
                                         min={1}
                                         max={1}
 
                                         maxLength={1}
-                                        // onChange={setNonft("1")}
-                                        // onKeyUp={imposeMinMax()}
                                         placeholder="number of NFT (1 allowed)"
                                         {...register("number_of_nft", { required: true, min: 1, max: 1 })}
-                                        // {...register("number_of_nft", { maxLength: 12 })}
                                         aria-invalid={errors.number_of_nft ? "true" : "false"}
                                     />
-                                    {/* {errors.number_of_nft && errors.number_of_nft.type === "max" && (
-            <p style={{ color: 'red' }}>
-                Only 1 nft allowed (select campaign for more than one NFTs)
-            </p>
-
-
-        )} */}
-                                    {/* {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFT is required and limit is upto 1</p>} */}
-                                    {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max one length </p>} */}
+               
+                                   
                                 </div>
                             </div>
                         ) : (
@@ -425,40 +424,30 @@ const Create = ({ current, next, prev }) => {
                                 <div className="form-group">
                                     <label>Number of NFTs</label>
                                     <input
-                                        // onInput={(e) => {
-                                        //     if (e?.target?.value?.length < e.target.maxLength)
-                                        //         e.target.value = e.target.value.slice(0, e.target.maxLength);
-                                        // }}
+                                      
                                         type="number"
                                         className="form-control"
                                         name="number_of_nft"
 
-                                        // defaultValue={1}
                                         min={1}
                                         max={10}
                                         maxLength={10}
 
-                                        // onKeyUp={imposeMinMax()}
-                                        // min=1 max=4 onkeyup=imposeMinMax(this)
-
-                                        // disabled={type == 1}
+                                        
                                         placeholder="Select your number of NFTs (1-10)"
                                         {...register("number_of_nft", { required: true, min: 1, max: 10 })}
 
-                                        // {...register("number_of_nft", { maxLength: 12 })}
                                         aria-invalid={errors.number_of_nft ? "true" : "false"}
                                     />
-                                    {/* {errors.number_of_nft?.message && <p>{errors.number_of_nft.message}</p>} */}
                                     {errors.number_of_nft && errors.number_of_nft.type === "max" && (
                                         <p style={{ color: 'red' }}>
                                             10 NFTs Maximum per Campaign
                                         </p>
                                     )}
                                     {errors.number_of_nft?.type === 'required' && <p style={{ color: 'red' }} role="alert">Number of NFTs per project is required with a limit of 10</p>}
-                                    {/* {errors.number_of_nft?.type === "maxLength" && <p style={{ color: 'red' }} role="alert">Max length exceeded</p>} */}
                                 </div>
                             </div>
-                        )}
+                        )} */}
 
 
                         <div className="col-12 col-md-12 pr-0 pl-0">
@@ -512,21 +501,18 @@ const Create = ({ current, next, prev }) => {
                     </div>
 
 
-                    {usertype == 2 && (
+                    {/* {usertype == 2 && (
 
                         <><div className="col-12 col-md-6">
                             <div className="form-group">
                                 <label>Campaign Start date</label>
                                 <input
                                     type="date"
-                                    // placeholder='dd-mm-yy'
-                                    // hidden={data.type == 1}
                                     className="form-control"
                                     name="start_date"
                                     min={disablePastDate()}
                                     defaultValue={defaultValue}
 
-                                    // placeholder="Start date :"
                                     {...register("start_date", { required: true })}
                                     aria-invalid={errors.start_date ? "true" : "false"} />
                                 {errors.start_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">Start date is required</p>}
@@ -537,13 +523,11 @@ const Create = ({ current, next, prev }) => {
                                     <label>Campaign End Date</label>
                                     <input
                                         type="date"
-                                        // hidden={data.type == 1}
                                         className="form-control"
                                         name="end_date"
                                         defaultValue={defaultValue1}
                                         min={disablePastDate()}
 
-                                        // placeholder="End date"
                                         {...register("end_date", { required: true })}
                                         aria-invalid={errors.end_date ? "true" : "false"}
                                     />
@@ -551,11 +535,10 @@ const Create = ({ current, next, prev }) => {
 
                                         <span className='logo-dis'>End date should be greater then or equal to start date</span>
                                     </div>
-                                    {/* {errors.end_date && errors?.end_date?.type === 'min' && <p style={{ color: 'red' }} role="alert">End date should be greater or equal to startdate</p>} */}
                                     {errors.end_date?.type === 'required' && <p style={{ color: 'red' }} role="alert">End date is required</p>}
                                 </div>
                             </div></>
-                    )}
+                    )} */}
                     <div className=" col-12">
                         <div className="form-group">
                             <label>Banner image</label>

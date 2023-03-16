@@ -426,6 +426,7 @@ export const updateReffid = async ({ tokenId, refid, nft_id, }) => {
   }
 };
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal }) => {
+  // debugger
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
@@ -439,8 +440,10 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
 
       let wallets = []
       let fee = []
-
-
+      // web3.fromWei(web3.eth.getBalance
+      const bala = web3.fromWei(web3.eth.getBalance(window.ethereum?.selectedAddress))
+      console.log(bala, 'balance')
+      // .then(console.log);
       wallets = refid === "null" ? [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets] : [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets, refid]
       fee = refid === "null" ? [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees] : [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, localStorage.getItem('refamount')]
       console.log(fee)

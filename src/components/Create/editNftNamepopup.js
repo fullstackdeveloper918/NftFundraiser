@@ -187,7 +187,7 @@ const EditNftName = (props) => {
     }, [form, nftdetail])
 
     const onFinish = async (values) => {
-
+        // debugger
         try {
 
             setLoading(true)
