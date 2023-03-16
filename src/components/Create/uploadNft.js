@@ -488,7 +488,7 @@ const UploadNft = ({ current, prev }) => {
                                                 onChange={onChange}
                                                 expandIconPosition={expandIconPosition}
                                             >
-                                                <Panel key={count} header={[nftName[index] ? <div className='Collapse-text'> {nftName[index].slice(0, 10) }  </div>: "Detail", source[index]?.type === "Image" ? <div> <img src={URL.createObjectURL(source[index].file)} className="images-Collapse" /></div> : <div> <img src={preview?.[index] && window.URL.createObjectURL(preview[index])} className="images-Collapse" /></div>]} className="p-0 nft-Collapse">
+                                                <Panel key={count} header={[nftName[index] ? <div className='Collapse-text'> {nftName[index].slice(0, 50) }  </div>: "Detail", source[index]?.type === "Image" ? <div>  <img src={URL.createObjectURL(source[index].file)} className="images-Collapse" /></div> : <div> <img src={preview?.[index] && window.URL.createObjectURL(preview[index])} className="images-Collapse" /></div>]} className="p-0 nft-Collapse">
                                                     <Fragment>
                                                         {/* <div>Artwork {index}</div> */}
                                                         <div className="row relative">
