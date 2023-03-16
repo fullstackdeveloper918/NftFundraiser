@@ -35,6 +35,21 @@ const RefralTransdataTable = (props) => {
             {/* Footer Top */}
             <div className="footer-top">
                 <div className="container">
+                    <div> <h3>How Creator and Referral MATIC Rewards Work</h3>
+                        <span className='termsandconditions'><li>Affiliates get 30% on first level NFT referred sales at Karmatica.io only.</li>
+                            <li>Creators get 10% of secondary NFT sales for the lifetime of the project.</li>
+                            <br />
+                            <h5>NFT sale to BUYER 1 </h5>
+                            69% goes to Creator <br />
+                            30% goes to Affiliate<br />
+                            1% to Karmatica<br />
+                            <br />
+                            <h5>NFT resold from BUYER 1 to BUYER 2 via Affiliate</h5>
+                            84% goes to BUYER 1<br />
+                            10% goes to NFT Creator<br />
+                            5% goes to Affiliate <br />
+                            1% to Karmatica<br />
+                        </span></div>
                     <div className='position-relative'>
                         <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
                             <svg className="activity_icon" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +58,7 @@ const RefralTransdataTable = (props) => {
                                 <path d="M14.9245 3.12012H7.65679C4.64535 3.12012 2.77808 5.25284 2.77808 8.26428V16.3467C2.77808 19.3581 4.60874 21.4817 7.65679 21.4817H16.2609C19.2724 21.4817 21.1396 19.3581 21.1396 16.3467V9.30776" stroke="#ffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                             <Panel header="Referral Activity" key="1">
-                                <Table responsive >
+                                <Table responsive className='m-0' >
                                     <thead>
 
 
