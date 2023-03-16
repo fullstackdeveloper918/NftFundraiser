@@ -86,6 +86,7 @@ const Create = ({ current, next, prev }) => {
     })
     // console.log(col, 'col')
     const onSubmit = (data) => {
+        debugger
         const imageBanner = dataURLtoBlob(image)
 
         setFormValues({ ...data, description, type: usertype, image: imageBanner, imageUri: image });
@@ -182,6 +183,7 @@ const Create = ({ current, next, prev }) => {
     const defaultValue1 = new Date(date1).toISOString().substr(0, 10) // yyyy-mm-dd
 
     const handleSubmitDraft = (data) => {
+        debugger
         const imageBanner = dataURLtoBlob(image)
         const formData = new FormData()
         for (const [key, value] of Object.entries(data)) {
@@ -190,12 +192,13 @@ const Create = ({ current, next, prev }) => {
 
         // formData.append("type", data.usertype)
         formData.append("image", imageBanner)
+        formData.append("type", "1")
         formData.append("status", 3)
         formData.append("on_which_step_left", 0)
-        if (data.usertype == 1) {
-            formData.append('start_date', '')
-            formData.append('end_date', '')
-        }
+        // if (data.usertype == 1) {
+        //     formData.append('start_date', '')
+        //     formData.append('end_date', '')
+        // }
 
         dispatch(CreateProjectAction(formData, setLoading, history))
     }
@@ -339,7 +342,7 @@ const Create = ({ current, next, prev }) => {
 
                                 {...register("country", { required: true })} onChange={handleChangeCountry}>
                                 aria-invalid={errors?.country ? "true" : "false"}
-                                <option >{countryName}</option>
+                                <option value={userdet?.organization_detail?.country_id} selected>{countryName}</option>
                                 {countries?.data?.data?.map((option, key) => (
                                     <>
 
@@ -355,7 +358,7 @@ const Create = ({ current, next, prev }) => {
 
                                 ))}
                             </select>
-                            {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">Country is required</p>}
+                            {/* {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">Country is required</p>} */}
                         </div>
                     </div>
                     <div className="col-md-6 col-12">
