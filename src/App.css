@@ -2142,7 +2142,7 @@ body .btn.btn-bordered-white {
 }
 .inputtdrag::after {
     position: absolute;
-    background-image:"url('../public/img/camera.png')";
+    background-image: "url('../public/img/camera.png')";
     width: 100%;
     content: 'Upload NFT';
     top: 0px;
@@ -2157,7 +2157,7 @@ body .btn.btn-bordered-white {
     border: 2px solid #c1c1c1;
     border-style: dashed;
     z-index: 1;
-    padding: 49% 0px;
+    padding: 46% 0px;
 }
 .inputdragVedio::after {
     position: absolute;
@@ -2915,4 +2915,28 @@ h6{
 }
 .dropdown-item a i {
     padding: 0px 5px 0px 0px;
+}
+.nft-Collapse {
+    display: flex;
+    flex-wrap: wrap;
+}
+.ant-collapse-header span.ant-collapse-header-text {
+    display: flex;
+    align-items: center;
+}
+span.ant-collapse-header-text div:nth-child(2) {
+    width: 60px;
+}
+span.ant-collapse-header-text div:nth-child(2) img{
+    border-radius: 50%;
+}
+.images-Collapse{
+ width: 250px;
+}
+.nft-Collapse .ant-collapse-header {
+    width: 100%;
+    justify-content: space-between;
+}
+.Collapse-text{
+    width: 45%;
 }

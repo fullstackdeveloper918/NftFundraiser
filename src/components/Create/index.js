@@ -42,9 +42,9 @@ const UploadNftIndex = () => {
         <div className="row justify-content-center">
 
 
-          <div className="col-14 col-md-9">
+          <div className="col-14 col-md-9 mt-10">
             {/* Intro */}
-            <div className="intro mt-5 mt-lg-0 mb-4 mb-lg-5">
+            <div className="intro mt-5  mb-4 mb-lg-5">
               <div className="intro-content">
                 <span>Get Started</span>
                 {current === 0 ? (
