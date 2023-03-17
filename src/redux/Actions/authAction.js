@@ -29,7 +29,7 @@ export const Register = createAsyncThunk(
             if (res.status === 200) {
                 swal("success", res.data.message, 'success').then(function () {
                     window.location = "/create";
-                });
+               });
             }
 
         } catch (e) {

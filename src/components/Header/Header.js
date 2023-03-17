@@ -27,7 +27,7 @@ const Header = () => {
     }
 
     const userRole = useSelector(state => {
-        return state.user.userdetail.role
+        return state?.user.userdetail?.role
     })
     // console.log(userRole)
     const userToken = useSelector(state => {
@@ -143,7 +143,7 @@ const Header = () => {
                 confirmButtonAriaLabel: 'Thumbs up, great!',
             })
         }
-        else if (!window.ethereum?.selectedAddress) {
+        else if (!userToken) {
             Swal.fire({
                 icon: 'info',
                 html:
