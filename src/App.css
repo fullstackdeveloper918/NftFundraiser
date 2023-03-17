@@ -2923,12 +2923,16 @@ h6{
 .ant-collapse-header span.ant-collapse-header-text {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding-right: 30px;
 }
-span.ant-collapse-header-text div:nth-child(2) {
-    width: 60px;
-}
+/* span.ant-collapse-header-text div:nth-child(2) {
+ 
+} */
 span.ant-collapse-header-text div:nth-child(2) img{
-    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
 }
 .images-Collapse{
  width: 250px;
@@ -2937,6 +2941,6 @@ span.ant-collapse-header-text div:nth-child(2) img{
     width: 100%;
     justify-content: space-between;
 }
-.Collapse-text{
-    width: 45%;
+.nft-Collapse .ant-collapse-expand-icon span {
+    font-size: 18px !important;
 }
