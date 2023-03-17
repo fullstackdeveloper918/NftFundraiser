@@ -23,6 +23,9 @@ const Resell = ({ type }) => {
                         <div className="intro d-flex justify-content-between align-items-end m-0">
                             <div className="intro-content">
                                 <span>NFTs</span>
+                                <h3 className="mt-3 mb-0">
+                                    Latest NFTs
+                                </h3>
 
                             </div>
                             <div className="intro-btn">
