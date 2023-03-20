@@ -31,25 +31,32 @@ const RefralTransdataTable = (props) => {
     }, [props.id])
     const location = useLocation()
     return (
-        <footer className="footer-area">
+        <footer className="item-details-area referal-detail">
             {/* Footer Top */}
-            <div className="footer-top">
+            <div >
                 <div className="container">
-                    <div> <h3>How Creator and Referral MATIC Rewards Work</h3>
-                        <span className='termsandconditions'><li>Affiliates get 30% on first level NFT referred sales at Karmatica.io only.</li>
-                            <li>Creators get 10% of secondary NFT sales for the lifetime of the project.</li>
-                            <br />
+                    <div className="pb-5"> <h3>How Creator and Referral MATIC Rewards Work</h3>
+                        <div className='main-heading'>
+                            <div>Affiliates get 30% on first level NFT referred sales at Karmatica.io only.</div>
+                            <div>Creators get 10% of secondary NFT sales for the lifetime of the project.</div>
+                            </div>
+                            <div className='referal-main'>
                             <h5>NFT sale to BUYER 1 </h5>
-                            69% goes to Creator <br />
-                            30% goes to Affiliate<br />
-                            1% to Karmatica<br />
-                            <br />
+                            <ul>
+                            <li><span>69%</span> goes to Creator </li>
+                            <li><span>30%</span> goes to Affiliate</li>
+                            <li><span>1% </span>to Karmatica</li>
+                            </ul>
+                            </div>
+                            <div className='referal-main'>
                             <h5>NFT resold from BUYER 1 to BUYER 2 via Affiliate</h5>
-                            84% goes to BUYER 1<br />
-                            10% goes to NFT Creator<br />
-                            5% goes to Affiliate <br />
-                            1% to Karmatica<br />
-                        </span></div>
+                            <ul>
+                            <li> <span>84%</span> goes to BUYER 1</li>
+                            <li> <span>10%</span> goes to NFT Creator</li>
+                            <li> <span>5% </span>goes to Affiliate </li>
+                            <li> <span>1% </span>to Karmatica</li>
+                            </ul>
+                        </div></div>
                     <div className='position-relative'>
                         <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
                             <svg className="activity_icon" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
