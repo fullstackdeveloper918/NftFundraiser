@@ -93,7 +93,6 @@ const NftDetails = (props) => {
                         <div className="item-info">
                             {/* {latprojdetail?.map((item, key) => ( */}
                             {nftdetail.is_mint == 0 &&
-
                                 <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
 
 

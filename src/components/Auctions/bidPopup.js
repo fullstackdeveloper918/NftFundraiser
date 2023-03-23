@@ -10,7 +10,7 @@ function BidPopup(props) {
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
     const onSubmit = () => {
         // debugger
-        BidNft(props.id, props.projid)
+        BidNft(props.id, props.projid, dispatch)
     }
 
     return (

@@ -23,7 +23,7 @@ const Wallet = () => {
     const history = useHistory()
 
     const handleConnect = async () => {
-        const res = await ConnectWallet("CREATOR")
+        const res = await ConnectWallet("CREATOR", dispatch)
 
         if (res?.res?.response?.status === 401) {
             history.push('/signup')

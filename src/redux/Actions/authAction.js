@@ -4,10 +4,11 @@ import swal from "sweetalert";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { creatorWalletUpdate } from "../../components/Wallet/interact";
 import Swal from "sweetalert2";
+import { LogsAction } from "./logsAction";
 
 export const Register = createAsyncThunk(
     "auth/register",
-    async (params, thunkAPI) => {
+    async (params, thunkAPI, dispatch) => {
         try {
             const token = localStorage.getItem('authToken')
             const config = {
@@ -29,10 +30,11 @@ export const Register = createAsyncThunk(
             if (res.status === 200) {
                 swal("success", res.data.message, 'success').then(function () {
                     window.location = "/create";
-               });
+                });
             }
 
         } catch (e) {
+            dispatch(LogsAction(e))
             if (e?.response?.data) {
                 if (e?.response?.data.message) {
 
@@ -58,7 +60,7 @@ export const LoginAction = (params, history) => async dispatch => {
         dispatch(loginSuccess(res));
 
     } catch (e) {
-
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
 
             swal('error', e?.response?.data?.message, 'error')
@@ -66,7 +68,7 @@ export const LoginAction = (params, history) => async dispatch => {
     }
 }
 
-export const ForgotPasswordAction = (params) => async dispatch => {
+export const ForgotPasswordAction = (params, dispatch) => async dispatch => {
     try {
         const config = {
             headers: {
@@ -83,6 +85,7 @@ export const ForgotPasswordAction = (params) => async dispatch => {
         }
 
     } catch (e) {
+        await dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -106,7 +109,7 @@ export const GetUserAction = () => async dispatch => {
 
 
     } catch (e) {
-        // 
+        await dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -133,6 +136,7 @@ export const CreateOrganizationAction = (params) => async dispatch => {
         dispatch(createOrganizationSuccess(res));
 
     } catch (e) {
+        await dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error').then(function () {
                 // dispatch(ProjectDetail(params))
@@ -144,7 +148,7 @@ export const CreateOrganizationAction = (params) => async dispatch => {
 }
 export const CreateOrganizationAfterRoleChange = createAsyncThunk(
     "auth/register",
-    async (params, thunkAPI) => {
+    async (params, thunkAPI, dispatch) => {
         // debugger
         try {
             const token = localStorage.getItem('authToken')
@@ -172,6 +176,7 @@ export const CreateOrganizationAfterRoleChange = createAsyncThunk(
             }
 
         } catch (e) {
+            await dispatch(LogsAction(e))
             if (e?.response?.data) {
                 if (e?.response?.data.message) {
 
@@ -192,6 +197,7 @@ export const CountryList = () => async dispatch => {
             config)
         dispatch(getCountryList(res));
     } catch (e) {
+        await dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -210,6 +216,7 @@ export const StateList = (formData) => async dispatch => {
         // debugger
         dispatch(getStateList(res));
     } catch (e) {
+        await dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -226,6 +233,7 @@ export const CityList = (formData) => async dispatch => {
             formData, config)
         dispatch(getCityList(res));
     } catch (e) {
+        await dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -243,6 +251,7 @@ export const AnnualRevenueList = () => async dispatch => {
             config)
         dispatch(getAnnualRevenueList(res));
     } catch (e) {
+        await dispatch(LogsAction(e))
         return console.error(e.message);
     }
 }
@@ -258,6 +267,7 @@ export const HearAboutList = () => async dispatch => {
             config)
         dispatch(getHearAboutList(res));
     } catch (e) {
+        await dispatch(LogsAction(e))
         return console.error(e.message);
     }
 }
@@ -300,6 +310,7 @@ export const UpdateProfileAction = (formData, props) => async dispatch => {
 
         }
     } catch (e) {
+        await dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -330,6 +341,7 @@ export const CountSet = () => async dispatch => {
 
         }
     } catch (e) {
+        await dispatch(LogsAction(e))
         if (e?.response?.data?.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -357,6 +369,7 @@ export const AllNoti = () => async dispatch => {
 
 
     } catch (e) {
+        await dispatch(LogsAction(e))
         if (e?.response?.data?.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -388,6 +401,7 @@ export const NotiDelete = (id) => async dispatch => {
 
         }
     } catch (e) {
+        await dispatch(LogsAction(e))
         if (e?.response?.data?.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -419,6 +433,7 @@ export const ChangeUserRole = (history) => async dispatch => {
             }
         }
     } catch (e) {
+        await dispatch(LogsAction(e))
         if (e?.response?.data?.message) {
             swal('error', e.response.data.message, 'error')
         }

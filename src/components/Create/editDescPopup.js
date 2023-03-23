@@ -34,6 +34,7 @@ const getBase64 = (file) =>
 // import ImgCrop from 'antd-img-crop';
 
 const EditNftDesc = (props) => {
+    // debugger
     const editor = useRef(null);
 
     const [nftFileType, setNFtFileType] = useState('Image')

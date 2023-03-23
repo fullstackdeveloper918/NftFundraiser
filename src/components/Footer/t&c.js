@@ -10,7 +10,7 @@ const TermsConditions = () => {
     })
 
     useEffect(() => {
-        dispatch(getFooter())
+        dispatch(getFooter(dispatch))
     }, [])
     // console.log(footer, 'footer')
     return (

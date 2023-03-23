@@ -114,7 +114,7 @@ function DesPopup(props) {
         formData.append('type', data.type)
         formData.append('category_id', data.category_id)
 
-        dispatch(UpdateProject(props.id, formData))
+        dispatch(UpdateProject(props, formData))
     }
 
     return (

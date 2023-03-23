@@ -39,7 +39,7 @@ const Header = () => {
 
     useEffect(() => {
         dispatch(GetUserAction())
-        getCurrentWalletConnected()
+        getCurrentWalletConnected(dispatch)
         setAddress(getSelectedAddress)
 
         if (window.ethereum) {
@@ -53,6 +53,42 @@ const Header = () => {
         }
 
     }, [dispatch, address])
+
+    const [open, setOpen] = useState(false);
+    const [confirmLoading, setConfirmLoading] = useState(false);
+
+    const showPopconfirm = () => {
+        setOpen(true);
+    };
+
+    const handleOk = () => {
+        setConfirmLoading(true);
+
+        setTimeout(() => {
+            setOpen(false);
+            setConfirmLoading(false);
+        }, 2000);
+    };
+
+    const handleCancel = () => {
+        console.log('Clicked cancel button');
+        setOpen(false);
+    };
+
+    useEffect(() => {
+        window.addEventListener("beforeunload", handleBeforeUnload);
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, []);
+
+    const handleBeforeUnload = (e) => {
+        e.preventDefault();
+        const message =
+            "Are you sure you want to leave? All provided data will be lost.";
+        e.returnValue = message;
+        return message;
+    };
 
     function getSelectedAddress() {
         return window.ethereum?.selectedAddress;
@@ -82,7 +118,7 @@ const Header = () => {
         setActiveOption(!activeOption)
     }
     const WalletHandler = async () => {
-        const response = await ConnectWallet("BUYER")
+        const response = await ConnectWallet("BUYER", dispatch)
         const { res } = response
 
         // debugger
@@ -300,7 +336,7 @@ const Header = () => {
                                     {userRole == 2 && (
                                         <li><button type='button' class="dropdown-item"><Link to='/my/nfts'><i class="fa-regular fa-file-image" style={{ color: 'white', display: "table-cell" }} /> My NFTs</Link></button></li>
                                     )}
-                                    <li><button type='button' class="dropdown-item"><Link to='/referals-detail'><i class="fa-solid fa-coins" style={{ color: 'white', display: "table-cell" }}></i> My Referrals</Link></button></li>
+                                    <li><button type='button' class="dropdown-item"><Link to='/referals-detail'><i class="fa-solid fa-coins" style={{ color: 'white', display: "table-cell" }}></i>Referral Program</Link></button></li>
                                     {userRole == 3 && (
                                         <><li><button type='button' class="dropdown-item"><Link to='/projectlist'><i class="fa-regular fa-file" style={{ color: 'white', display: "table-cell" }}></i> My Projects</Link></button></li>
 

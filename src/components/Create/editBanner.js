@@ -1,9 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import {  UpdateBanner } from '../../redux/Actions/projectAction';
+import { UpdateBanner } from '../../redux/Actions/projectAction';
 import { useDispatch } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
-import UploadImage  from '../../shared/Upload'
+import UploadImage from '../../shared/Upload'
 import { dataURLtoBlob } from '../../utils/blobfromurl'
 
 function Banner(props) {
@@ -13,10 +13,12 @@ function Banner(props) {
     const dispatch = useDispatch()
 
     const submit = () => {
+        // debugger
         const formData = new FormData()
+
         const image = dataURLtoBlob(imageSrc)
         formData.append('image', image)
-        dispatch(UpdateBanner(formData, props.id))
+        dispatch(UpdateBanner(formData, props))
     }
 
     return (

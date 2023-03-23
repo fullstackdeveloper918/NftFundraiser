@@ -14,6 +14,7 @@ import NFTContract from '../../backend/contracts/artWork.sol/NFTContract.json'
 import { CreateMetaDataAndMint, UpdateStatus } from '../Wallet/interact';
 import NftPopup from './nftPopup';
 import { useFormData } from '../Create/Context/context';
+import { LogsAction } from '../../redux/Actions/logsAction';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -60,7 +61,7 @@ function SellPopup(props) {
             collid: nftdetail?.collection_id,
             nft_file_content: nftdetail?.nft_file_content,
             slug,
-            dispatch: dispatch,
+            dispatch,
             setModalShow,
 
             // auctiondata
@@ -122,7 +123,9 @@ function SellPopup(props) {
             }
         } catch (error) {
             // 
-            alert("went wrong")
+            dispatch(LogsAction(error))
+            alert("error", "contract not deployed please try again", "error")
+            setModalShow(false)
             return {
                 success: false,
                 status: ":disappointed_relieved: Something went wrong: " + error.message
@@ -232,7 +235,7 @@ function SellPopup(props) {
                             {/* {type == 1 && ( */}
 
                             <div className="form-group m-0">
-                                <label>Set Price</label>
+                                <label>Set Price in MATIC</label>
                                 <input
                                     type="number"
                                     className="form-control"

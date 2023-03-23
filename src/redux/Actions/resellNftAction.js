@@ -1,6 +1,7 @@
 import axios from "axios";
 import swal from "sweetalert";
 import { getResell, getReselldetails } from "../Slices/resellNftSlice";
+import { LogsAction } from "./logsAction";
 
 export const ResellAction = () => async dispatch => {
     // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
@@ -19,6 +20,7 @@ export const ResellAction = () => async dispatch => {
         console.log("resproj", res)
         dispatch(getResell(res));
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -41,6 +43,7 @@ export const ResellActionDetails = (slug) => async dispatch => {
         console.log("resproj", res)
         dispatch(getReselldetails(res));
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }

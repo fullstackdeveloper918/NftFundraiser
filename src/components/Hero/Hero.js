@@ -129,6 +129,7 @@ const Hero = ({ type }) => {
         <section className="hero-section">
             <div className="container">
                 <div className="row ">
+
                     <div className="col-12 col-md-6 col-lg-7">
 
                         <h1 className="mt-4">Create NFTs to fund real-life projects. Earn up to 30% by sharing with friends.</h1>

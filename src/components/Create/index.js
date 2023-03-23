@@ -22,7 +22,7 @@ const steps = [
 ];
 const UploadNftIndex = () => {
 
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState(0);
 
   const next = () => {
     setCurrent(current + 1);

@@ -11,6 +11,7 @@ import { useFormData } from './Context/context';
 import JoditEditor from 'jodit-react'; import { CityList, CountryList, GetUserAction, StateList } from '../../redux/Actions/authAction';
 import UploadImage from '../../shared/Upload';
 import { blobToDataURl, dataURLtoBlob } from '../../utils/blobfromurl';
+import { Autosave } from 'react-autosave';
 
 
 const Create = ({ current, next, prev }) => {
@@ -86,7 +87,7 @@ const Create = ({ current, next, prev }) => {
     })
     // console.log(col, 'col')
     const onSubmit = (data) => {
-        debugger
+        // debugger
         const imageBanner = dataURLtoBlob(image)
 
         setFormValues({ ...data, description, type: usertype, image: imageBanner, imageUri: image });
@@ -183,7 +184,8 @@ const Create = ({ current, next, prev }) => {
     const defaultValue1 = new Date(date1).toISOString().substr(0, 10) // yyyy-mm-dd
 
     const handleSubmitDraft = (data) => {
-        debugger
+        // debugger
+        // 
         const imageBanner = dataURLtoBlob(image)
         const formData = new FormData()
         for (const [key, value] of Object.entries(data)) {
@@ -194,6 +196,7 @@ const Create = ({ current, next, prev }) => {
         formData.append("image", imageBanner)
         formData.append("type", "1")
         formData.append("status", 3)
+        formData.append("number_of_nft", "1")
         formData.append("on_which_step_left", 0)
         // if (data.usertype == 1) {
         //     formData.append('start_date', '')
@@ -248,7 +251,7 @@ const Create = ({ current, next, prev }) => {
 
 
 
-
+                    {/* <Autosave onSave={handleSubmitDraft} data={}/> */}
 
                     <div className="col-md-6 col-12">
                         {/* {type == 1 && ( */}

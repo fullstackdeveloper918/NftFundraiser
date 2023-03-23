@@ -35,7 +35,7 @@ const Login = () => {
 
     const OnSubmit = (data) => {
         // 
-        dispatch(LoginAction(data))
+        dispatch(LoginAction(data, dispatch))
 
     }
 

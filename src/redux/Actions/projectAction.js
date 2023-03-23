@@ -25,6 +25,7 @@ import {
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import swal from "sweetalert";
+import { LogsAction } from "./logsAction";
 
 export const CreateProjectAction = (params, setLoading, history) => async dispatch => {
     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
@@ -48,6 +49,7 @@ export const CreateProjectAction = (params, setLoading, history) => async dispat
 
         if (res.status === 200) {
             setLoading(false)
+
             swal({ title: "success", text: res.data.message, icon: 'success', buttons: false, timer: 1500 })
                 .then(() => {
                     history.push("/projectlist");
@@ -58,6 +60,7 @@ export const CreateProjectAction = (params, setLoading, history) => async dispat
     } catch (e) {
         if (e?.response?.data.message) {
             setLoading(false)
+            dispatch(LogsAction(e))
             swal('error', e.response.data.message, 'error')
             dispatch(createFail(e))
         }
@@ -80,6 +83,7 @@ export const ProjectDetail = (slug) => async dispatch => {
         // console.log('details', res)
         dispatch(getProjectDetail(res));
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -99,6 +103,7 @@ export const LatestProjectDetail = (slug) => async dispatch => {
         // console.log(res, 'ressssss')
         dispatch(getLatestProjectDetail(res));
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -124,6 +129,7 @@ export const ProjectList = () => async dispatch => {
         // setLoading(false)
 
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             // setLoading(false)
             swal('error', e.response.data.message, 'error')
@@ -133,7 +139,7 @@ export const ProjectList = () => async dispatch => {
 
 export const NftList = (slug, setLoading) => async dispatch => {
     const token = localStorage.getItem('authToken')
-    setLoading(true)
+    // setLoading(true)
     try {
 
         const config = {
@@ -152,13 +158,14 @@ export const NftList = (slug, setLoading) => async dispatch => {
 
 
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
             setLoading(false)
         }
     }
 }
-export const uploadNFT = async (params) => {
+export const uploadNFT = async (params, dispatch) => {
     // debugger
     // const [loading, setLoading] = useState()
     // setLoading(true)
@@ -185,6 +192,7 @@ export const uploadNFT = async (params) => {
             };
         })
         .catch(function (error) {
+            dispatch(LogsAction(error))
             // swal('error!', 'NFT not uploaded', 'error')
             // uploadNFT(setLoading(false))
         });
@@ -222,6 +230,7 @@ export const getPublicLiveProjects = createAsyncThunk(
             // thunkAPI.dispatch(publicLiveProjects(res));
 
         } catch (e) {
+            thunkAPI.dispatch(LogsAction(e))
             if (e?.response?.data.message) {
                 swal('error', e.response.data.message, 'error')
             }
@@ -229,6 +238,7 @@ export const getPublicLiveProjects = createAsyncThunk(
     })
 
 export const UpdateProject = (props, params) => async dispatch => {
+    debugger
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -238,18 +248,22 @@ export const UpdateProject = (props, params) => async dispatch => {
             },
             transformRequest: formData => formData
         }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/update/${props}`,
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/update/${props.id}`,
             params, config)
         // 
         // console.log(res, 'proj')
         await dispatch(getProjectDetail(res));
         if (res.status === 200) {
-            swal("success", res.data.message, 'success').then(function () {
-                window.location = `/projnftdetails/${props}`;
-            });
+            swal("success", res.data.message, 'success')
+            dispatch(ProjectDetail(props.id))
+            // .then(function () {
+            // window.location = `/projnftdetails/${props}`;
+            // });
 
         }
+        props.onHide(false)
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -279,6 +293,7 @@ export const DeleteProject = (id) => async dispatch => {
 
         }
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -297,6 +312,7 @@ export const CategoriesAction = () => async dispatch => {
         dispatch(getCategoriesList(res));
 
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -320,6 +336,7 @@ export const GetCollectionsAction = () => async dispatch => {
         await dispatch(getCollections(res));
 
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -357,6 +374,7 @@ export const CreateCollectionAction = ({ dat, imageBanner, props }) => async dis
         }
 
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
             dispatch(createFail(e))
@@ -379,6 +397,7 @@ export const GetCollectionDetails = (id) => async dispatch => {
         await dispatch(getCollectionDetails(res));
 
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -398,6 +417,7 @@ export const GetSocialMediaIcons = () => async dispatch => {
         await dispatch(getSocialmediaIcons(res));
 
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -427,6 +447,7 @@ export const UpdateCollection = (id, params) => async dispatch => {
 
         // }
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -452,6 +473,7 @@ export const GetSettings = () => async dispatch => {
 
         // }
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -472,6 +494,7 @@ export const GetNftwol = ({ slug }) => async dispatch => {
         await dispatch(getNftwolDetails(res));
 
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -492,14 +515,15 @@ export const GetfundraiserProject = (slug) => async dispatch => {
         await dispatch(getfundprojdetails(res));
 
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
     }
 }
 
-export const UpdateBanner = (formData, params) => async dispatch => {
-    // 
+export const UpdateBanner = (formData, props) => async dispatch => {
+    debugger
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -509,28 +533,31 @@ export const UpdateBanner = (formData, params) => async dispatch => {
             },
             transformRequest: formData => formData
         }
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/image_update/${params}`,
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/projects/image_update/${props.id}`,
             formData, config)
         // 
         // console.log(res, 'coll rres')
         await dispatch(updatebanner(res));
 
         if (res.status === 200) {
+
             swal("success", "updated", 'success').then(function () {
-                dispatch(ProjectDetail(params))
-                dispatch(LatestProjectDetail(params))
+                dispatch(ProjectDetail(props.id))
+                dispatch(LatestProjectDetail(props.id))
                 // window.location = "/projectlist";
             });
+            props.onHide(false)
 
         }
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
     }
 }
 export const UpdateNft = (formData, props, setLoading) => async dispatch => {
-    debugger
+    // debugger
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -559,6 +586,7 @@ export const UpdateNft = (formData, props, setLoading) => async dispatch => {
 
         }
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             setLoading(false)
             swal('error', e.response.data.message, 'error')
@@ -591,6 +619,7 @@ export const AddNftAction = (formData, projid, slug, setLoading) => async dispat
 
         }
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             setLoading(false)
             swal('error', e.response.data.message, 'error')
@@ -616,6 +645,7 @@ export const GetMatic = () => async dispatch => {
         await dispatch(getMatic(res))
         console.log('res', res)
     } catch (error) {
+        dispatch(LogsAction(error))
         // console.log("error");
     }
 };
@@ -633,7 +663,8 @@ export const getBid = (id) => async dispatch => {
             config)
         await dispatch(res)
         console.log('res bid', res)
-    } catch (error) {
+    } catch (e) {
+        dispatch(LogsAction(e))
         // console.log("error");
     }
 };
@@ -653,7 +684,8 @@ export const UpdateBId = ({ id, status }) => async dispatch => {
         await dispatch(res)
 
         console.log('res bid', res)
-    } catch (error) {
+    } catch (e) {
+        dispatch(LogsAction(e))
         // console.log("error");
     }
 };
@@ -672,6 +704,7 @@ export const GetMostactivityProject = () => async dispatch => {
         await dispatch(getmostprojactivity(res));
 
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -693,6 +726,7 @@ export const GetbuyedNftDetails = (slug) => async dispatch => {
         await dispatch(getbuyednftdetails(res));
 
     } catch (e) {
+        dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -718,6 +752,7 @@ export const ResellNft = (params, props) => async dispatch => {
             props.onHide(false)
         }
     } catch (e) {
+        dispatch(LogsAction(e))
         // console.log("error");
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')

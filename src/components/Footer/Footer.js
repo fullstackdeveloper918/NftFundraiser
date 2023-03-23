@@ -16,7 +16,7 @@ const Footer = () => {
     })
 
     useEffect(() => {
-        dispatch(getFooter())
+        dispatch(getFooter(dispatch))
     }, [])
     // console.log(footer, 'footer')
     const userRole = useSelector(state => {

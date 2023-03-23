@@ -50,7 +50,7 @@ const RoleChangeOrganizationdetails = () => {
         formData.append('description', description)
         // formData.append('method_heard_detail', values.method_heard_detail)
 
-        dispatch(CreateOrganizationAfterRoleChange(formData))
+        dispatch(CreateOrganizationAfterRoleChange(formData, dispatch))
         // if (formData) {
         //     swal("Registered!", "You have been registered!", "success");
         //     history.push('/login')

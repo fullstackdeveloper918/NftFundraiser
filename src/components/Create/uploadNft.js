@@ -20,7 +20,7 @@ import swal from 'sweetalert';
 import { useHistory } from 'react-router';
 import DModal from './3dModal';
 import ProTypePopup from './ProjectTypePopup';
-
+import { LogsAction } from '../../redux/Actions/logsAction';
 
 const UploadNft = ({ current, prev }) => {
 
@@ -30,6 +30,7 @@ const UploadNft = ({ current, prev }) => {
     const [count, setCount] = useState(1);
     console.log("count", count)
     const [nft_description, setNft_description] = useState([])
+    console.log("nftdescr", nft_description)
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
     const [projmodalShow, setProjModalShow] = React.useState(false);
@@ -61,6 +62,8 @@ const UploadNft = ({ current, prev }) => {
 
     console.log(nft_collection_id, "nft collections")
     const [nftName, setNftName] = useState([])
+    const [nftDescription, setNftDescription] = useState([])
+    console.log("nftDescription", nftDescription)
     console.log("nftName", nftName)
 
 
@@ -104,7 +107,7 @@ const UploadNft = ({ current, prev }) => {
     // console.log(count, 'count')
 
     function onHandleClick(index, item) {
-
+        // debugger
         setNft_collection_id(previ => {
             previ[index] = item
             return {
@@ -116,12 +119,12 @@ const UploadNft = ({ current, prev }) => {
 
 
     const defaultValues = {
-        setNft_description: '',
+        setNft_description: null,
     }
 
     const { register, handleSubmit, formState: { errors }, watch, control, setValue } = useForm({
         mode: 'all',
-        defaultValues
+
     });
     useEffect(() => {
 
@@ -240,14 +243,34 @@ const UploadNft = ({ current, prev }) => {
 
 
     }, [])
+    const nftDescriptionHandler = (index, item) => {
+        // setNft_description(event?.currentTarget?.value)
+        setNft_description(previ => {
+            return {
+                ...previ,
+                [item]: index
+            }
+        })
+        // setNft_description(nftDescription[index])
+    }
+    // function onHandleClick(index, item) {
 
+    //     setNft_collection_id(previ => {
+    //         previ[index] = item
+    //         return {
+    //             ...previ,
+    //         }
+    //     }
+    //     );
+    // };
 
     const onFinish = async (values) => {
+        // debugger
         try {
             setLoading(true)
             // debugger
             // const nftImagepromises = values?.nfts?.map(x => uploadNFT(x?.nft_image?.file))
-            const nftImagepromises = values?.nfts?.map(x => uploadNFT(nft))
+            const nftImagepromises = values?.nfts?.map(x => uploadNFT(nft, dispatch))
 
             const imagesRes = await Promise.all(nftImagepromises).then(res => res)
             // 
@@ -309,7 +332,7 @@ const UploadNft = ({ current, prev }) => {
                 ))
 
                 formData.append('nft_collection_id', coll_id)
-                formData.append('nft_description', nft_description)
+                formData.append('nft_description', Object?.values(nft_description))
 
 
                 dispatch(CreateProjectAction(formData, setLoading, history))
@@ -322,33 +345,13 @@ const UploadNft = ({ current, prev }) => {
             }
         } catch (error) {
             console.log(error, 'error')
+            dispatch(LogsAction(error))
+            // throw new Error('Nft not uplpoaded while creating project')
         }
 
     };
 
-    // // console.log('title', localStorage.getItem('title'))
-    // const handleCancel = () => setPreviewOpen(false);
 
-    // const handlePreview = async (file) => {
-    //     if (!file.url && !file.preview) {
-    //         file.preview = await getBase64(file.originFileObj);
-    //     }
-    //     setPreviewImage(file.url || file.preview);
-    //     setPreviewOpen(true);
-    //     setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
-    // };
-    // const validateFileType = (
-    //     { type, name }
-    //     allowedTypes?
-    // ) => {
-    //     if (!allowedTypes) {
-    //         return true;
-    //     }
-
-    //     if (type) {
-    //         return allowedTypes.includes(type);
-    //     }
-    // };
 
     const fileProps = {
         name: "file",
@@ -410,8 +413,9 @@ const UploadNft = ({ current, prev }) => {
     }
 
 
-    const headerDetail = Object?.values(nftName)
-    console.log("headerdata", headerDetail)
+
+    // const headerDetail = Object?.values(nft_description)
+    // console.log("headerdata", headerDetail)
     return (
         // <section className="author-area">
         <div className="main-create ">
@@ -556,15 +560,19 @@ const UploadNft = ({ current, prev }) => {
                                                                                     return  */}
                                                                         <JoditEditor
                                                                             ref={editor}
-                                                                            value={nft_description}
+                                                                            // value={nft_description[index]}
+                                                                            // aria-invalid={errors.nft_description ? "true" : "false"}
+
                                                                             // config={config}
 
                                                                             placeholder="start typing"
                                                                             tabIndex={1} // tabIndex of textarea
-                                                                            onBlur={(newContent, e) => setNft_description(newContent)}
+                                                                            // onBlur={(newContent, e) => setNft_description(newContent)}
                                                                             // preferred to use only this option to update the content for performance reasons
-                                                                            onChange={(e) => { }}
+                                                                            onChange={e => nftDescriptionHandler(e, index)}
                                                                         />
+                                                                        {/* {nft_description.length == 0 && <p style={{ color: 'red' }} role="alert">Category is required</p>} */}
+                                                                        {/* {errors.nft_description === 'required' && <p style={{ color: 'red' }} role="alert">Category is required</p>} */}
                                                                         {/* }} */}
                                                                         {/* /> */}
                                                                     </Form.Item>

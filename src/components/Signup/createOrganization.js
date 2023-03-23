@@ -68,7 +68,7 @@ const CreateOrganization = ({ formStep, nextFormStep, goBack }) => {
         formData.append('description', description)
         // formData.append('method_heard_detail', values.method_heard_detail)
 
-        dispatch(Register(formData))
+        dispatch(Register(formData, dispatch))
         // if (formData) {
         //     swal("Registered!", "You have been registered!", "success");
         //     history.push('/login')

@@ -3,6 +3,9 @@ import swal from 'sweetalert';
 import axios from 'axios';
 import { NftList } from '../../redux/Actions/projectAction';
 import { useState } from 'react';
+import { logdispatch, LogsAction } from '../../redux/Actions/logsAction';
+import { useDispatch } from 'react-redux';
+
 
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
@@ -23,7 +26,6 @@ export const Roles = {
   "BUYER": 2,
   "CREATOR": 3
 }
-
 export const creatorWalletUpdate = async (auth_token) => {
   try {
 
@@ -71,12 +73,13 @@ export const UpdateWalletAddress = async (role, auth_token = null) => {
     return response
 
   } catch (error) {
-
+    // dispatch(LogsAction(error))
     return error
+    // await dispatch(LogsAction(error))
   }
 };
 
-export const ConnectWallet = async (role) => {
+export const ConnectWallet = async (role, dispatch) => {
 
   const chainId = 80001// Polygon Mainnet
 
@@ -88,6 +91,7 @@ export const ConnectWallet = async (role) => {
       });
 
     } catch (err) {
+      dispatch(LogsAction(err))
       // This error code indicates that the chain has not been added to MetaMask
       if (err.code === 4902) {
         await window.ethereum.request({
@@ -132,6 +136,7 @@ export const ConnectWallet = async (role) => {
         }
 
       } catch (err) {
+        dispatch(LogsAction(err))
         return {
           address: "",
           status: "😥 " + err.message,
@@ -157,7 +162,7 @@ export const ConnectWallet = async (role) => {
   }
 }
 
-export const getCurrentWalletConnected = async () => {
+export const getCurrentWalletConnected = async (dispatch) => {
   if (window.ethereum) {
     try {
       // 
@@ -177,6 +182,7 @@ export const getCurrentWalletConnected = async () => {
         };
       }
     } catch (err) {
+      dispatch(LogsAction(err))
       return {
         address: "",
         status: "😥 " + err.message,
@@ -231,6 +237,8 @@ export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from,
 
     )
   } catch (error) {
+    return error
+    // await dispatch(LogsAction(error))
     // 
     // console.log("error");
   }
@@ -254,8 +262,10 @@ const UpdateContract = async (collid, contractAddress) => {
     await axios.post(`${process.env.REACT_APP_BACKEND_API}api/updateContract/${collid}`,
       formData, config
     )
-  } catch (error) {
-    // console.log("error");
+  } catch (e) {
+    // await dispatch(LogsAction(e))
+
+    console.log("error");
   }
 };
 
@@ -280,14 +290,17 @@ export const sendFileToIPFS = async (fileImg) => {
 
       return ImgHash
 
-    } catch (error) {
+    } catch (e) {
+      return e
+      // await dispatch(LogsAction(e))
+
       // console.log("Error sending File to IPFS: ")
       // console.log(error)
     }
   }
 }
 
-export const CreateMetaDataAndMint = async ({ dispatch, slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date }) => {
+export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date, setModalShow, dispatch }) => {
 
   const contract = await new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
   // new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A");//loadContract();
@@ -349,8 +362,12 @@ export const CreateMetaDataAndMint = async ({ dispatch, slug, _imgBuffer, _des, 
       status: ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>"
     }
   } catch (error) {
+    await dispatch(LogsAction(error))
+    // Await dispatch(LogsAction(error)
+
     // 
-    alert("went wrong")
+    swal("error", "Transaction rejected please try again!", "error")
+    setModalShow(false)
     return {
       success: false,
       status: ":disappointed_relieved: Something went wrong: " + error.message
@@ -385,12 +402,15 @@ const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to,
       formData, config
     )
   } catch (error) {
+    return error
+    // await dispatch(LogsAction(error))
+
     // 
     // console.log("error");
   }
 };
 
-export const updateReffid = async ({ tokenId, refid, nft_id, }) => {
+export const updateReffid = async ({ tokenId, refid, nft_id, dispatch }) => {
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -421,12 +441,13 @@ export const updateReffid = async ({ tokenId, refid, nft_id, }) => {
     // setRefamount(res?.data?.data)
     // }
   } catch (error) {
+    await dispatch(LogsAction(error))
+
     // 
     // console.log("error");
   }
 };
-export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal }) => {
-  // debugger
+export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
@@ -441,8 +462,8 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       let wallets = []
       let fee = []
       // web3.fromWei(web3.eth.getBalance
-      const bala = web3.fromWei(web3.eth.getBalance(window.ethereum?.selectedAddress))
-      console.log(bala, 'balance')
+      // const bala = web3.fromWei(web3.eth.getBalance(window.ethereum?.selectedAddress))
+      // console.log(bala, 'balance')
       // .then(console.log);
       wallets = refid === "null" ? [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets] : [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets, refid]
       fee = refid === "null" ? [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees] : [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, localStorage.getItem('refamount')]
@@ -518,6 +539,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
           // modalShow(false)
         })
         .on('error', function (error) {
+          dispatch(LogsAction(error))
           // console.log(error.message, "error")
           swal('error', JSON.stringify(error.message, 'error'))
           // alert(JSON.stringify(error.message))
@@ -528,7 +550,10 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
           // will be fired once the receipt is mined
         })
     } catch (error) {
-      console.log(JSON.stringify(error.message))
+      dispatch(LogsAction(error))
+
+      swal("error", JSON.stringify(error.message), "error")
+      loadingg(false)
       // alert(JSON.stringify(error.message))
 
     }
@@ -559,12 +584,14 @@ const UpdateBid = async ({ amount, project_id, nft_id, pay_to, pay_from }) => {
       formData, config
     )
   } catch (error) {
+    // await dispatch(LogsAction(error))
+    return error
     // 
     // console.log("error");
   }
 };
 
-export const BidNft = async (id, projid) => {
+export const BidNft = async (id, projid, dispatch) => {
 
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
@@ -629,6 +656,8 @@ export const BidNft = async (id, projid) => {
       //     // will be fired once the receipt is mined
       //   })
     } catch (error) {
+      await dispatch(LogsAction(error))
+
       // 
       alert(error)
 

@@ -55,6 +55,7 @@ const MyRouts = () => {
       <BrowserRouter>
         <ScrollToTop />
         <Switch>
+
           <Route exact path="/" component={ThemeOne} />
           <Route exact path="/explore-1" component={ExploreOne} />
           <Route exact path="/projectlist" component={ExploreTwo} />

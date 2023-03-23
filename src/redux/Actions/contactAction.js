@@ -1,6 +1,7 @@
 import axios from "axios";
 import swal from "sweetalert";
 import { postContact } from "../Slices/contactSlice";
+import { LogsAction } from "./logsAction";
 export const ContactAction = (params, setLoading) => async dispatch => {
     // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
@@ -27,6 +28,7 @@ export const ContactAction = (params, setLoading) => async dispatch => {
         }
 
     } catch (e) {
+        await dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
