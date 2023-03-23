@@ -2376,6 +2376,12 @@ ul.creator-dropdown.notification-menu:after {
         left: 106px;
     }
 } */
+@media(min-width: 1200px){
+  .container , .container.header{
+    max-width: 100%;
+    padding: 0 100px;
+  }
+}
 @media (max-width: 1550px){
     :root ul.creator-dropdown.dropdown-menu {
         left: unset !important;
