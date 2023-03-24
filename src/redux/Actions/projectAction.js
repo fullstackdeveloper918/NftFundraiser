@@ -48,6 +48,7 @@ export const CreateProjectAction = (params, setLoading, history) => async dispat
         dispatch(createProjectSuccess(res));
 
         if (res.status === 200) {
+            // if (res.data.id == 1) { }
             setLoading(false)
 
             swal({ title: "success", text: res.data.message, icon: 'success', buttons: false, timer: 1500 })
@@ -238,7 +239,7 @@ export const getPublicLiveProjects = createAsyncThunk(
     })
 
 export const UpdateProject = (props, params) => async dispatch => {
-    debugger
+    // debugger
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -523,7 +524,7 @@ export const GetfundraiserProject = (slug) => async dispatch => {
 }
 
 export const UpdateBanner = (formData, props) => async dispatch => {
-    debugger
+    // debugger
     const token = localStorage.getItem('authToken')
     try {
         const config = {

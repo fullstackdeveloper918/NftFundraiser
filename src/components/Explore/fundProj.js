@@ -52,7 +52,7 @@ const GetAllFundraiseProjects = (props) => {
                             {fundprojdetail?.map((item, idx) => {
 
                                 return (
-                                    <Link key={`edth_${idx}`} to={`/projdetails/${item.id}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
+                                    <Link key={`edth_${idx}`} to={`/projects/${item.slug}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
                                         <div>
                                             <div className="card project_cards">
                                                 <div className="image-over relative ">
