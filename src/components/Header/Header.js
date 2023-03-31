@@ -10,7 +10,9 @@ import Swal from 'sweetalert2';
 import { isCancel } from 'axios';
 import moment from "moment";
 import { NavLink } from 'react-router-dom';
-import { Space, Switch, Tooltip } from 'antd';
+import { Space, Switch, Tooltip, notification, Button } from 'antd';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
     const location = useLocation();
@@ -34,6 +36,14 @@ const Header = () => {
         return state.user.userToken
     })
 
+    const close = () => {
+        console.log(
+            'Notification was closed. Either the close button was clicked or duration time elapsed.',
+        );
+    };
+
+    const [api, contextHolder] = notification.useNotification();
+
 
 
 
@@ -54,26 +64,7 @@ const Header = () => {
 
     }, [dispatch, address])
 
-    const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
 
-    const showPopconfirm = () => {
-        setOpen(true);
-    };
-
-    const handleOk = () => {
-        setConfirmLoading(true);
-
-        setTimeout(() => {
-            setOpen(false);
-            setConfirmLoading(false);
-        }, 2000);
-    };
-
-    const handleCancel = () => {
-        console.log('Clicked cancel button');
-        setOpen(false);
-    };
 
     useEffect(() => {
         window.addEventListener("beforeunload", handleBeforeUnload);
@@ -111,7 +102,19 @@ const Header = () => {
         OPTION2: "Creator"
     }]
     const [activeOption, setActiveOption] = useState(false);
-
+    toast.configure()
+    useEffect(() => {
+        toast('🦄 Wow so easy!', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: false,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }, [])
 
     const roleHandler = () => {
         dispatch(ChangeUserRole(history))
@@ -215,6 +218,9 @@ const Header = () => {
                         <li className="nav-item">
                             <NavLink exact activeClassName="navbar__link--active" className="nav-link" to="/">Explore</NavLink>
                         </li>
+                        <li className="nav-item">
+                            {/* <button onClick={tstt}>df</button> */}
+                        </li>
                         {/* {log !== null && ( */}
                         <li className="nav-item text-left nav-main" >
                             <a onClick={() => handleCreate()} className={location.pathname === `/create` && "nav-link-active"} activeClassName={location.pathname === `/create` && "navbar__link--active"} >Create</a>
@@ -225,6 +231,8 @@ const Header = () => {
                         <li className="nav-item">
                             <a target="_blank" href="https://changelly.com/?from=btc&to=matic&amount=0.1&ref_id=_-GPCBjccW7TMMjO" className="nav-link">Swap</a>
                         </li>
+
+
 
                     </ul>
                     {/* Navbar Toggler */}

@@ -29,7 +29,9 @@ function SellPopup(props) {
     const [modalShow, setModalShow] = React.useState(false);
 
     const [auctiontype, setAuctionType] = useState("")
+    // console.log("auction type", auctiontype)
     const autionTypeChange = (event) => {
+
         setAuctionType(event.target.value);
 
     }
@@ -215,7 +217,7 @@ function SellPopup(props) {
                                         type="radio"
                                         name="radiobutton"
                                         id="2"
-                                        disabled
+
                                         onChange={autionTypeChange}
                                         value="2"
                                         {...register("auctiontype", { required: true })}

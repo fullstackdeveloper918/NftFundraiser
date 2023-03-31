@@ -651,6 +651,7 @@ export const GetMatic = () => async dispatch => {
     }
 };
 export const getBid = (id) => async dispatch => {
+    // debugger
     try {
         const token = localStorage.getItem('authToken')
         const config = {
@@ -663,6 +664,7 @@ export const getBid = (id) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/getBidsDetailByIdx/${id}}`,
             config)
         await dispatch(res)
+
         console.log('res bid', res)
     } catch (e) {
         dispatch(LogsAction(e))
@@ -683,9 +685,12 @@ export const UpdateBId = ({ id, status }) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/change_bids_status/${id}}`,
             { status: status }, config)
         await dispatch(res)
-
+        if (res.status == 200) {
+            swal("success", "success", "success")
+        }
         console.log('res bid', res)
     } catch (e) {
+        swal("error", e?.response?.data?.message, "success")
         dispatch(LogsAction(e))
         // console.log("error");
     }

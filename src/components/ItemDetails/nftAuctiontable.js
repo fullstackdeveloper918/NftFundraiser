@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Collapse } from 'antd';
+import { Button, Collapse } from 'antd';
 import { getBid, NftList, ProjectDetail, ProjectList, UpdateBId } from '../../redux/Actions/projectAction';
 import { useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
@@ -14,7 +14,7 @@ const NftAuctiondataTable = (props) => {
         console.log(key);
     };
     const { slug } = useParams()
-    const [bidstatus, setBidStatus] = useState(2)
+    const [bidstatus, setBidStatus] = useState(" ")
     console.log('biddst', bidstatus)
     const [expandIconPosition, setExpandIconPosition] = useState('end');
     const onPositionChange = (newExpandIconPosition) => {
@@ -37,10 +37,14 @@ const NftAuctiondataTable = (props) => {
     }, [props.slug.id])
 
     const acceptHandler = (id) => {
-
         console.log("accept", id)
         getBid(props)
-        dispatch(UpdateBId({ id, status: bidstatus }))
+        dispatch(UpdateBId({ id, status: "2" }))
+    }
+    const rejectHandler = (id) => {
+        console.log("reject", id)
+        getBid(props)
+        dispatch(UpdateBId({ id, status: "3" }))
     }
     return (
         <div className='position-relative'>
@@ -61,7 +65,7 @@ const NftAuctiondataTable = (props) => {
                                 <th>Bid Price</th>
                                 <th>Wallet</th>
                                 {/* <th>To</th> */}
-                                <th>Transaction</th>
+                                {/* <th>Transaction</th> */}
                                 <th>Action</th>
                             </tr>
 
@@ -77,11 +81,12 @@ const NftAuctiondataTable = (props) => {
                                         <td>{item.amount}</td>
                                         <td>{item.pay_from?.slice(0, 4)}...{item.pay_from?.slice(35, 44)}</td>
                                         {/* <td>{item.pay_to?.slice(0, 4)}...{item.pay_to?.slice(35, 44)}</td> */}
-                                        <td>{item.txd_id?.slice(0, 4)}...{item.txd_id?.slice(35, 44)}</td>
+                                        {/* <td>{item.txd_id?.slice(0, 4)}...{item.txd_id?.slice(35, 44)}</td> */}
                                         <td>
                                             {item.status == 1 ? (
 
-                                                <button type="submit" onClick={() => acceptHandler(item.id, setBidStatus("2"))}>Accept</button>
+                                                <><Button type="submit" onClick={() => acceptHandler(item.id)}>Accept</Button>
+                                                    <Button type="submit" onClick={() => rejectHandler(item.id)}>Reject</Button></>
                                             ) : (
                                                 <a>Confirmed</a>
                                             )}

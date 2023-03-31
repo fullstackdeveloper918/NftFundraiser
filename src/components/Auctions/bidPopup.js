@@ -10,7 +10,7 @@ function BidPopup(props) {
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
     const onSubmit = () => {
         // debugger
-        BidNft(props.id, props.projid, dispatch)
+        BidNft(props.id, props.projid, props.from, props.onHide)
     }
 
     return (
@@ -20,6 +20,7 @@ function BidPopup(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
+
             <Modal.Header >
 
                 <div>
@@ -50,7 +51,7 @@ function BidPopup(props) {
                         <hr />
 
                         <div className="col-12">
-                            <button className="btn w-100 mt-3 mt-sm-4" type="submit">Pay with wallet </button>
+                            <button className="btn w-100 mt-3 mt-sm-4" type="submit">Place Your Bid </button>
                         </div>
                     </div>
 
