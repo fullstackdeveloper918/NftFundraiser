@@ -1,14 +1,11 @@
-
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Collapse } from 'antd';
 import { GetNftwol, ProjectDetail, ProjectList } from '../../redux/Actions/projectAction';
 import { useLocation, useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
-
 const UserTransdataTable = (props) => {
     const dispatch = useDispatch()
-
     const { Panel } = Collapse;
     const onChange = (key) => {
         console.log(key);
@@ -18,19 +15,9 @@ const UserTransdataTable = (props) => {
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
     };
-
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
-
-    // const latprojnftdetail = useSelector(state => {
-    //     // 
-    //     return state?.projectdetails?.getnftwoldetails
-    // })
-    // console.log('lattt', latprojnftdetail.nft_history)
-    // useEffect(() => {
-    //     dispatch(GetNftwol(props.id))
-    // }, [props.id])
     const location = useLocation()
     return (
         <div className='position-relative'>
@@ -43,33 +30,20 @@ const UserTransdataTable = (props) => {
                 <Panel header="Item Activity" key="1">
                     <Table responsive >
                         <thead>
-
-
                             <tr>
-
                                 <th>NFT</th>
                                 <th>Project</th>
                                 <th>Price</th>
                                 <th>From</th>
                                 <th>To</th>
                                 <th>Token</th>
-
                                 <th>Transaction</th>
                             </tr>
-
-
                         </thead>
-
-
-
-
-
-
                         <tbody>
                             {userdet?.payment_history?.map((items) => {
                                 return (
                                     <tr>
-
                                         <td>#{items.nft_id}</td>
                                         <td>#{items.project_id}</td>
                                         <td>{items.price}</td>
@@ -80,14 +54,8 @@ const UserTransdataTable = (props) => {
                                     </tr>
                                 )
                             })}
-
                         </tbody>
-
-
-
-
                     </Table>
-
                 </Panel>
                 {userdet?.payment_history?.length == 0 &&
                     <div className='nothing'>
@@ -98,5 +66,4 @@ const UserTransdataTable = (props) => {
         </div>
     )
 }
-
 export default UserTransdataTable

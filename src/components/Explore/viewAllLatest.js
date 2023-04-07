@@ -1,10 +1,11 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import {
   CategoriesAction,
   getPublicLiveProjects,
 } from "../../redux/Actions/projectAction";
+import { Pagination } from "antd";
 
 const projectTypesMap = {
   LatestProjects: 2,
@@ -14,15 +15,20 @@ const projectTypesMap = {
 const ExploreAll = () => {
   const { type } = useParams();
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
 
   const liveProjects = useSelector((state) => {
     return state?.projectdetails?.liveProjects[type];
   });
-  console.log(liveProjects?.nft_data?.image, "live");
+  const liveProjectspag = useSelector((state) => {
+    return state?.projectdetails?.liveProjectsPag;
+  });
+  console.log(liveProjectspag, "live");
 
-
+  let PageSize = liveProjectspag.page_per_data;
   useEffect(() => {
-    //
+
+
     dispatch(
       getPublicLiveProjects({
         cursor: 1,
@@ -137,6 +143,13 @@ const ExploreAll = () => {
             </div>
           )}
         </div>
+        {/* <Pagination
+          className="pagination-bar"
+          currentPage={currentPage}
+          totalCount={liveProjects?.data_count}
+          pageSize={PageSize}
+          onPageChange={page => setCurrentPage(page)}
+        /> */}
       </div>
     </section>
   );

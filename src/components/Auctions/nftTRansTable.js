@@ -1,31 +1,28 @@
-
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Collapse } from 'antd';
-import { GetNftwol, ProjectDetail, ProjectList } from '../../redux/Actions/projectAction';
+import { GetNftwol } from '../../redux/Actions/projectAction';
 import { useLocation, useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
-
 const NftTransdataTable = (props) => {
     const dispatch = useDispatch()
-
     const { Panel } = Collapse;
     const onChange = (key) => {
         console.log(key);
     };
+
+
+
     const { id } = useParams()
     const [expandIconPosition, setExpandIconPosition] = useState('end');
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
     };
-
-
-
     const latprojnftdetail = useSelector(state => {
         // 
         return state?.projectdetails?.getnftwoldetails
     })
-    console.log('lattt', latprojnftdetail.nft_history)
+    console.log('lattt', latprojnftdetail)
     useEffect(() => {
         dispatch(GetNftwol(props.id))
     }, [props.id])
@@ -41,32 +38,23 @@ const NftTransdataTable = (props) => {
                 <Panel header="Item Activity" key="1">
                     <Table responsive >
                         <thead>
-
-
                             <tr >
-
                                 <th>NFT</th>
                                 <th>Project</th>
                                 <th>Price</th>
                                 <th>From</th>
                                 <th>To</th>
                                 <th>Token</th>
-
                                 <th>Transaction</th>
                             </tr>
-
-
                         </thead>
-
-
                         <tbody>
                             {latprojnftdetail?.nft_history?.map((items) => {
                                 return (
                                     <tr className='contract-address'>
-
                                         <td>#{items.nft_id}</td>
                                         <td>#{items.project_id}</td>
-                                        <td>{items.price}</td>
+                                        <td className='referal'>{items.price}<img src='../../img/image14.png' /></td>
                                         <td>{items.pay_from.slice(0, 4)}...{items.pay_from.slice(35, 44)}</td>
                                         <td>{items.pay_to.slice(0, 4)}...{items.pay_to.slice(35, 44)}</td>
                                         <td>#{items.token_id}</td>
@@ -74,12 +62,7 @@ const NftTransdataTable = (props) => {
                                     </tr>
                                 )
                             })}
-
                         </tbody>
-
-
-
-
                     </Table>
                     <div className='nothing'>
                         {latprojnftdetail?.nft_history?.length == 0 &&
@@ -87,10 +70,8 @@ const NftTransdataTable = (props) => {
                         }
                     </div>
                 </Panel>
-
             </Collapse>
         </div>
     )
 }
-
 export default NftTransdataTable

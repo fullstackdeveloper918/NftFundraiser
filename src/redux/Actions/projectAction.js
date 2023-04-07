@@ -21,13 +21,15 @@ import {
     nftAdd,
     getMatic,
     getmostprojactivity,
-    getbuyednftdetails
+    getbuyednftdetails,
+    publicLiveProjectspagination
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import swal from "sweetalert";
 import { LogsAction } from "./logsAction";
 
 export const CreateProjectAction = (params, setLoading, history) => async dispatch => {
+    // debugger
     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
     // setLoading(true)
@@ -166,45 +168,48 @@ export const NftList = (slug, setLoading) => async dispatch => {
         }
     }
 }
-export const uploadNFT = async (params, dispatch) => {
+export const uploadNFT = async (nft, dispatch) => {
     // debugger
-    // const [loading, setLoading] = useState()
-    // setLoading(true)
-    const token = localStorage.getItem('authToken')
-    const config = {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${token}`
-        },
-        // transformRequest: formData.append('image', params)
+    try {
+
+        // const [loading, setLoading] = useState()
+        // setLoading(true)
+        const token = localStorage.getItem('authToken')
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${token}`
+            },
+            // transformRequest: formData.append('image', params)
+        }
+        const formData = new FormData();
+
+        for (let i = 0; i < nft.length; i++) {
+            formData.append("image[]", nft[i]);
+        }
+
+        return axios
+            .post(`${process.env.REACT_APP_BACKEND_API}api/ipfsHash/Nfft`,
+                formData, config)
+            .then(function (response) {
+
+                // console.log(response, 'resss')
+                return {
+                    success: true,
+                    data: response.data
+                };
+            },
+
+
+            )
+    } catch (error) {
+
+        dispatch(LogsAction(error))
+        swal('error', error, 'error')
+
     }
-    const formData = new FormData();
 
-    formData.append("image", params);
-    return axios
-        .post(`${process.env.REACT_APP_BACKEND_API}api/ipfsHash/Nfft`,
-            formData, config)
-        .then(function (response) {
-            // setLoading(false)
-            // console.log(response, 'resss')
-            return {
-                success: true,
-                data: response.data,
-            };
-        })
-        .catch(function (error) {
-            dispatch(LogsAction(error))
-            // swal('error!', 'NFT not uploaded', 'error')
-            // uploadNFT(setLoading(false))
-        });
-    // formData.append('image',params)
 
-    // const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/ipfsHash/Nfft`,
-    //     params, config)
-    // 
-    // console.log('rasasses', res)
-    // return res
-    // await dispatch(Nftres(res))
 
 }
 
@@ -212,7 +217,7 @@ export const uploadNFT = async (params, dispatch) => {
 export const getPublicLiveProjects = createAsyncThunk(
     "auth/liveProjects",
 
-    async (params, thunkAPI) => {
+    async (params, thunkAPI, setLatestData) => {
         try {
             const { projectType } = params
             const latitude = localStorage.getItem('latitude')
@@ -222,12 +227,17 @@ export const getPublicLiveProjects = createAsyncThunk(
                     'Content-Type': 'application/json',
                 },
             }
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=&latitude=${latitude}&longitude=${longitude}&search_keyword=&category_id=&type`, config)
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=1   &latitude=${latitude}&longitude=${longitude}&search_keyword=&category_id=&type`, config)
             // console.log(res, 'projres')
             thunkAPI.dispatch(publicLiveProjects({
                 res: res,
                 type: projectType,
             }));
+            thunkAPI.dispatch(publicLiveProjectspagination({
+                res: res,
+
+            }));
+            // setLatestData(res.data.data())
             // thunkAPI.dispatch(publicLiveProjects(res));
 
         } catch (e) {
@@ -545,6 +555,7 @@ export const UpdateBanner = (formData, props) => async dispatch => {
             swal("success", "updated", 'success').then(function () {
                 dispatch(ProjectDetail(props.id))
                 dispatch(LatestProjectDetail(props.id))
+
                 // window.location = "/projectlist";
             });
             props.onHide(false)

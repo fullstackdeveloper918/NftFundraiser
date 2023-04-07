@@ -24,6 +24,7 @@ const projectSlice = createSlice({
         getBuyedNftdetails: [],
         getnftwoldetails: [],
         settings: [],
+        liveProjectsPag: [],
         nftadd: [],
         nftres: [],
         nftupdate: [],
@@ -126,6 +127,11 @@ const projectSlice = createSlice({
             // state.liveProjects = action.payload.data.data.data
             // state.liveProjects['R'] = action.payload.data.data.data
         },
+        publicLiveProjectspagination: (state, action) => {
+            state.liveProjectsPag = action.payload.res.data.data
+            // state.liveProjects = action.payload.data.data.data
+            // state.liveProjects['R'] = action.payload.data.data.data
+        },
         deleteProject: (state, action) => {
             const { id } = action.payload?.data?.data;
             state.projects = state.projects.filter(item => item.id !== id)
@@ -141,6 +147,7 @@ export const {
     getProjectDetail,
     getLatestProjectDetail,
     publicLiveProjects,
+    publicLiveProjectspagination,
     createCollectionSuccess,
     deleteProject,
     createFail,

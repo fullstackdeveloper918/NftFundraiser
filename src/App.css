@@ -2744,7 +2744,8 @@ i.fa-solid.fa-share-nodes {
     /* position: unset; */
 }
 h6{
-    font-weight: 600 !important;
+    font-weight: 400 !important;
+    font-family: 'Poppins';
 }
 .nft-price img {
     width: 30px;

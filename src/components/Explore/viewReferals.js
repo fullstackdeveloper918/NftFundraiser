@@ -114,7 +114,7 @@ const RefralTransdataTable = (props) => {
                                     </Panel>
                                 </Collapse>
                             </div>
-                        </TabPanel>git
+                        </TabPanel>
                     </Tabs>
                 </div>
             </div>

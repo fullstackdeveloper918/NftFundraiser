@@ -54,7 +54,6 @@ const AuctionsOne = ({ type }) => {
                     key={`auc_${item.id}`}
                     className="swiper-slide item card position-relative auctions-slides-card"
                   >
-
                     <div className="image-over">
                       <Link to={`/projects/${item.slug}`}>
                         <img
@@ -66,7 +65,6 @@ const AuctionsOne = ({ type }) => {
                     </div>
                     <div className="card-caption col-12 p-0">
                       <div className="card-body">
-
                         {/* <a> */}
                         <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
                         {/* </a> */}
@@ -81,8 +79,7 @@ const AuctionsOne = ({ type }) => {
                           {/* </a> */}
                         </div>
                         <div className="card-bottom d-flex justify-content-between nft-price" >
-                       
-                          <span><img className="mr-1"src='../img/image14.png' />{Math.round(item.price)} MATIC</span>
+                          <span><img className="mr-1" src='../img/image14.png' />{Math.round(item.price)} MATIC</span>
                           {item?.number_of_nft == 1 ? (
                             <span>{item.number_of_nft} NFT</span>
                           ) : (
@@ -94,15 +91,12 @@ const AuctionsOne = ({ type }) => {
                             className="btn  btn-smaller mt-3 mb-0"
                             href="/login"
                           ><i className="icon-handbag" />
-                          {/* <i className="fa-solid fa-sack-dssollar"></i> */}
-                           
+                            {/* <i className="fa-solid fa-sack-dssollar"></i> */}
                           </a>
                           <a
                             className="btn  btn-smaller mt-3 ml-2 mb-0"
                             href="/login"
                           ><i class="fa-solid fa-share-nodes text-white"></i>
-                          
-                          
                           </a>
                         </div>
                       </div>

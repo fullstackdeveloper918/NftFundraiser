@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getPublicLiveProjects } from "../../redux/Actions/projectAction";
 import { ResellAction } from "../../redux/Actions/resellNftAction";
-
 const Resell = ({ type }) => {
     const dispatch = useDispatch();
     const nfts = useSelector((state) => {
@@ -12,7 +11,6 @@ const Resell = ({ type }) => {
     console.log(nfts[0]?.image, "resellnfts");
     useEffect(() => {
         dispatch(ResellAction())
-
     }, [dispatch]);
     return (
         <section className="live-auctions-area">
@@ -26,7 +24,6 @@ const Resell = ({ type }) => {
                                 <h3 className="mt-3 mb-0">
                                     Latest NFTs
                                 </h3>
-
                             </div>
                             <div className="intro-btn">
                                 {nfts?.length > 4 && (
@@ -48,7 +45,6 @@ const Resell = ({ type }) => {
                                         key={`auc_${item.id}`}
                                         className="swiper-slide item card position-relative auctions-slides-card"
                                     >
-
                                         <div className="image-over">
                                             <Link to={`/nft/resell/details/${item.slug}`}>
                                                 <img
@@ -60,7 +56,6 @@ const Resell = ({ type }) => {
                                         </div>
                                         <div className="card-caption col-12 p-0">
                                             <div className="card-body">
-
                                                 {/* <a> */}
                                                 <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
                                                 {/* </a> */}
@@ -76,21 +71,13 @@ const Resell = ({ type }) => {
                                                 </div>
                                                 <div className="card-bottom d-flex justify-content-between nft-price" >
                                                     <span><img className="mr-1" src='../img/image14.png' />{Math.round(item.price)} MATIC</span>
-                                                    {/* {item?.number_of_nft == 1 ? ( */}
                                                     <span>1 NFT</span>
-                                                    {/* ) : ( */}
-                                                    {/* <span>{item.number_of_nft} NFTs</span> */}
-                                                    {/* )} */}
                                                 </div>
                                                 <div className="d-flex justify-content-between edit-buttons nft-price ">
                                                     <Link to={`/nft/details/${item.slug}`} style={{ color: "white" }} className="btn  btn-smaller mt-3 mb-0">
-
-
                                                         <i className="icon-handbag" />
                                                     </Link>
                                                     <Link to={`/nft/details/${item.slug}`} className="btn  btn-smaller mt-3 ml-2 mb-0" style={{ color: "white" }}>
-
-
                                                         <i class="fa-solid fa-share-nodes text-white"></i>
                                                     </Link>
                                                 </div>

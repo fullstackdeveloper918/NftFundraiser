@@ -1,4 +1,3 @@
-
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { CategoriesAction, CreateCollectionAction, UpdateProject } from '../../redux/Actions/projectAction';
@@ -40,17 +39,11 @@ import { useParams } from 'react-router';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 function ProjDetailPopup(props) {
     const editor = useRef(null);
-    // const [title, setTitle] = useState("");
-    // const [description, setDescription] = useState("");
-    // const [short_url, setShortUrl] = useState("");
-    // const [symbol, setSymbol] = useState("");
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
     const [description, setDescription] = useState();
     const id = useParams()
     const [type, setType] = useState()
-    // const url = window.location.href + '/' + props.userRef
-    // const Refurl = window.location.href + '/' + props.id + '/' + props.userRef
     const { countries } = useSelector(state => state.countries)
     const [country, setCountry] = useState('')
     console.log('country', country)
@@ -61,28 +54,17 @@ function ProjDetailPopup(props) {
         // debugger
         return state.countries.states
     })
-    // console.log(countries?.data?.data)
     useEffect(() => {
         dispatch(CategoriesAction())
         dispatch(CountryList())
-        // dispatch(StateList('101'))
-
-        // dispatch(StateList(projdetail.country))
     }, [])
-
     const handleChangeCountry = (event) => {
         event?.preventDefault()
         // 👇 Get input value from "event"
         setCountry(event?.currentTarget?.value);
-
         const formData = new FormData()
         formData.append('country_id', event?.currentTarget?.value)
         dispatch(StateList(formData))
-
-        // if (country) {
-
-        //     debugger
-        // }
     };
     const handleChangeState = (event) => {
         // debugger
@@ -93,24 +75,16 @@ function ProjDetailPopup(props) {
         formData.append('country_id', country)
         formData.append('state_id', event?.currentTarget?.value)
         dispatch(CityList(formData))
-
-
-        //     debugger
-        // }
     };
     const handleChangeCity = (event) => {
         // debugger
         // 👇 Get input value from "event"
         setCity(event?.currentTarget?.value);
-
     };
-
     const cities = useSelector(state => {
         // debugger
         return state.countries.city
     })
-
-
     const projdetail = useSelector(state => {
         // 
         return state?.projectdetails?.projectdetails
@@ -129,7 +103,6 @@ function ProjDetailPopup(props) {
     };
     useEffect(() => {
         if (projdetail && Object.keys(projdetail).length) {
-
             setValue("title", projdetail.title)
             setValue("address", projdetail.address)
             setValue("description", projdetail.description)
@@ -142,7 +115,6 @@ function ProjDetailPopup(props) {
             setValue("end_date", projdetail.end_date)
             setValue("type", projdetail.type)
             setValue('category_id', projdetail.category_id)
-
             setType(projdetail.type)
             setCountry(projdetail.country)
             setDescription(projdetail.description)
@@ -157,13 +129,10 @@ function ProjDetailPopup(props) {
             formData.append('state_id', projdetail.state)
             dispatch(StateList(formData))
             dispatch(CityList(formData))
-
         }
     }, [projdetail]);
-
     const OnSubmit = (data) => {
         const formData = new FormData()
-
         // formData.append('image', data.image[0])
         formData.append('title', data.title)
         formData.append('description', description)
@@ -174,20 +143,16 @@ function ProjDetailPopup(props) {
         formData.append('price', data.price)
         formData.append('number_of_nft', data.number_of_nft)
         if (data?.type == 1) {
-
             formData.append('start_date', '')
             formData.append('end_date', '')
         } else {
-
             formData.append('start_date', data.start_date)
             formData.append('end_date', data.end_date)
         }
         formData.append('type', data.type)
         formData.append('category_id', data.category_id)
-
         dispatch(UpdateProject(props, formData))
     }
-
     return (
         <Modal
             {...props}
@@ -196,7 +161,6 @@ function ProjDetailPopup(props) {
             centered
         >
             <Modal.Header >
-
                 <div>
                     <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
                 </div>
@@ -204,10 +168,8 @@ function ProjDetailPopup(props) {
             <Modal.Body>
                 <form onSubmit={handleSubmit(OnSubmit)} className="item-form card no-hover">
                     <div className="row">
-
                         <div className="col-6 col-12">
                             {/* {type == 1 && ( */}
-
                             <div className="form-group mt-3">
                                 <label>Project name</label>
                                 <input
@@ -219,7 +181,6 @@ function ProjDetailPopup(props) {
                                     aria-invalid={errors.title ? "true" : "false"}
                                 />
                                 {errors.title?.type === 'required' && <p style={{ color: 'red' }} role="alert">Title is required</p>}
-
                             </div>
                             {/* )} */}
                         </div>
@@ -235,11 +196,8 @@ function ProjDetailPopup(props) {
                                     aria-invalid={errors.address ? "true" : "false"}
                                 />
                                 {errors.address?.type === 'required' && <p style={{ color: 'red' }} role="alert">Address is required</p>}
-
                             </div>
                         </div>
-
-
                         <div className="col-md-6 col-12">
                             <div className="form-group">
                                 <label>Country</label>
@@ -252,21 +210,15 @@ function ProjDetailPopup(props) {
                                             {...register("country", { required: true })}
                                             // value={value}
                                             // defaultValue={value}
-
                                             onChange={handleChangeCountry}
-
                                         >
-
                                             aria-invalid={errors?.country ? "true" : "false"}
-
                                             <option value="" disabled selected style={{ color: "#495057" }} >
                                                 Select your country</option>
                                             {countries?.data?.data?.map((option, key) => (
                                                 <>
                                                     <option key={key.id} value={option.id}  >
-
                                                         {option.name}
-
                                                     </option>
                                                 </>
                                             ))}
@@ -285,7 +237,6 @@ function ProjDetailPopup(props) {
                                     // selected={country}
                                     render={({ field: { onChange, onBlur, value, ref } }) => (
                                         <select name="state"
-
                                             {...register("state", { required: true })}
                                             // defaultValue={value}
                                             // value={value}
@@ -293,7 +244,6 @@ function ProjDetailPopup(props) {
                                             aria-invalid={errors?.state ? "true" : "false"}
                                             <option value="" disabled selected style={{ color: "#495057" }} >Select your state</option>
                                             {states?.data?.data?.map((option, key) => (
-
                                                 <><option key={key.id} value={option.id} >
                                                     {option.name}
                                                 </option></>
@@ -330,79 +280,11 @@ function ProjDetailPopup(props) {
                                 {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">City is required</p>}
                             </div>
                         </div>
-                        {/* <div className="col-12 col-md-6">
-                                    <div className="form-group">
-                                        <label>Country</label>
-                                        <Controller
-                                            control={control}
-                                            name="country"
-                                            // selected={country}
-                                            render={({ field: { onChange, onBlur, value, ref } }) => (
-                                                // onChange={onChange}
-
-                                                <GeoLocation
-                                                    // locationTitle="Country"
-                                                    isCountry
-                                                    onBlur={onBlur}
-                                                    selected={value}
-                                                    onChange={setCountry}
-                                                    required={true}
-                                                />
-                                            )}
-                                        />
-
-                                    </div>
-                                </div>
-                                <div className="col-12 col-md-6">
-                                    <div className="form-group">
-                                        <label>State or Province</label>
-                                        <Controller
-                                            control={control}
-                                            name="state"
-                                            render={({ field: { onChange, onBlur, value, ref } }) => (
-
-                                                <GeoLocation
-                                                    
-                                                    onChange={setState}
-                                                    geoId={country}
-                                                    onBlur={onBlur}
-                                                    selected={value}
-
-                                               
-                                                />
-                                            )}
-                                        />
-                                       
-                                    </div>
-                                </div>
-                                <div className="col-12 col-md-6">
-                                    <div className="form-group">
-                                        <label>City or Region</label>
-                                        <Controller
-                                            control={control}
-                                            name="city"
-                                            render={({ field: { onChange, onBlur, value, ref } }) => (
-
-                                                <GeoLocation
-                                                  
-                                                    onChange={setCity}
-                                                    geoId={state}
-                                                    onBlur={onBlur}
-                                                    selected={value}
-                                             
-                                                />
-                                            )}
-                                        />
-                                     
-                                    </div>
-                                </div> */}
                         <div className="col-12 col-md-6">
                             <div className="form-group">
                                 {projdetail.type == 2 ? (
-
                                     <label>Price</label>
                                 ) : (
-
                                     <label>Price per NFT</label>
                                 )}
                                 <input
@@ -416,7 +298,6 @@ function ProjDetailPopup(props) {
                                 {errors.price?.type === 'required' && <p style={{ color: 'red' }} role="alert">Price is required</p>}
                             </div>
                         </div>
-
                         <div className="col-12 col-md-6">
                             <div className="form-group">
                                 <label>Number of NFTs</label>
@@ -437,7 +318,6 @@ function ProjDetailPopup(props) {
                             </div>
                         </div>
                         {projdetail.type == 2 && (
-
                             <><div className="col-12 col-md-6">
                                 <div className="form-group">
                                     <label>Campaign Start date</label>
@@ -473,31 +353,20 @@ function ProjDetailPopup(props) {
                                     // defaultValue={}
                                     {...register("category_id")}>
                                     {cat?.map((option, key) => (
-
                                         <option key={key.id} value={option.id}>
                                             {option.title}
-
                                         </option>
                                     ))}
                                 </select>
                             </div>
                         </div>
-
-
                         <div className="col-12">
                             <button className="btn w-100 mt-3 mt-sm-4" type="submit">Update</button>
                         </div>
                     </div>
-
-
-
                 </form>
             </Modal.Body>
-            {/* <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer> */}
         </Modal >
     );
 }
-
 export default ProjDetailPopup

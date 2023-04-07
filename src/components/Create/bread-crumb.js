@@ -3,9 +3,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { ProjectDetail } from '../../redux/Actions/projectAction';
-
-
-
 const CollItem = () => {
     const { id } = useParams();
     const dispatch = useDispatch()
@@ -13,21 +10,16 @@ const CollItem = () => {
         // 
         return state?.projectdetails?.projectdetails
     })
-    // console.log(projdetail, 'projdata')
-
     useEffect(() => {
         // 
         dispatch(ProjectDetail(id))
     }, [id])
-
-
     return (
         <div>
             <div className="row justify-content-center text-center mt-5 mt-lg-0">
                 <div className="col-12">
                     {/* Explore Menu */}
                     <div className="explore-menu btn-group btn-group-toggle flex-wrap justify-content-center text-center mb-4" data-toggle="buttons">
-
                     </div>
                 </div>
             </div>
@@ -58,8 +50,7 @@ const CollItem = () => {
                                         {/* <span>{item.content}</span> */}
                                         <hr />
                                         <div className="card-bottom d-flex justify-content-between">
-                                            {/* <span>{item.price}</span> */}
-                                            {/* <span><i className="icon-heart mr-2" />{item.likes}</span> */}
+
                                         </div>
                                     </div>
                                 </div>
@@ -71,6 +62,4 @@ const CollItem = () => {
         </div>
     );
 }
-
-
 export default CollItem;

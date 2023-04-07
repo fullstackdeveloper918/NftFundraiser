@@ -11,7 +11,6 @@ export default function FormCard({ children, currentStep, prevFormStep }) {
                             back
                         </button>
                     )}
-
                 </>
             )}
             {children}

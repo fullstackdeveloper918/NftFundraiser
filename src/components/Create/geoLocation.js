@@ -7,21 +7,9 @@ const geonames = new Geonames({
     lan: "en",
     encoding: "JSON"
 });
-// const useStyles = makeStyles(theme => ({
-//     formControl: {
-//         minWidth: "100%",
-//         // background: 'black',
-//         // color: "#FFF"
-//     },
-//     selectEmpty: {
-//         marginTop: theme.spacing(2)
-//     }
-// }));
 export default function GeoLocation(props) {
-    // const classes = useStyles();
     const { locationTitle, geoId, onChange, isCountry } = props;
     const [options, setOptions] = useState([]);
-    // console.log(options, 'opttt')
     const [currentItem, setCurrentItem] = useState("");
     const [labelWidth, setLabelWidth] = useState(0);
     useEffect(() => {
@@ -32,8 +20,6 @@ export default function GeoLocation(props) {
             )
         }
     }, [props]);
-    // http://api.geonames.org/countryInfoJSON?username=fullstackdeveloper91&lang=en
-    // https://secure.geonames.org/countryInfoJSON?username=jhon_doe&lang=en
     useEffect(() => {
         try {
             const data = async () => {
@@ -43,7 +29,6 @@ export default function GeoLocation(props) {
                         setOptions(res);
                         console.log(res, "countries")
                     })
-                    // "https://secure.geonames.org/childrenJSON?geonameId=" + id
                     : axios?.get(`https://secure.geonames.org/childrenJSON?username=fullstackdeveloper91&lang=en&geonameId=${geoId}`)?.then(res => {
                         setOptions(res);
                         console.log(res, "cities")
@@ -59,7 +44,6 @@ export default function GeoLocation(props) {
         setCurrentItem(e.target.value);
         onChange(e.target.value);
     };
-
     return (
         <form >
             <label ref={inputLabel} id="demo-simple-select-outlined-label" style={{ display: 'none' }}>

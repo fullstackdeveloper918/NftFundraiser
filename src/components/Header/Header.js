@@ -103,18 +103,18 @@ const Header = () => {
     }]
     const [activeOption, setActiveOption] = useState(false);
     toast.configure()
-    useEffect(() => {
-        toast('🦄 Wow so easy!', {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: false,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-    }, [])
+    // useEffect(() => {
+    //     toast('🦄 Wow so easy!', {
+    //         position: toast.POSITION.TOP_CENTER,
+    //         autoClose: false,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "light",
+    //     });
+    // }, [])
 
     const roleHandler = () => {
         dispatch(ChangeUserRole(history))
@@ -166,33 +166,47 @@ const Header = () => {
     }
 
     const handleCreate = () => {
+        if (window.ethereum.selectedAddress) {
 
-        if (Roles["CREATOR"] == userRole) {
-            history.push('/create')
-        }
-        else if (Roles["BUYER"] == userRole) {
+            if (Roles["CREATOR"] == userRole) {
+                history.push('/create')
+            }
+            else if (Roles["BUYER"] == userRole) {
+                Swal.fire({
+                    icon: 'info',
+                    html:
+                        'Sign up as a Creator to start a project and upload NFTs',
+                    showCloseButton: false,
+                    focusConfirm: false,
+                    confirmButtonText:
+                        '<i class="fa fa-thumbs-up"></i> Ok!',
+                    confirmButtonAriaLabel: 'Thumbs up, great!',
+                })
+            }
+            else if (!userToken && !localStorage.getItem('authToken')) {
+                Swal.fire({
+                    icon: 'info',
+                    html:
+                        'Sign up as a Creator to start a project and upload NFTs',
+                    showCloseButton: false,
+                    focusConfirm: false,
+                    confirmButtonText:
+                        '<i class="fa fa-thumbs-up"></i> Ok!',
+                    confirmButtonAriaLabel: 'Thumbs up, great!',
+                })
+            }
+        } else {
             Swal.fire({
                 icon: 'info',
                 html:
-                    'Sign up as a Creator to start a project and upload NFTs',
+                    'Connect your wallet to start a project and upload NFTs',
                 showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:
                     '<i class="fa fa-thumbs-up"></i> Ok!',
                 confirmButtonAriaLabel: 'Thumbs up, great!',
             })
-        }
-        else if (!userToken) {
-            Swal.fire({
-                icon: 'info',
-                html:
-                    'Sign up as a Creator to start a project and upload NFTs',
-                showCloseButton: false,
-                focusConfirm: false,
-                confirmButtonText:
-                    '<i class="fa fa-thumbs-up"></i> Ok!',
-                confirmButtonAriaLabel: 'Thumbs up, great!',
-            })
+            history.push('/wallet-connect')
         }
 
     }

@@ -7,6 +7,7 @@ import { ProjectList } from '../../redux/Actions/projectAction';
 import Loader from '../Loader/loader';
 import { DeleteProject } from './../../redux/Actions/projectAction';
 import swal from 'sweetalert';
+import { Pagination } from 'antd';
 
 const GetAllProjects = () => {
     const [loading, setLoading] = useState()    // console.log(projc, 'projc')
@@ -51,6 +52,7 @@ const GetAllProjects = () => {
             ) : (
 
                 <section className="explore-area">
+
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-12 col-md-8 col-lg-7">
@@ -134,6 +136,7 @@ const GetAllProjects = () => {
                                 </div>
                             }
                         </div>
+                        {/* <Pagination defaultCurrent={6} total={500} /> */}
                     </div>
                 </section>
             )
