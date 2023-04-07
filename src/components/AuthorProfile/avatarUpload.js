@@ -6,11 +6,8 @@ import { useState, useEffect, useRef } from 'react';
 import UploadImage from '../../shared/Upload'
 import { dataURLtoBlob } from '../../utils/blobfromurl'
 import { GetUserAction, UpdateProfileAction } from '../../redux/Actions/authAction';
-
 function AvatarUpload(props) {
-
     const [imageSrc, setImageSrc] = useState('');
-
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
@@ -18,18 +15,14 @@ function AvatarUpload(props) {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(GetUserAction())
-
     }, [])
     const submit = () => {
         const formData = new FormData()
-        // const banner_image = dataURLtoBlob(imageSrc)
         const avatar = dataURLtoBlob(imageSrc)
         formData.append('avatar', avatar)
         formData.append('username', userdet.username)
-        // formData.append('banner_image', banner_image)
         dispatch(UpdateProfileAction(formData, props))
     }
-
     return (
         <Modal
             {...props}
@@ -61,5 +54,4 @@ function AvatarUpload(props) {
         </Modal >
     );
 }
-
 export default AvatarUpload

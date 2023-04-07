@@ -55,7 +55,7 @@ const Fundraiser = () => {
                                             <div className="seller-info ml-3 nft-price">
                                                 <a className="seller mb-2 text-capitalize">{item?.organization_detail?.organization_name}</a>
                                                 {/* <span dangerouslySetInnerHTML={{ __html: item?.organization_detail?.description?.slice(0, 15) }} /> */}
-                                                <span><img className="mr-1" src='../img/image14.png' /> ${item.amount} Raised</span>
+                                                <span><img className="mr-1" src='../img/image14.png' /> ${Number(Math.round(item.amount))} Raised</span>
                                             </div>
                                         </div>
                                     </div>

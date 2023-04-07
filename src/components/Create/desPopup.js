@@ -4,45 +4,15 @@ import { CreateCollectionAction, UpdateProject } from '../../redux/Actions/proje
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import {
-    EmailShareButton,
-    FacebookIcon,
-    FacebookShareButton,
-    InstapaperShareButton,
-    InstapaperIcon,
-    LineShareButton,
-    LinkedinShareButton,
-    PinterestShareButton,
-    RedditShareButton,
-    TelegramIcon,
-    TelegramShareButton,
-    TwitterIcon,
-    TwitterShareButton,
-    WhatsappIcon,
-    WhatsappShareButton,
-    LinkedinIcon,
-    EmailIcon,
-} from "react-share";
-import {
-    FacebookShareCount,
-    HatenaShareCount,
-    OKShareCount,
-    PinterestShareCount,
-    RedditShareCount,
-    TumblrShareCount,
-    VKShareCount
-} from "react-share";
+
+
 import JoditEditor from 'jodit-react';
 import { useParams } from 'react-router';
 import { CityList, StateList } from '../../redux/Actions/authAction';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 function DesPopup(props) {
     const editor = useRef(null);
-    // const [title, setTitle] = useState("");
-    // const [description, setDescription] = useState("");
-    // const [short_url, setShortUrl] = useState("");
-    // const [symbol, setSymbol] = useState("");
+
     const [country, setCountry] = useState()
     const [type, setType] = useState()
     const dispatch = useDispatch()
@@ -50,8 +20,6 @@ function DesPopup(props) {
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
     const [description, setDescription] = useState();
 
-    // const url = window.location.href + '/' + props.userRef
-    // const Refurl = window.location.href + '/' + props.id + '/' + props.userRef
     const projdetail = useSelector(state => {
         // 
         return state?.projectdetails?.projectdetails
@@ -171,9 +139,7 @@ function DesPopup(props) {
 
                 </form>
             </Modal.Body>
-            {/* <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer> */}
+
         </Modal >
     );
 }

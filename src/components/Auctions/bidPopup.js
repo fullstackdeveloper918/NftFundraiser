@@ -1,9 +1,7 @@
-
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { BidNft } from '../Wallet/interact';
-
 function BidPopup(props) {
     // debugger
     const dispatch = useDispatch()
@@ -12,7 +10,6 @@ function BidPopup(props) {
         // debugger
         BidNft(props.id, props.projid, props.from, props.onHide)
     }
-
     return (
         <Modal
             {...props}
@@ -20,18 +17,14 @@ function BidPopup(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-
             <Modal.Header >
-
                 <div>
                     <div className='modal-title h4 '>Place a bid</div>
-                    {/* <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a> */}
                 </div>
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleSubmit(onSubmit)} className="item-form card no-hover">
                     <div className="row">
-
                         <div className="col-12 pb-2">
                             <label>You are about to place a bid for {props.projtitle?.toUpperCase()} from {props.projcoll?.toUpperCase()}.</label>
                         </div>
@@ -49,21 +42,13 @@ function BidPopup(props) {
                             </div>
                         </div>
                         <hr />
-
                         <div className="col-12">
                             <button className="btn w-100 mt-3 mt-sm-4" type="submit">Place Your Bid </button>
                         </div>
                     </div>
-
-
-
                 </form>
             </Modal.Body>
-            {/* <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer> */}
         </Modal >
     );
 }
-
 export default BidPopup

@@ -6,23 +6,13 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { blobToDataURl, dataURLtoBlob } from '../../utils/blobfromurl';
 import UploadImage from '../../shared/Upload';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 function MyVerticallyCenteredModal(props) {
-    // const [title, setTitle] = useState("");
-    // const [description, setDescription] = useState("");
-    // const [short_url, setShortUrl] = useState("");
-    // const [symbol, setSymbol] = useState("");
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm();
     const [image, setImage] = useState()
     const OnSubmit = (dat) => {
-        // debugger
         const imageBanner = dataURLtoBlob(image)
-        // 
-        // data.preventDefault()
         dispatch(CreateCollectionAction({ dat, imageBanner, props }))
-        // console.log(data?.statusCode)
-
     }
     return (
         <Modal
@@ -54,15 +44,12 @@ function MyVerticallyCenteredModal(props) {
                                     {...register('title', { required: true })}
                                 // value={title}
                                 // onChange={(e) => {
-
                                 //     setTitle(e.target.value);
                                 // }} 
                                 />
-
                             </div>
                             {errors.title?.type === 'required' && <p style={{ color: 'red' }} role="alert">collection name is required</p>}
                         </div>
-
                         <div className="col-6">
                             <div className="form-group mt-3">
                                 <label>Symbol</label>
@@ -75,13 +62,10 @@ function MyVerticallyCenteredModal(props) {
                                     {...register('symbol', { required: true })}
                                 // value={symbol}
                                 // onChange={(e) => {
-
                                 //     setSymbol(e.target.value);
                                 // }} 
                                 />
                                 {errors.symbol?.type === 'required' && <p style={{ color: 'red' }} role="alert">symbol is required</p>}
-
-
                             </div>
                         </div>
                         <div className="col-6">
@@ -95,14 +79,12 @@ function MyVerticallyCenteredModal(props) {
                                     {...register('description', { required: true })}
                                     // value={description}
                                     // onChange={(e) => {
-
                                     //     setDescription(e.target.value);
                                     // }}
                                     placeholder="Spread some words about your collection"
                                 />
                                 {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">description is required</p>}
                             </div>
-
                         </div>
                         <div className="col-6">
                             <div className="form-group mt-3">
@@ -113,11 +95,9 @@ function MyVerticallyCenteredModal(props) {
                                     aria-invalid={errors.short_url ? "true" : "false"}
                                     name="short_url"
                                     placeholder="Web URL"
-
                                     {...register('short_url', { required: true })}
                                 // value={short_url}
                                 // onChange={(e) => {
-
                                 //     setShortUrl(e.target.value);
                                 // }} 
                                 />
@@ -132,24 +112,17 @@ function MyVerticallyCenteredModal(props) {
                                     // initalImag={image}
                                     setImageSrc={setImage}
                                 />
-
                                 <div >
-
                                     <span className='logo-dis'>Allowed types: JPG, PNG, GIF<br />Banner should be 1500 px wide x 500 px high</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {/* <div className="modal-footer"> */}
                     <Button key="create-collection" type="submit" className="btn btn-primary">Create</Button>
                     {/* </div> */}
                 </form>
             </Modal.Body>
-            {/* <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer> */}
         </Modal>
     );
 }
-
 export default MyVerticallyCenteredModal

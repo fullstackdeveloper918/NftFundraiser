@@ -58,17 +58,17 @@ const LatNftdataTable = () => {
                                 [...new Map(projdetail?.project_activity.map(item =>
                                     [item["title"], item])).values()].map((item, idx) => {
                                         return (
-                                            <tr>
+                                            <tr className='contract-address'>
 
                                                 <td><img
                                                     src={item.image}
                                                     className="rounded-circle mr-2"
                                                     alt="Avatar"
                                                 />{item.nft_title.slice(0, 13)}...</td>
-                                                <td>{item.price}</td>
+                                                <td className='referal'>{item.price}<img src='../../img/image14.png' /></td>
                                                 <td>{item.pay_from.slice(0, 4)}...{item.pay_from.slice(35, 44)}</td>
                                                 <td>{item.pay_to.slice(0, 4)}...{item.pay_to.slice(35, 44)}</td>
-                                                <td>{item.txd_id.slice(0, 4)}...{item.txd_id.slice(35, 44)}</td>
+                                                <td><a target="_blank" href={`https://mumbai.polygonscan.com/tx/${item?.txd_id}`} >{item.txd_id.slice(0, 4)}...{item.txd_id.slice(35, 44)}</a></td>
                                             </tr>
                                         )
                                     }) :

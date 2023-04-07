@@ -3,14 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { ContactAction } from '../../redux/Actions/contactAction';
 import Loader from '../Loader/loader';
-
-
 const Contact = () => {
     const [loading, setLoading] = useState()
     const dispatch = useDispatch()
-    // useEffect(() => {
-    //     dispatch(ContactAction())
-    // })
+
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
     const OnSubmit = (data) => {
         setLoading(true)
@@ -21,7 +17,6 @@ const Contact = () => {
         formData.append('description', data.description)
         dispatch(ContactAction(formData, setLoading))
     }
-
     return (
         <section className="author-area">
             <div className="container">
@@ -38,7 +33,6 @@ const Contact = () => {
                             {loading ? (
                                 <Loader />
                             ) : (
-
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="form-group mt-3">
@@ -46,7 +40,6 @@ const Contact = () => {
                                                 aria-invalid={errors.name ? "true" : "false"}
                                             />
                                             {errors.name?.type === 'required' && <p style={{ color: 'red' }} role="alert">Name is required</p>}
-
                                         </div>
                                     </div>
                                     <div className="col-12">
@@ -55,7 +48,6 @@ const Contact = () => {
                                                 aria-invalid={errors.email ? "true" : "false"}
                                             />
                                             {errors.email?.type === 'required' && <p style={{ color: 'red' }} role="alert">Email is required</p>}
-
                                         </div>
                                     </div>
                                     <div className="col-12">
@@ -64,7 +56,6 @@ const Contact = () => {
                                                 aria-invalid={errors.subject ? "true" : "false"}
                                             />
                                             {errors.subject?.type === 'required' && <p style={{ color: 'red' }} role="alert">Subject is required</p>}
-
                                         </div>
                                     </div>
                                     <div className="col-12">
@@ -73,7 +64,6 @@ const Contact = () => {
                                                 aria-invalid={errors.description ? "true" : "false"}
                                             />
                                             {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Message is required</p>}
-
                                         </div>
                                     </div>
                                     <div className="col-12">
@@ -88,7 +78,5 @@ const Contact = () => {
             </div>
         </section>
     );
-
 }
-
 export default Contact;

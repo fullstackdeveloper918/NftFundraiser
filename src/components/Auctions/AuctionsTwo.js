@@ -2,19 +2,14 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPublicLiveProjects } from '../../redux/Actions/projectAction';
-
 const LiveAuctions = () => {
-
     const dispatch = useDispatch()
-
     const { liveProjects } = useSelector(state => {
         return state.projectdetails.liveProjects
     })
-
     useEffect(() => {
         dispatch(getPublicLiveProjects(1))
     }, [dispatch])
-
     return (
         <section className="live-auctions-area">
             <div className="container">
@@ -24,7 +19,6 @@ const LiveAuctions = () => {
                         <div className="intro text-center">
                             <span>Auctions</span>
                             <h3 className="mt-3 mb-0">Newest Projects</h3>
-                            {/* <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati <br /> dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p> */}
                         </div>
                     </div>
                 </div>
@@ -33,7 +27,6 @@ const LiveAuctions = () => {
                         return (
                             <div key={`auct_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
                                 <div className="card">
-
                                     <div className="image-over">
                                         <Link to={`/proj-details/${item.id}`}>
                                             <img className="card-img-top" src={item.image} alt="" />
@@ -65,17 +58,8 @@ const LiveAuctions = () => {
                         );
                     })}
                 </div>
-                {/* {
-                <div className="row">
-                    <div className="col-12 text-center">
-                        <a className="btn btn-bordered-white mt-5">Load More</a>
-                    </div>
-                </div>
-               } */}
             </div>
         </section >
     );
-
 }
-
 export default LiveAuctions;

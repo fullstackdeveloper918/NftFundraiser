@@ -12,18 +12,10 @@ import { useLocation } from 'react-router';
 function BuyPopup(props) {
     const location = useLocation();
     const [copy, setCopy] = useState(false)
-    // const [title, setTitle] = useState("");
-    // const [description, setDescription] = useState("");
-    // const [short_url, setShortUrl] = useState("");
-    // const [symbol, setSymbol] = useState("");
-    // const [loading, setLoading] = useState(true)
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
     const OnSubmit = (data) => {
-        // dispatch(CreateCollectionAction(data))
     }
-
-
     return (
         <Modal
             {...props}
@@ -32,24 +24,14 @@ function BuyPopup(props) {
             centered
             className="loading"
         >
-
-
-
             {props.loading &&
-
                 <><Loader />
-
                     <div className="form-group m-0">
                         <span>Processing...</span>
                     </div>
-
-
-
                 </>
             }
-
         </Modal>
     );
 }
-
 export default BuyPopup

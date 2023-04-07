@@ -2,15 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Source } from "three";
-
 function loadGLTFModel(scene, glbPath, options) {
     const { receiveShadow, castShadow } = options;
     return new Promise((resolve, reject) => {
         const loader = new GLTFLoader();
         loader.load(
-
-
             glbPath,
             (gltf) => {
                 const obj = gltf.scene;
@@ -20,14 +16,12 @@ function loadGLTFModel(scene, glbPath, options) {
                 obj.receiveShadow = receiveShadow;
                 obj.castShadow = castShadow;
                 scene.add(obj);
-
                 obj.traverse(function (child) {
                     if (child.isMesh) {
                         child.castShadow = castShadow;
                         child.receiveShadow = receiveShadow;
                     }
                 });
-
                 resolve(obj);
             },
             undefined,
@@ -38,11 +32,9 @@ function loadGLTFModel(scene, glbPath, options) {
         );
     });
 }
-
 function easeOutCirc(x) {
     return Math.sqrt(1 - Math.pow(x - 1, 4));
 }
-
 const DModal = ({ vdo }) => {
     // debugger
     // const { vdo } = props
@@ -51,28 +43,9 @@ const DModal = ({ vdo }) => {
     const [renderer, setRenderer] = useState();
     const [source, setSource] = useState('')
     console.log('source', source)
-
     useEffect(() => {
         // debugger
         const file = vdo;
-        // if (file?.name?.includes("gltf")) {
-
-        //     const gltfToGlb = gltfPipeline.gltfToGlb;
-        //     const gltf = fsExtra.readJsonSync(file);
-        //     gltfToGlb(gltf).then(function (results) {
-        //         fsExtra.writeFileSync(file, results.glb);
-        //     });
-        //     console.log('yessss')
-        // }
-        // let url = URL.createObjectURL(file);
-        // url = window.URL.createObjectURL(new Blob([url]));
-        // // const url = window.URL.createObjectURL(new Blob([Response.data]));
-        // // this?.loaders?.gltfLoader?.load(url, (file) => {
-
-        // // });
-
-        // setSource(url);
-
         const { current: container } = refContainer;
         if (container && !renderer) {
             const scW = container.clientWidth;
@@ -86,7 +59,6 @@ const DModal = ({ vdo }) => {
             renderer.outputEncoding = THREE.sRGBEncoding;
             container.appendChild(renderer.domElement);
             setRenderer(renderer);
-
             const scene = new THREE.Scene();
             const scale = 5.6;
             const camera = new THREE.OrthographicCamera(
@@ -111,9 +83,7 @@ const DModal = ({ vdo }) => {
             controls.minDistance = 0
             controls.minZoom = 0
             controls.target = target;
-
             const loader = new GLTFLoader()
-
             loader.load(
                 file,
                 function (gltf) {
@@ -144,28 +114,14 @@ const DModal = ({ vdo }) => {
                     console.log(error)
                 }
             )
-            // loadGLTFModel(url, function (gltf) {
-            //     const model = gltf.scene;
-            //     URL.revokeObjectURL(url);
-            // }, function () { }, function () {
-            //     URL.revokeObjectURL(url);
-            // }).
-
-            // loadGLTFModel(scene, url, {
-            //     receiveShadow: false,
-            //     castShadow: false
-            // })
-
             let req = null;
             let frame = 0;
             const animate = () => {
                 req = requestAnimationFrame(animate);
                 frame = frame <= 100 ? frame + 1 : frame;
-
                 if (frame <= 100) {
                     const p = initialCameraPosition;
                     const rotSpeed = -easeOutCirc(frame / 120) * Math.PI * 20;
-
                     camera.position.y = 10;
                     camera.position.x =
                         p.x * Math.cos(rotSpeed) + p.z * Math.sin(rotSpeed);
@@ -175,45 +131,25 @@ const DModal = ({ vdo }) => {
                 } else {
                     controls.update();
                 }
-
                 renderer.render(scene, camera);
             };
-
             return () => {
                 cancelAnimationFrame(req);
                 renderer.dispose();
             };
         }
     }, [vdo]);
-
     return (
-
         <div
             style={{ height: "270px", width: "300px", position: "relative" }}
             ref={refContainer}
         >
-
             {loading && (
                 <span style={{ position: "absolute", left: "50%", top: "50%" }}>
                     Loading...
                 </span>
             )}
-
         </div>
-
     );
 };
 export default DModal
-// export default function App() {
-//   return (
-//     <div style={{ width: "100%", margin: "0 auto" }}>
-//       <p>Click and hold to move around</p>
-//       <p>
-//         Credits for the model: "Dinosaur" (https://skfb.ly/6ZBXA) by
-//         jeilocreativedesignworld is licensed under Creative Commons Attribution
-//         (http://creativecommons.org/licenses/by/4.0/).
-//       </p>
-//       <Dinosaur />
-//     </div>
-//   );
-// }

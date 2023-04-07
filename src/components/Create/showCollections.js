@@ -3,40 +3,18 @@ import { Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { GetCollectionsAction } from '../../redux/Actions/projectAction'
-
 const ShowCollections = () => {
     const dispatch = useDispatch()
     const col = useSelector(state => {
         // 
         return state?.projectdetails?.getcollections
     })
-    // const val = localStorage.getItem("values")
-    // console.log(val.address, 'vall')
-    // console.log(col, 'col')
     useEffect(() => {
         dispatch(GetCollectionsAction())
     }, [])
-    // useEffect(() => {
-
-    // })
-    // var dat = localStorage.getItem("values");
-    // dat = JSON.parse(dat);
-    // console.log('dat', dat?.nfts[0]?.image?.fileList[0]?.thumbUrl)
-    // console.log('valus', localStorage.getItem('values', 'address'))
-    // localStorage.setItem("values", JSON.stringify({
-    //     ...data,
-    //     nfts: values.nfts.map(x => {
-    //         return {
-    //             name: x.name,
-    //             description: x.description,
-    //             image: x.image,
-    //         }
-    //     })
-    // }));
     return (
         <section className="explore-area">
             <div className="container">
-
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-8 col-lg-7">
                         {/* Intro */}
@@ -47,10 +25,7 @@ const ShowCollections = () => {
                         </div>
                     </div>
                 </div>
-
                 <div className="row items explore-items h-auto">
-                    {/* {val?.map((item, idx) => { */}
-                    {/* return ( */}
                     <Link to={`/collection/${''}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
                         <div>
                             <div className="card">
@@ -73,11 +48,9 @@ const ShowCollections = () => {
                                             </a>
                                         </div>
                                         <div className="card-bottom d-flex justify-content-between">
-
                                             <span> {col.price}</span>
                                             <span> {col.number_of_nft}</span>
                                         </div>
-                                        {/* <a className="btn btn-bordered-white btn-smaller mt-3" href="/wallet-connect"><i className="icon-handbag mr-2" />dfg</a> */}
                                     </div>
                                 </div>
                             </div>
@@ -85,12 +58,9 @@ const ShowCollections = () => {
                     </Link>
                     {/* ) */}
                     {/* })} */}
-
-
                 </div>
             </div>
         </section>
     )
 }
-
 export default ShowCollections

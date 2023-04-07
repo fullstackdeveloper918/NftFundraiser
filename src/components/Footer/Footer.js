@@ -29,33 +29,47 @@ const Footer = () => {
 
     const history = useHistory()
     const handleCreate = () => {
+        if (window.ethereum.selectedAddress) {
 
-        if (Roles["CREATOR"] == userRole) {
-            history.push('/create')
-        }
-        else if (Roles["BUYER"] == userRole) {
+            if (Roles["CREATOR"] == userRole) {
+                history.push('/create')
+            }
+            else if (Roles["BUYER"] == userRole) {
+                Swal.fire({
+                    icon: 'info',
+                    html:
+                        'Sign up as a Creator to start a project and upload NFTs',
+                    showCloseButton: false,
+                    focusConfirm: false,
+                    confirmButtonText:
+                        '<i class="fa fa-thumbs-up"></i> Ok!',
+                    confirmButtonAriaLabel: 'Thumbs up, great!',
+                })
+            }
+            else if (!userToken && !localStorage.getItem('authToken')) {
+                Swal.fire({
+                    icon: 'info',
+                    html:
+                        'Sign up as a Creator to start a project and upload NFTs',
+                    showCloseButton: false,
+                    focusConfirm: false,
+                    confirmButtonText:
+                        '<i class="fa fa-thumbs-up"></i> Ok!',
+                    confirmButtonAriaLabel: 'Thumbs up, great!',
+                })
+            }
+        } else {
             Swal.fire({
                 icon: 'info',
                 html:
-                    'Sign up as a Creator to start a project and upload NFTs',
+                    'Connect your wallet to start a project and upload NFTs',
                 showCloseButton: false,
                 focusConfirm: false,
                 confirmButtonText:
                     '<i class="fa fa-thumbs-up"></i> Ok!',
                 confirmButtonAriaLabel: 'Thumbs up, great!',
             })
-        }
-        else if (!userToken) {
-            Swal.fire({
-                icon: 'info',
-                html:
-                    'Sign up as a Creator to start a project and upload NFTs',
-                showCloseButton: false,
-                focusConfirm: false,
-                confirmButtonText:
-                    '<i class="fa fa-thumbs-up"></i> Ok!',
-                confirmButtonAriaLabel: 'Thumbs up, great!',
-            })
+            history.push('/wallet-connect')
         }
 
     }

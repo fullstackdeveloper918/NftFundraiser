@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
 // importing all the themes
 import ThemeOne from "../themes/theme-one";
 import ExploreOne from "../themes/explore-one";
@@ -8,9 +7,7 @@ import ExploreTwo from "../themes/project-list";
 import ExploreFour from "../themes/latestProjects";
 import Auctions from "../themes/auctions";
 import ItemDetails from "../themes/item-details";
-import Activity from "../themes/activity";
 import HelpCenter from "../themes/help-center";
-import Authors from "../themes/authors";
 import Author from "../themes/author";
 import WalletConnect from "../themes/wallet-connect";
 import Create from "../themes/create";
@@ -48,21 +45,17 @@ import AllReraltrans from "../themes/all-refrals";
 
 
 const MyRouts = () => {
-
-
   return (
     <div>
       <BrowserRouter>
         <ScrollToTop />
         <Switch>
-
           <Route exact path="/" component={ThemeOne} />
           <Route exact path="/explore-1" component={ExploreOne} />
           <Route exact path="/projectlist" component={ExploreTwo} />
           <Route exact path="/create/organization" component={createOrganizationafterRoleChange} />
           <Route exact path="/allnotifications" component={Notifi} />
           <Route exact path="/updateproject/:id" component={ProjectUpdate} />
-          {/* <Route exact path="/projectlist" component={ExploreThree} /> */}
           <Route exact path="/explore-4" component={ExploreFour} />
           <Route exact path="/nft/resell/details/:slug" component={ResellDetail} />
           <Route exact path="/my/nfts" component={BuyedNft} />
@@ -81,9 +74,7 @@ const MyRouts = () => {
           <Route exact path="/nft/details/:id" component={Nft} />
           <Route exact path="/nftedit/:id/:id" component={EditNft} />
           <Route exact path="/addnft/:id" component={AddNFT} />
-          <Route exact path="/activity" component={Activity} />
           <Route exact path="/help-center" component={HelpCenter} />
-          <Route exact path="/authors" component={Authors} />
           <Route exact path="/profile" component={Author} />
           <Route exact path="/terms&conditions" component={TermsCond} />
           <Route exact path="/all/:type" component={All} />
@@ -93,13 +84,9 @@ const MyRouts = () => {
           <Route exact path="/wallet-connect" component={WalletConnect} />
           <Route exact path="/my-collections" component={Showcollections} />
           <Route exact path="/collection/:id" component={CollectionDetail} />
-          {/* <Route exact path="/newest-projects" component={NewestProj} /> */}
-
           <Route exact path="/create" component={Create} />
-
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          {/* <PrivateRoute exact path="/create-organization" component={createOrganization} /> */}
           <PrivateRoute exact path="/forgotpassword" component={Forgot} />
           <Route exact path="/contact" component={Contact} />
         </Switch>
@@ -107,5 +94,4 @@ const MyRouts = () => {
     </div>
   )
 }
-
 export default MyRouts

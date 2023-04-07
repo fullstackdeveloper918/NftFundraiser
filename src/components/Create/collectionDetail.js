@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { DeleteProject, GetCollectionDetails, ProjectDetail } from '../../redux/Actions/projectAction';
-import { getProjectDetail } from '../../redux/Slices/projectSlice';
-import { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import Author from '../Author/Author';
 import CollItem from './bread-crumb';
 import ReadMore from '../../readMore';
 
@@ -110,9 +107,7 @@ const CollectionDetails = () => {
         dispatch(GetCollectionDetails(id))
     }, [id])
 
-    // const deleteHandler = (id) => {
-    //     dispatch(DeleteProject(id))
-    // }
+
 
 
     return (
@@ -142,17 +137,11 @@ const CollectionDetails = () => {
                                     <Button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" variant="primary" onClick={() => setModalShow(true)} style={{ color: '#FFF' }}>
                                         Add item
                                     </Button>
-
-                                    {/* <MyVerticallyCenteredModal
-                                        show={modalShow}
-                                        onHide={() => setModalShow(false)}
-                                    /> */}
-                                    {/* <a className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2"> <Link to={""} style={{ color: '#FFF' }}>Add item</Link></a> */}
                                 </div>
 
                             </div>
 
-                          <ReadMore data={coldetail?.description} />
+                            <ReadMore data={coldetail?.description} />
 
 
 
