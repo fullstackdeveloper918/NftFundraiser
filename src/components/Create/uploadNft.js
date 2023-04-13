@@ -267,7 +267,6 @@ const UploadNft = ({ current, prev }) => {
 
 
     const onFinish = async (values) => {
-        debugger
         try {
             setLoading(true)
 

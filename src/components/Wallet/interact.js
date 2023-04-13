@@ -561,7 +561,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
   }
 }
 
-const UpdateBid = async ({ amount, project_id, nft_id, pay_to, from, onHide }) => {
+const UpdateBid = async ({ amount, project_id, nft_id, pay_to, from, onHide, setLoading }) => {
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -585,6 +585,7 @@ const UpdateBid = async ({ amount, project_id, nft_id, pay_to, from, onHide }) =
     )
     console.log('ress', res)
     if (res.status == 200) {
+      setLoading(false)
       swal("success", res?.data?.message, 'success')
       onHide(false)
     }
@@ -596,14 +597,14 @@ const UpdateBid = async ({ amount, project_id, nft_id, pay_to, from, onHide }) =
   }
 };
 
-export const BidNft = async (id, projid, from, onHide) => {
+export const BidNft = async (id, projid, from, onHide, setLoading) => {
 
   // if (!isMetaMaskInstalled()) {
   //   swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
   // } else {
   try {
-
+    setLoading(true)
 
     // const addressArray = await window.ethereum.request({
     //   method: "eth_requestAccounts",
@@ -634,7 +635,7 @@ export const BidNft = async (id, projid, from, onHide) => {
     //   }, function (err, transactionHash) {
     //     if (!err)
     //       console.log(transactionHash + " success");
-    UpdateBid({ amount: "0.03", project_id: projid, nft_id: id, from, onHide })
+    UpdateBid({ amount: "0.03", project_id: projid, nft_id: id, from, onHide, setLoading })
     // });
     // await web3.eth.sendTransaction(transferbid)
     //   .on('transactionHash', function (hash) {

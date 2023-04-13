@@ -23,6 +23,7 @@ const authSlice = createSlice({
         hereAbout: [],
         updpro: [],
         wallesign: [],
+        auctionnoti: [],
         organization: false
     },
     reducers: {
@@ -47,6 +48,10 @@ const authSlice = createSlice({
         userDetail: (state, action) => {
             // 
             state.userdetail = action.payload.data.data
+        },
+        userAuction: (state, action) => {
+            // 
+            state.auctionnoti = action.payload.data.data
         },
         loginSuccess: (state, action) => {
             state.user = action.payload;
@@ -104,6 +109,7 @@ export const {
     getAnnualRevenueList,
     getHearAboutList,
     loginSuccess,
+    userAuction,
     forgotpasswordSuccess,
     logoutSuccess,
     registerFail,

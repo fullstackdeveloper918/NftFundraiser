@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { ChangeUserRole, CountSet, GetUserAction, NotiDelete } from '../../redux/Actions/authAction';
+import { ChangeUserRole, CountSet, GetUserAction, GetauctionNoti, NotiDelete } from '../../redux/Actions/authAction';
 import swal from 'sweetalert';
 import { loginSuccess, logoutSuccess } from '../../redux/Slices/authSlice';
 import { ConnectWallet, getCurrentWalletConnected, Roles } from '../Wallet/interact';
@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 import { isCancel } from 'axios';
 import moment from "moment";
 import { NavLink } from 'react-router-dom';
-import { Space, Switch, Tooltip, notification, Button } from 'antd';
+import { Space, Switch, Tooltip, notification, Button, Alert, Popconfirm } from 'antd';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,7 +22,10 @@ const Header = () => {
     const [active, setActive] = useState(null)
     const add1 = address?.slice(0, 4).toUpperCase()
     const add2 = address?.slice(35, 44).toUpperCase()
-
+    const [open, setOpen] = useState(false);
+    const [confirmLoading, setConfirmLoading] = useState(false)
+    const [api, contextHolder] = notification.useNotification();
+    console.log("api", api)
     const LogoutHandler = () => {
         dispatch(logoutSuccess())
         setAddress(null)
@@ -42,9 +45,41 @@ const Header = () => {
         );
     };
 
-    const [api, contextHolder] = notification.useNotification();
+    const userdet = useSelector(state => {
+        return state?.user?.userdetail
+    })
+    const userauction = useSelector(state => {
+        return state?.user?.auctionnoti
+    })
+    console.log(userauction.count)
+    // const names = Object?.keys(userdet?.notification?.status);
+    // console.log("names", userdet && userdet.notification && userdet.notification[0]?.title)
 
 
+
+    useEffect((e) => {
+        e?.preventDefault();
+
+        const interval = setInterval(() => {
+            console.log("yyyyiiiiiiiiiiii")
+            // openNotification()
+            dispatch(GetauctionNoti())
+
+            if (userauction?.count > 0) {
+                console.log("trueeeeeeeeeeeeeee")
+                openNotification()
+            }
+            else {
+                // openNotification()
+                console.log("falseeeeeeeeee")
+            }
+            // if (true) {
+
+
+        }, 5000)
+
+        return () => clearInterval(interval);
+    }, [userauction])
 
 
     useEffect(() => {
@@ -57,6 +92,7 @@ const Header = () => {
                 if (!accounts.length) {
                     setAddress(null)
                     //  setIsLoggedIn(false)
+
                     localStorage.removeItem('auth_token')
                 }
             })
@@ -85,11 +121,7 @@ const Header = () => {
         return window.ethereum?.selectedAddress;
     }
 
-    const userdet = useSelector(state => {
-        return state?.user?.userdetail
-    })
-    // const names = Object?.keys(userdet?.notification?.status);
-    // console.log(names)
+
     const notiHandler = () => {
         // debugger
         dispatch(CountSet())
@@ -103,18 +135,43 @@ const Header = () => {
     }]
     const [activeOption, setActiveOption] = useState(false);
     toast.configure()
-    // useEffect(() => {
-    //     toast('🦄 Wow so easy!', {
-    //         position: toast.POSITION.TOP_CENTER,
-    //         autoClose: false,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "light",
-    //     });
-    // }, [])
+
+
+
+    const openNotification = () => {
+        const key = `open${Date.now()}`;
+        // console.log('key', api)
+        const btn = (
+            <Space>
+                <Button type="link" size="small" className='notification_btn-delete' onClick={() => { notification.destroy(key); notiHandler() }}>
+                    Reject
+                </Button>
+                <Link to={`/nftprojdetails/${userauction?.data?.nft_slug}`} onClick={() => notiHandler()}>
+                    <Button className='notification_btn-conf' onClick={() => notiHandler()}>Confirm
+                    </Button>
+                </Link>
+            </Space >
+
+        );
+        // console.log(notification.info, 'info')
+        // if (key === key) {
+
+        api.open({
+            message: < h4>Reminder</h4>,
+            description:
+                <h5 style={{ color: 'black' }}>You have received a new bid request!</h5>,
+            btn,
+            // duration: null,
+            key,
+            // onClose: key === key ? false : true,
+        });
+        // }
+    };
+
+
+
+
+
 
     const roleHandler = () => {
         dispatch(ChangeUserRole(history))
@@ -210,12 +267,23 @@ const Header = () => {
         }
 
     }
-    console.log(activeOption, "active")
+    // console.log(activeOption, "active")
     return (
         <header id="header">
             {/* Navbar */}
             <nav data-aos="zoom-out" data-aos-delay={800} className="navbar navbar-expand">
                 <div className="container header">
+                    {contextHolder}
+                    {/* <Popconfirm
+      title="Received new bid successfully"
+      description="Received new bid successfully"
+      open={open}
+      onConfirm={handleOk}
+      okButtonProps={{
+        loading: confirmLoading,
+      }}
+      onCancel={handleCancel}
+    /> */}
                     {/* Navbar Brand*/}
                     {/* <div className="your-required-wrapper" style={{ width: 100, height: 30 }}> */}
 

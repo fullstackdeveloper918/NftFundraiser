@@ -2996,3 +2996,103 @@ text-align: center;
     text-align: center;
     font-size: 40px !important;
 }
+.ant-popover-arrow {
+    display: none;
+}
+:root .ant-notification-notice-description h5 {
+    color: #000 !important;
+}
+.notification_btn-conf {
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+    color: #fff !important;
+    border-radius: 30px !important;
+    height: 40px !important;
+    font-weight: 500 !important;
+    font-family: 'Jost';
+    border: 1px solid #57048a  !important;
+    width: 120px;
+    transition: .5s ease-in-out;
+}
+.notification_btn-conf span, .reject-btn span, .table-btn span{
+    color: #fff;
+}
+.notification_btn-conf:hover span {
+    color: #57048a  !important; 
+}
+.notification_btn-conf:hover{
+    background-image:none !important;
+}
+.notification_btn-delete span{
+    color: #57048a  !important;
+}
+.notification_btn-delete{
+    border: 1px solid #57048a  !important;
+    border-radius: 30px !important;
+    /* padding: 0px 25px; */
+    height: 40px !important;
+    font-weight: 500 !important;
+    font-family: 'Jost';
+    width: 120px;
+    transition: .5s ease-in-out;
+}
+.ant-notification-notice-btn {
+    margin-top: 26px !important;
+}
+.ant-notification-notice.ant-notification-notice-closable {
+    height: 180px;
+    border-radius: 6px !important;
+}
+button.notification_btn-delete:hover{
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+}
+button.notification_btn-delete:hover span{
+    color: #fff !important;
+}
+:root .table-btn {
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+    color: #fff !important;
+    border-radius: 30px !important;
+    font-weight: 500 !important;
+    font-family: 'Jost';
+    border: 1px solid #57048a  !important;
+    transition: .5s ease-in-out;
+    padding: 0 25px !important;
+}
+    /* :root .table-btn:hover {
+        background: transparent !important;
+        border-color: #fff !important;
+    } */
+    .spiner {
+        display: flex;
+        justify-content: center;
+        padding: 20px 0px;
+    }
+:root .reject-btn {
+    border-radius: 30px !important;
+    background: transparent !important;
+    padding: 0px 25px !important;
+    color: #fff !important;
+}
+.reject-btn:hover {
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+    color: #fff !important;
+    border-color: #4528dc !important;
+}
+td.Btn_td {
+    display: flex;
+    gap: 10px;
+}
+.btndisabled {
+    border-radius: 30px;
+    background: #5a5a5a !important;
+    width: 100px;
+}
+a.auctionbttn {
+    background: #008000;
+    border-radius: 30px;
+    color: #fff !important;
+    padding: 6px 15px;
+}
+/* .table-responsive {
+    text-align: center;
+} */

@@ -49,7 +49,6 @@ function SellPopup(props) {
     console.log('nftdetail', nftdetail)
 
     const mint = (contractAddress, type, start_date, end_date, price) => {
-
         // auctiondata.map((item) => {
         //     setPrice(item.price)
         // })

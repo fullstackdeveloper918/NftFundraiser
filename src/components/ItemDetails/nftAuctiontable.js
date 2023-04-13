@@ -5,10 +5,14 @@ import { Button, Collapse } from 'antd';
 import { getBid, NftList, ProjectDetail, ProjectList, UpdateBId } from '../../redux/Actions/projectAction';
 import { useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
+import { Center, Loader } from '@react-three/drei';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
+
 
 const NftAuctiondataTable = (props) => {
     const dispatch = useDispatch()
-
+    const [loading, setLoading] = useState(false)
     const { Panel } = Collapse;
     const onChange = (key) => {
         console.log(key);
@@ -24,12 +28,13 @@ const NftAuctiondataTable = (props) => {
         // debugger
         return state?.projectdetails?.latestprojectdetails
     })
-    console.log(projdetail.nft_data, 'projdatanft')
+    console.log(projdetail, 'projdatanft')
     const nftdetail = useSelector(state => {
         // 
         return state.projectdetails.nftlist
 
     })
+    console.log(nftdetail, 'nftdetail')
     useEffect(() => {
         // debugger
         dispatch(NftList(props.slug.id))
@@ -39,15 +44,28 @@ const NftAuctiondataTable = (props) => {
     const acceptHandler = (id) => {
         console.log("accept", id)
         getBid(props)
-        dispatch(UpdateBId({ id, status: "2" }))
+        dispatch(UpdateBId({ id, status: "2", setLoading, slug: props.slug.id }))
     }
     const rejectHandler = (id) => {
         console.log("reject", id)
         getBid(props)
-        dispatch(UpdateBId({ id, status: "3" }))
+        dispatch(UpdateBId({ id, status: "3", setLoading, slug: props.slug.id }))
     }
+
+    const antIcon = (
+        <LoadingOutlined
+            style={{
+                fontSize: 35,
+                textAlign: "center"
+
+            }}
+            spin
+        />
+    )
     return (
         <div className='position-relative'>
+
+
             < Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
                 <svg className="activity_icon" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.4" d="M7.24487 14.7815L10.238 10.8914L13.6522 13.5733L16.5813 9.79297" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -56,49 +74,55 @@ const NftAuctiondataTable = (props) => {
                 </svg>
                 <Panel header="Latest Bids" key="1" >
                     <Table responsive >
-                        <thead>
+                        {loading ? (
+                            <div className='spiner'>
+                                <Spin indicator={antIcon} />
+                            </div>
+                        ) : (
+                            <><thead>
 
 
-                            <tr>
+                                <tr>
 
-                                <th>User</th>
-                                <th>Bid Price</th>
-                                <th>Wallet</th>
-                                {/* <th>To</th> */}
-                                {/* <th>Transaction</th> */}
-                                <th>Action</th>
-                            </tr>
+                                    <th>User</th>
+                                    <th>Bid Price</th>
+                                    <th>Wallet</th>
+                                    {/* <th>To</th> */}
+                                    {/* <th>Transaction</th> */}
+                                    <th>Action</th>
+                                </tr>
 
 
-                        </thead>
-                        <tbody className='img_table'>
-                            {nftdetail.bids?.map((item) => {
+                            </thead><tbody className='img_table'>
+                                    {nftdetail.bids?.map((item) => {
 
-                                return (
-                                    <tr>
+                                        return (
+                                            <tr>
 
-                                        <td>{item.username}</td>
-                                        <td>{item.amount}</td>
-                                        <td>{item.pay_from?.slice(0, 4)}...{item.pay_from?.slice(35, 44)}</td>
-                                        {/* <td>{item.pay_to?.slice(0, 4)}...{item.pay_to?.slice(35, 44)}</td> */}
-                                        {/* <td>{item.txd_id?.slice(0, 4)}...{item.txd_id?.slice(35, 44)}</td> */}
-                                        <td>
-                                            {item.status == 1 ? (
+                                                <td>{item.username}</td>
+                                                <td>{item.amount}</td>
+                                                <td>{item.pay_from?.slice(0, 4)}...{item.pay_from?.slice(35, 44)}</td>
+                                                {/* <td>{item.pay_to?.slice(0, 4)}...{item.pay_to?.slice(35, 44)}</td> */}
+                                                {/* <td>{item.txd_id?.slice(0, 4)}...{item.txd_id?.slice(35, 44)}</td> */}
+                                                <td className='Btn_td'>
+                                                    {item.status == 1 ? (
 
-                                                <><Button type="submit" onClick={() => acceptHandler(item.id)}>Accept</Button>
-                                                    <Button type="submit" onClick={() => rejectHandler(item.id)}>Reject</Button></>
-                                            ) : (
-                                                <a>Confirmed</a>
-                                            )}
-                                        </td>
-                                    </tr>
-                                )
-                            })}
+                                                        <><Button type="submit" className={nftdetail.bid_approved_id !== null ? "btndisabled" : "table-btn "} onClick={() => acceptHandler(item.id)} disabled={nftdetail.bid_approved_id !== null ? true : false}>Accept</Button>
+                                                            <Button type="submit" className={nftdetail.bid_approved_id !== null ? "btndisabled" : "table-btn "} onClick={() => rejectHandler(item.id)} disabled={nftdetail.bid_approved_id !== null ? true : false}>Reject</Button></>
+                                                    ) : (
+                                                        <>
+                                                            {/* {nftdetail?.bid_approved_id !== null && } */}
+                                                            <a className='auctionbttn'>Confirmed</a>
+                                                        </>
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
 
-                        </tbody>
-                        {/* <div className='nothing col-spam-5' colspan="5">
-                            No matching records found
-                        </div> */}
+                                </tbody></>
+
+                        )}
                     </Table>
                     {nftdetail?.bids?.length == 0 &&
                         <div className='nothing'>
@@ -109,7 +133,7 @@ const NftAuctiondataTable = (props) => {
                 </Panel>
 
             </Collapse>
-        </div>
+        </div >
     )
 }
 

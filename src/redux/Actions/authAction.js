@@ -1,5 +1,5 @@
 import axios from "axios";
-import { allnotification, createOrganizationSuccess, getAnnualRevenueList, getCityList, getCountryList, getHearAboutList, getStateList, loginSuccess, updateprofile, userDetail } from "../Slices/authSlice";
+import { allnotification, createOrganizationSuccess, getAnnualRevenueList, getCityList, getCountryList, getHearAboutList, getStateList, loginSuccess, updateprofile, userAuction, userDetail } from "../Slices/authSlice";
 import swal from "sweetalert";
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { creatorWalletUpdate } from "../../components/Wallet/interact";
@@ -106,6 +106,30 @@ export const GetUserAction = () => async dispatch => {
             config)
         // console.log('userres', res)
         dispatch(userDetail(res));
+
+
+    } catch (e) {
+        await dispatch(LogsAction(e))
+        if (e?.response?.data.message) {
+            swal('error', e.response.data.message, 'error')
+        }
+    }
+}
+export const GetauctionNoti = () => async dispatch => {
+    const token = localStorage.getItem('authToken')
+
+    try {
+        const config = {
+            headers: {
+                // 'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+        }
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestNotification`,
+            config)
+        // console.log('userres', res)
+        dispatch(userAuction(res));
 
 
     } catch (e) {

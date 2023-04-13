@@ -14,7 +14,7 @@ import 'antd/lib/button/style/css'
 import swal from 'sweetalert';
 import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
-import { useLocation, useParams } from 'react-router';
+import { useHistory, useLocation, useParams } from 'react-router';
 import DModal from './3dModal';
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -31,18 +31,18 @@ const AddNft = ({ current, prev }) => {
     const [previewTitle, setPreviewTitle] = useState('');
     const [count, setCount] = useState(0);
 
-    const [nft, setNft] = useState()
+    const [nft, setNft] = useState([])
     const [size, setSize] = useState()
     const [nftwidth, setNftwidth] = useState()
     const [nftHeight, setNftheight] = useState()
     const [Pimage, setPimage] = useState()
     const [modalShow, setModalShow] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: "1" });
-    const [NFtFileExtension, setNFtExtension] = useState()
+    const [NFtFileExtension, setNFtExtension] = useState([])
     const [source, setSource] = useState([])
     const [preview, setPreview] = useState([])
     const [nft_description, setNft_description] = useState([])
-    const [sourceType, setSourceType] = useState()
+    const [sourceType, setSourceType] = useState([])
     const coll_id = (Object.values(nft_collection_id));
     const [loading, setLoading] = useState(false)
     const search = useLocation().search;
@@ -77,7 +77,7 @@ const AddNft = ({ current, prev }) => {
     }, [register]);
 
     const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
-
+const history = useHistory()
     const dispatch = useDispatch()
     const col = useSelector(state => {
         return state?.projectdetails?.getcollections
@@ -110,7 +110,14 @@ const AddNft = ({ current, prev }) => {
         const filetype = e.target.files[0].type
         setNFtExtension(filetype)
         // debugger
-        setNft(e.target.files[0])
+        // setNft(e.target.files[0])
+        setNft(previ => {
+            previ[index] = e.target.files[0]
+            return [
+                ...previ,
+
+            ]
+        })
         var fr = new FileReader;
         fr.onload = function () { // file is loaded
             var img = new Image;
@@ -169,15 +176,19 @@ const AddNft = ({ current, prev }) => {
     const onFinish = async (values) => {
         try {
             setLoading(true)
-            const nftImagepromises = values?.nfts?.map(x => uploadNFT(nft))
-            const imagesRes = await Promise.all(nftImagepromises).then(res => res)
+            // const nftImagepromises = values?.nfts?.map(x => uploadNFT(nft))
+            const imagesRes = await uploadNFT(nft, dispatch)
             // 
-            const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
+            // const addedImage = imagesRes?.data?.data.map(x => ipfsBaseUrl + x?.image_hash)
+            const addedImage = ipfsBaseUrl + imagesRes.data.data[0].image_hash
             // 
             var str = addedImage;
             var check = str.includes("https://ipfs.io/ipfs/undefined");
             const formData = new FormData()
             if (check === false) {
+                // for (let i = 0; i < addedImage.length; i++) {
+                //     formData.append("image", (addedImage[i]));
+                // }
                 formData.append('image', addedImage)
                 formData.append('title', values?.nfts?.map(x =>
                     x.nft_name
@@ -186,13 +197,15 @@ const AddNft = ({ current, prev }) => {
                 formData.append('description', values?.nfts?.map(x => x.nft_description))
                 formData.append('preview_imag', Pimage)
                 formData.append('extention', sourceType)
-                dispatch(AddNftAction(formData, projid, slug, setLoading))
+                dispatch(AddNftAction(formData, projid, slug, setLoading,history))
             } else {
                 console.log('fail')
                 setLoading(false)
                 swal('error!', 'Nft not uploaded', 'error')
             }
         } catch (error) {
+            setLoading(false)
+            swal('error!', 'Nft not uploaded', 'error')
             console.log(error, 'error')
         }
     };

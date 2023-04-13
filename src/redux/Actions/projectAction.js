@@ -169,7 +169,6 @@ export const NftList = (slug, setLoading) => async dispatch => {
     }
 }
 export const uploadNFT = async (nft, dispatch) => {
-    // debugger
     try {
 
         // const [loading, setLoading] = useState()
@@ -605,7 +604,7 @@ export const UpdateNft = (formData, props, setLoading) => async dispatch => {
         }
     }
 }
-export const AddNftAction = (formData, projid, slug, setLoading) => async dispatch => {
+export const AddNftAction = (formData, projid, slug, setLoading, history) => async dispatch => {
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -623,11 +622,13 @@ export const AddNftAction = (formData, projid, slug, setLoading) => async dispat
 
         if (res.status === 200) {
             setLoading(false)
-            swal("success", "updated", 'success').then(function () {
-                // dispatch(ProjectDetail(props.id))
-                // dispatch(LatestProjectDetail(params))
-                window.location = `/projnftdetails/${slug.id}`;
-            });
+            swal("success", "updated", 'success')
+            history.push(`/projnftdetails/${slug.id}`)
+            // .then(function () {
+            // dispatch(ProjectDetail(props.id))
+            // dispatch(LatestProjectDetail(params))
+            // window.location = `/projnftdetails/${slug.id}`;
+            // });
 
         }
     } catch (e) {
@@ -682,8 +683,9 @@ export const getBid = (id) => async dispatch => {
         // console.log("error");
     }
 };
-export const UpdateBId = ({ id, status }) => async dispatch => {
+export const UpdateBId = ({ id, status, setLoading, slug }) => async dispatch => {
     // debugger
+    setLoading(true)
     try {
         const token = localStorage.getItem('authToken')
         const config = {
@@ -695,13 +697,16 @@ export const UpdateBId = ({ id, status }) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/change_bids_status/${id}}`,
             { status: status }, config)
-        await dispatch(res)
+        // await dispatch(res)
         if (res.status == 200) {
+            setLoading(false)
+            await dispatch(NftList(slug))
             swal("success", "success", "success")
         }
         console.log('res bid', res)
     } catch (e) {
-        swal("error", e?.response?.data?.message, "success")
+        swal("error", e?.response?.data?.message, "error")
+        setLoading(false)
         dispatch(LogsAction(e))
         // console.log("error");
     }
