@@ -217,6 +217,7 @@ export const getPublicLiveProjects = createAsyncThunk(
     "auth/liveProjects",
 
     async (params, thunkAPI, setLatestData) => {
+        // debugger
         try {
             const { projectType } = params
             const latitude = localStorage.getItem('latitude')
@@ -226,23 +227,29 @@ export const getPublicLiveProjects = createAsyncThunk(
                     'Content-Type': 'application/json',
                 },
             }
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=1   &latitude=${latitude}&longitude=${longitude}&search_keyword=&category_id=&type`, config)
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=${params.count}&latitude=${latitude}&longitude=${longitude}&search_keyword=&category_id=&type`, config)
             // console.log(res, 'projres')
+
             thunkAPI.dispatch(publicLiveProjects({
                 res: res,
                 type: projectType,
             }));
-            thunkAPI.dispatch(publicLiveProjectspagination({
-                res: res,
+            if (params.location.pathname === "/all/LatestProjects") {
 
-            }));
+                params.setCount(params.count)
+            }
+            // thunkAPI.dispatch(publicLiveProjectspagination({
+            //     res: res,
+
+            // }));
             // setLatestData(res.data.data())
             // thunkAPI.dispatch(publicLiveProjects(res));
 
         } catch (e) {
             thunkAPI.dispatch(LogsAction(e))
+            // debugger
             if (e?.response?.data.message) {
-                swal('error', e.response.data.message, 'error')
+                // swal('error', e.response.data.message, 'error')
             }
         }
     })
@@ -267,7 +274,7 @@ export const UpdateProject = (props, params) => async dispatch => {
             swal("success", res.data.message, 'success')
             dispatch(ProjectDetail(props.id))
             // .then(function () {
-            // window.location = `/projnftdetails/${props}`;
+            // window.location = `/ projnftdetails / ${ props }`;
             // });
 
         }
@@ -491,6 +498,7 @@ export const GetSettings = () => async dispatch => {
 }
 
 export const GetNftwol = ({ slug }) => async dispatch => {
+    
     try {
         const config = {
             headers: {
@@ -591,7 +599,7 @@ export const UpdateNft = (formData, props, setLoading) => async dispatch => {
             dispatch(ProjectDetail(props.id))
             props.onHide(false)
             // .then(function () {
-            //     window.location = `/nft/details/${props.nft_id?.id}?project=${props.id}`;
+            //     window.location = `/ nft / details / ${ props.nft_id?.id } ? project = ${ props.id }`;
 
             // });
 
@@ -627,7 +635,7 @@ export const AddNftAction = (formData, projid, slug, setLoading, history) => asy
             // .then(function () {
             // dispatch(ProjectDetail(props.id))
             // dispatch(LatestProjectDetail(params))
-            // window.location = `/projnftdetails/${slug.id}`;
+            // window.location = `/ projnftdetails / ${ slug.id }`;
             // });
 
         }

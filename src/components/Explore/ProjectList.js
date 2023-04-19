@@ -8,6 +8,7 @@ import Loader from '../Loader/loader';
 import { DeleteProject } from './../../redux/Actions/projectAction';
 import swal from 'sweetalert';
 import { Pagination } from 'antd';
+import Loadmore from '../../LoadMore';
 
 const GetAllProjects = () => {
     const [loading, setLoading] = useState()    // console.log(projc, 'projc')
@@ -68,6 +69,7 @@ const GetAllProjects = () => {
                         </div>
 
                         <div className="row items explore-items h-auto">
+                            {/* <Loadmore data= */}
                             {projects && projects.length ?
                                 [...new Map(projects.map(item =>
                                     [item["title"], item])).values()].map((item, idx) => {
@@ -135,6 +137,7 @@ const GetAllProjects = () => {
                                     )}
                                 </div>
                             }
+                            {/* /> */}
                         </div>
                         {/* <Pagination defaultCurrent={6} total={500} /> */}
                     </div>

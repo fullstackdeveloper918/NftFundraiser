@@ -7,30 +7,74 @@ import { useLocation, useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
 import { GetUserAction } from '../../redux/Actions/authAction';
 import { Link } from 'react-router-dom';
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import { NftList } from '../../redux/Actions/projectAction';
+import dayjs from 'dayjs';
+import WidgetPopup from './widgetPopup';
 const RefralTransdataTable = (props) => {
     const dispatch = useDispatch()
-
+    const [projSlug, setProjSlug] = useState(" ")
+    const [nftSlug, setNftslug] = useState(" ")
+    console.log('nftSlug', nftSlug)
     const { Panel } = Collapse;
+    console.log('projSlug', projSlug)
     const onChange = (key) => {
         console.log(key);
     };
-
+    const [copy, setCopy] = useState(false)
     const [expandIconPosition, setExpandIconPosition] = useState('end');
+    const [widgetModalShow, setWidgetModalShow] = useState(false)
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
     };
+    const nftdetail = useSelector(state => {
 
+        return state.projectdetails.nftlist
+    })
 
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
 
+    const projects = useSelector(state => {
+        return state.projectdetails.projects
+    })
+
+    console.log(projects, 'projects')
+    const HandleProj = (e) => {
+        setProjSlug(e?.currentTarget?.value)
+        setNftslug('')
+    }
+
+
+    useEffect(() => {
+        dispatch(ProjectList())
+    }, [dispatch])
+
     useEffect(() => {
         dispatch(GetUserAction())
     }, [props.id])
+
+    const projdetail = useSelector(state => {
+        return state?.projectdetails?.projectdetails
+    })
+
+    useEffect(() => {
+        if (projSlug) {
+            dispatch(ProjectDetail(projSlug))
+        }
+        if (nftSlug) {
+
+            dispatch(NftList(nftSlug))
+        }
+    }, [projSlug, nftSlug])
+
+    console.log('projdetail', projdetail)
     const location = useLocation()
+
     return (
         <footer className="item-details-area referal-detail">
             {/* Footer Top */}
@@ -40,6 +84,7 @@ const RefralTransdataTable = (props) => {
                         <TabList>
                             <Tab>How To Earn</Tab>
                             <Tab>My Referrals</Tab>
+                            <Tab>Referral Widget</Tab>
                         </TabList>
                         <TabPanel>
                             <div className="pb-5"> <h3>How Creator and Referral MATIC Rewards Work</h3>
@@ -113,6 +158,128 @@ const RefralTransdataTable = (props) => {
                                         </div>
                                     </Panel>
                                 </Collapse>
+                            </div>
+                        </TabPanel>
+                        <TabPanel>
+                            <h6 className='top-content'>Share with friends using our NFT widget on your website.<br />
+                                Upload your NFTs to get an affiliate referral link to earn 30% of NFTs sold in MATIC</h6>
+                            <div className="col-12 col-md-12 pr-0 pl-0 select_bar">
+                                <div className="form-group">
+                                    <label>Select Project</label>
+                                    <select name="category_id"
+                                        onChange={HandleProj}
+                                    >
+                                        <option value="" disabled selected style={{ color: "#495057" }}>Select project </option>
+
+                                        {projects?.map((option, key) => (
+                                            <option key={key.slug} value={option.slug}  >
+                                                {option.title}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="col-12 mt-4">
+                                <div className='nfts_main' id='invest'>
+                                    <div className='intro row m-0 p-0'>
+                                        {projSlug &&
+
+                                            <div className="intro-content">
+                                                <span >NFTs</span>
+                                                <h3 className="w-full mb-0 pt-4">NFTs</h3>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div className="row items mt-0 explore-items px-0">
+                                        {copy == true &&
+                                            <span className='copytext'>Copied!</span>
+
+                                        }
+                                        {projdetail?.nft_data?.map((x, idx) => {
+                                            const iFrame = `<iframe id="inlineFrameExample"
+                                 title="Inline Frame Example"
+                                 width="100%"
+                                 height="auto"
+                                 src='https://app.karmatica.io/referral/widget/${x.slug}'>
+                             </iframe>`
+                                            return (
+
+                                                <><div key={`eds_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item ">
+                                                    <div className="card no-hover m-0" onClick={() => setNftslug(x.slug)}>
+
+                                                        <div className="image-over relative">
+                                                            {x.user_id == projdetail.user_id ? (
+                                                                <>
+                                                                    {/* <Link to={`/nft/details/${x.slug}?project=${slug}`}> */}
+                                                                    {x.extention === 'Player' || x.extention === 'modal' ? (
+                                                                        <img className="card-img-top" src={x.preview_imag} alt="" />
+                                                                    ) : (
+                                                                        <img className="card-img-top" src={x.image} alt="" />
+                                                                    )}
+                                                                    {/* </Link> */}
+                                                                </>
+                                                            ) : (
+                                                                // <Link to={`/nft/details/${x.slug}?project=${slug}`}>
+                                                                <>
+                                                                    {x.extention === 'Player' || x.extention === 'modal' ? (
+                                                                        <img className="card-img-top" src={x.preview_imag} alt="" />
+                                                                    ) : (
+                                                                        <img className="card-img-top" src={x.image} alt="" />
+                                                                    )}
+                                                                </>
+                                                                // </Link>
+                                                            )}
+                                                            <div className='token'>
+                                                                <span>#{x?.token_id}</span>
+                                                                <span className='cards-icons'>
+                                                                    {/* {x.is_mint == 0 && */}
+                                                                    {/* // <Link to={`/nft/details/${x.slug}?project=${slug}`} ><i className="fa-solid fa-pen" /></Link> */}
+                                                                    {/* } */}
+                                                                </span>
+                                                            </div>
+                                                            {/* Author */}
+                                                        </div>
+                                                        {/* Card Caption */}
+                                                        <div className="card-caption px-0 col-12 ">
+                                                            {/* Card Body */}
+                                                            <div className="card-body">
+                                                                {/* <a href="#" className="d-flex justify-content-between align-items-center">
+                                                                    <h5 className="m-0 pb-2 p-0 text-capitalize">{x.title.slice(0, 16)}...</h5>
+                                                                </a> */}
+                                                                <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">
+                                                                    Project Name:<span>{nftdetail?.project_name?.slice(0, 12)}..</span>
+                                                                </div>
+                                                                <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">
+                                                                    NFT Name :<span>{nftdetail.title?.slice(0, 12)}..</span>
+                                                                </div>
+                                                                <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">
+                                                                    NFT Price :<span> {nftdetail.price} (MATIC)</span>
+                                                                </div>
+                                                                <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">
+                                                                    NFT End-Date :<span>{dayjs(nftdetail.end_date).format("DD MMM YYYY")}</span>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+
+                                                        <i className="fa-sharp fa-solid fa-copy" onClick={() => setWidgetModalShow(true)}></i>
+                                                        <WidgetPopup
+                                                            data={iFrame}
+                                                            show={widgetModalShow}
+                                                            onHide={() => setWidgetModalShow(false)}
+                                                        />
+
+                                                    </div>
+
+                                                </div>
+
+                                                </>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
                             </div>
                         </TabPanel>
                     </Tabs>

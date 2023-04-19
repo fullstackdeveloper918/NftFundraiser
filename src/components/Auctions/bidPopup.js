@@ -33,11 +33,15 @@ function BidPopup(props) {
                     <form onSubmit={handleSubmit(onSubmit)} className="item-form card no-hover">
                         <div className="row">
                             <div className="col-12 pb-2">
-                                <label>You are about to place a bid for {props.projtitle?.toUpperCase()} from {props.projcoll?.toUpperCase()}.</label>
+                                {window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? (
+                                    <label>You are about to place a bid for {props.projtitle?.toUpperCase()} from {props.projcoll?.toUpperCase()}.</label>
+                                ) : (
+                                    <label style={{ color: 'red' }}>Connect your wallet.</label>
+                                )}
                             </div>
                             <div className="col-12">
                                 <label>Wallet address:</label>
-                                <div class="bidinput">{window.ethereum?.selectedAddress}</div>
+                                <div class="bidinput">{window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? window.ethereum?.selectedAddress : <span style={{ color: 'red' }} disabled>Please connect your wallet</span>}</div>
                             </div>
                             <div className="col-12">
                                 <div className="form-group">
@@ -45,7 +49,10 @@ function BidPopup(props) {
                                     <input
                                         type="number"
                                         placeholder='Enter bid'
+                                        {...register('amount', { required: true })}
+                                        aria-invalid={errors.amount ? "true" : "false"}
                                     />
+                                    {errors.amount?.type === 'required' && <p style={{ color: 'red' }} role="alert">Amount is required</p>}
                                 </div>
                             </div>
                             <hr />

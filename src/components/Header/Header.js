@@ -57,15 +57,14 @@ const Header = () => {
 
 
 
-    useEffect((e) => {
-        e?.preventDefault();
+    useEffect(() => {
 
         const interval = setInterval(() => {
             console.log("yyyyiiiiiiiiiiii")
             // openNotification()
             dispatch(GetauctionNoti())
 
-            if (userauction?.count > 0) {
+            if (userauction?.count > 0 && userdet.user_id !== userauction?.data?.user_id) {
                 console.log("trueeeeeeeeeeeeeee")
                 openNotification()
             }
@@ -74,8 +73,6 @@ const Header = () => {
                 console.log("falseeeeeeeeee")
             }
             // if (true) {
-
-
         }, 5000)
 
         return () => clearInterval(interval);
@@ -103,10 +100,13 @@ const Header = () => {
 
 
     useEffect(() => {
+
         window.addEventListener("beforeunload", handleBeforeUnload);
-        return () => {
-            window.removeEventListener("beforeunload", handleBeforeUnload);
-        };
+        if (window.location == '/create') {
+            return () => {
+                window.removeEventListener("beforeunload", handleBeforeUnload);
+            };
+        }
     }, []);
 
     const handleBeforeUnload = (e) => {
@@ -426,7 +426,7 @@ const Header = () => {
                                     {userRole == 2 && (
                                         <li><button type='button' class="dropdown-item"><Link to='/my/nfts'><i class="fa-regular fa-file-image" style={{ color: 'white', display: "table-cell" }} /> My NFTs</Link></button></li>
                                     )}
-                                    <li><button type='button' class="dropdown-item"><Link to='/referals-detail'><i class="fa-solid fa-coins" style={{ color: 'white', display: "table-cell" }}></i>Referral Program</Link></button></li>
+                                    <li><button type='button' class="dropdown-item"><Link to='/referrals-detail'><i class="fa-solid fa-coins" style={{ color: 'white', display: "table-cell" }}></i>Referral Program</Link></button></li>
                                     {userRole == 3 && (
                                         <><li><button type='button' class="dropdown-item"><Link to='/projectlist'><i class="fa-regular fa-file" style={{ color: 'white', display: "table-cell" }}></i> My Projects</Link></button></li>
 

@@ -1,13 +1,107 @@
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Controller, useForm } from 'react-hook-form';
+import { useLocation } from 'react-router';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { CityList, CountryList, StateList } from '../../redux/Actions/authAction';
+import { CategoriesAction, UpdateProject } from '../../redux/Actions/projectAction';
 function ProTypePopup(props) {
+    const location = useLocation()
+    const [type, setType] = useState()
+    const { countries } = useSelector(state => state.countries)
+    const [country, setCountry] = useState('')
+    const [description, setDescription] = useState();
+    const dispatch = useDispatch()
+    console.log('country', country)
+    const [state, setState] = useState('')
+    const [city, setCity] = useState('')
+    console.log(countries?.data?.data, 'cntry')
+    const states = useSelector(state => {
+        // debugger
+        return state.countries.states
+    })
+    const cities = useSelector(state => {
+        // debugger
+        return state.countries.city
+    })
+    // useEffect(() => {
+    //     dispatch(CategoriesAction())
+    //     dispatch(CountryList())
+    // }, [])
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
+
+    const projdetail = useSelector(state => {
+        // 
+        return state?.projectdetails?.projectdetails
+    })
+    const lat = localStorage.getItem('latitude')
+    // console.log(lat, 'lattt')
+    const log = localStorage.getItem('longitude')
+    useEffect(() => {
+        if (location.pathname !== '/create' && projdetail && Object.keys(projdetail).length) {
+            setValue("title", projdetail.title)
+            setValue("address", projdetail.address)
+            setValue("description", projdetail.description)
+            setValue('state', projdetail.state)
+            setValue('country', projdetail.country)
+            setValue('city', projdetail.city)
+            setValue("price", projdetail.price)
+            setValue("number_of_nft", projdetail.number_of_nft)
+            setValue("start_date", projdetail.start_date)
+            setValue("end_date", projdetail.end_date)
+            setValue("type", projdetail.type)
+            setValue('category_id', projdetail.category_id)
+            setType(projdetail.type)
+            setCountry(projdetail.country)
+            setDescription(projdetail.description)
+            // setState(projdetail.state)
+            // setCity(projdetail.city)
+            console.log(projdetail.state, 'edit state')
+            console.log(projdetail.city, 'edit city')
+            setValue("image", projdetail.image)
+            const formData = new FormData()
+            // formData.append('country_id', event?.currentTarget?.value)
+            formData.append('country_id', projdetail.country)
+            formData.append('state_id', projdetail.state)
+            dispatch(StateList(formData))
+            dispatch(CityList(formData))
+        }
+    }, [projdetail]);
     const OnSubmit = (data) => {
-        props.startdate(data.start_date)
-        props.enddate(data.end_date)
-        props.nftno(data.number_of_nft)
-        props.onHide(true)
+        // debugger
+        if (location.pathname === '/create') {
+
+            props.startdate(data.start_date)
+            props.enddate(data.end_date)
+            props.nftno(data.number_of_nft)
+            props.onHide(true)
+        } else {
+            const formData = new FormData()
+
+
+            formData.append('title', data.title)
+            formData.append('description', description)
+            formData.append('state', data.state)
+            formData.append('country', data.country)
+            formData.append('city', data.city)
+            formData.append('address', data.address)
+            formData.append('price', data.price)
+            formData.append('number_of_nft', data.number_of_nft)
+            if (data?.type == 1) {
+
+                formData.append('start_date', '')
+                formData.append('end_date', '')
+            } else {
+
+                formData.append('start_date', data.start_date)
+                formData.append('end_date', data.end_date)
+            }
+            formData.append('type', '2')
+            formData.append('category_id', data.category_id)
+
+            dispatch(UpdateProject(props, formData))
+
+        }
     }
     const today = new Date();
     const numberOfDaysToAdd = 30;

@@ -1,11 +1,11 @@
 import React, { Component, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import {
   CategoriesAction,
   getPublicLiveProjects,
 } from "../../redux/Actions/projectAction";
-import { Pagination } from "antd";
+import { Button, Pagination } from "antd";
 
 const projectTypesMap = {
   LatestProjects: 2,
@@ -15,6 +15,9 @@ const projectTypesMap = {
 const ExploreAll = () => {
   const { type } = useParams();
   const dispatch = useDispatch();
+  const [count, setCount] = useState(1)
+  const location = useLocation()
+  console.log('count', count)
   const [currentPage, setCurrentPage] = useState(1);
 
   const liveProjects = useSelector((state) => {
@@ -25,15 +28,39 @@ const ExploreAll = () => {
   });
   console.log(liveProjectspag, "live");
 
-  let PageSize = liveProjectspag.page_per_data;
-  useEffect(() => {
 
+  const handleIncrement = () => {
+    // debugger
+    // if (startDate && endDate && numberofNfts) {
+
+    // setCount(prevCount => prevCount + 1)
+    dispatch(
+      getPublicLiveProjects({
+        cursor: 1,
+        type: projectTypesMap[type],
+        projectType: type,
+        setCount,
+        location,
+        count: count + 1,
+      })
+    );
+    // }
+  };
+
+
+  const handleDecrement = () => {
+    setCount(prevCount => prevCount - 1);
+  };
+  useEffect(() => {
+    // debugger
 
     dispatch(
       getPublicLiveProjects({
         cursor: 1,
         type: projectTypesMap[type],
         projectType: type,
+        setCount,
+        count,
       })
     );
   }, [dispatch, type]);
@@ -150,6 +177,7 @@ const ExploreAll = () => {
           pageSize={PageSize}
           onPageChange={page => setCurrentPage(page)}
         /> */}
+        <a onClick={(e) => handleIncrement(e)} className="btn ml-lg-auto btn-bordered-white morebutton">Load More</a>
       </div>
     </section>
   );

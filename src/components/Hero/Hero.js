@@ -147,7 +147,7 @@ const Hero = ({ type }) => {
 
                     <div className="col-12 col-md-6 col-lg-7">
 
-                        <h1 className="mt-4">Create NFTs to fund real-life projects. Earn up to 30% by sharing with friends.</h1>
+                        <h1 className="mt-4">Buy or create NFTs to fund projects. Earn 30% by sharing with friends.</h1>
                         {/* <p>Earn rewards by referring your friends.</p> */}
                         {/* Buttons */}
                         <div className="button-group">

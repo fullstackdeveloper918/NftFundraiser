@@ -57,7 +57,6 @@ const projectSlice = createSlice({
             state.getcollectiondetails = action?.payload?.data?.data;
         },
         getNftwolDetails: (state, action) => {
-            // 
             state.getnftwoldetails = action?.payload?.data?.data;
         },
         nftUpd: (state, action) => {

@@ -14,6 +14,7 @@ import EditNftDesc from '../Create/editDescPopup';
 import EditNftImage from '../Create/nftImageeditPopup';
 import { GetMatic } from './GetMAtic';
 import Loader from '../Loader/loader';
+import ReadMore from '../../readMore';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
@@ -232,7 +233,8 @@ const NftDetails = (props) => {
                                     </div>
                                 }
                             </div>
-                            <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft " />
+                            <ReadMore data={nftdetail.description} className="nft-detail-nft " />
+                            {/* <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft " /> */}
                         </div>
                     </div>
 

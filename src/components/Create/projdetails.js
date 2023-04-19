@@ -12,6 +12,8 @@ import ReadMore from '../../readMore';
 import { GetMatic } from '../ItemDetails/GetMAtic';
 import ReferalPopup from '../ItemDetails/refralPopup';
 import Swal from 'sweetalert2';
+import { Alert, Space } from 'antd';
+import ProTypePopup from './ProjectTypePopup';
 // import ProgressBar from 'react-bootstrap';
 const ProjNftDetails = () => {
     const { slug } = useParams()
@@ -28,10 +30,12 @@ const ProjNftDetails = () => {
     const [modalShowrefer, setModalShowrefer] = React.useState(false);
     const dispatch = useDispatch()
     const [modalShowDes, setModalShowDes] = React.useState(false);
+    const [projmodalShows, setProjModalShows] = React.useState(false);
     const projdetail = useSelector(state => {
         // 
         return state?.projectdetails?.projectdetails
     })
+    console.log('projdetail', projdetail)
     useEffect((event) => {
         (GetMatic(setmatic))
         dispatch(ProjectDetail(slug))
@@ -45,6 +49,38 @@ const ProjNftDetails = () => {
     return (
         <section className="item-details-area project-nft-si main-proj-detail ">
             <div className="container">
+                {projdetail.type === "1" &&
+                    <Space
+                        direction="vertical"
+                        style={{
+                            width: '100%',
+
+                        }}
+                        className='project_type-icon'
+
+                    >
+                        <Alert
+                            message="Change you project from single to campaign to add more NFTs"
+                            type="info"
+                            showIcon
+                            action={
+                                <>
+                                    <i class="fa-solid fa-check" onClick={() => setProjModalShows(true)}></i>
+                                    <ProTypePopup
+                                        id={slug}
+                                        show={projmodalShows}
+                                        onHide={() => setProjModalShows(false)}
+                                    />
+                                </>
+                            }
+
+
+
+
+                            closable
+                        />
+                    </Space>
+                }
                 <div className="row justify-content-between p-0">
                     <div className='col-12'>
                         <span className="my-2 p-0 title_main">{projdetail.title}</span>

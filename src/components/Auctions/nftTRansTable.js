@@ -19,7 +19,6 @@ const NftTransdataTable = (props) => {
         setExpandIconPosition(newExpandIconPosition);
     };
     const latprojnftdetail = useSelector(state => {
-        // 
         return state?.projectdetails?.getnftwoldetails
     })
     console.log('lattt', latprojnftdetail)
@@ -54,7 +53,7 @@ const NftTransdataTable = (props) => {
                                     <tr className='contract-address'>
                                         <td>#{items.nft_id}</td>
                                         <td>#{items.project_id}</td>
-                                        <td className='referal'>{items.price}<img src='../../img/image14.png' /></td>
+                                        <td className='referal'>{items.price}<img src='../../../img/image14.png' /></td>
                                         <td>{items.pay_from.slice(0, 4)}...{items.pay_from.slice(35, 44)}</td>
                                         <td>{items.pay_to.slice(0, 4)}...{items.pay_to.slice(35, 44)}</td>
                                         <td>#{items.token_id}</td>

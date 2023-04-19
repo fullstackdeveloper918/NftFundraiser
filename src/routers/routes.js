@@ -42,6 +42,8 @@ import { createOrganizationafterRoleChange } from "../themes/rolechange-organiza
 import ResellDetail from "../themes/resell-details";
 import AllResellNft from "../themes/allresellNfts";
 import AllReraltrans from "../themes/all-refrals";
+import NotFound from "../notFound";
+import Widget from "../components/Explore/widget";
 
 
 const MyRouts = () => {
@@ -51,6 +53,7 @@ const MyRouts = () => {
         <ScrollToTop />
         <Switch>
           <Route exact path="/" component={ThemeOne} />
+
           <Route exact path="/explore-1" component={ExploreOne} />
           <Route exact path="/projectlist" component={ExploreTwo} />
           <Route exact path="/create/organization" component={createOrganizationafterRoleChange} />
@@ -64,11 +67,12 @@ const MyRouts = () => {
           <Route exact path="/auctions" component={Auctions} />
           <Route exact path="/popularcollection/details/:slug" component={ItemDetails} />
           <Route exact path="/projects/:slug" component={latprojDetails} />
-          <Route exact path="/referals-detail" component={AllReraltrans} />
+          <Route exact path="/referrals-detail" component={AllReraltrans} />
           <Route exact path="/nftprojdetails/:slug" component={latnftprojDetails} />
           <Route exact path="/fundraiser/detail/:user_id" component={FundDetail} />
           <Route exact path="/myfundraiser/detail/:user_id" component={FundraiserProjects} />
           <Route exact path="/projnftdetails/:slug" component={ProjNft} />
+          <Route exact path="/referral/widget/:slug" component={Widget} />
           <Route exact path="/allfundraise" component={AllFundraiser} />
           <Route exact path="/all/fundraise/projects/:user_id" component={AllFundraiserProjects} />
           <Route exact path="/nft/details/:id" component={Nft} />
@@ -89,6 +93,7 @@ const MyRouts = () => {
           <Route exact path="/signup" component={Signup} />
           <PrivateRoute exact path="/forgotpassword" component={Forgot} />
           <Route exact path="/contact" component={Contact} />
+          <Route exact path="*" component={NotFound} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -98,12 +98,12 @@ const ProjdataTable = (props) => {
                                     <>
                                         {/* <td><span>Owned By:</span> <span>{latprojdetail?.user_data?.username}</span> </td> */}
                                         {/* <td><span>Total NFT's:</span> <span>{latprojdetail?.number_of_nft}</span></td> */}
-                                        <td><span>Chain: </span> <span>Polygon (Matic)</span></td>
-                                        <td><span>Created : </span> <span> {dayjs(latprojdetail?.created_at).format("DD MMM YYYY")} </span></td>
+                                        <td><span>Chain </span> <span>Polygon (Matic)</span></td>
+                                        <td><span>Created  </span> <span> {dayjs(latprojdetail?.created_at).format("DD MMM YYYY")} </span></td>
                                         <td><span>Country </span> <span>{latprojdetail?.country_name?.name}</span></td>
                                         <td><span>State</span>  <span>{latprojdetail?.state_name?.name}</span> </td>
                                         <td><span>City</span>  <span>{latprojdetail?.city_name?.name}</span> </td>
-                                        <td><span>Number of NFTs</span>  <span>{latprojdetail?.number_of_nft}</span> </td>
+                                        <td><span>Project Type</span>  <span>{latprojdetail?.type === "1" ? "Single" : 'Campaign'}</span> </td>
                                         {latprojdetail.type == 2 &&
 
                                             <><td><span>Start Date</span>  <span>{latprojdetail?.start_date}</span> </td>
@@ -128,7 +128,7 @@ const ProjdataTable = (props) => {
                                                 <td><span>Country </span> <span>{projdetail.country_name?.name}</span></td>
                                                 <td><span>State</span>  <span>{projdetail.state_name?.name}</span> </td>
                                                 <td><span>City</span>  <span>{projdetail.city_name?.name}</span> </td>
-                                                <td><span>Number of NFTs</span>  <span>{projdetail.number_of_nft}</span> </td>
+                                                <td><span>Project Type</span>  <span>{projdetail?.type === "1" ? "Single" : 'Campaign'}</span> </td>
                                                 {projdetail.type == 2 &&
 
                                                     <><td><span>Start Date</span>  <span>{projdetail.start_date}</span> </td>

@@ -2967,7 +2967,7 @@ span.ant-collapse-header-text div:nth-child(2) img{
 }
 .referal-main li {
     padding: 50px 20px;
-    background: #1e1e1e;
+    background: #4a1ec5;
     width: 100%;
     max-width: 260px;
     list-style: none;
@@ -3096,3 +3096,101 @@ a.auctionbttn {
 /* .table-responsive {
     text-align: center;
 } */
+.ant-result-title {
+    color: white !important;
+    font-size: 20px !important;
+    line-height: 1.8;
+    text-align: center;
+}
+.ant-result-subtitle {
+    color: white !important;
+    font-size: 20px !important;
+    line-height: 1.6;
+    text-align: center;
+}
+.ant-result {
+    padding: 150px 37px !important;
+}
+.project_type-icon .ant-alert-icon svg {
+    fill: #1890ff !important;
+}
+.project_type-icon .ant-alert-action {
+    margin-left: 8px;
+    padding: 2px;
+    border-radius: 100px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #1890ff;
+    cursor: pointer;
+}
+.project_type-icon .ant-alert-action .fa-solid{
+    font-weight: 900;
+    margin-left: 0px;
+    color: #1890ff;
+    font-size: 10px;
+}
+.project_type-icon .anticon-close {
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+    padding: 2px;
+    border-radius: 100px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1890ff;
+}
+.project_type-icon .anticon-close svg {
+    fill: white;
+    font-size: 12px;
+}
+.project_type-icon .ant-space-item {
+    width: 100%;
+    max-width: 97%;
+    margin: 0 auto;
+}
+.html-box textarea.form-control {
+    height: fit-content;
+    min-height: 150px;
+}
+.html-box textarea.form-control::-webkit-scrollbar-thumb {
+    background: #343434;
+}
+.html-box textarea.form-control::-webkit-scrollbar {
+    width: 5px;
+}
+.html-box textarea.form-control::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+.html-box .html_boxrow>div:first-child {
+    width: 95%;
+}
+.html-box .html_boxrow>div:last-child {
+    width: 5%;
+}
+.copy_text .copytext {
+    left: unset !important;
+    right: -30px;
+    top: -18px;
+}
+.html_box-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+.select_bar select {
+    border: 1px solid #fff;
+    margin-top: 20px;
+}
+.react-tabs__tab--selected {
+    border-color: #aaa0;
+    color: white;
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+}
+.react-tabs__tab {
+    border: 1px solid transparent !important;
+    padding: 10px 12px !important;
+}

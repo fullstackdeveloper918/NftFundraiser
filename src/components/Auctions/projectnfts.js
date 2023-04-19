@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { LatestProjectDetail } from '../../redux/Actions/projectAction';
+import CopyToClipboard from 'react-copy-to-clipboard';
 const ProjNFTS = (props) => {
     const dispatch = useDispatch()
+ 
     const { slug } = useParams();
     const latprojdetail = useSelector(state => {
         // 
@@ -28,7 +30,10 @@ const ProjNFTS = (props) => {
                 </div>
                 <div className="row items">
                     {latprojdetail?.nft_data?.map((item, idx) => {
+                       
                         return (
+                            
+                                
                             <div key={`auct_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
                                 <div className="card">
                                     <div className="image-over">
@@ -55,6 +60,7 @@ const ProjNFTS = (props) => {
                                                     <a> <button className='btn py-2 ml-lg-auto btn-bordered-white'><i className="icon-handbag mr-1" /> <Link to={`/nftprojdetails/${item.slug}?refid=${props.refid}`} style={{ color: "white" }}>Invest</Link></button></a>
                                                 )}
                                                 <a> <img className="mr-1" src='../img/image14.png' />{item.price}</a>
+                                                
                                             </div>
                                         </div>
                                     </div>

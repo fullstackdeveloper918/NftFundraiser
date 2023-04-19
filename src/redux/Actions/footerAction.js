@@ -26,6 +26,7 @@ export const getFooter = createAsyncThunk(
             }
         }
     })
+
 export const AboutUsAction = createAsyncThunk(
     "auth/about",
     async (params, thunkAPI) => {

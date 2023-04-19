@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { getPublicLiveProjects } from "../../redux/Actions/projectAction";
+import { useState } from "react";
 const projectTypesMap = {
   LatestProjects: 2,
   RecentCampaigns: 1,
 };
 const AuctionsOne = ({ type }) => {
   const dispatch = useDispatch();
+  const [count, setCount] = useState(1)
+  const location = useLocation()
   const liveProjects = useSelector((state) => {
     return state?.projectdetails?.liveProjects[type];
   });
@@ -18,6 +21,8 @@ const AuctionsOne = ({ type }) => {
         cursor: 1,
         type: projectTypesMap[type],
         projectType: type,
+        location,
+        count
       })
     );
   }, [dispatch]);
