@@ -466,8 +466,13 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       // const bala = web3.fromWei(web3.eth.getBalance(window.ethereum?.selectedAddress))
       // console.log(bala, 'balance')
       // .then(console.log);
-      wallets = refid === "null" ? [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets] : [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets, refid]
-      fee = refid === "null" ? [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees] : [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, localStorage.getItem('refamount')]
+      wallets = (refid === "null" || refid === null) ? 
+        [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets] :
+        [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets, refid]
+      fee = (refid === "null" || refid === null) ? 
+           [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees] : 
+           [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, localStorage.getItem('refamount')]
+      
       console.log(fee)
       console.log(wallets)
 
@@ -482,6 +487,8 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       };
 
       const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
+
+      
       // const nftContract = new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
       // const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
 
@@ -493,12 +500,12 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       })
 
 
-
+      
       const memory_amounts = fee.map(amt => {
-        const amountToSend = ((amt / 100) * 0.03)
+        const amountToSend = ((parseFloat(amt) / 100) * 0.03)
         return web3.utils.toWei(`${amountToSend}`, "ether")
       })
-
+      
       const transferowner = {
         'from': window.ethereum?.selectedAddress,
         'to': contractAddress,
@@ -509,6 +516,8 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
         'input': nftContract.methods.buyNft(contractAddress, tokenId, memory_clients, memory_amounts).encodeABI()
       };
 
+      
+
       // const txHash = await web3.eth.sendTransaction(tx)
 
       // console.log('txhash', txHash)
@@ -516,7 +525,6 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
         .on('transactionHash', function (hash) {
           let txHash = hash
           // console.log('tx', txHash)
-
 
         })
         .on('receipt', function (receipt) {
@@ -540,6 +548,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
           // modalShow(false)
         })
         .on('error', function (error) {
+          
           dispatch(LogsAction(error))
           // console.log(error.message, "error")
           swal('error', JSON.stringify(error.message, 'error'))
@@ -551,8 +560,8 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
           // will be fired once the receipt is mined
         })
     } catch (error) {
-      dispatch(LogsAction(error))
-
+      // dispatch(LogsAction(error))
+      
       swal("error", JSON.stringify(error.message), "error")
       loadingg(false)
       // alert(JSON.stringify(error.message))
