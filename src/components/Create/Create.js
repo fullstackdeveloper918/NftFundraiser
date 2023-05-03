@@ -236,7 +236,9 @@ const Create = ({ current, next, prev }) => {
                                 ))}
                             </select>
                         </div>
-                        <div className="col-12 col-md-12 pr-0 pl-0">
+                        
+                    </div>
+                    <div className="col-12 col-md-6">
                             <div className="form-group">
                                 <label>Category</label>
                                 <select name="category_id"
@@ -253,8 +255,7 @@ const Create = ({ current, next, prev }) => {
                                 {errors.category_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Category is required</p>}
                             </div>
                         </div>
-                    </div>
-                    <div className="col-12 col-md-6">
+                    <div className="col-12 col-md-12">
                         <div className="form-group">
                             {usertype == 2 ? (
                                 <label>Price per NFT (In MATIC tokens)</label>
@@ -276,8 +277,12 @@ const Create = ({ current, next, prev }) => {
                         <div className="">
                             <div className="form-group pricing-detail">
                                 <p><span>Price</span> <span>{price ? price : '--'} MATIC</span></p>
-                                <p><span>Karmatica Fee</span><span>1%</span></p>
-                                <p><span>You will receive </span><span>{99 * price / 100 ? 99 * price / 100 : "--"} MATIC</span></p>
+                               
+                                <div className='fee_contentdiv'><span className='mainkrmetica_heading'>Karmatica Fee</span><div className='fee_content'><span>Buyer</span><span>1%</span></div><div className='fee_content'><span>Seller</span><span>1%</span></div></div>
+                                {/* <span>Buyer</span><span>1%</span><br /><span>Seller</span><span>1%</span> */}
+                                
+                                
+                                <p><span>You will receive </span><span>{98 * price / 100 ? 98 * price / 100 : "--"} MATIC</span></p>
                             </div>
                         </div>
                     </div>

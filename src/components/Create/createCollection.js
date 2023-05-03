@@ -92,7 +92,7 @@ function MyVerticallyCenteredModal(props) {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    aria-invalid={errors.short_url ? "true" : "false"}
+                                                                                
                                     name="short_url"
                                     placeholder="Web URL"
                                     {...register('short_url', { required: true })}

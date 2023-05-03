@@ -40,7 +40,7 @@ const AuctionsOne = ({ type }) => {
                 </h3>
               </div>
               <div className="intro-btn">
-                {liveProjects?.length > 4 && (
+                {liveProjects?.data?.length > 4 && (
                   <Link to={`/all/${type}`} style={{ color: "white" }}>
                     <a className="btn content-btn">View All</a>
                   </Link>
@@ -53,7 +53,7 @@ const AuctionsOne = ({ type }) => {
           <div className="swiper-container slider-mid items ">
             <div className="swiper-wrapper  ">
               {/* Single Slide */}
-              {liveProjects?.map((item, idx) => {
+              {liveProjects?.data?.map((item, idx) => {
                 return (
                   <div
                     key={`auc_${item.id}`}

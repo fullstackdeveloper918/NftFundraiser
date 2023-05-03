@@ -113,9 +113,9 @@ export const LatestProjectDetail = (slug) => async dispatch => {
     }
 }
 
-export const ProjectList = () => async dispatch => {
+export const ProjectList = (params) => async dispatch => {
     const token = localStorage.getItem('authToken')
-    // setLoading(true)
+    params.setLoading(true)
     try {
         const config = {
             headers: {
@@ -124,17 +124,22 @@ export const ProjectList = () => async dispatch => {
             },
         }
 
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/project/list`,
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/project/list?page=${params.count}&search_keyword=&category_id=&type`,
             config)
 
         // console.log(res?.data?.data[0]?.image, 'proj')
-        await dispatch(getProjectList(res.data?.data));
+        if (params.location.pathname === "/projectlist") {
+
+            params.setCount(params.count)
+        }
+        await dispatch(getProjectList(res));
+        params.setLoading(false)
         // setLoading(false)
 
     } catch (e) {
         dispatch(LogsAction(e))
+        params.setLoading(false)
         if (e?.response?.data.message) {
-            // setLoading(false)
             swal('error', e.response.data.message, 'error')
         }
     }
@@ -168,7 +173,7 @@ export const NftList = (slug, setLoading) => async dispatch => {
         }
     }
 }
-export const uploadNFT = async (nft, dispatch) => {
+export const uploadNFT = async (nft, dispatch,setLoading) => {
     try {
 
         // const [loading, setLoading] = useState()
@@ -196,13 +201,13 @@ export const uploadNFT = async (nft, dispatch) => {
                 return {
                     success: true,
                     data: response.data
+                    
                 };
             },
-
-
+            setLoading(false)
             )
     } catch (error) {
-
+setLoading(false)
         dispatch(LogsAction(error))
         swal('error', error, 'error')
 
@@ -217,7 +222,10 @@ export const getPublicLiveProjects = createAsyncThunk(
     "auth/liveProjects",
 
     async (params, thunkAPI, setLatestData) => {
-        // debugger
+        debugger
+        if (params.location.pathname === "/all/LatestProjects") {
+        params.setLoading(true)
+        }
         try {
             const { projectType } = params
             const latitude = localStorage.getItem('latitude')
@@ -234,6 +242,7 @@ export const getPublicLiveProjects = createAsyncThunk(
                 res: res,
                 type: projectType,
             }));
+            params.setLoading(false)
             if (params.location.pathname === "/all/LatestProjects") {
 
                 params.setCount(params.count)
@@ -241,11 +250,12 @@ export const getPublicLiveProjects = createAsyncThunk(
             // thunkAPI.dispatch(publicLiveProjectspagination({
             //     res: res,
 
-            // }));
+           // }));
             // setLatestData(res.data.data())
             // thunkAPI.dispatch(publicLiveProjects(res));
 
         } catch (e) {
+            params.setLoading(false)
             thunkAPI.dispatch(LogsAction(e))
             // debugger
             if (e?.response?.data.message) {

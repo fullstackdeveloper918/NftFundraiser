@@ -1,27 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { ProjectList } from '../../redux/Actions/projectAction';
 import Loader from '../Loader/loader';
 import { DeleteProject } from './../../redux/Actions/projectAction';
 import swal from 'sweetalert';
-import { Pagination } from 'antd';
-import Loadmore from '../../LoadMore';
 
 const GetAllProjects = () => {
-    const [loading, setLoading] = useState()    // console.log(projc, 'projc')
+    const [loading, setLoading] = useState(false)    // console.log(projc, 'projc')
     const dispatch = useDispatch()
-
+    const [count, setCount] = useState(1)
+    const location = useLocation()
     const projects = useSelector(state => {
         return state.projectdetails.projects
     })
 
     console.log(projects, 'projects')
-
+    const handleIncrement = () => {
+        // if (startDate && endDate && numberofNfts) {
+    
+        // setCount(prevCount => prevCount + 1)
+        dispatch(
+            ProjectList({
+                location,
+            setCount,
+            setLoading,
+          
+            count: count + 1,
+          })
+        );
+        // }
+      };
+      const handleDecrement = () => {
+        dispatch(
+            ProjectList({
+                setLoading,
+            setCount,
+            location,
+            count: 1,
+          })
+        );
+      };
     useEffect(() => {
-        dispatch(ProjectList())
+        dispatch(ProjectList({setCount,
+            count,location,setLoading}))
     }, [dispatch])
 
     const showDeleteHandler = (id) => {
@@ -48,10 +72,8 @@ const GetAllProjects = () => {
     return (
         <>
 
-            {loading ? (
-                <Loader />
-            ) : (
 
+          
                 <section className="explore-area">
 
                     <div className="container">
@@ -69,9 +91,12 @@ const GetAllProjects = () => {
                         </div>
 
                         <div className="row items explore-items h-auto">
-                            {/* <Loadmore data= */}
-                            {projects && projects.length ?
-                                [...new Map(projects.map(item =>
+                        {loading ? (
+                <Loader />
+            ) : (
+                            <>
+                            {projects?.data && projects?.data?.length ?
+                                [...new Map(projects?.data?.map(item =>
                                     [item["title"], item])).values()].map((item, idx) => {
                                         return (
                                             // <Link key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
@@ -124,6 +149,7 @@ const GetAllProjects = () => {
                                             // </Link>
                                         )
                                     }) :
+                                    
                                 <div className="col-12 col-sm-12 col-lg-12">
                                     {window.ethereum?.selectedAddress ? (
                                         <h2 className='allproj2'>
@@ -137,13 +163,28 @@ const GetAllProjects = () => {
                                     )}
                                 </div>
                             }
-                            {/* /> */}
+                            
+                           
+                           
+                            </>
+                            )
+            }
                         </div>
+                        {projects.current_page != projects.totalPageCount ?(
+          <>
+          <div className="morebutton"><a onClick={(e) => handleIncrement(e)} className="btn btn-bordered-white">Load More</a></div>
+          </>
+
+        ):(
+<>
+        <div className="morebutton"><a onClick={(e) => handleDecrement(e)} className="btn btn-bordered-white">Load Previous</a></div>
+        </>
+        )}
+                        {/* <div className="morebutton"><a onClick={(e) => handleIncrement(e)} className="btn btn-bordered-white">Load More</a></div> */}
                         {/* <Pagination defaultCurrent={6} total={500} /> */}
                     </div>
                 </section>
-            )
-            }
+            
         </>
     );
 

@@ -271,7 +271,7 @@ const UploadNft = ({ current, prev }) => {
             setLoading(true)
 
 
-            const imagesRes = await uploadNFT(nftimage, dispatch)
+            const imagesRes = await uploadNFT(nftimage, dispatch,setLoading)
 
             const addedImage = imagesRes?.data?.data.map(x => ipfsBaseUrl + x?.image_hash)
 
@@ -283,7 +283,6 @@ const UploadNft = ({ current, prev }) => {
 
             const formData = new FormData()
 
-            // debugger
             if (check === false) {
                 console.log('uploaded')
                 formData.append('title', data.title)
@@ -342,17 +341,16 @@ const UploadNft = ({ current, prev }) => {
 
                 dispatch(CreateProjectAction(formData, setLoading, history))
             } else {
-
                 console.log('fail')
                 setLoading(false)
                 swal('error', 'Nft not uploaded', 'error')
 
             }
         } catch (error) {
-            swal('error', error, 'error')
+            swal('error', 'Nft not uploaded', 'error')
             setLoading(false)
             console.log(error, 'error')
-            dispatch(LogsAction(error))
+            dispatch(LogsAction(error?.response?.data?.message))
         }
 
     };

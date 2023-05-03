@@ -1251,7 +1251,7 @@ a:not(.btn), a:link:not(.btn), a:visited:not(.btn), a:hover:not(.btn), a:active:
 }
 .image-holder {
     width: 100% !important;
-    background-color: #262424 !important;
+    background-color: #000 !important;
     border-style: dotted !important;
     border-color: #484646 !important;
     /* padding: 130px !important; */
@@ -3193,4 +3193,25 @@ a.auctionbttn {
 .react-tabs__tab {
     border: 1px solid transparent !important;
     padding: 10px 12px !important;
+}
+.fee_contentdiv {
+    padding: 15px 10px;
+    border-bottom:1px solid #373737cc;
+}
+:root .fee_contentdiv .mainkrmetica_heading {
+    color: #fff !important;
+}
+.fee_content {
+    display: flex;
+    justify-content: space-between;
+}
+:root .morebutton {
+    margin-top:30px;
+    display: flex;
+    justify-content: center;
+}
+:root .morebutton a {
+    width: 100%;
+    max-width: fit-content;
+    margin: 0px auto;
 }

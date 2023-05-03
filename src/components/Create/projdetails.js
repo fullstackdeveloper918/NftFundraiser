@@ -68,8 +68,8 @@ const ProjNftDetails = () => {
                                     <i class="fa-solid fa-check" onClick={() => setProjModalShows(true)}></i>
                                     <ProTypePopup
                                         id={slug}
-                                        show={projmodalShows}
-                                        onHide={() => setProjModalShows(false)}
+                                                                                            show={projmodalShows}
+                                                                                            onHide={() => setProjModalShows(false)}
                                     />
                                 </>
                             }

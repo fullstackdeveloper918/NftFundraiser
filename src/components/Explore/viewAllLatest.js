@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useLocation } from "react-router-dom";
+import Loader from "../Loader/loader";
 import {
   CategoriesAction,
   getPublicLiveProjects,
@@ -16,6 +17,7 @@ const ExploreAll = () => {
   const { type } = useParams();
   const dispatch = useDispatch();
   const [count, setCount] = useState(1)
+  const [loading, setLoading] = useState(false) 
   const location = useLocation()
   console.log('count', count)
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +28,7 @@ const ExploreAll = () => {
   const liveProjectspag = useSelector((state) => {
     return state?.projectdetails?.liveProjectsPag;
   });
-  console.log(liveProjectspag, "live");
+  console.log(liveProjects, "live");
 
 
   const handleIncrement = () => {
@@ -40,6 +42,7 @@ const ExploreAll = () => {
         type: projectTypesMap[type],
         projectType: type,
         setCount,
+        setLoading,
         location,
         count: count + 1,
       })
@@ -49,7 +52,17 @@ const ExploreAll = () => {
 
 
   const handleDecrement = () => {
-    setCount(prevCount => prevCount - 1);
+    dispatch(
+      getPublicLiveProjects({
+        cursor: 1,
+        type: projectTypesMap[type],
+        projectType: type,
+        setLoading,
+        setCount,
+        location,
+        count: 1,
+      })
+    );
   };
   useEffect(() => {
     // debugger
@@ -59,6 +72,8 @@ const ExploreAll = () => {
         cursor: 1,
         type: projectTypesMap[type],
         projectType: type,
+        setLoading,
+        location,
         setCount,
         count,
       })
@@ -83,10 +98,14 @@ const ExploreAll = () => {
         </div>
 
         <div className="row items explore-items h-auto">
-          {liveProjects && liveProjects.length ? (
+        {loading ? (
+                <Loader />
+            ) : (
+              <>
+          {liveProjects?.data && liveProjects?.data?.length ? (
             [
               ...new Map(
-                liveProjects?.map((item) => [item["title"], item])
+                liveProjects?.data?.map((item) => [item["title"], item])
               ).values(),
             ].map((item, idx) => {
               return (
@@ -169,6 +188,8 @@ const ExploreAll = () => {
               <h2 className="allproj2">No latest project found</h2>
             </div>
           )}
+</>
+            )}
         </div>
         {/* <Pagination
           className="pagination-bar"
@@ -177,7 +198,16 @@ const ExploreAll = () => {
           pageSize={PageSize}
           onPageChange={page => setCurrentPage(page)}
         /> */}
-        <a onClick={(e) => handleIncrement(e)} className="btn ml-lg-auto btn-bordered-white morebutton">Load More</a>
+        {liveProjects.current_page != liveProjects.totalPageCount ?(
+          <>
+          <div className="morebutton"><a onClick={(e) => handleIncrement(e)} className="btn btn-bordered-white">Load More</a></div>
+          </>
+
+        ):(
+<>
+        <div className="morebutton"><a onClick={(e) => handleDecrement(e)} className="btn btn-bordered-white">Load Previous</a></div>
+        </>
+        )}
       </div>
     </section>
   );

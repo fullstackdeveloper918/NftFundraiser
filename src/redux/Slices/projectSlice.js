@@ -78,7 +78,7 @@ const projectSlice = createSlice({
             state.getBuyedNftdetails = action?.payload?.data?.data;
         },
         getProjectList: (state, action) => {
-            state.projects = action.payload;
+            state.projects = action.payload?.data?.data
         },
         getMatic: (state, action) => {
             state.matic = action.payload?.data?.data
@@ -122,7 +122,8 @@ const projectSlice = createSlice({
             state.updbanner = action?.payload?.data?.data;
         },
         publicLiveProjects: (state, action) => {
-            state.liveProjects[action.payload.type] = action.payload.res.data.data.data
+            debugger
+            state.liveProjects[action.payload.type] = action.payload.res.data.data
             // state.liveProjects = action.payload.data.data.data
             // state.liveProjects['R'] = action.payload.data.data.data
         },
