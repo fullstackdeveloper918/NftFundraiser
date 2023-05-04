@@ -271,7 +271,7 @@ const UploadNft = ({ current, prev }) => {
             setLoading(true)
 
 
-            const imagesRes = await uploadNFT(nftimage, dispatch,setLoading)
+            const imagesRes = await uploadNFT(nftimage, dispatch)
 
             const addedImage = imagesRes?.data?.data.map(x => ipfsBaseUrl + x?.image_hash)
 

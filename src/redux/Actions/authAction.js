@@ -111,7 +111,8 @@ export const GetUserAction = () => async dispatch => {
     } catch (e) {
         await dispatch(LogsAction(e))
         if (e?.response?.data.message) {
-            swal('error', e.response.data.message, 'error')
+            
+            // swal('error', e.response.data.message, 'error')
         }
     }
 }

@@ -122,7 +122,6 @@ const projectSlice = createSlice({
             state.updbanner = action?.payload?.data?.data;
         },
         publicLiveProjects: (state, action) => {
-            debugger
             state.liveProjects[action.payload.type] = action.payload.res.data.data
             // state.liveProjects = action.payload.data.data.data
             // state.liveProjects['R'] = action.payload.data.data.data

@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 
 
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
+// const alchemyKey = "https://polygon-mainnet.g.alchemy.com/v2/bDM_VuUmdoyJSNn3Ky8pZL0vBMAc9BXd"
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 
 const contractABI = require('../../backend/contracts/artWork.sol/NFTContract.json')
@@ -301,13 +302,11 @@ export const sendFileToIPFS = async (fileImg) => {
 }
 
 export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date, setModalShow, dispatch }) => {
-
   const contract = await new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
   // new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A");//loadContract();
 
   try {
     let txHash = null
-
     // const web3 = new Web3(window.ethereum);
 
     await web3.eth.sendTransaction({
@@ -351,7 +350,6 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, set
         }
       })
       .on('error', function (error) {
-
       })
 
     // 

@@ -204,10 +204,10 @@ export const uploadNFT = async (nft, dispatch,setLoading) => {
                     
                 };
             },
-            setLoading(false)
+            // setLoading(false)
             )
     } catch (error) {
-setLoading(false)
+// setLoading(false)
         dispatch(LogsAction(error))
         swal('error', error, 'error')
 
@@ -222,7 +222,6 @@ export const getPublicLiveProjects = createAsyncThunk(
     "auth/liveProjects",
 
     async (params, thunkAPI, setLatestData) => {
-        debugger
         if (params.location.pathname === "/all/LatestProjects") {
         params.setLoading(true)
         }

@@ -62,7 +62,10 @@ const Header = () => {
         const interval = setInterval(() => {
             console.log("yyyyiiiiiiiiiiii")
             // openNotification()
-            dispatch(GetauctionNoti())
+            if(localStorage.getItem('authToken')){
+
+                dispatch(GetauctionNoti())
+            }
 
             if (userauction?.count > 0 && userdet.user_id !== userauction?.data?.user_id) {
                 console.log("trueeeeeeeeeeeeeee")

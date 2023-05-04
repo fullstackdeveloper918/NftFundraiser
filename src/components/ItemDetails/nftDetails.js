@@ -15,7 +15,7 @@ import EditNftImage from '../Create/nftImageeditPopup';
 import { GetMatic } from './GetMAtic';
 import Loader from '../Loader/loader';
 import ReadMore from '../../readMore';
-const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
+const alchemyKey = "https://polygon-mainnet.g.alchemy.com/v2/bDM_VuUmdoyJSNn3Ky8pZL0vBMAc9BXd";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
 const web3 = createAlchemyWeb3(alchemyKey);
