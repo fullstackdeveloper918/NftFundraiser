@@ -14,12 +14,13 @@ import NFTContract from '../../backend/contracts/artWork.sol/NFTContract.json'
 import { CreateMetaDataAndMint, UpdateStatus } from '../Wallet/interact';
 import NftPopup from './nftPopup';
 import { useFormData } from '../Create/Context/context';
-import { LogsAction } from '../../redux/Actions/logsAction';
-const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
+import { LogsAction } from '../../redux/Actions/logsAction';                                                                                                                                                                                                                                                                                                                                                                                            
+const alchemyKey = "https://polygon-mainnet.g.alchemy.com/v2/bDM_VuUmdoyJSNn3Ky8pZL0vBMAc9BXd";
+// const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 // console.log(NFTContract.abi,"abi")
 const web3 = createAlchemyWeb3(alchemyKey);
-const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
+const provider = new Web3.providers.HttpProvider("https://polygon-mainnet.g.alchemy.com/v2/bDM_VuUmdoyJSNn3Ky8pZL0vBMAc9BXd");
 
 function SellPopup(props) {
     const history = useHistory()
@@ -80,39 +81,41 @@ function SellPopup(props) {
 
                 await window.ethereum.request({
                     method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: web3.utils.toHex('80001') }],
+                    params: [{ chainId: web3.utils.toHex('137') }],
                 })
 
                 // const { address } = await ConnectWallet()
                 const address = window?.ethereum?.selectedAddress
                 const MyNFTContract = new web3.eth.Contract(NFTContract.abi)
-                const gas = await web3.eth.getGasPrice();
-                // const gas = 500000
+                // const gas = await web3.eth.getGasPrice();
+                // const gas = 5000
 
                 MyNFTContract.deploy({
                     data: NFTContract.bytecode,
                     arguments: [nftdetail?.collectionData?.title, nftdetail?.collectionData?.symbol],
                 }).send({
                     from: address,
+                    // gas:gas
                 })
-                    .on('error', (error) => {
-                        // console.log(error)
-                    })
+                    
                     .on('transactionHash', (transactionHash) => {
-                        // console.log(transactionHash, "transactionHash")
+                        console.log(transactionHash, "transactionHash")
                     })
                     .on('receipt', (receipt) => {
                         // receipt will contain deployed contract address
-                        // console.log(receipt, "reciept")
+                        console.log(receipt, "reciept")
                     })
                     .on('confirmation', (confNumber, receipt) => {
-                        // console.log(receipt.contractAddress, "confirmRecipet")
+                        console.log(receipt.contractAddress, "confirmRecipet")
                         if (confNumber == 1) {
                             mint(receipt?.contractAddress)
                             // setContractAdd(receipt?.contractAddress)
                             // UpdateContract(id)
                         }
 
+                    })
+                    .on('error', (error) => {
+                        // console.log(error)
                     })
             } else {
                 mint(nftdetail?.collectionData?.contract_id, type, start_date, end_date, price)
@@ -123,7 +126,6 @@ function SellPopup(props) {
                 status: ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>"
             }
         } catch (error) {
-            // 
             dispatch(LogsAction(error))
             alert("error", "contract not deployed please try again", "error")
             setModalShow(false)

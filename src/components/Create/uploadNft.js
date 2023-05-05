@@ -151,7 +151,8 @@ const UploadNft = ({ current, prev }) => {
     }, [register]);
 
 
-    const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
+    const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
+    
 
     const dispatch = useDispatch()
     const col = useSelector(state => {

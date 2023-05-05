@@ -58,7 +58,7 @@ const LatprojNftDetails = (props) => {
 
 
     const buyHandler = () => {
-
+// debugger
         BuyNft({
             contractAddress: latprojnftdetail?.collectionData?.contract_id,
             tokenId: latprojnftdetail.token_id,
@@ -78,6 +78,7 @@ const LatprojNftDetails = (props) => {
         })
     }
     const reffHandler = async () => {
+
         await updateReffid({ tokenId: latprojnftdetail.token_id, refid, nft_id: latprojnftdetail.id, dispatch })
         await buyHandler()
     }

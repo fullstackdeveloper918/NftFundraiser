@@ -19,6 +19,7 @@ const data = {
 }
 
 const Wallet = () => {
+    // debugger
     const dispatch = useDispatch()
     const history = useHistory()
 

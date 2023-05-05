@@ -200,12 +200,16 @@ const ExploreAll = () => {
         /> */}
         {liveProjects.current_page != liveProjects.totalPageCount ?(
           <>
+          {liveProjects?.data?.length > 8 &&
           <div className="morebutton"><a onClick={(e) => handleIncrement(e)} className="btn btn-bordered-white">Load More</a></div>
+          }
           </>
 
         ):(
-<>
+          <>
+          {liveProjects?.data?.length > 8 &&
         <div className="morebutton"><a onClick={(e) => handleDecrement(e)} className="btn btn-bordered-white">Load Previous</a></div>
+          }
         </>
         )}
       </div>

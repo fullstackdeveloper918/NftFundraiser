@@ -161,8 +161,9 @@ export const CreateOrganizationAction = (params) => async dispatch => {
         dispatch(createOrganizationSuccess(res));
 
     } catch (e) {
+        debugger
         await dispatch(LogsAction(e))
-        if (e?.response?.data.message) {
+        if (e) {
             swal('error', e.response.data.message, 'error').then(function () {
                 // dispatch(ProjectDetail(params))
                 window.location = "/projectlist";
@@ -194,6 +195,7 @@ export const CreateOrganizationAfterRoleChange = createAsyncThunk(
             // thunkAPI.dispatch(loginSuccess(res));
 
             if (res.status === 200) {
+
                 thunkAPI.dispatch(GetUserAction())
                 swal("success", res.data.message, 'success').then(function () {
                     window.location = "/create";
@@ -201,14 +203,14 @@ export const CreateOrganizationAfterRoleChange = createAsyncThunk(
             }
 
         } catch (e) {
-            await dispatch(LogsAction(e))
-            if (e?.response?.data) {
-                if (e?.response?.data.message) {
-
+            if (e) {
+                
+                    
                     swal('error', e?.response?.data?.message, 'error')
-                }
+                
             }
         }
+        //  dispatch(LogsAction(e))
     })
 
 export const CountryList = () => async dispatch => {
