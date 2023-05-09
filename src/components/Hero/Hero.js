@@ -46,11 +46,11 @@ const Hero = ({ type }) => {
     }
 
     const userRole = useSelector(state => {
-        return state.user.userdetail.role
+        return state.user?.userdetail?.role
     })
 
     const userToken = useSelector(state => {
-        return state.user.userToken
+        return state?.user?.userToken
     })
     const dispatch = useDispatch()
 

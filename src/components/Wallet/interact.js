@@ -7,6 +7,7 @@ import { logdispatch, LogsAction } from '../../redux/Actions/logsAction';
 import { useDispatch } from 'react-redux';
 
 
+
 // const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const alchemyKey = "https://polygon-mainnet.g.alchemy.com/v2/bDM_VuUmdoyJSNn3Ky8pZL0vBMAc9BXd"
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
@@ -244,6 +245,7 @@ export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from,
 
     )
   } catch (error) {
+    swal("error","Please try again","error")
     return error
     // await dispatch(LogsAction(error))
     // 
@@ -310,7 +312,6 @@ export const sendFileToIPFS = async (fileImg) => {
 export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date, setModalShow, dispatch }) => {
   const contract = await new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
   // new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A");//loadContract();
-
   try {
     let txHash = null
     // const web3 = new Web3(window.ethereum);
@@ -319,6 +320,7 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, set
       to: contractAddress, // Required except during contract publications.
       // to: "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A", // Required except during contract publications.
       from: window.ethereum.selectedAddress,
+      // gas: 500000,
       data: contract.methods.mint(nft_file_content).encodeABI() //make call to NFT smart contract
     })
       .on('transactionHash', function (hash) {
@@ -334,13 +336,11 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, set
         setCurrent(1)
       })
       .on('confirmation', async (confNumber, receipt) => {
-        if (confNumber == 1) {
-
+        if (confNumber == 23) {
+          
           if (collid != 1) {
-
             await UpdateContract(collid, contractAddress)
           }
-
 
           // await UpdateContract(collid, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
           const tokid = web3.utils.hexToNumber(receipt.logs[0].topics[3])
@@ -370,7 +370,7 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, set
     // Await dispatch(LogsAction(error)
 
     // 
-    swal("error", "Transaction rejected please try again!", "error")
+    swal("error", "Transaction cancelled", "error")
     setModalShow(false)
     return {
       success: false,
@@ -576,7 +576,6 @@ export const updateReffid = async ({ tokenId, refid, nft_id, dispatch }) => {
 // }
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
-  // debugger
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
   } else {
@@ -591,11 +590,11 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       // console.log(bala, 'balance')
       // .then(console.log);
       wallets = (refid === "null" || refid === null) ?
-        [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets] :
-        [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets, refid]
+        [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets,flow[0]?.buyer_fee[0]?.wallets] :
+        [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets,flow[0]?.buyer_fee[0]?.wallets ,refid]
       fee = (refid === "null" || refid === null) ?
-           [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees] :
-           [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, localStorage.getItem('refamount')]
+           [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, flow[0]?.buyer_fee[0]?.fees] :
+           [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees,flow[0]?.buyer_fee[0]?.fees, localStorage.getItem('refamount')]
       console.log(fee)
       console.log(wallets)
       const addressArray = await window.ethereum.request({

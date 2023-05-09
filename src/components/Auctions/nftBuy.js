@@ -86,7 +86,7 @@ const LatprojNftDetails = (props) => {
 
     return (
         <section className="item-details-area">
-            <Spin spinning={loading}>
+            // <Spin spinning={loading}>
                 <div className="container">
 
                     <div className="row justify-content-between content_project px-0">
@@ -302,7 +302,7 @@ const LatprojNftDetails = (props) => {
 
                     </div>
                 </div >
-            </Spin>
+            // </Spin>
 
         </section >
     );

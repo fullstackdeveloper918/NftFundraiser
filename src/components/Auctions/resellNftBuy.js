@@ -12,6 +12,8 @@ import BuyPopup from './buyPopup';
 import { GetMatic } from './../ItemDetails/GetMAtic';
 import { ResellActionDetails } from '../../redux/Actions/resellNftAction';
 import { GetUserAction } from '../../redux/Actions/authAction';
+import swal from 'sweetalert';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
@@ -21,6 +23,7 @@ const ResellNftDetails = (props) => {
     const [loading, setLoading] = useState(true)
     const [matic, setMatic] = useState('')
     const [buymodalShow, setBuyModalShow] = React.useState(false);
+   
     const slug = useParams();
     const resellnftdetail = useSelector(state => {
         return state.resell?.reselldetails
@@ -51,6 +54,7 @@ const ResellNftDetails = (props) => {
             flow: ([resellnftdetail.payment_flow]),
             proj_id: resellnftdetail.project_id,
             nft_id: resellnftdetail.id,
+            refid: null,
             loadingg: setLoading,
             modal: setBuyModalShow,
         })
@@ -120,18 +124,29 @@ const ResellNftDetails = (props) => {
                                             <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" disabled>SOLD OUT</button>
                                         ) : (
                                             <>
-                                                {resellnftdetail.user_id === userdet.user_id ? (
+                                                {resellnftdetail?.user_data?.wallet_id === window.ethereum.selectedAddress ? (
                                                     <div className='eddlbtton d-flex  align-items-center mt-3'>
                                                         <><span className="purchase_btn  mt-3 d-flex align-items-center justify-content-center py-1 mx-2"
                                                             disabled>Your NFT is now ready to purchase</span>
                                                         </>
                                                     </div>
                                                 ) : (
-                                                    <><button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                                        id="nftdetail.id" onClick={() => { buyHandler(); setBuyModalShow(true); setLoading(true); }}>Buy Now</button><BuyPopup
-                                                            show={buymodalShow}
-                                                            loading={loading}
-                                                            onHide={() => setBuyModalShow(false)} /></>
+                                                    <>
+                                                    {userdet.role == 3 ?(
+                                                        <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                                        onClick={() => {
+                                                            swal("warning", "To buy this nft you need to change your creator account to buyer ", "warning")
+                                                        }}>Buy Now</button>
+                                                    ):(
+<>
+                                                        <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                                            id="nftdetail.id" onClick={() => { buyHandler(); setBuyModalShow(true); setLoading(true); }}>Buy Now</button><BuyPopup
+                                                                show={buymodalShow}
+                                                                loading={loading}
+                                                                onHide={() => setBuyModalShow(false)} />
+                                                                </>
+                                                    )}
+                                                            </>
                                                 )}
                                             </>
                                         )}

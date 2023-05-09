@@ -32,7 +32,7 @@ const Header = () => {
     }
 
     const userRole = useSelector(state => {
-        return state?.user.userdetail?.role
+        return state?.user?.userdetail?.role
     })
     // console.log(userRole)
     const userToken = useSelector(state => {
@@ -62,12 +62,12 @@ const Header = () => {
         const interval = setInterval(() => {
             console.log("yyyyiiiiiiiiiiii")
             // openNotification()
-            if(localStorage.getItem('authToken')){
+            if (localStorage.getItem('authToken') && window.ethereum.selectedAddress) {
 
                 dispatch(GetauctionNoti())
             }
 
-            if (userauction?.count > 0 && userdet.user_id !== userauction?.data?.user_id) {
+            if (userauction?.count > 0 && userdet.user_id !== userauction?.data?.user_id &&  localStorage.getItem('authToken')) {
                 console.log("trueeeeeeeeeeeeeee")
                 openNotification()
             }
@@ -104,8 +104,8 @@ const Header = () => {
 
     useEffect(() => {
 
-        window.addEventListener("beforeunload", handleBeforeUnload);
-        if (window.location == '/create') {
+        if (location.pathname === '/create') {
+            window.addEventListener("beforeunload", handleBeforeUnload);
             return () => {
                 window.removeEventListener("beforeunload", handleBeforeUnload);
             };

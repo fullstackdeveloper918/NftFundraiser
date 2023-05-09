@@ -161,7 +161,6 @@ export const CreateOrganizationAction = (params) => async dispatch => {
         dispatch(createOrganizationSuccess(res));
 
     } catch (e) {
-        debugger
         await dispatch(LogsAction(e))
         if (e) {
             swal('error', e.response.data.message, 'error').then(function () {

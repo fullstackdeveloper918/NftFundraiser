@@ -68,7 +68,7 @@ const LatNftdataTable = () => {
                                                 <td className='referal'>{item.price}<img src='../../img/image14.png' /></td>
                                                 <td>{item.pay_from.slice(0, 4)}...{item.pay_from.slice(35, 44)}</td>
                                                 <td>{item.pay_to.slice(0, 4)}...{item.pay_to.slice(35, 44)}</td>
-                                                <td><a target="_blank" href={`https://mumbai.polygonscan.com/tx/${item?.txd_id}`} >{item.txd_id.slice(0, 4)}...{item.txd_id.slice(35, 44)}</a></td>
+                                                <td><a target="_blank" href={`https://polygonscan.com/tx/${item?.txd_id}`} >{item.txd_id.slice(0, 4)}...{item.txd_id.slice(35, 44)}</a></td>
                                             </tr>
                                         )
                                     }) :

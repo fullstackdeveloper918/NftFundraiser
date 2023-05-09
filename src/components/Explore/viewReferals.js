@@ -144,7 +144,7 @@ const RefralTransdataTable = (props) => {
                                                             <td><Link to={`/popularcollection/details/${items.collection_slug}`}>{items.collection_name}</Link></td>
                                                             <td>{items.pay_from?.slice(0, 4)}...{items.pay_from?.slice(35, 44)}</td>
                                                             <td>{items.pay_to?.slice(0, 4)}...{items.pay_to?.slice(35, 44)}</td>
-                                                            <td><a target="_blank" href={`https://mumbai.polygonscan.com/tx/${items?.transaction_hash}`} >{items.transaction_hash?.slice(0, 4)}...{items.transaction_hash?.slice(35, 44)}</a></td>
+                                                            <td><a target="_blank" href={`https://polygonscan.com/tx/${items?.transaction_hash}`} >{items.transaction_hash?.slice(0, 4)}...{items.transaction_hash?.slice(35, 44)}</a></td>
                                                         </tr>
                                                         </>
                                                     )

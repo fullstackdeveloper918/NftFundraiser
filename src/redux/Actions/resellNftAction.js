@@ -4,6 +4,7 @@ import { getResell, getReselldetails } from "../Slices/resellNftSlice";
 import { LogsAction } from "./logsAction";
 
 export const ResellAction = () => async dispatch => {
+    // debugger
     // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
     // setLoading(true)
@@ -18,6 +19,7 @@ export const ResellAction = () => async dispatch => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getResaleNft`,
             "", config)
         console.log("resproj", res)
+        // swal('success', res.response?.data?.message, 'success')
         dispatch(getResell(res));
     } catch (e) {
         dispatch(LogsAction(e))

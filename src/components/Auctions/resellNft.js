@@ -5,7 +5,8 @@ import { getPublicLiveProjects } from "../../redux/Actions/projectAction";
 import { ResellAction } from "../../redux/Actions/resellNftAction";
 const Resell = ({ type }) => {
     const dispatch = useDispatch();
-    const nfts = useSelector((state) => {
+    const nfts = useSelector((state) =>
+     {
         return state?.resell?.resell;
     });
     console.log(nfts[0]?.image, "resellnfts");

@@ -57,7 +57,7 @@ const NftTransdataTable = (props) => {
                                         <td>{items.pay_from.slice(0, 4)}...{items.pay_from.slice(35, 44)}</td>
                                         <td>{items.pay_to.slice(0, 4)}...{items.pay_to.slice(35, 44)}</td>
                                         <td>#{items.token_id}</td>
-                                        <td><a target="_blank" href={`https://mumbai.polygonscan.com/tx/${items?.txd_id}`} >{items.txd_id.slice(0, 4)}...{items.txd_id.slice(35, 44)}</a></td>
+                                        <td><a target="_blank" href={`https://polygonscan.com/tx/${items?.txd_id}`} >{items.txd_id.slice(0, 4)}...{items.txd_id.slice(35, 44)}</a></td>
                                     </tr>
                                 )
                             })}

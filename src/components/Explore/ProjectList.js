@@ -7,12 +7,14 @@ import { ProjectList } from '../../redux/Actions/projectAction';
 import Loader from '../Loader/loader';
 import { DeleteProject } from './../../redux/Actions/projectAction';
 import swal from 'sweetalert';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const GetAllProjects = () => {
     const [loading, setLoading] = useState(false)    // console.log(projc, 'projc')
     const dispatch = useDispatch()
     const [count, setCount] = useState(1)
     const location = useLocation()
+    const history = useHistory()
     const projects = useSelector(state => {
         return state.projectdetails.projects
     })
@@ -51,24 +53,7 @@ const GetAllProjects = () => {
     }, [dispatch])
 
     const showDeleteHandler = (id) => {
-        // debugger
-        swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this project!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    dispatch(DeleteProject(id))
-                    swal("Poof! Your project has been deleted!", {
-                        icon: "success",
-                    });
-                } else {
-                    swal("Your project is safe!");
-                }
-            });
+        dispatch(DeleteProject(id,history))
     }
 
     return (

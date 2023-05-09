@@ -296,8 +296,7 @@ export const UpdateProject = (props, params) => async dispatch => {
     }
 }
 
-export const DeleteProject = (id) => async dispatch => {
-    // 
+export const DeleteProject = (id,history) => async dispatch => {
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -310,12 +309,35 @@ export const DeleteProject = (id) => async dispatch => {
             config)
         // 
         // console.log(res.status, 'proj')
-        await dispatch(deleteProject(res));
-        if (res.status === 200) {
-            dispatch(ProjectList())
+        // await dispatch(deleteProject(res));
+        if (res.status == 200) {
+            
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this project!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                       
+                        swal("Poof! Your project has been deleted!", {
+                            icon: "success",
+                        }).then(function () {
+                            window.location = '/projectlist';
+                            });
+                        
+                    } else {
+                        swal("Your project is safe!");
+                    }
+                });
+                // history.push('/projectlist')
+            
             // swal("success", res.data.message, 'success').then(function () {
             //     window.location = "/projectlist";
             // });
+            
 
         }
     } catch (e) {
@@ -772,8 +794,7 @@ export const GetbuyedNftDetails = (slug) => async dispatch => {
     }
 }
 
-export const ResellNft = (params, props) => async dispatch => {
-    // debugger
+export const ResellNft = (params, props,history) => async dispatch => {
     try {
         const token = localStorage.getItem('authToken')
         const config = {
@@ -785,10 +806,13 @@ export const ResellNft = (params, props) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/create_resale_nft`,
             params, config)
-        await dispatch(res())
-        if (res?.status === 200) {
-            await dispatch(GetbuyedNftDetails(props.slug?.slug))
+        // await dispatch(res())
+        if (res?.status == 200) {
+            
+            await dispatch(GetbuyedNftDetails(props.slug))
+            swal("success","Your NFT has been sent to resell","success")
             props.onHide(false)
+            // history.push(`/my/nfts-detail/${props.slug?.slug}`)
         }
     } catch (e) {
         dispatch(LogsAction(e))

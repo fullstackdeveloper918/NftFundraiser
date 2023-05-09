@@ -151,7 +151,7 @@ function SellPopup(props) {
         {
             props.ismint == 1 ? (
 
-                dispatch(ResellNft(formData, props))
+                dispatch(ResellNft(formData, props,history))
             ) : (
                 await deployContract({ type: data.auctiontype, end_date: data.end_date, start_date: data.start_date, price: data.price })
             )
