@@ -103,7 +103,8 @@ export const ConnectWallet = async (role, dispatch) => {
               chainName: 'Polygon Mainnet',
               chainId: web3.utils.toHex(chainId),
               nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
-              rpcUrls: ['https://polygon-mainnet.g.alchemy.com/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B']
+              rpcUrls: ['https://rpc-mainnet.maticvigil.com/'],
+              blockExplorerUrls: ['https://polygonscan.com/']
             }
             // {
             //   chainName: 'Mumbai Testnet',
@@ -130,6 +131,7 @@ export const ConnectWallet = async (role, dispatch) => {
         await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
           params: [{ chainId: web3.utils.toHex('137') }],
+          // params: [{ chainId: web3.utils.toHex('80001') }],
         })
 
         const obj = {
@@ -217,7 +219,7 @@ export const getCurrentWalletConnected = async (dispatch) => {
 
 
 
-export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from, pay_to, type }) => {
+export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from, pay_to, type, setModalShow }) => {
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -245,7 +247,9 @@ export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from,
 
     )
   } catch (error) {
-    swal("error","Please try again","error")
+
+    swal("error", "Please try again", "error")
+    setModalShow(false)
     return error
     // await dispatch(LogsAction(error))
     // 
@@ -253,7 +257,7 @@ export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from,
   }
 };
 
-const UpdateContract = async (collid, contractAddress) => {
+const UpdateContract = async (collid, contractAddress, setModalShow) => {
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -272,6 +276,8 @@ const UpdateContract = async (collid, contractAddress) => {
       formData, config
     )
   } catch (e) {
+    setModalShow(false)
+    swal("error", "something went wrong", "error")
     // await dispatch(LogsAction(e))
 
     console.log("error");
@@ -336,17 +342,19 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, set
         setCurrent(1)
       })
       .on('confirmation', async (confNumber, receipt) => {
-        if (confNumber == 23) {
-          
+        // debugger
+        if (confNumber == 24) {
+
           if (collid != 1) {
-            await UpdateContract(collid, contractAddress)
+            await UpdateContract(collid, contractAddress, setModalShow)
           }
+          // debugger
 
           // await UpdateContract(collid, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
-          const tokid = web3.utils.hexToNumber(receipt.logs[0].topics[3])
+          const tokid = web3.utils.toBN(receipt.logs[0].topics[3])
 
           // console.log(startdate)
-          await UpdateStatus({ slug: slug.id, token_id: tokid, transaction_hash: receipt.transactionHash, pay_from: receipt.from, pay_to: receipt.to, type, price, start_date, end_date })
+          await UpdateStatus({ slug: slug.id, token_id: tokid, transaction_hash: receipt.transactionHash, pay_from: receipt.from, pay_to: receipt.to, type, setModalShow, price, start_date, end_date })
           setCurrent(2)
           await dispatch(NftList(slug.id))
 
@@ -356,6 +364,8 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, set
         }
       })
       .on('error', function (error) {
+        swal("error", "Transaction cancelled", "error")
+        setModalShow(false)
       })
 
     // 
@@ -576,6 +586,7 @@ export const updateReffid = async ({ tokenId, refid, nft_id, dispatch }) => {
 // }
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
+  debugger
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
   } else {
@@ -590,11 +601,11 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       // console.log(bala, 'balance')
       // .then(console.log);
       wallets = (refid === "null" || refid === null) ?
-        [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets,flow[0]?.buyer_fee[0]?.wallets] :
-        [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets,flow[0]?.buyer_fee[0]?.wallets ,refid]
+        [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets, flow[0]?.buyer_fee[0]?.wallets] :
+        [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets, flow[0]?.buyer_fee[0]?.wallets, refid]
       fee = (refid === "null" || refid === null) ?
-           [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, flow[0]?.buyer_fee[0]?.fees] :
-           [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees,flow[0]?.buyer_fee[0]?.fees, localStorage.getItem('refamount')]
+        [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, flow[0]?.buyer_fee[0]?.fees] :
+        [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, flow[0]?.buyer_fee[0]?.fees, localStorage.getItem('refamount')]
       console.log(fee)
       console.log(wallets)
       const addressArray = await window.ethereum.request({
@@ -615,28 +626,34 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
         const amountToSend = ((parseFloat(amt) / 100) * 0.03)
         return web3.utils.toWei(`${amountToSend}`, "ether")
       })
-      const transferowner = {
+      
+          const transferowner = {
 
         'from': window.ethereum?.selectedAddress,
         'to': contractAddress,
         // 'to': "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A",
         // 'value': web3.utils.toWei(`${values}`),
         'value': web3.utils.toWei('0.03', 'ether'),
+        "gas": 100000,
+        // "gasPrice": web3.utils.toHex(gasPrice),
         // 'input': nftContract.methods.buyNft(contractAddress, tokenId).encodeABI()
         'input': nftContract.methods.buyNft(contractAddress, tokenId, memory_clients, memory_amounts).encodeABI()
       };
       // const txHash = await web3.eth.sendTransaction(tx)
       // console.log('txhash', txHash)
-      await web3.eth.sendTransaction(transferowner)
+       web3.eth.sendTransaction(transferowner)
         .on('transactionHash', function (hash) {
           let txHash = hash
           // console.log('tx', txHash)
+          debugger
         })
         .on('receipt', function (receipt) {
+          debugger
           // console.log(receipt, 'recipt')
         })
         .on('confirmation', async (confNumber, receipt) => {
-          if (confNumber == 1) {
+          debugger
+          // if (confNumber == 1) {
             console.log(confNumber, 'counttrans')
             console.log(receipt, 'conf')
             // localStorage.setItem('txd_id', receipt.transactionHash)
@@ -646,13 +663,13 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
             swal("success", "Confirmed", 'success').then(function () {
               window.location = `/my/nfts`;
             });
-          }
+          // }
           // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
           // setModeShow(false)
           // modalShow(false)
         })
         .on('error', function (error) {
-      // debugger
+          debugger
 
           dispatch(LogsAction(error))
           // console.log(error.message, "error")
@@ -664,6 +681,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
         .then(function (receipt) {
           // will be fired once the receipt is mined
         })
+     
     } catch (error) {
       // debugger
       // dispatch(LogsAction(error))

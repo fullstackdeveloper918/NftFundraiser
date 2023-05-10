@@ -20,8 +20,10 @@ import swal from 'sweetalert';
 import { Loader } from '@react-three/drei';
 
 const alchemyKey = "https://polygon-mainnet.g.alchemy.com/v2/bDM_VuUmdoyJSNn3Ky8pZL0vBMAc9BXd";
+// const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
+// const provider = new Web3.providers.HttpProvider("https://polygon-mainnet.g.alchemy.com/v2/bDM_VuUmdoyJSNn3Ky8pZL0vBMAc9BXd");
 const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
 
 const LatprojNftDetails = (props) => {
@@ -58,7 +60,7 @@ const LatprojNftDetails = (props) => {
 
 
     const buyHandler = () => {
-// debugger
+debugger
         BuyNft({
             contractAddress: latprojnftdetail?.collectionData?.contract_id,
             tokenId: latprojnftdetail.token_id,
@@ -86,7 +88,7 @@ const LatprojNftDetails = (props) => {
 
     return (
         <section className="item-details-area">
-            // <Spin spinning={loading}>
+         
                 <div className="container">
 
                     <div className="row justify-content-between content_project px-0">
@@ -302,7 +304,7 @@ const LatprojNftDetails = (props) => {
 
                     </div>
                 </div >
-            // </Spin>
+            
 
         </section >
     );

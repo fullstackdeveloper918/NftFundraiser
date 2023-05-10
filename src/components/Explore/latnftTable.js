@@ -46,7 +46,7 @@ const LatNftDataTable = (props) => {
                             </tr>
                             <tr className='contract-address'>
                                 <th>Contract ID</th>
-                                <td> <a target="_blank" href={`https://mumbai.polygonscan.com/address/${latprojnftdetail?.collectionData?.contract_id}`} >{latprojnftdetail?.collectionData?.contract_id?.slice(0, 5)}.....{latprojnftdetail?.collectionData?.contract_id?.slice(39, 42)}</a></td>
+                                <td> <a target="_blank" href={`https://polygonscan.com/address/${latprojnftdetail?.collectionData?.contract_id}`} >{latprojnftdetail?.collectionData?.contract_id?.slice(0, 5)}.....{latprojnftdetail?.collectionData?.contract_id?.slice(39, 42)}</a></td>
                                 {/* <td>{latprojnftdetail?.collectionData?.contract_id}</td> */}
                             </tr>
                             <tr>
