@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 
 export const LogsAction = (params) => async dispatch => {
-    // debugger
+    // 
     try {
         const formData = new FormData()
         formData.append('content', params.message)

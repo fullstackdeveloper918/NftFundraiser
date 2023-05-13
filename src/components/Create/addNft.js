@@ -109,7 +109,7 @@ const history = useHistory()
     const handleUpload = (e, index) => {
         const filetype = e.target.files[0].type
         setNFtExtension(filetype)
-        // debugger
+        // 
         // setNft(e.target.files[0])
         setNft(previ => {
             previ[index] = e.target.files[0]
@@ -156,7 +156,7 @@ const history = useHistory()
             }
             // setNFtFileType(type)
             setSource(prevState => {
-                // debugger
+                // 
                 prevState[index] = { file: e.target.files[0], type: type }
                 setSourceType(type)
                 return [...prevState]

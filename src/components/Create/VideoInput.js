@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 export default function VideoAudioPLayer(props) {
-    // debugger
+    // 
     const { width, height } = props;
     const { vdo } = props
 
@@ -12,7 +12,7 @@ export default function VideoAudioPLayer(props) {
     // .mov,.mp4,.mp3
 
     useEffect(() => {
-        // debugger
+        // 
         const file = vdo;
         // const url = URL?.createObjectURL(file);
         setSource(file);

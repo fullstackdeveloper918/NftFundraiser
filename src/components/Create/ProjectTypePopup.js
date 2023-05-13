@@ -17,11 +17,11 @@ function ProTypePopup(props) {
     const [city, setCity] = useState('')
     console.log(countries?.data?.data, 'cntry')
     const states = useSelector(state => {
-        // debugger
+        // 
         return state.countries.states
     })
     const cities = useSelector(state => {
-        // debugger
+        // 
         return state.countries.city
     })
     // useEffect(() => {
@@ -68,7 +68,7 @@ function ProTypePopup(props) {
         }
     }, [projdetail]);
     const OnSubmit = (data) => {
-        // debugger
+        // 
         if (location.pathname === '/create') {
 
             props.startdate(data.start_date)

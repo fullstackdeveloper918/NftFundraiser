@@ -5,6 +5,7 @@ import { NftList } from '../../redux/Actions/projectAction';
 import { useState } from 'react';
 import { logdispatch, LogsAction } from '../../redux/Actions/logsAction';
 import { useDispatch } from 'react-redux';
+import { getNftwolDetailsPaymentflow } from '../../redux/Slices/projectSlice';
 
 
 
@@ -103,7 +104,7 @@ export const ConnectWallet = async (role, dispatch) => {
               chainName: 'Polygon Mainnet',
               chainId: web3.utils.toHex(chainId),
               nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
-              rpcUrls: ['https://rpc-mainnet.maticvigil.com/'],
+              rpcUrls: ['https://polygon-rpc.com/'],
               blockExplorerUrls: ['https://polygonscan.com/']
             }
             // {
@@ -316,6 +317,7 @@ export const sendFileToIPFS = async (fileImg) => {
 }
 
 export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date, setModalShow, dispatch }) => {
+  
   const contract = await new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
   // new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A");//loadContract();
   try {
@@ -342,13 +344,13 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, _name, set
         setCurrent(1)
       })
       .on('confirmation', async (confNumber, receipt) => {
-        // debugger
-        if (confNumber == 24) {
+        // 
+        if (confNumber == 1) {
 
           if (collid != 1) {
             await UpdateContract(collid, contractAddress, setModalShow)
           }
-          // debugger
+          // 
 
           // await UpdateContract(collid, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
           const tokid = web3.utils.toBN(receipt.logs[0].topics[3])
@@ -424,8 +426,8 @@ const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to,
   }
 };
 
-export const updateReffid = async ({ tokenId, refid, nft_id, dispatch }) => {
-  // debugger
+export const updateReffid = async ({ tokenId, refid, nft_id, dispatch, setPaymentFlow }) => {
+  
   const token = localStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -446,10 +448,13 @@ export const updateReffid = async ({ tokenId, refid, nft_id, dispatch }) => {
     const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/getUserPercentage`,
       formData, config
     )
-    // await dispatch(res())
-    // const reffee = localStorage.setItem('refamount', res?.data?.data?.referral_fees[0]?.fees)
+    // await dispatch(res())                  
+    // const reffee = localStorage.setItem('refamount', res?.data?.data?.referral_fees[0]?.fees) 
     if (res?.status === 200) {
-      await localStorage.setItem('refamount', res?.data?.data?.referral_fees[0]?.fees)
+      // await dispatch(getNftwolDetailsPaymentflow(res))
+      // const data =  Object.entries(res.data.data[0])?.map(x=>x)
+        // (setPaymentFlow(res?.data?.data))
+      //  await dispatch(localStorage.setItem('paymentFlow', res?.data?.data))
     }
 
     // if (res.status === 200) {
@@ -463,7 +468,7 @@ export const updateReffid = async ({ tokenId, refid, nft_id, dispatch }) => {
   }
 };
 // export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
-//   debugger
+//   
 //   if (!isMetaMaskInstalled()) {
 //     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
@@ -585,8 +590,9 @@ export const updateReffid = async ({ tokenId, refid, nft_id, dispatch }) => {
 //   }
 // }
 
-export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
+export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow,ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
   debugger
+  // const flow = JSON.parse(localStorage.getItem('paymentFlow') || "[]")
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
   } else {
@@ -600,12 +606,12 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       // const bala = web3.fromWei(web3.eth.getBalance(window.ethereum?.selectedAddress))
       // console.log(bala, 'balance')
       // .then(console.log);
-      wallets = (refid === "null" || refid === null) ?
-        [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets, flow[0]?.buyer_fee[0]?.wallets] :
-        [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets, flow[0]?.buyer_fee[0]?.wallets, refid]
-      fee = (refid === "null" || refid === null) ?
-        [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, flow[0]?.buyer_fee[0]?.fees] :
-        [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, flow[0]?.buyer_fee[0]?.fees, localStorage.getItem('refamount')]
+      wallets = (refid === "null" || refid === null  ) ?
+      [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees?.wallets, flow[0]?.project_data?.wallets, flow[0]?.buyer_fee?.wallets] :
+      [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees?.wallets, flow[0]?.project_data?.wallets, flow[0]?.buyer_fee?.wallets, flow[0]?.referral_fees?.wallets]
+    fee = (refid === "null" || refid === null) ?
+      [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees?.fees, flow[0]?.project_data?.fees, flow[0]?.buyer_fee?.fees] :
+      [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.project_data?.fees, flow[0]?.buyer_fee?.fees, flow[0]?.referral_fees?.fees]
       console.log(fee)
       console.log(wallets)
       const addressArray = await window.ethereum.request({
@@ -626,26 +632,47 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
         const amountToSend = ((parseFloat(amt) / 100) * 0.03)
         return web3.utils.toWei(`${amountToSend}`, "ether")
       })
-      
-          const transferowner = {
+      // 
+
+      // const gas = await web3.eth.getGasPrice();
+      // const gasPrice = await web3.eth.getMaxPriorityFeePerGas();
+      // const fees = gas * gasPrice
+      // // const functionGasFees = await nftContract.estimateGas.saveUser(window.ethereum?.selectedAddress);
+      // // const finalGasPrice = gasPrice * functionGasFees;
+      // const gasLimit = Math.ceil(fees * 1.2);
+      // var block = await web3.eth.getBlock("latest");
+      // console.log("gasLimit: " + block.gasLimit);
+      const gasPrice = await web3.eth.getMaxPriorityFeePerGas()
+      // const gaslimit = (block.gasLimit)
+      // var transactionObject = {
+      //   from: window.ethereum?.selectedAddress,
+      //   to: contractAddress,
+      //   gasPrice: gasPrice,
+        
+      // }
+      const amount = web3.utils.toWei('0.03', 'ether')
+      // const gasLimit =  await nftContract.methods.transfer(contractAddress, amount).estimateGas();
+
+      // console.log('transactionObject', transactionObject)
+      const transferowner = {
 
         'from': window.ethereum?.selectedAddress,
         'to': contractAddress,
-        // 'to': "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A",
-        // 'value': web3.utils.toWei(`${values}`),
+
         'value': web3.utils.toWei('0.03', 'ether'),
-        "gas": 100000,
-        // "gasPrice": web3.utils.toHex(gasPrice),
-        // 'input': nftContract.methods.buyNft(contractAddress, tokenId).encodeABI()
+        "gasPrice": web3.utils.toHex(gasPrice),
+        "gasLimit": web3.utils.toHex(100000),
+
         'input': nftContract.methods.buyNft(contractAddress, tokenId, memory_clients, memory_amounts).encodeABI()
       };
       // const txHash = await web3.eth.sendTransaction(tx)
       // console.log('txhash', txHash)
-       web3.eth.sendTransaction(transferowner)
+      await web3.eth.sendTransaction(transferowner)
         .on('transactionHash', function (hash) {
           let txHash = hash
-          // console.log('tx', txHash)
           debugger
+          // console.log('tx', txHash)
+          // 
         })
         .on('receipt', function (receipt) {
           debugger
@@ -653,37 +680,37 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
         })
         .on('confirmation', async (confNumber, receipt) => {
           debugger
-          // if (confNumber == 1) {
+          if (confNumber == 1) {
             console.log(confNumber, 'counttrans')
             console.log(receipt, 'conf')
             // localStorage.setItem('txd_id', receipt.transactionHash)
             // localStorage.setItem('pay_to', receipt.receipt.to)
-            UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: window.ethereum?.selectedAddress, tokenId, values })
+            // UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: window.ethereum?.selectedAddress, tokenId, values })
             loadingg(false)
             swal("success", "Confirmed", 'success').then(function () {
               window.location = `/my/nfts`;
             });
-          // }
+          }
           // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
           // setModeShow(false)
           // modalShow(false)
         })
         .on('error', function (error) {
-          debugger
+          // 
 
           dispatch(LogsAction(error))
           // console.log(error.message, "error")
           swal('error', JSON.stringify(error.message, 'error'))
-          // alert(JSON.stringify(error.message))
+          // alert(JSON.stringify(error.message))Charity DAO releases a new collection of NFTs - Protecting Human Rights Data Security - to raise awareness of data protection rights and support human rights activities. It's important for people to realize that privacy is a fundamental human right, and protecting personal data is crucial in today's digital age. The increasing cases of online stalking and unauthorized use and sale of personal data underscore the need for stronger legal frameworks that include penalties for data breaches and unauthorized access. By purchasing the NFTs from this collection, individuals can show their support for protecting human rights and data security.
           modal(false)
           loadingg(false)
         })
         .then(function (receipt) {
           // will be fired once the receipt is mined
         })
-     
+
     } catch (error) {
-      // debugger
+      // 
       // dispatch(LogsAction(error))
       swal("error", JSON.stringify(error.message), "error")
       loadingg(false)

@@ -22,7 +22,7 @@ const getBase64 = (file) =>
     });
 // import ImgCrop from 'antd-img-crop';
 const EditNftName = (props) => {
-    // debugger
+    // 
     const editor = useRef(null);
     const [nftFileType, setNFtFileType] = useState('Image')
     const [nft, setNft] = useState()
@@ -126,7 +126,7 @@ const EditNftName = (props) => {
         setNft_collection_id(nftdetail.collection_id)
     }, [form, nftdetail])
     const onFinish = async (values) => {
-        // debugger
+        // 
         try {
             setLoading(true)
             if (source) {

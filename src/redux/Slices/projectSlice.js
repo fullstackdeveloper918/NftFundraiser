@@ -22,6 +22,7 @@ const projectSlice = createSlice({
         getfundProjDetails: [],
         getmostProjActivity: [],
         getBuyedNftdetails: [],
+        getPaymentFlow:[],
         getnftwoldetails: [],
         settings: [],
         liveProjectsPag: [],
@@ -58,6 +59,9 @@ const projectSlice = createSlice({
         },
         getNftwolDetails: (state, action) => {
             state.getnftwoldetails = action?.payload?.data?.data;
+        },
+        getNftwolDetailsPaymentflow: (state, action) => {
+            state.getPaymentFlow = action?.payload?.data?.data;
         },
         nftUpd: (state, action) => {
             // 
@@ -164,6 +168,7 @@ export const {
     Nftres,
     updatebanner,
     getmostprojactivity,
+    getNftwolDetailsPaymentflow,
     nftUpd,
     nftAdd,
     getMatic

@@ -6,7 +6,7 @@ export default function ImageViewer(props) {
     const [source, setSource] = React.useState(null);
     // .mov,.mp4,.mp3
     useEffect(() => {
-        // debugger
+        // 
         const file = vdo;
         // const url = dataURLtoBlob(file)
         setSource(URL.createObjectURL(file))

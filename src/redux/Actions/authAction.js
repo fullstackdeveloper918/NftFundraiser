@@ -174,7 +174,7 @@ export const CreateOrganizationAction = (params) => async dispatch => {
 export const CreateOrganizationAfterRoleChange = createAsyncThunk(
     "auth/register",
     async (params, thunkAPI, dispatch) => {
-        // debugger
+        // 
         try {
             const token = localStorage.getItem('authToken')
             const config = {
@@ -230,7 +230,7 @@ export const CountryList = () => async dispatch => {
     }
 }
 export const StateList = (formData) => async dispatch => {
-    // debugger
+    // 
     try {
         const config = {
             headers: {
@@ -239,7 +239,7 @@ export const StateList = (formData) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/getStateById`,
             formData, config)
-        // debugger
+        // 
         dispatch(getStateList(res));
     } catch (e) {
         await dispatch(LogsAction(e))
@@ -343,7 +343,7 @@ export const UpdateProfileAction = (formData, props) => async dispatch => {
     }
 }
 export const CountSet = () => async dispatch => {
-    // debugger
+    // 
     // 
     const token = localStorage.getItem('authToken')
     try {
@@ -361,7 +361,7 @@ export const CountSet = () => async dispatch => {
         // await dispatch(res);
 
         if (res.status === 200) {
-            // debugger
+            // 
             await dispatch(GetUserAction())
 
 
@@ -420,7 +420,7 @@ export const NotiDelete = (id) => async dispatch => {
         // await dispatch(res);
 
         if (res.status === 200) {
-            // debugger
+            // 
             await dispatch(GetUserAction())
             await dispatch(AllNoti())
 
@@ -434,7 +434,7 @@ export const NotiDelete = (id) => async dispatch => {
     }
 }
 export const ChangeUserRole = (history) => async dispatch => {
-    // debugger
+    // 
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -450,7 +450,7 @@ export const ChangeUserRole = (history) => async dispatch => {
         // await dispatch(res);
 
         if (res.status === 200) {
-            // debugger
+            // 
             await dispatch(GetUserAction())
             if (res?.data?.data?.organization === false) {
                 history.push('/create/organization')

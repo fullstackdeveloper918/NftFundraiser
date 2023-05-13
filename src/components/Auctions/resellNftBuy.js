@@ -107,7 +107,7 @@ const ResellNftDetails = (props) => {
                                 <div className="item-info-list">
                                     <ul className="list-unstyled mb-0">
                                         <span class='boldertext'>Token :</span>
-                                        <span> #{resellnftdetail.token_id}</span>
+                                        <span> #{resellnftdetail.token_id?.slice(0,2)}</span>
                                     </ul>
                                 </div>
                                 <div>

@@ -19,13 +19,13 @@ const LatNftdataTable = () => {
         setExpandIconPosition(newExpandIconPosition);
     };
     const projdetail = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.latestprojectdetails
     })
     console.log(projdetail.nft_data, 'projdatanft')
 
     useEffect(() => {
-        // debugger
+        // 
         dispatch(ProjectDetail(slug))
     }, [slug])
 

@@ -19,7 +19,7 @@ const LatNftDataTable = (props) => {
     };
 
     // useEffect(() => {
-    //     debugger
+    //     
     //     dispatch(NftList(id))
     // }, [id])
     const latprojnftdetail = useSelector(state => {
@@ -51,7 +51,7 @@ const LatNftDataTable = (props) => {
                             </tr>
                             <tr>
                                 <th>Token ID</th>
-                                <td>{latprojnftdetail?.token_id}</td>
+                                <td>{latprojnftdetail?.token_id?.slice(0,2)}</td>
                             </tr>
                             <tr>
                                 <th>Token Stranded</th>

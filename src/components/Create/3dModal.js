@@ -36,7 +36,7 @@ function easeOutCirc(x) {
     return Math.sqrt(1 - Math.pow(x - 1, 4));
 }
 const DModal = ({ vdo }) => {
-    // debugger
+    // 
     // const { vdo } = props
     const refContainer = useRef();
     const [loading, setLoading] = useState(true);
@@ -44,7 +44,7 @@ const DModal = ({ vdo }) => {
     const [source, setSource] = useState('')
     console.log('source', source)
     useEffect(() => {
-        // debugger
+        // 
         const file = vdo;
         const { current: container } = refContainer;
         if (container && !renderer) {
@@ -110,7 +110,7 @@ const DModal = ({ vdo }) => {
                     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
                 },
                 (error) => {
-                    // debugger
+                    // 
                     console.log(error)
                 }
             )

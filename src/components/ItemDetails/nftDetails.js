@@ -161,7 +161,7 @@ const NftDetails = (props) => {
                                 <div className="item-info-list">
                                     <ul className="list-unstyled">
                                         <span class='boldertext'>Token :</span>
-                                        <span> #{nftdetail.token_id}</span>
+                                        <span> #{nftdetail.token_id?.slice(0,2)}</span>
                                     </ul>
                                 </div>
                                 {nftdetail.is_mint == 0 ? (

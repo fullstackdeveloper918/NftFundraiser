@@ -25,7 +25,7 @@ const NftAuctiondataTable = (props) => {
         setExpandIconPosition(newExpandIconPosition);
     };
     const projdetail = useSelector(state => {
-        // debugger
+        // 
         return state?.projectdetails?.latestprojectdetails
     })
     console.log(projdetail, 'projdatanft')
@@ -36,7 +36,7 @@ const NftAuctiondataTable = (props) => {
     })
     console.log(nftdetail, 'nftdetail')
     useEffect(() => {
-        // debugger
+        // 
         dispatch(NftList(props.slug.id))
 
     }, [props.slug.id])

@@ -57,29 +57,29 @@ const Header = () => {
 
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const interval = setInterval(() => {
-            console.log("yyyyiiiiiiiiiiii")
-            // openNotification()
-            if (localStorage.getItem('authToken') && window.ethereum.selectedAddress) {
+    //     const interval = setInterval(() => {
+    //         console.log("yyyyiiiiiiiiiiii")
+    //         // openNotification()
+    //         if (localStorage.getItem('authToken') && window.ethereum.selectedAddress) {
 
-                dispatch(GetauctionNoti())
-            }
+    //             dispatch(GetauctionNoti())
+    //         }
 
-            if (userauction?.count > 0 && userdet.user_id !== userauction?.data?.user_id &&  localStorage.getItem('authToken')) {
-                console.log("trueeeeeeeeeeeeeee")
-                openNotification()
-            }
-            else {
-                // openNotification()
-                console.log("falseeeeeeeeee")
-            }
-            // if (true) {
-        }, 5000)
+    //         if (userauction?.count > 0 && userdet.user_id !== userauction?.data?.user_id &&  localStorage.getItem('authToken')) {
+    //             console.log("trueeeeeeeeeeeeeee")
+    //             openNotification()
+    //         }
+    //         else {
+    //             // openNotification()
+    //             console.log("falseeeeeeeeee")
+    //         }
+    //         // if (true) {
+    //     }, 5000)
 
-        return () => clearInterval(interval);
-    }, [userauction])
+    //     return () => clearInterval(interval);
+    // }, [userauction])
 
 
     useEffect(() => {
@@ -126,7 +126,7 @@ const Header = () => {
 
 
     const notiHandler = () => {
-        // debugger
+        // 
         dispatch(CountSet())
     }
     const deleteHandler = (id) => {
@@ -184,7 +184,7 @@ const Header = () => {
         const response = await ConnectWallet("BUYER", dispatch)
         const { res } = response
 
-        // debugger
+        // 
         if (!res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data.role) {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)

@@ -51,7 +51,7 @@ function ProjDetailPopup(props) {
     const [city, setCity] = useState('')
     console.log(countries?.data?.data, 'cntry')
     const states = useSelector(state => {
-        // debugger
+        // 
         return state.countries.states
     })
     useEffect(() => {
@@ -67,7 +67,7 @@ function ProjDetailPopup(props) {
         dispatch(StateList(formData))
     };
     const handleChangeState = (event) => {
-        // debugger
+        // 
         event.preventDefault()
         // 👇 Get input value from "event"
         setState(event.currentTarget.value);
@@ -77,12 +77,12 @@ function ProjDetailPopup(props) {
         dispatch(CityList(formData))
     };
     const handleChangeCity = (event) => {
-        // debugger
+        // 
         // 👇 Get input value from "event"
         setCity(event?.currentTarget?.value);
     };
     const cities = useSelector(state => {
-        // debugger
+        // 
         return state.countries.city
     })
     const projdetail = useSelector(state => {

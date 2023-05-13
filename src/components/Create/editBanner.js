@@ -13,7 +13,7 @@ function Banner(props) {
     const dispatch = useDispatch()
 
     const submit = () => {
-        // debugger
+        // 
         const formData = new FormData()
 
         const image = dataURLtoBlob(imageSrc)

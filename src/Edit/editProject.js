@@ -48,7 +48,7 @@ const EditProject = () => {
 
     console.log(countries?.data?.data, 'cntry')
     const states = useSelector(state => {
-        // debugger
+        // 
         return state.countries.states
     })
     // console.log(first)
@@ -134,7 +134,7 @@ const EditProject = () => {
         // dispatch(StateList(projdetail.country))
     }, [])
     const handleChangeCountry = (event) => {
-        // debugger
+        // 
         // 👇 Get input value from "event"
         setCountry(event?.currentTarget?.value);
         const formData = new FormData()
@@ -144,7 +144,7 @@ const EditProject = () => {
 
         // if (country) {
 
-        //     debugger
+        //     
         // }
     };
     const handleChangeState = (event) => {
@@ -156,7 +156,7 @@ const EditProject = () => {
         dispatch(CityList(formData))
 
 
-        //     debugger
+        //     
         // }
     };
     return (

@@ -29,7 +29,7 @@ import swal from "sweetalert";
 import { LogsAction } from "./logsAction";
 
 export const CreateProjectAction = (params, setLoading, history) => async dispatch => {
-    // debugger
+    // 
     // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
     // setLoading(true)
@@ -93,7 +93,7 @@ export const ProjectDetail = (slug) => async dispatch => {
     }
 }
 export const LatestProjectDetail = (slug) => async dispatch => {
-    // debugger
+    // 
     // 
     try {
         const config = {
@@ -256,7 +256,7 @@ export const getPublicLiveProjects = createAsyncThunk(
         } catch (e) {
             params.setLoading(false)
             thunkAPI.dispatch(LogsAction(e))
-            // debugger
+            // 
             if (e?.response?.data.message) {
                 // swal('error', e.response.data.message, 'error')
             }
@@ -264,7 +264,7 @@ export const getPublicLiveProjects = createAsyncThunk(
     })
 
 export const UpdateProject = (props, params) => async dispatch => {
-    // debugger
+    // 
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -528,16 +528,25 @@ export const GetSettings = () => async dispatch => {
     }
 }
 
-export const GetNftwol = ({ slug }) => async dispatch => {
+export const GetNftwol = ({ slug },refid) => async dispatch => {
     
     try {
+        // const formData = new FormData()
+        // formData.append('ref_id', refid?refid:'')
+        // if(slug.reffid){
+
+        //     const reff = slug.reffid
+        // }
+        let refId=(refid)?refid:'';
         const config = {
             headers: {
                 'Content-Type': 'application/json',
+                
             },
+            transformRequest: formData => formData
         }
 
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getNftDetailByIdxWithoutLogin/${slug}`,
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getNftDetailByIdxWithoutLogin/${slug}/${refId}`,
             config)
 
         await dispatch(getNftwolDetails(res));
@@ -572,7 +581,7 @@ export const GetfundraiserProject = (slug) => async dispatch => {
 }
 
 export const UpdateBanner = (formData, props) => async dispatch => {
-    // debugger
+    // 
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -607,7 +616,7 @@ export const UpdateBanner = (formData, props) => async dispatch => {
     }
 }
 export const UpdateNft = (formData, props, setLoading) => async dispatch => {
-    // debugger
+    // 
     const token = localStorage.getItem('authToken')
     try {
         const config = {
@@ -702,7 +711,7 @@ export const GetMatic = () => async dispatch => {
     }
 };
 export const getBid = (id) => async dispatch => {
-    // debugger
+    // 
     try {
         const token = localStorage.getItem('authToken')
         const config = {
@@ -723,7 +732,7 @@ export const getBid = (id) => async dispatch => {
     }
 };
 export const UpdateBId = ({ id, status, setLoading, slug }) => async dispatch => {
-    // debugger
+    // 
     setLoading(true)
     try {
         const token = localStorage.getItem('authToken')

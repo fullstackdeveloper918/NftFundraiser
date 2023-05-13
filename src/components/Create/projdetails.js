@@ -68,8 +68,8 @@ const ProjNftDetails = () => {
                                     <i class="fa-solid fa-check" onClick={() => setProjModalShows(true)}></i>
                                     <ProTypePopup
                                         id={slug}
-                                                                                            show={projmodalShows}
-                                                                                            onHide={() => setProjModalShows(false)}
+                                        show={projmodalShows}
+                                        onHide={() => setProjModalShows(false)}
                                     />
                                 </>
                             }
@@ -256,7 +256,7 @@ const ProjNftDetails = () => {
                                                     </Link>
                                                 )}
                                                 <div className='token'>
-                                                    <span>#{x?.token_id}</span>
+                                                    <span>#{x?.token_id?.slice(0,2)}</span>
                                                     <span className='cards-icons'>
                                                         {x.is_mint == 0 &&
                                                             <Link to={`/nft/details/${x.slug}?project=${slug}`} ><i className="fa-solid fa-pen" /></Link>

@@ -5,12 +5,12 @@ import { BidNft } from '../Wallet/interact';
 import { useState } from 'react';
 import { Loader } from '@react-three/drei';
 function BidPopup(props) {
-    // debugger
+    // 
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
     const onSubmit = () => {
-        // debugger
+        // 
         BidNft(props.id, props.projid, props.from, props.onHide, setLoading)
     }
     return (

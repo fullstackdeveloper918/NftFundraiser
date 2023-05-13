@@ -159,10 +159,10 @@ const GetAllProjects = () => {
                     </div>
                     {projects.current_page != projects.totalPageCount ? (
                         <>
-                            {projects?.data?.length > 8 &&
+                            
 
                                 <div className="morebutton"><a onClick={(e) => handleIncrement(e)} className="btn btn-bordered-white">Load More</a></div>
-                            }
+                           
                         </>
 
                     ) : (

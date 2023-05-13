@@ -134,7 +134,7 @@ const EditNftImage = (props) => {
         setNft_collection_id(nftdetail.collection_id)
     }, [form, nftdetail])
     const onFinish = async (values) => {
-        // debugger
+        // 
         try {
             setLoading(true)
             if (source) {
@@ -143,7 +143,7 @@ const EditNftImage = (props) => {
                 const addedImage = imagesRes?.data?.data.map(x => ipfsBaseUrl + x?.image_hash)
                 var str = addedImage;
                 var check = str.includes("https://ipfs.io/ipfs/undefined");
-                // debugger
+                // 
                 if (check === false) {
                     const formData = new FormData()
                     formData.append('image', addedImage)
@@ -161,7 +161,7 @@ const EditNftImage = (props) => {
                     swal('error!', 'Nft not uploaded', 'error')
                 }
             } else {
-                // debugger
+                // 
                 const formData = new FormData()
                 formData.append('image', image)
                 formData.append('title', values?.nfts?.map(x =>

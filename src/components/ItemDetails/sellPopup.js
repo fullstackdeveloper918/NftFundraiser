@@ -50,10 +50,11 @@ function SellPopup(props) {
     console.log('nftdetail', nftdetail)
 
     const mint = (contractAddress, type, start_date, end_date, price) => {
-        debugger
+        // 
         // auctiondata.map((item) => {
         //     setPrice(item.price)
         // })
+        
         CreateMetaDataAndMint({
 
             _name: nftdetail.title,
@@ -77,7 +78,7 @@ function SellPopup(props) {
     }
 
     const deployContract = async (type, start_date, end_date, price) => {
-        debugger
+        
         try {
             if (nftdetail?.collectionData?.contract_id == null) {
 

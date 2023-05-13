@@ -97,7 +97,7 @@ const BuyedNftDetails = (props) => {
                                         <div className='loader-img'>{modalShoweditimg &&
 
                                             <EditNftImage
-                                                // debugger
+                                                // 
                                                 id={projslug}
                                                 nft_id={nftId}
                                                 show={modalShoweditimg}
@@ -152,7 +152,7 @@ const BuyedNftDetails = (props) => {
                                     {modalShowedit &&
 
                                         <EditNftName
-                                            // debugger
+                                            // 
                                             id={projslug}
                                             nft_id={nftId}
                                             show={modalShowedit}
@@ -184,7 +184,7 @@ const BuyedNftDetails = (props) => {
                                 <div className="item-info-list">
                                     <ul className="list-unstyled">
                                         <span class='boldertext'>Token :</span>
-                                        <span> #{nftdetail.token_id}</span>
+                                        <span> #{nftdetail.token_id?.slice(0,2)}</span>
                                     </ul>
                                 </div>
                                 {nftdetail.nft_type === "1" ? (
@@ -246,7 +246,7 @@ const BuyedNftDetails = (props) => {
                                         {modalShoweditdes &&
 
                                             <EditNftDesc
-                                                // debugger
+                                                // 
                                                 id={projslug}
                                                 nft_id={nftId}
                                                 show={modalShoweditdes}

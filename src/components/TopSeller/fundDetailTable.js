@@ -42,7 +42,7 @@
 //                             <i class="fa-solid fa-pen" onClick={() =>
 //                                 setModalShowproj(true)}></i>
 //                             <ProjDetailPopup
-//                                 debugger
+//                                 
 //                                 id={props.id}
 //                                 show={modalShowproj}
 //                                 onHide={() => setModalShowproj(false)} />

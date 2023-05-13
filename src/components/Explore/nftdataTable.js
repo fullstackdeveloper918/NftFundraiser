@@ -47,7 +47,7 @@ const NftdataTable = (props) => {
                                     <td><a target="_blank" href={`https://polygonscan.com/address/${nftdetail?.collectionData?.contract_id}`} >{nftdetail.collectionData?.contract_id?.slice(0, 5)}.....{nftdetail.collectionData?.contract_id?.slice(39, 42)}</a></td>
                                 </tr><tr>
                                     <th>Token ID</th>
-                                    <td>{nftdetail.token_id}</td>
+                                    <td>{nftdetail.token_id?.slice(0,2)}</td>
                                 </tr><tr>
                                     <th>Token Stranded</th>
                                     <td>ERC721</td>

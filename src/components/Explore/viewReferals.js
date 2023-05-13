@@ -137,7 +137,7 @@ const RefralTransdataTable = (props) => {
                                                     return (
                                                         <><tr className='contract-address'>
                                                             <td ><Link to={`/nftprojdetails/${items.slug}`} >{items.title?.slice(0, 20)}</Link>...</td>
-                                                            <td>#{items.token_id}</td>
+                                                            <td>#{items.token_id?.slice(0,2)}</td>
                                                             <td>{items.price}</td>
                                                             {/* <td>{items.referral_amount} </td> */}
                                                             <td className='referal'>{items.referral_amount} <img src='../../img/image14.png' /></td>
@@ -231,7 +231,7 @@ const RefralTransdataTable = (props) => {
                                                                 // </Link>
                                                             )}
                                                             <div className='token'>
-                                                                <span>#{x?.token_id}</span>
+                                                                <span>#{x?.token_id?.slice(0,2)}</span>
                                                                 <span className='cards-icons'>
                                                                     {/* {x.is_mint == 0 && */}
                                                                     {/* // <Link to={`/nft/details/${x.slug}?project=${slug}`} ><i className="fa-solid fa-pen" /></Link> */}

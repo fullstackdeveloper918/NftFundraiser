@@ -32,7 +32,7 @@ const ExploreAll = () => {
 
 
   const handleIncrement = () => {
-    // debugger
+    // 
     // if (startDate && endDate && numberofNfts) {
 
     // setCount(prevCount => prevCount + 1)
@@ -65,7 +65,7 @@ const ExploreAll = () => {
     );
   };
   useEffect(() => {
-    // debugger
+    // 
 
     dispatch(
       getPublicLiveProjects({
@@ -199,11 +199,11 @@ const ExploreAll = () => {
           onPageChange={page => setCurrentPage(page)}
         /> */}
         {liveProjects.current_page != liveProjects.totalPageCount ?(
-          <>
-          {liveProjects?.data?.length > 8 &&
+          // <>
+          // {liveProjects?.data?.length > 8 &&
           <div className="morebutton"><a onClick={(e) => handleIncrement(e)} className="btn btn-bordered-white">Load More</a></div>
-          }
-          </>
+          // }
+          // </>
 
         ):(
           <>

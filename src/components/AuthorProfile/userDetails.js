@@ -47,10 +47,10 @@ const UserTransdataTable = (props) => {
                                         <td>#{items.nft_id}</td>
                                         <td>#{items.project_id}</td>
                                         <td>{items.price}</td>
-                                        <td>{items.pay_from.slice(0, 4)}...{items.pay_from.slice(35, 44)}</td>
-                                        <td>{items.pay_to.slice(0, 4)}...{items.pay_to.slice(35, 44)}</td>
-                                        <td>#{items.token_id}</td>
-                                        <td>{items.txd_id.slice(0, 4)}...{items.txd_id.slice(35, 44)}</td>
+                                        <td>{items.pay_from?.slice(0, 4)}...{items.pay_from?.slice(35, 44)}</td>
+                                        <td>{items.pay_to?.slice(0, 4)}...{items.pay_to?.slice(35, 44)}</td>
+                                        <td>#{items.token_id?.slice(0,2)}</td>
+                                        <td>{items.txd_id?.slice(0, 4)}...{items.txd_id?.slice(35, 44)}</td>
                                     </tr>
                                 )
                             })}

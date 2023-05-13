@@ -88,7 +88,7 @@ const Create = ({ current, next, prev }) => {
             formData.append('country_id', userdet?.organization_detail?.country_id)
         }
         dispatch(StateList(formData)) // if (country) {
-        //     debugger
+        //     
         // }
     };
     const handleChangeState = (event) => {
@@ -106,7 +106,7 @@ const Create = ({ current, next, prev }) => {
     const defaultValue = new Date(date).toISOString().substr(0, 10) // yyyy-mm-dd
     const defaultValue1 = new Date(date1).toISOString().substr(0, 10) // yyyy-mm-dd
     const handleSubmitDraft = (data) => {
-        // debugger
+        // 
         // 
         const imageBanner = dataURLtoBlob(image)
         const formData = new FormData()

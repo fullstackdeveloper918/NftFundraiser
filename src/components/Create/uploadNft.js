@@ -124,7 +124,7 @@ const UploadNft = ({ current, prev }) => {
     // console.log(count, 'count')
 
     function onHandleClick(index, item) {
-        // debugger
+        // 
         setNft_collection_id(previ => {
             previ[index] = item
             return {
@@ -231,7 +231,7 @@ const UploadNft = ({ current, prev }) => {
             // setNFtFileType(type)
 
             setSource(prevState => {
-                // debugger
+                // 
                 prevState[index] = { file: e.target.files[0], type: type }
                 setSourceType(type)
 
@@ -400,7 +400,7 @@ const UploadNft = ({ current, prev }) => {
 
     ];
     const nftNameHandler = (event, index) => {
-        // debugger
+        // 
         setNftName(prevState => {
             return {
                 ...prevState,
