@@ -233,12 +233,15 @@ const ProjNftDetails = () => {
                             )}
                             {projdetail?.nft_data?.map((x, idx) => {
                                 return (
-                                    <div key={`eds_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item ">
+                                    <div key={`eds_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item soldout-card">
+                                    {x.sold_nft == 1 && 
+                                        <div className='sold-outbtn'>SOLD OUT</div>  
+                                        }  
                                         <div className="card no-hover m-0">
                                             <div className="image-over relative">
                                                 {x.user_id == projdetail.user_id ? (
                                                     <>
-                                                        <Link to={`/nft/details/${x.slug}?project=${slug}`}>
+                                                        <Link to={x.sold_nft == 0 && `/nft/details/${x.slug}?project=${slug}`}>
                                                             {x.extention === 'Player' || x.extention === 'modal' ? (
                                                                 <img className="card-img-top" src={x.preview_imag} alt="" />
                                                             ) : (
@@ -247,7 +250,7 @@ const ProjNftDetails = () => {
                                                         </Link>
                                                     </>
                                                 ) : (
-                                                    <Link to={`/nft/details/${x.slug}?project=${slug}`}>
+                                                    <Link to={x.sold_nft == 0 && `/nft/details/${x.slug}?project=${slug}`}>
                                                         {x.extention === 'Player' || x.extention === 'modal' ? (
                                                             <img className="card-img-top" src={x.preview_imag} alt="" />
                                                         ) : (
@@ -273,7 +276,7 @@ const ProjNftDetails = () => {
                                                         <h5 className="m-0 pb-2 p-0 text-capitalize">{x.title.slice(0, 16)}...</h5>
                                                     </a>
                                                     <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">
-                                                        <span className='align-self-start' dangerouslySetInnerHTML={{ __html: x.description.slice(0, 52) }} />
+                                                        <span className='align-self-start' dangerouslySetInnerHTML={{ __html: x.description.slice(0, 45) }} />
                                                     </div>
                                                     <div className='mint d-flex justify-content-between button_group buy-invest-btn align-items-center nft-price' >
                                                         {x.is_mint == 0 ? (
@@ -282,7 +285,7 @@ const ProjNftDetails = () => {
                                                             </button>
                                                         ) : (
                                                             <>
-                                                                {x.user_id !== projdetail.user_id ? (
+                                                                {x?.user_data?.user_id !== projdetail?.user_data?.user_id ? (
                                                                     <button className='btn py-2 ml-lg-auto btn-bordered-white' disabled>
                                                                         <a >SOLD OUT</a>
                                                                     </button>

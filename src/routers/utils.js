@@ -1,4 +1,4 @@
-export const TOKEN_KEY = localStorage.getItem('authToken')
+export const TOKEN_KEY = sessionStorage.getItem('authToken')
 
 
 export const logout = () => {

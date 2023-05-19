@@ -30,11 +30,11 @@ import { LogsAction } from "./logsAction";
 
 export const CreateProjectAction = (params, setLoading, history) => async dispatch => {
     // 
-    // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
+    // sessionStorage.setItem('auth_token', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
     // setLoading(true)
     try {
-        const token = localStorage.getItem('authToken')
+        const token = sessionStorage.getItem('authToken')
         // 
         const config = {
             headers: {
@@ -71,8 +71,7 @@ export const CreateProjectAction = (params, setLoading, history) => async dispat
 }
 
 export const ProjectDetail = (slug) => async dispatch => {
-    // 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -114,7 +113,7 @@ export const LatestProjectDetail = (slug) => async dispatch => {
 }
 
 export const ProjectList = (params) => async dispatch => {
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     params.setLoading(true)
     try {
         const config = {
@@ -146,7 +145,8 @@ export const ProjectList = (params) => async dispatch => {
 }
 
 export const NftList = (slug, setLoading) => async dispatch => {
-    const token = localStorage.getItem('authToken')
+    
+    const token = sessionStorage.getItem('authToken')
     // setLoading(true)
     try {
 
@@ -166,6 +166,7 @@ export const NftList = (slug, setLoading) => async dispatch => {
 
 
     } catch (e) {
+        
         dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
@@ -178,7 +179,7 @@ export const uploadNFT = async (nft, dispatch,setLoading) => {
 
         // const [loading, setLoading] = useState()
         // setLoading(true)
-        const token = localStorage.getItem('authToken')
+        const token = sessionStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -227,8 +228,8 @@ export const getPublicLiveProjects = createAsyncThunk(
         }
         try {
             const { projectType } = params
-            const latitude = localStorage.getItem('latitude')
-            const longitude = localStorage.getItem('longitude')
+            const latitude = sessionStorage.getItem('latitude')
+            const longitude = sessionStorage.getItem('longitude')
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
@@ -265,7 +266,7 @@ export const getPublicLiveProjects = createAsyncThunk(
 
 export const UpdateProject = (props, params) => async dispatch => {
     // 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -297,7 +298,7 @@ export const UpdateProject = (props, params) => async dispatch => {
 }
 
 export const DeleteProject = (id,history) => async dispatch => {
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -369,7 +370,7 @@ export const CategoriesAction = () => async dispatch => {
 
 
 export const GetCollectionsAction = () => async dispatch => {
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -390,15 +391,16 @@ export const GetCollectionsAction = () => async dispatch => {
         }
     }
 }
-export const CreateCollectionAction = ({ dat, imageBanner, props }) => async dispatch => {
+export const CreateCollectionAction = ({ dat, imageBanner, props ,setLoading}) => async dispatch => {
     try {
+        setLoading(true)
         const formData = new FormData()
         formData.append('title', dat.title)
         formData.append('description', dat.description)
         formData.append('short_url', dat.short_url)
         formData.append('symbol', dat.symbol)
         formData.append('image', imageBanner)
-        const token = localStorage.getItem('authToken')
+        const token = sessionStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -413,6 +415,7 @@ export const CreateCollectionAction = ({ dat, imageBanner, props }) => async dis
         if (res?.status === 200) {
 
             await dispatch(GetCollectionsAction());
+            setLoading(false)
             props.onHide(false)
             // swal("success", 'Collection Created', 'success')
             // .then(function () {
@@ -422,6 +425,7 @@ export const CreateCollectionAction = ({ dat, imageBanner, props }) => async dis
         }
 
     } catch (e) {
+        setLoading(false)
         dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
@@ -430,7 +434,7 @@ export const CreateCollectionAction = ({ dat, imageBanner, props }) => async dis
     }
 }
 export const GetCollectionDetails = (id) => async dispatch => {
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -474,7 +478,7 @@ export const GetSocialMediaIcons = () => async dispatch => {
 
 export const UpdateCollection = (id, params) => async dispatch => {
     // 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -537,7 +541,7 @@ export const GetNftwol = ({ slug },refid) => async dispatch => {
 
         //     const reff = slug.reffid
         // }
-        let refId=(refid)?refid:'';
+        let refId=(refid)?refid:'null';
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -582,7 +586,7 @@ export const GetfundraiserProject = (slug) => async dispatch => {
 
 export const UpdateBanner = (formData, props) => async dispatch => {
     // 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -617,7 +621,7 @@ export const UpdateBanner = (formData, props) => async dispatch => {
 }
 export const UpdateNft = (formData, props, setLoading) => async dispatch => {
     // 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -653,7 +657,7 @@ export const UpdateNft = (formData, props, setLoading) => async dispatch => {
     }
 }
 export const AddNftAction = (formData, projid, slug, setLoading, history) => async dispatch => {
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -713,7 +717,7 @@ export const GetMatic = () => async dispatch => {
 export const getBid = (id) => async dispatch => {
     // 
     try {
-        const token = localStorage.getItem('authToken')
+        const token = sessionStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -735,7 +739,7 @@ export const UpdateBId = ({ id, status, setLoading, slug }) => async dispatch =>
     // 
     setLoading(true)
     try {
-        const token = localStorage.getItem('authToken')
+        const token = sessionStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -781,7 +785,7 @@ export const GetMostactivityProject = () => async dispatch => {
     }
 }
 export const GetbuyedNftDetails = (slug) => async dispatch => {
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -805,7 +809,7 @@ export const GetbuyedNftDetails = (slug) => async dispatch => {
 
 export const ResellNft = (params, props,history) => async dispatch => {
     try {
-        const token = localStorage.getItem('authToken')
+        const token = sessionStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'application/json',

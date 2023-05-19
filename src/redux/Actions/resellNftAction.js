@@ -5,7 +5,7 @@ import { LogsAction } from "./logsAction";
 
 export const ResellAction = () => async dispatch => {
     // 
-    // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
+    // sessionStorage.setItem('authToken', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
     // setLoading(true)
     try {
@@ -29,7 +29,7 @@ export const ResellAction = () => async dispatch => {
     }
 }
 export const ResellActionDetails = (slug) => async dispatch => {
-    // localStorage.setItem('authToken', JSON.stringify(action.payload.dat
+    // sessionStorage.setItem('authToken', JSON.stringify(action.payload.dat
     // const [loading, setLoading] = useState(false)
     // setLoading(true)
     try {

@@ -89,8 +89,6 @@ const MyRouts = () => {
           <Route exact path="/my-collections" component={Showcollections} />
           <Route exact path="/collection/:id" component={CollectionDetail} />
           <Route exact path="/create" component={Create} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
           <PrivateRoute exact path="/forgotpassword" component={Forgot} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="*" component={NotFound} />

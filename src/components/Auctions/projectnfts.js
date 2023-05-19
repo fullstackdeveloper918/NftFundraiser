@@ -34,10 +34,14 @@ const ProjNFTS = (props) => {
                         return (
                             
                                 
-                            <div key={`auct_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
-                                <div className="card">
+                            <div key={`auct_${idx}`} className="col-12 col-sm-6 col-lg-3 item soldout-card">
+                            {item.sold_nft == 1 && 
+                            <div className='sold-outbtn'>SOLD OUT</div>  
+                            }  
+                            <div className="card">
+        
                                     <div className="image-over">
-                                        <Link to={`/nftprojdetails/${item.slug}?refid=${props.refid}`}>
+                                        <Link to={item.sold_nft == 0 && `/nftprojdetails/${item.slug}?refid=${props.refid}`}>
                                             {item.extention === 'modal' || item.extention === 'Player' ? (
                                                 <img className="card-img-top" src={item.preview_imag} alt="" />
                                             ) : (
@@ -51,13 +55,13 @@ const ProjNFTS = (props) => {
                                         <div className="card-body">
                                             <h5 className="mb-0">{item.title.slice(0, 16)} ...</h5>
                                             <div className="card-bottom mt-1">
-                                                <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 50) }} />
+                                                <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 45) }} />
                                             </div>
                                             <div className='d-flex justify-content-between button_group buy-invest-btn align-items-center nft-price'>
-                                                {item.sold_nft == 1 ? (
-                                                    <a> <button className='btn py-2 ml-lg-auto btn-bordered-white' disabled>SOLD OUT</button></a>
-                                                ) : (
-                                                    <a> <button className='btn py-2 ml-lg-auto btn-bordered-white'><i className="icon-handbag mr-1" /> <Link to={`/nftprojdetails/${item.slug}?refid=${props.refid}`} style={{ color: "white" }}>Invest</Link></button></a>
+                                                {item.sold_nft !== 1 && (
+                                                    // <a> <button className='sold-outbtn' disabled>SOLD OUT</button></a>
+                                                
+                                                    <a> <button className='btn py-2 ml-lg-auto btn-bordered-white'><i className="icon-handbag mr-1" /> <Link to={item.sold_nft == 0 && `/nftprojdetails/${item.slug}?refid=${props.refid}`} style={{ color: "white" }}>Invest</Link></button></a>
                                                 )}
                                                 <a> <img className="mr-1" src='../img/image14.png' />{item.price}</a>
                                                 

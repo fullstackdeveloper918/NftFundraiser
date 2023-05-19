@@ -242,9 +242,9 @@ const UploadNft = ({ current, prev }) => {
         }
     }
 
-    const lat = localStorage.getItem('latitude')
+    const lat = sessionStorage.getItem('latitude')
     // console.log(lat, 'lattt')
-    const log = localStorage.getItem('longitude')
+    const log = sessionStorage.getItem('longitude')
     // console.log(log, 'logggg')
 
     // const desdata = { nft_description() }
@@ -835,14 +835,14 @@ const UploadNft = ({ current, prev }) => {
                         nftno={setNumberofNfts}
 
                     />
-                    <MyVerticallyCenteredModal
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                    />
-
-                </div>
-            )
-            }
+                    
+                    </div>
+                    )
+                }
+                <MyVerticallyCenteredModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                />
         </div >
     )
 }

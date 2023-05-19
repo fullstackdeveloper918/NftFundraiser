@@ -97,14 +97,14 @@ const AuthorProfile = () => {
                                                 type="email"
                                                 className="form-control "
                                                 name="email"
-                                                disabled={userdet.role == 3 ? true : false}
+                                                // disabled={userdet.role == 3 ? true : false}
                                                 placeholder="email"
                                                 {...register("email")}
                                                 aria-invalid={errors.email ? "true" : "false"}
                                             />
-                                            {userdet.role == 2 &&
+                                            
                                                 <i class="fa-solid fa-pen"></i>
-                                            }
+                                           
                                         </label>
                                         <button className="btn btn-bordered-white btn-smaller" type="submit" >
                                             Update

@@ -129,7 +129,7 @@ const userprojurl = `http://localhost:3000/referral/widget/${slug.slug}` + `?ref
                                 <CopyToClipboard text={userprojurl} >
                                     <div className='copy'>
 
-                                        <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={() => setCopy(false)} disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false : true}></i></a>
+                                        <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={() => setCopy(false)} disabled={window.ethereum?.selectedAddress && sessionStorage.getItem('authToken') ? false : true}></i></a>
                                     </div>
                                 </CopyToClipboard>
                             

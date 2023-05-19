@@ -192,7 +192,7 @@ const BuyedNftDetails = (props) => {
 
 
                                         <><span className="purchase_btn  mt-3 d-flex align-items-center justify-content-center py-1 mx-2"
-                                            disabled>Your NFT is now ready to purchase</span>
+                                            disabled>Status: Ready to purchase</span>
 
                                         </>
 

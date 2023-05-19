@@ -192,11 +192,11 @@ const NftDetails = (props) => {
 
                                             </div>
                                         ) : (
-                                            <div className='eddlbtton d-flex  align-items-center mt-3'>
+                                            <div className='eddlbtton d-flex  align-items-center'>
 
 
-                                                <><span className="purchase_btn  mt-3 d-flex align-items-center justify-content-center py-1 mx-2"
-                                                    disabled>Your NFT is now ready to purchase</span>
+                                                <><span className="purchase_btn d-flex align-items-center justify-content-center py-1 mx-2"
+                                                    disabled>Status: Ready to purchase</span>
 
                                                 </>
 

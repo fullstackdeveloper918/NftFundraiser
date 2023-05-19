@@ -33,7 +33,7 @@ function BidPopup(props) {
                     <form onSubmit={handleSubmit(onSubmit)} className="item-form card no-hover">
                         <div className="row">
                             <div className="col-12 pb-2">
-                                {window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? (
+                                {window.ethereum?.selectedAddress && sessionStorage.getItem('authToken') ? (
                                     <label>You are about to place a bid for {props.projtitle?.toUpperCase()} from {props.projcoll?.toUpperCase()}.</label>
                                 ) : (
                                     <label style={{ color: 'red' }}>Connect your wallet.</label>
@@ -41,7 +41,7 @@ function BidPopup(props) {
                             </div>
                             <div className="col-12">
                                 <label>Wallet address:</label>
-                                <div class="bidinput">{window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? window.ethereum?.selectedAddress : <span style={{ color: 'red' }} disabled>Please connect your wallet</span>}</div>
+                                <div class="bidinput">{window.ethereum?.selectedAddress && sessionStorage.getItem('authToken') ? window.ethereum?.selectedAddress : <span style={{ color: 'red' }} disabled>Please connect your wallet</span>}</div>
                             </div>
                             <div className="col-12">
                                 <div className="form-group">

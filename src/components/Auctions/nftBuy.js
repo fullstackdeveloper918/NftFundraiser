@@ -59,7 +59,11 @@ const LatprojNftDetails = (props) => {
 
     useEffect(() => {
         (GetMatic(setMatic))
-        dispatch(GetUserAction())
+
+         if(sessionStorage.getItem('authToken')){
+
+            dispatch(GetUserAction())
+        }
         dispatch(GetNftwol(id,refid))
         dispatch(GetSettings())
     }, [id])
@@ -171,18 +175,23 @@ const LatprojNftDetails = (props) => {
                                     <span className='boldertext w-100'>NFT creator royalties : </span>
                                     <span> 10%</span>
                                 </div>
+                                <div>
+                                    <span className='boldertext w-100'>Karmatica royalties : </span>
+                                    <span> 1%</span>
+                                </div>
                                 <div className='eddlbtton d-flex gap- align-items-center mt-2 justify-content-between'>
 
 
                                     <div className='eddlbtton flex-wrap d-flex gap-10  align-items-center mt-2'>
                                         {latprojnftdetail.sold_nft == 1 ? (
-                                            <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" disabled>SOLD OUT</button>
+                                            
+                                            <button className="d-flex align-items-center justify-content-center sold-outbtn" disabled>SOLD OUT</button>
                                         ) : (
                                             <>
                                                 {latprojnftdetail.user_id === userdet.user_id ? (
-                                                    <div className='eddlbtton d-flex  align-items-center mt-3'>
-                                                        <><span className="purchase_btn  mt-3 d-flex align-items-center justify-content-center py-1 mx-2"
-                                                            disabled>Your NFT is now ready to purchase</span>
+                                                    <div className='eddlbtton d-flex  align-items-center'>
+                                                        <><span className="purchase_btn  d-flex align-items-center justify-content-center py-1 mx-2"
+                                                            disabled>Status: Ready to purchase</span>
 
                                                         </>
 

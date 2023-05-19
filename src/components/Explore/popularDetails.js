@@ -191,12 +191,14 @@ const CollectionDetails = (props) => {
 
                         <div className=" col-12 mt-3 p-0">
                             <div className="items mt-0 explore-items p-0">
-                                <CollectionNFTS />
+                               
                             </div>
                         </div>
 
                     </div>
                 </div>
+                <CollectionNFTS 
+                slug={slug}/>
             </div>
         </section>
     );

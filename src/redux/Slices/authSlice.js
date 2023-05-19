@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 // Slice
-const userToken = localStorage.getItem('authToken')
-    // ? JSON.parse(localStorage.getItem('user'))
-    ? localStorage.getItem('authToken')
+const userToken = sessionStorage.getItem('authToken')
+    // ? JSON.parse(sessionStorage.getItem('user'))
+    ? sessionStorage.getItem('authToken')
     : null
 
 const authSlice = createSlice({
@@ -31,7 +31,7 @@ const authSlice = createSlice({
             state.user = action.payload;
             state.userToken = action.payload.data.data.auth_token;
             state.role = action.payload.data.data.role;
-            localStorage.setItem('authToken', action.payload.data.data.auth_token)
+            sessionStorage.setItem('authToken', action.payload.data.data.auth_token)
         },
         registerFail: (state, action) => {
             // 
@@ -58,7 +58,7 @@ const authSlice = createSlice({
             state.role = action.payload?.data?.data?.role;
             state.message = action.payload?.data?.message
             state.userToken = action.payload?.data?.data?.auth_token;
-            localStorage.setItem('authToken', action.payload?.data?.data?.auth_token)
+            sessionStorage.setItem('authToken', action.payload?.data?.data?.auth_token)
         },
         logoutSuccess: (state) => {
             localStorage.removeItem('authToken')

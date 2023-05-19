@@ -2,9 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Collapse } from 'antd';
-import { ProjectDetail, ProjectList } from '../../redux/Actions/projectAction';
+import { LatestProjectDetail, ProjectDetail, ProjectList } from '../../redux/Actions/projectAction';
 import { useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
+import { getLatestProjectDetail } from '../../redux/Slices/projectSlice';
 
 const LatNftdataTable = () => {
     const dispatch = useDispatch()
@@ -26,7 +27,7 @@ const LatNftdataTable = () => {
 
     useEffect(() => {
         // 
-        dispatch(ProjectDetail(slug))
+        dispatch(LatestProjectDetail(slug))
     }, [slug])
 
     return (

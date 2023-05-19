@@ -35,8 +35,8 @@ const Hero = ({ type }) => {
         // console.log(`Latitude : ${crd.latitude}`);
         // console.log(`Longitude: ${crd.longitude}`);
         // console.log(`More or less ${crd.accuracy} meters.`);
-        localStorage.setItem('latitude', `${crd.latitude}`);
-        localStorage.setItem('longitude', `${crd.longitude}`);
+        sessionStorage.setItem('latitude', `${crd.latitude}`);
+        sessionStorage.setItem('longitude', `${crd.longitude}`);
         // setLatitude(`${crd.latitude}`)
         // setLongitude(`${crd.longitude}`)
     }
@@ -112,7 +112,7 @@ const Hero = ({ type }) => {
                     confirmButtonAriaLabel: 'Thumbs up, great!',
                 })
             }
-            else if (!userToken && !localStorage.getItem('authToken')) {
+            else if (!userToken && !sessionStorage.getItem('authToken')) {
                 Swal.fire({
                     icon: 'info',
                     html:

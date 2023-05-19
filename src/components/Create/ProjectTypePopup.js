@@ -34,9 +34,9 @@ function ProTypePopup(props) {
         // 
         return state?.projectdetails?.projectdetails
     })
-    const lat = localStorage.getItem('latitude')
+    const lat = sessionStorage.getItem('latitude')
     // console.log(lat, 'lattt')
-    const log = localStorage.getItem('longitude')
+    const log = sessionStorage.getItem('longitude')
     useEffect(() => {
         if (location.pathname !== '/create' && projdetail && Object.keys(projdetail).length) {
             setValue("title", projdetail.title)

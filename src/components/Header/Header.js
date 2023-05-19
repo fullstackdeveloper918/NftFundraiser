@@ -62,12 +62,12 @@ const Header = () => {
     //     const interval = setInterval(() => {
     //         console.log("yyyyiiiiiiiiiiii")
     //         // openNotification()
-    //         if (localStorage.getItem('authToken') && window.ethereum.selectedAddress) {
+    //         if (sessionStorage.getItem('authToken') && window.ethereum.selectedAddress) {
 
     //             dispatch(GetauctionNoti())
     //         }
 
-    //         if (userauction?.count > 0 && userdet.user_id !== userauction?.data?.user_id &&  localStorage.getItem('authToken')) {
+    //         if (userauction?.count > 0 && userdet.user_id !== userauction?.data?.user_id &&  sessionStorage.getItem('authToken')) {
     //             console.log("trueeeeeeeeeeeeeee")
     //             openNotification()
     //         }
@@ -83,7 +83,10 @@ const Header = () => {
 
 
     useEffect(() => {
-        dispatch(GetUserAction())
+        if(sessionStorage.getItem('authToken')){
+
+            dispatch(GetUserAction())
+        }
         getCurrentWalletConnected(dispatch)
         setAddress(getSelectedAddress)
 
@@ -243,7 +246,7 @@ const Header = () => {
                     confirmButtonAriaLabel: 'Thumbs up, great!',
                 })
             }
-            else if (!userToken && !localStorage.getItem('authToken')) {
+            else if (!userToken && !sessionStorage.getItem('authToken')) {
                 Swal.fire({
                     icon: 'info',
                     html:
@@ -359,7 +362,7 @@ const Header = () => {
                     {/* Navbar Action Button */}
                     {/* Navbar Action Button */}
                     <ul className="navbar-nav action">
-                        {window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? (
+                        {window.ethereum?.selectedAddress && sessionStorage.getItem('authToken') ? (
 
                             <>
 
@@ -377,7 +380,7 @@ const Header = () => {
                         )}
 
                     </ul>
-                    {window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? (
+                    {window.ethereum?.selectedAddress && sessionStorage.getItem('authToken') ? (
                         <>
 
                             <div className="dropdown dropdown_login">

@@ -53,7 +53,10 @@ const ProjDetails = () => {
     useEffect(() => {
         (GetMatic(setMatic))
         dispatch(LatestProjectDetail(slug))
-        dispatch(GetUserAction())
+        if(sessionStorage.getItem('authToken')){
+
+            dispatch(GetUserAction())
+        }
 
     }, [slug])
 
@@ -74,7 +77,7 @@ const ProjDetails = () => {
 
                             <div className="item-thumb text-center">
                                 <><div>
-                                    {latprojdetail?.user_data?.user_id === userdet?.user_id && localStorage.getItem('authToken') &&
+                                    {latprojdetail?.user_data?.user_id === userdet?.user_id && sessionStorage.getItem('authToken') &&
                                         <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() => setModalShow(true)}></i>
 
 

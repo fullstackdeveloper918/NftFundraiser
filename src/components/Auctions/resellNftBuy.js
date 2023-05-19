@@ -34,7 +34,10 @@ const ResellNftDetails = (props) => {
     const setValue = getSett.find(x => x.key === 'pricing_per_nft')
     useEffect(() => {
         (GetMatic(setMatic))
-        dispatch(GetUserAction())
+        if(sessionStorage.getItem('authToken')){
+
+            dispatch(GetUserAction())
+        }
         dispatch(ResellActionDetails(slug))
         dispatch(GetSettings())
     }, [slug])
@@ -42,6 +45,7 @@ const ResellNftDetails = (props) => {
         return state?.user?.userdetail
     })
     const buyHandler = () => {
+        
         BuyNft({
             contractAddress: resellnftdetail?.collectionData?.contract_id,
             tokenId: resellnftdetail.token_id,
@@ -57,6 +61,7 @@ const ResellNftDetails = (props) => {
             refid: null,
             loadingg: setLoading,
             modal: setBuyModalShow,
+            dispatch
         })
     }
     return (
@@ -118,6 +123,10 @@ const ResellNftDetails = (props) => {
                                     <span className='boldertext w-100'>NFT creator royalties : </span>
                                     <span> 10%</span>
                                 </div>
+                                <div>
+                                <span className='boldertext w-100'>Karmatica royalties : </span>
+                                <span> 1%</span>
+                            </div>
                                 <div className='eddlbtton d-flex gap- align-items-center mt-2 justify-content-between'>
                                     <div className='eddlbtton flex-wrap d-flex gap-10  align-items-center mt-2'>
                                         {resellnftdetail.sold_nft == 1 ? (

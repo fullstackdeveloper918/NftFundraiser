@@ -27,11 +27,11 @@ const Wallet = () => {
         const res = await ConnectWallet("CREATOR", dispatch)
 
         if (res?.res?.response?.status === 401) {
-            history.push('/signup')
+            history.push('/wallet-connect')
         }
         else {
             dispatch(loginSuccess(res?.res))
-            localStorage.setItem('authToken', res?.res?.data?.data?.auth_token)
+            sessionStorage.setItem('authToken', res?.res?.data?.data?.auth_token)
             history.push('/projectlist')
         }
     }

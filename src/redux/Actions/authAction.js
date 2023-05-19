@@ -10,7 +10,7 @@ export const Register = createAsyncThunk(
     "auth/register",
     async (params, thunkAPI, dispatch) => {
         try {
-            const token = localStorage.getItem('authToken')
+            const token = sessionStorage.getItem('authToken')
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export const Register = createAsyncThunk(
 
 export const LoginAction = (params, history) => async dispatch => {
     try {
-        const token = localStorage.getItem('authToken')
+        const token = sessionStorage.getItem('authToken')
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ export const ForgotPasswordAction = (params, dispatch) => async dispatch => {
     }
 }
 export const GetUserAction = () => async dispatch => {
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
 
     try {
         const config = {
@@ -117,7 +117,7 @@ export const GetUserAction = () => async dispatch => {
     }
 }
 export const GetauctionNoti = () => async dispatch => {
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
 
     try {
         const config = {
@@ -143,9 +143,9 @@ export const GetauctionNoti = () => async dispatch => {
 
 export const CreateOrganizationAction = (params) => async dispatch => {
     // 
-    // localStorage.setItem('auth_token', JSON.stringify(action.payload.dat
+    // sessionStorage.setItem('auth_token', JSON.stringify(action.payload.dat
     try {
-        const token = localStorage.getItem('authToken')
+        const token = sessionStorage.getItem('authToken')
         const config = {
             headers: {
                 // 'Content-Type': 'multipart/form-data',
@@ -176,7 +176,7 @@ export const CreateOrganizationAfterRoleChange = createAsyncThunk(
     async (params, thunkAPI, dispatch) => {
         // 
         try {
-            const token = localStorage.getItem('authToken')
+            const token = sessionStorage.getItem('authToken')
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
@@ -300,7 +300,7 @@ export const HearAboutList = () => async dispatch => {
 
 export const UpdateProfileAction = (formData, props) => async dispatch => {
 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -345,7 +345,7 @@ export const UpdateProfileAction = (formData, props) => async dispatch => {
 export const CountSet = () => async dispatch => {
     // 
     // 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -377,7 +377,7 @@ export const CountSet = () => async dispatch => {
 export const AllNoti = () => async dispatch => {
 
 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
 
     try {
         const config = {
@@ -404,7 +404,7 @@ export const AllNoti = () => async dispatch => {
 
 export const NotiDelete = (id) => async dispatch => {
     // 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {
@@ -435,7 +435,7 @@ export const NotiDelete = (id) => async dispatch => {
 }
 export const ChangeUserRole = (history) => async dispatch => {
     // 
-    const token = localStorage.getItem('authToken')
+    const token = sessionStorage.getItem('authToken')
     try {
         const config = {
             headers: {

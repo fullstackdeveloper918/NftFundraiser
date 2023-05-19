@@ -741,6 +741,9 @@ ul.list-unstyled.viewproduct-detail li span:first-child , :root .boldertext , li
     font-weight: 600!important;
     margin-right: 10px; 
 }
+.list-unstyled {
+    margin-bottom: 0px;
+}
 :root .nft_price {
     color: #f5f5f5 !important;
     font-size: 18px;
@@ -1748,7 +1751,7 @@ span.share {
     display: flex;
     align-items: center;
     gap: 10px;
-    align-items: self-end;
+    align-items: flex-start;
 }
 .main-create .ant-collapse-content-box {
     background: #16151a;
@@ -2814,12 +2817,47 @@ h6{
 .nfts-detail .card-body {
     padding: 25px 0 0 !important;
 }
-.purchase_btn{
-    border: 2px solid #8e8e8e;
-    /* width: auto !important; */
-    padding: 10px 20px;
-    border-radius: 25px;
-    color: #8e8e8e !important;
+.purchase_btn {
+    margin: 0px !important;
+    font-size: 20px;
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+:root .sold-outbtn {
+    margin: 0px !important;
+    font-size: 20px !important;
+    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+    border: 0px;
+    padding: 0px !important;
+}
+.soldout-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.soldout-card .sold-outbtn {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    text-align: center;
+    right: 0;
+    padding: 10px !important;
+    border-radius: 0px;
+    webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    color: #fff !important;
+    background: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+}
+.dark-sold {
+    opacity: 0.5;
 }
 .nfts_main .card-body div {
     min-height: 42px;

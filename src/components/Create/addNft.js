@@ -166,9 +166,9 @@ const history = useHistory()
 
     }
     // console.log('col', col)
-    const lat = localStorage.getItem('latitude')
+    const lat = sessionStorage.getItem('latitude')
     // console.log(lat, 'lattt')
-    const log = localStorage.getItem('longitude')
+    const log = sessionStorage.getItem('longitude')
 
     useEffect(() => {
         dispatch(GetCollectionsAction())

@@ -46,7 +46,7 @@ const Footer = () => {
                     confirmButtonAriaLabel: 'Thumbs up, great!',
                 })
             }
-            else if (!userToken && !localStorage.getItem('authToken')) {
+            else if (!userToken && !sessionStorage.getItem('authToken')) {
                 Swal.fire({
                     icon: 'info',
                     html:

@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 // // Slice
-// const userToken = localStorage.getItem('authToken')
-//     // ? JSON.parse(localStorage.getItem('user'))
-//     ? localStorage.getItem('authToken')
+// const userToken = sessionStorage.getItem('authToken')
+//     // ? JSON.parse(sessionStorage.getItem('user'))
+//     ? sessionStorage.getItem('authToken')
 //     : null
 const projectSlice = createSlice({
     name: 'project',

@@ -94,7 +94,7 @@ function ReferalPopup(props) {
                                     className="form-control"
                                     name="display_name"
                                     value={location.pathname === `/projnftdetails/${props.id}` ? userprojurl : url}
-                                    disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false : true}
+                                    disabled={window.ethereum?.selectedAddress && sessionStorage.getItem('authToken') ? false : true}
                                 // required
                                 // placeholder="Enter collection name"
                                 // {...register('title')}
@@ -140,7 +140,7 @@ function ReferalPopup(props) {
                                 <CopyToClipboard text={userprojurl} >
                                     <div className='copy'>
 
-                                        <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={() => setCopy(false)} disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false : true}></i></a>
+                                        <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={() => setCopy(false)} disabled={window.ethereum?.selectedAddress && sessionStorage.getItem('authToken') ? false : true}></i></a>
                                     </div>
                                 </CopyToClipboard>
                             ) : (
@@ -148,7 +148,7 @@ function ReferalPopup(props) {
                                 <CopyToClipboard text={url} >
                                     <div className='copy'>
 
-                                        <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={() => setCopy(false)} disabled={window.ethereum?.selectedAddress && localStorage.getItem('authToken') ? false : true}></i></a>
+                                        <a> <i className="fa-sharp fa-solid fa-copy" onClick={() => setCopy(true)} onMouseLeave={() => setCopy(false)} disabled={window.ethereum?.selectedAddress && sessionStorage.getItem('authToken') ? false : true}></i></a>
                                     </div>
                                 </CopyToClipboard>
                             )}
