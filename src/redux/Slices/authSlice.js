@@ -61,7 +61,7 @@ const authSlice = createSlice({
             sessionStorage.setItem('authToken', action.payload?.data?.data?.auth_token)
         },
         logoutSuccess: (state) => {
-            localStorage.removeItem('authToken')
+            sessionStorage.removeItem('authToken')
             state.user.role = null
             state.userToken = null
         },

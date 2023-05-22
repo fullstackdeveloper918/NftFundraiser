@@ -1,8 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom'
 import { ConnectWallet } from './interact';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { loginSuccess } from '../../redux/Slices/authSlice';
+import { useEffect } from 'react';
+import { GetUserAction } from '../../redux/Actions/authAction';
 
 const data = {
     "preHeading": "Wallet Connect",
@@ -22,17 +24,35 @@ const Wallet = () => {
     // 
     const dispatch = useDispatch()
     const history = useHistory()
+    // const userRole = useSelector(state => {
+    //     return state?.user?.userdetail?.role
+    // })
+    // useEffect(()=>{
+    //     // if (sessionStorage.getItem('authToken')) {
 
+    //         dispatch(GetUserAction())
+    //     // }
+    // })
     const handleConnect = async () => {
         const res = await ConnectWallet("CREATOR", dispatch)
-
         if (res?.res?.response?.status === 401) {
             history.push('/wallet-connect')
         }
         else {
             dispatch(loginSuccess(res?.res))
             sessionStorage.setItem('authToken', res?.res?.data?.data?.auth_token)
-            history.push('/projectlist')
+            {res.res.data.data.role == 2 ?(
+
+                    history.push('/all/LatestProjects')
+            ):(
+                history.push('/projectlist')
+            )}
+            // {userRole.role == 2 && 
+
+            // }
+            // {userRole.role == 2 && 
+            //         history.push('/projectlist')
+            // }
         }
     }
 

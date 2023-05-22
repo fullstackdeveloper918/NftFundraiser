@@ -114,7 +114,10 @@ export const LatestProjectDetail = (slug) => async dispatch => {
 
 export const ProjectList = (params) => async dispatch => {
     const token = sessionStorage.getItem('authToken')
-    params.setLoading(true)
+    if (params?.location?.pathname === '/projectlist') {
+
+        params.setLoading(true)
+    }
     try {
         const config = {
             headers: {
@@ -137,7 +140,9 @@ export const ProjectList = (params) => async dispatch => {
 
     } catch (e) {
         dispatch(LogsAction(e))
-        params.setLoading(false)
+        if (params?.location?.pathname === '/projectlist') {
+            params.setLoading(false)
+        }
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
         }
@@ -145,7 +150,6 @@ export const ProjectList = (params) => async dispatch => {
 }
 
 export const NftList = (slug, setLoading) => async dispatch => {
-    
     const token = sessionStorage.getItem('authToken')
     // setLoading(true)
     try {
@@ -166,7 +170,7 @@ export const NftList = (slug, setLoading) => async dispatch => {
 
 
     } catch (e) {
-        
+
         dispatch(LogsAction(e))
         if (e?.response?.data.message) {
             swal('error', e.response.data.message, 'error')
@@ -174,7 +178,7 @@ export const NftList = (slug, setLoading) => async dispatch => {
         }
     }
 }
-export const uploadNFT = async (nft, dispatch,setLoading) => {
+export const uploadNFT = async (nft, dispatch, setLoading) => {
     try {
 
         // const [loading, setLoading] = useState()
@@ -202,13 +206,13 @@ export const uploadNFT = async (nft, dispatch,setLoading) => {
                 return {
                     success: true,
                     data: response.data
-                    
+
                 };
             },
-            // setLoading(false)
+                // setLoading(false)
             )
     } catch (error) {
-// setLoading(false)
+        // setLoading(false)
         dispatch(LogsAction(error))
         swal('error', error, 'error')
 
@@ -224,7 +228,7 @@ export const getPublicLiveProjects = createAsyncThunk(
 
     async (params, thunkAPI, setLatestData) => {
         if (params.location.pathname === "/all/LatestProjects") {
-        params.setLoading(true)
+            params.setLoading(true)
         }
         try {
             const { projectType } = params
@@ -250,7 +254,7 @@ export const getPublicLiveProjects = createAsyncThunk(
             // thunkAPI.dispatch(publicLiveProjectspagination({
             //     res: res,
 
-           // }));
+            // }));
             // setLatestData(res.data.data())
             // thunkAPI.dispatch(publicLiveProjects(res));
 
@@ -297,7 +301,7 @@ export const UpdateProject = (props, params) => async dispatch => {
     }
 }
 
-export const DeleteProject = (id,history) => async dispatch => {
+export const DeleteProject = (id, history) => async dispatch => {
     const token = sessionStorage.getItem('authToken')
     try {
         const config = {
@@ -312,7 +316,7 @@ export const DeleteProject = (id,history) => async dispatch => {
         // console.log(res.status, 'proj')
         // await dispatch(deleteProject(res));
         if (res.status == 200) {
-            
+
             swal({
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this project!",
@@ -322,23 +326,23 @@ export const DeleteProject = (id,history) => async dispatch => {
             })
                 .then((willDelete) => {
                     if (willDelete) {
-                       
+
                         swal("Poof! Your project has been deleted!", {
                             icon: "success",
                         }).then(function () {
                             window.location = '/projectlist';
-                            });
-                        
+                        });
+
                     } else {
                         swal("Your project is safe!");
                     }
                 });
-                // history.push('/projectlist')
-            
+            // history.push('/projectlist')
+
             // swal("success", res.data.message, 'success').then(function () {
             //     window.location = "/projectlist";
             // });
-            
+
 
         }
     } catch (e) {
@@ -391,7 +395,7 @@ export const GetCollectionsAction = () => async dispatch => {
         }
     }
 }
-export const CreateCollectionAction = ({ dat, imageBanner, props ,setLoading}) => async dispatch => {
+export const CreateCollectionAction = ({ dat, imageBanner, props, setLoading }) => async dispatch => {
     try {
         setLoading(true)
         const formData = new FormData()
@@ -532,8 +536,8 @@ export const GetSettings = () => async dispatch => {
     }
 }
 
-export const GetNftwol = ({ slug },refid) => async dispatch => {
-    
+export const GetNftwol = ({ slug }, refid) => async dispatch => {
+
     try {
         // const formData = new FormData()
         // formData.append('ref_id', refid?refid:'')
@@ -541,11 +545,11 @@ export const GetNftwol = ({ slug },refid) => async dispatch => {
 
         //     const reff = slug.reffid
         // }
-        let refId=(refid)?refid:'null';
+        let refId = (refid) ? refid : 'null';
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                
+
             },
             transformRequest: formData => formData
         }
@@ -807,7 +811,7 @@ export const GetbuyedNftDetails = (slug) => async dispatch => {
     }
 }
 
-export const ResellNft = (params, props,history) => async dispatch => {
+export const ResellNft = (params, props, history) => async dispatch => {
     try {
         const token = sessionStorage.getItem('authToken')
         const config = {
@@ -821,9 +825,9 @@ export const ResellNft = (params, props,history) => async dispatch => {
             params, config)
         // await dispatch(res())
         if (res?.status == 200) {
-            
+
             await dispatch(GetbuyedNftDetails(props.slug))
-            swal("success","Your NFT has been sent to resell","success")
+            swal("success", "Your NFT has been sent to resell", "success")
             props.onHide(false)
             // history.push(`/my/nfts-detail/${props.slug?.slug}`)
         }

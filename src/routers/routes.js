@@ -55,31 +55,31 @@ const MyRouts = () => {
           <Route exact path="/" component={ThemeOne} />
 
           <Route exact path="/explore-1" component={ExploreOne} />
-          <Route exact path="/projectlist" component={ExploreTwo} />
+          <PrivateRoute exact path="/projectlist" component={ExploreTwo} />
           <Route exact path="/create/organization" component={createOrganizationafterRoleChange} />
-          <Route exact path="/allnotifications" component={Notifi} />
-          <Route exact path="/updateproject/:id" component={ProjectUpdate} />
+          <PrivateRoute exact path="/allnotifications" component={Notifi} />
+          <PrivateRoute exact path="/updateproject/:id" component={ProjectUpdate} />
           <Route exact path="/explore-4" component={ExploreFour} />
           <Route exact path="/nft/resell/details/:slug" component={ResellDetail} />
-          <Route exact path="/my/nfts" component={BuyedNft} />
+          <PrivateRoute exact path="/my/nfts" component={BuyedNft} />
           <Route exact path="/my/nfts-detail/:slug" component={BuyNftDetail} />
           <Route exact path="/rewards" component={NftReward} />
           <Route exact path="/auctions" component={Auctions} />
           <Route exact path="/popularcollection/details/:slug" component={ItemDetails} />
           <Route exact path="/projects/:slug" component={latprojDetails} />
-          <Route exact path="/referrals-detail" component={AllReraltrans} />
+          <PrivateRoute exact path="/referrals-detail" component={AllReraltrans} />
           <Route exact path="/nftprojdetails/:slug" component={latnftprojDetails} />
           <Route exact path="/fundraiser/detail/:user_id" component={FundDetail} />
           <Route exact path="/myfundraiser/detail/:user_id" component={FundraiserProjects} />
-          <Route exact path="/projnftdetails/:slug" component={ProjNft} />
-          <Route exact path="/referral/widget/:slug" component={Widget} />
+          <PrivateRoute exact path="/projnftdetails/:slug" component={ProjNft} />
+          <PrivateRoute exact path="/referral/widget/:slug" component={Widget} />
           <Route exact path="/allfundraise" component={AllFundraiser} />
           <Route exact path="/all/fundraise/projects/:user_id" component={AllFundraiserProjects} />
-          <Route exact path="/nft/details/:id" component={Nft} />
-          <Route exact path="/nftedit/:id/:id" component={EditNft} />
-          <Route exact path="/addnft/:id" component={AddNFT} />
+          <PrivateRoute exact path="/nft/details/:id" component={Nft} />
+          <PrivateRoute exact path="/nftedit/:id/:id" component={EditNft} />
+          <PrivateRoute exact path="/addnft/:id" component={AddNFT} />
           <Route exact path="/help-center" component={HelpCenter} />
-          <Route exact path="/profile" component={Author} />
+          <PrivateRoute exact path="/profile" component={Author} />
           <Route exact path="/terms&conditions" component={TermsCond} />
           <Route exact path="/all/:type" component={All} />
           <Route exact path="/all/resll/nfts" component={AllResellNft} />

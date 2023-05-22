@@ -83,7 +83,7 @@ const Header = () => {
 
 
     useEffect(() => {
-        if(sessionStorage.getItem('authToken')){
+        if (sessionStorage.getItem('authToken')) {
 
             dispatch(GetUserAction())
         }
@@ -187,7 +187,6 @@ const Header = () => {
         const response = await ConnectWallet("BUYER", dispatch)
         const { res } = response
 
-        // 
         if (!res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data.role) {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)
@@ -196,7 +195,7 @@ const Header = () => {
         else if (res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data?.role) {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)
-            // history.push('/create')
+            history.push('/all/LatestProjects')
 
             swal({
                 title: "Welcome to Karmatica!!!",
@@ -429,15 +428,15 @@ const Header = () => {
                                     </li> */}
                                     <li> {userdet?.email}</li>
                                     <li><button type='button' class="dropdown-item"><Link to='/profile'><i class="fa-regular fa-user"></i> My Profile</Link></button></li>
-                                    {userRole == 2 && (
-                                        <li><button type='button' class="dropdown-item"><Link to='/my/nfts'><i class="fa-regular fa-file-image" style={{ color: 'white', display: "table-cell" }} /> My NFTs</Link></button></li>
-                                    )}
-                                    <li><button type='button' class="dropdown-item"><Link to='/referrals-detail'><i class="fa-solid fa-coins" style={{ color: 'white', display: "table-cell" }}></i>Referral Program</Link></button></li>
                                     {userRole == 3 && (
                                         <><li><button type='button' class="dropdown-item"><Link to='/projectlist'><i class="fa-regular fa-file" style={{ color: 'white', display: "table-cell" }}></i> My Projects</Link></button></li>
 
                                             <li><button type='button' class="dropdown-item"><Link to={`/fundraiser/detail/${userdet.user_id}`}><i class="fa-solid fa-hand-holding-heart" style={{ display: "table-cell", color: "white" }}></i> Fundraise</Link></button></li></>
                                     )}
+                                    {userRole == 2 && (
+                                        <li><button type='button' class="dropdown-item"><Link to='/my/nfts'><i class="fa-regular fa-file-image" style={{ color: 'white', display: "table-cell" }} /> My NFTs</Link></button></li>
+                                    )}
+                                    <li><button type='button' class="dropdown-item"><Link to='/referrals-detail'><i class="fa-solid fa-coins" style={{ color: 'white', display: "table-cell" }}></i>Referral Program</Link></button></li>
                                     {/* {userRole == 2 ? ( */}
 
 

@@ -206,11 +206,11 @@ const ExploreAll = () => {
           // </>
 
         ):(
-          <>
-          {liveProjects?.data?.length > 8 &&
+          // <>
+          // {liveProjects?.data?.length > 8 &&
         <div className="morebutton"><a onClick={(e) => handleDecrement(e)} className="btn btn-bordered-white">Load Previous</a></div>
-          }
-        </>
+          // }
+        // </>
         )}
       </div>
     </section>

@@ -250,7 +250,7 @@ export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from,
 
     )
   } catch (error) {
-    
+
     swal("error", "Please try again", "error")
     setModalShow(false)
     return error
@@ -468,138 +468,17 @@ export const updateReffid = async ({ tokenId, refid, nft_id, dispatch, setPaymen
     // console.log("error");
   }
 };
-// export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
-//   
-//   if (!isMetaMaskInstalled()) {
-//     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
-//   } else {
-
-//     try {
-//       // if (refid == null) {
-//       //   setReferalid("")
-
-//       // }
-
-//       let wallets = []
-//       let fee = []
-//       // web3.fromWei(web3.eth.getBalance
-//       // const bala = web3.fromWei(web3.eth.getBalance(window.ethereum?.selectedAddress))
-//       // console.log(bala, 'balance')
-//       // .then(console.log);
-//       wallets = (refid === "null" || refid === null) ?
-//         [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets] :
-//         [...wallets, ...flow[0]?.buyer_data?.map(x => x.walllets), flow[0]?.karmatica_fees[0]?.wallets, flow[0]?.project_data[0]?.wallets, refid]
-//       fee = (refid === "null" || refid === null) ?
-//         [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees] :
-//         [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees[0]?.fees, flow[0]?.project_data[0]?.fees, sessionStorage.getItem('refamount')]
-
-//       console.log(fee)
-//       console.log(wallets)
-
-
-//       const addressArray = await window.ethereum.request({
-//         method: "eth_requestAccounts",
-//       });
-
-//       const obj = {
-//         status: "👆🏽 Write a message in the text-field above.",
-//         address: addressArray[0],
-//       };
-
-//       const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
-
-
-//       // const nftContract = new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
-//       // const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
-
-//       // const amountToSendowner = ((`${ownerFee[0]}` / 100) * 0.03)
-
-//       const memory_clients = wallets.map(wal => {
-
-//         return (`${wal}`)
-//       })
-
-
-
-//       const memory_amounts = fee.map(amt => {
-//         const amountToSend = ((parseFloat(amt) / 100) * 0.03)
-//         return web3.utils.toWei(`${amountToSend}`, "ether")
-//       })
-
-//       const transferowner = {
-//         'from': window.ethereum?.selectedAddress,
-//         'to': contractAddress,
-//         // 'to': "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A",
-//         // 'value': web3.utils.toWei(`${values}`),
-//         'value': web3.utils.toWei('0.03', 'ether'),
-//         // 'input': nftContract.methods.buyNft(contractAddress, tokenId).encodeABI()
-//         'input': nftContract.methods.buyNft(contractAddress, tokenId, memory_clients, memory_amounts).encodeABI()
-//       };
-
-
-
-//       // const txHash = await web3.eth.sendTransaction(tx)
-
-//       // console.log('txhash', txHash)
-//       await web3.eth.sendTransaction(transferowner)
-//         .on('transactionHash', function (hash) {
-//           let txHash = hash
-//           // console.log('tx', txHash)
-
-//         })
-//         .on('receipt', function (receipt) {
-//           // console.log(receipt, 'recipt')
-//         })
-//         .on('confirmation', async (confNumber, receipt) => {
-//           if (confNumber == 1) {
-//             console.log(confNumber, 'counttrans')
-//             console.log(receipt, 'conf')
-//             // sessionStorage.setItem('txd_id', receipt.transactionHash)
-//             // sessionStorage.setItem('pay_to', receipt.receipt.to)
-//             UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: window.ethereum?.selectedAddress, tokenId, values })
-//             loadingg(false)
-//             swal("success", "Confirmed", 'success').then(function () {
-//               window.location = `/my/nfts`;
-//             });
-//           }
-//           // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
-//           // setModeShow(false)
-
-//           // modalShow(false)
-//         })
-//         .on('error', function (error) {
-
-//           dispatch(LogsAction(error))
-//           // console.log(error.message, "error")
-//           swal('error', JSON.stringify(error.message, 'error'))
-//           // alert(JSON.stringify(error.message))
-//           modal(false)
-//           loadingg(false)
-//         })
-//         .then(function (receipt) {
-//           // will be fired once the receipt is mined
-//         })
-//     } catch (error) {
-//       // dispatch(LogsAction(error))
-
-//       swal("error", JSON.stringify(error.message), "error")
-//       loadingg(false)
-//       // alert(JSON.stringify(error.message))
-
-//     }
-//   }
-// }
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
-
+debugger
   // const flow = JSON.parse(sessionStorage.getItem('paymentFlow') || "[]")
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
   } else {
-
-
-
+    if (!window.ethereum?.selectedAddress) {
+       ConnectWallet("BUYER")
+    }
     try {
 
       let wallets = []
@@ -611,7 +490,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
         [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees?.wallets, flow[0]?.project_data?.wallets, flow[0]?.referral_fees?.wallets]
       fee = (refid === "null" || refid === null) ?
         [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees?.fees, flow[0]?.project_data?.fees] :
-        [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.project_data?.fees, flow[0]?.referral_fees?.fees]
+        [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees?.fees, flow[0]?.project_data?.fees, flow[0]?.referral_fees?.fees]
       console.log(fee)
       console.log(wallets)
       const addressArray = await window.ethereum.request({
@@ -635,7 +514,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
 
 
       const tx = await nftContract.methods.buyNft(contractAddress, tokenId, memory_clients, memory_amounts)
-        .send({ from: window.ethereum?.selectedAddress, value: web3.utils.toWei('0.03', 'ether'), gasPrice: web3.utils.toHex(1000000), gasLimit: web3.utils.toHex(100000) })
+        .send({ from: window.ethereum?.selectedAddress, value: web3.utils.toWei('0.03', 'ether'), gasPrice: web3.utils.toHex(100000), gasLimit: web3.utils.toHex(100000) })
 
 
         .on('transactionHash', (hash) => {
@@ -647,60 +526,10 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
         .on('receipt', (receipt) => {
           console.log(receipt.contractAddress); // 0xf4cb...
         })
-
         .on('confirmation', (confNumber, receipt) => {
-
-          //   try{
-
-
-          //   const transaction = web3.eth.getTransaction(receipt.transactionHash);
-
-          //   if (!transaction) {
-          //     console.log('Transaction not found');
-          //     loadingg(false)
-          //     return;
-          //   }
-
-          //   if (transaction.blockNumber === null) {
-
-          //     const tLink = `<a href="https://polygonscan.com/tx/${receipt.transactionHash}" target="_blank">check your transaction status</a>`
-          //     console.log('Transaction is pending');
-          //     Swal.fire({
-          //       title: 'Transaction is pending, please wait for some-time',
-          //       icon: 'warning',
-          //       html: tLink,
-          //       // html: <a target="_blank"  href=`${https://polygonscan.com/address/${transactionHash}y}`> check your transaction status here</a>",
-          //       confirmButtonText: 'OK',
-          //     });
-          //     loadingg(false)
-          //     return 'pending';
-          //   } else {
-
-          //     const receipt =  web3.eth.getTransactionReceipt(receipt.transactionHash);
-          //     if (receipt && receipt.status) {
-          //       console.log('Transaction succeeded');
-          //       loadingg(false)
-          //       return 'succeeded';
-
-          //     } else {
+          debugger
 
 
-          //       console.log('Transaction failed or was reverted ,try again after some time');
-          //       Swal.fire({
-          //         title: 'Transaction failed or was reverted',
-          //         icon: 'warning',
-          //         html: 'Please try after some time',
-          //         // html: <a target="_blank"  href=`${https://polygonscan.com/address/${transactionHash}y}`> check your transaction status here</a>",
-          //         confirmButtonText: 'OK',
-          //       });
-          //       // swal('warning','Transaction failed or was reverted, try again after some time `${https://polygonscan.com/address/${transactionHash}}`','warning')
-          //       loadingg(false)
-          //       return 'failed';
-          //     }
-          //   }
-          // }catch(error){
-          //   console.log('error', error)
-          // }
           if (confNumber == 1) {
 
             // checkTransactionStatus(receipt.transactionHash)

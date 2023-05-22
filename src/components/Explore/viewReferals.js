@@ -14,10 +14,12 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import { NftList } from '../../redux/Actions/projectAction';
 import dayjs from 'dayjs';
 import WidgetPopup from './widgetPopup';
+import { set } from 'react-hook-form';
 const RefralTransdataTable = (props) => {
     const dispatch = useDispatch()
     const [projSlug, setProjSlug] = useState(" ")
     const [nftSlug, setNftslug] = useState(" ")
+    const [nftData, setNftdata] = useState()
     console.log('nftSlug', nftSlug)
     const { Panel } = Collapse;
     console.log('projSlug', projSlug)
@@ -31,29 +33,51 @@ const RefralTransdataTable = (props) => {
         setExpandIconPosition(newExpandIconPosition);
     };
     const nftdetail = useSelector(state => {
-
         return state.projectdetails.nftlist
     })
 
     const userdet = useSelector(state => {
+        
         return state?.user?.userdetail
     })
-
+console.log('nftdetail', nftdetail)
     const projects = useSelector(state => {
-        return state.projectdetails.projects
+        return state?.projectdetails?.projects
     })
-
+    console.log('projects', projects)
     console.log(projects, 'projects')
     const HandleProj = (e) => {
         setProjSlug(e?.currentTarget?.value)
-        setNftslug('')
+        // if (projSlug != " ") {
+            dispatch(ProjectDetail(e?.currentTarget?.value))
+            setNftslug(" ")
+        // }
+        if (nftSlug != " ") {
+
+            dispatch(NftList(nftSlug))
+        }
     }
+    // const HandleNFT = (e) => {
+    //     // setProjSlug(e?.currentTarget?.value)
+    //     // if (projSlug != " ") {
+    //         {projects?.data?.nft_data?.map((key)=>{
 
+    //             set
+    //         })}
+    //         // setNftslug(" ")
+    //     // }
+    //     if (nftSlug != " ") {
 
+    //         dispatch(NftList(nftSlug))
+    //     }
+    // }
+
+    const count = 1
     useEffect(() => {
-        dispatch(ProjectList())
+        dispatch(ProjectList({ location, count: count }))
     }, [dispatch])
 
+    const location = useLocation()
     useEffect(() => {
         dispatch(GetUserAction())
     }, [props.id])
@@ -62,18 +86,17 @@ const RefralTransdataTable = (props) => {
         return state?.projectdetails?.projectdetails
     })
 
-    useEffect(() => {
-        if (projSlug) {
-            dispatch(ProjectDetail(projSlug))
-        }
-        if (nftSlug) {
+    // useEffect(() => {
+    //     if (projSlug != " ") {
+    //         dispatch(ProjectDetail(projSlug))
+    //     }
+    //     if (nftSlug != " ") {
 
-            dispatch(NftList(nftSlug))
-        }
-    }, [projSlug, nftSlug])
+    //         dispatch(NftList(nftSlug))
+    //     }
+    // }, [projSlug, nftSlug])
 
     console.log('projdetail', projdetail)
-    const location = useLocation()
 
     return (
         <footer className="item-details-area referal-detail">
@@ -137,7 +160,7 @@ const RefralTransdataTable = (props) => {
                                                     return (
                                                         <><tr className='contract-address'>
                                                             <td ><Link to={`/nftprojdetails/${items.slug}`} >{items.title?.slice(0, 20)}</Link>...</td>
-                                                            <td>#{items.token_id?.slice(0,2)}</td>
+                                                            <td>#{items.token_id?.slice(0, 2)}</td>
                                                             <td>{items.price}</td>
                                                             {/* <td>{items.referral_amount} </td> */}
                                                             <td className='referal'>{items.referral_amount} <img src='../../img/image14.png' /></td>
@@ -171,7 +194,7 @@ const RefralTransdataTable = (props) => {
                                     >
                                         <option value="" disabled selected style={{ color: "#495057" }}>Select project </option>
 
-                                        {projects?.map((option, key) => (
+                                        {projects?.data?.map((option, key) => (
                                             <option key={key.slug} value={option.slug}  >
                                                 {option.title}
                                             </option>
@@ -183,7 +206,7 @@ const RefralTransdataTable = (props) => {
                             <div className="col-12 mt-4">
                                 <div className='nfts_main' id='invest'>
                                     <div className='intro row m-0 p-0'>
-                                        {projSlug &&
+                                        {projSlug !== " " &&
 
                                             <div className="intro-content">
                                                 <span >NFTs</span>
@@ -231,7 +254,7 @@ const RefralTransdataTable = (props) => {
                                                                 // </Link>
                                                             )}
                                                             <div className='token'>
-                                                                <span>#{x?.token_id?.slice(0,2)}</span>
+                                                                <span>#{x?.token_id?.slice(0, 2)}</span>
                                                                 <span className='cards-icons'>
                                                                     {/* {x.is_mint == 0 && */}
                                                                     {/* // <Link to={`/nft/details/${x.slug}?project=${slug}`} ><i className="fa-solid fa-pen" /></Link> */}
@@ -248,16 +271,16 @@ const RefralTransdataTable = (props) => {
                                                                     <h5 className="m-0 pb-2 p-0 text-capitalize">{x.title.slice(0, 16)}...</h5>
                                                                 </a> */}
                                                                 <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">
-                                                                    Project Name:<span>{nftdetail?.project_name?.slice(0, 12)}..</span>
+                                                                    Project Name:<span>{x?.project_name?.slice(0, 12)}..</span>
                                                                 </div>
                                                                 <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">
-                                                                    NFT Name :<span>{nftdetail.title?.slice(0, 12)}..</span>
+                                                                    NFT Name :<span>{x?.title?.slice(0, 12)}..</span>
                                                                 </div>
                                                                 <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">
-                                                                    NFT Price :<span> {nftdetail.price} (MATIC)</span>
+                                                                    NFT Price :<span> {x?.price} (MATIC)</span>
                                                                 </div>
                                                                 <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">
-                                                                    NFT End-Date :<span>{dayjs(nftdetail.end_date).format("DD MMM YYYY")}</span>
+                                                                    NFT End-Date :<span>{dayjs(x?.end_date).format("DD MMM YYYY")}</span>
                                                                 </div>
 
 
