@@ -25,6 +25,7 @@ const Header = () => {
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false)
     const [api, contextHolder] = notification.useNotification();
+    const search = useLocation().search;
     console.log("api", api)
     const LogoutHandler = () => {
         dispatch(logoutSuccess())
@@ -184,18 +185,38 @@ const Header = () => {
         setActiveOption(!activeOption)
     }
     const WalletHandler = async () => {
+        const currentLocation = window.location.pathname;
+        console.log('currentLocation', currentLocation)
+        
+        const refid = new URLSearchParams(search).get('refid');
+        console.log(refid, 'refid')
         const response = await ConnectWallet("BUYER", dispatch)
         const { res } = response
 
+        
         if (!res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data.role) {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)
-            history.push('/all/LatestProjects')
+            {refid &&
+                sessionStorage.setItem('authToken',res?.data?.data?.auth_token)
+            }
+            {refid ? (
+                history.push(currentLocation + '?refid=' + refid)
+
+
+            ):(
+                history.push('/all/LatestProjects')     
+            )}
         }
         else if (res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data?.role) {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)
-            history.push('/all/LatestProjects')
+            {refid ? (
+                history.push(currentLocation + '?refid=' + refid)
+
+            ):(
+                history.push('/all/LatestProjects')     
+            )}
 
             swal({
                 title: "Welcome to Karmatica!!!",

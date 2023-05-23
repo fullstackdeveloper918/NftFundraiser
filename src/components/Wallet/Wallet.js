@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loginSuccess } from '../../redux/Slices/authSlice';
 import { useEffect } from 'react';
 import { GetUserAction } from '../../redux/Actions/authAction';
+import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const data = {
     "preHeading": "Wallet Connect",
@@ -33,6 +34,8 @@ const Wallet = () => {
     //         dispatch(GetUserAction())
     //     // }
     // })
+  
+   
     const handleConnect = async () => {
         const res = await ConnectWallet("CREATOR", dispatch)
         if (res?.res?.response?.status === 401) {

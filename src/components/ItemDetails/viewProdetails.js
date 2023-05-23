@@ -57,6 +57,10 @@ const ProjDetails = () => {
 
             dispatch(GetUserAction())
         }
+        // if(refid){
+        //     swal("info","Please check your metamask wallet for ","info")
+
+        // }
 
     }, [slug])
 

@@ -72,7 +72,7 @@ const MyRouts = () => {
           <Route exact path="/fundraiser/detail/:user_id" component={FundDetail} />
           <Route exact path="/myfundraiser/detail/:user_id" component={FundraiserProjects} />
           <PrivateRoute exact path="/projnftdetails/:slug" component={ProjNft} />
-          <PrivateRoute exact path="/referral/widget/:slug" component={Widget} />
+          <Route exact path="/referral/widget/:slug" component={Widget} />
           <Route exact path="/allfundraise" component={AllFundraiser} />
           <Route exact path="/all/fundraise/projects/:user_id" component={AllFundraiserProjects} />
           <PrivateRoute exact path="/nft/details/:id" component={Nft} />

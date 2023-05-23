@@ -123,11 +123,12 @@ export const ConnectWallet = async (role, dispatch) => {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
   } else {
-
+    // debugger
     if (window.ethereum) {
       try {
         const addressArray = await window.ethereum.request({
-          method: "eth_requestAccounts",
+          method: "wallet_requestPermissions",
+          params: [{ eth_accounts: {} }],
         });
 
         await window.ethereum.request({
@@ -367,7 +368,7 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading
         }
       })
       .on('error', function (error) {
-        swal("error", "Transaction cancelled", "error")
+        swal("error", "Transaction cancelled ", "Please retry")
         setModalShow(false)
       })
 
@@ -393,6 +394,7 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading
 }
 
 const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to, tokenId, values) => {
+  debugger
   const token = sessionStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -405,6 +407,7 @@ const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to,
     formData.append('pay_to', nft_id.pay_to);
     formData.append('token_id', nft_id.tokenId);
     formData.append('ref_id', nft_id.refid);
+    formData.append('ref_amount', nft_id.ref_amount);
     formData.append('status', '1');
 
 
@@ -471,13 +474,13 @@ export const updateReffid = async ({ tokenId, refid, nft_id, dispatch, setPaymen
 
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
-debugger
+  debugger
   // const flow = JSON.parse(sessionStorage.getItem('paymentFlow') || "[]")
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
   } else {
     if (!window.ethereum?.selectedAddress) {
-       ConnectWallet("BUYER")
+      ConnectWallet("BUYER")
     }
     try {
 
@@ -485,10 +488,10 @@ debugger
       let fee = []
 
 
-      wallets = (refid === "null" || refid === null) ?
+      wallets = (flow[0]?.referral_fees?.wallets === null) ?
         [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees?.wallets, flow[0]?.project_data?.wallets] :
         [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees?.wallets, flow[0]?.project_data?.wallets, flow[0]?.referral_fees?.wallets]
-      fee = (refid === "null" || refid === null) ?
+      fee = (flow[0]?.referral_fees?.wallets === null) ?
         [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees?.fees, flow[0]?.project_data?.fees] :
         [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees?.fees, flow[0]?.project_data?.fees, flow[0]?.referral_fees?.fees]
       console.log(fee)
@@ -506,19 +509,26 @@ debugger
       const memory_clients = wallets.map(wal => {
         return (`${wal}`)
       })
-
+      console.log('memory_clients', memory_clients)
       const memory_amounts = fee.map(amt => {
         const amountToSend = ((parseFloat(amt) / 100) * 0.03)
+        console.log('amountToSend', amountToSend)
         return web3.utils.toWei(`${amountToSend}`, "ether")
+
+      })
+      const referal_amount = fee.map(amt => {
+        return ((parseFloat(amt) / 100) * 0.03)
+        // return web3.utils.toWei(`${amountToSend}`, "ether")
+
       })
 
-
+      console.log('referal_amount', referal_amount)
       const tx = await nftContract.methods.buyNft(contractAddress, tokenId, memory_clients, memory_amounts)
-        .send({ from: window.ethereum?.selectedAddress, value: web3.utils.toWei('0.03', 'ether'), gasPrice: web3.utils.toHex(100000), gasLimit: web3.utils.toHex(100000) })
+        .send({ from: window.ethereum?.selectedAddress, value: web3.utils.toWei('0.03', 'ether'), gasPrice: web3.utils.toHex(10000000), gasLimit: web3.utils.toHex(1000000) })
 
 
         .on('transactionHash', (hash) => {
-
+          debugger
           sessionStorage.setItem('transactionHash', hash)
 
 
@@ -536,7 +546,7 @@ debugger
             console.log(confNumber, 'counttrans')
             console.log(receipt, 'conf')
 
-            UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: window.ethereum?.selectedAddress, tokenId, values })
+            UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: window.ethereum?.selectedAddress, tokenId, values ,ref_amount:flow[0]?.referral_fees?.wallets !== null ? referal_amount[2]: 0})
             loadingg(false)
             swal("success", "Confirmed", 'success').then(function () {
               window.location = `/my/nfts`;

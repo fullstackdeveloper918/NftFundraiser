@@ -37,10 +37,12 @@ const RefralTransdataTable = (props) => {
     })
 
     const userdet = useSelector(state => {
-        
+
         return state?.user?.userdetail
     })
-console.log('nftdetail', nftdetail)
+    const refid = userdet.wallet_id
+    console.log('refid', refid)
+    console.log('userdet', userdet)
     const projects = useSelector(state => {
         return state?.projectdetails?.projects
     })
@@ -49,8 +51,8 @@ console.log('nftdetail', nftdetail)
     const HandleProj = (e) => {
         setProjSlug(e?.currentTarget?.value)
         // if (projSlug != " ") {
-            dispatch(ProjectDetail(e?.currentTarget?.value))
-            setNftslug(" ")
+        dispatch(ProjectDetail(e?.currentTarget?.value))
+        setNftslug(" ")
         // }
         if (nftSlug != " ") {
 
@@ -224,12 +226,12 @@ console.log('nftdetail', nftdetail)
                                  title="Inline Frame Example"
                                  width="100%"
                                  height="auto"
-                                 src='https://app.karmatica.io/referral/widget/${x.slug}'>
+                                 src='https://app.karmatica.io/referral/widget/${x.slug}/?refid=${refid}'>
                              </iframe>`
                                             return (
 
                                                 <><div key={`eds_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item ">
-                                                    <div className="card no-hover m-0" onClick={() => setNftslug(x.slug)}>
+                                                    <div className="card no-hover m-0" onClick={() => { setNftslug(x.slug); setWidgetModalShow(true) }} style={{cursor:'pointer'}}>
 
                                                         <div className="image-over relative">
                                                             {x.user_id == projdetail.user_id ? (
@@ -288,16 +290,16 @@ console.log('nftdetail', nftdetail)
                                                         </div>
 
                                                         <i className="fa-sharp fa-solid fa-copy" onClick={() => setWidgetModalShow(true)}></i>
-                                                        <WidgetPopup
-                                                            data={iFrame}
-                                                            show={widgetModalShow}
-                                                            onHide={() => setWidgetModalShow(false)}
-                                                        />
+                                                       
 
                                                     </div>
 
                                                 </div>
-
+                                                <WidgetPopup
+                                                data={iFrame}
+                                                show={widgetModalShow}
+                                                onHide={() => setWidgetModalShow(false)}
+                                            />
                                                 </>
                                             );
                                         })}
