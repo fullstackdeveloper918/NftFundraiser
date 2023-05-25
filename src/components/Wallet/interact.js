@@ -123,7 +123,7 @@ export const ConnectWallet = async (role, dispatch) => {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
 
   } else {
-    // debugger
+    // 
     if (window.ethereum) {
       try {
         const addressArray = await window.ethereum.request({
@@ -368,7 +368,7 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading
         }
       })
       .on('error', function (error) {
-        swal("error", "Transaction cancelled ", "Please retry")
+        swal("error", "Metamask is busy, please retry ", "error")
         setModalShow(false)
       })
 
@@ -394,7 +394,7 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading
 }
 
 const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to, tokenId, values) => {
-  debugger
+  
   const token = sessionStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -474,7 +474,7 @@ export const updateReffid = async ({ tokenId, refid, nft_id, dispatch, setPaymen
 
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
-  debugger
+  
   // const flow = JSON.parse(sessionStorage.getItem('paymentFlow') || "[]")
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
@@ -528,7 +528,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
 
 
         .on('transactionHash', (hash) => {
-          debugger
+          
           sessionStorage.setItem('transactionHash', hash)
 
 
@@ -537,7 +537,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
           console.log(receipt.contractAddress); // 0xf4cb...
         })
         .on('confirmation', (confNumber, receipt) => {
-          debugger
+          
 
 
           if (confNumber == 1) {

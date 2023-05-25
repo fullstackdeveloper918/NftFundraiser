@@ -60,7 +60,7 @@ const ProjNftDetails = () => {
 
                     >
                         <Alert
-                            message="Change you project from single to campaign to add more NFTs"
+                            message="Click here to change you project from single NFT to a campaign of multiple NFTs"
                             type="info"
                             showIcon
                             action={
@@ -273,10 +273,10 @@ const ProjNftDetails = () => {
                                                 {/* Card Body */}
                                                 <div className="card-body">
                                                     <a href="#" className="d-flex justify-content-between align-items-center">
-                                                        <h5 className="m-0 pb-2 p-0 text-capitalize">{x.title.slice(0, 16)}...</h5>
+                                                        <h5 className="m-0 pb-2 p-0 text-capitalize">{x.title.slice(0, 22)}...</h5>
                                                     </a>
                                                     <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">
-                                                        <span className='align-self-start' dangerouslySetInnerHTML={{ __html: x.description.slice(0, 45) }} />
+                                                        <span className='align-self-start' dangerouslySetInnerHTML={{ __html: x.description.slice(0, 65) }} />
                                                     </div>
                                                     <div className='mint d-flex justify-content-between button_group buy-invest-btn align-items-center nft-price' >
                                                         {x.is_mint == 0 ? (

@@ -269,7 +269,6 @@ export const getPublicLiveProjects = createAsyncThunk(
     })
 
 export const UpdateProject = (props, params) => async dispatch => {
-    // 
     const token = sessionStorage.getItem('authToken')
     try {
         const config = {
@@ -285,7 +284,8 @@ export const UpdateProject = (props, params) => async dispatch => {
         // console.log(res, 'proj')
         await dispatch(getProjectDetail(res));
         if (res.status === 200) {
-            swal("success", res.data.message, 'success')
+            
+            swal({ title: "success", text: res.data.message, icon: 'success', buttons: false, timer: 1500 })
             dispatch(ProjectDetail(props.id))
             // .then(function () {
             // window.location = `/ projnftdetails / ${ props }`;
@@ -606,8 +606,8 @@ export const UpdateBanner = (formData, props) => async dispatch => {
         await dispatch(updatebanner(res));
 
         if (res.status === 200) {
-
-            swal("success", "updated", 'success').then(function () {
+            
+            swal({ title: "success", text: 'Project details updated', icon: 'success', buttons: false, timer: 1500 }).then(function () {
                 dispatch(ProjectDetail(props.id))
                 dispatch(LatestProjectDetail(props.id))
 
@@ -641,7 +641,7 @@ export const UpdateNft = (formData, props, setLoading) => async dispatch => {
         await dispatch(nftUpd(res));
 
         if (res.status === 200) {
-            swal("success", "updated", 'success')
+            swal({ title: "success", text: 'NFT details updated', icon: 'success', buttons: false, timer: 1500 })
             setLoading(false)
             dispatch(NftList(props.nft_id?.id))
             dispatch(ProjectDetail(props.id))
@@ -678,7 +678,7 @@ export const AddNftAction = (formData, projid, slug, setLoading, history) => asy
 
         if (res.status === 200) {
             setLoading(false)
-            swal("success", "updated", 'success')
+            swal({ title: "success", text: 'NFT added ', icon: 'success', buttons: false, timer: 1500 })
             history.push(`/projnftdetails/${slug.id}`)
             // .then(function () {
             // dispatch(ProjectDetail(props.id))
@@ -757,7 +757,7 @@ export const UpdateBId = ({ id, status, setLoading, slug }) => async dispatch =>
         if (res.status == 200) {
             setLoading(false)
             await dispatch(NftList(slug))
-            swal("success", "success", "success")
+            swal({ title: "success", text: 'success', icon: 'success', buttons: false, timer: 1500 })
         }
         console.log('res bid', res)
     } catch (e) {
@@ -827,7 +827,8 @@ export const ResellNft = (params, props, history) => async dispatch => {
         if (res?.status == 200) {
 
             await dispatch(GetbuyedNftDetails(props.slug))
-            swal("success", "Your NFT has been sent to resell", "success")
+            
+            swal({ title: "success", text: "Your NFT has been sent to resell", icon: 'success', buttons: false, timer: 1500 })
             props.onHide(false)
             // history.push(`/my/nfts-detail/${props.slug?.slug}`)
         }

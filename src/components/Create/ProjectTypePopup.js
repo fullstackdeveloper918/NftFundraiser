@@ -68,7 +68,6 @@ function ProTypePopup(props) {
         }
     }, [projdetail]);
     const OnSubmit = (data) => {
-        // 
         if (location.pathname === '/create') {
 
             props.startdate(data.start_date)
@@ -87,15 +86,11 @@ function ProTypePopup(props) {
             formData.append('address', data.address)
             formData.append('price', data.price)
             formData.append('number_of_nft', data.number_of_nft)
-            if (data?.type == 1) {
+            
 
-                formData.append('start_date', '')
-                formData.append('end_date', '')
-            } else {
+            formData.append('start_date', data.start_date)
+            formData.append('end_date', data.end_date)
 
-                formData.append('start_date', data.start_date)
-                formData.append('end_date', data.end_date)
-            }
             formData.append('type', '2')
             formData.append('category_id', data.category_id)
 

@@ -71,7 +71,7 @@ const AuctionsOne = ({ type }) => {
                     <div className="card-caption col-12 p-0">
                       <div className="card-body">
                         {/* <a> */}
-                        <h5 className="mb-0">{item.title.slice(0, 16)}</h5>
+                        <h5 className="mb-0">{item.title.slice(0, 34)}...</h5>
                         {/* </a> */}
                         <div
                           className="seller d-flex align-items-center my-3"
