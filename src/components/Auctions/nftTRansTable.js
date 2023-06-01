@@ -2,18 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Collapse } from 'antd';
 import { GetNftwol } from '../../redux/Actions/projectAction';
-import { useLocation, useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
+
 const NftTransdataTable = (props) => {
+
+
     const dispatch = useDispatch()
     const { Panel } = Collapse;
     const onChange = (key) => {
-        console.log(key);
     };
-
-
-
-    const { id } = useParams()
     const [expandIconPosition, setExpandIconPosition] = useState('end');
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
@@ -21,11 +18,12 @@ const NftTransdataTable = (props) => {
     const latprojnftdetail = useSelector(state => {
         return state?.projectdetails?.getnftwoldetails
     })
-    console.log('lattt', latprojnftdetail)
+
     useEffect(() => {
         dispatch(GetNftwol(props.id))
     }, [props.id])
-    const location = useLocation()
+
+
     return (
         <div className='position-relative'>
             <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
@@ -56,7 +54,7 @@ const NftTransdataTable = (props) => {
                                         <td className='referal'>{items.price}<img src='../../../img/image14.png' /></td>
                                         <td>{items.pay_from?.slice(0, 4)}...{items.pay_from.slice(35, 44)}</td>
                                         <td>{items.pay_to?.slice(0, 4)}...{items.pay_to.slice(35, 44)}</td>
-                                        <td>#{items.token_id?.slice(0,2)}</td>
+                                        <td>#{items.token_id?.slice(0, 2)}</td>
                                         <td><a target="_blank" href={`https://polygonscan.com/tx/${items?.txd_id}`} >{items.txd_id.slice(0, 4)}...{items.txd_id.slice(35, 44)}</a></td>
                                     </tr>
                                 )

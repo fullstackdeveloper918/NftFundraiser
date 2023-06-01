@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AuthorProfile from '../AuthorProfile/AuthorProfile';
-import Explore from '../Explore/ExploreSix';
 
 class Author extends Component {
     render() {

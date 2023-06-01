@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
-import { Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { GetCollectionsAction } from '../../redux/Actions/projectAction'
+
 const ShowCollections = () => {
     const dispatch = useDispatch()
     const col = useSelector(state => {
-        // 
         return state?.projectdetails?.getcollections
     })
+
     useEffect(() => {
         dispatch(GetCollectionsAction())
     }, [])
+
     return (
         <section className="explore-area">
             <div className="container">

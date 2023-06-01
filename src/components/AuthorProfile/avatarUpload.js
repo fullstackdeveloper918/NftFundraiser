@@ -1,21 +1,23 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { UpdateBanner } from '../../redux/Actions/projectAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import UploadImage from '../../shared/Upload'
 import { dataURLtoBlob } from '../../utils/blobfromurl'
 import { GetUserAction, UpdateProfileAction } from '../../redux/Actions/authAction';
+
 function AvatarUpload(props) {
+
     const [imageSrc, setImageSrc] = useState('');
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
-    console.log(userdet.avatar)
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(GetUserAction())
     }, [])
+
     const submit = () => {
         const formData = new FormData()
         const avatar = dataURLtoBlob(imageSrc)
@@ -23,6 +25,7 @@ function AvatarUpload(props) {
         formData.append('username', userdet.username)
         dispatch(UpdateProfileAction(formData, props))
     }
+
     return (
         <Modal
             {...props}

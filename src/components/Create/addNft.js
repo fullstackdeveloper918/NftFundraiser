@@ -1,14 +1,12 @@
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Modal, Upload } from 'antd';
+import { Button, Form, Input } from 'antd';
 import React, { Fragment, useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddNftAction, CreateProjectAction, GetCollectionsAction, uploadNFT } from '../../redux/Actions/projectAction';
+import { AddNftAction, GetCollectionsAction, uploadNFT } from '../../redux/Actions/projectAction';
 import MyVerticallyCenteredModal from './createCollection';
 import styles from './styles/styles.module.scss'
 import 'antd/lib/form/style/css';
 import 'antd/lib/upload/style/css';
-import { Collapse } from 'antd';
 import 'antd/lib/modal/style/css';
 import 'antd/lib/button/style/css'
 import swal from 'sweetalert';
@@ -16,21 +14,9 @@ import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
 import { useHistory, useLocation, useParams } from 'react-router';
 import DModal from './3dModal';
-const getBase64 = (file) =>
-    new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
-    });
-// import ImgCrop from 'antd-img-crop';
+
 const AddNft = ({ current, prev }) => {
     const editor = useRef(null);
-    const [previewOpen, setPreviewOpen] = useState(false);
-    const [previewImage, setPreviewImage] = useState('');
-    const [previewTitle, setPreviewTitle] = useState('');
-    const [count, setCount] = useState(0);
-
     const [nft, setNft] = useState([])
     const [size, setSize] = useState()
     const [nftwidth, setNftwidth] = useState()
@@ -47,12 +33,8 @@ const AddNft = ({ current, prev }) => {
     const [loading, setLoading] = useState(false)
     const search = useLocation().search;
     const projid = new URLSearchParams(search).get('projectid');
-    const handleIncrement = () => {
-        setCount(prevCount => prevCount + 1);
-    };
-    const handleDecrement = () => {
-        setCount(prevCount => prevCount - 1);
-    };
+    const slug = useParams()
+
     function onHandleClick(index, item) {
         setNft_collection_id(previ => {
             previ[index] = item
@@ -62,29 +44,23 @@ const AddNft = ({ current, prev }) => {
         }
         );
     };
-    const slug = useParams()
 
     const defaultValues = {
         setNft_description: '',
     }
 
-    const { register, handleSubmit, formState: { errors }, watch, control, setValue } = useForm({
+    const { register, formState: { errors } } = useForm({
         mode: 'all',
         defaultValues
     });
-    useEffect(() => {
-        register("nft_description");
-    }, [register]);
 
-    const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
-const history = useHistory()
+    const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
+    const history = useHistory()
     const dispatch = useDispatch()
     const col = useSelector(state => {
         return state?.projectdetails?.getcollections
     })
-    const imaeg = useSelector(state => {
-        return state?.projectdetails?.nftres
-    })
+
     const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
@@ -97,6 +73,7 @@ const history = useHistory()
             };
         });
     };
+
     const previewChange = async (e, index) => {
         const pimage = e.target.files[0]
         const base64 = await convertToBase64(pimage);
@@ -106,11 +83,10 @@ const history = useHistory()
             return [...prevState]
         })
     };
+
     const handleUpload = (e, index) => {
         const filetype = e.target.files[0].type
         setNFtExtension(filetype)
-        // 
-        // setNft(e.target.files[0])
         setNft(previ => {
             previ[index] = e.target.files[0]
             return [
@@ -165,30 +141,21 @@ const history = useHistory()
         }
 
     }
-    // console.log('col', col)
-    const lat = sessionStorage.getItem('latitude')
-    // console.log(lat, 'lattt')
-    const log = sessionStorage.getItem('longitude')
 
     useEffect(() => {
         dispatch(GetCollectionsAction())
-    }, []);
+        register("nft_description");
+    }, [register]);
+
     const onFinish = async (values) => {
         try {
             setLoading(true)
-            // const nftImagepromises = values?.nfts?.map(x => uploadNFT(nft))
             const imagesRes = await uploadNFT(nft, dispatch)
-            // 
-            // const addedImage = imagesRes?.data?.data.map(x => ipfsBaseUrl + x?.image_hash)
             const addedImage = ipfsBaseUrl + imagesRes.data.data[0].image_hash
-            // 
             var str = addedImage;
             var check = str.includes("https://ipfs.io/ipfs/undefined");
             const formData = new FormData()
             if (check === false) {
-                // for (let i = 0; i < addedImage.length; i++) {
-                //     formData.append("image", (addedImage[i]));
-                // }
                 formData.append('image', addedImage)
                 formData.append('title', values?.nfts?.map(x =>
                     x.nft_name
@@ -197,51 +164,19 @@ const history = useHistory()
                 formData.append('description', values?.nfts?.map(x => x.nft_description))
                 formData.append('preview_imag', Pimage)
                 formData.append('extention', sourceType)
-                dispatch(AddNftAction(formData, projid, slug, setLoading,history))
+                dispatch(AddNftAction(formData, projid, slug, setLoading, history))
             } else {
-                console.log('fail')
                 setLoading(false)
                 swal('error!', 'Nft not uploaded', 'error')
             }
         } catch (error) {
             setLoading(false)
             swal('error!', 'Nft not uploaded', 'error')
-            console.log(error, 'error')
-        }
-    };
-    const handleCancel = () => setPreviewOpen(false);
-    const handlePreview = async (file) => {
-        if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj);
-        }
-        setPreviewImage(file.url || file.preview);
-        setPreviewOpen(true);
-        setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
-    };
-    const fileProps = {
-        name: "file",
-        multiple: false,
-        beforeUpload: () => {
-            return false;
-        },
-        onChange(info) {
-            if (info.file.status !== "uploading") {
-                let reader = new FileReader();
-                reader.readAsDataURL(info.file);
-            }
         }
     };
 
     const [form] = Form.useForm()
 
-    const { Panel } = Collapse;
-    const [expandIconPosition, setExpandIconPosition] = useState('end');
-    const onPositionChange = (newExpandIconPosition) => {
-        setExpandIconPosition(newExpandIconPosition);
-    };
-    const onChange = (key) => {
-        console.log(key);
-    };
     const nfts = [
         {
             key: 0,
@@ -249,6 +184,7 @@ const history = useHistory()
             amount: 1000
         },
     ];
+
     return (
         <section className="author-area">
             <div className="container mt-3">
@@ -277,23 +213,7 @@ const history = useHistory()
                                                 <Form.List name="nfts">
                                                     {(fields, { add, remove }) => (
                                                         <>
-                                                            <Button className="previous_btn" onClick={() => prev()}>
-                                                                <svg
-                                                                    width="16px"
-                                                                    height="16px"
-                                                                    viewBox="0 0 24 24"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        fill="none"
-                                                                        stroke="#fff"
-                                                                        stroke-width="2"
-                                                                        d="M2,12 L22,12 M13,3 L22,12 L13,21"
-                                                                        transform="matrix(-1 0 0 1 24 0)"
-                                                                    />
-                                                                </svg>
-                                                                Previous
-                                                            </Button>
+                                                           
                                                             <>
                                                                 {fields.map(({ key, name, ...restField }, index) => (
                                                                     <Fragment>
@@ -361,14 +281,7 @@ const history = useHistory()
                                                                                         )}
                                                                                 </div>
                                                                             </div>
-                                                                            <div className="col-md-1 col-12 nft-remove">
-                                                                                <MinusCircleOutlined
-                                                                                    onClick={(e) => {
-                                                                                        remove(name);
-                                                                                        handleDecrement(e);
-                                                                                    }}
-                                                                                />
-                                                                            </div>
+
                                                                             {/* </div> */}
                                                                             <div className="col-12">
                                                                                 <label className="mt-2 mb-3">

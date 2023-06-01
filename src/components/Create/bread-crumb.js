@@ -1,19 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { ProjectDetail } from '../../redux/Actions/projectAction';
+
 const CollItem = () => {
+
     const { id } = useParams();
     const dispatch = useDispatch()
     const projdetail = useSelector(state => {
-        // 
         return state?.projectdetails?.projectdetails
     })
+
     useEffect(() => {
-        // 
         dispatch(ProjectDetail(id))
     }, [id])
+
     return (
         <div>
             <div className="row justify-content-center text-center mt-5 mt-lg-0">

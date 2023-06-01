@@ -35,7 +35,7 @@ const EditNftDesc = (props) => {
     const defaultValues = {
         setNft_description: '',
     }
-    const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
+    const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(GetCollectionsAction())
@@ -127,7 +127,7 @@ const EditNftDesc = (props) => {
                 const imagesRes = await Promise.all(nftImagepromises).then(res => res)
                 const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
                 var str = addedImage;
-                var check = str.includes("https://ipfs.io/ipfs/undefined");
+                var check = str.includes("https://ipfs.karmatica.io/ipfs/undefined");
                 if (check === false) {
                     const formData = new FormData()
                     formData.append('image', addedImage)

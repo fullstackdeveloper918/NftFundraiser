@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Collapse } from 'antd';
-import { useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
+
 const UserdataTable = (props) => {
-    const dispatch = useDispatch()
+
     const { Panel } = Collapse;
     const onChange = (key) => {
-        console.log(key);
     };
-    const { id } = useParams()
     const [expandIconPosition, setExpandIconPosition] = useState('end');
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
@@ -17,6 +15,7 @@ const UserdataTable = (props) => {
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
+
     return (
         <div>
             <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>

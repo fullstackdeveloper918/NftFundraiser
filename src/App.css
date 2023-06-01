@@ -3253,3 +3253,43 @@ a.auctionbttn {
     max-width: fit-content;
     margin: 0px auto;
 }
+.create_projrct {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.create_projrct i.fa-solid.fa-plus.create, .create_projrct i span {
+    margin-left: 0px !important;
+    color: #fff;
+}
+
+.all_nft .explore-item{
+    flex: 23%;
+}
+.all_nft {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+button.btn.btn-primary.banner-update {
+    /* text-align: right; */
+    float: right;
+}
+@media(max-width:500px){
+    .create_projrct i span {
+        display: none;
+    }
+    :root .all_nft .explore-item{
+        flex: 100%;
+    }
+   
+}
+@media (max-width:991px){
+    :root .all_nft .explore-item{
+        flex: 45%;
+    }
+
+}

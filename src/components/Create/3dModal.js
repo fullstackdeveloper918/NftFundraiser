@@ -2,49 +2,18 @@ import { useState, useEffect, useRef } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-function loadGLTFModel(scene, glbPath, options) {
-    const { receiveShadow, castShadow } = options;
-    return new Promise((resolve, reject) => {
-        const loader = new GLTFLoader();
-        loader.load(
-            glbPath,
-            (gltf) => {
-                const obj = gltf.scene;
-                obj.name = "dinosaur";
-                obj.position.y = 0;
-                obj.position.x = 0;
-                obj.receiveShadow = receiveShadow;
-                obj.castShadow = castShadow;
-                scene.add(obj);
-                obj.traverse(function (child) {
-                    if (child.isMesh) {
-                        child.castShadow = castShadow;
-                        child.receiveShadow = receiveShadow;
-                    }
-                });
-                resolve(obj);
-            },
-            undefined,
-            function (error) {
-                console.log(error);
-                reject(error);
-            }
-        );
-    });
-}
+
 function easeOutCirc(x) {
     return Math.sqrt(1 - Math.pow(x - 1, 4));
 }
+
 const DModal = ({ vdo }) => {
-    // 
-    // const { vdo } = props
+
     const refContainer = useRef();
     const [loading, setLoading] = useState(true);
     const [renderer, setRenderer] = useState();
-    const [source, setSource] = useState('')
-    console.log('source', source)
+
     useEffect(() => {
-        // 
         const file = vdo;
         const { current: container } = refContainer;
         if (container && !renderer) {
@@ -107,7 +76,6 @@ const DModal = ({ vdo }) => {
                     animate();
                     setLoading(false);
                     // mdl(file)
-                    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
                 },
                 (error) => {
                     // 
@@ -139,6 +107,7 @@ const DModal = ({ vdo }) => {
             };
         }
     }, [vdo]);
+
     return (
         <div
             style={{ height: "270px", width: "300px", position: "relative" }}

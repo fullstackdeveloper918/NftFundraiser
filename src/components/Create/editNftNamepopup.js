@@ -41,7 +41,7 @@ const EditNftName = (props) => {
     const defaultValues = {
         setNft_description: '',
     }
-    const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
+    const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(GetCollectionsAction())

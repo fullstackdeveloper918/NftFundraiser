@@ -11,7 +11,6 @@ import 'antd/lib/form/style/css';
 import 'antd/lib/upload/style/css';
 import { Collapse } from 'antd';
 import 'antd/lib/modal/style/css';
-
 import 'antd/lib/button/style/css'
 import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
@@ -25,61 +24,43 @@ const UploadNft = ({ current, prev }) => {
 
     const editor = useRef(null);
     const { data, setFormValues } = useFormData();
-
     const [count, setCount] = useState(1);
-    console.log("count", count)
     const [nft_description, setNft_description] = useState([])
-    console.log("nftdescr", nft_description)
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
     const [projmodalShow, setProjModalShow] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: '1' });
     const [nftFileType, setNFtFileType] = useState()
     const [nftimage, setNftImage] = useState([])
-    // console.log(nftimage.map(x => x), "nfttttt")
     const [nftwidth, setNftwidth] = useState()
     const [nftHeight, setNftheight] = useState()
     const [size, setSize] = useState()
     const [Pimage, setPimage] = useState([])
-    console.log(Pimage, "Pimage")
     const [startDate, setStartDate] = useState("")
-    console.log("startdate", startDate)
     const [endDate, setEndDate] = useState("")
-    console.log("enddate", endDate)
     const [numberofNfts, setNumberofNfts] = useState("")
-    console.log("noof nfts", numberofNfts)
-
     const coll_id = (Object.values(nft_collection_id));
     const [source, setSource] = useState([])
     const [sourceType, setSourceType] = useState()
-
-
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState()
     const [NFtFileExtension, setNFtExtension] = useState()
     const [preview, setPreview] = useState([])
     const [basePreview, setPreviewBase] = useState([])
-    console.log('previwimg', preview)
     const [projtype, setProjType] = useState("1")
-
-    console.log(nft_collection_id, "nft collections")
     const [nftName, setNftName] = useState([])
     const [nftDescription, setNftDescription] = useState([])
-    console.log("nftDescription", nftDescription)
-    console.log("nftName", nftName)
 
 
     const handleIncrement = () => {
-        // if (startDate && endDate && numberofNfts) {
-
         setCount(prevCount => prevCount + 1);
-        // }
     };
 
 
     const handleDecrement = () => {
         setCount(prevCount => prevCount - 1);
     };
+
     const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
@@ -93,11 +74,6 @@ const UploadNft = ({ current, prev }) => {
         });
     };
     const previewChange = async (e, index) => {
-        // const pimage = () => {
-        //     return [
-        //         ...Pimage, e?.target?.files[0]
-        //     ]
-        // }
         const pimage = e.target.files[0]
         const base64 = await convertToBase64(pimage);
         setPimage(previ => {
@@ -115,13 +91,8 @@ const UploadNft = ({ current, prev }) => {
 
             ]
         })
-        // const base64pr = await convertToBase64(preview)
-        // console.log('baseee', base64pr)
-        // setPreviewBase(base64pr)
-
-
+       
     };
-    // console.log(count, 'count')
 
     function onHandleClick(index, item) {
         // 
@@ -135,11 +106,7 @@ const UploadNft = ({ current, prev }) => {
     };
 
 
-    const defaultValues = {
-        setNft_description: null,
-    }
-
-    const { register, handleSubmit, formState: { errors }, watch, control, setValue } = useForm({
+    const { register, formState: { errors } } = useForm({
         mode: 'all',
 
     });
@@ -158,10 +125,6 @@ const UploadNft = ({ current, prev }) => {
     const col = useSelector(state => {
         // 
         return state?.projectdetails?.getcollections
-    })
-    const imaeg = useSelector(state => {
-        // 
-        return state?.projectdetails?.nftres
     })
 
     const OnSubmit = (values) => {
@@ -228,8 +191,6 @@ const UploadNft = ({ current, prev }) => {
                     type = 'Image'
             }
 
-            // setNFtFileType(type)
-
             setSource(prevState => {
                 // 
                 prevState[index] = { file: e.target.files[0], type: type }
@@ -278,7 +239,7 @@ const UploadNft = ({ current, prev }) => {
 
             // const addedImagetype = imagesRes?.map(x => x?.data?.data?.extension)
             var str = addedImage;
-            var check = str.includes("https://ipfs.io/ipfs/undefined");
+            var check = str.includes("https://ipfs.karmatica.io/ipfs/undefined");
             // console.log(check)
             // console.log(addedImage.includes('undefined'), 'add')
 

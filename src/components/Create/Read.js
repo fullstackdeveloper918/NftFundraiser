@@ -1,18 +1,19 @@
-import React, { Component, useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ProjectList } from '../../redux/Actions/projectAction';
+
 const Read = () => {
-    // const [projc, setProjc] = useState([])
-    // console.log(projc, 'projc')
+
     const dispatch = useDispatch()
     const proj = useSelector(state => {
         return state.getproject
     })
+
     useEffect(() => {
         dispatch(ProjectList())
     }, [])
+
     return (
         <section className="live-auctions-area">
             <div className="container">

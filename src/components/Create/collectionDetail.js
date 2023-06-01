@@ -1,99 +1,14 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
-import { DeleteProject, GetCollectionDetails, ProjectDetail } from '../../redux/Actions/projectAction';
+import { GetCollectionDetails } from '../../redux/Actions/projectAction';
 import { Button } from 'react-bootstrap';
 import CollItem from './bread-crumb';
 import ReadMore from '../../readMore';
 
 const CollectionDetails = () => {
 
-    const initData = {
-        itemImg: "/img/avtar1.png",
-        date: "2022-03-30",
-        tab_1: "Bids",
-        tab_2: "History",
-        tab_3: "Details",
-        ownerImg: "/img/avtar1.png",
-        itemOwner: "Themeland",
-        created: "15 Jul 2021",
-        title: "Walking On Air",
-        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.",
-        price_1: "1.5 ETH",
-        price_2: "$500.89",
-        count: "1 of 5",
-        size: "14000 x 14000 px",
-        volume: "64.1",
-        highest_bid: "2.9 BNB",
-        bid_count: "1 of 5",
-        btnText: "Place a Bid"
-    }
-    const tabData_1 = [
-        {
-            id: "1",
-            img: "/img/avtar1.png",
-            price: "14 ETH",
-            time: "4 hours ago",
-            author: "@arham"
-        },
-        {
-            id: "2",
-            img: "/img/avtar2.jpg",
-            price: "10 ETH",
-            time: "8 hours ago",
-            author: "@junaid"
-        },
-        {
-            id: "3",
-            img: "/img/avtar3.png",
-            price: "12 ETH",
-            time: "3 hours ago",
-            author: "@yasmin"
-        }
-    ]
-
-    const tabData_2 = [
-        {
-            id: "1",
-            img: "/img/avtar1.png",
-            price: "32 ETH",
-            time: "10 hours ago",
-            author: "@hasan"
-        },
-        {
-            id: "2",
-            img: "/img/avtar2.jpg",
-            price: "24 ETH",
-            time: "6 hours ago",
-            author: "@artnox"
-        },
-        {
-            id: "3",
-            img: "/img/avtar3.png",
-            price: "29 ETH",
-            time: "12 hours ago",
-            author: "@meez"
-        }
-    ]
-
-    const sellerData = [
-        {
-            id: "1",
-            img: "/img/avtar1.png",
-            seller: "@ArtNoxStudio",
-            post: "Creator"
-        },
-        {
-            id: "2",
-            img: "/img/avtar2.jpg",
-            seller: "Virtual Worlds",
-            post: "Collection"
-        }
-    ]
-
     const { id } = useParams();
-    // console.log(id, 'idd')
     const [modalShow, setModalShow] = React.useState(false);
 
     const dispatch = useDispatch()
@@ -101,14 +16,10 @@ const CollectionDetails = () => {
     const coldetail = useSelector(state => {
         return state?.projectdetails?.getcollectiondetails
     })
-    // console.log(coldetail, 'coldetail')
 
     useEffect(() => {
         dispatch(GetCollectionDetails(id))
     }, [id])
-
-
-
 
     return (
         <section className="item-details-area">

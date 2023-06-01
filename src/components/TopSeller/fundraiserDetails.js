@@ -9,12 +9,21 @@ import FundTransdataTable from './fundPaymenttable';
 import ReadMore from '../../readMore';
 import { Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import EditName from './Edit-organization/editName';
+import EditBanner from './Edit-organization/editBanner';
+import { GetUserAction } from '../../redux/Actions/authAction';
+import DescEdit from './Edit-organization/descEdit';
+import EditLogo from './Edit-organization/logoEdit';
 
 const FundraiserDetail = () => {
     const { user_id } = useParams()
     // const id = useParams()
     // const { id } = useParams()
     const dispatch = useDispatch()
+    const [modalShoweditfund, setModalShoweditfund] = React.useState(false);
+    const [modalShoweditfundimg, setModalShoweditfundimg] = React.useState(false);
+    const [modalShoweditfunddes, setModalShoweditfunddesc] = React.useState(false);
+    const [modalShoweditfundlogo, setModalShoweditfundlogo] = React.useState(false);
     const funddetail = useSelector(state => {
         return state?.fundraiser?.fundraiserdetail
     })
@@ -27,38 +36,14 @@ const FundraiserDetail = () => {
         return state?.user?.userdetail
     })
     const userDetail = userdet.referrer_id
-    console.log('userdettt', userDetail)
-    const log = useSelector(state => {
-        return state.user.userToken
-    })
-
-    const latprojdetail = useSelector(state => {
-        // 
-        return state.projectdetails.latestprojectdetails
-    })
-    console.log(fundprojdetail.user_data, 'fdprojetail')
 
     useEffect(() => {
-
+        dispatch(GetUserAction())
         dispatch(TopFundraiserDetail(user_id))
         dispatch(GetfundraiserProject(user_id))
 
     }, [dispatch, user_id])
-    // state = {
-    //     initData: {},
-    //     tabData_1: [],
-    //     tabData_2: [],
-    //     sellerData: []
-    // }
-    // componentDidMount() {
-    //     this.setState({
-    //         initData: initData,
-    //         tabData_1: tabData_1,
-    //         tabData_2: tabData_2,
-    //         sellerData: sellerData
-    //     })
-    // }
-    // render() {
+
     const investHandler = () => {
 
         if (!window.ethereum?.selectedAddress) {
@@ -81,12 +66,33 @@ const FundraiserDetail = () => {
 
                 <div className="row justify-content-between p-0">
                     <div className='col-12'>
-                        <span className='title_main'>{funddetail?.organization_detail?.organization_name}</span>
+                        <div className='nft-edit-icon'>
+                            <span className='title_main'>{funddetail?.organization_detail?.organization_name}</span>
+                            <i className="fa-solid fa-pen " onClick={(e) => {
+                                // setNftID(slug)
+
+                                setModalShoweditfund(true)
+                            }
+                            } ></i>
+                            <EditName
+                                // id={projslug}
+                                // nft_id={nftId}
+                                show={modalShoweditfund}
+                                onHide={() => setModalShoweditfund(false)} />
+
+                        </div>
                     </div>
                     <div className="col-12 col-lg-8">
                         <div className="item-info">
 
                             <div className="item-thumb text-center">
+                                <div>
+                                    <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() =>
+                                        setModalShoweditfundimg(true)}></i>
+                                    <EditBanner
+                                        show={modalShoweditfundimg}
+                                        onHide={() => setModalShoweditfundimg(false)} />
+                                </div>
                                 <img src={funddetail?.organization_detail?.banner_image} alt="" />
                                 {/* <img src="/img/ph.jpg" /> */}
                                 {/* <img src='/img/ph.jpg' alt="" /> */}
@@ -94,16 +100,20 @@ const FundraiserDetail = () => {
 
                         </div>
                         <div className='lorem_done mt-3'>
-                            <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            {/* <img src={funddetail?.user_data?.avatar} width="28px" height="28px" viewBox="0 0 24 24" fill="none" /> */}
+                     
+                           
+                  
+                           <img src={userdet?.organization_detail?.logo} width="32px" height="32px" viewBox="0 0 24 24" fill="none"  />
 
-                            <span className='cutom_dis'> {funddetail?.organization_detail?.organization_name} is organizing this fundraiser.</span>
+                            <span className='cutom_dis'> {funddetail?.organization_detail?.organization_name} is organizing this fundraiser. </span>
+                            <div>
+                            <i className="fa-solid fa-pen-to-square" onClick={() =>
+                                setModalShoweditfundlogo(true)}></i>
+                            <EditLogo
+                                show={modalShoweditfundlogo}
+                                onHide={() => setModalShoweditfundlogo(false)} />
                         </div>
-
+                        </div>
                         <br />
 
                         <div className="progress_nft mobile_nft mb-3">
@@ -161,13 +171,15 @@ const FundraiserDetail = () => {
 
 
                         <div className='custam_col mt-3 mt-lg-0'>
-                            <h5 class="user_title ">
+                            <h5 class="user_title justify-content-between">
 
-                                <div className='d-flex align-item-center gap-5'>
-                                    <svg className='' width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg>
-
-                                    <div>Description</div>
-
+                                <div className='d-flex align-items-center gap-5'> <div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg></div><div>Description</div></div>
+                                <div >
+                                    <i class="fa-solid fa-pen" onClick={() =>
+                                        setModalShoweditfunddesc(true)}></i>
+                                    <DescEdit
+                                        show={modalShoweditfunddes}
+                                        onHide={() => setModalShoweditfunddesc(false)} />
                                 </div>
                             </h5>
 

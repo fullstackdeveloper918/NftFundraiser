@@ -17,6 +17,7 @@ const NftAuctiondataTable = (props) => {
     const onChange = (key) => {
         console.log(key);
     };
+    const params = useParams()
     const { slug } = useParams()
     const [bidstatus, setBidStatus] = useState(" ")
     console.log('biddst', bidstatus)
@@ -93,7 +94,12 @@ const NftAuctiondataTable = (props) => {
                                 </tr>
 
 
-                            </thead><tbody className='img_table'>
+                            </thead>
+                           
+                               
+                            
+                            <tbody className='img_table'>
+
                                     {nftdetail.bids?.map((item) => {
 
                                         return (
@@ -120,7 +126,10 @@ const NftAuctiondataTable = (props) => {
                                         );
                                     })}
 
-                                </tbody></>
+                                </tbody>
+                  
+                        
+                                </>
 
                         )}
                     </Table>

@@ -1,12 +1,12 @@
 
-import React, { useEffect } from "react";
+import React from "react";
+
 const Timer = (props) => {
     const [days, setDays] = React.useState(0);
     const [hours, setHours] = React.useState(0);
     const [minutes, setMinutes] = React.useState(0);
     const [seconds, setSeconds] = React.useState(0);
 
-    const deadline = "2023-03-05 00:00:00"
     const getTime = () => {
         const time = Date.parse(`${props.time}`) - Date.now();
         setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
@@ -14,10 +14,12 @@ const Timer = (props) => {
         setMinutes(Math.floor((time / 1000 / 60) % 60));
         setSeconds(Math.floor((time / 1000) % 60));
     };
+
     React.useEffect(() => {
         const interval = setInterval(() => getTime(`${props.time}`), 1000);
         return () => clearInterval(interval);
     }, []);
+
     return (
         <div>
             {days == 0 &&

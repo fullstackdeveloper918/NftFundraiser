@@ -2,16 +2,19 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PopularCollectionAction } from '../../redux/Actions/popularAction';
 import { Link } from 'react-router-dom';
+
 const Collections = () => {
+
     const dispatch = useDispatch()
     const coll = useSelector(state => {
-        //
         return state?.collection?.collection
     })
-    console.log(coll, "coll detail")
+    console.log('coll', coll)
+
     useEffect(() => {
-        dispatch(PopularCollectionAction({}))
+        dispatch(PopularCollectionAction({count:1}))
     }, [dispatch])
+
     return (
         <section className="popular-collections-area">
             <div className="container">
@@ -24,7 +27,7 @@ const Collections = () => {
                                 <h3 className="mt-3 mb-0">Popular Collections</h3>
                             </div>
                             <div className="intro-btn">
-                                {coll?.length > 8 &&
+                                {coll?.data?.length > 7 &&
                                     <Link className="btn content-btn text-left" to="/allcollections">Explore More</Link>
                                 }
                             </div>
@@ -32,7 +35,7 @@ const Collections = () => {
                     </div>
                 </div>
                 <div className="row items">
-                    {coll?.slice(0, 8)?.map((item, idx) => {
+                    {coll?.data?.slice(0, 8)?.map((item, idx) => {
                         return (
                             <div key={`cd_${idx}`} className="col-12 col-sm-6 col-lg-3 item">
                                 <div className="card no-hover text-center">

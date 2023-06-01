@@ -6,19 +6,30 @@ import { LogsAction } from "./logsAction";
 
 export const PopularCollectionAction = createAsyncThunk(
     "auth/collection",
-    async ({ }, thunkAPI) => {
+    async (params , thunkAPI) => {
         // 
+        
+
+        if(params?.location?.pathname === '/allcollections'){
+            params.setLoading(true)
+        }
         try {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             }
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getPopularConnection`, config)
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getPopularConnection?page=${params.count}&search_keyword=`, config)
             console.log(res, 'resddd')
             thunkAPI.dispatch(getPopularCollection(res?.data?.data));
+            if(params?.location?.pathname === '/allcollections'){
+                params.setLoading(false)
+            }
 
         } catch (e) {
+            if(params?.location?.pathname=== '/allcollections'){
+                params.setLoading(false)
+            }
             thunkAPI.dispatch(LogsAction(e))
             // 
             if (e?.response?.data.message) {

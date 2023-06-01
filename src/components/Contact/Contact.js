@@ -1,13 +1,16 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { ContactAction } from '../../redux/Actions/contactAction';
 import Loader from '../Loader/loader';
+
 const Contact = () => {
+
     const [loading, setLoading] = useState()
     const dispatch = useDispatch()
 
-    const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
+    const { register, handleSubmit, formState: { errors } } = useForm({});
+
     const OnSubmit = (data) => {
         setLoading(true)
         const formData = new FormData()
@@ -17,6 +20,7 @@ const Contact = () => {
         formData.append('description', data.description)
         dispatch(ContactAction(formData, setLoading))
     }
+
     return (
         <section className="author-area">
             <div className="container">

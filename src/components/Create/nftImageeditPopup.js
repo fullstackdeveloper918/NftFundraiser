@@ -1,30 +1,16 @@
-import { Button, Form, Input, } from 'antd';
+import { Form } from 'antd';
 import Modal from 'react-bootstrap/Modal';
 import React, { Fragment, useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CreateProjectAction, GetCollectionsAction, NftList, UpdateNft, uploadNFT } from '../../redux/Actions/projectAction';
-import { useFormData } from './Context/context'
-import MyVerticallyCenteredModal from './createCollection';
-import styles from './styles/styles.module.scss'
+import { GetCollectionsAction, NftList, UpdateNft, uploadNFT } from '../../redux/Actions/projectAction';
 import 'antd/lib/form/style/css';
 import 'antd/lib/upload/style/css';
-import { Collapse } from 'antd';
 import 'antd/lib/modal/style/css';
 import 'antd/lib/button/style/css'
-import JoditEditor from 'jodit-react'
 import Loader from '../Loader/loader';
-import { useParams } from 'react-router';
-import CollPopup from './createCollection';
 import DModal from './3dModal';
 import swal from 'sweetalert';
-const getBase64 = (file) =>
-    new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
-    });
-// import ImgCrop from 'antd-img-crop';
+
 const EditNftImage = (props) => {
     const editor = useRef(null);
     const [nftFileType, setNFtFileType] = useState('Image')
@@ -44,15 +30,9 @@ const EditNftImage = (props) => {
     const defaultValues = {
         setNft_description: '',
     }
-    const ipfsBaseUrl = 'https://ipfs.io/ipfs/'
+    const ipfsBaseUrl = 'https://ipfs.karmatica.io/ipfs/'
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(GetCollectionsAction())
-        dispatch(NftList(props.nft_id?.id))
-    }, [props.nft_id?.id])
-    const col = useSelector(state => {
-        return state?.projectdetails?.getcollections
-    })
+
     const nftdetail = useSelector(state => {
         return state.projectdetails.nftlist
     })
@@ -100,6 +80,7 @@ const EditNftImage = (props) => {
             }
         }
     };
+
     const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
@@ -112,13 +93,17 @@ const EditNftImage = (props) => {
             };
         });
     };
+
     const previewChange = async (e, index) => {
         const pimage = e.target.files[0]
         const base64 = await convertToBase64(pimage);
         setPimage(base64)
         setPreview(URL.createObjectURL(pimage))
     };
+
     useEffect(() => {
+        dispatch(GetCollectionsAction())
+        dispatch(NftList(props.nft_id?.id))
         form.setFieldsValue({
             nfts: [{
                 nft_name: nftdetail.title,
@@ -132,18 +117,16 @@ const EditNftImage = (props) => {
         setNFtFileType(nftdetail.extention)
         setPreviewnft(nftdetail.preview_imag)
         setNft_collection_id(nftdetail.collection_id)
-    }, [form, nftdetail])
+    }, [props.nft_id?.id, form, nftdetail])
+
     const onFinish = async (values) => {
-        // 
         try {
             setLoading(true)
             if (source) {
-                // const nftImagepromises = uploadNFT(nft)
                 const imagesRes = await uploadNFT(nft, dispatch)
                 const addedImage = imagesRes?.data?.data.map(x => ipfsBaseUrl + x?.image_hash)
                 var str = addedImage;
                 var check = str.includes("https://ipfs.io/ipfs/undefined");
-                // 
                 if (check === false) {
                     const formData = new FormData()
                     formData.append('image', addedImage)
@@ -156,12 +139,9 @@ const EditNftImage = (props) => {
                     formData.append('description', values?.nfts?.map(x => x.nft_description))
                     dispatch(UpdateNft(formData, props, setLoading))
                 } else {
-                    console.log('fail')
-                    // setLoading(false)
                     swal('error!', 'Nft not uploaded', 'error')
                 }
             } else {
-                // 
                 const formData = new FormData()
                 formData.append('image', image)
                 formData.append('title', values?.nfts?.map(x =>
@@ -174,11 +154,11 @@ const EditNftImage = (props) => {
                 dispatch(UpdateNft(formData, props, setLoading))
             }
         } catch (error) {
-            console.log(error)
             swal("error", error, 'error')
             setLoading(false)
         }
     };
+
     const nfts = [
         {
             key: 0,
@@ -186,6 +166,7 @@ const EditNftImage = (props) => {
             amount: 1000
         },
     ];
+
     return (
         <div className="main-create">
             <Modal className="edit_nft_popup"

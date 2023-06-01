@@ -1,10 +1,11 @@
 import Modal from 'react-bootstrap/Modal';
-import { Controller, useForm } from 'react-hook-form';
+import {  useForm } from 'react-hook-form';
 import { useLocation } from 'react-router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect , useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CityList, CountryList, StateList } from '../../redux/Actions/authAction';
-import { CategoriesAction, UpdateProject } from '../../redux/Actions/projectAction';
+import { CityList, StateList } from '../../redux/Actions/authAction';
+import {  UpdateProject } from '../../redux/Actions/projectAction';
+
 function ProTypePopup(props) {
     const location = useLocation()
     const [type, setType] = useState()
@@ -12,31 +13,13 @@ function ProTypePopup(props) {
     const [country, setCountry] = useState('')
     const [description, setDescription] = useState();
     const dispatch = useDispatch()
-    console.log('country', country)
-    const [state, setState] = useState('')
-    const [city, setCity] = useState('')
-    console.log(countries?.data?.data, 'cntry')
-    const states = useSelector(state => {
-        // 
-        return state.countries.states
-    })
-    const cities = useSelector(state => {
-        // 
-        return state.countries.city
-    })
-    // useEffect(() => {
-    //     dispatch(CategoriesAction())
-    //     dispatch(CountryList())
-    // }, [])
+  
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
 
     const projdetail = useSelector(state => {
-        // 
         return state?.projectdetails?.projectdetails
     })
-    const lat = sessionStorage.getItem('latitude')
-    // console.log(lat, 'lattt')
-    const log = sessionStorage.getItem('longitude')
+
     useEffect(() => {
         if (location.pathname !== '/create' && projdetail && Object.keys(projdetail).length) {
             setValue("title", projdetail.title)
@@ -54,19 +37,15 @@ function ProTypePopup(props) {
             setType(projdetail.type)
             setCountry(projdetail.country)
             setDescription(projdetail.description)
-            // setState(projdetail.state)
-            // setCity(projdetail.city)
-            console.log(projdetail.state, 'edit state')
-            console.log(projdetail.city, 'edit city')
             setValue("image", projdetail.image)
             const formData = new FormData()
-            // formData.append('country_id', event?.currentTarget?.value)
             formData.append('country_id', projdetail.country)
             formData.append('state_id', projdetail.state)
             dispatch(StateList(formData))
             dispatch(CityList(formData))
         }
     }, [projdetail]);
+
     const OnSubmit = (data) => {
         if (location.pathname === '/create') {
 
@@ -76,8 +55,6 @@ function ProTypePopup(props) {
             props.onHide(true)
         } else {
             const formData = new FormData()
-
-
             formData.append('title', data.title)
             formData.append('description', description)
             formData.append('state', data.state)
@@ -86,16 +63,12 @@ function ProTypePopup(props) {
             formData.append('address', data.address)
             formData.append('price', data.price)
             formData.append('number_of_nft', data.number_of_nft)
-            
-
             formData.append('start_date', data.start_date)
             formData.append('end_date', data.end_date)
-
             formData.append('type', '2')
             formData.append('category_id', data.category_id)
 
             dispatch(UpdateProject(props, formData))
-
         }
     }
     const today = new Date();
@@ -104,6 +77,7 @@ function ProTypePopup(props) {
     const date1 = today.setDate(today.getDate() + numberOfDaysToAdd);
     const defaultValue = new Date(date).toISOString().substr(0, 10) // yyyy-mm-dd
     const defaultValue1 = new Date(date1).toISOString().substr(0, 10) // yyyy-mm-dd
+
     const disablePastDate = () => {
         const today = new Date();
         const dd = String(today.getDate() + 0).padStart(2, "0");
@@ -111,6 +85,7 @@ function ProTypePopup(props) {
         const yyyy = today.getFullYear();
         return yyyy + "-" + mm + "-" + dd;
     };
+
     return (
         <Modal
             {...props}

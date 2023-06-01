@@ -2,50 +2,70 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { GetSettings, } from '../../redux/Actions/projectAction';
-import Web3 from 'web3';
 import { BuyNft, } from '../Wallet/interact';
 import { useState } from 'react';
 import NftTransdataTable from './nftTRansTable';
 import LatNftDataTable from '../Explore/latnftTable';
 import DModal from '../Create/3dModal';
 import BuyPopup from './buyPopup';
+import { Button, Collapse, Spin } from 'antd';
 import { GetMatic } from './../ItemDetails/GetMAtic';
 import { ResellActionDetails } from '../../redux/Actions/resellNftAction';
 import { GetUserAction } from '../../redux/Actions/authAction';
 import swal from 'sweetalert';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
-const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
-const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-const web3 = createAlchemyWeb3(alchemyKey);
-const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
+import { Table } from 'react-bootstrap';
+import { LoadingOutlined } from '@ant-design/icons';
+
 const ResellNftDetails = (props) => {
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
     const [matic, setMatic] = useState('')
     const [buymodalShow, setBuyModalShow] = React.useState(false);
-   
     const slug = useParams();
+    const { Panel } = Collapse;
+    const onChange = (key) => {
+        console.log(key);
+    };
+
     const resellnftdetail = useSelector(state => {
         return state.resell?.reselldetails
     })
+
     const getSett = useSelector(state => {
         return state.projectdetails.settings
     })
+    const [expandIconPosition, setExpandIconPosition] = useState('end');
+    const onPositionChange = (newExpandIconPosition) => {
+        setExpandIconPosition(newExpandIconPosition);
+    };
     const setValue = getSett.find(x => x.key === 'pricing_per_nft')
+
     useEffect(() => {
         (GetMatic(setMatic))
-        if(sessionStorage.getItem('authToken')){
+        if (sessionStorage.getItem('authToken')) {
 
             dispatch(GetUserAction())
         }
         dispatch(ResellActionDetails(slug))
         dispatch(GetSettings())
     }, [slug])
+
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
+    const antIcon = (
+        <LoadingOutlined
+            style={{
+                fontSize: 35,
+                textAlign: "center"
+
+            }}
+            spin
+        />
+    )
+
     const buyHandler = () => {
-        
+
         BuyNft({
             contractAddress: resellnftdetail?.collectionData?.contract_id,
             tokenId: resellnftdetail.token_id,
@@ -64,6 +84,7 @@ const ResellNftDetails = (props) => {
             dispatch
         })
     }
+
     return (
         <section className="item-details-area">
             <div className="container">
@@ -112,7 +133,7 @@ const ResellNftDetails = (props) => {
                                 <div className="item-info-list">
                                     <ul className="list-unstyled mb-0">
                                         <span class='boldertext'>Token :</span>
-                                        <span> #{resellnftdetail.token_id?.slice(0,2)}</span>
+                                        <span> #{resellnftdetail.token_id?.slice(0, 2)}</span>
                                     </ul>
                                 </div>
                                 <div>
@@ -124,9 +145,9 @@ const ResellNftDetails = (props) => {
                                     <span> 10%</span>
                                 </div>
                                 <div>
-                                <span className='boldertext w-100'>Karmatica royalties : </span>
-                                <span> 1%</span>
-                            </div>
+                                    <span className='boldertext w-100'>Karmatica royalties : </span>
+                                    <span> 1%</span>
+                                </div>
                                 <div className='eddlbtton d-flex gap- align-items-center mt-2 justify-content-between'>
                                     <div className='eddlbtton flex-wrap d-flex gap-10  align-items-center mt-2'>
                                         {resellnftdetail.sold_nft == 1 ? (
@@ -141,21 +162,21 @@ const ResellNftDetails = (props) => {
                                                     </div>
                                                 ) : (
                                                     <>
-                                                    {userdet.role == 3 ?(
-                                                        <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                                        onClick={() => {
-                                                            swal("warning", "To buy this nft you need to change your creator account to buyer ", "warning")
-                                                        }}>Buy Now</button>
-                                                    ):(
-<>
-                                                        <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
-                                                            id="nftdetail.id" onClick={() => { buyHandler(); setBuyModalShow(true); setLoading(true); }}>Buy Now</button><BuyPopup
-                                                                show={buymodalShow}
-                                                                loading={loading}
-                                                                onHide={() => setBuyModalShow(false)} />
-                                                                </>
-                                                    )}
+                                                        {userdet.role == 3 ? (
+                                                            <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                                                onClick={() => {
+                                                                    swal("warning", "To buy this nft you need to change your creator account to buyer ", "warning")
+                                                                }}>Buy Now</button>
+                                                        ) : (
+                                                            <>
+                                                                <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
+                                                                    id="nftdetail.id" onClick={() => { buyHandler(); setBuyModalShow(true); setLoading(true); }}>Buy Now</button><BuyPopup
+                                                                    show={buymodalShow}
+                                                                    loading={loading}
+                                                                    onHide={() => setBuyModalShow(false)} />
                                                             </>
+                                                        )}
+                                                    </>
                                                 )}
                                             </>
                                         )}
@@ -203,6 +224,79 @@ const ResellNftDetails = (props) => {
                             />
                         </div>
                     </div>
+
+                    {resellnftdetail?.bids?.length > 0 &&
+
+                        <div className='col-12 mt-4'>
+                            <div className='position-relative'>
+
+
+                                < Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
+                                    <svg className="activity_icon" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.4" d="M7.24487 14.7815L10.238 10.8914L13.6522 13.5733L16.5813 9.79297" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <circle cx="19.9954" cy="4.20027" r="1.9222" stroke="#ffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M14.9245 3.12012H7.65679C4.64535 3.12012 2.77808 5.25284 2.77808 8.26428V16.3467C2.77808 19.3581 4.60874 21.4817 7.65679 21.4817H16.2609C19.2724 21.4817 21.1396 19.3581 21.1396 16.3467V9.30776" stroke="#ffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <Panel header="Latest Bids" key="1" >
+                                        <Table responsive >
+                                            {loading ? (
+                                                <div className='spiner'>
+                                                    <Spin indicator={antIcon} />
+                                                </div>
+                                            ) : (
+                                                <><thead>
+
+
+                                                    <tr>
+
+                                                        <th>User</th>
+                                                        <th>Bid Price</th>
+                                                        <th>From</th>
+                                                        {/* <th>To</th> */}
+                                                        {/* <th>Transaction</th> */}
+                                                        <th>Status</th>
+                                                    </tr>
+
+
+                                                </thead>
+
+
+                                                    <tbody className='img_table'>
+
+                                                        {resellnftdetail.bids?.map((item) => {
+
+                                                            return (
+                                                                <tr>
+
+                                                                    <td>{item.username}</td>
+                                                                    <td>{item.amount}</td>
+                                                                    <td>{item.pay_from?.slice(0, 4)}...{item.pay_from?.slice(35, 44)}</td>
+                                                                    {/* <td>{item.pay_to?.slice(0, 4)}...{item.pay_to?.slice(35, 44)}</td> */}
+                                                                    {/* <td>{item.txd_id?.slice(0, 4)}...{item.txd_id?.slice(35, 44)}</td> */}
+                                                                    <td><a className='auctionbttn'>{item.status}</a></td>
+                                                                </tr>
+                                                            );
+                                                        })}
+
+                                                    </tbody>
+
+
+                                                </>
+
+                                            )}
+                                        </Table>
+                                        {resellnftdetail?.bids?.length == 0 &&
+                                            <div className='nothing'>
+
+                                                No matching records found
+                                            </div>
+                                        }
+                                    </Panel>
+
+                                </Collapse>
+                            </div >
+                        </div>
+                    }
                 </div>
             </div >
         </section >

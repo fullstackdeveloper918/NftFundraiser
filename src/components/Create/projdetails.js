@@ -14,12 +14,10 @@ import ReferalPopup from '../ItemDetails/refralPopup';
 import Swal from 'sweetalert2';
 import { Alert, Space } from 'antd';
 import ProTypePopup from './ProjectTypePopup';
-// import ProgressBar from 'react-bootstrap';
+
 const ProjNftDetails = () => {
     const { slug } = useParams()
-    // console.log(id, 'idd')
     const latprojdetail = useSelector(state => {
-        // 
         return state.projectdetails.latestprojectdetails
     })
     const [matic, setmatic] = useState('')
@@ -32,20 +30,21 @@ const ProjNftDetails = () => {
     const [modalShowDes, setModalShowDes] = React.useState(false);
     const [projmodalShows, setProjModalShows] = React.useState(false);
     const projdetail = useSelector(state => {
-        // 
         return state?.projectdetails?.projectdetails
     })
-    console.log('projdetail', projdetail)
+
     useEffect((event) => {
         (GetMatic(setmatic))
         dispatch(ProjectDetail(slug))
     }, [slug])
+
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
+
     const userDetail = userdet.referrer_id
-    const bannerHandler = () => {
-    }
+
+
     return (
         <section className="item-details-area project-nft-si main-proj-detail ">
             <div className="container">
@@ -234,9 +233,9 @@ const ProjNftDetails = () => {
                             {projdetail?.nft_data?.map((x, idx) => {
                                 return (
                                     <div key={`eds_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item soldout-card">
-                                    {x.sold_nft == 1 && 
-                                        <div className='sold-outbtn'>SOLD OUT</div>  
-                                        }  
+                                        {x.sold_nft == 1 &&
+                                            <div className='sold-outbtn'>SOLD OUT</div>
+                                        }
                                         <div className="card no-hover m-0">
                                             <div className="image-over relative">
                                                 {x.user_id == projdetail.user_id ? (
@@ -259,7 +258,7 @@ const ProjNftDetails = () => {
                                                     </Link>
                                                 )}
                                                 <div className='token'>
-                                                    <span>#{x?.token_id?.slice(0,2)}</span>
+                                                    <span>#{x?.token_id?.slice(0, 2)}</span>
                                                     <span className='cards-icons'>
                                                         {x.is_mint == 0 &&
                                                             <Link to={`/nft/details/${x.slug}?project=${slug}`} ><i className="fa-solid fa-pen" /></Link>
@@ -276,7 +275,7 @@ const ProjNftDetails = () => {
                                                         <h5 className="m-0 pb-2 p-0 text-capitalize">{x.title.slice(0, 22)}...</h5>
                                                     </a>
                                                     <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">
-                                                        <span className='align-self-start' dangerouslySetInnerHTML={{ __html: x.description.slice(0, 65) }} />
+                                                        <span className='align-self-start' dangerouslySetInnerHTML={{ __html: x.description.slice(0, 35) }} />
                                                     </div>
                                                     <div className='mint d-flex justify-content-between button_group buy-invest-btn align-items-center nft-price' >
                                                         {x.is_mint == 0 ? (

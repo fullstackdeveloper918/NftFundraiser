@@ -6,9 +6,8 @@ import { useState } from 'react';
 import { Loader } from '@react-three/drei';
 function BidPopup(props) {
     // 
-    const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
-    const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
+    const { register, handleSubmit, formState: { errors } } = useForm({});
     const onSubmit = () => {
         // 
         BidNft(props.id, props.projid, props.from, props.onHide, setLoading)

@@ -2,16 +2,19 @@ import React, { useEffect, useState, useRef } from "react";
 import Geonames from "geonames.js";
 import PropTypes from "prop-types";
 import axios from "axios";
+
 const geonames = new Geonames({
     username: "fullstackdeveloper91",
     lan: "en",
     encoding: "JSON"
 });
+
 export default function GeoLocation(props) {
     const { locationTitle, geoId, onChange, isCountry } = props;
     const [options, setOptions] = useState([]);
     const [currentItem, setCurrentItem] = useState("");
     const [labelWidth, setLabelWidth] = useState(0);
+
     useEffect(() => {
         setLabelWidth(inputLabel.current.offsetWidth);
         {
@@ -19,31 +22,27 @@ export default function GeoLocation(props) {
                 setCurrentItem(props?.selected)
             )
         }
-    }, [props]);
-    useEffect(() => {
         try {
             const data = async () => {
                 (await isCountry)
                     ? axios?.get(`https://secure.geonames.org/countryInfoJSON?username=fullstackdeveloper91&lang=en`)?.then(res => {
-                        // 
                         setOptions(res);
-                        console.log(res, "countries")
                     })
                     : axios?.get(`https://secure.geonames.org/childrenJSON?username=fullstackdeveloper91&lang=en&geonameId=${geoId}`)?.then(res => {
                         setOptions(res);
-                        console.log(res, "cities")
                     });
             };
             data();
         } catch (err) {
-            console.error(err);
         }
-    }, [geoId, isCountry]);
+    }, [geoId, isCountry, props]);
+
     const inputLabel = useRef(null);
     const handleChange = e => {
         setCurrentItem(e.target.value);
         onChange(e.target.value);
     };
+
     return (
         <form >
             <label ref={inputLabel} id="demo-simple-select-outlined-label" style={{ display: 'none' }}>

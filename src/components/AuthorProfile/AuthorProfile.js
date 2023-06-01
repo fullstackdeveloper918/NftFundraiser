@@ -1,40 +1,41 @@
-import React, { Component, useState } from "react";
-import axios from "axios";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { GetUserAction, UpdateProfileAction } from "../../redux/Actions/authAction";
 import { useEffect } from "react";
 import UserTransdataTable from "./userTransTable";
 import UserdataTable from "./userDetails";
-import Banner from "../Create/editBanner";
 import AvatarUpload from "./avatarUpload";
 import BannerUpload from "./bannerUpload";
 import { Link } from "react-router-dom";
+
 const AuthorProfile = () => {
+
     const [modalSho, setModalSho] = React.useState(false);
     const [modalShowavatar, setModalShowavatar] = React.useState(false);
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
-    console.log(userdet, 'user')
-    const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
     const dispatch = useDispatch()
-    const onSubmit = (data) => {
-        const formData = new FormData()
-        formData.append('username', data.username)
-        formData.append('email', data.email)
-        dispatch(UpdateProfileAction(formData))
-    }
+
     useEffect(() => {
         dispatch(GetUserAction());
-    }, []);
-    useEffect(() => {
         if (userdet && Object.keys(userdet).length) {
             setValue("avatar", userdet.avatar);
             setValue("username", userdet.username);
             setValue("email", userdet.email);
         }
     }, [userdet]);
+
+    const onSubmit = (data) => {
+        const formData = new FormData()
+        formData.append('username', data.username)
+        formData.append('email', data.email)
+        dispatch(UpdateProfileAction(formData))
+    }
+
+
     return (
         <div className="col-12">
             <div className="container">
@@ -102,9 +103,9 @@ const AuthorProfile = () => {
                                                 {...register("email")}
                                                 aria-invalid={errors.email ? "true" : "false"}
                                             />
-                                            
-                                                <i class="fa-solid fa-pen"></i>
-                                           
+
+                                            <i class="fa-solid fa-pen"></i>
+
                                         </label>
                                         <button className="btn btn-bordered-white btn-smaller" type="submit" >
                                             Update

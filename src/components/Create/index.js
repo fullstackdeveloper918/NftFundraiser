@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
-// import styles from "../styles/styles.module.scss";
-import FormCard from "./FormCard";
+import { useState } from "react";
 import Create from "./Create";
 import UploadNft from "./uploadNft";
-import FormProvider, { useFormData } from "./Context/context";
-import { Button, message, Steps } from 'antd';
-import { set, useForm } from "react-hook-form";
+import FormProvider from "./Context/context";
+import { Steps } from 'antd';
+
 const steps = [
   {
     title: 'Create Project',
@@ -16,16 +14,17 @@ const steps = [
     content: <UploadNft />,
   },
 ];
+
 const UploadNftIndex = () => {
+
   const [current, setCurrent] = useState(0);
   const next = () => {
     setCurrent(current + 1);
   };
-  const { setValue } = useForm();
   const prev = () => {
-    // 
     setCurrent(current - 1);
   };
+
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
   return (
     <section className="author-area">

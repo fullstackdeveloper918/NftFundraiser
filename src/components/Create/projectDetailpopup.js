@@ -36,7 +36,7 @@ import {
 import JoditEditor from 'jodit-react';
 import { CityList, CountryList, StateList } from '../../redux/Actions/authAction';
 import { useParams } from 'react-router';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+
 function ProjDetailPopup(props) {
     const editor = useRef(null);
     const dispatch = useDispatch()
@@ -46,18 +46,17 @@ function ProjDetailPopup(props) {
     const [type, setType] = useState()
     const { countries } = useSelector(state => state.countries)
     const [country, setCountry] = useState('')
-    console.log('country', country)
     const [state, setState] = useState('')
     const [city, setCity] = useState('')
-    console.log(countries?.data?.data, 'cntry')
     const states = useSelector(state => {
-        // 
         return state.countries.states
     })
+
     useEffect(() => {
         dispatch(CategoriesAction())
         dispatch(CountryList())
     }, [])
+
     const handleChangeCountry = (event) => {
         event?.preventDefault()
         // 👇 Get input value from "event"
@@ -66,6 +65,7 @@ function ProjDetailPopup(props) {
         formData.append('country_id', event?.currentTarget?.value)
         dispatch(StateList(formData))
     };
+
     const handleChangeState = (event) => {
         // 
         event.preventDefault()
@@ -76,24 +76,27 @@ function ProjDetailPopup(props) {
         formData.append('state_id', event?.currentTarget?.value)
         dispatch(CityList(formData))
     };
+
     const handleChangeCity = (event) => {
         // 
         // 👇 Get input value from "event"
         setCity(event?.currentTarget?.value);
     };
+
     const cities = useSelector(state => {
         // 
         return state.countries.city
     })
+
     const projdetail = useSelector(state => {
         // 
         return state?.projectdetails?.projectdetails
     })
-    console.log(projdetail.nft_data, 'projdatanft')
+
     const cat = useSelector(state => {
-        // 
         return state?.projectdetails?.categories
     })
+
     const disablePastDate = () => {
         const today = new Date();
         const dd = String(today.getDate() + 0).padStart(2, "0");
@@ -101,6 +104,7 @@ function ProjDetailPopup(props) {
         const yyyy = today.getFullYear();
         return yyyy + "-" + mm + "-" + dd;
     };
+
     useEffect(() => {
         if (projdetail && Object.keys(projdetail).length) {
             setValue("title", projdetail.title)
@@ -118,22 +122,17 @@ function ProjDetailPopup(props) {
             setType(projdetail.type)
             setCountry(projdetail.country)
             setDescription(projdetail.description)
-            // setState(projdetail.state)
-            // setCity(projdetail.city)
-            console.log(projdetail.state, 'edit state')
-            console.log(projdetail.city, 'edit city')
             setValue("image", projdetail.image)
             const formData = new FormData()
-            // formData.append('country_id', event?.currentTarget?.value)
             formData.append('country_id', projdetail.country)
             formData.append('state_id', projdetail.state)
             dispatch(StateList(formData))
             dispatch(CityList(formData))
         }
     }, [projdetail]);
+
     const OnSubmit = (data) => {
         const formData = new FormData()
-        // formData.append('image', data.image[0])
         formData.append('title', data.title)
         formData.append('description', description)
         formData.append('state', data.state)
@@ -153,6 +152,7 @@ function ProjDetailPopup(props) {
         formData.append('category_id', data.category_id)
         dispatch(UpdateProject(props, formData))
     }
+
     return (
         <Modal
             {...props}

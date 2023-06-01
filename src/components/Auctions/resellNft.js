@@ -1,18 +1,19 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { getPublicLiveProjects } from "../../redux/Actions/projectAction";
+import { Link } from "react-router-dom";
 import { ResellAction } from "../../redux/Actions/resellNftAction";
+
 const Resell = ({ type }) => {
     const dispatch = useDispatch();
-    const nfts = useSelector((state) =>
-     {
+    const nfts = useSelector((state) => {
         return state?.resell?.resell;
     });
-    console.log(nfts[0]?.image, "resellnfts");
+    console.log('nfts', nfts)
+
     useEffect(() => {
-        dispatch(ResellAction())
+        dispatch(ResellAction({count:1}))
     }, [dispatch]);
+
     return (
         <section className="live-auctions-area">
             <div className="container">
@@ -27,7 +28,7 @@ const Resell = ({ type }) => {
                                 </h3>
                             </div>
                             <div className="intro-btn">
-                                {nfts?.length > 4 && (
+                                {nfts?.data?.length > 4 && (
                                     <Link to='/all/resll/nfts' style={{ color: "white" }}>
                                         <a className="btn content-btn">View All</a>
                                     </Link>
@@ -40,7 +41,7 @@ const Resell = ({ type }) => {
                     <div className="swiper-container slider-mid items ">
                         <div className="swiper-wrapper  ">
                             {/* Single Slide */}
-                            {nfts?.map((item, idx) => {
+                            {nfts?.data?.map((item, idx) => {
                                 return (
                                     <div
                                         key={`auc_${item.id}`}

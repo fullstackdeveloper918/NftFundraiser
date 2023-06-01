@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { LatestProjectDetail } from '../../redux/Actions/projectAction';
-import CopyToClipboard from 'react-copy-to-clipboard';
+
 const ProjNFTS = (props) => {
+
     const dispatch = useDispatch()
- 
     const { slug } = useParams();
     const latprojdetail = useSelector(state => {
-        // 
         return state.projectdetails.latestprojectdetails
     })
-    console.log(latprojdetail, "prjj")
-    const userdet = useSelector(state => {
-        return state?.user?.userdetail
-    })
+  
     useEffect(() => {
-        // 
         dispatch(LatestProjectDetail(slug))
     }, [slug])
+
     return (
         <section className="live-auctions-area single_project-detail">
             <div className="container">
@@ -59,7 +55,6 @@ const ProjNFTS = (props) => {
                                             </div>
                                             <div className='d-flex justify-content-between button_group buy-invest-btn align-items-center nft-price'>
                                                 {item.sold_nft !== 1 && (
-                                                    // <a> <button className='sold-outbtn' disabled>SOLD OUT</button></a>
                                                 
                                                     <a> <button className='btn py-2 ml-lg-auto btn-bordered-white'><i className="icon-handbag mr-1" /> <Link to={item.sold_nft == 0 && `/nftprojdetails/${item.slug}?refid=${props.refid}`} style={{ color: "white" }}>Invest</Link></button></a>
                                                 )}

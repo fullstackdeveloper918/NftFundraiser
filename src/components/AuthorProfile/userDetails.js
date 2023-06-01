@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Collapse } from 'antd';
-import { GetNftwol, ProjectDetail, ProjectList } from '../../redux/Actions/projectAction';
-import { useLocation, useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
+
 const UserTransdataTable = (props) => {
-    const dispatch = useDispatch()
+
     const { Panel } = Collapse;
     const onChange = (key) => {
         console.log(key);
     };
-    const { id } = useParams()
+
     const [expandIconPosition, setExpandIconPosition] = useState('end');
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
@@ -18,7 +17,7 @@ const UserTransdataTable = (props) => {
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
-    const location = useLocation()
+
     return (
         <div className='position-relative'>
             <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
@@ -49,7 +48,7 @@ const UserTransdataTable = (props) => {
                                         <td>{items.price}</td>
                                         <td>{items.pay_from?.slice(0, 4)}...{items.pay_from?.slice(35, 44)}</td>
                                         <td>{items.pay_to?.slice(0, 4)}...{items.pay_to?.slice(35, 44)}</td>
-                                        <td>#{items.token_id?.slice(0,2)}</td>
+                                        <td>#{items.token_id?.slice(0, 2)}</td>
                                         <td>{items.txd_id?.slice(0, 4)}...{items.txd_id?.slice(35, 44)}</td>
                                     </tr>
                                 )

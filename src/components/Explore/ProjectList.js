@@ -53,7 +53,7 @@ const GetAllProjects = () => {
     }, [dispatch])
 
     const showDeleteHandler = (id) => {
-        dispatch(DeleteProject(id,history))
+        dispatch(DeleteProject(id, history))
     }
 
     return (
@@ -65,14 +65,17 @@ const GetAllProjects = () => {
 
                 <div className="container">
                     <div className="row justify-content-center">
-                        <div className="col-12 col-md-8 col-lg-7">
+                        <div className="col-12">
                             {/* Intro */}
-                            <div className="intro text-center mb-4">
+                            <div className="text-left mb-4 create_projrct">
                                 {/* <span>Explore</span> */}
                                 {window.ethereum?.selectedAddress && (
 
-                                    <h3 className="mt-3 mb-0">My Projects</h3>
+                                    <h3 className="mb-0">My Projects</h3>
                                 )}
+                                <div>
+                              <Link to='/create'><i class="fa-solid fa-plus create"> <span>Create Project</span></i></Link> 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -159,10 +162,10 @@ const GetAllProjects = () => {
                     </div>
                     {projects.current_page != projects.totalPageCount ? (
                         <>
-                            
 
-                                <div className="morebutton"><a onClick={(e) => handleIncrement(e)} className="btn btn-bordered-white">Load More</a></div>
-                           
+
+                            <div className="morebutton"><a onClick={(e) => handleIncrement(e)} className="btn btn-bordered-white">Load More</a></div>
+
                         </>
 
                     ) : (

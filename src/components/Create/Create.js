@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState, useRef, useMemo } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -8,10 +8,10 @@ import styles from "./styles/styles.module.scss"
 import { useFormData } from './Context/context';
 import JoditEditor from 'jodit-react'; import { CityList, CountryList, GetUserAction, StateList } from '../../redux/Actions/authAction';
 import UploadImage from '../../shared/Upload';
-import { blobToDataURl, dataURLtoBlob } from '../../utils/blobfromurl';
+import { dataURLtoBlob } from '../../utils/blobfromurl';
+
 const Create = ({ current, next, prev }) => {
-    const editor = useRef(null);
-    const { data, setFormValues, prevValues } = useFormData();
+    const { data, setFormValues } = useFormData();
     const [description, setDescription] = useState()
     const [country, setCountry] = useState("");
     const [state, setState] = useState("");
@@ -22,14 +22,11 @@ const Create = ({ current, next, prev }) => {
     const [collection_id, setCollectionId] = useState(0);
     const [usertype, setUserType] = useState("1");
     const [nonft, setNonft] = useState('1')
-    function onHandleClick(event) {
-        setCollectionId(event.currentTarget.id);
-    };
     const dispatch = useDispatch()
     const history = useHistory()
-    const [modalShow, setModalShow] = React.useState(false);
     const [countryName, setCountryName] = useState(" ")
     const { countries } = useSelector(state => state.countries)
+    const [cursorState, updateCursorState] = useState({});
     const states = useSelector(state => {
         return state.countries.states
     })
@@ -40,39 +37,14 @@ const Create = ({ current, next, prev }) => {
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({
         mode: "all",
     });
-    const col = useSelector(state => {
-        return state?.projectdetails?.getcollections
-    })
+    
     const onSubmit = (data) => {
+
         const imageBanner = dataURLtoBlob(image)
         setFormValues({ ...data, description, type: usertype, image: imageBanner, imageUri: image });
         next()
     }
-    useEffect(() => {
-        dispatch(GetUserAction())
-        dispatch(GetCollectionsAction())
-        dispatch(CategoriesAction())
-        dispatch(CountryList())
-        if (prev) {
-            setValue('title', data.title)
-            setValue('address', data.address)
-            setValue('category_id', data.category_id)
-            setValue('country', data.country)
-            setValue('state', data.state)
-            setValue('city', data.city)
-            setValue('description', data.description)
-            setValue('price', data.price)
-            setValue('type', data.usertype)
-            setValue('image', data.imageUri)
-            setUserType(data.usertype)
-            setCountry(data.country)
-            setDescription(data.description)
-            setImage(data.imageUri)
-            setState(data.state)
-            setCity(data.city)
-        }
-        handleChangeCountry()
-    }, [data])
+
     const cat = useSelector(state => {
         return state?.projectdetails?.categories
     })
@@ -91,6 +63,40 @@ const Create = ({ current, next, prev }) => {
         //     
         // }
     };
+   
+    useEffect(() => {
+        dispatch(GetUserAction())
+
+        dispatch(GetCollectionsAction())
+        dispatch(CategoriesAction())
+        dispatch(CountryList())
+        handleChangeCountry()
+        if (prev) {
+            setValue('title', data.title)
+            setValue('address', data.address)
+            setValue('category_id', data.category_id)
+            setValue('country', data.country)
+            setValue('state', data.state)
+            setValue('city', data.city)
+            setValue('description', data.description)
+            setValue('price', data.price)
+            setValue('type', data.usertype)
+            setValue('image', data.imageUri)
+            setUserType(data.usertype)
+            setCountry(data.country)
+            setDescription(data.description)
+            setImage(data.imageUri)
+            setState(data.state)
+            setCity(data.city)
+        }
+        
+
+    }, [data])
+
+    
+
+    
+       
     const handleChangeState = (event) => {
         // 👇 Get input value from "event"
         // setCountry(event.currentTarget.value);
@@ -99,15 +105,18 @@ const Create = ({ current, next, prev }) => {
         formData.append('state_id', event.currentTarget.value)
         dispatch(CityList(formData))
     };
-    const today = new Date();
-    const numberOfDaysToAdd = 30;
-    const date = today.setDate(today.getDate())
-    const date1 = today.setDate(today.getDate() + numberOfDaysToAdd);
-    const defaultValue = new Date(date).toISOString().substr(0, 10) // yyyy-mm-dd
-    const defaultValue1 = new Date(date1).toISOString().substr(0, 10) // yyyy-mm-dd
+
+    const handleEditorChange = (value) => {
+        // Check if the editor content is empty
+        if (!value) {
+            // Reset the editor content if it's empty
+            setDescription('');
+        } else {
+            setDescription(value);
+        }
+    };
     const handleSubmitDraft = (data) => {
-        // 
-        // 
+
         const imageBanner = dataURLtoBlob(image)
         const formData = new FormData()
         for (const [key, value] of Object.entries(data)) {
@@ -120,6 +129,7 @@ const Create = ({ current, next, prev }) => {
         formData.append("on_which_step_left", 0)
         dispatch(CreateProjectAction(formData, setLoading, history))
     }
+
     return (
         <div className={current === 0 ? styles.showForm : styles.hideForm}>
             <form onSubmit={handleSubmit(onSubmit)} className="item-form card no-hover">
@@ -169,16 +179,19 @@ const Create = ({ current, next, prev }) => {
                                 control={control}
                                 name="description"
                                 defaultValue=""
+
                                 rules={{ required: true, minLength: 100 }}
                                 render={({ field }) => {
                                     return <JoditEditor
                                         ref={field.ref}
-                                        value={field.value}
+                                        value={description}
+
                                         placeholder="start typing"
                                         aria-invalid={errors.description ? "true" : "false"}
                                         tabIndex={1} // tabIndex of textarea
                                         onBlur={newContent => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
                                         onChange={field.onChange}
+
                                     />
                                 }}
                             />
@@ -196,7 +209,7 @@ const Create = ({ current, next, prev }) => {
                             <select name="country"
                                 {...register("country", { required: true })} onChange={handleChangeCountry}>
                                 aria-invalid={errors?.country ? "true" : "false"}
-                                <option value={userdet?.organization_detail?.country_id} selected>{countryName}</option>
+                                <option value={countryName ? countryName: userdet?.organization_detail?.country_id} defaultChecked={countryName ? countryName: userdet?.organization_detail?.country_id}>{countryName ? countryName: userdet?.organization_detail?.country && handleChangeCountry()}</option>
                                 {countries?.data?.data?.map((option, key) => (
                                     <>
                                         <option key={key.id} value={option.id}>
@@ -236,25 +249,25 @@ const Create = ({ current, next, prev }) => {
                                 ))}
                             </select>
                         </div>
-                        
+
                     </div>
                     <div className="col-12 col-md-6">
-                            <div className="form-group">
-                                <label>Category</label>
-                                <select name="category_id"
-                                    {...register("category_id", { required: true })}
-                                >
-                                    aria-invalid={errors.category_id ? "true" : "false"}
-                                    <option value="" disabled selected style={{ color: "#495057" }}>Select category </option>
-                                    {cat?.map((option, key) => (
-                                        <option key={key.id} value={option.id} >
-                                            {option.title}
-                                        </option>
-                                    ))}
-                                </select>
-                                {errors.category_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Category is required</p>}
-                            </div>
+                        <div className="form-group">
+                            <label>Category</label>
+                            <select name="category_id"
+                                {...register("category_id", { required: true })}
+                            >
+                                aria-invalid={errors.category_id ? "true" : "false"}
+                                <option value="" disabled selected style={{ color: "#495057" }}>Select category </option>
+                                {cat?.map((option, key) => (
+                                    <option key={key.id} value={option.id} >
+                                        {option.title}
+                                    </option>
+                                ))}
+                            </select>
+                            {errors.category_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Category is required</p>}
                         </div>
+                    </div>
                     <div className="col-12 col-md-12">
                         <div className="form-group">
                             {usertype == 2 ? (
@@ -277,11 +290,11 @@ const Create = ({ current, next, prev }) => {
                         <div className="">
                             <div className="form-group pricing-detail">
                                 <p><span>Price</span> <span>{price ? price : '--'} MATIC</span></p>
-                               
+
                                 <div className='fee_contentdiv'><span className='mainkrmetica_heading'>Karmatica Fee</span><div className='fee_content'><span>Buyer</span><span>1%</span></div><div className='fee_content'><span>Seller</span><span>1%</span></div></div>
                                 {/* <span>Buyer</span><span>1%</span><br /><span>Seller</span><span>1%</span> */}
-                                
-                                
+
+
                                 <p><span>You will receive </span><span>{98 * price / 100 ? 98 * price / 100 : "--"} MATIC</span></p>
                             </div>
                         </div>

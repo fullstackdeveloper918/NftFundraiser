@@ -5,6 +5,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { creatorWalletUpdate } from "../../components/Wallet/interact";
 import Swal from "sweetalert2";
 import { LogsAction } from "./logsAction";
+import { TopFundraiserDetail } from "./fundraiserAction";
+import { GetfundraiserProject } from "./projectAction";
 
 export const Register = createAsyncThunk(
     "auth/register",
@@ -111,7 +113,7 @@ export const GetUserAction = () => async dispatch => {
     } catch (e) {
         await dispatch(LogsAction(e))
         if (e?.response?.data.message) {
-            
+
             // swal('error', e.response.data.message, 'error')
         }
     }
@@ -171,6 +173,42 @@ export const CreateOrganizationAction = (params) => async dispatch => {
         }
     }
 }
+export const UpdateOrganizationAction = (formData, id, props, userid) => async dispatch => {
+    
+    try {
+        const token = sessionStorage.getItem('authToken')
+        const config = {
+            headers: {
+                // 'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            transformRequest: formData => formData
+        }
+
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/updateOrganizationDetails/${id}`,
+            formData, config)
+
+        if (res.status === 200) {
+            swal({ title: "success", text: "organization details updated", icon: 'success', buttons: false, timer: 1500 })
+           
+            await dispatch(GetUserAction())
+            dispatch(TopFundraiserDetail(userid))
+            dispatch(GetfundraiserProject(userid))
+            props.onHide(false)
+        }
+
+        // dispatch(createOrganizationSuccess(res));
+
+    } catch (e) {
+        await dispatch(LogsAction(e))
+        if (e) {
+            swal('error', e.response.data.message, 'error').then(function () {
+            });
+
+        }
+    }
+}
 export const CreateOrganizationAfterRoleChange = createAsyncThunk(
     "auth/register",
     async (params, thunkAPI, dispatch) => {
@@ -203,10 +241,10 @@ export const CreateOrganizationAfterRoleChange = createAsyncThunk(
 
         } catch (e) {
             if (e) {
-                
-                    
-                    swal('error', e?.response?.data?.message, 'error')
-                
+
+
+                swal('error', e?.response?.data?.message, 'error')
+
             }
         }
         //  dispatch(LogsAction(e))

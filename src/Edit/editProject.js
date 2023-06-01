@@ -55,6 +55,7 @@ const EditProject = () => {
 
     // console.log(states?.data?.data, 'states')
     const cities = useSelector(state => { return state.countries.city })
+    
     useEffect(() => {
         if (projdetail && Object.keys(projdetail).length) {
 

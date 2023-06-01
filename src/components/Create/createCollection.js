@@ -1,21 +1,25 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { CreateCollectionAction, GetCollectionsAction } from '../../redux/Actions/projectAction';
+import { CreateCollectionAction } from '../../redux/Actions/projectAction';
 import { useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { blobToDataURl, dataURLtoBlob } from '../../utils/blobfromurl';
+import { dataURLtoBlob } from '../../utils/blobfromurl';
 import UploadImage from '../../shared/Upload';
 import { Loader } from '@react-three/drei';
+
 function MyVerticallyCenteredModal(props) {
+    
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
-    const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [image, setImage] = useState()
+
     const OnSubmit = (dat) => {
         const imageBanner = dataURLtoBlob(image)
         dispatch(CreateCollectionAction({ dat, imageBanner, props, setLoading }))
     }
+
     return (
         <>
             <Modal

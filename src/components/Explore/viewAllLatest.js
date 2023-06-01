@@ -17,7 +17,7 @@ const ExploreAll = () => {
   const { type } = useParams();
   const dispatch = useDispatch();
   const [count, setCount] = useState(1)
-  const [loading, setLoading] = useState(false) 
+  const [loading, setLoading] = useState(false)
   const location = useLocation()
   console.log('count', count)
   const [currentPage, setCurrentPage] = useState(1);
@@ -60,7 +60,7 @@ const ExploreAll = () => {
         setLoading,
         setCount,
         location,
-        count: 1,
+        count: count - 1,
       })
     );
   };
@@ -98,98 +98,98 @@ const ExploreAll = () => {
         </div>
 
         <div className="row items explore-items h-auto">
-        {loading ? (
-                <Loader />
-            ) : (
-              <>
-          {liveProjects?.data && liveProjects?.data?.length ? (
-            [
-              ...new Map(
-                liveProjects?.data?.map((item) => [item["title"], item])
-              ).values(),
-            ].map((item, idx) => {
-              return (
-                <Link
-                  key={`edth_${idx}`}
-                  className="col-12 col-sm-6 col-lg-3 item explore-item"
-                >
-                  <div>
-                    <Link to={`/projects/${item.slug}`}>
-                      <div className="card">
-                        <div className="image-over">
-                          <Link to={`/projects/${item.slug}`}>
-                            <img
-                              className="card-img-top"
-                              src={item.image}
-                              alt=""
-                            />
-                          </Link>
-                          {/* <div className="image-over">
+          {loading ? (
+            <Loader />
+          ) : (
+            <>
+              {liveProjects?.data && liveProjects?.data?.length ? (
+                [
+                  ...new Map(
+                    liveProjects?.data?.map((item) => [item["title"], item])
+                  ).values(),
+                ].map((item, idx) => {
+                  return (
+                    <Link
+                      key={`edth_${idx}`}
+                      className="col-12 col-sm-6 col-lg-3 item explore-item"
+                    >
+                      <div>
+                        <Link to={`/projects/${item.slug}`}>
+                          <div className="card">
+                            <div className="image-over">
+                              <Link to={`/projects/${item.slug}`}>
+                                <img
+                                  className="card-img-top"
+                                  src={item.image}
+                                  alt=""
+                                />
+                              </Link>
+                              {/* <div className="image-over">
                                                         <img className="card-img-top" src={item.image} alt="" /> */}
-                        </div>
+                            </div>
 
-                        <div className="card-caption col-12 p-0">
-                          {/* Card Body */}
-                          <div className="card-body">
-                            {/* <div className="countdown-times ">
+                            <div className="card-caption col-12 p-0">
+                              {/* Card Body */}
+                              <div className="card-body">
+                                {/* <div className="countdown-times ">
                                                         <div className="countdown d-flex justify-content-center" data-date={item.date} />
                                                     </div> */}
-                            {/* <a > */}
-                            <h5 className="mb-0">
-                              {item.title.slice(0, 15)}
-                            </h5>
-                            {/* </a> */}
-                            <div
-                              className="seller d-flex align-items-center my-3"
+                                {/* <a > */}
+                                <h5 className="mb-0">
+                                  {item.title.slice(0, 15)}
+                                </h5>
+                                {/* </a> */}
+                                <div
+                                  className="seller d-flex align-items-center my-3"
 
-                            >
-                              <span>Owned By</span>
-                              {/* <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" /> */}
+                                >
+                                  <span>Owned By</span>
+                                  {/* <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" /> */}
 
-                              {/* <a > */}
-                              <h6 className="ml-2 mb-0">
-                                {item.user_data.username.slice(0, 12)}
-                              </h6>
-                              {/* </a> */}
+                                  {/* <a > */}
+                                  <h6 className="ml-2 mb-0">
+                                    {item.user_data.username.slice(0, 12)}
+                                  </h6>
+                                  {/* </a> */}
 
-                              {/* <span className="ml-2 mb-0">{item.user_data.username}</span> */}
-                            </div>
-                            <div className="card-bottom d-flex justify-content-between nft-price">
-                              <span><img className="mr-1" src='../img/image14.png' />{Math.round(item.price)} MATIC</span>
-                              {item?.number_of_nft == 1 ? (
-                                <span>{item.number_of_nft} NFT</span>
-                              ) : (
-                                <span>{item.number_of_nft} NFTs</span>
-                              )}
-                            </div>
-                            <div className="d-flex justify-content-between edit-buttons nft-price mt-2">
-                              <Link to={`/projects/${item.slug}`} style={{ color: "white" }} className="btn  btn-smaller mt-3 mb-0">
-
-
-                                <i className="icon-handbag" />
-                                {/* <i className="fa-solid fa-sack-dssollar"></i> */}
-                              </Link>
-                              <Link to={`/projects/${item.slug}`} className="btn  btn-smaller mt-3 ml-2 mb-0" style={{ color: "white" }}>
+                                  {/* <span className="ml-2 mb-0">{item.user_data.username}</span> */}
+                                </div>
+                                <div className="card-bottom d-flex justify-content-between nft-price">
+                                  <span><img className="mr-1" src='../img/image14.png' />{Math.round(item.price)} MATIC</span>
+                                  {item?.number_of_nft == 1 ? (
+                                    <span>{item.number_of_nft} NFT</span>
+                                  ) : (
+                                    <span>{item.number_of_nft} NFTs</span>
+                                  )}
+                                </div>
+                                <div className="d-flex justify-content-between edit-buttons nft-price mt-2">
+                                  <Link to={`/projects/${item.slug}`} style={{ color: "white" }} className="btn  btn-smaller mt-3 mb-0">
 
 
-                                <i class="fa-solid fa-share-nodes text-white"></i>
-                              </Link>
+                                    <i className="icon-handbag" />
+                                    {/* <i className="fa-solid fa-sack-dssollar"></i> */}
+                                  </Link>
+                                  <Link to={`/projects/${item.slug}`} className="btn  btn-smaller mt-3 ml-2 mb-0" style={{ color: "white" }}>
+
+
+                                    <i class="fa-solid fa-share-nodes text-white"></i>
+                                  </Link>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        </Link>
                       </div>
                     </Link>
-                  </div>
-                </Link>
-              );
-            })
-          ) : (
-            <div className="col-12 col-sm-12 col-lg-12">
-              <h2 className="allproj2">No latest project found</h2>
-            </div>
+                  );
+                })
+              ) : (
+                <div className="col-12 col-sm-12 col-lg-12">
+                  <h2 className="allproj2">No latest project found</h2>
+                </div>
+              )}
+            </>
           )}
-</>
-            )}
         </div>
         {/* <Pagination
           className="pagination-bar"
@@ -198,19 +198,19 @@ const ExploreAll = () => {
           pageSize={PageSize}
           onPageChange={page => setCurrentPage(page)}
         /> */}
-        {liveProjects.current_page != liveProjects.totalPageCount ?(
+        {liveProjects.current_page != liveProjects.totalPageCount ? (
           // <>
           // {liveProjects?.data?.length > 8 &&
           <div className="morebutton"><a onClick={(e) => handleIncrement(e)} className="btn btn-bordered-white">Load More</a></div>
           // }
           // </>
 
-        ):(
+        ) : (
           // <>
           // {liveProjects?.data?.length > 8 &&
-        <div className="morebutton"><a onClick={(e) => handleDecrement(e)} className="btn btn-bordered-white">Load Previous</a></div>
+          <div className="morebutton"><a onClick={(e) => handleDecrement(e)} className="btn btn-bordered-white">Load Previous</a></div>
           // }
-        // </>
+          // </>
         )}
       </div>
     </section>

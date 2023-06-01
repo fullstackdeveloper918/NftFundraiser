@@ -1,17 +1,60 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { PopularCollectionAction } from '../../redux/Actions/popularAction';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import Loader from '../Loader/loader';
+
 const AllCollections = () => {
+
     const dispatch = useDispatch()
+    const [count, setCount] = useState(1)
+    const [loading, setLoading] = useState(false)
+    const location = useLocation()
     const coll = useSelector(state => {
-        // 
         return state.collection.collection
     })
-    // console.log(coll, "coll")
+
     useEffect(() => {
-        dispatch(PopularCollectionAction())
+        dispatch(PopularCollectionAction({
+            cursor: 1,
+            setCount,
+            setLoading,
+            location,
+            count
+        }))
     }, [dispatch])
+
+    const handleIncrement = () => {
+
+        // if (startDate && endDate && numberofNfts) {
+
+        // setCount(prevCount => prevCount + 1)
+        dispatch(
+            PopularCollectionAction({
+                cursor: 1,
+                setCount,
+                setLoading,
+                location,
+                count: count + 1,
+            })
+        );
+        // }
+    };
+
+
+    const handleDecrement = () => {
+
+        dispatch(
+            PopularCollectionAction({
+                cursor: 1,
+                setLoading,
+                setCount,
+                location,
+                count: count - 1,
+            })
+        );
+    };
     return (
         <>
             <section className="explore-area">
@@ -30,49 +73,72 @@ const AllCollections = () => {
                         </div>
                     </div>
                     <div className="row items explore-items h-auto">
-                        {coll && coll.length ?
-                            [...new Map(coll?.map(item =>
-                                [item["title"], item])).values()]?.map((item, idx) => {
-                                    return (
-                                        <Link key={`edth_${idx}`} to={`/popularcollection/details/${item.slug}`} className="col-12 col-sm-6 col-lg-3 item explore-item" >
-                                            <div>
-                                                <div className="card position-relative ">
-                                                    <div className="image-over ">
-                                                        <img className="card-img-top" src={item.image} />
-                                                    </div>
-                                                    {/* Card Caption */}
-                                                    <div className="card-caption col-12 p-0">
-                                                        <img className='logo' src="/img/logo.png" alt='logo' width={50} height={50} />
-                                                        {/* Card Body */}
-                                                        <div className="card-body">
-                                                            <a>
-                                                                <h5 className="mb-0 mt-3">{item.title.slice(0, 15)}...</h5>
-                                                            </a>
-                                                            <div class=""><p>{item.description.slice(0, 50)}...</p></div>
-                                                            <div class="mb-2 align-items-center justify-content-between">
-                                                                <div class="mt-2 mb-2 d-flex justify-content-between text-align-center fundraiser_sale">
-                                                                    {item?.nft_data.length == 1 ? (
-                                                                        <span>{item.nft_data.length} NFT</span>
-                                                                    ) : (
-                                                                        <span>{item.nft_data.length} NFTs</span>
-                                                                    )
-                                                                    }
+                        {loading ? (
+                            <Loader />
+                        ) : (
+                            <>
+                                {coll?.data && coll?.data?.length ?
+                                    [...new Map(coll?.data?.map(item =>
+                                        [item["title"], item])).values()]?.map((item, idx) => {
+                                            return (
+                                                <Link key={`edth_${idx}`} to={`/popularcollection/details/${item.slug}`} className="col-12 col-sm-6 col-lg-3 item explore-item" >
+                                                    <div>
+                                                        <div className="card position-relative ">
+                                                            <div className="image-over ">
+                                                                <img className="card-img-top" src={item.image} />
+                                                            </div>
+                                                            {/* Card Caption */}
+                                                            <div className="card-caption col-12 p-0">
+                                                                <img className='logo' src="/img/logo.png" alt='logo' width={50} height={50} />
+                                                                {/* Card Body */}
+                                                                <div className="card-body">
+                                                                    <a>
+                                                                        <h5 className="mb-0 mt-3">{item.title.slice(0, 20)}...</h5>
+                                                                    </a>
+                                                                    <div class=""><p>{item.description.slice(0, 45)}...</p></div>
+                                                                    <div class="mb-2 align-items-center justify-content-between">
+                                                                        <div class="mt-2 mb-2 d-flex justify-content-between text-align-center fundraiser_sale">
+                                                                            {item?.nft_data.length == 1 ? (
+                                                                                <span>{item.nft_data.length} NFT</span>
+                                                                            ) : (
+                                                                                <span>{item.nft_data.length} NFTs</span>
+                                                                            )
+                                                                            }
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    )
-                                }) :
-                            <div className="col-12 col-sm-12 col-lg-12 no-data">
-                                <h2>
-                                    No Popular Collections
-                                </h2>
-                            </div>
-                        }
+                                                </Link>
+                                            )
+                                        }) :
+                                    <div className="col-12 col-sm-12 col-lg-12 no-data">
+                                        <h2>
+                                            No Popular Collections
+                                        </h2>
+                                    </div>
+                                }
+                            </>
+                        )}
                     </div>
+                    {coll?.current_page != coll?.totalPageCount ? (
+                        <>
+                            {coll?.totalPageCount >= 2 &&
+
+                                <div className="morebutton"><a onClick={(e) => handleIncrement(e)} className="btn btn-bordered-white">Load More</a></div>
+                            }
+                        </>
+
+
+                    ) : (
+                        <>
+                            {coll?.totalPageCount >= 2 &&
+
+                                <div className="morebutton"><a onClick={(e) => handleDecrement(e)} className="btn btn-bordered-white">Load Previous</a></div>
+                            }
+                        </>
+                    )}
                 </div>
             </section>
         </>
