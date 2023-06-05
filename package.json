@@ -37,6 +37,8 @@
     "react-bootstrap": "^2.5.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dayjs": "^0.3.2",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.36.1",
     "react-image-picker-editor": "^1.2.0",

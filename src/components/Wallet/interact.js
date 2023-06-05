@@ -320,8 +320,10 @@ export const sendFileToIPFS = async (fileImg) => {
   }
 }
 
-export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date, setModalShow, dispatch }) => {
+export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date, setModalShow, dispatch ,role}) => {
+  
   const contract = await new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
+  
   // new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A");//loadContract();
   try {
     let txHash = null
@@ -394,7 +396,7 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading
 }
 
 const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to, tokenId, values) => {
-  
+
   const token = sessionStorage.getItem('authToken')
   try {
     const formData = new FormData();
@@ -474,7 +476,7 @@ export const updateReffid = async ({ tokenId, refid, nft_id, dispatch, setPaymen
 
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
-  
+
   // const flow = JSON.parse(sessionStorage.getItem('paymentFlow') || "[]")
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
@@ -511,24 +513,24 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       })
       console.log('memory_clients', memory_clients)
       const memory_amounts = fee.map(amt => {
-        const amountToSend = ((parseFloat(amt) / 100) * 0.03)
+        const amountToSend = ((parseFloat(amt) / 100) * values)
         console.log('amountToSend', amountToSend)
         return web3.utils.toWei(`${amountToSend}`, "ether")
 
       })
       const referal_amount = fee.map(amt => {
-        return ((parseFloat(amt) / 100) * 0.03)
+        return ((parseFloat(amt) / 100) * values)
         // return web3.utils.toWei(`${amountToSend}`, "ether")
 
       })
 
       console.log('referal_amount', referal_amount)
       const tx = await nftContract.methods.buyNft(contractAddress, tokenId, memory_clients, memory_amounts)
-        .send({ from: window.ethereum?.selectedAddress, value: web3.utils.toWei('0.03', 'ether'), gasPrice: web3.utils.toHex(10000000), gasLimit: web3.utils.toHex(1000000) })
+        .send({ from: window.ethereum?.selectedAddress, value: web3.utils.toWei(values, 'ether'), gasPrice: web3.utils.toHex(10000000), gasLimit: web3.utils.toHex(1000000) })
 
 
         .on('transactionHash', (hash) => {
-          
+
           sessionStorage.setItem('transactionHash', hash)
 
 
@@ -537,7 +539,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
           console.log(receipt.contractAddress); // 0xf4cb...
         })
         .on('confirmation', (confNumber, receipt) => {
-          
+
 
 
           if (confNumber == 1) {
@@ -546,7 +548,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
             console.log(confNumber, 'counttrans')
             console.log(receipt, 'conf')
 
-            UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: window.ethereum?.selectedAddress, tokenId, values ,ref_amount:flow[0]?.referral_fees?.wallets !== null ? referal_amount[2]: 0})
+            UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: window.ethereum?.selectedAddress, tokenId, values, ref_amount: flow[0]?.referral_fees?.wallets !== null ? referal_amount[2] : 0 })
             loadingg(false)
             swal("success", "Confirmed", 'success').then(function () {
               window.location = `/my/nfts`;
@@ -614,78 +616,17 @@ const UpdateBid = async ({ amount, project_id, nft_id, pay_to, from, onHide, set
   }
 };
 
-export const BidNft = async (id, projid, from, onHide, setLoading) => {
+export const BidNft = async (id, projid, from, onHide, setLoading,amount) => {
 
-  // if (!isMetaMaskInstalled()) {
-  //   swal('oops!', 'No wallet found. Please install MetaMask', 'error')
-
-  // } else {
   try {
     setLoading(true)
 
-    // const addressArray = await window.ethereum.request({
-    //   method: "eth_requestAccounts",
-    // });
+    UpdateBid({ amount: amount, project_id: projid, nft_id: id, from, onHide, setLoading })
 
-    // const obj = {
-    //   status: "👆🏽 Write a message in the text-field above.",
-    //   address: addressArray[0],
-    // };
-
-    // const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
-    // const nftContract = new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
-    // const nonce = await web3.eth.getTransactionCount(window.ethereum.selectedAddress, 'latest');
-    // const amountToSendPlatform = ((`${platformFee[0]?.fees}` / 100) * 0.03)
-    // const amountToSendowner = ((`${ownerFee[0]}` / 100) * 0.03)
-    // // const amountToSend = (amountToSendPlatform - amount, "either")
-    // const amountToSend = (0.0005)
-    // const amountToSend = ; // Convert to wei value
-    // const memory_clients = [platformFee[0].wallets, ownerWallet[0]]
-    // const memory_amounts = [web3.utils.toWei(`${amountToSendPlatform}`, "ether"), web3.utils.toWei(`${amountToSendowner}`, "ether")]
-
-    // web3.eth.sendTransaction(
-    //   {
-    //     from: window.ethereum?.selectedAddress,
-    //     to: "0xB79722911A09502fb54De1f7769F6624C301810a",
-    //     value: web3.utils.toWei("0.01"),
-    //     data: "0xdf"
-    //   }, function (err, transactionHash) {
-    //     if (!err)
-    //       console.log(transactionHash + " success");
-    UpdateBid({ amount: "0.03", project_id: projid, nft_id: id, from, onHide, setLoading })
-    // });
-    // await web3.eth.sendTransaction(transferbid)
-    //   .on('transactionHash', function (hash) {
-    //     let txHash = hash
-    //     // console.log('tx', txHash)
-
-
-    //   })
-    //   .on('receipt', function (receipt) {
-    //     // console.log(receipt, 'recipt')
-    //   })
-    //   .on('confirmation', async (confNumber, receipt) => {
-    //     // 
-    //     console.log(receipt, 'conf')
-    //     // setrdata(receipt.transactionHash, receipt.from, receipt.to, receipt.status)
-    //     // setModeShow(false)
-
-    //     // modalShow(false)
-    //   })
-    //   .on('error', function (error) {
-
-    //   })
-    //   .then(function (receipt) {
-    //     // will be fired once the receipt is mined
-    //   })
   } catch (error) {
-    // await dispatch(LogsAction(error))
 
-    // 
     swal("error", error, "error")
-    // alert(error)
 
-    // }
   }
 }
 

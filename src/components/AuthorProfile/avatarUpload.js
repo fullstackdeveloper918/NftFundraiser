@@ -5,6 +5,9 @@ import { useState, useEffect, useRef } from 'react';
 import UploadImage from '../../shared/Upload'
 import { dataURLtoBlob } from '../../utils/blobfromurl'
 import { GetUserAction, UpdateProfileAction } from '../../redux/Actions/authAction';
+// import { useDrop } from 'react-dnd';
+// import { NativeTypes } from 'react-dnd-html5-backend';
+// import 'react-image-picker-editor/dist/index.css'
 
 function AvatarUpload(props) {
 
@@ -25,7 +28,30 @@ function AvatarUpload(props) {
         formData.append('username', userdet.username)
         dispatch(UpdateProfileAction(formData, props))
     }
+    // const handleDrop = (item) => {
+    //     if (item && item.files && item.files.length) {
+    //         const file = item.files[0];
+    //         const reader = new FileReader();
 
+    //         reader.onload = (e) => {
+    //             setImageSrc(e.target.result);
+    //         };
+
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
+
+    // const [{ canDrop, isOver }, drop] = useDrop(() => ({
+    //     accept: [NativeTypes.FILE],
+    //     drop: (item) => handleDrop(item),
+    //     collect: (monitor) => ({
+    //         isOver: monitor.isOver(),
+    //         canDrop: monitor.canDrop(),
+    //     }),
+    // }));
+
+    // const isActive = canDrop && isOver;
+    // const backgroundColor = isActive ? 'lightgreen' : 'white';
     return (
         <Modal
             {...props}
@@ -47,7 +73,7 @@ function AvatarUpload(props) {
                         <div>
                             <UploadImage
                                 imageSrc={imageSrc}
-                                setImageSrc={setImageSrc}
+                                setImageSrc={setImageSrc}                                   
                             />
                         </div>
                         <Button onClick={submit} className="btn btn-primary banner-update">Update</Button>

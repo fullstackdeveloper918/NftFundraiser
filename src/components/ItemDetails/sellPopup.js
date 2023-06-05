@@ -51,8 +51,11 @@ function SellPopup(props) {
         return state.projectdetails.nftlist
     })
     console.log('nftdetail', nftdetail)
-
+    const userdet = useSelector(state => {
+        return state?.user?.userdetail
+    })
     const mint = (contractAddress, type, start_date, end_date, price) => {
+        
         // 
         // auctiondata.map((item) => {
         //     setPrice(item.price)
@@ -71,6 +74,7 @@ function SellPopup(props) {
             dispatch,
             setModalShow,
             setLoading,
+            role:nftdetail?.role === 2 ? "Buyer" : "Creator",
 
             // auctiondata
             type,
@@ -82,6 +86,7 @@ function SellPopup(props) {
     }
 
     const deployContract = async (type, start_date, end_date, price) => {
+        
         try {
             if (nftdetail?.collectionData?.contract_id == null) {
 

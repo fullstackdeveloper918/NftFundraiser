@@ -326,7 +326,7 @@ const LatprojNftDetails = (props) => {
                     {latprojnftdetail?.bids?.length > 0 &&
 
                         <div className='col-12 mt-4'>
-                            <div className='position-relative'>
+                            <div className="funddeatil table-detail ">
 
 
                                 < Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
@@ -364,7 +364,7 @@ const LatprojNftDetails = (props) => {
                                                         {latprojnftdetail.bids?.map((item) => {
 
                                                             return (
-                                                                <tr>
+                                                                <tr className='contract-address'>
 
                                                                     <td>{item.username}</td>
                                                                     <td>{item.amount}</td>

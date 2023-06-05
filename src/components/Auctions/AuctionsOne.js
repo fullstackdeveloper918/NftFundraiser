@@ -94,13 +94,13 @@ const AuctionsOne = ({ type }) => {
                         <div className="d-flex justify-content-between edit-buttons nft-price ">
                           <a
                             className="btn  btn-smaller mt-3 mb-0"
-                            href="/login"
+                            href="/wallet-connect"
                           ><i className="icon-handbag" />
                             {/* <i className="fa-solid fa-sack-dssollar"></i> */}
                           </a>
                           <a
                             className="btn  btn-smaller mt-3 ml-2 mb-0"
-                            href="/login"
+                            href="/wallet-connect"
                           ><i class="fa-solid fa-share-nodes text-white"></i>
                           </a>
                         </div>

@@ -11,8 +11,6 @@ import HelpCenter from "../themes/help-center";
 import Author from "../themes/author";
 import WalletConnect from "../themes/wallet-connect";
 import Create from "../themes/create";
-import Login from "../themes/login";
-import Signup from "../themes/signup";
 import Contact from "../themes/contact";
 import Forgot from "../themes/forgotpassword";
 import PrivateRoute from "./privateRoutes";

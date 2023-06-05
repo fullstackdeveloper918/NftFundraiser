@@ -65,12 +65,11 @@ const ResellNftDetails = (props) => {
     )
 
     const buyHandler = () => {
-
         BuyNft({
             contractAddress: resellnftdetail?.collectionData?.contract_id,
             tokenId: resellnftdetail.token_id,
             payFrom: resellnftdetail.pay_from,
-            values: setValue.value,
+            values: resellnftdetail.price,
             sellingCount: resellnftdetail.selling_count,
             platformFee: ([resellnftdetail.payment_flow?.karmatica_fee]),
             ownerFee: ([resellnftdetail.payment_flow?.project_data?.fees]),

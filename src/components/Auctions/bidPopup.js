@@ -8,9 +8,9 @@ function BidPopup(props) {
     // 
     const [loading, setLoading] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm({});
-    const onSubmit = () => {
+    const onSubmit = (data) => {
         // 
-        BidNft(props.id, props.projid, props.from, props.onHide, setLoading)
+        BidNft(props.id, props.projid, props.from, props.onHide, setLoading, data.amount)
     }
     return (
         <Modal
@@ -20,8 +20,8 @@ function BidPopup(props) {
             centered
         >
             <Modal.Header >
-                <div>
-                    <div className='modal-title h4 '>Place a bid</div>
+                <div  className='d-flex justify-content-between w-full'>
+                <label className='modal-title h4 '>Place a bid</label><a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
                 </div>
             </Modal.Header>
             <Modal.Body>
@@ -56,7 +56,7 @@ function BidPopup(props) {
                             </div>
                             <hr />
                             <div className="col-12">
-                                <button className="btn w-100 mt-3 mt-sm-4" type="submit">Place Your Bid </button>
+                                <button className="btn w-100 mt-3 mt-sm-4" disabled={!sessionStorage.getItem('authToken')} type="submit">Place Your Bid </button>
                             </div>
                         </div>
                     </form>

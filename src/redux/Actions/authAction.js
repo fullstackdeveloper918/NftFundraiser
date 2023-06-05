@@ -81,7 +81,7 @@ export const ForgotPasswordAction = (params, dispatch) => async dispatch => {
             params, config)
         if (res.status === 200) {
             swal("success", res.data.message, 'success').then(function () {
-                window.location = "/login";
+                window.location = "/wallet-connect";
             });
 
         }
@@ -471,9 +471,10 @@ export const NotiDelete = (id) => async dispatch => {
         }
     }
 }
-export const ChangeUserRole = (history) => async dispatch => {
+export const ChangeUserRole = (history,setLoading) => async dispatch => {
     // 
     const token = sessionStorage.getItem('authToken')
+    setLoading(true)
     try {
         const config = {
             headers: {
@@ -490,6 +491,7 @@ export const ChangeUserRole = (history) => async dispatch => {
         if (res.status === 200) {
             // 
             await dispatch(GetUserAction())
+            setLoading(false)
             if (res?.data?.data?.organization === false) {
                 history.push('/create/organization')
             } else {
@@ -497,6 +499,7 @@ export const ChangeUserRole = (history) => async dispatch => {
             }
         }
     } catch (e) {
+        setLoading(false)
         await dispatch(LogsAction(e))
         if (e?.response?.data?.message) {
             swal('error', e.response.data.message, 'error')

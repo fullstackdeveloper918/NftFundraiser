@@ -1822,9 +1822,9 @@ padding: 12px 16px;
     font-family: var(--secondary-font);
 
 }
-.card-caption .card-body p:first-child :after {
+/* .card-caption .card-body p:first-child :after {
     content: "...";
-}
+} */
 .donate-btn button{
     background-color: transparent !important;
     border: 1px solid #fff !important;
@@ -2444,6 +2444,7 @@ ul.creator-dropdown.notification-menu:after {
     }
     :root .EditImage .popup .image-container {
         flex-direction: column !important;
+
     }
     :root .EditImage .popup .image-container {
         flex-direction: column !important;
@@ -3277,6 +3278,11 @@ a.auctionbttn {
 button.btn.btn-primary.banner-update {
     /* text-align: right; */
     float: right;
+}
+
+.image-upload-btn .material-icons {
+    
+    color: #ffffff !important;
 }
 @media(max-width:500px){
     .create_projrct i span {

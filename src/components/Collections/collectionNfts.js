@@ -44,9 +44,9 @@ const CollectionNFTS = (props) => {
                                     <div className="card-caption col-12 p-0 nfts-detail">
                                         {/* Card Body */}
                                         <div className="card-body">
-                                            <h5 className="mb-0">{item.title.slice(0, 16)} ...</h5>
+                                            <h5 className="mb-0">{item?.title?.slice(0, 25)} {item?.title?.length > 25 && <>...</>}</h5>
                                             <div className="card-bottom mt-1">
-                                                <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 50) }} />
+                                                <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 60)}} />{item?.title?.length > 25 && <>...</>}
                                             </div>
                                             <div className='d-flex justify-content-between button_group buy-invest-btn align-items-center nft-price'>
                                                 {item.sold_nft !== 0 && (

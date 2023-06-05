@@ -13,6 +13,9 @@ import { NavLink } from 'react-router-dom';
 import { Space, Switch, Tooltip, notification, Button, Alert, Popconfirm } from 'antd';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
+
 
 const Header = () => {
     const location = useLocation();
@@ -23,9 +26,19 @@ const Header = () => {
     const add1 = address?.slice(0, 4).toUpperCase()
     const add2 = address?.slice(35, 44).toUpperCase()
     const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [api, contextHolder] = notification.useNotification();
     const search = useLocation().search;
+
+    const antIcon = (
+        <LoadingOutlined
+            style={{
+                fontSize: 24,
+            }}
+            spin
+        />
+    );
+
     console.log("api", api)
     const LogoutHandler = () => {
         dispatch(logoutSuccess())
@@ -82,7 +95,6 @@ const Header = () => {
     //     return () => clearInterval(interval);
     // }, [userauction])
 
-
     useEffect(() => {
         if (sessionStorage.getItem('authToken')) {
 
@@ -90,6 +102,10 @@ const Header = () => {
         }
         getCurrentWalletConnected(dispatch)
         setAddress(getSelectedAddress)
+    }, [])
+    useEffect(() => {
+
+
 
         if (window.ethereum) {
             window.ethereum.on('accountsChanged', function (accounts) {
@@ -181,42 +197,47 @@ const Header = () => {
 
 
     const roleHandler = () => {
-        dispatch(ChangeUserRole(history))
+        dispatch(ChangeUserRole(history, setLoading))
         setActiveOption(!activeOption)
     }
     const WalletHandler = async () => {
         const currentLocation = window.location.pathname;
         console.log('currentLocation', currentLocation)
-        
+
         const refid = new URLSearchParams(search).get('refid');
         console.log(refid, 'refid')
         const response = await ConnectWallet("BUYER", dispatch)
         const { res } = response
 
-        
+
         if (!res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data.role) {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)
-            {refid &&
-                sessionStorage.setItem('authToken',res?.data?.data?.auth_token)
+            {
+                refid &&
+                    sessionStorage.setItem('authToken', res?.data?.data?.auth_token)
             }
-            {refid ? (
-                history.push(currentLocation + '?refid=' + refid)
+            {
+                refid ? (
+                    history.push(currentLocation + '?refid=' + refid)
 
 
-            ):(
-                history.push('/all/LatestProjects')     
-            )}
+                ) : (
+                    history.push('/all/LatestProjects')
+                )
+            }
         }
         else if (res?.data?.data?.is_new_user && Roles["BUYER"] == res?.data?.data?.role) {
             dispatch(loginSuccess(res))
             setAddress(window.ethereum.selectedAddress)
-            {refid ? (
-                history.push(currentLocation + '?refid=' + refid)
+            {
+                refid ? (
+                    history.push(currentLocation + '?refid=' + refid)
 
-            ):(
-                history.push('/all/LatestProjects')     
-            )}
+                ) : (
+                    history.push('/all/LatestProjects')
+                )
+            }
 
             swal({
                 title: "Welcome to Karmatica!!!",
@@ -293,6 +314,9 @@ const Header = () => {
         }
 
     }
+
+
+
     // console.log(activeOption, "active")
     return (
         <header id="header">
@@ -344,7 +368,9 @@ const Header = () => {
 
                     </ul>
                     {/* Navbar Toggler */}
-                    {window.ethereum?.selectedAddress &&
+                    {window.ethereum?.selectedAddress && sessionStorage?.getItem('authToken') &&
+
+
                         <div className="dropdown notification relative">
                             <i className="btn btn-secondary dropdown-toggle fa-sharp fa-solid fa-bell  text-white w-auto m-0 " type="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={() => notiHandler()} ></i>
                             {userdet?.notification_count > 0 &&
@@ -371,6 +397,7 @@ const Header = () => {
                             </ul>
 
                         </div>
+
                     }
                     <ul className="navbar-nav toggle">
                         <li className="nav-item">
@@ -402,72 +429,76 @@ const Header = () => {
                     </ul>
                     {window.ethereum?.selectedAddress && sessionStorage.getItem('authToken') ? (
                         <>
-
                             <div className="dropdown dropdown_login">
-                                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i className="fa fa-solid fa-user"></i>
-                                </button>
-                                <ul className="creator-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    {/* <li>{userdet?.username}</li> */}
-                                    <div className="background">
-                                        <div className="SwitchContainer">
-                                            <div
-                                                className="ToggleItem"
-                                                style={{
-                                                    backgroundColor:
-                                                        userRole == 2 ? "#4528DC" : "transparent"
-                                                }}
-                                                onClick={() => roleHandler(SwitchOptions.OPTION1)}
-                                            >
-                                                <div className={"Text"}>Buyer</div>
+                                {loading ? (
+                                    <Spin indicator={antIcon} />
+                                ) : (
+
+
+                                    <><button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i className="fa fa-solid fa-user"></i>
+                                    </button><ul className="creator-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            {/* <li>{userdet?.username}</li> */}
+                                            <div className="background">
+                                                <div className="SwitchContainer">
+                                                    <div
+                                                        className="ToggleItem"
+                                                        style={{
+                                                            backgroundColor: userRole == 2 ? "#4528DC" : "transparent"
+                                                        }}
+                                                        onClick={() => roleHandler(SwitchOptions.OPTION1)}
+                                                    >
+                                                        <div className={"Text"}>Buyer</div>
+                                                    </div>
+                                                    <div
+                                                        className="ToggleItem"
+                                                        style={{
+                                                            backgroundColor: userRole == 3 ? "#4528DC" : "transparent"
+                                                        }}
+                                                        onClick={() => roleHandler(SwitchOptions.OPTION2)}
+                                                    >
+                                                        <div className={"Text"}>Creator</div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div
-                                                className="ToggleItem"
-                                                style={{
-                                                    backgroundColor:
-                                                        userRole == 3 ? "#4528DC" : "transparent"
-                                                }}
-                                                onClick={() => roleHandler(SwitchOptions.OPTION2)}
-                                            >
-                                                <div className={"Text"}>Creator</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* <li>
-                                        
-                                        <Space direction="vertical">
-                                           
+                                            {/* <li>
 
-                                            <Switch
-                                                className='switch_custom'
-                                                checkedChildren={<div onClick={() => roleHandler()}> {userRole == 2 ? 'switch to creator' : 'switch to buyer'}</div>}
-                                                unCheckedChildren={<div onClick={() => roleHandler()}>{userRole == 2 ? 'switch to creator' : 'switch to buyer'}</div>}
-
-                                            />
-                                          
-                                        </Space>
-                                    </li> */}
-                                    <li> {userdet?.email}</li>
-                                    <li><button type='button' class="dropdown-item"><Link to='/profile'><i class="fa-regular fa-user"></i> My Profile</Link></button></li>
-                                    {userRole == 3 && (
-                                        <><li><button type='button' class="dropdown-item"><Link to='/projectlist'><i class="fa-regular fa-file" style={{ color: 'white', display: "table-cell" }}></i> My Projects</Link></button></li>
-
-                                            <li><button type='button' class="dropdown-item"><Link to={`/fundraiser/detail/${userdet.user_id}`}><i class="fa-solid fa-hand-holding-heart" style={{ display: "table-cell", color: "white" }}></i> Fundraise</Link></button></li></>
-                                    )}
-                                    {userRole == 2 && (
-                                        <li><button type='button' class="dropdown-item"><Link to='/my/nfts'><i class="fa-regular fa-file-image" style={{ color: 'white', display: "table-cell" }} /> My NFTs</Link></button></li>
-                                    )}
-                                    <li><button type='button' class="dropdown-item"><Link to='/referrals-detail'><i class="fa-solid fa-coins" style={{ color: 'white', display: "table-cell" }}></i>Referral Program</Link></button></li>
-                                    {/* {userRole == 2 ? ( */}
+<Space direction="vertical">
 
 
-                                    {/* <li><button type='button' class="dropdown-item" onClick={() => roleHandler()}>Switch to Creator</button></li></> */}
-                                    {/* ) : (
-                                        <li><button type='button' class="dropdown-item" onClick={() => roleHandler()}>Switch to Buyer</button></li>
-                                    )} */}
-                                    <li><button type='button' class="dropdown-item" onClick={LogoutHandler}><a href='/'><i class="fa-solid fa-right-from-bracket" style={{ display: "table-cell", color: "white" }}></i> Logout</a></button></li>
-                                </ul>
+<Switch
+className='switch_custom'
+checkedChildren={<div onClick={() => roleHandler()}> {userRole == 2 ? 'switch to creator' : 'switch to buyer'}</div>}
+unCheckedChildren={<div onClick={() => roleHandler()}>{userRole == 2 ? 'switch to creator' : 'switch to buyer'}</div>}
+
+/>
+
+</Space>
+</li> */}
+                                            <li> {userdet?.email}</li>
+                                            <li><button type='button' class="dropdown-item"><Link to='/profile'><i class="fa-regular fa-user"></i> My Profile</Link></button></li>
+                                            {userRole == 3 && (
+                                                <><li><button type='button' class="dropdown-item"><Link to='/projectlist'><i class="fa-regular fa-file" style={{ color: 'white', display: "table-cell" }}></i> My Projects</Link></button></li>
+
+                                                    <li><button type='button' class="dropdown-item"><Link to={`/fundraiser/detail/${userdet.user_id}`}><i class="fa-solid fa-hand-holding-heart" style={{ display: "table-cell", color: "white" }}></i> Fundraise</Link></button></li></>
+                                            )}
+                                            {userRole == 2 && (
+                                                <li><button type='button' class="dropdown-item"><Link to='/my/nfts'><i class="fa-regular fa-file-image" style={{ color: 'white', display: "table-cell" }} /> My NFTs</Link></button></li>
+                                            )}
+                                            <li><button type='button' class="dropdown-item"><Link to='/referrals-detail'><i class="fa-solid fa-coins" style={{ color: 'white', display: "table-cell" }}></i>Referral Program</Link></button></li>
+                                            {/* {userRole == 2 ? ( */}
+
+
+                                            {/* <li><button type='button' class="dropdown-item" onClick={() => roleHandler()}>Switch to Creator</button></li></> */}
+                                            {/* ) : (
+<li><button type='button' class="dropdown-item" onClick={() => roleHandler()}>Switch to Buyer</button></li>
+)} */}
+                                            <li><button type='button' class="dropdown-item" onClick={LogoutHandler}><a href='/'><i class="fa-solid fa-right-from-bracket" style={{ display: "table-cell", color: "white" }}></i> Logout</a></button></li>
+                                        </ul></>
+                                )}
                             </div>
+
+
                         </>
                     ) : (
                         <ul className="navbar-nav action">
@@ -475,10 +506,7 @@ const Header = () => {
                                 <Tooltip title='You will be signed in as a creator' color='#4528dc'>  <a className="creator-button btn ml-md-auto btn-bordered-white"
                                     onClick={() => history.push('/wallet-connect')} style={{ color: '#f8f9fa' }}><i className="fa fa-user" />
                                     <div>Creator</div></a></Tooltip>
-                                {/* <Link to="/login" className="creator-button btn ml-md-auto btn-bordered-white">
-                                    <i className="fa fa-user" />
-                                    <div>CREATOR</div>
-                                </Link> */}
+
                             </li>
                         </ul>
                     )}

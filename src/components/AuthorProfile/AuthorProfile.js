@@ -21,6 +21,10 @@ const AuthorProfile = () => {
 
     useEffect(() => {
         dispatch(GetUserAction());
+    }, [])
+
+    useEffect(() => {
+
         if (userdet && Object.keys(userdet).length) {
             setValue("avatar", userdet.avatar);
             setValue("username", userdet.username);
@@ -100,10 +104,10 @@ const AuthorProfile = () => {
                                                 name="email"
                                                 // disabled={userdet.role == 3 ? true : false}
                                                 placeholder="email"
-                                                {...register("email")}
+                                                {...register("email", { required: true })}
                                                 aria-invalid={errors.email ? "true" : "false"}
                                             />
-
+                                            {errors.email?.type === 'required' && <p style={{ color: 'red' }} role="alert">email is required</p>}
                                             <i class="fa-solid fa-pen"></i>
 
                                         </label>
