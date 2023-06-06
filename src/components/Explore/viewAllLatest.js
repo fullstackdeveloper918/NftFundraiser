@@ -148,7 +148,7 @@ const ExploreAll = () => {
 
                                   {/* <a > */}
                                   <h6 className="ml-2 mb-0">
-                                    {item.user_data.username.slice(0, 12)}
+                                    {item?.user_data?.username.slice(0, 12)}
                                   </h6>
                                   {/* </a> */}
 
@@ -191,13 +191,7 @@ const ExploreAll = () => {
             </>
           )}
         </div>
-        {/* <Pagination
-          className="pagination-bar"
-          currentPage={currentPage}
-          totalCount={liveProjects?.data_count}
-          pageSize={PageSize}
-          onPageChange={page => setCurrentPage(page)}
-        /> */}
+     
         {liveProjects.current_page != liveProjects.totalPageCount ? (
           // <>
           // {liveProjects?.data?.length > 8 &&

@@ -320,10 +320,10 @@ export const sendFileToIPFS = async (fileImg) => {
   }
 }
 
-export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date, setModalShow, dispatch ,role}) => {
-  
+export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading, _name, setCurrent, contractAddress, collid, nft_file_content, type, price, start_date, end_date, setModalShow, dispatch, role }) => {
+
   const contract = await new web3.eth.Contract(contractABI.abi, contractAddress);//loadContract();
-  
+
   // new web3.eth.Contract(contractABI.abi, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A");//loadContract();
   try {
     let txHash = null
@@ -476,7 +476,7 @@ export const updateReffid = async ({ tokenId, refid, nft_id, dispatch, setPaymen
 
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
-
+  debugger
   // const flow = JSON.parse(sessionStorage.getItem('paymentFlow') || "[]")
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
@@ -489,13 +489,15 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       let wallets = []
       let fee = []
 
-
+      const karmfee = values * 1 / 100
+      const totalValue = parseFloat(values) + parseFloat(karmfee)
+      console.log('totalValue', totalValue)
       wallets = (flow[0]?.referral_fees?.wallets === null) ?
         [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees?.wallets, flow[0]?.project_data?.wallets] :
         [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees?.wallets, flow[0]?.project_data?.wallets, flow[0]?.referral_fees?.wallets]
       fee = (flow[0]?.referral_fees?.wallets === null) ?
-        [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees?.fees, flow[0]?.project_data?.fees] :
-        [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), flow[0]?.karmatica_fees?.fees, flow[0]?.project_data?.fees, flow[0]?.referral_fees?.fees]
+        [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), + parseFloat(flow[0]?.karmatica_fees?.fees) + parseFloat(karmfee), flow[0]?.project_data?.fees] :
+        [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), + parseFloat(flow[0]?.karmatica_fees?.fees) + parseFloat(karmfee), flow[0]?.project_data?.fees, flow[0]?.referral_fees?.fees]
       console.log(fee)
       console.log(wallets)
       const addressArray = await window.ethereum.request({
@@ -513,20 +515,20 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
       })
       console.log('memory_clients', memory_clients)
       const memory_amounts = fee.map(amt => {
-        const amountToSend = ((parseFloat(amt) / 100) * values)
+        const amountToSend = ((parseFloat(amt) * totalValue / 100))
         console.log('amountToSend', amountToSend)
         return web3.utils.toWei(`${amountToSend}`, "ether")
 
       })
       const referal_amount = fee.map(amt => {
-        return ((parseFloat(amt) / 100) * values)
+        return ((parseFloat(amt)) * totalValue / 100)
         // return web3.utils.toWei(`${amountToSend}`, "ether")
 
       })
 
       console.log('referal_amount', referal_amount)
       const tx = await nftContract.methods.buyNft(contractAddress, tokenId, memory_clients, memory_amounts)
-        .send({ from: window.ethereum?.selectedAddress, value: web3.utils.toWei(values, 'ether'), gasPrice: web3.utils.toHex(10000000), gasLimit: web3.utils.toHex(1000000) })
+        .send({ from: window.ethereum?.selectedAddress, value: web3.utils.toWei(String(totalValue), 'ether'), gasPrice: web3.utils.toHex(10000000), gasLimit: web3.utils.toHex(1000000) })
 
 
         .on('transactionHash', (hash) => {
@@ -558,7 +560,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
         })
 
         .on('error', function (error) {
-          // 
+          debugger
           // checkTransactionStatus(sessionStorage.getItem('transactionHash'))
           dispatch(LogsAction(error))
 
@@ -571,7 +573,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
 
       // }
     } catch (error) {
-
+      debugger
       dispatch(LogsAction(error))
       // checkTransactionStatus(sessionStorage.getItem("transactionHash"), loadingg)
       swal("error", JSON.stringify(error.message), "error")
@@ -616,7 +618,7 @@ const UpdateBid = async ({ amount, project_id, nft_id, pay_to, from, onHide, set
   }
 };
 
-export const BidNft = async (id, projid, from, onHide, setLoading,amount) => {
+export const BidNft = async (id, projid, from, onHide, setLoading, amount) => {
 
   try {
     setLoading(true)
