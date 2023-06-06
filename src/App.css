@@ -3,6 +3,9 @@
 body{
     background-color: #09080d !important;
 }
+::-webkit-scrollbar {
+    display: none;
+}
 iframe {
     pointer-events: none;
   }
