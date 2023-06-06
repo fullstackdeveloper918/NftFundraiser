@@ -51,8 +51,8 @@ function DescEdit(props) {
         >
             <Modal.Header >
 
-                <div>
-                    <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
+                <div className='d-flex justify-content-between w-full'>
+                    <label className='modal-title h4 '>Description</label>   <a><i class="fa-regular fa-xmark-large" style={{ color: '#fff' }} onClick={props.onHide}>X</i></a>
                 </div>
             </Modal.Header>
             <Modal.Body>
@@ -60,7 +60,6 @@ function DescEdit(props) {
                     <div className="row">
 
                         <div className="col-12">
-                            <label>Description</label>
                             <div className="form-group">
 
                                 <Controller
@@ -93,7 +92,7 @@ function DescEdit(props) {
                     </div>
 
 
-                                    
+
                 </form>
             </Modal.Body>
 

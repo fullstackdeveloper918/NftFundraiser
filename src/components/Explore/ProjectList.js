@@ -74,7 +74,10 @@ const GetAllProjects = () => {
                                     <h3 className="mb-0">My Projects</h3>
                                 )}
                                 <div>
-                              <Link to='/create'><i class="fa-solid fa-plus create"> <span>Create Project</span></i></Link> 
+                                {projects?.data?.length !== 0 &&
+                                
+                                    <Link to='/create'><i class="fa-solid fa-plus create"> </i> <span style={{color:'#fff'}}>Create Project</span></Link> 
+                                }
                                 </div>
                             </div>
                         </div>

@@ -63,7 +63,8 @@ const ResellNftDetails = (props) => {
             spin
         />
     )
-
+    const karmfee = resellnftdetail.price * 1 / 100
+    console.log('karmfee', karmfee)
     const buyHandler = () => {
         BuyNft({
             contractAddress: resellnftdetail?.collectionData?.contract_id,
@@ -204,7 +205,7 @@ const ResellNftDetails = (props) => {
                             <div className='price_nft_detail'>
                                 <div className='nft-price'>
                                     <img src='../../../../img/image14.png' />
-                                    <span><small>{resellnftdetail.amount}  / ${resellnftdetail.amount * Math.round(matic['matic-network']?.cad)} Cdn </small></span>
+                                    <span><small>{resellnftdetail.price}  / ${Math.round(resellnftdetail?.price * matic['matic-network']?.cad)} Cdn </small></span>
                                 </div>
                             </div>
                         </div>
