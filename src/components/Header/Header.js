@@ -430,15 +430,19 @@ const Header = () => {
                     {window.ethereum?.selectedAddress && sessionStorage.getItem('authToken') ? (
                         <>
                             <div className="dropdown dropdown_login">
-                                {loading ? (
-                                    <Spin indicator={antIcon} />
-                                ) : (
+                               
 
 
                                     <><button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i className="fa fa-solid fa-user"></i>
-                                    </button><ul className="creator-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                                    </button>
+                                    <ul className="creator-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    {loading &&
+                                        <div className='loader-spin'><Spin indicator={antIcon} /> </div>                            
+                                    }
                                             {/* <li>{userdet?.username}</li> */}
+                                          
                                             <div className="background">
                                                 <div className="SwitchContainer">
                                                     <div
@@ -495,7 +499,7 @@ unCheckedChildren={<div onClick={() => roleHandler()}>{userRole == 2 ? 'switch t
 )} */}
                                             <li><button type='button' class="dropdown-item" onClick={LogoutHandler}><a href='/'><i class="fa-solid fa-right-from-bracket" style={{ display: "table-cell", color: "white" }}></i> Logout</a></button></li>
                                         </ul></>
-                                )}
+                             
                             </div>
 
 

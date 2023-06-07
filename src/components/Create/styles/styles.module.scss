@@ -117,3 +117,26 @@ $border-radius: 4px;
     display: block;
   }
 }
+.input_group {
+  input[type=number]::-webkit-inner-spin-button, 
+  .input_group input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0; 
+  }
+  span{
+    position: absolute;
+    right: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    &.plus_icon{
+      top: 5px;
+    }
+    &.minus_icon{
+      bottom: 2px;
+    }
+  }
+ 
+  
+}

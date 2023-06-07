@@ -49,7 +49,7 @@ const NftdataTable = (props) => {
                                     <th>Token ID</th>
                                     <td>{nftdetail.token_id?.slice(0,2)}</td>
                                 </tr><tr>
-                                    <th>Token Stranded</th>
+                                    <th>Token Standard</th>
                                     <td>ERC721</td>
                                 </tr></>
 

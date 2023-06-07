@@ -3224,7 +3224,7 @@ a.auctionbttn {
     border: 1px solid #fff;
     margin-top: 20px;
 }
-.react-tabs__tab--selected {
+.referal-detail .react-tabs__tab--selected {
     border-color: #aaa0;
     color: white;
     background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
@@ -3284,6 +3284,69 @@ button.btn.btn-primary.banner-update {
     
     color: #ffffff !important;
 }
+.single_project-detail .item .card {
+    width: 100%;
+}
+.single_project-detail .item .card a {
+    display: block;
+}
+.single_project-detail .card-bottom p {
+    min-height: 45px;
+}
+.author-area .item-form .select-box:after {
+    content: "\f107";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 15px;
+    opacity: .6;
+    right: 15px;
+    pointer-events: none;
+  }
+  
+  .author-area .item-form .select-box select {
+    appearance: none;
+    cursor: pointer;
+  }
+  .referal-detail .react-tabs__tab:focus:after {
+    left: -1px;
+    right: 0;
+    width: 102%;
+    display: none;
+}
+.referal-detail .react-tabs__tab--selected{
+    border-bottom: 5px solid #fff!important;
+}
+.fundraise-main .nft-edit-icon i{
+    margin: 5px 0 0 20px;
+}
+.fundraise-main .nft-edit-icon {
+    display: flex;
+    align-items: center;
+}
+.ant-tooltip {
+    padding-top: 0;
+    font-size: 12px;
+}
+.loader-spin {
+    position: absolute;
+    width: 100%;
+    height: 72%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    top: 90px;
+    backdrop-filter: blur(3px);
+}
+.Edite_able {
+    text-align: left;
+}
+.edit_icon_des i{margin-left: 20px;}
+.ant-tooltip.ant-tooltip-placement-bottom {
+    padding-top: 0;
+    font-size: 12px;
+}
 @media(max-width:500px){
     .create_projrct i span {
         display: none;
@@ -3291,7 +3354,31 @@ button.btn.btn-primary.banner-update {
     :root .all_nft .explore-item{
         flex: 100%;
     }
-   
+    .single_project-detail .item .card {
+        padding: 15px;
+    }
+    
+    .single_project-detail .item .card img {
+        width: 100%;
+    }
+    
+    .single_project-detail .item .card a {
+        display: block;
+    }
+    
+    .soldout-card {
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+    
+    .soldout-card .sold-outbtn {
+        width: calc(100% - 60px);
+        left: 30px;
+    }
+    .button_group.nft-price .btn {display: flex;align-items: center;padding: 10px 15px;}
+    .single_project-detail .card-bottom p {
+        min-height: inherit;
+    }
 }
 @media (max-width:991px){
     :root .all_nft .explore-item{

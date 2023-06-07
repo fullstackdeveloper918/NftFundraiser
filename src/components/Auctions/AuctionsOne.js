@@ -11,6 +11,7 @@ const AuctionsOne = ({ type }) => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(1)
   const location = useLocation()
+  const [data, setData] = useState([]);
   const liveProjects = useSelector((state) => {
     return state?.projectdetails?.liveProjects[type];
   });
@@ -22,7 +23,8 @@ const AuctionsOne = ({ type }) => {
         type: projectTypesMap[type],
         projectType: type,
         location,
-        count
+        count,
+        setData
       })
     );
   }, [dispatch]);

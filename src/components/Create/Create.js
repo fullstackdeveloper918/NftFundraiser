@@ -206,6 +206,7 @@ const Create = ({ current, next, prev }) => {
                     <div className="col-md-6 col-12">
                         <div className="form-group mt-3">
                             <label>Country</label>
+                            <div className="position-relative select-box">
                             <select name="country"
                                 {...register("country", { required: true })} onChange={handleChangeCountry}>
                                 aria-invalid={errors?.country ? "true" : "false"}
@@ -218,11 +219,13 @@ const Create = ({ current, next, prev }) => {
                                     </>
                                 ))}
                             </select>
+                            </div>
                         </div>
                     </div>
                     <div className="col-md-6 col-12">
                         <div className="form-group mt-3">
                             <label>State or province</label>
+                            <div className="position-relative select-box">
                             <select name="state"
                                 {...register("state")} onChange={handleChangeState}>
                                 aria-invalid={errors?.state ? "true" : "false"}
@@ -233,11 +236,13 @@ const Create = ({ current, next, prev }) => {
                                     </option></>
                                 ))}
                             </select>
+                            </div>
                         </div>
                     </div>
                     <div className="col-md-6 col-12">
                         <div className="form-group">
                             <label>City or Region</label>
+                            <div className="position-relative select-box">
                             <select name="city"
                                 {...register("city")}>
                                 aria-invalid={errors?.city ? "true" : "false"}
@@ -248,12 +253,14 @@ const Create = ({ current, next, prev }) => {
                                     </option></>
                                 ))}
                             </select>
+                            </div>
                         </div>
 
                     </div>
                     <div className="col-12 col-md-6">
                         <div className="form-group">
                             <label>Category</label>
+                            <div className="position-relative select-box">
                             <select name="category_id"
                                 {...register("category_id", { required: true })}
                             >
@@ -266,15 +273,18 @@ const Create = ({ current, next, prev }) => {
                                 ))}
                             </select>
                             {errors.category_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Category is required</p>}
+                       </div>
                         </div>
                     </div>
                     <div className="col-12 col-md-12">
-                        <div className="form-group">
+                        <div className={`form-group  ${styles.input_group}`}>
                             {usertype == 2 ? (
                                 <label>Price per NFT (In MATIC tokens)</label>
                             ) : (
                                 <label>Price (In MATIC tokens)</label>
                             )}
+                            <div className='position-relative'>
+                            <span className={styles.plus_icon}><i className="fa fa-plus" aria-hidden="true"></i></span>
                             <input
                                 type="number"
                                 className="form-control"
@@ -285,7 +295,10 @@ const Create = ({ current, next, prev }) => {
                                 onChange={(e) => setPrice(e.target.value)}
                                 aria-invalid={errors.price ? "true" : "false"}
                             />
+                            
                             {errors.price?.type === 'required' && <p style={{ color: 'red' }} role="alert">Price is required</p>}
+                            <span className={styles.minus_icon}><i className="fa fa-minus" aria-hidden="true"></i></span>
+                        </div>
                         </div>
                         <div className="">
                             <div className="form-group pricing-detail">

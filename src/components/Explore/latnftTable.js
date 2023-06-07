@@ -54,7 +54,7 @@ const LatNftDataTable = (props) => {
                                 <td>{latprojnftdetail?.token_id?.slice(0,2)}</td>
                             </tr>
                             <tr>
-                                <th>Token Stranded</th>
+                                <th>Token Standard</th>
                                 <td>ERC721</td>
                             </tr>
 
@@ -62,7 +62,7 @@ const LatNftDataTable = (props) => {
 
                                 <th>Contract Address</th>
                                 <th>Token ID</th>
-                                <th>Token Stranded</th>
+                                <th>Token Standard</th>
                                 <th>Blockchain</th>
                             </tr> */}
 

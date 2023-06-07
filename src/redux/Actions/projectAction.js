@@ -226,7 +226,7 @@ export const uploadNFT = async (nft, dispatch, setLoading) => {
 export const getPublicLiveProjects = createAsyncThunk(
     "auth/liveProjects",
 
-    async (params, thunkAPI, setLatestData) => {
+    async (params, thunkAPI) => {
         if (params.location.pathname === "/all/LatestProjects") {
             params.setLoading(true)
         }
@@ -241,15 +241,19 @@ export const getPublicLiveProjects = createAsyncThunk(
             }
             const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=${params.count}&latitude=${latitude}&longitude=${longitude}&search_keyword=&category_id=&type`, config)
             // console.log(res, 'projres')
-
+            params.setData(prevData =>{ return{ ...prevData, res}});
             thunkAPI.dispatch(publicLiveProjects({
                 res: res,
                 type: projectType,
+                // setPrevData,
+                
             }));
+            // params.setPrevData(res)
             params.setLoading(false)
             if (params.location.pathname === "/all/LatestProjects") {
 
                 params.setCount(params.count)
+                // params.setPrevData((prevData)=> [...prevData, res?.data?.data])
             }
             // thunkAPI.dispatch(publicLiveProjectspagination({
             //     res: res,

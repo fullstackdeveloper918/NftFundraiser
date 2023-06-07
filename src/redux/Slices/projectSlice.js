@@ -125,8 +125,9 @@ const projectSlice = createSlice({
             // 
             state.updbanner = action?.payload?.data?.data;
         },
-        publicLiveProjects: (state, action) => {
+        publicLiveProjects: (state, action,setPrevData) => {
             state.liveProjects[action.payload.type] = action.payload.res.data.data
+            // setPrevData(state.liveProjects[action.payload.type])
             // state.liveProjects = action.payload.data.data.data
             // state.liveProjects['R'] = action.payload.data.data.data
         },
