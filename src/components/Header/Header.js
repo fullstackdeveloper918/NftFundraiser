@@ -39,7 +39,6 @@ const Header = () => {
         />
     );
 
-    console.log("api", api)
     const LogoutHandler = () => {
         dispatch(logoutSuccess())
         setAddress(null)
