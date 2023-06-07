@@ -14,7 +14,7 @@ import UploadComponent from "../UploadComponent";
 // import 'react-image-picker-editor/dist/index.css'
 
 function AvatarUpload(props) {
-  const [imageSrc, setImageSrc] = useState("");
+  const [imageSrc, setImageSrc] = useState();
   const userdet = useSelector((state) => {
     return state?.user?.userdetail;
   });
@@ -24,10 +24,13 @@ function AvatarUpload(props) {
     dispatch(GetUserAction());
   }, []);
 
+  console.log("imageSrc", imageSrc);
   const submit = () => {
+  
+
     const formData = new FormData();
-    const avatar = dataURLtoBlob(imageSrc);
-    formData.append("avatar", avatar);
+    // const avatar = dataURLtoBlob(imageSrc);
+    formData.append("avatar", new File(imageSrc));
     formData.append("username", userdet.username);
     dispatch(UpdateProfileAction(formData, props));
   };

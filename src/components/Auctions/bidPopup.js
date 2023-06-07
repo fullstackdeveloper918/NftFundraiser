@@ -43,15 +43,20 @@ function BidPopup(props) {
                                 <div class="bidinput">{window.ethereum?.selectedAddress && sessionStorage.getItem('authToken') ? window.ethereum?.selectedAddress : <span style={{ color: 'red' }} disabled>Please connect your wallet</span>}</div>
                             </div>
                             <div className="col-12">
-                                <div className="form-group">
+                                <div className="form-group number-input">
                                     <label>Your bid</label>
+                                    <div class="position-relative">
+                                    <span className="plus_icon"><i className="fa fa-plus" aria-hidden="true"></i></span>
                                     <input
                                         type="number"
                                         placeholder='Enter bid'
                                         {...register('amount', { required: true })}
                                         aria-invalid={errors.amount ? "true" : "false"}
                                     />
+                                    <span className="minus_icon"><i className="fa fa-minus" aria-hidden="true"></i></span>
+                                    </div>
                                     {errors.amount?.type === 'required' && <p style={{ color: 'red' }} role="alert">Amount is required</p>}
+                                                                        
                                 </div>
                             </div>
                             <hr />

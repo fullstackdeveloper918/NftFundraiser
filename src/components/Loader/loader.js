@@ -5,7 +5,7 @@
 import React from "react";
 import { Spinner } from "react-bootstrap";
 
-function Loader() {
+function Loader({height,width}) {
 
 
 
@@ -15,8 +15,8 @@ function Loader() {
             animation="border"
             role="status"
             style={{
-                height: "100px",
-                width: "100px",
+                height: height ? height : "100px",
+                width: width ? width :"100px",
                 margin: "auto",
                 display: "block",
                 // position: 'absolute',

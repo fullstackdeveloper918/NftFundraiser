@@ -220,7 +220,7 @@ const RoleChangeOrganizationdetails = () => {
                                 <div className="col-md-6 col-12">
                                     <div className="form-group mt-3">
                                         <label>Country</label>
-
+                                        <div class="position-relative select-box">
                                         <select name="country"
                                             {...register("country", { required: true })}>
                                             aria-invalid={errors.country ? "true" : "false"}
@@ -231,6 +231,7 @@ const RoleChangeOrganizationdetails = () => {
                                                 </option></>
                                             ))}
                                         </select>
+                                        </div>
                                         {errors.country?.type === 'required' && <p style={{ color: 'red' }} role="alert">Country is required</p>}
                                     </div>
                                 </div>
@@ -249,8 +250,10 @@ const RoleChangeOrganizationdetails = () => {
                                         </div>
                                     </div> */}
                                 <div className="col-md-6 col-12">
-                                    <div className="form-group mt-3">
+                                    <div className="form-group number-input mt-3">
                                         <label>EIN Number/Tax Id</label>
+                                        <div class="position-relative">
+                                       <span className="plus_icon"><i className="fa fa-plus" aria-hidden="true"></i></span>
                                         <input
                                             type="number"
                                             className="form-control"
@@ -260,12 +263,15 @@ const RoleChangeOrganizationdetails = () => {
                                             // {...register("email")}
                                             aria-invalid={errors.tax_id ? "true" : "false"}
                                         />
+                                         <span className="minus_icon"><i className="fa fa-minus" aria-hidden="true"></i></span>
+                                    </div>
                                         {errors.tax_id?.type === 'required' && <p style={{ color: 'red' }} role="alert">Id is required</p>}
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-12">
                                     <div className="form-group mt-3">
                                         <label>Social Media (required)</label>
+                                        <div class="position-relative select-box">
                                         <select name="social"
                                             {...register("social", { required: true })}>
                                             aria-invalid={errors.social ? "true" : "false"}
@@ -276,6 +282,7 @@ const RoleChangeOrganizationdetails = () => {
                                                 </option></>
                                             ))}
                                         </select>
+                                        </div>
                                         {errors.social?.type === 'required' && <p style={{ color: 'red' }} role="alert">Social media is required</p>}
                                     </div>
                                 </div>

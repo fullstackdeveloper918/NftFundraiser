@@ -27,6 +27,7 @@ export const ResellAction = (params) => async dispatch => {
         if(params?.location?.pathname === '/all/resll/nfts'){
             params.setLoading(false)
         }
+        return res?.data?.data;
     } catch (e) {
         if(params?.location?.pathname === '/all/resll/nfts'){
             params.setLoading(false)

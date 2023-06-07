@@ -295,10 +295,10 @@ const Create = ({ current, next, prev }) => {
                                 onChange={(e) => setPrice(e.target.value)}
                                 aria-invalid={errors.price ? "true" : "false"}
                             />
-                            
-                            {errors.price?.type === 'required' && <p style={{ color: 'red' }} role="alert">Price is required</p>}
-                            <span className={styles.minus_icon}><i className="fa fa-minus" aria-hidden="true"></i></span>
+                             <span className={styles.minus_icon}><i className="fa fa-minus" aria-hidden="true"></i></span>
                         </div>
+                            {errors.price?.type === 'required' && <p style={{ color: 'red' }} role="alert">Price is required</p>}
+                           
                         </div>
                         <div className="">
                             <div className="form-group pricing-detail">

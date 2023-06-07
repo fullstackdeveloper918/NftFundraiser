@@ -9,8 +9,8 @@ const projectTypesMap = {
 };
 const AuctionsOne = ({ type }) => {
   const dispatch = useDispatch();
-  const [count, setCount] = useState(1)
-  const location = useLocation()
+  const [count, setCount] = useState(1);
+  const location = useLocation();
   const [data, setData] = useState([]);
   const liveProjects = useSelector((state) => {
     return state?.projectdetails?.liveProjects[type];
@@ -24,10 +24,11 @@ const AuctionsOne = ({ type }) => {
         projectType: type,
         location,
         count,
-        setData
+        setData,
       })
     );
   }, [dispatch]);
+
   return (
     <section className="live-auctions-area">
       <div className="container">
@@ -75,9 +76,7 @@ const AuctionsOne = ({ type }) => {
                         {/* <a> */}
                         <h5 className="mb-0">{item.title.slice(0, 34)}...</h5>
                         {/* </a> */}
-                        <div
-                          className="seller d-flex align-items-center my-3"
-                        >
+                        <div className="seller d-flex align-items-center my-3">
                           <span>Owned By</span>
                           {/* <a> */}
                           <h6 className="ml-2 mb-0">
@@ -85,8 +84,11 @@ const AuctionsOne = ({ type }) => {
                           </h6>
                           {/* </a> */}
                         </div>
-                        <div className="card-bottom d-flex justify-content-between nft-price" >
-                          <span><img className="mr-1" src='../img/image14.png' />{Math.round(item.price)} MATIC</span>
+                        <div className="card-bottom d-flex justify-content-between nft-price">
+                          <span>
+                            <img className="mr-1" src="../img/image14.png" />
+                            {Math.round(item.price)} MATIC
+                          </span>
                           {item?.number_of_nft == 1 ? (
                             <span>{item.number_of_nft} NFT</span>
                           ) : (
@@ -97,13 +99,15 @@ const AuctionsOne = ({ type }) => {
                           <a
                             className="btn  btn-smaller mt-3 mb-0"
                             href="/wallet-connect"
-                          ><i className="icon-handbag" />
+                          >
+                            <i className="icon-handbag" />
                             {/* <i className="fa-solid fa-sack-dssollar"></i> */}
                           </a>
                           <a
                             className="btn  btn-smaller mt-3 ml-2 mb-0"
                             href="/wallet-connect"
-                          ><i class="fa-solid fa-share-nodes text-white"></i>
+                          >
+                            <i class="fa-solid fa-share-nodes text-white"></i>
                           </a>
                         </div>
                       </div>

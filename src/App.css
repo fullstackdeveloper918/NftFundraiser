@@ -1,149 +1,151 @@
-
 /* new */
-body{
-    background-color: #09080d !important;
-}
-::-webkit-scrollbar {
-    display: none;
+body {
+  background-color: #09080d !important;
 }
 iframe {
-    pointer-events: none;
-  }
-html {
-    scroll-behavior: smooth;
-  }
-p, label , .h4 , span ,input{
-    color: #fff;
+  pointer-events: none;
 }
-input, textarea {
-    background-color: #000 !important;
-    border: 1px solid #000 !important;
-    color: #fff !important;
+html {
+  scroll-behavior: smooth;
+}
+p,
+label,
+.h4,
+span,
+input {
+  color: #fff;
+}
+input,
+textarea {
+  background-color: #000 !important;
+  border: 1px solid #000 !important;
+  color: #fff !important;
 }
 .ant-btn.ant-btn-block {
-    width: auto !important;
-    float: right;
+  width: auto !important;
+  float: right;
 }
-a{
-    font-family: 'Poppins' !Important;
+a {
+  font-family: "Poppins" !important;
 }
 .hero-section h1 {
-    color: var(--white-color);
-    font-family: 'Jost';
-    margin-bottom: 1.5rem;
-    font-size: var(--h1-size);
-    font-weight: var(--h1-weight);
-    line-height: 1.2;
-    font-family: var(--primary-font);
-    /* color: var(--primary-color); */
-    -ms-word-wrap: break-word;
-    word-wrap: break-word;
+  color: var(--white-color);
+  font-family: "Jost";
+  margin-bottom: 1.5rem;
+  font-size: var(--h1-size);
+  font-weight: var(--h1-weight);
+  line-height: 1.2;
+  font-family: var(--primary-font);
+  /* color: var(--primary-color); */
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
 }
 label#demo-simple-select-outlined-label {
-    color: #8e8e8e !important;
+  color: #8e8e8e !important;
 }
 button.ant-btn.ant-btn-dashed.ant-btn-block {
-    background: transparent;
-    border: 1px solid #cccccc0d;
+  background: transparent;
+  border: 1px solid #cccccc0d;
 }
-button.ant-btn.ant-btn-dashed.ant-btn-block svg ,button.ant-btn.ant-btn-dashed.ant-btn-block span{
-    color: #fff !important;
+button.ant-btn.ant-btn-dashed.ant-btn-block svg,
+button.ant-btn.ant-btn-dashed.ant-btn-block span {
+  color: #fff !important;
 }
 form label {
-    margin-bottom: 6px;
+  margin-bottom: 6px;
 }
-input , textarea{
-    background-color: #000 !important;
-    border: 1px solid #000 !important;
+input,
+textarea {
+  background-color: #000 !important;
+  border: 1px solid #000 !important;
 }
 .ant-upload.ant-upload-select-picture-card {
-    background-color: #000000 !important;
+  background-color: #000000 !important;
 }
-.ant-upload.ant-upload-select-picture-card span{
-    color: #fff !important;
+.ant-upload.ant-upload-select-picture-card span {
+  color: #fff !important;
 }
 .MuiSelect-icon {
-    color: rgb(255 255 255 / 54%) !important;
+  color: rgb(255 255 255 / 54%) !important;
 }
 .hidden-word {
-    visibility: hidden !important;
-   
+  visibility: hidden !important;
 }
 .anticon svg {
-    display: inline-block;
-    color: #fff !important;
+  display: inline-block;
+  color: #fff !important;
 }
 .choose_div div {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    min-height: 0px;
-    padding: 12px;
-    border-radius: 8px;
-    color: #ffff;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 0px;
+  padding: 12px;
+  border-radius: 8px;
+  color: #ffff;
 }
 .card-body button {
-    /* background: #000 !important; */
-    color: #fff !important;
-    margin: 0 !important;
-    /* border: 1px solid #cccccc14 !important; */
-    /* padding-top: 0; */
+  /* background: #000 !important; */
+  color: #fff !important;
+  margin: 0 !important;
+  /* border: 1px solid #cccccc14 !important; */
+  /* padding-top: 0; */
 }
 .card-body div {
-    color: #fff !important;
-    font-family: 'Poppins', sans-serif !important;
+  color: #fff !important;
+  font-family: "Poppins", sans-serif !important;
 }
-::placeholder{
-    font-weight: 400!important;
-    font-size: 14px !important;
-    color: #515151 !important;
-    text-transform: capitalize;
+::placeholder {
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  color: #515151 !important;
+  text-transform: capitalize;
 }
 .creator-dropdown {
-    min-width: 10rem !important;
-    left: -20px;
-    text-align: center;
+  min-width: 10rem !important;
+  left: -20px;
+  text-align: center;
 }
 
 .creator-button {
-    display: flex;
-    grid-gap: 8px;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  grid-gap: 8px;
+  align-items: center;
+  gap: 8px;
 }
 .modal-content {
-    max-width: 500px;
-    width: 100%;
-    margin: 0 auto !important;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto !important;
 }
 .approval {
-    font-size: 10px;
-    background: #9b8bc1;
-    color: white;
-    padding: 8px;
-    width: 120px;
-    margin: 24px 0px 0px 0px;
-    border-radius: 12px;
+  font-size: 10px;
+  background: #9b8bc1;
+  color: white;
+  padding: 8px;
+  width: 120px;
+  margin: 24px 0px 0px 0px;
+  border-radius: 12px;
 }
 
 ::-webkit-calendar-picker-indicator {
-    filter: invert(1) brightness(50%)
-        /* sepia(100%)
+  filter: invert(1) brightness(50%);
+  /* sepia(100%)
             saturate(10000%)
             hue-rotate(180deg) */
 }
 
 input[type="date"]::before {
-    color: var(--primary-p-color);
-    content: attr(placeholder) " : ";
+  color: var(--primary-p-color);
+  content: attr(placeholder) " : ";
 }
 
 input[type="date"]:focus::before {
-    content: "" !important;
+  content: "" !important;
 }
 
 .live-auctions-area .swiper-slide.item {
-    max-width: 270px;
+  max-width: 270px;
 }
 /****bannercss******/
 /*  */
@@ -151,662 +153,697 @@ input[type="date"]:focus::before {
 
 /****footer***/
 .termsandconditions {
-    padding: 0px 0px 50px 30px;
+  padding: 0px 0px 50px 30px;
 }
 .item-details-area .shape {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    line-height: 0;
-    direction: ltr;
-    overflow: hidden;
-    z-index: 0;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  line-height: 0;
+  direction: ltr;
+  overflow: hidden;
+  z-index: 0;
 }
 
 .item-details-area .row {
-    /* background: #101010; */
-    /* padding: 20px 10px; */
+  /* background: #101010; */
+  /* padding: 20px 10px; */
 }
 
 .auctions-slides .items .item {
-    margin-right: 30px;
- }
- section {
-    width: 100%;
-    padding: 80px 0 0 !important;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
- }
- section.hero-section {
-    padding: 130px 0 !important;
- }
- .footer-area .footer-top {
-    padding: 60px 0 !important;
-    margin-top: 100px;
+  margin-right: 30px;
+}
+section {
+  width: 100%;
+  padding: 80px 0 0 !important;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+section.hero-section {
+  padding: 130px 0 !important;
+}
+.footer-area .footer-top {
+  padding: 60px 0 !important;
+  margin-top: 100px;
 }
 
- .creator-dropdown {
-    min-width: 10rem !important;
-    left: -20px;
-    text-align: center;
+.creator-dropdown {
+  min-width: 10rem !important;
+  left: -20px;
+  text-align: center;
 }
-.hero-section p{
-    font-size: 1.2rem !important;
-    color: #8E8E8E !important;
+.hero-section p {
+  font-size: 1.2rem !important;
+  color: #8e8e8e !important;
 }
 .creator-button {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 8px;
 }
 .approval {
-    font-size: 10px;
-    background: #9B8BC1;
-    color: white;
-    padding: 8px;
-    width: 120px;
-    margin: 24px 0px 0px 0px;
-    border-radius: 12px;
+  font-size: 10px;
+  background: #9b8bc1;
+  color: white;
+  padding: 8px;
+  width: 120px;
+  margin: 24px 0px 0px 0px;
+  border-radius: 12px;
 }
 ::-webkit-calendar-picker-indicator {
-    filter: invert(1) brightness(50%)
-        /* sepia(100%)
+  filter: invert(1) brightness(50%);
+  /* sepia(100%)
             saturate(10000%)
             hue-rotate(180deg) */
 }
 input[type="date"]::before {
-    color: var(--primary-p-color);
-    content: attr(placeholder) " : ";
+  color: var(--primary-p-color);
+  content: attr(placeholder) " : ";
 }
 input[type="date"]:focus::before {
-    content: "" !important;
+  content: "" !important;
 }
 .live-auctions-area .swiper-slide.item {
-    max-width: 270px;
+  max-width: 270px;
 }
 /****bannercss******/
 /*  */
 /****bannercss******/
 /****footer***/
 .termsandconditions {
-    padding: 0px 0px 50px 30px;
+  padding: 0px 0px 50px 30px;
 }
 .item-details-area .shape {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    line-height: 0;
-    direction: ltr;
-    overflow: hidden;
-    z-index: -1;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  line-height: 0;
+  direction: ltr;
+  overflow: hidden;
+  z-index: -1;
 }
 /* .item-details-area h3 {
     padding: 20px 0px 0px 0px;
 } */
 
-
 .auctions-slides .items .item {
-    margin-right: 30px;
- }
- 
- section.hero-section {
-    padding: 130px 0 !important;
- }
- .footer-area .footer-top {
-    padding: 100px 0;
-    margin-top: 100px;
- }
+  margin-right: 30px;
+}
+
+section.hero-section {
+  padding: 130px 0 !important;
+}
+.footer-area .footer-top {
+  padding: 100px 0;
+  margin-top: 100px;
+}
 
 .item-details-area {
-    padding: 130px 0px 0px !important;
+  padding: 130px 0px 0px !important;
 }
 
 footer a.navbar-brand img {
-    width: 70px;
+  width: 70px;
 }
 
 .MuiSelect-select.MuiSelect-select {
-    padding-right: 24px;
-    color: var(--primary-p-color);
+  padding-right: 24px;
+  color: var(--primary-p-color);
 }
 
 .ant-form-item {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    color: rgba(0, 0, 0, 0.85);
-    font-size: 14px;
-    font-variant: tabular-nums;
-    line-height: 1.5715;
-    list-style: none;
-    font-feature-settings: 'tnum', "tnum";
-    margin-bottom: 24px;
-    vertical-align: top;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: "tnum", "tnum";
+  margin-bottom: 24px;
+  vertical-align: top;
 }
-.ant-form-item-control:first-child:not([class^='ant-col-']):not([class*=' ant-col-']) {
-    width: 100%;
+.ant-form-item-control:first-child:not([class^="ant-col-"]):not(
+    [class*=" ant-col-"]
+  ) {
+  width: 100%;
 }
 
-.item-details-area .item-info img , .fundraise-main .item-info img{
-    object-fit: cover;
-    object-position: center;
-    width: 100% !important;
-    height: 100%;
-    /* height: auto; */
+.item-details-area .item-info img,
+.fundraise-main .item-info img {
+  object-fit: cover;
+  object-position: center;
+  width: 100% !important;
+  height: 100%;
+  /* height: auto; */
 }
-.ant-select:not(.ant-select-customize-input) .ant-select-selector  {
-    position: relative;
-    background-color: rgb(0, 0, 0, 0.85) !important;
-    border: rgb(0, 0, 0, 0.85) !important;
-    border-radius: 2px;
-    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-    background: black !important;
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  position: relative;
+  background-color: rgb(0, 0, 0, 0.85) !important;
+  border: rgb(0, 0, 0, 0.85) !important;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  background: black !important;
 }
 .ant-select-single .ant-select-selector .ant-select-selection-item {
-    position: relative;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    color: #fff !important;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff !important;
 }
-.fa-regular, .far {
-    font-weight: 400;
-    margin-left: 9px;
-    color: #452868;
+.fa-regular,
+.far {
+  font-weight: 400;
+  margin-left: 9px;
+  color: #452868;
 }
-.fa-solid, .fas {
-    font-weight: 900;
-    margin-left: 186px;
-    
-    color: #4528DC;
+.fa-solid,
+.fas {
+  font-weight: 900;
+  margin-left: 186px;
+
+  color: #4528dc;
 }
 ul.creator-dropdown.dropdown-menu li {
-    font-size: 15px !important;
-    font-weight: 700!important;
-    line-height: 22px;
-    padding: 10px 0px 0px;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  line-height: 22px;
+  padding: 10px 0px 0px;
 }
 .dropdown-item {
-    padding: 0;
+  padding: 0;
 }
-.dropdown-item a{
-color:#fff !important;
+.dropdown-item a {
+  color: #fff !important;
 }
 :root header .navbar-expand .dropdown_login:hover > .dropdown-menu:after {
-    content: "";
-    height: 15px;
-    width: 15px;
-    background-color: #1e1e1e !important;
-    position: absolute;
-    top: -8px;
-    left: 38px;
-    transform: rotate(45deg);
+  content: "";
+  height: 15px;
+  width: 15px;
+  background-color: #1e1e1e !important;
+  position: absolute;
+  top: -8px;
+  left: 38px;
+  transform: rotate(45deg);
 }
 header .navbar-expand .dropdown_login:hover > .dropdown-menu {
-    box-shadow: 0px 0px 7px #302f2f87 !important;
-    padding: 30px 20px 20px;
-    margin-top: 0px !important;
-    visibility: unset;
-    opacity: 1;
-    color: #fff;
-    text-align: left;
-    background-color: #1e1e1e !important;
+  box-shadow: 0px 0px 7px #302f2f87 !important;
+  padding: 30px 20px 20px;
+  margin-top: 0px !important;
+  visibility: unset;
+  opacity: 1;
+  color: #fff;
+  text-align: left;
+  background-color: #1e1e1e !important;
 }
-.dropdown{
-    padding: 13px 5px !important;
+.dropdown {
+  padding: 13px 5px !important;
 }
 
-
-
-nav .header .navbar-nav.items li a:hover , .dropdown ul li a:hover , .card-body a h5:hover , .explore-menu label span:hover{
-    color: #4528DC !important;
+nav .header .navbar-nav.items li a:hover,
+.dropdown ul li a:hover,
+.card-body a h5:hover,
+.explore-menu label span:hover {
+  color: #4528dc !important;
 }
-.explore-menu label span{
-transition: 0.3s ease-in-out;
+.explore-menu label span {
+  transition: 0.3s ease-in-out;
 }
-.step2icon i , .step1icon i , .stepperline i , .single-work h4 {
-    color: #fff !important;
-    
+.step2icon i,
+.step1icon i,
+.stepperline i,
+.single-work h4 {
+  color: #fff !important;
 }
-.single-work h4{
-    margin: 1.5rem 0px;
-    padding: 0px !important;
+.single-work h4 {
+  margin: 1.5rem 0px;
+  padding: 0px !important;
 }
 .step1icon i {
-    margin: 0 !important;
+  margin: 0 !important;
 }
-input::placeholder , textarea::placeholder   {
-    color: #8e8e8e !important;
-    font-weight: 500 !important;
+input::placeholder,
+textarea::placeholder {
+  color: #8e8e8e !important;
+  font-weight: 500 !important;
 }
 
 .form-group select option {
-    color: #8e8e8e  !important;
+  color: #8e8e8e !important;
 }
-.steps-center{
-    justify-content: center;
-    display: flex ;
-    width: 100%;
+.steps-center {
+  justify-content: center;
+  display: flex;
+  width: 100%;
 }
-.orgicon2 i , .orgicon1 i{
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 20px;
+.orgicon2 i,
+.orgicon1 i {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 20px;
 }
 .orgicon2 i {
-    color: #fff !important;
+  color: #fff !important;
 }
 i.fa-regular.fa-plus {
-    color: #fff;
-    margin-right: 5px;
-    margin-left: 0;
+  color: #fff;
+  margin-right: 5px;
+  margin-left: 0;
 }
 form#dynamic_form_nest_item .anticon {
-    vertical-align: unset!important;
+  vertical-align: unset !important;
 }
-.content.nft-single-content{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: baseline;
+.content.nft-single-content {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: baseline;
 }
 .content.nft-single-content p {
-    margin: 10px 0 !important;
+  margin: 10px 0 !important;
 }
 .content.nft-single-content h3 {
-    padding: 0 !important ;
+  padding: 0 !important ;
 }
 .ant-steps-item-title {
-    color: #FFF !important;
+  color: #fff !important;
 }
 
-.ant-steps-item-description  {
-    color: #FFF !important;
+.ant-steps-item-description {
+  color: #fff !important;
 }
 .ant-steps-item-finish .ant-steps-item-icon {
-    background-image: linear-gradient(54deg, #57048a 0%, var(--primary-color) 78%);
-    border-image: linear-gradient(54deg, #57048a 0%, var(--primary-color) 78%);
+  background-image: linear-gradient(
+    54deg,
+    #57048a 0%,
+    var(--primary-color) 78%
+  );
+  border-image: linear-gradient(54deg, #57048a 0%, var(--primary-color) 78%);
 }
-.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after {
-    background-color: #fff !important;
+.ant-steps-item-finish
+  > .ant-steps-item-container
+  > .ant-steps-item-content
+  > .ant-steps-item-title::after {
+  background-color: #fff !important;
 }
 .footer-items a.navbar-brand {
-    margin-bottom: 12px;
+  margin-bottom: 12px;
 }
 img.mobile-logo {
-    display: none;
+  display: none;
 }
 img.navbar-brand-sticky.desktop_logo {
-    display: block;
+  display: block;
 }
 .modal-header .icon-close {
-    color: #fff;
+  color: #fff;
 }
 .avatar-md {
-    object-fit: cover;
+  object-fit: cover;
 }
 header .navbar-expand .navbar-nav .nav-link:not(.btn) {
-    padding-right: 0rem;
-    padding-left: 0rem;
-    color: var(--top-nav-item-color);
-    margin: 0 1rem;
-    padding: 0px !important;
+  padding-right: 0rem;
+  padding-left: 0rem;
+  color: var(--top-nav-item-color);
+  margin: 0 1rem;
+  padding: 0px !important;
 }
 img.card-img-top {
-    /* width: 100%;
+  /* width: 100%;
     height: 200px; */
-    object-fit: cover;
-    aspect-ratio: 1/1;
+  object-fit: cover;
+  aspect-ratio: 1/1;
 }
 span.banner-dis {
-    color: var(--primary-p-color) !important;
+  color: var(--primary-p-color) !important;
 }
 span.logo-dis {
-    color: var(--primary-p-color) !important;
+  color: var(--primary-p-color) !important;
 }
 h2.allproj2 {
-    color: var(--primary-p-color) !important;
-    text-align: center;
-    font-size: 20px;
+  color: var(--primary-p-color) !important;
+  text-align: center;
+  font-size: 20px;
 }
 ::marker {
-    color: #fff;
+  color: #fff;
 }
 .jodit-container:not(.jodit_inline) .jodit-workplace {
-    background-color: black !important;
-    border: 0 solid #dadada;
-    max-height: 100%;
+  background-color: black !important;
+  border: 0 solid #dadada;
+  max-height: 100%;
 }
 /* b, strong {
     font-weight: bolder;
     color: #fff;
 } */
 .jodit-toolbar__box:not(:empty):not(:empty) {
-    background-color: #000000 !important;
+  background-color: #000000 !important;
 }
-.jodit-workplace+.jodit-status-bar:not(:empty) {
-    border-top: 1px solid #dadada !important;
+.jodit-workplace + .jodit-status-bar:not(:empty) {
+  border-top: 1px solid #dadada !important;
 }
 .jodit-status-bar {
-    display: none !important;
+  display: none !important;
 }
 .jodit-toolbar-editor-collection_size_middle.jodit-toolbar-editor-collection_mode_horizontal {
-
-    background-image: repeating-linear-gradient(transparent 0,transparent 37px,#2d2d2d 38px);
+  background-image: repeating-linear-gradient(
+    transparent 0,
+    transparent 37px,
+    #2d2d2d 38px
+  );
 }
 .jodit-ui-separator {
-    border-left: 0;
-    border-right: 1px solid #2d2d2d;
-    cursor: default;
-    margin: 2px;
-    padding: 0;
+  border-left: 0;
+  border-right: 1px solid #2d2d2d;
+  cursor: default;
+  margin: 2px;
+  padding: 0;
 }
 .jodit-toolbar__box:not(:empty) .jodit-toolbar-editor-collection:after {
-    background-color: #090909 !important;
+  background-color: #090909 !important;
 }
 .jodit-popup__content {
-    background: #16151a !important;
+  background: #16151a !important;
 }
 .jodit-wysiwyg {
-    color: white !important;
+  color: white !important;
 }
 body {
-    color: rgb(255 255 255 / 85%) !important;
+  color: rgb(255 255 255 / 85%) !important;
 }
 #dynamic_form_nest_item .card .card-body {
-    padding: 5px 0 0 !important;
-    text-align: center !important;
+  padding: 5px 0 0 !important;
+  text-align: center !important;
 }
 span#inputGroupPrepend2 {
-    background-color: #474746;
-    border: none;
-    border-radius: 0px;
+  background-color: #474746;
+  border: none;
+  border-radius: 0px;
 }
 
-.intro span {   
-    font-size: 16px;
+.intro span {
+  font-size: 16px;
 }
 /* .card .card-body{
     padding: 20px 0 0 !important;
 } */
 .seller-info.ml-3 span {
-    color: #8e8e8e !important;
-    font-family: var(--secondary-font) !important;
-    font-size: 15px;
+  color: #8e8e8e !important;
+  font-family: var(--secondary-font) !important;
+  font-size: 15px;
 }
 .popular-collections-area img.card-img-top {
-    width: 100%;
-    height: 161px;
-    object-fit: cover;
+  width: 100%;
+  height: 161px;
+  object-fit: cover;
 }
 .styles_hideForm__Dhvgw .orgicon1line {
-    width: 150px;
+  width: 150px;
 }
 form span {
-    color: #6b6b6b !important;
+  color: #6b6b6b !important;
 }
 form .salewrap {
-    color: #5d5d5d !important;
+  color: #5d5d5d !important;
 }
 section.work-area p {
-    color: #8e8e8e !important;
-    font-family: var(--secondary-font);
+  color: #8e8e8e !important;
+  font-family: var(--secondary-font);
 }
 .stepperline {
-    margin: 0px -2px 0px 5px;
+  margin: 0px -2px 0px 5px;
 }
 h4 {
-    /* font-size: 2rem; */
-    font-weight: 600;
-    line-height: 1.2;
-    font-family: 'Jost', sans-serif;
-    color: var(--primary-t-color);
+  /* font-size: 2rem; */
+  font-weight: 600;
+  line-height: 1.2;
+  font-family: "Jost", sans-serif;
+  color: var(--primary-t-color);
 }
-span , p{
-    color: var(--primary-p-color);
-    font-size: 16px;
+span,
+p {
+  color: var(--primary-p-color);
+  font-size: 16px;
 }
 
-.live-auctions-area.single_project-detail h3{
-    width: 100%;
+.live-auctions-area.single_project-detail h3 {
+  width: 100%;
 }
 section.live-auctions-area.single_project-detail {
-    padding: 0 !important;
+  padding: 0 !important;
 }
-section.live-auctions-area.single_project-detail .row , .nfts_main .row.explore-items{
-    padding: 0 !important;
-    margin: 0 -15px;
+section.live-auctions-area.single_project-detail .row,
+.nfts_main .row.explore-items {
+  padding: 0 !important;
+  margin: 0 -15px;
 }
 section.live-auctions-area.single_project-detail .row h3 {
-    padding: 20px 0px 0px 0px;
+  padding: 20px 0px 0px 0px;
 }
 .eddlbtton button {
-    font-size: 16px !important;
-    padding: 16px 30px !important;
-    font-family: 'Poppins', sans-serif;
+  font-size: 16px !important;
+  padding: 16px 30px !important;
+  font-family: "Poppins", sans-serif;
 }
 .modal-dialog.modal-lg.modal-dialog-centered {
-    background: #2222228a;
-    width: 100%;
-    min-height: 100vh;
-    padding: 0;
-    max-width: 100%;
-    margin: 0;
+  background: #2222228a;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  max-width: 100%;
+  margin: 0;
 }
 .fade.modal.show {
-    padding: 0 !important;
+  padding: 0 !important;
 }
-.ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon , .ant-steps-item-wait .ant-steps-item-icon{
-    background-image: linear-gradient(150deg, #000000 0%, #000000 78%)!important;
-    border: 0;
-    border: 2px solid #ffff !important;
+.ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon,
+.ant-steps-item-wait .ant-steps-item-icon {
+  background-image: linear-gradient(150deg, #000000 0%, #000000 78%) !important;
+  border: 0;
+  border: 2px solid #ffff !important;
 }
 .ant-steps-item-wait .ant-steps-item-icon > .ant-steps-icon {
-    color: rgb(255 250 250) !important;
+  color: rgb(255 250 250) !important;
 }
-.ant-steps-item-custom > .ant-steps-item-container > .ant-steps-item-icon > .ant-steps-icon {
-    top: -7px !important;
+.ant-steps-item-custom
+  > .ant-steps-item-container
+  > .ant-steps-item-icon
+  > .ant-steps-icon {
+  top: -7px !important;
 }
 .ant-steps-vertical > .ant-steps-item .ant-steps-item-description {
-    padding-bottom: 12px;
-    color: var(--primary-p-color) !important;
+  padding-bottom: 12px;
+  color: var(--primary-p-color) !important;
 }
 .modal-header {
-    padding-bottom: 0!important;
+  padding-bottom: 0 !important;
 }
-.countdown{
-    color: var(--primary-p-color) !important; 
+.countdown {
+  color: var(--primary-p-color) !important;
 }
 .card .card-caption .card-bottom span {
-    font-size: 16px;
+  font-size: 16px;
 }
 /* .card-body h5 {
     padding-bottom: 10px;
 } */
 .container.single_project-detail .row h3 {
-    width: 100% !important;
-    padding-left: 15px !important;
+  width: 100% !important;
+  padding-left: 15px !important;
 }
 /* 28-11-22 */
 span.title_main {
-    font-size: 40px !important;
-    font-weight: 700 !important;
-    color: white !important;
-    text-transform: capitalize;
+  font-size: 40px !important;
+  font-weight: 700 !important;
+  color: white !important;
+  text-transform: capitalize;
 }
-.detail_single_nfts li{
-    font-size: 16px !important;
-    font-family: 'Poppins', sans-serif !important;
-    font-weight: 300 !important;
-    text-transform: uppercase;
+.detail_single_nfts li {
+  font-size: 16px !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 300 !important;
+  text-transform: uppercase;
 }
 .lorem_done {
-    display: flex;
-    gap: 4px;
-    align-items: center;
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 span.cutom_dis {
-    text-transform: capitalize;
-    font-weight: 700;
+  text-transform: capitalize;
+  font-weight: 700;
 }
-.item_created{
-    margin: 0;
-    margin-bottom: 10px !important;
-    padding-left: 15px;
+.item_created {
+  margin: 0;
+  margin-bottom: 10px !important;
+  padding-left: 15px;
 }
-.item_title{
-    padding-left: 15px;  
+.item_title {
+  padding-left: 15px;
 }
-.card li  , .card .countdown {
-    color: #8e8e8e !important;
-    /* font-size: 1rem !important; */
-    font-weight: 400 !important;
-    font-family: 'Poppins', sans-serif !important;
+.card li,
+.card .countdown {
+  color: #8e8e8e !important;
+  /* font-size: 1rem !important; */
+  font-weight: 400 !important;
+  font-family: "Poppins", sans-serif !important;
 }
-.lorem_done svg{
-    background: #a395f1;
-    border-radius: 50%;
+.lorem_done svg {
+  background: #a395f1;
+  border-radius: 50%;
 }
-.main-fund-detail .top-seller-area{
-    padding-top: 0 !Important;
+.main-fund-detail .top-seller-area {
+  padding-top: 0 !important;
 }
 /* .item-details-area h4{
     font-size: 40px !important;
 } */
 .jodit-toolbar-button__trigger svg {
-    fill: white;
+  fill: white;
 }
 
-    input[type="date"]::before {
-        color: var(--primary-p-color);
-        content: attr(placeholder) " ";
-    }
-    #dynamic_form_nest_item .ant-form-item {
-    margin-bottom: 5px;
-    margin-top: 10px;
+input[type="date"]::before {
+  color: var(--primary-p-color);
+  content: attr(placeholder) " ";
+}
+#dynamic_form_nest_item .ant-form-item {
+  margin-bottom: 5px;
+  margin-top: 10px;
 }
 #dynamic_form_nest_item button.ant-btn.ant-btn-default {
-    width: fit-content;
-    padding: 0px;
-    word-break: break-all;
-    border: none !important;
-    background-color: transparent !important;
+  width: fit-content;
+  padding: 0px;
+  word-break: break-all;
+  border: none !important;
+  background-color: transparent !important;
 }
 .orgicon1line {
-    word-break: normal;
-    height: 19px;
-    overflow: hidden;
-    width: 59px;
-    margin: -3px 5px 0px 8px;
-    color: white !important;
+  word-break: normal;
+  height: 19px;
+  overflow: hidden;
+  width: 59px;
+  margin: -3px 5px 0px 8px;
+  color: white !important;
 }
 .owner span {
-    overflow-wrap: anywhere;
+  overflow-wrap: anywhere;
 }
 section.item-details-area.project-nft-single img {
-    height: 225px !important;
+  height: 225px !important;
 }
-.w-full{
-    width: 100% !important;
+.w-full {
+  width: 100% !important;
 }
-.content-baner p{
-    font-family: 'Poppins', sans-serif !important;
+.content-baner p {
+  font-family: "Poppins", sans-serif !important;
 }
 p.nft-detail-nft {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
-.ant-steps-item-custom > .ant-steps-item-container > .ant-steps-item-icon > .ant-steps-icon {
-    height: auto !important;
-    line-height: 0 !important;
-    top: 0 !important;
+.ant-steps-item-custom
+  > .ant-steps-item-container
+  > .ant-steps-item-icon
+  > .ant-steps-icon {
+  height: auto !important;
+  line-height: 0 !important;
+  top: 0 !important;
 }
 .anticon svg {
-    display: inline-block;
-    vertical-align: baseline;
+  display: inline-block;
+  vertical-align: baseline;
 }
-.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after {
-    background-color: #ffffff !important;
+.ant-steps-item-finish
+  > .ant-steps-item-container
+  > .ant-steps-item-tail::after {
+  background-color: #ffffff !important;
 }
 input[type="date"]::before {
-    color: var(--primary-p-color);
-    content: attr(placeholder) "  ";
+  color: var(--primary-p-color);
+  content: attr(placeholder) "  ";
 }
 form.item-form.card.no-hover select {
-    background-color: black !important;
-    padding: 5px 15px;
+  background-color: black !important;
+  padding: 5px 15px;
 }
-ul.list-unstyled.viewproduct-detail li span:first-child , :root .boldertext , li.item_title , .card-inner-heading span{
-    color: #f5f5f5 !important;
-    font-weight: 600!important;
-    margin-right: 10px; 
+ul.list-unstyled.viewproduct-detail li span:first-child,
+:root .boldertext,
+li.item_title,
+.card-inner-heading span {
+  color: #f5f5f5 !important;
+  font-weight: 600 !important;
+  margin-right: 10px;
 }
 .list-unstyled {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 :root .nft_price {
-    color: #f5f5f5 !important;
-    font-size: 18px;
+  color: #f5f5f5 !important;
+  font-size: 18px;
 }
 .item_created i.fa-solid.fa-circle {
-    margin-left: 0px;
-    color: white;
-    font-size: 7px;
-    position: relative;
-    top: -2px;
+  margin-left: 0px;
+  color: white;
+  font-size: 7px;
+  position: relative;
+  top: -2px;
 }
 .progressbar {
-    border: 1px solid #454248;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 25px;
-    width: 100%;
-    max-width: 300px;
-    background: #1e1d1d;
-    height: 10px;
+  border: 1px solid #454248;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 25px;
+  width: 100%;
+  max-width: 300px;
+  background: #1e1d1d;
+  height: 10px;
 }
 hr {
-    
-    background-color: white;
+  background-color: white;
 }
 .copy .fa-solid {
-    color: #fff;
-    font-size: 22px;
-    margin-top: 10px;
-    float: left;
-    margin-left: 20px;
+  color: #fff;
+  font-size: 22px;
+  margin-top: 10px;
+  float: left;
+  margin-left: 20px;
 }
 .demo .modal-content {
-    background-color: var(--primary-bg-color);
-    border: none;
-    border-radius: 0;
-    overflow-x: hidden;
-    height: auto;
-    max-height: calc(100vh - 40px);
-    overflow-y: scroll;
+  background-color: var(--primary-bg-color);
+  border: none;
+  border-radius: 0;
+  overflow-x: hidden;
+  height: auto;
+  max-height: calc(100vh - 40px);
+  overflow-y: scroll;
 }
-.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {
-    box-shadow: unset !important;
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: unset !important;
 }
-.create_collection span{
-    font-size: 14px;
+.create_collection span {
+  font-size: 14px;
 }
 .modal-body hr {
-    margin: 15px 0;
+  margin: 15px 0;
 }
 .refer-icons {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 .countdown.d-flex {
-    flex-direction: column;
+  flex-direction: column;
 }
-section{
-    height: auto;
-    min-height: calc(100vh - 450px);
+section {
+  height: auto;
+  min-height: calc(100vh - 450px);
 }
 
 /* .steps-content {
@@ -822,234 +859,242 @@ section{
   .steps-action {
     margin-top: 24px;
   } */
-  
-  :root ul.creator-dropdown.dropdown-menu li:nth-child(2) {
-    text-transform: none !important;
+
+:root ul.creator-dropdown.dropdown-menu li:nth-child(2) {
+  text-transform: none !important;
 }
 .copyright-area {
-    text-align: center !important;
-    justify-content: center !important;
+  text-align: center !important;
+  justify-content: center !important;
 }
 .ant-steps.ant-steps-horizontal.ant-steps-label-horizontal {
-    width: 50%;
-    margin: 20px auto;
+  width: 50%;
+  margin: 20px auto;
 }
 
-:root #dynamic_form_nest_item button.ant-btn.ant-btn-default.previous_btn{
-    color: #fff !important;
-    padding: 4px 15px !important;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    /* border: 1px solid #cccccc0d !important; */
+:root #dynamic_form_nest_item button.ant-btn.ant-btn-default.previous_btn {
+  color: #fff !important;
+  padding: 4px 15px !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* border: 1px solid #cccccc0d !important; */
 }
-button.ant-btn.ant-btn-default.previous_btn span{
-    color: #fff !important;
+button.ant-btn.ant-btn-default.previous_btn span {
+  color: #fff !important;
 }
 .swal-icon--success__line {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
-.swal-title , .swal-text  {
-    color: #fff !important;
+.swal-title,
+.swal-text {
+  color: #fff !important;
 }
 .swal-button {
-    background-color: #7cd1f900 !important;
-    color: #fff;
-    border: 2px solid #cccccc0d !important;
+  background-color: #7cd1f900 !important;
+  color: #fff;
+  border: 2px solid #cccccc0d !important;
 }
 .swal-overlay--show-modal .swal-modal {
-    background: #000 !important;
+  background: #000 !important;
 }
 .swal-overlay {
-    background-color: #2222228a !important;
+  background-color: #2222228a !important;
 }
 .author-details-area img.card-img-top {
-    width: 100%;
-    height: 210px;
+  width: 100%;
+  height: 210px;
 }
 .input-group.author_detail {
-    border-radius: 100px;
-    background-color: #000000f2;
-    border: 2px solid;
-    height: unset !important;
-    border-color: #000;
-    outline: none;
-    display: flex !important;
-    flex-direction: column;
-    align-items: center;
-    text-align: left;
-    padding: 13px 30px;
-    margin: 0;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    gap: 10px;
+  border-radius: 100px;
+  background-color: #000000f2;
+  border: 2px solid;
+  height: unset !important;
+  border-color: #000;
+  outline: none;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  padding: 13px 30px;
+  margin: 0;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  gap: 10px;
 }
-:root .author-details-area{
-    padding: 160px 0px 0px !important;
+:root .author-details-area {
+  padding: 160px 0px 0px !important;
 }
 .author-area .card .image-over .author .author-thumb img {
-    height: calc(6rem - 16px) !important;
-    width: calc(6rem - 16px) !important;
-    margin: 5px;
+  height: calc(6rem - 16px) !important;
+  width: calc(6rem - 16px) !important;
+  margin: 5px;
 }
 .author-area .card .image-over .author .author-thumb::before {
-    content: "";
-    width: calc(6rem - 6px) !important;
-    height: calc(6rem - 6px) !important;
-    background-color: rgb(9 8 13 / 0%) !important;
+  content: "";
+  width: calc(6rem - 6px) !important;
+  height: calc(6rem - 6px) !important;
+  background-color: rgb(9 8 13 / 0%) !important;
 }
 .author-area .card .image-over .author .author-thumb::after {
-    width: calc(6rem - 16px) !important;
-    height: calc(6rem - 16px) !important;
-    background-color: rgb(9 8 13 / 0%) !important;
+  width: calc(6rem - 16px) !important;
+  height: calc(6rem - 16px) !important;
+  background-color: rgb(9 8 13 / 0%) !important;
 }
 :root .author-details-area .card .image-over .author {
-    top: calc(100% - 4rem);
+  top: calc(100% - 4rem);
 }
 .input-group.author_detail div {
-    width: 90%;
-    display: flex;
-    align-items: center;
+  width: 90%;
+  display: flex;
+  align-items: center;
 }
 .input-group.author_detail div label {
-    width: 140px;
+  width: 140px;
 }
-.item-thumb{
-    position: relative;
+.item-thumb {
+  position: relative;
 }
 .item-thumb-edit {
-    position: absolute;
-    cursor: pointer;
-    right: 16px;
-    color: #fff !important;
-    top: 16px;
-    font-size: 15px;
-    font-weight: 200 !important;
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
-    padding: 6px 20px;
-    border-radius: 25px;
+  position: absolute;
+  cursor: pointer;
+  right: 16px;
+  color: #fff !important;
+  top: 16px;
+  font-size: 15px;
+  font-weight: 200 !important;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  );
+  padding: 6px 20px;
+  border-radius: 25px;
 }
-.item-thumb-delete{
-    position: absolute;
-    right: 30px;
-    color: #fff !important;
-    top: 10px;
-    font-size: 15px;
-    font-weight: 200 !important;
+.item-thumb-delete {
+  position: absolute;
+  right: 30px;
+  color: #fff !important;
+  top: 10px;
+  font-size: 15px;
+  font-weight: 200 !important;
 }
 /* :root .auctions-slides span {
     color: #fffbfb !important;
 } */
 .live-auctions-area .card .card-body a h5 {
-    text-transform: capitalize;
-    font-weight: 600;
+  text-transform: capitalize;
+  font-weight: 600;
 }
-.card .card-body a h5{
-    font-weight: 600 !important;
+.card .card-body a h5 {
+  font-weight: 600 !important;
 }
 section.explore-area {
-    padding: 130px 0 0 0 !important;
+  padding: 130px 0 0 0 !important;
 }
 .card-body h5 {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 .progress-bar {
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
-    border-radius: 25px;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  ) !important;
+  border-radius: 25px;
 }
 .progressbar .progress {
-    background: #464646;
-    height: 10px;
-    border: 1px solid #565656;
+  background: #464646;
+  height: 10px;
+  border: 1px solid #565656;
 }
 .avatar-lg {
-    height: 5rem !important;
-    width: 5rem !important;
+  height: 5rem !important;
+  width: 5rem !important;
 }
 .input-group.author_detail input {
-    height: 40px;
-    border: 1px solid #1d1c1c !important;
+  height: 40px;
+  border: 1px solid #1d1c1c !important;
 }
 
 .btn.btn-bordered-white {
-  
-    margin: 24px 0px;
+  margin: 24px 0px;
 }
 .input-group.author_detail {
-    padding: 32px;
+  padding: 32px;
 }
 
 section.hero-section .button-group a {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 .swal-icon--success__hide-corners {
-    background-color: #040000 !important;
+  background-color: #040000 !important;
 }
-.swal-icon--success:after, .swal-icon--success:before {
-    background: #040404 !important;
+.swal-icon--success:after,
+.swal-icon--success:before {
+  background: #040404 !important;
 }
 
 /* a.col-12.col-sm-6.col-lg-3.item.explore-item .card-body a h5 {
     min-height: 56px;
 } */
 .card.project_cards i {
-    transition: 0.3s ease-in-out;
-    opacity: 0;
+  transition: 0.3s ease-in-out;
+  opacity: 0;
 }
-.card.project_cards:hover i{
-   opacity:1; 
+.card.project_cards:hover i {
+  opacity: 1;
 }
 .fa-trash {
-    color: #5e5c5c;
-    position: absolute;
-    top: 8px;
-    right: 24px;
+  color: #5e5c5c;
+  position: absolute;
+  top: 8px;
+  right: 24px;
 }
 .project_cards .fa-pen {
-    position: absolute;
-    color: #5e5c5c;
-    top: 8px;
-    right: 0;
+  position: absolute;
+  color: #5e5c5c;
+  top: 8px;
+  right: 0;
 }
 .jodit-dialog__panel {
-    background-color: #000 !important;
-  
+  background-color: #000 !important;
 }
 .jodit-ui-button_variant_primary {
-    background-color: #111214 !important;
-    color: #fff;
+  background-color: #111214 !important;
+  color: #fff;
 }
-section {
+/* section {
     height: auto !important;
     min-height: inherit !important;
-}
+} */
 span.nft_price {
-    text-transform: capitalize !important;
+  text-transform: capitalize !important;
 }
 .item-thumb {
-    position: relative;
-    border: 10px solid #111112f5 !important;
-    border-radius: 20px;
-    box-shadow: 2px 1px 20px -8px #8b8b8b2e !important;
-    height: 100%;
+  position: relative;
+  border: 10px solid #111112f5 !important;
+  border-radius: 20px;
+  box-shadow: 2px 1px 20px -8px #8b8b8b2e !important;
+  height: 100%;
 }
 .eddlbtton button {
-    width: auto !important;
-    margin: auto 0 !important;
-    padding: 15px 40px !important;
+  width: auto !important;
+  margin: auto 0 !important;
+  padding: 15px 40px !important;
 }
 .avatar-sm {
-    height: 3rem;
-    width: 3rem;
-    object-fit: cover;
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
 }
 .content_project .card {
-    display: flex;
-    gap: 14px;
-    flex-direction: column;
-    font-family: var(--secondary-font);
-    margin-bottom: 0;
+  display: flex;
+  gap: 14px;
+  flex-direction: column;
+  font-family: var(--secondary-font);
+  margin-bottom: 0;
 }
 
 /* .project_img {
@@ -1067,987 +1112,1023 @@ span.nft_price {
 } */
 
 :root .project_img img {
-    box-shadow: 0px 2px 6px #5012a9fa;
-    width: 60px;
-    height: 60px;
+  box-shadow: 0px 2px 6px #5012a9fa;
+  width: 60px;
+  height: 60px;
 }
 :root .project-total-detail div span {
-    font-size: 16px !important;
+  font-size: 16px !important;
 }
 .project-total-detail {
-    display: flex;
-    grid-gap: 30px;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  grid-gap: 30px;
+  flex-direction: column;
+  gap: 10px;
 }
 .project-total-detail div {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 .project-total-detail div span:nth-child(1) {
-    color: #fff !important;
+  color: #fff !important;
 }
-.detail_url a{
-    font-size: 20px;
-    cursor: pointer;
-    color: #fff !important;
+.detail_url a {
+  font-size: 20px;
+  cursor: pointer;
+  color: #fff !important;
 }
 
 .token span:first-child {
-    font-size: 14px;
-    top: 30px;
-    right: 30px;
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
-    color: #fff !important;
-    padding: 0 20px;
-    border-radius: 12px;
-    cursor: pointer;
-    margin-top: 4px;
+  font-size: 14px;
+  top: 30px;
+  right: 30px;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  );
+  color: #fff !important;
+  padding: 0 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 4px;
 }
-.mint a{
-    color: #fff !important;
+.mint a {
+  color: #fff !important;
 }
 .mint button {
-    /* width: 100%;
+  /* width: 100%;
     margin-top: 15px !important; */
-    background-color: transparent !important;
-    border: 1px solid #ffff !important;
-    border-radius: 25px !important;
-    position: relative;
-    padding: 12px ; 
+  background-color: transparent !important;
+  border: 1px solid #ffff !important;
+  border-radius: 25px !important;
+  position: relative;
+  padding: 12px;
 }
 .mint button:hover {
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
-    border-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  ) !important;
+  border-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  ) !important;
 }
-.creater span{
-color: #fff !important;
+.creater span {
+  color: #fff !important;
 }
-.owner{
-    gap: 10px;
+.owner {
+  gap: 10px;
 }
 header .navbar-expand {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    opacity: unset !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  /* opacity: unset !important; */
 }
 .ant-collapse-content {
-    color: #8e8e8e !important;
-    /* border: unset !important; */
-    background-color: black !important;
+  color: #8e8e8e !important;
+  /* border: unset !important; */
+  background-color: black !important;
 }
 .ant-collapse-content tr {
-    color: #8e8e8e !important;
-    /* border-top: 1px solid #16151a; */
-    background-color: #09080d;
+  color: #8e8e8e !important;
+  /* border-top: 1px solid #16151a; */
+  background-color: #09080d;
 }
-.table-detail tr:nth-child(odd){
-    /* color: rgba(0, 0, 0, 0.85) !important; */
-    background-color: #16151A !important;
-
+.table-detail tr:nth-child(odd) {
+  /* color: rgba(0, 0, 0, 0.85) !important; */
+  background-color: #16151a !important;
 }
 
 .ant-collapse-header {
-    background-color: #16151a !important;
+  background-color: #16151a !important;
 }
 .table-detail th {
-    color: #fff;
-    border: unset !important;
-    font-weight: 600;
-}  
+  color: #fff;
+  border: unset !important;
+  font-weight: 600;
+}
 :root .container.table-detail tr {
-    /* border-bottom: 1px solid #000000 !important; */
-    /* border: unset !important; */
+  /* border-bottom: 1px solid #000000 !important; */
+  /* border: unset !important; */
 }
 :root .table-detail thead tr {
-    background: #09080d !important;
+  background: #09080d !important;
 }
 .container.table-detail table.table-detail.table * {
-    /* border: none; */
+  /* border: none; */
 }
 .container.table-detail .ant-collapse {
-    /* border: 1px solid #1e1e1e; */
-    /* border-radius: 12px; */
-    overflow: hidden;
-    background: transparent;
+  /* border: 1px solid #1e1e1e; */
+  /* border-radius: 12px; */
+  overflow: hidden;
+  background: transparent;
 }
 
 .table-detail .table {
-    width: 100%;
-    margin-bottom: 0px !important;
-    color: #8E8E8E;
+  width: 100%;
+  margin-bottom: 0px !important;
+  color: #8e8e8e;
 }
 
 .table-detail .ant-collapse-content > .ant-collapse-content-box {
-    padding: 0px;
+  padding: 0px;
 }
 .table-detail td {
-    /* border: unset; */
+  /* border: unset; */
 }
 .table-detail tr:last-child {
-    border-bottom:none;
+  border-bottom: none;
 }
 /* .ant-collapse-content {
     background-color: #16151A !important;
     border-top: 1px solid #2C2C2C !important;
 } */
 .owner span:nth-child(3) {
-    color: #fff !important;
-    text-transform: capitalize;
-    font-weight: 700 !important;
+  color: #fff !important;
+  text-transform: capitalize;
+  font-weight: 700 !important;
 }
-.main-proj-detail .item-thumb ,.fundraise-main .item-info {
-    height: 400px;
-    /* height: auto; */
+.main-proj-detail .item-thumb,
+.fundraise-main .item-info {
+  height: 400px;
+  /* height: auto; */
 }
 
 .user_title {
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding: 14px 16px !important;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 14px 16px !important;
 }
 .user_title .fa-trash {
-    color: #ffffff;
-    position: inherit;
-
+  color: #ffffff;
+  position: inherit;
 }
-
 
 /* new */
 .modal-content {
-    max-width: 700px;
-   
+  max-width: 700px;
 }
 .ant-collapse {
-    
-    width: 635px;
+  width: 635px;
 }
 
 .image-container {
-    max-width: 900px;
-    margin: 0px auto;
-    box-sizing: border-box;
-    width: 100%;
+  max-width: 900px;
+  margin: 0px auto;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .buttons-group {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    gap: 12px;
-    margin: 12px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px 0px 0px 0px;
 }
 
 .swal2-icon.swal2-info {
-    border-color: #34305a !important;
-    color: #34305a !important;
+  border-color: #34305a !important;
+  color: #34305a !important;
 }
-a:not(.btn), a:link:not(.btn), a:visited:not(.btn), a:hover:not(.btn), a:active:not(.btn) {
-    font-size: unset !important;
+a:not(.btn),
+a:link:not(.btn),
+a:visited:not(.btn),
+a:hover:not(.btn),
+a:active:not(.btn) {
+  font-size: unset !important;
 }
 
 .table-detail .ant-collapse.ant-collapse-icon-position-end {
-    width: 100%;
+  width: 100%;
 }
 
 .banner_img {
-    width: 100%;
+  width: 100%;
 }
 .image-holder {
-    width: 100% !important;
-    background-color: #000 !important;
-    border-style: dotted !important;
-    border-color: #484646 !important;
-    /* padding: 130px !important; */
+  width: 100% !important;
+  background-color: #000 !important;
+  border-style: dotted !important;
+  border-color: #484646 !important;
+  /* padding: 130px !important; */
 }
 button:focus {
-    outline: 1px dotted;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline: unset !important;
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline: unset !important;
 }
 .image-holder-loaded {
-    width: 100% !important;
-    border: 1px solid #1a1919;
+  width: 100% !important;
+  border: 1px solid #1a1919;
 }
 .ReactImagePickerEditor .place-image .editing-bar-btn {
-    margin-top: 2px;
-    position: absolute;
-    right: 0;
+  margin-top: 2px;
+  position: absolute;
+  right: 0;
 }
 .place-image {
-    position: relative;
+  position: relative;
 }
 form#dynamic_form_nest_item {
-    gap: 15px;
+  gap: 15px;
 }
 
 .ant-collapse {
-    width: 100% !important;
+  width: 100% !important;
 }
 button.ant-btn.ant-btn-default.collection_btn span {
-    font-size: 14px !important;
+  font-size: 14px !important;
 }
 .project_img {
-    align-items: center;
+  align-items: center;
 }
-.proj_main> div {
-    /* background: red; */
-    border: 1px solid #cccccc1a;
-    margin: 0 -15px;
-    padding: 15px;
+.proj_main > div {
+  /* background: red; */
+  border: 1px solid #cccccc1a;
+  margin: 0 -15px;
+  padding: 15px;
 }
 .project-total-detail {
-    background: #16151a;
-    padding: 15px;
-    border-radius: 8px;
+  background: #16151a;
+  padding: 15px;
+  border-radius: 8px;
 }
 h5.user_title {
-    background: #16151a;
-    padding: 10px;
-    /* border-radius: 8px 8px 0px 0; */
+  background: #16151a;
+  padding: 10px;
+  /* border-radius: 8px 8px 0px 0; */
 }
 .user-description {
-    border: 1px solid #1e1e1e;
-    border-radius: 8px;
-    padding-bottom: 10px;
-    height: 100%;
-    overflow: hidden;
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+  padding-bottom: 10px;
+  height: 100%;
+  overflow: hidden;
 }
- .price_nft {
-    border: 1px solid #1e1e1e;
-    border-radius: 8px;
-    padding-bottom: 10px;
-    
+.price_nft {
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+  padding-bottom: 10px;
 }
-.user-description >p {
-    padding: 0 16px;
+.user-description > p {
+  padding: 0 16px;
 }
 .table-main-detail .ant-collapse.ant-collapse-icon-position-end {
-    margin-bottom: 0px !important;
+  margin-bottom: 0px !important;
 }
 :root span.progress-bar.bg-success {
-    font-size: 8px !important;
+  font-size: 8px !important;
 }
-h5.user_title i , .container.table-main-detail i , .token span i{
-    font-size: 15px;
-    cursor: pointer;
-    color: #fff !important;
-    font-size: 10px;
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
-    padding: 6px 20px;
-    border-radius: 25px;
-    margin: 0;
-    margin-top: -5px;
+h5.user_title i,
+.container.table-main-detail i,
+.token span i {
+  font-size: 15px;
+  cursor: pointer;
+  color: #fff !important;
+  font-size: 10px;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  );
+  padding: 6px 20px;
+  border-radius: 25px;
+  margin: 0;
+  margin-top: -5px;
 }
 .project-btn.flex-column button {
-    background: transparent;
-    position: relative;
-    border: 2px solid #fff;
-    border-radius: 25px;
-    padding: 8px;
-    /* gap: 20px; */
-    /* display: flex; */
-    background: transparent none repeat scroll 0 0;
-    border: 2px solid #fff;
+  background: transparent;
+  position: relative;
+  border: 2px solid #fff;
+  border-radius: 25px;
+  padding: 8px;
+  /* gap: 20px; */
+  /* display: flex; */
+  background: transparent none repeat scroll 0 0;
+  border: 2px solid #fff;
 }
 .project-btn button::after {
-    position: absolute;
-    content: "";
-    height: calc(100% + 4px);
-    width: calc(100% + 4px);
-    background-image: linear-gradient(135deg, var(--primary-color) 10%, var(--secondary-color));
-    top: -2px;
-    left: -2px;
-    border-radius: 100px;
-    opacity: 0;
-    -webkit-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
-    z-index: -1;
+  position: absolute;
+  content: "";
+  height: calc(100% + 4px);
+  width: calc(100% + 4px);
+  background-image: linear-gradient(
+    135deg,
+    var(--primary-color) 10%,
+    var(--secondary-color)
+  );
+  top: -2px;
+  left: -2px;
+  border-radius: 100px;
+  opacity: 0;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  z-index: -1;
 }
 
-.project-btn button:hover::after{
-    opacity: 1;
+.project-btn button:hover::after {
+  opacity: 1;
 }
-.project-btn{
-    display: flex;
-    gap: 10px;
+.project-btn {
+  display: flex;
+  gap: 10px;
 }
 :root .card.add-nft {
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    border: 1px dashed #2a2a2a;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed #2a2a2a;
 }
 :root .add-nft a {
-    /* color: #fff !important; */
-    font-size: 20px !important;
+  /* color: #fff !important; */
+  font-size: 20px !important;
 }
 
-.table-detail span.ant-collapse-header-text , .table-main-detail span.ant-collapse-header-text{
-    font-size: 1.2rem;
-    color: #ffffff;
-    font-family: var(--primary-font);
+.table-detail span.ant-collapse-header-text,
+.table-main-detail span.ant-collapse-header-text {
+  font-size: 1.2rem;
+  color: #ffffff;
+  font-family: var(--primary-font);
 }
 .owner-nft span:nth-child(2) {
-    color: #fff !important;
-    text-transform: capitalize;
-    font-weight: 700 !important;
-    margin-right: 2px;
+  color: #fff !important;
+  text-transform: capitalize;
+  font-weight: 700 !important;
+  margin-right: 2px;
 }
 span.cards-icons i {
-    margin-left: unset !important;
-    color: #fff;
-    font-size: 10px;
+  margin-left: unset !important;
+  color: #fff;
+  font-size: 10px;
 }
 .token {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    gap: 5px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  gap: 5px;
 }
 .nfts_details tr td {
-    display: flex;
-    justify-content: space-between;
-    padding: 4px 16px;
-    gap: 10px;
-    text-align: right;
-    font-family: var(--secondary-font);
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 16px;
+  gap: 10px;
+  text-align: right;
+  font-family: var(--secondary-font);
 }
 table.nfts_details.table i {
-    position: absolute;
-    top: 22px;
-    right: 62px;
+  position: absolute;
+  top: 22px;
+  right: 62px;
 }
 
 .table-main-detail .ant-collapse {
-/* border: unset !important; */
-background-color: transparent !important;
+  /* border: unset !important; */
+  background-color: transparent !important;
 }
 
 .ant-collapse-header {
-    border-radius: 8px 8px 0 0 !important;
+  border-radius: 8px 8px 0 0 !important;
 }
 .container.table-main-detail .ant-collapse-content > .ant-collapse-content-box {
-    padding: unset !important;
+  padding: unset !important;
 }
 .nfts_details span:nth-child(1) {
-    color: #fff;
+  color: #fff;
 }
 
-.progress_main{
-    flex-direction: column;
+.progress_main {
+  flex-direction: column;
 }
 :root form#dynamic_form_nest_item span {
-    color: #fff !important;
-    background-image: white !important;
-    -webkit-text-fill-color: #ffffff;
+  color: #fff !important;
+  background-image: white !important;
+  -webkit-text-fill-color: #ffffff;
 }
 /* .ant-collapse > .ant-collapse-item {
     border: unset !important;
    } */
-   .ant-collapse-content-box {
-    padding: 16px;
-    /* border-bottom: 1px solid; */
-    /* background: #16151a; */
+.ant-collapse-content-box {
+  padding: 16px;
+  /* border-bottom: 1px solid; */
+  /* background: #16151a; */
 }
-div.ant-collapse ,  div.ant-collapse > .ant-collapse-item{
-    /* border: 1px solid #1e1e1e00; */
+div.ant-collapse,
+div.ant-collapse > .ant-collapse-item {
+  /* border: 1px solid #1e1e1e00; */
 }
 .card.choose_div {
-    padding: 1.2rem;
+  padding: 1.2rem;
 }
 .nft-remove {
-    position: absolute;
-    right: 0;
-    top: 58px;
+  position: absolute;
+  right: 0;
+  top: 58px;
 }
 .fade.edit_nft_popup.modal.show .modal-content {
-    max-width: 100%;
+  max-width: 100%;
 }
 .fundraiser {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .progress_nft {
-    font-family: var(--secondary-font);
-    border: 1px solid #1e1e1e;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    grid-gap: 10px;
-    gap: 10px;
-    background-color: #16151a;
-    border-radius: 10px;
+  font-family: var(--secondary-font);
+  border: 1px solid #1e1e1e;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+  gap: 10px;
+  background-color: #16151a;
+  border-radius: 10px;
 }
 :root .ant-collapse {
-    background-color: #16151a;
+  background-color: #16151a;
 }
 .progress_nft ul li {
-    list-style: none;
-    border-bottom: 1px solid #2e2e2e;
-    padding: 0;
-    padding: 11px 0;
-    margin: 0;
+  list-style: none;
+  border-bottom: 1px solid #2e2e2e;
+  padding: 0;
+  padding: 11px 0;
+  margin: 0;
 }
 .progress_nft ul li:last-child {
-    border: unset;
+  border: unset;
 }
 .progress_nft .lorem_done {
-    gap: 10px
+  gap: 10px;
 }
 .progress_name {
-    color: #fff;
+  color: #fff;
 }
 .ant-collapse-item {
-    /* border-radius: 8px; */
+  /* border-radius: 8px; */
 }
 :root .btn.btn-bordered-white {
-    line-height: 7px !important;
+  line-height: 7px !important;
 }
-.donation-count{
-
+.donation-count {
 }
-.see_all{
-    color:white;
-    cursor: pointer;
-    border: 2px solid #4B1BBF;
-    border-radius: 100px;
-    padding: 5px 20px;
-    max-width: 100px;
-    text-align: center;
-    margin: auto;
+.see_all {
+  color: white;
+  cursor: pointer;
+  border: 2px solid #4b1bbf;
+  border-radius: 100px;
+  padding: 5px 20px;
+  max-width: 100px;
+  text-align: center;
+  margin: auto;
 }
-
-
-
 
 span.ant-collapse-header-text {
-    text-align: start;
+  text-align: start;
 }
 .ant-collapse-content {
-    color: #8E8E8E !important;
-    border: unset !important;
-    background-color: #09080D !important;
+  color: #8e8e8e !important;
+  border: unset !important;
+  background-color: #09080d !important;
 }
-.table thead th, td {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e600;
-    border-top: 0px !important;
+.table thead th,
+td {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e600;
+  border-top: 0px !important;
 }
 .ant-collapse {
-    /* border-radius: 10px !important; */
-    overflow: hidden !important;
-    background-color: transparent !important;
-    font-family: var(--secondary-font);
+  /* border-radius: 10px !important; */
+  overflow: hidden !important;
+  background-color: transparent !important;
+  font-family: var(--secondary-font);
 }
 .ant-collapse-content tr {
-    border-top: 0px;
+  border-top: 0px;
 }
 :root span.ant-collapse-header-text {
-    font-size: 1.2rem;
-    color: #FFFFFF;
-    font-family: var(--primary-font);
+  font-size: 1.2rem;
+  color: #ffffff;
+  font-family: var(--primary-font);
 }
 .input-group_1 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: initial;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: initial;
 }
 .input-group_1 div {
-    color: #fff !important;
-    font-family: 'Poppins', sans-serif !important;
-    width: 100%;
-    margin-bottom: 20px;
+  color: #fff !important;
+  font-family: "Poppins", sans-serif !important;
+  width: 100%;
+  margin-bottom: 20px;
 }
-.input-group_1 div input{
-    margin-top: 10px;
+.input-group_1 div input {
+  margin-top: 10px;
 }
 .rounded-circle {
-    border-radius: 50%!important;
-    height: 40px;
-    width: 40px;
-    object-fit: cover;
+  border-radius: 50% !important;
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
 }
-.ant-collapse {
-    /* border: 1px solid #1E1E1E !important; */
-}
+
 .wrap_card .btn.btn-bordered-white {
-    margin: 0px 24px 0px;
+  margin: 0px 24px 0px;
+}
+.profile_main_right.wrap_card .btn.btn-bordered-white {
+  margin-top: 25px !important;
 }
 .wrap_card .social-icons svg {
-    margin: 0px 12px !important;
-    font-size: 17px !important;
-    margin-bottom: 9px !important;
-    cursor: pointer;
+  margin: 0px 12px !important;
+  font-size: 17px !important;
+  margin-bottom: 9px !important;
+  cursor: pointer;
 }
 .wrap_card .social-icons svg:hover {
-    color: #4528DC;
+  color: #4528dc;
 }
 .wrap_card .Edite_able input.user_name {
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 500;
-    font-family: jost;
-    background-color: transparent !important;
-    border: none !important;
-    border-bottom: 1px solid #383838 !important;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-family: jost;
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid #383838 !important;
 }
 .wrap_card input.user_email {
-    background-color: transparent !important;
-    border: none !important;
-    text-align: center;
-    padding: 0px !important;
-    font-family: jost;
-    color: gray !important;
-    font-size: 18px;
-    border-bottom: 1px solid #383838 !important;
+  background-color: transparent !important;
+  border: none !important;
+  text-align: center;
+  padding: 0px !important;
+  font-family: jost;
+  color: gray !important;
+  font-size: 18px;
+  border-bottom: 1px solid #383838 !important;
 }
 .item-thumb {
-    border: 7px solid #131314 !important;
-    box-shadow: 0px 0px 33px 3px #ffffff0a !important;
-    overflow: hidden;
+  border: 7px solid #131314 !important;
+  box-shadow: 0px 0px 33px 3px #ffffff0a !important;
+  overflow: hidden;
 }
 .banner {
-    height: 400px;
-    width: 100%;
+  height: 400px;
+  width: 100%;
 }
-.banner img{
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+.banner img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 .wrap_card .Edite_able label {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 .wrap_card .Edite_able i.fa-solid.fa-pen {
-    position: absolute;
-    right: 10px;
-    top: 12px;
-    background-color: #000;
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  background-color: #000;
 }
 .Edite_able input {
-    text-transform: unset !important;
+  text-transform: unset !important;
 }
 ul.project_back {
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
-    margin: 0px !important;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0px !important;
 }
 li.item_title {
-    padding: 0px;
+  padding: 0px;
 }
 li.item_title {
-    padding: 0px;
-    margin: 0px  !important;
+  padding: 0px;
+  margin: 0px !important;
 }
 .item_created {
-    margin: 0;
-    font-size: 14px;
-    margin-bottom: 10px !important;
-    padding-left: 15px;
+  margin: 0;
+  font-size: 14px;
+  margin-bottom: 10px !important;
+  padding-left: 15px;
 }
 .custam_col {
-    border:1px solid #1E1E1E !important;
-    border-radius: 10px;
-    overflow: hidden;
+  border: 1px solid #1e1e1e !important;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .custam_col .no-hover {
-    padding: 16px;
+  padding: 16px;
 }
 ul.project_back {
-    padding: 0px 22px;
+  padding: 0px 22px;
 }
 li.button_blow {
-    padding: 0px 20px;
+  padding: 0px 20px;
 }
 :root .detail_single_nfts li {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 span.read-or-hide {
-    color: #4B1BBF;
-    cursor: pointer;
-    text-transform: capitalize;
-    float: right;
+  color: #4b1bbf;
+  cursor: pointer;
+  text-transform: capitalize;
+  float: right;
 }
 .modal-body form.item-form.card.no-hover select {
-    background-color: black !important;
-    padding: 7px;
-    height: 38px;
+  background-color: black !important;
+  padding: 7px;
+  height: 38px;
 }
 .item-thumb {
-    border: 0px solid #16151a !important;
-    box-shadow: none !important;
-    overflow: hidden;
-    border-radius: 10px !important;
+  border: 0px solid #16151a !important;
+  box-shadow: none !important;
+  overflow: hidden;
+  border-radius: 10px !important;
 }
 
 section.wallet-connect-area h4 {
-    color: #fff;
-    padding: 22px 0;
+  color: #fff;
+  padding: 22px 0;
 }
 .ant-collapse-content-box {
-    padding: 16px;
-    /* border-bottom: 1px solid; */
+  padding: 16px;
+  /* border-bottom: 1px solid; */
 }
 .container.table-main-detail.position-relative {
-    padding: 0;
+  padding: 0;
 }
 .container.table-detail {
-    padding: 0;
+  padding: 0;
 }
 .banner_img button {
-    margin-top: 15px;
+  margin-top: 15px;
 }
-.author-details-area .ant-collapse-content-box , .funddeatil .ant-collapse-content-box  {
-    padding: 0 !important;
+.author-details-area .ant-collapse-content-box,
+.funddeatil .ant-collapse-content-box {
+  padding: 0 !important;
 }
-.author-details-area table{
-    margin-bottom: 0;
+.author-details-area table {
+  margin-bottom: 0;
 }
 .profile_main_right {
-    position: sticky;
-    top: 0;
+  position: sticky;
+  top: 0;
 }
 .desktop_nft .progress_nft.mb-3 {
-    position: sticky;
-    top: 10px;
+  position: sticky;
+  top: 10px;
 }
-.table tbody+tbody {
-    border-top: 2px solid #08080800 !important;
+.table tbody + tbody {
+  border-top: 2px solid #08080800 !important;
 }
-.table td, .table th {
-    vertical-align: middle !important;
-    padding: 12px 16px;
-    border: unset;
+.table td,
+.table th {
+  vertical-align: middle !important;
+  padding: 12px 16px;
+  border: unset;
 }
 .funddeatil.mt-3 table {
-    margin-top: 0.5rem;
+  margin-top: 0.5rem;
 }
 span.share {
-    position: absolute;
-    right: 22px;
+  position: absolute;
+  right: 22px;
 }
-.price_nft_detail{
-    padding: 12px 16px;
-    font-family: var(--secondary-font);
+.price_nft_detail {
+  padding: 12px 16px;
+  font-family: var(--secondary-font);
 }
 .nft-price span {
-    font-size: 24px;
-    font-weight: 600;
-    color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
 }
 .sales span:first-child {
-    margin-right: 10px;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 200;
+  margin-right: 10px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 200;
 }
 .nft-price {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    align-items: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-items: flex-start;
 }
 .main-create .ant-collapse-content-box {
-    background: #16151a;
+  background: #16151a;
 }
 span.matics {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    z-index: 999;
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
-    border-radius: 25px;
-    padding: 2px 14px;
-    color: #fff;
-    font-size: 12px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 999;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  ) !important;
+  border-radius: 25px;
+  padding: 2px 14px;
+  color: #fff;
+  font-size: 12px;
 }
 
 .swal-button-container {
-    margin: 5px;
-    display: inline-block;
-    position: relative;
-    border: 1px solid #fff;
-    border-radius: 5px;
+  margin: 5px;
+  display: inline-block;
+  position: relative;
+  border: 1px solid #fff;
+  border-radius: 5px;
 }
 button.swal-button.swal-button--continue:after {
-    content: "Continue";
+  content: "Continue";
 }
 button.swal-button.swal-button--skip:after {
-    content: "skip";
+  content: "skip";
 }
 .price_nft_detail button {
-    margin-bottom: 0 !important;
-    padding: 15px 40px !important;
-    margin-left: 0px !important;
+  margin-bottom: 0 !important;
+  padding: 15px 40px !important;
+  margin-left: 0px !important;
 }
 
 .nothing {
-    background: #16151a;
-    color: var(--primary-p-color);
-    font-size: 16px;
-text-align: center;
-padding: 12px 16px;
+  background: #16151a;
+  color: var(--primary-p-color);
+  font-size: 16px;
+  text-align: center;
+  padding: 12px 16px;
 }
-.logo{
-        position: absolute;
-        top: -22px;
-        left: 10px;
-        background: #16151a;
-        z-index: 1;
-        padding: 2px;
-        border-radius: 25%;
-        border: 2px solid #ffff;
-        /* background-image: linear-gradient(150deg, #57048a 0%, var(--primary-color) 78%) !important; */
-        border-color: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+.logo {
+  position: absolute;
+  top: -22px;
+  left: 10px;
+  background: #16151a;
+  z-index: 1;
+  padding: 2px;
+  border-radius: 25%;
+  border: 2px solid #ffff;
+  /* background-image: linear-gradient(150deg, #57048a 0%, var(--primary-color) 78%) !important; */
+  border-color: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  ) !important;
 }
-.fundraiser_sale{
-    gap: 10px;
+.fundraiser_sale {
+  gap: 10px;
 }
 .fundraiser_sale span:first-child {
-    color: #fff !important;
-    font-size: 14px;
+  color: #fff !important;
+  font-size: 14px;
 }
 .fundraiser_sale div div {
-    color: #8e8e8e !important;
-    font-weight: 600;
+  color: #8e8e8e !important;
+  font-weight: 600;
 }
 .card-caption .card-body p {
-    font-size: 14px;
-    font-family: var(--secondary-font);
-
+  font-size: 14px;
+  font-family: var(--secondary-font);
 }
 /* .card-caption .card-body p:first-child :after {
     content: "...";
 } */
-.donate-btn button{
-    background-color: transparent !important;
-    border: 1px solid #fff !important;
+.donate-btn button {
+  background-color: transparent !important;
+  border: 1px solid #fff !important;
 }
 .donate-btn {
-    text-align: center;
+  text-align: center;
 }
-.gap-5{
-    gap: 5px;
+.gap-5 {
+  gap: 5px;
 }
-.gap-10{
-    gap: 10px;
+.gap-10 {
+  gap: 10px;
 }
 .ant-collapse-icon-position-end > .ant-collapse-item > .ant-collapse-header {
-    position: relative;
-    padding: 12px 43px !important;
-    padding-right: 40px;
+  position: relative;
+  padding: 12px 43px !important;
+  padding-right: 40px;
 }
 
-svg.detail-icon , .activity_icon {
-    position: absolute;
-    z-index: 1;
-    top: 16px;
-    left: 15px;
+svg.detail-icon,
+.activity_icon {
+  position: absolute;
+  z-index: 1;
+  top: 16px;
+  left: 15px;
 }
 
-input, select, textarea {
-    border-radius: 5px !important;
+input,
+select,
+textarea {
+  border-radius: 5px !important;
 }
 .collection_img_popup .image-holder {
-    height: 200px !important;
+  height: 200px !important;
 }
-.mint_btn button{
-    border: 1px solid #fff !important;
-    margin: 15px 0 !important;
-    background: transparent !important;
-    width: 100%; 
+.mint_btn button {
+  border: 1px solid #fff !important;
+  margin: 15px 0 !important;
+  background: transparent !important;
+  width: 100%;
 }
- .EditImage .popup img {
-    vertical-align: middle;
-    max-height: 450px;
-    max-width: 100%;
-    object-fit: cover;
-    object-position: center;
+.EditImage .popup img {
+  vertical-align: middle;
+  max-height: 450px;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 .EditImage .popup .control-panel {
-    position: fixed !important;
-    right: 0 !important;
-    border-left: 2px solid #3c3c3c !important;
-    height: 100%;
-    top: 0 !important;
-    border-radius: 0;
-    background: #1e1d1d;
-    margin: 0;
+  position: fixed !important;
+  right: 0 !important;
+  border-left: 2px solid #3c3c3c !important;
+  height: 100%;
+  top: 0 !important;
+  border-radius: 0;
+  background: #1e1d1d;
+  margin: 0;
 }
 .EditImage .popup .image-container {
-    place-content: unset !important;
+  place-content: unset !important;
 }
 
 .jodit-dialog__panel {
-    background: #16151a !important;
+  background: #16151a !important;
 }
 .jodit-dialog__content {
-    display: flex !important;
-    align-items: center !important;
-    margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 auto !important;
 }
 .jodit-ui-button:hover:not([disabled]) {
-    color: #4528DC !important;
-    background-color: #08080800 !important;
+  color: #4528dc !important;
+  background-color: #08080800 !important;
 }
 .jodit-ui-button span.jodit-ui-button__text:hover {
-    color: #4528DC;
-    font-weight: 600;
+  color: #4528dc;
+  font-weight: 600;
 }
 span.jodit-ui-button__text {
-    /* color: #fff; */
-    font-weight: 600;
+  /* color: #fff; */
+  font-weight: 600;
 }
 .progress_nft_main {
-    position: sticky;
-    top: 10px;
-    height: auto !important;
+  position: sticky;
+  top: 10px;
+  height: auto !important;
 }
-.item-details-area .content_project .item-thumb{
-    height: 350px;
-    width: 100%;
-    max-width: 350px !important;
-    height: 350px !important;
-    object-position: bottom;
-    margin: 0 auto;
-    background: #16151a;
-    border-radius: 8px;
+.item-details-area .content_project .item-thumb {
+  height: 350px;
+  width: 100%;
+  max-width: 350px !important;
+  height: 350px !important;
+  object-position: bottom;
+  margin: 0 auto;
+  background: #16151a;
+  border-radius: 8px;
 }
 .demo .nfts_details tr td {
-    display: flex;
-    justify-content: space-between;
-    padding: 6px 16px;
-    font-family: var(--secondary-font);
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 16px;
+  font-family: var(--secondary-font);
 }
 .content.content_project {
-    height: calc(100% - 63px);
+  height: calc(100% - 63px);
 }
 .proj-left {
-    position: sticky;
-    top: 20px;
+  position: sticky;
+  top: 20px;
 }
 .content {
-    height: calc(100% - 74px) !important;
+  height: calc(100% - 74px) !important;
 }
 .swal2-popup.swal2-modal.swal2-icon-info.swal2-show {
-	background-color: #0D0D10;
-	color: white;
+  background-color: #0d0d10;
+  color: white;
 }
 .swal2-icon.swal2-info {
-	border-color: #aaa !important;
-	color: #aaa !important;
+  border-color: #aaa !important;
+  color: #aaa !important;
 }
 .progress_nft .lorem_done span:first-child {
-	background-color: #CEB8FF;
-	border-radius: 100px;
+  background-color: #ceb8ff;
+  border-radius: 100px;
 }
 .progress_nft .lorem_done.p-0 span svg {
-    padding: 5px;
-    margin: 3px;
-    border-radius: 0px;
-    background-color: transparent;
+  padding: 5px;
+  margin: 3px;
+  border-radius: 0px;
+  background-color: transparent;
 }
 .nft_detail_main th {
-    color: #FFF;
-    font-weight: 400 !important;
+  color: #fff;
+  font-weight: 400 !important;
 }
-.nft_detail_main table{
-    font-family: var(--secondary-font) ;
-    font-size: 16px;
-   
+.nft_detail_main table {
+  font-family: var(--secondary-font);
+  font-size: 16px;
 }
-.nft_detail_main th, .nft_detail_main td {
-    padding: 4px 16px !important;
+.nft_detail_main th,
+.nft_detail_main td {
+  padding: 4px 16px !important;
 }
 .nft_detail_main td {
-    text-align: right;
-    word-break: break-word;
-    min-width: 157px;
+  text-align: right;
+  word-break: break-word;
+  min-width: 157px;
 }
 .no-data h2 {
-    color: #4625d6 !important;
-    font-size: 18px;
-    text-align: center;
+  color: #4625d6 !important;
+  font-size: 18px;
+  text-align: center;
 }
 
 .proj-left.user_icon svg {
-    margin: 0 !important;
+  margin: 0 !important;
 }
-body .swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
-    background: rgb(74 74 74 / 40%);
+body .swal2-container.swal2-backdrop-show,
+.swal2-container.swal2-noanimation {
+  background: rgb(74 74 74 / 40%);
 }
 .price_nft_detail small {
-    font-size: 14px;
-    color: #8e8e8e;
-    font-weight: 500;
+  font-size: 14px;
+  color: #8e8e8e;
+  font-weight: 500;
 }
 .table-main-detail {
-    /* border: 1px solid #1e1e1e; */
-    /* border-radius: 8px; */
+  /* border: 1px solid #1e1e1e; */
+  /* border-radius: 8px; */
 }
 .ant-collapse {
-    border: 1px solid #1e1e1e !important;
-    border-bottom: 0 !important;
-    border-radius: 8px !important;
-    border-color: #1e1e1e !important;
+  border: 1px solid #1e1e1e !important;
+  border-bottom: 0 !important;
+  border-radius: 8px !important;
+  border-color: #1e1e1e !important;
 }
 .ant-collapse > .ant-collapse-item {
-    border-bottom:  1px solid #1e1e1e !important;
-    border-color: #1e1e1e !important;
+  border-bottom: 1px solid #1e1e1e !important;
+  border-color: #1e1e1e !important;
 }
 .button_group {
-    display: flex;
-    margin-top: 9px;
-    gap:5px;
+  display: flex;
+  margin-top: 9px;
+  gap: 5px;
 }
 .button_group .btn {
-    padding: 16px 20px;
+  padding: 16px 20px;
 }
-.buy-invest-btn{
-    margin-top: 15px;
+.buy-invest-btn {
+  margin-top: 15px;
 }
 tbody.img_table td {
-    padding: 8px 16px !important;
+  padding: 8px 16px !important;
 }
-table.nfts_details.table td:first-child , .profile_detail .table tr:first-child{
-    padding-top: 16px !important;
+table.nfts_details.table td:first-child,
+.profile_detail .table tr:first-child {
+  padding-top: 16px !important;
 }
-table.nfts_details.table td:last-child , .profile_detail .table tr:first-child{
-    padding-bottom: 16px !important;
+table.nfts_details.table td:last-child,
+.profile_detail .table tr:first-child {
+  padding-bottom: 16px !important;
 }
 .table {
-    margin-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 .ant-collapse-content > .ant-collapse-content-box {
-    padding: 0px  0 !important;
+  padding: 0px 0 !important;
 }
 .img_table .rounded-circle {
-    border-radius: 50%!important;
-    height: 30px;
-    width: 30px;
-    object-fit: cover;
+  border-radius: 50% !important;
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
 }
 .profile_detail.mt-4 .table-responsive {
-    padding: 16px 0;
+  padding: 16px 0;
 }
 
 .logo-dis-img {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
 }
 
-.logo-dis-img span{
-    color: #8e8e8e !important;
+.logo-dis-img span {
+  color: #8e8e8e !important;
 }
 /* .uploadnftpopup-input {
     border: 1px dashed rgb(204, 204, 204);
@@ -2075,23 +2156,23 @@ table.nfts_details.table td:last-child , .profile_detail .table tr:first-child{
     height: 100%;
 } */
 .filter-main-name {
-    /* border: 1px solid #8e8e8e; */
-    border-radius: 25px;
-    padding: 10px 20px;
-    font-weight: 600;
-    font-size: 16px;
-    background-color: #16151a;
-    display: flex;
-    justify-content: space-between;
+  /* border: 1px solid #8e8e8e; */
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 16px;
+  background-color: #16151a;
+  display: flex;
+  justify-content: space-between;
 }
 .filter-main {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 .filter-main li {
-    padding: 10px 0;
-    list-style: none;
-    margin: 1rem 0;
-    /* border-bottom: 1px solid #1e1e1e; */
+  padding: 10px 0;
+  list-style: none;
+  margin: 1rem 0;
+  /* border-bottom: 1px solid #1e1e1e; */
 }
 /* .filter-main ul {
     padding: 10px 20px;
@@ -2112,8 +2193,8 @@ table.nfts_details.table td:last-child , .profile_detail .table tr:first-child{
     margin: 20px 0px;
 } */
 :root .main-create .ant-collapse-header {
-    padding: 16px !important;
-    background: #16151a!important;
+  padding: 16px !important;
+  background: #16151a !important;
 }
 /* .uploadnftpopup-input.Icon_cam {
     background-position: center;
@@ -2123,254 +2204,279 @@ video.VideoInput_video {
     height: 240px;
 } */
 body .btn.btn-bordered-white {
-    border: 2px solid #fff;
+  border: 2px solid #fff;
 }
 .card .fa-solid.fa-trash {
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
-    padding: 4px 17px;
-    border-radius: 25px;
-    color: #fff;
-    font-size: 11px;
-    position: absolute;
-    top: 30px;
-    margin-right: 6px;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  );
+  padding: 4px 17px;
+  border-radius: 25px;
+  color: #fff;
+  font-size: 11px;
+  position: absolute;
+  top: 30px;
+  margin-right: 6px;
 }
-.break-all{
-    word-break: break-all;
+.break-all {
+  word-break: break-all;
 }
 /* U P L O A D N F T I M A G E  */
-.position-relative.upload_nft{
-    max-width: 300px;
-    width: 100%;
+.position-relative.upload_nft {
+  max-width: 300px;
+  width: 100%;
 }
-.nft-image{
-    width: 100%;
+.nft-image {
+  width: 100%;
 }
 .inputtdrag::after {
-    position: absolute;
-    background-image: "url('../public/img/camera.png')";
-    width: 100%;
-    content: 'Upload NFT';
-    top: 0px;
-    color: white;
-    text-align: center;
-    margin: auto;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    padding: 17px 0px;
-    border-radius: 7px;
-    border: 2px solid #c1c1c1;
-    border-style: dashed;
-    z-index: 1;
-    padding: 46% 0px;
+  position: absolute;
+  background-image: "url('../public/img/camera.png')";
+  width: 100%;
+  content: "Upload NFT";
+  top: 0px;
+  color: white;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 17px 0px;
+  border-radius: 7px;
+  border: 2px solid #c1c1c1;
+  border-style: dashed;
+  z-index: 1;
+  padding: 46% 0px;
 }
 .inputdragVedio::after {
-    position: absolute;
-    background-color: transparent;
-    width: 100%;
-    content: 'Upload NFT';
-    top: 0px;
-    color: white;
-    text-align: center;
-    margin: auto;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    padding: 17px 0px;
-    border-radius: 7px;
-    border: 2px solid #c1c1c1;
-    border-style: dashed;
-    z-index: 1; 
-    background-color: #16151a;
+  position: absolute;
+  background-color: transparent;
+  width: 100%;
+  content: "Upload NFT";
+  top: 0px;
+  color: white;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 17px 0px;
+  border-radius: 7px;
+  border: 2px solid #c1c1c1;
+  border-style: dashed;
+  z-index: 1;
+  background-color: #16151a;
 }
 .inputdragVedio .inputtdrag::after {
-    content: '' !important;
+  content: "" !important;
 }
 
 .inputtdrag {
-    height: auto;
-    position: relative;
-    height: 300px;
+  height: auto;
+  position: relative;
+  height: 300px;
 }
-.inputtdrag input{
-    z-index: 999;
-    position: absolute;
-    opacity: 0;
-    max-width: 300px;
-    width: 100%;
-    height: 300px;
-    cursor: pointer;
+.inputtdrag input {
+  z-index: 999;
+  position: absolute;
+  opacity: 0;
+  max-width: 300px;
+  width: 100%;
+  height: 300px;
+  cursor: pointer;
 }
 .nft-image {
-    z-index: 2;
-    position: absolute;
-    width: 96%;
-    height: 97%;
-    object-fit: contain;
-    background-color: black;
-    margin: 6px;
+  z-index: 2;
+  position: absolute;
+  width: 96%;
+  height: 97%;
+  object-fit: contain;
+  background-color: black;
+  margin: 6px;
 }
 .preview_image {
-    z-index: 2;
-    position: absolute;
-    width: 92%;
-    height: 91%;
-    object-fit: contain;
-    background-color: black;
-    margin: 6px;
+  z-index: 2;
+  position: absolute;
+  width: 92%;
+  height: 91%;
+  object-fit: contain;
+  background-color: black;
+  margin: 6px;
 }
 .uploadnftpopup-input.upload-secound-input.inputtdrag {
-    max-width: 150px;
-    height: 150px;
+  max-width: 150px;
+  height: 150px;
 }
 .uploadnftpopup-input.upload-secound-input.inputtdrag input {
-    z-index: 999;
-    position: absolute;
-    opacity: 0;	
-    cursor: pointer;
-    width: 100%;
+  z-index: 999;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
 }
 :root .inputdragVedio video {
-    margin-top:60px;
-    border-radius: 7px;
-    border: 2px solid #c1c1c1;
-    border-style: dashed;
-    border-top: 0px ;
-    min-height: 235px;
+  margin-top: 60px;
+  border-radius: 7px;
+  border: 2px solid #c1c1c1;
+  border-style: dashed;
+  border-top: 0px;
+  min-height: 235px;
 }
-:root .inputdragVedio canvas{
-    margin-top:60px;
-    border-radius: 7px;
-    border: 2px solid #c1c1c1;
-    border-style: dashed;
-    border-top: 0px ;
-    min-height: 235px;
-
+:root .inputdragVedio canvas {
+  margin-top: 60px;
+  border-radius: 7px;
+  border: 2px solid #c1c1c1;
+  border-style: dashed;
+  border-top: 0px;
+  min-height: 235px;
 }
-.inputdragVedio input{
-    z-index: 9999 !important;
-    position: absolute;
-    opacity: 0;
-    max-width: 300px;
-    width: 100%;
-    cursor: pointer;
+.inputdragVedio input {
+  z-index: 9999 !important;
+  position: absolute;
+  opacity: 0;
+  max-width: 300px;
+  width: 100%;
+  cursor: pointer;
 }
 .uploadnftpopup_content {
-    padding: 20px 0px;
+  padding: 20px 0px;
 }
-.uploadnftpopup-input.upload-secound-input.inputtdrag:after{
-    padding: 41% 0px;
+.uploadnftpopup-input.upload-secound-input.inputtdrag:after {
+  padding: 41% 0px;
 }
 .inputdragVedio .uploadnftpopup-input.upload-secound-input.inputtdrag input {
-	height: 150px;
+  height: 150px;
 }
 .inputdragVedio .uploadnftpopup-input-img.uploadnftpopup-secound {
-	height: 150px;
+  height: 150px;
 }
 .inputdragVedio .uploadnftpopup-input-img.uploadnftpopup-secound img {
-	height: 76%;
-	width: 92%;
-	object-fit: contain;
+  height: 76%;
+  width: 92%;
+  object-fit: contain;
 }
 .form-sell .form-check-inline .form-check-input {
-    width: 34px !important;
+  width: 34px !important;
 }
 .modal-content .card {
-    padding: 0rem !important;
-    background: #09080d;
+  padding: 0rem !important;
+  background: #09080d;
 }
 .modal-content .modal-body {
-    padding: 1rem !important;
+  padding: 1rem !important;
 }
 .modal-content .form-group input {
-    background-color: #17171b !important;
+  background-color: #17171b !important;
 }
-.bidinput{
-    background-color: #17171b !important;
-    padding: 10px;
-    margin-bottom: 10px;
-    height: 40px;
+.bidinput {
+  background-color: #17171b !important;
+  padding: 10px;
+  margin-bottom: 10px;
+  height: 40px;
 }
 .refer-frnd.modal-body {
-    padding: 20px 30px !important;
+  padding: 20px 30px !important;
 }
-.copytext{
-    position: absolute;
-    width: 60px;
-    top: 32px;
-    left: 0;
+.copytext {
+  position: absolute;
+  width: 60px;
+  top: 32px;
+  left: 0;
 }
 .notification {
     font-size: 25px;
-    margin: 0 15px;
+    margin: 0 5px;
     position: relative;
-}
-small.dropdown-notification {
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
-    position: absolute;
-    left: 13px;
-    border-radius: 100px;
-    padding: 0px 0px 0px;
-    font-size: 10px;
-    font-weight: 900;
-    top: 18px;
-    z-index: 1;
-    width: 15px;
-    height: 15px;
+    padding: 0!important;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    transition: all .3s;
+}
+small.dropdown-notification {
+  /* background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  ); */
+  background-color: #f00;
+  box-shadow: 0 0px 0px 1px rgb(9 8 13 / 32%);
+  position: absolute;
+  left: 20px;
+  border-radius: 100px;
+  padding: 0px 2px;
+  font-size: 10px;
+  font-weight: 900;
+  top: 5px;
+  z-index: 1;
+  min-width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 ul.creator-dropdown.dropdown-menu {
-    /* position: absolute; */
-    left: 0px;
+  /* position: absolute; */
+  left: 0px;
 }
 
 .notification-menu {
-    box-shadow: 0px 0px 7px #302f2f87 !important;
-    padding: 10px;
-    margin-top: 0px !important;
-    visibility: unset;
-    opacity: 1;
-    color: #fff;
-    text-align: left;
-    background-color: #252329 !important;
-    list-style: none;
-    position: absolute;
-    /* width: 250px; */
-    left: -90px;
-    width: max-content;
-    display:none;
+  box-shadow: 0px 0px 7px #302f2f87 !important;
+  padding: 10px;
+  margin-top: 0px !important;
+  visibility: unset;
+  opacity: 1;
+  color: #fff;
+  text-align: left;
+  background-color: #252329 !important;
+  list-style: none;
+  position: absolute;
+  /* width: 250px; */
+  left: -90px;
+  width: max-content;
+  display: none;
 }
-.notification-menu-open{
-    display: block;
+.notification-menu-open {
+  display: block;
 }
 
 .notification .btn.btn-secondary.dropdown-toggle:after {
-    display: none;
-    content: "";
+  display: none;
+  content: "";
 }
 ul.creator-dropdown.notification-menu:after {
-    content: "";
-    height: 15px;
-    width: 15px;
-    background-color: #252329 !important;
-    position: absolute;
-    top: -8px;
-    left: 70px;
-    transform: rotate(45deg);
+  content: "";
+  height: 15px;
+  width: 15px;
+  background-color: #252329 !important;
+  position: absolute;
+  top: -8px;
+  left: 70px;
+  transform: rotate(45deg);
 }
 .notification .btn.btn-secondary.dropdown-toggle {
-    background: unset;
-    padding: 0;
-    font-size: 20px;
+  background: unset;
+  padding: 0;
+  font-size: 20px;
+  transition: all 0.3s;
 }
-@media (min-width: 991px){
-    .progress_nft.mobile_nft.mb-3 {
-       display: none;
-    }
-    
+
+.notification:hover .btn.btn-secondary.dropdown-toggle {
+    font-weight: 100;
+}
+
+.notification:hover {
+    background-image: linear-gradient(135deg, var(--primary-color) 10%, var(--secondary-color));
+}
+@media (min-width: 991px) {
+  .progress_nft.mobile_nft.mb-3 {
+    display: none;
+  }
 }
 
 /* @media (max-width: 1245px){
@@ -2382,508 +2488,526 @@ ul.creator-dropdown.notification-menu:after {
         left: 106px;
     }
 } */
-@media(min-width: 1200px){
+@media (min-width: 1200px) {
   /* .container , .container.header{
     max-width: 1140px;
     padding: 0 15px;
   } */
 }
-@media (max-width: 1550px){
-    :root ul.creator-dropdown.dropdown-menu {
-        left: unset !important;
-        right: 0px;
-    }
-    :root header .navbar-expand .dropdown_login:hover > .dropdown-menu:after {
-        content: "";
-        left: unset !important;
-        right: 46px;
-    }
+@media (max-width: 1550px) {
+  :root ul.creator-dropdown.dropdown-menu {
+    left: unset !important;
+    right: 0px;
+  }
+  :root header .navbar-expand .dropdown_login:hover > .dropdown-menu:after {
+    content: "";
+    left: unset !important;
+    right: 46px;
+  }
 }
 
-
-@media (max-width: 1200px){
-    .hero-section h1{
-        font-size: 50px;
-        }
-    }
-
-@media (max-width: 991px){
-    .referal-detail .main-heading {
-        font-size: 16px !important  ;
-    }
-    .item-details-area.referal-detail h3 {
-        font-size: 30px !important;
-    }
-    .popular-collections-area img.card-img-top {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        aspect-ratio: 1/1 !important;
-    }
-
-    :root .item-details-area .content_project .item-thumb, :root body .item-details-area.project-nft-si.main-proj-detail.collection_detail .item-thumb {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 100% !important;
-    }
-    .desktop_nft{
-       display: none;
-    }
-    .progress_nft.mobile_nft .fund_row {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    .progress_nft.mobile_nft ul li {
-        border-bottom: unset;
-        width: 100%;
-    }
-
-
-    :root .EditImage .popup .control-panel {
-        position: unset !important;
-        width: 450px;
-        margin: 0;
-    }
-    :root .EditImage .popup .image-container {
-        flex-direction: column !important;
-
-    }
-    :root .EditImage .popup .image-container {
-        flex-direction: column !important;
-        /* align-items: center !important; */
-        align-content: center !important;
-    }
-
+@media (max-width: 1200px) {
+  .hero-section h1 {
+    font-size: 50px;
+  }
 }
 
-@media (max-width:767px){
-    section .btn.btn-bordered-white {
-        margin: 14px 0px;
-    }
-    .row{
-        padding: 0 !important;
-    }
-    .uploadnftpopup .ant-upload.ant-upload-select.ant-upload-select-picture-card {
-        width: 100%;
-    }
-    .main-proj-detail .item-thumb , .fundraise-main .item-info {
-        height: 300px !important;
-        /* height: auto; */
-    }
-    .nft-remove {
-        position: absolute;
-        left: 0 !important;
-        top: 16px !important;
-        text-align: right !important;
-    }
-    img.mobile-logo {
-        display: block;
-    }
-    img.navbar-brand-sticky.desktop_logo {
-        display: none;
-    }
-
-}
-
-@media (max-width:768px){
-    .author-area .item-form {
-        padding: 40px 15px;
-    }
-    .stepperline {
-        word-break: normal;
-        height: 13px;
-        overflow: hidden;
-        width: 59px;
-        margin: 1px 0px 0px 15px;
-    }
-     .orgicon1line {
-        width: 50px !important;
-    }
-    span.title_main {
-        font-size: 30px !important;
-    }
-    .item-details-area h3 {
-        padding: 20px 0px 0px 10px;
-    }
-    .termsandconditions {
-        padding: 0px 0px 50px 10px;
-    }
-    body h1{
-        font-size: 35px !important;
-    }
-    .button-group a {
-        margin-top: 10px;
-        margin-right: 5px;
-    }
-    :root section.hero-section {
-        padding: 80px 0 !important;
-    }
-    .intro {
-        display: block !important;
-    }
-    .intro-content h3 {
-        font-size: 30px;
-    }
-    svg.svg-inline--fa.fa-user.fa-w-14 {
-        font-size: 16px;
-    }
-    a.creator-button div {
-        display: none;
-    }
-    body header .navbar-expand .navbar-nav.action .btn {
-        padding: 9px 10px;
-        font-size: 0;
-    }
-    section {
-        width: 100%;
-        padding: 80px 0 0 !important;
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
-     }
-    }
-    
-    @media (max-width: 850px){
-        .project-total-detail {
-            gap: 10px !important;
-            flex-direction: column;
-        }
-    }
-
-    @media (max-width: 600px){
-        .input-group.author_detail {
-            border-radius: 30px !important;
-            padding: 13px 0px !important;
-            margin: 0;
-            gap: 10px;
-        }
-        .input-group.author_detail div {
-            flex-direction: column;
-            /* text-align: left; */
-        }
-        .input-group.author_detail div label {
-            width: 90%;
-        }
-        .input-group.author_detail input {
-            height: 40px !important;
-        }
-        .nft-image {
-            height: 92%;
-        }
-    }
-    @media (max-width: 440px){
-        .notification {
-            margin: 0 0px;
-        }
-        .dropdown.dropdown_login .btn {
-            padding: 16px 20px;
-        }
-        .uploadnftpopup-input {
-            height: 157px;
-        }
-        video.VideoInput_video {
-            height: 130px;
-        }
-    }
-    @media (max-width: 400px){
-            .proj-left button {
-                width: 100%;
-                margin-top: 10px !important;
-            }
-        }
-
-
-        .dropdown-scrollbar {
-            height: auto;
-            overflow-x: hidden;
-            overflow-y: scroll;
-            max-width: 260px;
-            max-height: 350px;
-        }
-        .dropdown-scrollbar::-webkit-scrollbar-thumb {
-            background: #afafaf;
-        }
-        .dropdown-scrollbar::-webkit-scrollbar {
-            width: 5px;
-        }
-        .dropdown-scrollbar::-webkit-scrollbar-track {
-            background: #323232;
-        }
-        li.btn_wrap {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #3f3f3f;
-            padding-bottom: 10px;
-        }
-        .btn_wrap button {
-            background: transparent;
-            border: 0px;
-            font-size: 12px;
-        }
-        .btn_wrap span {
-            font-size: 12px !important;
-            line-height: 12px;
-        }
-        
-        .noty_all {
-            border-radius: 100px !important;
-            font-size: 14px;
-            padding: 4px 13px;
-            float: right;
-            background-color: transparent;
-            border: none;
-            color: lightgray;
-        }
-        .noty_all a{
-            color: lightgray !important;
-        }
-   
-        .modal-dialog.modal-lg {
-            
-            height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-        .fade.edit_nft_popup.modal.show {
-            background: #2222228a;
-        }
-        .modal-content input{
-           background: #17171b !important;
-        }
-        .nft-edit-icon {
-            top: 10px;
-            z-index: 1;
-            right: 30px;
-            /* background: red; */
-        }
-        .nft-edit-icon i {
-            background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
-            padding: 5px 15px;
-            color: #fff;
-            border-radius: 20px;
-            top: 10px;
-            font-size: 12px;
-        }
-        div#werwer {
-            height: auto;
-        }
-       .auction-slider.auctions-slides  span {
-            -webkit-background-clip: unset !important;
-            -webkit-text-fill-color: unset !important;
-            /* color: #ffff !important; */
-            text-transform: inherit;
-            background: unset;
-        }
-       .auction-slider.auctions-slides  span:after{
-            display: none;
-        }
-        .auction-slider.auctions-slides img.card-img-top {
-            aspect-ratio: unset !important;
-        }
-
-        .auction-slider.auctions-slides .item.card {
-            color: black;
-            /* background-image: linear-gradient(150deg, white -200%, #0e0e0e 78%); */
-            transform: translate3d(0px, 10px, 10px);
-            /* border: 1px solid #282828; */
-            background-color: #16151a;
-            box-shadow: 10px 0px 65px #000000;
-        }
-        .inputtdrag {
-            color: #16151a;
-        }
-        .loading .modal-content {
-            background: transparent !important;
-        }
-        .fade.loading .form-group{
-            align-items: center;
-    text-align: center;
-    color: #fff;
-    font-weight: 800;
-    margin-top: 10px !important;
-        }
-        .loading .main-create {
-            background: transparent !important;
-        }
-        
-        .loader-img .main-create {
-    position: absolute;
-    z-index: 99;
-    text-align: center;
-   
+@media (max-width: 991px) {
+  .referal-detail .main-heading {
+    font-size: 16px !important  ;
+  }
+  .item-details-area.referal-detail h3 {
+    font-size: 30px !important;
+  }
+  .popular-collections-area img.card-img-top {
     width: 100%;
-    vertical-align: middle !important;
-    height: 350px;
-    text-align: center;
-    align-items: center;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1/1 !important;
+  }
+
+  :root .item-details-area .content_project .item-thumb,
+  :root
+    body
+    .item-details-area.project-nft-si.main-proj-detail.collection_detail
+    .item-thumb {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+  }
+  .desktop_nft {
+    display: none;
+  }
+  .progress_nft.mobile_nft .fund_row {
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .progress_nft.mobile_nft ul li {
+    border-bottom: unset;
+    width: 100%;
+  }
+
+  :root .EditImage .popup .control-panel {
+    position: unset !important;
+    width: 450px;
+    margin: 0;
+  }
+  :root .EditImage .popup .image-container {
+    flex-direction: column !important;
+  }
+  :root .EditImage .popup .image-container {
+    flex-direction: column !important;
+    /* align-items: center !important; */
+    align-content: center !important;
+  }
+}
+
+@media (max-width: 767px) {
+  section .btn.btn-bordered-white {
+    margin: 14px 0px;
+  }
+  .row {
+    padding: 0 !important;
+  }
+  .uploadnftpopup .ant-upload.ant-upload-select.ant-upload-select-picture-card {
+    width: 100%;
+  }
+  .main-proj-detail .item-thumb,
+  .fundraise-main .item-info {
+    height: 300px !important;
+    /* height: auto; */
+  }
+  .nft-remove {
+    position: absolute;
+    left: 0 !important;
+    top: 16px !important;
+    text-align: right !important;
+  }
+  img.mobile-logo {
+    display: block;
+  }
+  img.navbar-brand-sticky.desktop_logo {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .author-area .item-form {
+    padding: 40px 15px;
+  }
+  .stepperline {
+    word-break: normal;
+    height: 13px;
+    overflow: hidden;
+    width: 59px;
+    margin: 1px 0px 0px 15px;
+  }
+  .orgicon1line {
+    width: 50px !important;
+  }
+  span.title_main {
+    font-size: 30px !important;
+  }
+  .item-details-area h3 {
+    padding: 20px 0px 0px 10px;
+  }
+  .termsandconditions {
+    padding: 0px 0px 50px 10px;
+  }
+  body h1 {
+    font-size: 35px !important;
+  }
+  .button-group a {
+    margin-top: 10px;
+    margin-right: 5px;
+  }
+  :root section.hero-section {
+    padding: 80px 0 !important;
+  }
+  .intro {
+    display: block !important;
+  }
+  .intro-content h3 {
+    font-size: 30px;
+  }
+  svg.svg-inline--fa.fa-user.fa-w-14 {
+    font-size: 16px;
+  }
+  a.creator-button div {
+    display: none;
+  }
+  body header .navbar-expand .navbar-nav.action .btn {
+    padding: 9px 10px;
+    font-size: 0;
+  }
+  section {
+    width: 100%;
+    padding: 80px 0 0 !important;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+  }
+}
+
+@media (max-width: 850px) {
+  .project-total-detail {
+    gap: 10px !important;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .input-group.author_detail {
+    border-radius: 30px !important;
+    padding: 13px 0px !important;
+    margin: 0;
+    gap: 10px;
+  }
+  .input-group.author_detail div {
+    flex-direction: column;
+    /* text-align: left; */
+  }
+  .input-group.author_detail div label {
+    width: 90%;
+  }
+  .input-group.author_detail input {
+    height: 40px !important;
+  }
+  .nft-image {
+    height: 92%;
+  }
+}
+@media (max-width: 440px) {
+  .notification {
+    margin: 0 0px;
+  }
+  .dropdown.dropdown_login .btn {
+    padding: 16px 20px;
+  }
+  .uploadnftpopup-input {
+    height: 157px;
+  }
+  video.VideoInput_video {
+    height: 130px;
+  }
+}
+@media (max-width: 400px) {
+  .proj-left button {
+    width: 100%;
+    margin-top: 10px !important;
+  }
+}
+
+.dropdown-scrollbar {
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-width: 260px;
+  max-height: 350px;
+}
+.dropdown-scrollbar::-webkit-scrollbar-thumb {
+  background: #afafaf;
+}
+.dropdown-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.dropdown-scrollbar::-webkit-scrollbar-track {
+  background: #323232;
+}
+li.btn_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #3f3f3f;
+  padding-bottom: 10px;
+}
+.btn_wrap button {
+  background: transparent;
+  border: 0px;
+  font-size: 12px;
+}
+.btn_wrap span {
+  font-size: 12px !important;
+  line-height: 12px;
+}
+
+.noty_all {
+  border-radius: 100px !important;
+  font-size: 14px;
+  padding: 4px 13px;
+  float: right;
+  background-color: transparent;
+  border: none;
+  color: lightgray;
+}
+.noty_all a {
+  color: lightgray !important;
+}
+
+.modal-dialog.modal-lg {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.fade.edit_nft_popup.modal.show {
+  background: #2222228a;
+}
+.modal-content input {
+  background: #17171b !important;
+}
+.nft-edit-icon {
+  top: 10px;
+  z-index: 1;
+  right: 30px;
+  /* background: red; */
+}
+.nft-edit-icon i {
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  );
+  padding: 5px 15px;
+  color: #fff;
+  border-radius: 20px;
+  top: 10px;
+  font-size: 12px;
+}
+div#werwer {
+  height: auto;
+}
+.auction-slider.auctions-slides span {
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  /* color: #ffff !important; */
+  text-transform: inherit;
+  background: unset;
+}
+.auction-slider.auctions-slides span:after {
+  display: none;
+}
+.auction-slider.auctions-slides img.card-img-top {
+  aspect-ratio: unset !important;
+}
+
+.auction-slider.auctions-slides .item.card {
+  color: black;
+  /* background-image: linear-gradient(150deg, white -200%, #0e0e0e 78%); */
+  transform: translate3d(0px, 10px, 10px);
+  /* border: 1px solid #282828; */
+  background-color: #16151a;
+  box-shadow: 10px 0px 65px #000000;
+}
+.inputtdrag {
+  color: #16151a;
+}
+.loading .modal-content {
+  background: transparent !important;
+}
+.fade.loading .form-group {
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  font-weight: 800;
+  margin-top: 10px !important;
+}
+.loading .main-create {
+  background: transparent !important;
+}
+
+.loader-img .main-create {
+  position: absolute;
+  z-index: 99;
+  text-align: center;
+
+  width: 100%;
+  vertical-align: middle !important;
+  height: 350px;
+  text-align: center;
+  align-items: center;
+  display: flex;
 }
 
 .image-caption {
-    color: rgb(165 160 159);
+  color: rgb(165 160 159);
 }
 .navbar__link:hover {
-    transform: translateY(-2px);
-  }
-  
-  .navbar__link--active {
-    border-bottom: 3px solid #4528DC !important;
-    /* transition: border-bottom .5s ease-in-out; */
-    width: min-content !important;
-    border-radius: unset !important;
+  transform: translateY(-2px);
+}
+
+.navbar__link--active {
+  border-bottom: 3px solid #4528dc !important;
+  /* transition: border-bottom .5s ease-in-out; */
+  width: min-content !important;
+  border-radius: unset !important;
 }
 /* .nav-link-active:hover {
     transform: translateY(-2px);
   } */
-  
-  .nav-link-active {
-    border-bottom: 3px solid #4528DC !important;
-    transition: border-bottom .5s ease-in-out;
-  }
-  p.caption.image-caption {
-    display: none !important;
+
+.nav-link-active {
+  border-bottom: 3px solid #4528dc !important;
+  transition: border-bottom 0.5s ease-in-out;
+}
+p.caption.image-caption {
+  display: none !important;
 }
 
 i.fa-solid.fa-share-nodes {
-    margin-left: unset !important;
-    /* position: unset; */
+  margin-left: unset !important;
+  /* position: unset; */
 }
-h6{
-    font-weight: 400 !important;
-    font-family: 'Poppins';
+h6 {
+  font-weight: 400 !important;
+  font-family: "Poppins";
 }
 .nft-price img {
-    width: 30px;
+  width: 30px;
 }
 .edit-buttons {
-    position: absolute;
-    top: -230px;
-    left: -6px;
-    width: 100%;
-    justify-content: right !important;
-    gap: 10px;
+  position: absolute;
+  top: -230px;
+  left: -6px;
+  width: 100%;
+  justify-content: right !important;
+  gap: 10px;
 }
 .edit-buttons a {
-    padding: 7px 20px;
+  padding: 7px 20px;
 }
 .edit-buttons {
-    /* display: none !important; */
-    visibility: hidden !important;
+  /* display: none !important; */
+  visibility: hidden !important;
 }
-.card:hover .edit-buttons{
-    display: block !important;
-    text-align: right;
-    transition: 0.3s ease-in-out;
-    visibility: visible !important;
+.card:hover .edit-buttons {
+  display: block !important;
+  text-align: right;
+  transition: 0.3s ease-in-out;
+  visibility: visible !important;
 }
 .hero-section .auction-slider.auctions-slides .item.card {
-    min-width: 250px;
-    width: 200px;
-    padding: 10px;
+  min-width: 250px;
+  width: 200px;
+  padding: 10px;
 }
-.hero-section  .auction-slider.auctions-slides img.card-img-top {
-    aspect-ratio: unset !important;
-    /* height: 230px; */
-    height: -webkit-fill-available;
+.hero-section .auction-slider.auctions-slides img.card-img-top {
+  aspect-ratio: unset !important;
+  /* height: 230px; */
+  height: -webkit-fill-available;
 }
 .hero-section .image-over {
-    height: 230px;
-    overflow: hidden;
-    border-radius: 2px;
+  height: 230px;
+  overflow: hidden;
+  border-radius: 2px;
 }
 .hero-section .card .card-body {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    min-height: 1px;
-    padding: 15px 0 0;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 15px 0 0;
 }
-.hero-section .item.card{
-    animation: mymove 5s ease-in-out infinite;
+.hero-section .item.card {
+  animation: mymove 5s ease-in-out infinite;
 }
 @keyframes mymove {
-    0%   {top: 0px; }
-    /* 25%  {top: 50px; } */
-    50%  {top: 30px;}
-    /* 75%  {top: 100px; } */
-    100% {top: 0px;}
+  0% {
+    top: 0px;
   }
-
-
-.contract-address td a:hover{
-    color: #4528dc !important;
+  /* 25%  {top: 50px; } */
+  50% {
+    top: 30px;
+  }
+  /* 75%  {top: 100px; } */
+  100% {
+    top: 0px;
+  }
 }
-.contract-address td a{
-    color: #8e8e8e !important;
+
+.contract-address td a:hover {
+  color: #4528dc !important;
+}
+.contract-address td a {
+  color: #8e8e8e !important;
 }
 .nfts-detail .card-body {
-    padding: 25px 0 0 !important;
+  padding: 25px 0 0 !important;
 }
 .purchase_btn {
-    margin: 0px !important;
-    font-size: 20px;
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 600;
+  margin: 0px !important;
+  font-size: 20px;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
 }
 :root .sold-outbtn {
-    margin: 0px !important;
-    font-size: 20px !important;
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 600;
-    border: 0px;
-    padding: 0px !important;
+  margin: 0px !important;
+  font-size: 20px !important;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+  border: 0px;
+  padding: 0px !important;
 }
 .soldout-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
-    margin-right: 15px;
-    margin-left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 .soldout-card .sold-outbtn {
-    position: absolute;
-    left: 0;
-    z-index: 1;
-    text-align: center;
-    right: 0;
-    padding: 10px !important;
-    border-radius: 0px;
-    webkit-background-clip: unset !important;
-    -webkit-text-fill-color: unset !important;
-    color: #fff !important;
-    background: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  text-align: center;
+  right: 0;
+  padding: 10px !important;
+  border-radius: 0px;
+  webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  color: #fff !important;
+  background: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  );
 }
 .dark-sold {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 .nfts_main .card-body div {
-    min-height: 42px;
+  min-height: 42px;
 }
 .dropdown_login .fa-user {
-    margin: 0 !important;
-    color: #FFF;
+  margin: 0 !important;
+  color: #fff;
 }
 .dropdown_login ul.creator-dropdown.dropdown-menu li button:hover {
-    color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
 }
 .dropdown_login ul.creator-dropdown.dropdown-menu li button {
-    color: #fff !important;
-    font-family: 'Poppins' !important;
+  color: #fff !important;
+  font-family: "Poppins" !important;
 }
 
-
-  .disabled {
-    background-color: #707070;
-    left: 2px;
-  }
-  /* .dropdown_login .ant-space-item {
+.disabled {
+  background-color: #707070;
+  left: 2px;
+}
+/* .dropdown_login .ant-space-item {
     border: 1px solid #474747 !important;
     background-color: rgb(0 0 0 / 38%) !important;
     padding: 4px !important;
@@ -2893,499 +3017,604 @@ h6{
     background-color: rgb(0 0 0 / 1%) !important;
 } */
 .dropdown_login .ant-space-item:focus-visible {
-    outline: unset !important;
+  outline: unset !important;
 }
 .dropdown_login .ant-switch:focus-visible {
-    outline: unset !important;
+  outline: unset !important;
 }
 .ant-switch {
-    padding: 5px !important;
-    height: auto !important;
-
+  padding: 5px !important;
+  height: auto !important;
 }
-.dropdown_login  .ant-switch-handle {
-    position: absolute;
-    top: 7px !important;
-    left: 6px ;
-    width: 18px;
-    height: 18px;
-    transition: all 0.2s ease-in-out;
+.dropdown_login .ant-switch-handle {
+  position: absolute;
+  top: 7px !important;
+  left: 6px;
+  width: 18px;
+  height: 18px;
+  transition: all 0.2s ease-in-out;
 }
 .dropdown_login .ant-switch-checked {
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  );
 }
 .dropdown_login .ant-switch-handle::before {
-    position: absolute;
-    top: 0;
-    right: 2px;
-    bottom: 0;
-    left: -2px;
-    background-color: #fff;
-    border-radius: 9px;
-    box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
-    transition: all 0.2s ease-in-out;
-    content: '';
+  position: absolute;
+  top: 0;
+  right: 2px;
+  bottom: 0;
+  left: -2px;
+  background-color: #fff;
+  border-radius: 9px;
+  box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
+  transition: all 0.2s ease-in-out;
+  content: "";
 }
 .SwitchContainer {
-    display: flex;
-    background-color: #2a2a2a;
-    align-items: center;
-    border-radius: 35px;
-    width: max-content;
-    height: max-content;
+  display: flex;
+  background-color: #2a2a2a;
+  align-items: center;
+  border-radius: 35px;
+  width: max-content;
+  height: max-content;
 }
-  
-  .ToggleItem {
-    height: 40px;
-    width: 100px;
-    display: flex;
-    border-radius: 35px;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 12px;
-    cursor: pointer;
+
+.ToggleItem {
+  height: 40px;
+  width: 100px;
+  display: flex;
+  border-radius: 35px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  cursor: pointer;
 }
 .ToggleItem:hover {
-    background: rgb(60 31 215) !important;
+  background: rgb(60 31 215) !important;
 }
-  .Text {
-    color: white;
-    font-size: 14px;
-  }
-  /* .background {
+.Text {
+  color: white;
+  font-size: 14px;
+}
+/* .background {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 10vw;
     height: 10vh;
   } */
-  .ToggleItem.ToggleItem-first ,   .ToggleItem.ToggleItem-sec {
-    /* background: red !important; */
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+.ToggleItem.ToggleItem-first,
+.ToggleItem.ToggleItem-sec {
+  /* background: red !important; */
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  );
 }
 .referal img {
-    max-width: 20px;
-    object-fit: cover;
-    width: 100%;
+  max-width: 20px;
+  object-fit: cover;
+  width: 100%;
 }
 .dropdown-item a i {
-    padding: 0px 5px 0px 0px;
+  padding: 0px 5px 0px 0px;
 }
 .nft-Collapse {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 .ant-collapse-header span.ant-collapse-header-text {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 30px;
 }
 /* span.ant-collapse-header-text div:nth-child(2) {
  
 } */
-span.ant-collapse-header-text div:nth-child(2) img{
-    width: 60px;
-    height: 60px;
-    border-radius: 10px;
+span.ant-collapse-header-text div:nth-child(2) img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
 }
-.images-Collapse{
- width: 250px;
+.images-Collapse {
+  width: 250px;
 }
 .nft-Collapse .ant-collapse-header {
-    width: 100%;
-    justify-content: space-between;
+  width: 100%;
+  justify-content: space-between;
 }
 .nft-Collapse .ant-collapse-expand-icon span {
-    font-size: 18px !important;
+  font-size: 18px !important;
 }
-.referal-main ul{
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-evenly;
-    /* justify-content: space-around; */
-    margin: 0 auto;
-    gap: 0 20px;
+.referal-main ul {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-evenly;
+  /* justify-content: space-around; */
+  margin: 0 auto;
+  gap: 0 20px;
 }
 .referal-main li {
-    padding: 50px 20px;
-    background: #4a1ec5;
-    width: 100%;
-    max-width: 260px;
-    list-style: none;
-    border-radius: 7px;
-    align-items: center;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+  padding: 50px 20px;
+  background: #4a1ec5;
+  width: 100%;
+  max-width: 260px;
+  list-style: none;
+  border-radius: 7px;
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
-.referal-main li span{
-    color: #fff;
-    font-size: 20px;
-
+.referal-main li span {
+  color: #fff;
+  font-size: 20px;
 }
-.referal-detail .main-heading{
-    flex-direction: column;
-    text-align: center;
-    margin-top: 48px;
-    font-size: 22px;
+.referal-detail .main-heading {
+  flex-direction: column;
+  text-align: center;
+  margin-top: 48px;
+  font-size: 22px;
 }
-.referal-detail h5{
-margin: 60px 0 20px;
-text-align: center;
+.referal-detail h5 {
+  margin: 60px 0 20px;
+  text-align: center;
 }
-.referal-detail h3{
-    text-align: center;
-    font-size: 40px !important;
+.referal-detail h3 {
+  text-align: center;
+  font-size: 40px !important;
 }
 .ant-popover-arrow {
-    display: none;
+  display: none;
 }
 :root .ant-notification-notice-description h5 {
-    color: #000 !important;
+  color: #000 !important;
 }
 .notification_btn-conf {
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
-    color: #fff !important;
-    border-radius: 30px !important;
-    height: 40px !important;
-    font-weight: 500 !important;
-    font-family: 'Jost';
-    border: 1px solid #57048a  !important;
-    width: 120px;
-    transition: .5s ease-in-out;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  ) !important;
+  color: #fff !important;
+  border-radius: 30px !important;
+  height: 40px !important;
+  font-weight: 500 !important;
+  font-family: "Jost";
+  border: 1px solid #57048a !important;
+  width: 120px;
+  transition: 0.5s ease-in-out;
 }
-.notification_btn-conf span, .reject-btn span, .table-btn span{
-    color: #fff;
+.notification_btn-conf span,
+.reject-btn span,
+.table-btn span {
+  color: #fff;
 }
 .notification_btn-conf:hover span {
-    color: #57048a  !important; 
+  color: #57048a !important;
 }
-.notification_btn-conf:hover{
-    background-image:none !important;
+.notification_btn-conf:hover {
+  background-image: none !important;
 }
-.notification_btn-delete span{
-    color: #57048a  !important;
+.notification_btn-delete span {
+  color: #57048a !important;
 }
-.notification_btn-delete{
-    border: 1px solid #57048a  !important;
-    border-radius: 30px !important;
-    /* padding: 0px 25px; */
-    height: 40px !important;
-    font-weight: 500 !important;
-    font-family: 'Jost';
-    width: 120px;
-    transition: .5s ease-in-out;
+.notification_btn-delete {
+  border: 1px solid #57048a !important;
+  border-radius: 30px !important;
+  /* padding: 0px 25px; */
+  height: 40px !important;
+  font-weight: 500 !important;
+  font-family: "Jost";
+  width: 120px;
+  transition: 0.5s ease-in-out;
 }
 .ant-notification-notice-btn {
-    margin-top: 26px !important;
+  margin-top: 26px !important;
 }
 .ant-notification-notice.ant-notification-notice-closable {
-    height: 180px;
-    border-radius: 6px !important;
+  height: 180px;
+  border-radius: 6px !important;
 }
-button.notification_btn-delete:hover{
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+button.notification_btn-delete:hover {
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  ) !important;
 }
-button.notification_btn-delete:hover span{
-    color: #fff !important;
+button.notification_btn-delete:hover span {
+  color: #fff !important;
 }
 :root .table-btn {
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
-    color: #fff !important;
-    border-radius: 30px !important;
-    font-weight: 500 !important;
-    font-family: 'Jost';
-    border: 1px solid #57048a  !important;
-    transition: .5s ease-in-out;
-    padding: 0 25px !important;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  ) !important;
+  color: #fff !important;
+  border-radius: 30px !important;
+  font-weight: 500 !important;
+  font-family: "Jost";
+  border: 1px solid #57048a !important;
+  transition: 0.5s ease-in-out;
+  padding: 0 25px !important;
 }
-    /* :root .table-btn:hover {
+/* :root .table-btn:hover {
         background: transparent !important;
         border-color: #fff !important;
     } */
-    .spiner {
-        display: flex;
-        justify-content: center;
-        padding: 20px 0px;
-    }
+.spiner {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0px;
+}
 :root .reject-btn {
-    border-radius: 30px !important;
-    background: transparent !important;
-    padding: 0px 25px !important;
-    color: #fff !important;
+  border-radius: 30px !important;
+  background: transparent !important;
+  padding: 0px 25px !important;
+  color: #fff !important;
 }
 .reject-btn:hover {
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
-    color: #fff !important;
-    border-color: #4528dc !important;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  ) !important;
+  color: #fff !important;
+  border-color: #4528dc !important;
 }
 td.Btn_td {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 .btndisabled {
-    border-radius: 30px;
-    background: #5a5a5a !important;
-    width: 100px;
+  border-radius: 30px;
+  background: #5a5a5a !important;
+  width: 100px;
 }
 a.auctionbttn {
-    background: #008000;
-    border-radius: 30px;
-    color: #fff !important;
-    padding: 6px 15px;
+  background: #008000;
+  border-radius: 30px;
+  color: #fff !important;
+  padding: 6px 15px;
 }
 /* .table-responsive {
     text-align: center;
 } */
 .ant-result-title {
-    color: white !important;
-    font-size: 20px !important;
-    line-height: 1.8;
-    text-align: center;
+  color: white !important;
+  font-size: 20px !important;
+  line-height: 1.8;
+  text-align: center;
 }
 .ant-result-subtitle {
-    color: white !important;
-    font-size: 20px !important;
-    line-height: 1.6;
-    text-align: center;
+  color: white !important;
+  font-size: 20px !important;
+  line-height: 1.6;
+  text-align: center;
 }
 .ant-result {
-    padding: 150px 37px !important;
+  padding: 150px 37px !important;
 }
 .project_type-icon .ant-alert-icon svg {
-    fill: #1890ff !important;
+  fill: #1890ff !important;
 }
 .project_type-icon .ant-alert-action {
-    margin-left: 8px;
-    padding: 2px;
-    border-radius: 100px;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #1890ff;
-    cursor: pointer;
+  margin-left: 8px;
+  padding: 2px;
+  border-radius: 100px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #1890ff;
+  cursor: pointer;
 }
-.project_type-icon .ant-alert-action .fa-solid{
-    font-weight: 900;
-    margin-left: 0px;
-    color: #1890ff;
-    font-size: 10px;
+.project_type-icon .ant-alert-action .fa-solid {
+  font-weight: 900;
+  margin-left: 0px;
+  color: #1890ff;
+  font-size: 10px;
 }
 .project_type-icon .anticon-close {
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
-    padding: 2px;
-    border-radius: 100px;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #1890ff;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  );
+  padding: 2px;
+  border-radius: 100px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1890ff;
 }
 .project_type-icon .anticon-close svg {
-    fill: white;
-    font-size: 12px;
+  fill: white;
+  font-size: 12px;
 }
 .project_type-icon .ant-space-item {
-    width: 100%;
-    max-width: 97%;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 97%;
+  margin: 0 auto;
 }
 .html-box textarea.form-control {
-    height: fit-content;
-    min-height: 150px;
+  height: fit-content;
+  min-height: 150px;
 }
 .html-box textarea.form-control::-webkit-scrollbar-thumb {
-    background: #343434;
+  background: #343434;
 }
 .html-box textarea.form-control::-webkit-scrollbar {
-    width: 5px;
+  width: 5px;
 }
 .html-box textarea.form-control::-webkit-scrollbar-track {
-    background: #ffffff;
+  background: #ffffff;
 }
-.html-box .html_boxrow>div:first-child {
-    width: 95%;
+.html-box .html_boxrow > div:first-child {
+  width: 95%;
 }
-.html-box .html_boxrow>div:last-child {
-    width: 5%;
+.html-box .html_boxrow > div:last-child {
+  width: 5%;
 }
 .copy_text .copytext {
-    left: unset !important;
-    right: -30px;
-    top: -18px;
+  left: unset !important;
+  right: -30px;
+  top: -18px;
 }
 .html_box-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 .select_bar select {
-    border: 1px solid #fff;
-    margin-top: 20px;
+  border: 1px solid #fff;
+  margin-top: 20px;
 }
 .referal-detail .react-tabs__tab--selected {
-    border-color: #aaa0;
-    color: white;
-    background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
+  border-color: #aaa0;
+  color: white;
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  );
 }
 .react-tabs__tab {
-    border: 1px solid transparent !important;
-    padding: 10px 12px !important;
+  border: 1px solid transparent !important;
+  padding: 10px 12px !important;
 }
 .fee_contentdiv {
-    padding: 15px 10px;
-    border-bottom:1px solid #373737cc;
+  padding: 15px 10px;
+  border-bottom: 1px solid #373737cc;
 }
 :root .fee_contentdiv .mainkrmetica_heading {
-    color: #fff !important;
+  color: #fff !important;
 }
 .fee_content {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 :root .morebutton {
-    margin-top:30px;
-    display: flex;
-    justify-content: center;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
 }
 :root .morebutton a {
-    width: 100%;
-    max-width: fit-content;
-    margin: 0px auto;
+  width: 100%;
+  max-width: fit-content;
+  margin: 0px auto;
 }
 .create_projrct {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
-.create_projrct i.fa-solid.fa-plus.create, .create_projrct i span {
-    margin-left: 0px !important;
-    color: #fff;
+.create_projrct i.fa-solid.fa-plus.create,
+.create_projrct i span {
+  margin-left: 0px !important;
+  color: #fff;
 }
 
-.all_nft .explore-item{
-    flex: 23%;
+.all_nft .explore-item {
+  flex: 23%;
 }
 .all_nft {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
 }
 button.btn.btn-primary.banner-update {
-    /* text-align: right; */
-    float: right;
+  /* text-align: right; */
+  float: right;
 }
 
 .image-upload-btn .material-icons {
-    
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 .single_project-detail .item .card {
-    width: 100%;
+  width: 100%;
 }
 .single_project-detail .item .card a {
-    display: block;
+  display: block;
 }
 .single_project-detail .card-bottom p {
-    min-height: 45px;
+  min-height: 45px;
 }
 .author-area .item-form .select-box:after {
-    content: "\f107";
-    font-family: FontAwesome;
-    position: absolute;
-    top: 15px;
-    opacity: .6;
-    right: 15px;
-    pointer-events: none;
-  }
-  
-  .author-area .item-form .select-box select {
-    appearance: none;
-    cursor: pointer;
-  }
-  .referal-detail .react-tabs__tab:focus:after {
-    left: -1px;
-    right: 0;
-    width: 102%;
-    display: none;
+  content: "\f107";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 15px;
+  opacity: 0.6;
+  right: 15px;
+  pointer-events: none;
 }
-.referal-detail .react-tabs__tab--selected{
-    border-bottom: 5px solid #fff!important;
+
+.author-area .item-form .select-box select {
+  appearance: none;
+  cursor: pointer;
 }
-.fundraise-main .nft-edit-icon i{
-    margin: 5px 0 0 20px;
+.referal-detail .react-tabs__tab:focus:after {
+  left: -1px;
+  right: 0;
+  width: 102%;
+  display: none;
+}
+.referal-detail .react-tabs__tab--selected {
+  border-bottom: 5px solid #fff !important;
+}
+.fundraise-main .nft-edit-icon i {
+  margin: 5px 0 0 20px;
 }
 .fundraise-main .nft-edit-icon {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 .ant-tooltip {
-    padding-top: 0;
-    font-size: 12px;
+  padding-top: 0;
+  font-size: 12px;
 }
 .loader-spin {
-    position: absolute;
-    width: 100%;
-    height: 72%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    left: 0;
-    right: 0;
-    top: 90px;
-    backdrop-filter: blur(3px);
+  position: absolute;
+  width: 100%;
+  height: 72%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  top: 90px;
+  backdrop-filter: blur(3px);
 }
 .Edite_able {
-    text-align: left;
+  text-align: left;
 }
-.edit_icon_des i{margin-left: 20px;}
+.edit_icon_des i {
+  margin-left: 20px;
+  cursor: pointer;
+}
 .ant-tooltip.ant-tooltip-placement-bottom {
-    padding-top: 0;
-    font-size: 12px;
+  padding-top: 0;
+  font-size: 12px;
 }
-@media(max-width:500px){
-    .create_projrct i span {
-        display: none;
-    }
-    :root .all_nft .explore-item{
-        flex: 100%;
-    }
-    .single_project-detail .item .card {
-        padding: 15px;
-    }
-    
-    .single_project-detail .item .card img {
-        width: 100%;
-    }
-    
-    .single_project-detail .item .card a {
-        display: block;
-    }
-    
-    .soldout-card {
-        margin: 0 auto;
-        padding: 0 15px;
-    }
-    
-    .soldout-card .sold-outbtn {
-        width: calc(100% - 60px);
-        left: 30px;
-    }
-    .button_group.nft-price .btn {display: flex;align-items: center;padding: 10px 15px;}
-    .single_project-detail .card-bottom p {
-        min-height: inherit;
-    }
+.footer-items ul li a:hover {
+  color: #4528dc !important;
+  font-weight: 600;
 }
-@media (max-width:991px){
-    :root .all_nft .explore-item{
-        flex: 45%;
-    }
+.intro-btn a:hover {
+  color: var(--primary-color) !important;
+}
+.contract-address .auctionbttn,
+.contract-address .auctionbttn:hover {
+  color: #fff !important;
+}
+.swal2-actions .swal2-styled.swal2-confirm,
+.swal2-actions .swal2-styled.swal2-confirm:hover {
+  background-image: linear-gradient(
+    150deg,
+    var(--secondary-color) 0%,
+    var(--primary-color) 78%
+  ) !important;
+}
+.swal2-actions .swal2-styled.swal2-confirm:focus {
+  box-shadow: none;
+  outline: none;
+}
+.item-form .btn:hover {
+  border: 2px solid #fff;
+  background: transparent;
+}
 
+.item-form .btn {
+  border: 2px solid transparent;
+}
+span.plus_icon,
+span.minus_icon {
+  position: absolute;
+  right: 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+span.plus_icon {
+  top: 5px;
+}
+span.minus_icon {
+  bottom: 2px;
+}
+.swal-footer {
+    text-align: center;
+}
+
+.swal-title:not(:last-child) {
+    text-transform: capitalize;
+}
+.number-input input[type=number]::-webkit-inner-spin-button, 
+.number-input .input_group input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0; 
+  }
+  .top-seller-area .item a:hover a.seller {
+    color: var(--primary-color)!important;
+}
+
+
+@media (max-width: 500px) {
+  .create_projrct i span {
+    display: none;
+  }
+  :root .all_nft .explore-item {
+    flex: 100%;
+  }
+  .single_project-detail .item .card {
+    padding: 15px;
+  }
+
+  .single_project-detail .item .card img {
+    width: 100%;
+  }
+
+  .single_project-detail .item .card a {
+    display: block;
+  }
+
+  .soldout-card {
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .soldout-card .sold-outbtn {
+    width: calc(100% - 60px);
+    left: 30px;
+  }
+  .button_group.nft-price .btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+  }
+  .single_project-detail .card-bottom p {
+    min-height: inherit;
+  }
+  .swiper-pagination.swiper-pagination-bullets {
+    display: none;
+}
+}
+@media (max-width: 991px) {
+  :root .all_nft .explore-item {
+    flex: 45%;
+  }
 }

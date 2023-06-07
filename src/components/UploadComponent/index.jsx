@@ -65,6 +65,7 @@ const Dropzone = ({ onDrop }) => {
 function UploadComponent({ imageSrc, setImageSrc }) {
   const [preview, setPreview] = useState();
 
+  console.log("imageSrc1111", imageSrc);
   useEffect(() => {
     if (imageSrc?.preview) {
       setPreview(imageSrc?.preview);

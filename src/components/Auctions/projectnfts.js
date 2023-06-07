@@ -56,7 +56,7 @@ const ProjNFTS = (props) => {
                                             <div className='d-flex justify-content-between button_group buy-invest-btn align-items-center nft-price'>
                                                 {item.sold_nft !== 1 && (
                                                 
-                                                    <a> <button className='btn py-2 ml-lg-auto btn-bordered-white'><i className="icon-handbag mr-1" /> <Link to={item.sold_nft == 0 && `/nftprojdetails/${item.slug}?refid=${props.refid}`} style={{ color: "white" }}>Invest</Link></button></a>
+                                                    <a> <button className='d-flex align-items-center btn py-2 ml-lg-auto btn-bordered-white'><i className="icon-handbag mr-2" /> <Link to={item.sold_nft == 0 && `/nftprojdetails/${item.slug}?refid=${props.refid}`} style={{ color: "white" }}>Invest</Link></button></a>
                                                 )}
                                                 <a> <img className="mr-1" src='../img/image14.png' />{item.price}</a>
                                                 
