@@ -141,14 +141,14 @@ export const ProjectList = (params) => async (dispatch) => {
             config
         );
 
-        console.log(res, 'proj')
+        // console.log(res, 'proj')
         if (params.location.pathname === "/projectlist") {
             params.setCount(params.count);
         }
         await dispatch(getProjectList(res));
         params.setLoading(false);
         // setLoading(false)
-        return ;
+        return res?.data?.data;
     } catch (e) {
         dispatch(LogsAction(e));
         if (params?.location?.pathname === "/projectlist") {

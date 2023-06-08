@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { getPublicLiveProjects } from "../../redux/Actions/projectAction";
 import { useState } from "react";
+import Loader from "../Loader/loader";
 const projectTypesMap = {
   LatestProjects: 2,
   RecentCampaigns: 1,
@@ -12,11 +13,12 @@ const AuctionsOne = ({ type }) => {
   const [count, setCount] = useState(1);
   const location = useLocation();
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const liveProjects = useSelector((state) => {
     return state?.projectdetails?.liveProjects[type];
   });
-  console.log(liveProjects, "liveeproj");
   useEffect(() => {
+    setLoading(true);
     dispatch(
       getPublicLiveProjects({
         cursor: 1,
@@ -26,7 +28,9 @@ const AuctionsOne = ({ type }) => {
         count,
         setData,
       })
-    );
+    ).then((res) => {
+      if (res) setLoading(false);
+    });
   }, [dispatch]);
 
   return (
@@ -56,65 +60,76 @@ const AuctionsOne = ({ type }) => {
           <div className="swiper-container slider-mid items ">
             <div className="swiper-wrapper  ">
               {/* Single Slide */}
-              {liveProjects?.data?.map((item, idx) => {
-                return (
-                  <div
-                    key={`auc_${item.id}`}
-                    className="swiper-slide item card position-relative auctions-slides-card"
-                  >
-                    <div className="image-over">
-                      <Link to={`/projects/${item.slug}`}>
-                        <img
-                          className="card-img-top"
-                          src={item?.image}
-                          alt=""
-                        />
-                      </Link>
-                    </div>
-                    <div className="card-caption col-12 p-0">
-                      <div className="card-body">
-                        {/* <a> */}
-                        <h5 className="mb-0">{item.title.slice(0, 34)}...</h5>
-                        {/* </a> */}
-                        <div className="seller d-flex align-items-center my-3">
-                          <span>Owned By</span>
-                          {/* <a> */}
-                          <h6 className="ml-2 mb-0">
-                            {item.user_data.username.slice(0, 12)}
-                          </h6>
-                          {/* </a> */}
+              {loading ? (
+                <Loader height="30px" width="30px" />
+              ) : (
+                <>
+                  {liveProjects?.data?.map((item, idx) => {
+                    return (
+                      <div
+                        key={`auc_${item.id}`}
+                        className="swiper-slide item card position-relative auctions-slides-card"
+                      >
+                        <div className="image-over">
+                          <Link to={`/projects/${item.slug}`}>
+                            <img
+                              className="card-img-top"
+                              src={item?.image}
+                              alt=""
+                            />
+                          </Link>
                         </div>
-                        <div className="card-bottom d-flex justify-content-between nft-price">
-                          <span>
-                            <img className="mr-1" src="../img/image14.png" />
-                            {Math.round(item.price)} MATIC
-                          </span>
-                          {item?.number_of_nft == 1 ? (
-                            <span>{item.number_of_nft} NFT</span>
-                          ) : (
-                            <span>{item.number_of_nft} NFTs</span>
-                          )}
-                        </div>
-                        <div className="d-flex justify-content-between edit-buttons nft-price ">
-                          <a
-                            className="btn  btn-smaller mt-3 mb-0"
-                            href="/wallet-connect"
-                          >
-                            <i className="icon-handbag" />
-                            {/* <i className="fa-solid fa-sack-dssollar"></i> */}
-                          </a>
-                          <a
-                            className="btn  btn-smaller mt-3 ml-2 mb-0"
-                            href="/wallet-connect"
-                          >
-                            <i class="fa-solid fa-share-nodes text-white"></i>
-                          </a>
+                        <div className="card-caption col-12 p-0">
+                          <div className="card-body">
+                            {/* <a> */}
+                            <h5 className="mb-0">
+                              {item.title.slice(0, 34)}...
+                            </h5>
+                            {/* </a> */}
+                            <div className="seller d-flex align-items-center my-3">
+                              <span>Owned By</span>
+                              {/* <a> */}
+                              <h6 className="ml-2 mb-0">
+                                {item.user_data.username.slice(0, 12)}
+                              </h6>
+                              {/* </a> */}
+                            </div>
+                            <div className="card-bottom d-flex justify-content-between nft-price">
+                              <span>
+                                <img
+                                  className="mr-1"
+                                  src="../img/image14.png"
+                                />
+                                {Math.round(item.price)} MATIC
+                              </span>
+                              {item?.number_of_nft == 1 ? (
+                                <span>{item.number_of_nft} NFT</span>
+                              ) : (
+                                <span>{item.number_of_nft} NFTs</span>
+                              )}
+                            </div>
+                            <div className="d-flex justify-content-between edit-buttons nft-price ">
+                              <a
+                                className="btn  btn-smaller mt-3 mb-0"
+                                href={`/projects/${item.slug}`}
+                              >
+                                <i className="icon-handbag" />
+                                {/* <i className="fa-solid fa-sack-dssollar"></i> */}
+                              </a>
+                              <a
+                                className="btn  btn-smaller mt-3 ml-2 mb-0"
+                                href={`/projects/${item.slug}`}
+                              >
+                                <i class="fa-solid fa-share-nodes text-white"></i>
+                              </a>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                );
-              })}
+                    );
+                  })}
+                </>
+              )}
             </div>
             <div className="swiper-pagination" />
           </div>

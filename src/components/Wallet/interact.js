@@ -476,7 +476,6 @@ export const updateReffid = async ({ tokenId, refid, nft_id, dispatch, setPaymen
 
 
 export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platformFee, sellingCount, ownerFee, flow, ownerWallet, refid, proj_id, nft_id, loadingg, modal, dispatch }) => {
-  debugger
   // const flow = JSON.parse(sessionStorage.getItem('paymentFlow') || "[]")
   if (!isMetaMaskInstalled()) {
     swal('oops!', 'No wallet found. Please install MetaMask', 'error')
@@ -560,7 +559,6 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
         })
 
         .on('error', function (error) {
-          debugger
           // checkTransactionStatus(sessionStorage.getItem('transactionHash'))
           dispatch(LogsAction(error))
 
@@ -573,7 +571,6 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
 
       // }
     } catch (error) {
-      debugger
       dispatch(LogsAction(error))
       // checkTransactionStatus(sessionStorage.getItem("transactionHash"), loadingg)
       swal("error", JSON.stringify(error.message), "error")

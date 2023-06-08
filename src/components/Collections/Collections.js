@@ -9,7 +9,6 @@ const Collections = () => {
     const coll = useSelector(state => {
         return state?.collection?.collection
     })
-    console.log('coll', coll)
 
     useEffect(() => {
         dispatch(PopularCollectionAction({count:1}))

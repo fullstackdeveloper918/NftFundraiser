@@ -39,7 +39,6 @@ const GetAllProjects = () => {
             setLoading,
           })
         ).then((res) => {
-          console.log(res, "res");
           setLoading(false);
           setData([...data, ...res?.data]);
           setCurrentPage(Number(res?.current_page));
@@ -51,43 +50,6 @@ const GetAllProjects = () => {
       }
     }
   };
-
-  console.log(projects, "projects");
-  const handleIncrement = () => {
-    // if (startDate && endDate && numberofNfts) {
-
-    // setCount(prevCount => prevCount + 1)
-    dispatch(
-      ProjectList({
-        location,
-        setCount,
-        setLoading,
-
-        count: count + 1,
-      })
-    );
-    // }
-  };
-  const handleDecrement = () => {
-    dispatch(
-      ProjectList({
-        setLoading,
-        setCount,
-        location,
-        count: 1,
-      })
-    );
-  };
-  useEffect(() => {
-    dispatch(
-      ProjectList({
-        setCount,
-        count,
-        location,
-        setLoading,
-      })
-    );
-  }, [dispatch]);
 
   const showDeleteHandler = (id) => {
     dispatch(DeleteProject(id, history));
@@ -118,17 +80,13 @@ const GetAllProjects = () => {
           </div>
 
           <div className="row items explore-items h-auto">
-            {loading ? (
+            {loading && data?.length === 0 ? (
               <Loader />
             ) : (
               <>
-                {projects?.data && projects?.data?.length ? (
-                  [
-                    ...new Map(
-                      projects?.data?.map((item) => [item["title"], item])
-                    ).values(),
-                  ].map((item, idx) => {
-                    return (
+                {data?.length > 0 ? (
+                  <>
+                    {data?.map((item, idx) => (
                       // <Link key={`edth_${idx}`} className="col-12 col-sm-6 col-lg-3 item explore-item">
                       <div className="col-12 col-sm-6 col-lg-3 item explore-item">
                         {/* <button onClick={() => showDeleteHandler()}>delete</button> */}
@@ -183,8 +141,40 @@ const GetAllProjects = () => {
                         </div>
                       </div>
                       // </Link>
-                    );
-                  })
+                    ))}
+
+                    {loading && data.length > 0 && (
+                      <div
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Loader height="40px" width="40px" />
+                      </div>
+                    )}
+
+                    {totalPage !== currentPage && (
+                      <div
+                        className="morebutton"
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <a
+                          onClick={(e) => fetchData(currentPage + 1)}
+                          className="btn btn-bordered-white"
+                        >
+                          Load More
+                        </a>
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <div className="col-12 col-sm-12 col-lg-12">
                     {window.ethereum?.selectedAddress ? (
@@ -203,33 +193,6 @@ const GetAllProjects = () => {
               </>
             )}
           </div>
-          {projects.current_page != projects.totalPageCount ? (
-            <>
-              <div className="morebutton">
-                <a
-                  onClick={(e) => handleIncrement(e)}
-                  className="btn btn-bordered-white"
-                >
-                  Load More
-                </a>
-              </div>
-            </>
-          ) : (
-            <>
-              {projects?.data?.length > 8 && (
-                <div className="morebutton">
-                  <a
-                    onClick={(e) => handleDecrement(e)}
-                    className="btn btn-bordered-white"
-                  >
-                    Load Previous
-                  </a>
-                </div>
-              )}
-            </>
-          )}
-          {/* <div className="morebutton"><a onClick={(e) => handleIncrement(e)} className="btn btn-bordered-white">Load More</a></div> */}
-          {/* <Pagination defaultCurrent={6} total={500} /> */}
         </div>
       </section>
     </>

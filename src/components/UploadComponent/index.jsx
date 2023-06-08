@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import "../pintura/pintura.css";
 import { openDefaultEditor } from "../pintura/pintura";
+import { Button } from "react-bootstrap";
+import { dataURLtoBlob } from "../../utils/blobfromurl";
 
 const thumb = {
   justifyContent: "center",
@@ -13,13 +15,24 @@ const thumb = {
 };
 const thumbInner = {
   display: "flex",
+  width: "100%",
+  maxHeight: "400px",
   minWidth: 0,
   overflow: "hidden",
   borderRadius: 2,
-  border: "1px solid #fff",
+  border: "1px solid #373737cc",
+  alignItems: "center" /* Vertically center the image within the container */,
+  justifyContent:
+    "center" /* Horizontally center the image within the container */,
+    marginTop: "20px",
 };
 const img = {
   display: "block",
+  maxHeight:
+    "100%" /* Make the image take up the full height of the container */,
+  maxWidth: "100%" /* Ensure the image maintains its aspect ratio */,
+  objectFit:
+    "contain" /* Fit the image within the container while maintaining aspect ratio */,
   width: "auto",
   height: "100%",
 };
@@ -63,26 +76,29 @@ const Dropzone = ({ onDrop }) => {
   );
 };
 function UploadComponent({ imageSrc, setImageSrc }) {
-  const [preview, setPreview] = useState();
+  const [previewObj, setPreviewObj] = useState();
 
-  console.log("imageSrc1111", imageSrc);
-  useEffect(() => {
-    if (imageSrc?.preview) {
-      setPreview(imageSrc?.preview);
-    }
-  }, [imageSrc, preview]);
+  // console.log("imageSrc1111", imageSrc);
+  // useEffect(() => {
+  //   if (imageSrc?.preview) {
+  //     setPreview(imageSrc?.preview);
+  //   }
+  // }, [imageSrc, preview]);
 
+  // console.log(previewObj, "previewObj");
   const handleDrop = (acceptedFiles) => {
     const updatedFiles = acceptedFiles.map((file) => {
-      return {
+      setPreviewObj({
         name: file.name,
         size: file.size,
         type: file.type,
         path: file.path,
         lastModifiedDate: file.lastModifiedDate,
         preview: URL.createObjectURL(file),
-      };
+      });
+      return file;
     });
+
     setImageSrc(...updatedFiles);
   };
 
@@ -99,7 +115,7 @@ function UploadComponent({ imageSrc, setImageSrc }) {
       // the user cancelled editing the image
     });
     editor.on("process", ({ dest, imageState }) => {
-      const updatedFiles = { ...imageSrc };
+      const updatedFiles = { ...previewObj };
       Object.assign(dest, {
         pintura: { file: imageFile, data: imageState },
       });
@@ -109,27 +125,42 @@ function UploadComponent({ imageSrc, setImageSrc }) {
 
       // Update the preview URL of the edited file
       updatedFiles.preview = editedImageURL;
-      setImageSrc(updatedFiles);
+      setPreviewObj(updatedFiles);
+      setImageSrc(dest);
     });
   };
 
   return (
     <div>
-      {!!imageSrc === false ? (
+      {!!previewObj === false ? (
         <Dropzone onDrop={handleDrop} />
       ) : (
         <div style={thumb}>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <button style={thumbButton} onClick={() => editImage(imageSrc)}>
+            {/* <button style={thumbButton} onClick={() => editImage(previewObj)}>
               Edit
-            </button>
-            <button style={thumbButton} onClick={() => setImageSrc("")}>
+            </button> */}
+            <Button
+              // variant="primary"
+              className="edit_btn"
+              onClick={() => editImage(previewObj)}
+            >
+              Edit
+            </Button>
+            <Button
+              // variant="primary"
+              className="delete_btn"
+              onClick={() => setPreviewObj("")}
+            >
               Delete
-            </button>
+            </Button>
+            {/* <button style={thumbButton} >
+              Delete
+            </button> */}
           </div>
 
           <div style={thumbInner}>
-            <img src={preview} style={img} alt="" />
+            <img src={previewObj?.preview} style={img} alt="" />
           </div>
         </div>
       )}

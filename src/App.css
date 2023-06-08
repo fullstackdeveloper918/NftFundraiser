@@ -2385,6 +2385,9 @@ body .btn.btn-bordered-white {
   top: 32px;
   left: 0;
 }
+::-webkit-scrollbar {
+  display: none;
+}
 .notification {
     font-size: 25px;
     margin: 0 5px;
@@ -3547,6 +3550,7 @@ span.minus_icon {
   right: 15px;
   font-size: 14px;
   cursor: pointer;
+  line-height: 2px;
 }
 span.plus_icon {
   top: 5px;
@@ -3617,4 +3621,26 @@ span.minus_icon {
   :root .all_nft .explore-item {
     flex: 45%;
   }
+}
+.edit_btn {
+  background: transparent;
+  font-size: 12px;
+  padding: 0px 10px;
+  border-radius: 15px;
+  height: 28px;
+  font-weight: 400;
+  width: 60px;
+  margin-right: 5px;
+}
+.edit_btn:hover {
+  background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%) !important;
+}
+.delete_btn {
+  color: white;
+  font-size: 12px;
+  padding: 0px 10px;
+  border-radius: 15px;
+  height: 28px;
+  font-weight: 400;
+  background-image: linear-gradient(150deg, var(--secondary-color) 0%, var(--primary-color) 78%);
 }

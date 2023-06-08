@@ -21,7 +21,6 @@ export const ResellAction = (params) => async dispatch => {
         }
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getResaleNft?page=${params.count}&search_keyword=`,
             "", config)
-        console.log("resproj", res)
         // swal('success', res.response?.data?.message, 'success')
         dispatch(getResell(res));
         if(params?.location?.pathname === '/all/resll/nfts'){
