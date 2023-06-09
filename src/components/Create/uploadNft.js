@@ -204,11 +204,8 @@ const UploadNft = ({ current, prev }) => {
     }
 
     const lat = sessionStorage.getItem('latitude')
-    // console.log(lat, 'lattt')
     const log = sessionStorage.getItem('longitude')
-    // console.log(log, 'logggg')
 
-    // const desdata = { nft_description() }
 
     useEffect(() => {
 
@@ -240,13 +237,10 @@ const UploadNft = ({ current, prev }) => {
             // const addedImagetype = imagesRes?.map(x => x?.data?.data?.extension)
             var str = addedImage;
             var check = str.includes("https://ipfs.karmatica.io/ipfs/undefined");
-            // console.log(check)
-            // console.log(addedImage.includes('undefined'), 'add')
 
             const formData = new FormData()
 
             if (check === false) {
-                console.log('uploaded')
                 formData.append('title', data.title)
                 formData.append('description', data.description)
                 formData.append('address', data.address)
@@ -303,7 +297,6 @@ const UploadNft = ({ current, prev }) => {
 
                 dispatch(CreateProjectAction(formData, setLoading, history))
             } else {
-                console.log('fail')
                 setLoading(false)
                 swal('error', 'Nft not uploaded', 'error')
 
@@ -311,7 +304,6 @@ const UploadNft = ({ current, prev }) => {
         } catch (error) {
             swal('error', 'Nft not uploaded', 'error')
             setLoading(false)
-            console.log(error, 'error')
             dispatch(LogsAction(error?.response?.data?.message))
         }
 
@@ -350,7 +342,7 @@ const UploadNft = ({ current, prev }) => {
         setExpandIconPosition(newExpandIconPosition);
     };
     const onChange = (key) => {
-        console.log(key);
+        // console.log(key);
     };
     const nfts = [
         {

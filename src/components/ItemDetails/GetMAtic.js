@@ -15,7 +15,6 @@ export const GetMatic = async (setMatic) => {
             config
         )
         setMatic(res?.data)
-        console.log('matciccres', res)
     } catch (error) {
         // console.log("error");
     }

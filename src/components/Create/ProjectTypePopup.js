@@ -15,7 +15,6 @@ function ProTypePopup(props) {
   const dispatch = useDispatch();
   const [nftCount, setNFTCount] = useState();
 
-  console.log(nftCount, "nftCount");
 
   const {
     register,
@@ -173,7 +172,6 @@ function ProTypePopup(props) {
                     className="plus_icon"
                     onClick={(e) => {
                       e.stopPropagation();
-                      console.log("pluse");
                       setNFTCount(Number(nftCount) + 1);
                     }}
                   >
@@ -199,7 +197,6 @@ function ProTypePopup(props) {
                     })}
                     aria-invalid={errors.number_of_nft ? "true" : "false"}
                     onChange={(e) => {
-                      console.log(e.target.value,"1234567")
                       setNFTCount(e.target.value)}}
                   />
                   <span

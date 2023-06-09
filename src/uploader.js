@@ -5,10 +5,6 @@ import ReactImagePickerEditor, { ImagePickerConf } from 'react-image-picker-edit
 
 const UploadImage = ({ imageSrc, setImageSrc }) => {
 
-    const onclick =()=>{
-        console.log("hellooo")
-    }
-
     const config2 = {
         borderRadius: '8px',
         language: 'en',
@@ -25,7 +21,6 @@ const UploadImage = ({ imageSrc, setImageSrc }) => {
 
 
         <ReactImagePickerEditor
-            onClick={()=>onclick()}
             config={config2}
             imageSrcProp={initialImage}
             imageChanged={(newDataUri) => { setImageSrc(newDataUri); }} /><br /><br /><hr /><br /><p>Image preview:</p>

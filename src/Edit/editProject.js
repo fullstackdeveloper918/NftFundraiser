@@ -16,7 +16,6 @@ import { CityList, CountryList, StateList } from "../redux/Actions/authAction";
 const EditProject = () => {
   const editor = useRef(null);
   const [country, setCountry] = useState();
-  console.log(country);
   const [state, setState] = useState();
   const [city, setCity] = useState();
   const [description, setDescription] = useState();
@@ -57,7 +56,6 @@ const EditProject = () => {
   };
   const { countries } = useSelector((state) => state.countries);
 
-  console.log(countries?.data?.data, "cntry");
   const states = useSelector((state) => {
     //
     return state.countries.states;
@@ -88,8 +86,6 @@ const EditProject = () => {
       setCountry(projdetail.country);
       // setState(projdetail.state)
       // setCity(projdetail.city)
-      console.log(projdetail.state, "edit state");
-      console.log(projdetail.city, "edit city");
       setValue("image", projdetail.image);
       // const formData = new FormData()
       // // formData.append('country_id', event?.currentTarget?.value)

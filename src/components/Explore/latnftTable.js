@@ -10,7 +10,7 @@ const LatNftDataTable = (props) => {
     const dispatch = useDispatch()
     const { Panel } = Collapse;
     const onChange = (key) => {
-        console.log(key);
+        // console.log(key);
     };
     const { id } = useParams()
     const [expandIconPosition, setExpandIconPosition] = useState('end');
@@ -26,7 +26,6 @@ const LatNftDataTable = (props) => {
         // 
         return state?.projectdetails?.getnftwoldetails
     })
-    console.log(latprojnftdetail, 'laptnft')
 
     return (
         <div className='nft_detail_main position-relative'>

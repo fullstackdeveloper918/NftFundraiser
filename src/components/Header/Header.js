@@ -64,15 +64,14 @@ const Header = () => {
   const userRole = useSelector((state) => {
     return state?.user?.userdetail?.role;
   });
-  // console.log(userRole)
   const userToken = useSelector((state) => {
     return state.user.userToken;
   });
 
   const close = () => {
-    console.log(
-      "Notification was closed. Either the close button was clicked or duration time elapsed."
-    );
+    // console.log(
+    //   "Notification was closed. Either the close button was clicked or duration time elapsed."
+    // );
   };
 
   const userdet = useSelector((state) => {
@@ -81,33 +80,7 @@ const Header = () => {
   const userauction = useSelector((state) => {
     return state?.user?.auctionnoti;
   });
-  console.log(userauction.count);
-  // const names = Object?.keys(userdet?.notification?.status);
-  // console.log("names", userdet && userdet.notification && userdet.notification[0]?.title)
-
-  // useEffect(() => {
-
-  //     const interval = setInterval(() => {
-  //         console.log("yyyyiiiiiiiiiiii")
-  //         // openNotification()
-  //         if (sessionStorage.getItem('authToken') && window.ethereum.selectedAddress) {
-
-  //             dispatch(GetauctionNoti())
-  //         }
-
-  //         if (userauction?.count > 0 && userdet.user_id !== userauction?.data?.user_id &&  sessionStorage.getItem('authToken')) {
-  //             console.log("trueeeeeeeeeeeeeee")
-  //             openNotification()
-  //         }
-  //         else {
-  //             // openNotification()
-  //             console.log("falseeeeeeeeee")
-  //         }
-  //         // if (true) {
-  //     }, 5000)
-
-  //     return () => clearInterval(interval);
-  // }, [userauction])
+  
 
   useEffect(() => {
     if (sessionStorage.getItem("authToken")) {
@@ -195,8 +168,7 @@ const Header = () => {
         </Link>
       </Space>
     );
-    // console.log(notification.info, 'info')
-    // if (key === key) {
+   
 
     api.open({
       message: <h4>Reminder</h4>,
@@ -217,10 +189,8 @@ const Header = () => {
   };
   const WalletHandler = async () => {
     const currentLocation = window.location.pathname;
-    console.log("currentLocation", currentLocation);
 
     const refid = new URLSearchParams(search).get("refid");
-    console.log(refid, "refid");
     const response = await ConnectWallet("BUYER", dispatch);
     const { res } = response;
 

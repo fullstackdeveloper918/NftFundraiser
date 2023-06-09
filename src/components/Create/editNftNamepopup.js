@@ -34,7 +34,6 @@ const EditNftName = (props) => {
     const [source, setSource] = useState()
     const [modalShowcoll, setModalShowcoll] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: "0" });
-    console.log(nft_collection_id, "sdfasf")
     const [form] = Form.useForm()
     const [image, setImage] = useState()
     const [loading, setLoading] = useState(false)
@@ -147,7 +146,6 @@ const EditNftName = (props) => {
                     formData.append('description', values?.nfts?.map(x => x.nft_description))
                     dispatch(UpdateNft(formData, props, setLoading))
                 } else {
-                    console.log('fail')
                     swal('error!', 'Nft not uploaded', 'error')
                 }
             } else {
@@ -163,7 +161,6 @@ const EditNftName = (props) => {
                 dispatch(UpdateNft(formData, props, setLoading))
             }
         } catch (error) {
-            console.log(error)
         }
     };
     const nfts = [

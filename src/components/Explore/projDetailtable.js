@@ -24,7 +24,6 @@ const ProjdataTable = (props) => {
         // 
         return state?.projectdetails?.projectdetails
     })
-    console.log(projdetail, 'userprojdata')
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
@@ -32,15 +31,7 @@ const ProjdataTable = (props) => {
         // 
         return state.projectdetails.latestprojectdetails
     })
-    console.log(latprojdetail, 'userprojdetaaaa')
-    // const [projuserID, setProjuserid] = useState()
-    // console.log('projjj', projuserID)
-    // const projuserid = projdetail?.user_data?.map((item) => {
-    //     return (
-    //         setProjuserid(item.user_id)
-    //     )
-    // })
-    console.log(userdet.user_id, 'uid')
+    
     useEffect(() => {
         dispatch(LatestProjectDetail(slug))
         if(sessionStorage.getItem("authToken")){
@@ -59,7 +50,6 @@ const ProjdataTable = (props) => {
     const date2 = new Date()
     const time_difference = date2.getTime() - date1.getTime();
     const days_difference = Math.ceil(time_difference / (1000 * 60 * 60 * 24));
-    console.log('days', days_difference)
     return (
         <div>
             <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>

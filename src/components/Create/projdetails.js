@@ -218,7 +218,6 @@ const ProjNftDetails = () => {
                       const days_difference = Math.ceil(
                         time_difference / (1000 * 60 * 60 * 24)
                       );
-                      console.log("days", days_difference);
                       return (
                         <ul className="m-0 custom_lis pl-0">
                           <li>

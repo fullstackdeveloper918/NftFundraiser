@@ -15,27 +15,22 @@ const NftAuctiondataTable = (props) => {
     const [loading, setLoading] = useState(false)
     const { Panel } = Collapse;
     const onChange = (key) => {
-        console.log(key);
+        // console.log(key);
     };
     const params = useParams()
     const { slug } = useParams()
     const [bidstatus, setBidStatus] = useState(" ")
-    console.log('biddst', bidstatus)
     const [expandIconPosition, setExpandIconPosition] = useState('end');
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
     };
     const projdetail = useSelector(state => {
-        // 
         return state?.projectdetails?.latestprojectdetails
     })
-    console.log(projdetail, 'projdatanft')
     const nftdetail = useSelector(state => {
-        // 
         return state.projectdetails.nftlist
 
     })
-    console.log(nftdetail, 'nftdetail')
     useEffect(() => {
         // 
         dispatch(NftList(props.slug.id))
@@ -43,12 +38,10 @@ const NftAuctiondataTable = (props) => {
     }, [props.slug.id])
 
     const acceptHandler = (id) => {
-        console.log("accept", id)
         getBid(props)
         dispatch(UpdateBId({ id, status: "2", setLoading, slug: props.slug.id }))
     }
     const rejectHandler = (id) => {
-        console.log("reject", id)
         getBid(props)
         dispatch(UpdateBId({ id, status: "3", setLoading, slug: props.slug.id }))
     }

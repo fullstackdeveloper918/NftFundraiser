@@ -28,7 +28,6 @@ import NftBuydataTable from './NftBuyData';
 import { GetMatic } from '../ItemDetails/GetMAtic';
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-// console.log(NFTContract.abi,"abi")
 const web3 = createAlchemyWeb3(alchemyKey);
 const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
 
@@ -36,13 +35,7 @@ const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alche
 const BuyedNftDetails = (props) => {
     const history = useHistory()
     const [nftId, setNftID] = useState();
-    // const search = useLocation().search;
-    // const projslug = new URLSearchParams(search).get('project');
-    // console.log(projslug, 'projslug')
-    // const latprojnftdetail = useSelector(state => {
-    //     // 
-    //     return state.projectdetails.getnftwoldetails
-    // })
+   
     const [modalShow, setModalShow] = React.useState(false);
     const [matic, setMatic] = useState('')
     const [sellmodalShow, setSellModalShow] = React.useState(false);
@@ -63,11 +56,9 @@ const BuyedNftDetails = (props) => {
         return state?.projectdetails?.getBuyedNftdetails
 
     })
-    // console.log("nftmint", nftdetail.is_mint)
     useEffect(() => {
         (GetMatic(setMatic))
         dispatch(GetbuyedNftDetails(slug))
-        // dispatch(GetSettings())
     }, [slug])
 
 

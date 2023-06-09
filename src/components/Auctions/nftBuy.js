@@ -32,9 +32,6 @@ const LatprojNftDetails = (props) => {
     const [bidmodalShow, setBidModalShow] = React.useState(false);
     const [buymodalShow, setBuyModalShow] = React.useState(false);
     const { Panel } = Collapse;
-    const onChange = (key) => {
-        console.log(key);
-    };
     const [expandIconPosition, setExpandIconPosition] = useState('end');
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
@@ -329,7 +326,7 @@ const LatprojNftDetails = (props) => {
                             <div className="funddeatil table-detail ">
 
                             <div className='position-relative'>
-                                < Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>
+                                < Collapse defaultActiveKey={['1']}  expandIconPosition={expandIconPosition}>
                                     <svg className="activity_icon" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path opacity="0.4" d="M7.24487 14.7815L10.238 10.8914L13.6522 13.5733L16.5813 9.79297" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         <circle cx="19.9954" cy="4.20027" r="1.9222" stroke="#ffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

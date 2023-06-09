@@ -27,31 +27,11 @@ function NftPopup(props) {
         // 
         return window.ethereum?.selectedAddress;
     }
-    // function getconfirmAddress() {
-    //     // 
-    //     return web3.eth.getTransactionReceipt;
-    // }
-    // useEffect(() => {
-    // setTxhash(gettxhashAddress())
-    // setConfirm(getconfirmAddress())
-    // if (txhas) {
-    // setCurrent(1)
-    // setCurrent(2)
-    // setCurrent(3)
-    // }
-    // }, [])
+   
     const nftdetail = useSelector(state => {
-        // 
         return state.projectdetails.nftlist
     })
-    // console.log('latprojdetailpop', nftdetail)
-    // const mint = () => {
-    //     CreateMetaDataAndMint({
-    //         _name: nftdetail.title,
-    //         _des: nftdetail.description,
-    //         _imgBuffer: nftdetail.image
-    //     })
-    // }
+   
 
     const { Step } = Steps;
     return (

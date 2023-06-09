@@ -31,14 +31,10 @@ const Hero = ({ type }) => {
     function success(pos) {
         var crd = pos.coords;
 
-        // console.log("Your current position is:");
-        // console.log(`Latitude : ${crd.latitude}`);
-        // console.log(`Longitude: ${crd.longitude}`);
-        // console.log(`More or less ${crd.accuracy} meters.`);
+       
         sessionStorage.setItem('latitude', `${crd.latitude}`);
         sessionStorage.setItem('longitude', `${crd.longitude}`);
-        // setLatitude(`${crd.latitude}`)
-        // setLongitude(`${crd.longitude}`)
+       
     }
 
     function errors(err) {
@@ -57,7 +53,6 @@ const Hero = ({ type }) => {
     const mostactivityProjects = useSelector(state => {
         return state?.projectdetails?.getmostProjActivity
     })
-    console.log(mostactivityProjects, 'mostactivityProjects')
     useEffect(() => {
         dispatch(getPublicLiveProjects({
             cursor: 1,

@@ -19,12 +19,10 @@ const MyFundraiserDetail = () => {
     const funddetail = useSelector(state => {
         return state?.fundraiser?.fundraiserdetail
     })
-    // console.log(funddetail, 'fdddetail')
     const fundprojdetail = useSelector(state => {
         // 
         return state?.projectdetails?.getfundProjDetails
     })
-    // console.log(fundprojdetail, 'fdprojetail')
 
     useEffect(() => {
 
@@ -128,11 +126,9 @@ const MyFundraiserDetail = () => {
                                                 [item["title"], item])).values()]?.slice(0, 4)?.map((item, idx) => {
                                                     const date1 = new Date(item.created_at)
                                                     const date2 = new Date()
-                                                    // console.log('todat', date2)
                                                     const time_difference = date2.getTime() - date1.getTime();
                                                     const days_difference = Math.ceil(time_difference / (1000 * 60 * 60 * 24));
                                                     // const totaldays = days_difference.slice(0,1)
-                                                    // console.log("daysss", days_difference)
                                                     return (
 
                                                         <>

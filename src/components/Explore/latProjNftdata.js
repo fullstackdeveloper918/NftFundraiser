@@ -23,7 +23,6 @@ const LatNftdataTable = () => {
         // 
         return state?.projectdetails?.latestprojectdetails
     })
-    console.log(projdetail.nft_data, 'projdatanft')
 
     useEffect(() => {
         // 

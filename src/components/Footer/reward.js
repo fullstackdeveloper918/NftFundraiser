@@ -4,7 +4,6 @@ import { getFooter } from '../../redux/Actions/footerAction'
 
 const Rewards = () => {
 
-    // console.log(footer, 'footer')
     return (
         <section className="item-details-area">
             <div className="container">

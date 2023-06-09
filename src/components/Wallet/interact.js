@@ -182,7 +182,6 @@ export const getCurrentWalletConnected = async (dispatch) => {
       const addressArray = await window.ethereum.request({
         method: "eth_accounts",
       });
-      // console.log(addressArray, 'address')
       if (addressArray.length > 0) {
         return {
           address: addressArray[0],
@@ -255,9 +254,7 @@ export const UpdateStatus = async ({ slug, token_id, transaction_hash, pay_from,
     swal("error", "Please try again", "error")
     setModalShow(false)
     return error
-    // await dispatch(LogsAction(error))
-    // 
-    // console.log("error");
+    
   }
 };
 
@@ -312,10 +309,7 @@ export const sendFileToIPFS = async (fileImg) => {
 
     } catch (e) {
       return e
-      // await dispatch(LogsAction(e))
-
-      // console.log("Error sending File to IPFS: ")
-      // console.log(error)
+     
     }
   }
 }
@@ -338,35 +332,25 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading
     })
       .on('transactionHash', function (hash) {
         txHash = hash
-        // console.log('txhash11', txHash)
-
         setCurrent(1)
       })
       .on('receipt', function (receipt) {
-        // console.log(receipt, 'recipt')
-        // console.log(receipt.logs[0].topics[3])
         setCurrent(1)
       })
       .on('confirmation', async (confNumber, receipt) => {
-        console.log('receipt', receipt)
         if (confNumber == 1) {
 
           if (collid != 1) {
             await UpdateContract(collid, contractAddress, setModalShow)
           }
-          // 
 
-          // await UpdateContract(collid, "0xdDA37f9D3e72476Dc0c8cb25263F3bb9426B4A5A")
           const tokid = web3.utils.toBN(receipt.logs[0].topics[3])
-          // console.log(startdate)
 
           await UpdateStatus({ slug: slug.id, token_id: tokid, transaction_hash: receipt.transactionHash, pay_from: receipt.from, pay_to: receipt.to, type, setModalShow, price, start_date, end_date })
           setCurrent(2)
           await dispatch(NftList(slug.id, setLoading))
 
-          // history.push(`nft/details/${slug.id}`)
-          // return redirect(`nft/details/${id}`)
-          // console.log('tokid', tokid)
+         
         }
       })
       .on('error', function (error) {
@@ -374,8 +358,6 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading
         setModalShow(false)
       })
 
-    // 
-    // console.log('txHash', txHash)
     return {
       success: true,
       // status: ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>" + txHash
@@ -383,9 +365,7 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading
     }
   } catch (error) {
     await dispatch(LogsAction(error))
-    // Await dispatch(LogsAction(error)
 
-    // 
     swal("error", "Transaction cancelled", "error")
     setModalShow(false)
     return {
@@ -425,10 +405,7 @@ const UpdateBuyHistory = async (nft_id, proj_id, refid, txd_id, payFrom, pay_to,
     )
   } catch (error) {
     return error
-    // await dispatch(LogsAction(error))
-
-    // 
-    // console.log("error");
+   
   }
 };
 
@@ -490,15 +467,12 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
 
       const karmfee = values * 1 / 100
       const totalValue = parseFloat(values) + parseFloat(karmfee)
-      console.log('totalValue', totalValue)
       wallets = (flow[0]?.referral_fees?.wallets === null) ?
         [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees?.wallets, flow[0]?.project_data?.wallets] :
         [...wallets, ...flow[0]?.buyer_data?.map(x => x.wallets), flow[0]?.karmatica_fees?.wallets, flow[0]?.project_data?.wallets, flow[0]?.referral_fees?.wallets]
       fee = (flow[0]?.referral_fees?.wallets === null) ?
         [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), + parseFloat(flow[0]?.karmatica_fees?.fees) + parseFloat(karmfee), flow[0]?.project_data?.fees] :
         [...fee, ...flow[0]?.buyer_data?.map(x => x.fees), + parseFloat(flow[0]?.karmatica_fees?.fees) + parseFloat(karmfee), flow[0]?.project_data?.fees, flow[0]?.referral_fees?.fees]
-      console.log(fee)
-      console.log(wallets)
       const addressArray = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
@@ -507,15 +481,12 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
         address: addressArray[0],
       };
       const nftContract = new web3.eth.Contract(contractABI.abi, contractAddress)
-      console.log('nftContract', nftContract)
 
       const memory_clients = wallets.map(wal => {
         return (`${wal}`)
       })
-      console.log('memory_clients', memory_clients)
       const memory_amounts = fee.map(amt => {
         const amountToSend = ((parseFloat(amt) * totalValue / 100))
-        console.log('amountToSend', amountToSend)
         return web3.utils.toWei(`${amountToSend}`, "ether")
 
       })
@@ -525,7 +496,6 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
 
       })
 
-      console.log('referal_amount', referal_amount)
       const tx = await nftContract.methods.buyNft(contractAddress, tokenId, memory_clients, memory_amounts)
         .send({ from: window.ethereum?.selectedAddress, value: web3.utils.toWei(String(totalValue), 'ether'), gasPrice: web3.utils.toHex(10000000), gasLimit: web3.utils.toHex(1000000) })
 
@@ -546,8 +516,6 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
           if (confNumber == 1) {
 
             // checkTransactionStatus(receipt.transactionHash)
-            console.log(confNumber, 'counttrans')
-            console.log(receipt, 'conf')
 
             UpdateBuyHistory({ nft_id, proj_id, refid, txd_id: receipt.transactionHash, payFrom, pay_to: window.ethereum?.selectedAddress, tokenId, values, ref_amount: flow[0]?.referral_fees?.wallets !== null ? referal_amount[2] : 0 })
             loadingg(false)
@@ -601,7 +569,6 @@ const UpdateBid = async ({ amount, project_id, nft_id, pay_to, from, onHide, set
     const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/project/bids`,
       formData, config
     )
-    console.log('ress', res)
     if (res.status == 200) {
       setLoading(false)
       swal("success", res?.data?.message, 'success')

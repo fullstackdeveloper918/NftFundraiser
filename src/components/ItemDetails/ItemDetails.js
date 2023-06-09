@@ -92,14 +92,12 @@ const ItemDetails = () => {
     ]
 
     const { id } = useParams();
-    // console.log(id, 'idd')
 
     const dispatch = useDispatch()
 
     const projdetail = useSelector(state => {
         return state.projectdetails
     })
-    // console.log(projdetail, 'projdata')
 
     useEffect(() => {
         // 

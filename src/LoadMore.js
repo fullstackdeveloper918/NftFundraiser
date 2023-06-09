@@ -4,7 +4,6 @@ import React, { useState } from "react";
 const Loadmore = ({ data }) => {
 
     const [isReadMore, setIsReadMore] = useState(true);
-    console.log(data)
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
     };

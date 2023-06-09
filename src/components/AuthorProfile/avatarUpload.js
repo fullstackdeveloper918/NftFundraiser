@@ -24,7 +24,6 @@ function AvatarUpload(props) {
     dispatch(GetUserAction());
   }, []);
 
-  // console.log("imageSrc", imageSrc);
   const submit = () => {
 
     const formData = new FormData();

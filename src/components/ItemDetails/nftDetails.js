@@ -18,7 +18,6 @@ import ReadMore from '../../readMore';
 // const alchemyKey = "https://polygon-mainnet.g.alchemy.com/v2/bDM_VuUmdoyJSNn3Ky8pZL0vBMAc9BXd";
 const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-// console.log(NFTContract.abi,"abi")
 const web3 = createAlchemyWeb3(alchemyKey);
 const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
 
@@ -39,7 +38,6 @@ const NftDetails = (props) => {
 
         return state?.projectdetails?.projectdetails
     })
-    console.log(projdetail, 'projdataaaa')
     const dispatch = useDispatch()
 
     const nftdetail = useSelector(state => {

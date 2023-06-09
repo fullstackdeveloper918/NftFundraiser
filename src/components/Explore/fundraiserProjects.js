@@ -24,7 +24,6 @@ const GetAllFundraise = () => {
     const fund = useSelector(state => {
         return state?.fundraiser?.fundraiser
     })
-    console.log(fund, 'fdd')
 
     useEffect(() => {
         dispatch(TopFundraiserAction({}))

@@ -79,7 +79,6 @@ const DModal = ({ vdo }) => {
                 },
                 (error) => {
                     // 
-                    console.log(error)
                 }
             )
             let req = null;

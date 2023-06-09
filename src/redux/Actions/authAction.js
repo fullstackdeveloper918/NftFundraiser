@@ -350,7 +350,6 @@ export const UpdateProfileAction = (formData, props) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/profileUpdate`,
             formData, config)
         // 
-        console.log(res, 'update rres')
         await dispatch(updateprofile(res));
 
         if (res.status === 200) {
@@ -395,7 +394,6 @@ export const CountSet = () => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/notification/update`,
             {}, config)
         // 
-        console.log(res, 'update rres')
         // await dispatch(res);
 
         if (res.status === 200) {
@@ -428,7 +426,6 @@ export const AllNoti = () => async dispatch => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getAllNotification`,
             config)
         // 
-        console.log(res, 'allnoti rres')
         await dispatch(allnotification(res));
 
 
@@ -454,7 +451,6 @@ export const NotiDelete = (id) => async dispatch => {
         const res = await axios.delete(`${process.env.REACT_APP_BACKEND_API}api/notification/delete/${id}`,
             config)
         // 
-        console.log(res, 'delete rres')
         // await dispatch(res);
 
         if (res.status === 200) {
@@ -484,9 +480,6 @@ export const ChangeUserRole = (history,setLoading) => async dispatch => {
         }
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}api/change_user_roles`, "",
             config)
-        // 
-        console.log(res, 'user role')
-        // await dispatch(res);
 
         if (res.status === 200) {
             // 

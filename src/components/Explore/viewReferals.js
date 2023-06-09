@@ -20,9 +20,7 @@ const RefralTransdataTable = (props) => {
     const [projSlug, setProjSlug] = useState(" ")
     const [nftSlug, setNftslug] = useState(" ")
     const [nftData, setNftdata] = useState()
-    console.log('nftSlug', nftSlug)
     const { Panel } = Collapse;
-    console.log('projSlug', projSlug)
     const onChange = (key) => {
         console.log(key);
     };
@@ -41,13 +39,9 @@ const RefralTransdataTable = (props) => {
         return state?.user?.userdetail
     })
     const refid = userdet.wallet_id
-    console.log('refid', refid)
-    console.log('userdet', userdet)
     const projects = useSelector(state => {
         return state?.projectdetails?.projects
     })
-    console.log('projects', projects)
-    console.log(projects, 'projects')
     const HandleProj = (e) => {
         setProjSlug(e?.currentTarget?.value)
         // if (projSlug != " ") {
@@ -88,17 +82,8 @@ const RefralTransdataTable = (props) => {
         return state?.projectdetails?.projectdetails
     })
 
-    // useEffect(() => {
-    //     if (projSlug != " ") {
-    //         dispatch(ProjectDetail(projSlug))
-    //     }
-    //     if (nftSlug != " ") {
+   
 
-    //         dispatch(NftList(nftSlug))
-    //     }
-    // }, [projSlug, nftSlug])
-
-    console.log('projdetail', projdetail)
 
     return (
         <footer className="item-details-area referal-detail">

@@ -50,7 +50,6 @@ function SellPopup(props) {
     const nftdetail = useSelector(state => {
         return state.projectdetails.nftlist
     })
-    console.log('nftdetail', nftdetail)
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })

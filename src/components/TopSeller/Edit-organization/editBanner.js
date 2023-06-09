@@ -22,7 +22,6 @@ const EditBanner = (props) => {
   const userdet = useSelector((state) => {
     return state?.user?.userdetail;
   });
-  console.log("userdet", userdet);
 
   useEffect(() => {
     form.setFieldsValue({

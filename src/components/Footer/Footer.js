@@ -21,11 +21,9 @@ const Footer = () => {
   useEffect(() => {
     dispatch(getFooter(dispatch));
   }, []);
-  // console.log(footer, 'footer')
   const userRole = useSelector((state) => {
     return state.user.userdetail.role;
   });
-  // console.log(userRole)
   const userToken = useSelector((state) => {
     return state.user.userToken;
   });
