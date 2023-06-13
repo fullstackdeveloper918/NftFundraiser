@@ -8,6 +8,7 @@ import {
 import { ResellAction } from "../../redux/Actions/resellNftAction";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import Loader from "../Loader/loader";
+import { debounce } from "lodash";
 
 const ExploreAllResell = () => {
   const slug = useParams();
@@ -22,12 +23,13 @@ const ExploreAllResell = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    fetchData(currentPage);
-  }, []);
+    fetchData({ page: currentPage, isLoadMore: false, searchQuery });
+  }, [searchQuery]);
 
-  const fetchData = async (page) => {
+  const fetchData = async ({ page, isLoadMore, searchQuery }) => {
     if (!loading) {
       setLoading(true);
       try {
@@ -38,10 +40,17 @@ const ExploreAllResell = () => {
             setLoading,
             location,
             count: page,
+            searchQuery,
           })
         ).then((res) => {
           setLoading(false);
-          setData([...data, ...res?.data]);
+
+          if (isLoadMore) {
+            setData([...data, ...res?.data]);
+          } else {
+            setData(res?.data);
+          }
+
           setCurrentPage(Number(res?.current_page));
           setTotalPage(res?.totalPageCount);
         });
@@ -52,40 +61,11 @@ const ExploreAllResell = () => {
     }
   };
 
-  //   useEffect(() => {
-  //     dispatch(
-  //       ResellAction({
-  //         cursor: 1,
-  //         setCount,
-  //         setLoading,
-  //         location,
-  //         count,
-  //       })
-  //     );
-  //   }, [dispatch]);
-//   const handleIncrement = () => {
-//     dispatch(
-//       ResellAction({
-//         cursor: 1,
-//         setCount,
-//         setLoading,
-//         location,
-//         count: count + 1,
-//       })
-//     );
-//   };
+  // Debounce function with a delay of 500 milliseconds
+  const debouncedSearch = debounce((value) => {
+    setSearchQuery(value);
+  }, 500);
 
-//   const handleDecrement = () => {
-//     dispatch(
-//       ResellAction({
-//         cursor: 1,
-//         setLoading,
-//         setCount,
-//         location,
-//         count: count - 1,
-//       })
-//     );
-//   };
   return (
     <section className="explore-area">
       <div className="container">
@@ -101,8 +81,14 @@ const ExploreAllResell = () => {
           </div>
         </div>
 
-        <div className="row items explore-items h-auto">
-          {loading && data?.length === 0 ? (
+        <input
+          autoFocus
+          placeholder="Enter your search keyword"
+          onChange={(val) => debouncedSearch(val?.target?.value)}
+        />
+
+        <div className="row items explore-items h-auto mt-3">
+          {loading ? (
             <Loader />
           ) : (
             <>
@@ -216,7 +202,9 @@ const ExploreAllResell = () => {
                       }}
                     >
                       <a
-                        onClick={(e) => fetchData(currentPage + 1)}
+                        onClick={(e) =>
+                          fetchData({ page: currentPage + 1, isLoadMore: true })
+                        }
                         className="btn btn-bordered-white"
                       >
                         Load More

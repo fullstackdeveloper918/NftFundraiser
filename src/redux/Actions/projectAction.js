@@ -137,7 +137,11 @@ export const ProjectList = (params) => async (dispatch) => {
     };
 
     const res = await axios.get(
-      `${process.env.REACT_APP_BACKEND_API}api/project/list?page=${params.count}&search_keyword=&category_id=&type`,
+      `${process.env.REACT_APP_BACKEND_API}api/project/list?page=${
+        params.count
+      }&search_keyword=${
+        params.searchQuery !== undefined ? params.searchQuery : ""
+      }&category_id=&type`,
       config
     );
 
@@ -232,7 +236,7 @@ export const getPublicLiveProjects = createAsyncThunk(
 
   async (params, thunkAPI) => {
     try {
-      const { projectType, count, setLoading, location } = params;
+      const { projectType, count, setLoading, location, searchQuery } = params;
       if (location.pathname === "/all/LatestProjects") {
         setLoading(true);
       }
@@ -244,7 +248,11 @@ export const getPublicLiveProjects = createAsyncThunk(
         },
       };
       const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_API}api/getLatestProjects?page=${count}&latitude=${latitude}&longitude=${longitude}&search_keyword=&category_id=&type`,
+        `${
+          process.env.REACT_APP_BACKEND_API
+        }api/getLatestProjects?page=${count}&latitude=${latitude}&longitude=${longitude}&search_keyword=${
+          searchQuery !== undefined ? searchQuery : ""
+        }&category_id=&type`,
         config
       );
       thunkAPI.dispatch(

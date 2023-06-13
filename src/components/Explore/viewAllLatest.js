@@ -6,7 +6,8 @@ import {
   CategoriesAction,
   getPublicLiveProjects,
 } from "../../redux/Actions/projectAction";
-import { Button, Pagination, Spin } from "antd";
+import { Button, Input, Pagination, Spin } from "antd";
+import { debounce } from "lodash";
 
 const projectTypesMap = {
   LatestProjects: 2,
@@ -21,12 +22,13 @@ const ExploreAll = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    fetchData(currentPage);
-  }, []);
+    fetchData({ page: currentPage, searchQuery, isLoadMore: false });
+  }, [searchQuery]);
 
-  const fetchData = async (page) => {
+  const fetchData = async ({ page, searchQuery, isLoadMore }) => {
     if (!loading) {
       setLoading(true);
       try {
@@ -40,10 +42,16 @@ const ExploreAll = () => {
             count: page,
             setData,
             data,
+            searchQuery,
           })
         ).then((res) => {
           setLoading(false);
-          setData([...data, ...res?.payload?.data]);
+          if (isLoadMore) {
+            setData([...data, ...res?.payload?.data]);
+          } else {
+            setData(res?.payload?.data);
+          }
+
           setCurrentPage(Number(res?.payload?.current_page));
           setTotalPage(res?.payload?.totalPageCount);
         });
@@ -53,6 +61,11 @@ const ExploreAll = () => {
       }
     }
   };
+
+  // Debounce function with a delay of 500 milliseconds
+  const debouncedSearch = debounce((value) => {
+    setSearchQuery(value);
+  }, 500);
 
   return (
     <section className="explore-area">
@@ -71,8 +84,14 @@ const ExploreAll = () => {
           </div>
         </div>
 
-        <div className="row items explore-items h-auto">
-          {loading && data?.length === 0 ? (
+        <input
+          autoFocus
+          placeholder="Enter your search keyword"
+          onChange={(val) => debouncedSearch(val?.target?.value)}
+        />
+
+        <div className="row items explore-items h-auto mt-3">
+          {loading ? (
             <Loader />
           ) : (
             <>
@@ -184,7 +203,9 @@ const ExploreAll = () => {
                       }}
                     >
                       <a
-                        onClick={(e) => fetchData(currentPage + 1)}
+                        onClick={(e) =>
+                          fetchData({ page: currentPage + 1, isLoadMore: true })
+                        }
                         className="btn btn-bordered-white"
                       >
                         Load More

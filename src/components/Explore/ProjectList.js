@@ -8,6 +8,7 @@ import Loader from "../Loader/loader";
 import { DeleteProject } from "./../../redux/Actions/projectAction";
 import swal from "sweetalert";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { debounce } from "lodash";
 
 const GetAllProjects = () => {
   const dispatch = useDispatch();
@@ -22,12 +23,13 @@ const GetAllProjects = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    fetchData(currentPage);
-  }, []);
+    fetchData({ page: currentPage, searchQuery, isLoadMore: false });
+  }, [searchQuery]);
 
-  const fetchData = async (page) => {
+  const fetchData = async ({ page, searchQuery, isLoadMore }) => {
     if (!loading) {
       setLoading(true);
       try {
@@ -37,10 +39,15 @@ const GetAllProjects = () => {
             count: page,
             location,
             setLoading,
+            searchQuery,
           })
         ).then((res) => {
           setLoading(false);
-          setData([...data, ...res?.data]);
+          if (isLoadMore) {
+            setData([...data, ...res?.data]);
+          } else {
+            setData(res?.data);
+          }
           setCurrentPage(Number(res?.current_page));
           setTotalPage(res?.totalPageCount);
         });
@@ -54,6 +61,11 @@ const GetAllProjects = () => {
   const showDeleteHandler = (id) => {
     dispatch(DeleteProject(id, history));
   };
+
+  // Debounce function with a delay of 500 milliseconds
+  const debouncedSearch = debounce((value) => {
+    setSearchQuery(value);
+  }, 500);
 
   return (
     <>
@@ -79,8 +91,14 @@ const GetAllProjects = () => {
             </div>
           </div>
 
-          <div className="row items explore-items h-auto">
-            {loading && data?.length === 0 ? (
+          <input
+            autoFocus
+            placeholder="Enter your search keyword"
+            onChange={(val) => debouncedSearch(val?.target?.value)}
+          />
+
+          <div className="row items explore-items h-auto mt-3">
+            {loading  ? (
               <Loader />
             ) : (
               <>
@@ -167,7 +185,12 @@ const GetAllProjects = () => {
                         }}
                       >
                         <a
-                          onClick={(e) => fetchData(currentPage + 1)}
+                          onClick={(e) =>
+                            fetchData({
+                              page: currentPage + 1,
+                              isLoadMore: true,
+                            })
+                          }
                           className="btn btn-bordered-white"
                         >
                           Load More
