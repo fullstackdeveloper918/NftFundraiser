@@ -80,7 +80,6 @@ const Header = () => {
   const userauction = useSelector((state) => {
     return state?.user?.auctionnoti;
   });
-  
 
   useEffect(() => {
     if (sessionStorage.getItem("authToken")) {
@@ -168,7 +167,6 @@ const Header = () => {
         </Link>
       </Space>
     );
-   
 
     api.open({
       message: <h4>Reminder</h4>,
@@ -374,7 +372,7 @@ const Header = () => {
                   aria-expanded="false"
                   onClick={() => notiHandler()}
                 ></i>
-                {userdet?.notification_count == 0 && (
+                {userdet?.notification_count > 0 && (
                   <small className="dropdown-notification">
                     {userdet?.notification_count}
                   </small>

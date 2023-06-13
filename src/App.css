@@ -2892,7 +2892,7 @@ h6 {
 .hero-section .auction-slider.auctions-slides .item.card {
   min-width: 250px;
   width: 200px;
-  padding: 10px;
+  padding: 1.5rem;
 }
 .hero-section .auction-slider.auctions-slides img.card-img-top {
   aspect-ratio: unset !important;

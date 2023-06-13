@@ -84,7 +84,7 @@ const Resell = ({ type }) => {
     <section className="live-auctions-area">
       <div className="container">
         <div className="row">
-          <div className="col-12">
+          <div className="col-12" style={{ marginBottom: "20px" }}>
             {/* Intro */}
             <div className="intro d-flex justify-content-between align-items-end m-0">
               <div className="intro-content">
