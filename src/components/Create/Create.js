@@ -25,9 +25,11 @@ const Create = ({ current, next, prev }) => {
   const { data, setFormValues } = useFormData();
   const [description, setDescription] = useState();
   const [country, setCountry] = useState("");
+
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
+  console.log('price', price)
   const [image, setImage] = useState();
   const [loading, setLoading] = useState(false);
   const [collection_id, setCollectionId] = useState(0);
@@ -41,12 +43,16 @@ const Create = ({ current, next, prev }) => {
   const states = useSelector((state) => {
     return state.countries.states;
   });
+  console.log("states", states);
   const cities = useSelector((state) => {
     return state.countries.city;
   });
   const userdet = useSelector((state) => {
     return state?.user?.userdetail;
   });
+  const priceIncrement=()=>{
+    setPrice((prevValue) => prevValue + 1)
+  }
   const {
     register,
     handleSubmit,
@@ -310,6 +316,11 @@ const Create = ({ current, next, prev }) => {
                     </>
                   ))}
                 </select>
+                <span>
+                  {" "}
+                  {states?.data?.data?.length == 0 &&
+                    " current country does't have any state/province"}
+                </span>
               </div>
             </div>
           </div>
@@ -335,6 +346,11 @@ const Create = ({ current, next, prev }) => {
                     </>
                   ))}
                 </select>
+                <span>
+                  {" "}
+                  { states?.data?.data?.length == 0 &&
+                    "current country does't have any city/region"}
+                </span>
               </div>
             </div>
           </div>
@@ -379,9 +395,9 @@ const Create = ({ current, next, prev }) => {
               <div className="position-relative">
                 <span
                   className={styles.plus_icon}
-                  onClick={() => {
-                    setPrice((price || 0) + 1);
-                  }}
+                  onClick={() => 
+                    setPrice((price) => price + 1)
+                  }
                 >
                   <i className="fa fa-plus" aria-hidden="true"></i>
                 </span>
@@ -399,7 +415,7 @@ const Create = ({ current, next, prev }) => {
                 <span
                   className={styles.minus_icon}
                   onClick={() => {
-                    if (price > 0) setPrice((price || 0) - 1);
+                    if (price > 0) setPrice(price - 1);
                   }}
                 >
                   <i className="fa fa-minus" aria-hidden="true"></i>
@@ -448,7 +464,7 @@ const Create = ({ current, next, prev }) => {
                 initalImag={data.imageUri}
                 setImageSrc={setImage}
               /> */}
-              <UploadComponent imageSrc={image} setImageSrc={setImage}/>
+              <UploadComponent imageSrc={image} setImageSrc={setImage} />
               <div>
                 <div className="logo-dis logo-dis-img">
                   <span>Allowed types: JPG, PNG, GIF</span>

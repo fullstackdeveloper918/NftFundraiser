@@ -42,10 +42,12 @@ const RefralTransdataTable = (props) => {
     const projects = useSelector(state => {
         return state?.projectdetails?.projects
     })
-    const HandleProj = (e) => {
+    console.log('projects', projects?.data && projects?.data[0].title)
+    const HandleProj = (e,) => {
         setProjSlug(e?.currentTarget?.value)
         // if (projSlug != " ") {
-        dispatch(ProjectDetail(e?.currentTarget?.value))
+        const slug = projects?.data && projects?.data[0].slug
+        dispatch(ProjectDetail(e?.currentTarget?.value ? e?.currentTarget?.value:slug ))
         setNftslug(" ")
         // }
         if (nftSlug != " ") {
@@ -67,10 +69,14 @@ const RefralTransdataTable = (props) => {
     //         dispatch(NftList(nftSlug))
     //     }
     // }
-
+useEffect(()=>{
+    HandleProj()    
+},[projects])
     const count = 1
+   
     useEffect(() => {
         dispatch(ProjectList({ location, count: count }))
+        
     }, [dispatch])
 
     const location = useLocation()
@@ -179,7 +185,7 @@ const RefralTransdataTable = (props) => {
                                     <select name="category_id"
                                         onChange={HandleProj}
                                     >
-                                        <option value="" disabled selected style={{ color: "#495057" }}>Select project </option>
+                                        <option value={projects.data && projects?.data[0]?.title}  selected style={{ color: "#495057" }}>{projects.data && projects?.data[0]?.title} </option>
 
                                         {projects?.data?.map((option, key) => (
                                             <option key={key.slug} value={option.slug}  >
