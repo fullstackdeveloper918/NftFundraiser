@@ -18,7 +18,6 @@ import ProjectUpdate from "../themes/update";
 import TermsCond from "../themes/term&cond";
 import All from "../themes/viewalllatest";
 import ColExplore from "../themes/exploreCollections";
-import Aboutus from "../themes/Aboutus";
 import latprojDetails from "../themes/latproj-details";
 import Showcollections from "../themes/showcollections";
 import CollectionDetail from "../themes/collectn-details";
@@ -42,6 +41,7 @@ import AllResellNft from "../themes/allresellNfts";
 import AllReraltrans from "../themes/all-refrals";
 import NotFound from "../notFound";
 import Widget from "../components/Explore/widget";
+import Aboutus from "../themes/Aboutus";
 
 
 const MyRouts = () => {
@@ -77,6 +77,7 @@ const MyRouts = () => {
           <PrivateRoute exact path="/nftedit/:id/:id" component={EditNft} />
           <PrivateRoute exact path="/addnft/:id" component={AddNFT} />
           <Route exact path="/help-center" component={HelpCenter} />
+          <Route exact path="/about-us" component={Aboutus} />
           <PrivateRoute exact path="/profile" component={Author} />
           <Route exact path="/terms&conditions" component={TermsCond} />
           <Route exact path="/all/:type" component={All} />

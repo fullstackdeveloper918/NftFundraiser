@@ -32,7 +32,7 @@ const AboutUs = () => {
                                 </g>
                             </svg>
                         </div>
-                        <h3>{about?.title}</h3>
+                        <h1 style={{color:'#d3d3d3'}}>{about?.title}</h1>
                         <div className='termsandconditions' dangerouslySetInnerHTML={{ __html: about?.description }} />
                     </div>
 

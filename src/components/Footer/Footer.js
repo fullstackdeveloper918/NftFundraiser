@@ -116,13 +116,9 @@ const Footer = () => {
                 <h4 className="footer-title">Community</h4>
                 <ul>
                   <li>
-                    <a
-                      href="https://www.canopycrypto.io/our-team"
-                      alt=""
-                      target="blank"
-                    >
+                   <Link to="/about-us">
                       About Us
-                    </a>
+                    </Link>
                   </li>
                   {/* <li><Link to='/https://www.canopycrypto.io/our-team/'>About Us</Link></li> */}
                   <li>
