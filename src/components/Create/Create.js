@@ -296,8 +296,11 @@ const Create = ({ current, next, prev }) => {
               <div className="position-relative select-box">
                 <select
                   name="state"
+                  
                   {...register("state")}
                   onChange={handleChangeState}
+                  disabled={states?.data?.data?.length == 0}
+                
                 >
                   aria-invalid={errors?.state ? "true" : "false"}
                   <option
@@ -306,7 +309,7 @@ const Create = ({ current, next, prev }) => {
                     selected
                     style={{ color: "#495057" }}
                   >
-                    Select your state/province
+                    { states?.data?.data?.length == 0 ? "N/A":'Select your state/province'}
                   </option>
                   {states?.data?.data?.map((option, key) => (
                     <>
@@ -316,11 +319,7 @@ const Create = ({ current, next, prev }) => {
                     </>
                   ))}
                 </select>
-                <span>
-                  {" "}
-                  {states?.data?.data?.length == 0 &&
-                    " current country does't have any state/province"}
-                </span>
+                
               </div>
             </div>
           </div>
@@ -328,7 +327,7 @@ const Create = ({ current, next, prev }) => {
             <div className="form-group">
               <label>City or Region</label>
               <div className="position-relative select-box">
-                <select name="city" {...register("city")}>
+                <select name="city" {...register("city")}  disabled={states?.data?.data?.length == 0}>
                   aria-invalid={errors?.city ? "true" : "false"}
                   <option
                     value=""
@@ -336,7 +335,7 @@ const Create = ({ current, next, prev }) => {
                     selected
                     style={{ color: "#495057" }}
                   >
-                    Select your city/region
+                  { states?.data?.data?.length == 0 ? "N/A" :"Select your city/region"}
                   </option>
                   {cities?.data?.data?.map((option, key) => (
                     <>
@@ -346,11 +345,7 @@ const Create = ({ current, next, prev }) => {
                     </>
                   ))}
                 </select>
-                <span>
-                  {" "}
-                  { states?.data?.data?.length == 0 &&
-                    "current country does't have any city/region"}
-                </span>
+                
               </div>
             </div>
           </div>
@@ -361,6 +356,7 @@ const Create = ({ current, next, prev }) => {
                 <select
                   name="category_id"
                   {...register("category_id", { required: true })}
+                 
                 >
                   aria-invalid={errors.category_id ? "true" : "false"}
                   <option
