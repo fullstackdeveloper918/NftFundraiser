@@ -31,6 +31,7 @@ const ProjNFTS = (props) => {
                             
                                 
                             <div key={`auct_${idx}`} className="col-12 col-sm-6 col-lg-3 item soldout-card">
+                               <div className="inner-card">
                             {item.sold_nft == 1 && 
                             <div className='sold-outbtn'>SOLD OUT</div>  
                             }  
@@ -64,6 +65,7 @@ const ProjNFTS = (props) => {
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                         );
                     })}

@@ -2971,13 +2971,20 @@ h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px;
-  margin-right: 15px;
-  margin-left: 15px;
+  padding: 0px 15px;
+
+}
+.inner-card {
+  position: relative;
+  height: 100%;
+  background: #16151a;
+  border-radius: 8px;
 }
 .soldout-card .sold-outbtn {
   position: absolute;
+  width: 100%;
   left: 0;
+  top: 35%;
   z-index: 1;
   text-align: center;
   right: 0;
@@ -3605,10 +3612,6 @@ span.minus_icon {
     padding: 0 15px;
   }
 
-  .soldout-card .sold-outbtn {
-    width: calc(100% - 60px);
-    left: 30px;
-  }
   .button_group.nft-price .btn {
     display: flex;
     align-items: center;

@@ -354,6 +354,8 @@ const ProjNftDetails = () => {
                     key={`eds_${idx}`}
                     className="col-12 col-sm-6 col-lg-3 item explore-item soldout-card"
                   >
+                    <div className="inner-card">
+
                     {x.sold_nft == 1 && (
                       <div className="sold-outbtn">SOLD OUT</div>
                     )}
@@ -473,6 +475,7 @@ const ProjNftDetails = () => {
                           </div>
                         </div>
                       </div>
+                    </div>
                     </div>
                   </div>
                 );
