@@ -9,6 +9,8 @@ const AboutUs = () => {
         return state.footer.aboutus
     })
 
+    
+
     useEffect(() => {
         dispatch(AboutUsAction())
     }, [])

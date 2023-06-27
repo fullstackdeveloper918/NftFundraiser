@@ -27,7 +27,7 @@ const Collections = () => {
                             </div>
                             <div className="intro-btn">
                                 {coll?.data?.length > 7 &&
-                                    <Link className="btn content-btn text-left" to="/allcollections">Explore More</Link>
+                                    <Link className="btn content-btn text-left" to="/allcollections">View All</Link>
                                 }
                             </div>
                         </div>

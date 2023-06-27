@@ -35,6 +35,7 @@ const FundraiserDetail = () => {
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
+    console.log('userdet', userdet)
     const userDetail = userdet.referrer_id
 
     useEffect(() => {
@@ -68,12 +69,14 @@ const FundraiserDetail = () => {
                     <div className='col-12'>
                         <div className='nft-edit-icon'>
                             <span className='title_main'>{funddetail?.organization_detail?.organization_name}</span>
+                            {funddetail?.user_id === userDetail?.user_id &&
                             <i className="fa-solid fa-pen " onClick={(e) => {
                                 // setNftID(slug)
 
                                 setModalShoweditfund(true)
                             }
                             } ></i>
+                        }
                             <EditName
                                 // id={projslug}
                                 // nft_id={nftId}
@@ -87,8 +90,10 @@ const FundraiserDetail = () => {
 
                             <div className="item-thumb text-center">
                                 <div>
+                                    {funddetail?.user_id === userDetail?.user_id &&
                                     <i class="fa-solid fa-pen-to-square item-thumb-edit" onClick={() =>
                                         setModalShoweditfundimg(true)}></i>
+                                    }
                                     <EditBanner
                                         show={modalShoweditfundimg}
                                         onHide={() => setModalShoweditfundimg(false)} />
@@ -103,12 +108,14 @@ const FundraiserDetail = () => {
                      
                            
                   
-                           <img src={userdet?.organization_detail?.logo} width="32px" height="32px" viewBox="0 0 24 24" fill="none"  />
+                           <img src={userdet?.organization_detail?.logo} width="32px" height="32px" viewBox="0 0 24 24" fill="none"  alt='' />
 
                             <span className='cutom_dis'> {funddetail?.organization_detail?.organization_name} is organizing this fundraiser. </span>
                             <div>
+                            {funddetail?.user_id === userDetail?.user_id &&
                             <i className="fa-solid fa-pen-to-square" onClick={() =>
                                 setModalShoweditfundlogo(true)}></i>
+                            }
                             <EditLogo
                                 show={modalShoweditfundlogo}
                                 onHide={() => setModalShoweditfundlogo(false)} />
@@ -175,8 +182,10 @@ const FundraiserDetail = () => {
 
                                 <div className='d-flex align-items-center gap-5'> <div><svg width="24px" fill="#fff" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z stroke=" /><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" /></svg></div><div>Description</div></div>
                                 <div >
+                                {funddetail?.user_id === userDetail?.user_id &&
                                     <i className="fa-solid fa-pen" onClick={() =>
                                         setModalShoweditfunddesc(true)}></i>
+                                    }
                                     <DescEdit
                                         show={modalShoweditfunddes}
                                         onHide={() => setModalShoweditfunddesc(false)} />
