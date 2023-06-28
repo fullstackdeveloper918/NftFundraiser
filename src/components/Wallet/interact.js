@@ -84,6 +84,7 @@ export const UpdateWalletAddress = async (role, auth_token = null) => {
 };
 
 export const ConnectWallet = async (role, dispatch) => {
+  
   // const chainId = 80001// Polygon Mainnet
   const chainId = 137 // Polygon Mainnet
 
@@ -338,9 +339,9 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading
         setCurrent(1)
       })
       .on('confirmation', async (confNumber, receipt) => {
-        if (confNumber == 1) {
+        if (confNumber === 1) {
 
-          if (collid != 1) {
+          if (collid !== 1) {
             await UpdateContract(collid, contractAddress, setModalShow)
           }
 
@@ -354,7 +355,7 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading
         }
       })
       .on('error', function (error) {
-        swal("error", "Metamask is busy, please retry ", "error")
+        // swal("error", "Metamask is busy, please retry ", "error")
         setModalShow(false)
       })
 
@@ -366,7 +367,7 @@ export const CreateMetaDataAndMint = async ({ slug, _imgBuffer, _des, setLoading
   } catch (error) {
     await dispatch(LogsAction(error))
 
-    swal("error", "Transaction cancelled", "error")
+    swal("error", "Metamask is busy, please retry ", "error")
     setModalShow(false)
     return {
       success: false,
@@ -513,7 +514,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
 
 
 
-          if (confNumber == 1) {
+          if (confNumber === 1) {
 
             // checkTransactionStatus(receipt.transactionHash)
 
@@ -541,7 +542,7 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
     } catch (error) {
       dispatch(LogsAction(error))
       // checkTransactionStatus(sessionStorage.getItem("transactionHash"), loadingg)
-      swal("error", JSON.stringify(error.message), "error")
+      swal("error", "Network is busy please try again", "error")
       loadingg(false)
       // alert(JSON.stringify(error.message))
     }

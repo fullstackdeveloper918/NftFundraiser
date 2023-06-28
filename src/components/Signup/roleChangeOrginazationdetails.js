@@ -21,8 +21,8 @@ import JoditEditor from "jodit-react";
 // import { uploadcare } from '../lib/uploadcare.min.js';
 const RoleChangeOrganizationdetails = () => {
   const [description, setDescription] = useState();
-  const [einNumber, setEinNumber] = useState();
-  const [fundraisingGoal, setFundraisingGoal] = useState();
+  const [einNumber, setEinNumber] = useState(0);
+  const [fundraisingGoal, setFundraisingGoal] = useState(0);
 
   const editor = useRef(null);
 
@@ -110,9 +110,9 @@ const RoleChangeOrganizationdetails = () => {
                     <div class="position-relative">
                     <span
                       className="plus_icon"
-                      onClick={() => {
-                        setFundraisingGoal((fundraisingGoal || 0) + 1);
-                      }}
+                      onClick={() => 
+                        setFundraisingGoal((fundraisingGoal)=> fundraisingGoal + 1)
+                      }
                     >
                       <i className="fa fa-plus" aria-hidden="true"></i>
                     </span>
@@ -324,7 +324,7 @@ const RoleChangeOrganizationdetails = () => {
                     <div class="position-relative">
                       <span
                         className="plus_icon"
-                        onClick={() => setEinNumber((einNumber || 0) + 1)}
+                        onClick={() => setEinNumber((einNumber)=>einNumber  + 1)}
                       >
                         <i className="fa fa-plus" aria-hidden="true"></i>
                       </span>

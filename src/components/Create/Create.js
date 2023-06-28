@@ -299,7 +299,7 @@ const Create = ({ current, next, prev }) => {
                   
                   {...register("state")}
                   onChange={handleChangeState}
-                  disabled={states?.data?.data?.length == 0}
+                  disabled={states?.data?.data?.length === 0}
                 
                 >
                   aria-invalid={errors?.state ? "true" : "false"}
@@ -309,7 +309,7 @@ const Create = ({ current, next, prev }) => {
                     selected
                     style={{ color: "#495057" }}
                   >
-                    { states?.data?.data?.length == 0 ? "N/A":'Select your state/province'}
+                    { states?.data?.data?.length === 0 ? "N/A":'Select your state/province'}
                   </option>
                   {states?.data?.data?.map((option, key) => (
                     <>
@@ -327,7 +327,7 @@ const Create = ({ current, next, prev }) => {
             <div className="form-group">
               <label>City or Region</label>
               <div className="position-relative select-box">
-                <select name="city" {...register("city")}  disabled={states?.data?.data?.length == 0}>
+                <select name="city" {...register("city")}  disabled={states?.data?.data?.length === 0}>
                   aria-invalid={errors?.city ? "true" : "false"}
                   <option
                     value=""
@@ -335,7 +335,7 @@ const Create = ({ current, next, prev }) => {
                     selected
                     style={{ color: "#495057" }}
                   >
-                  { states?.data?.data?.length == 0 ? "N/A" :"Select your city/region"}
+                  { states?.data?.data?.length === 0 ? "N/A" :"Select your city/region"}
                   </option>
                   {cities?.data?.data?.map((option, key) => (
                     <>
@@ -383,7 +383,7 @@ const Create = ({ current, next, prev }) => {
           </div>
           <div className="col-12 col-md-12">
             <div className={`form-group  ${styles.input_group}`}>
-              {usertype == 2 ? (
+              {usertype === 2 ? (
                 <label>Price per NFT (In MATIC tokens)</label>
               ) : (
                 <label>Price (In MATIC tokens)</label>

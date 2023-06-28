@@ -142,14 +142,14 @@ const Resell = ({ type }) => {
                               <div className="card-body">
                                 {/* <a> */}
                                 <h5 className="mb-0">
-                                  {item.title.slice(0, 18)}...
+                                  {item?.title?.slice(0, 18)}...
                                 </h5>
                                 {/* </a> */}
                                 <div className="seller d-flex align-items-center my-3">
                                   <span>Owned By</span>
                                   {/* <a> */}
                                   <h6 className="ml-2 mb-0">
-                                    {item.user_data.username.slice(0, 12)}
+                                    {item?.user_data.username?.slice(0, 12)}
                                   </h6>
                                   {/* </a> */}
                                 </div>

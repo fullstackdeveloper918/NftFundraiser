@@ -49,6 +49,7 @@ const Hero = ({ type }) => {
   const mostactivityProjects = useSelector((state) => {
     return state?.projectdetails?.getmostProjActivity;
   });
+  console.log('mostactivityProjects', mostactivityProjects)
   useEffect(() => {
     dispatch(
       getPublicLiveProjects({
@@ -148,7 +149,7 @@ const Hero = ({ type }) => {
               </a>
             </div>
           </div>
-
+{mostactivityProjects.length > 0 && 
           <div className="col-12 col-md-6 col-lg-4 auction-slider auctions-slides">
             {/* {mostactivityProjects[0]?.map((item, idx) => { */}
             {/* return ( */}
@@ -203,6 +204,7 @@ const Hero = ({ type }) => {
               </div>
             </div>
           </div>
+}
         </div>
       </div>
 

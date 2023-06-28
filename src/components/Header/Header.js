@@ -194,7 +194,7 @@ const Header = () => {
 
     if (
       !res?.data?.data?.is_new_user &&
-      Roles["BUYER"] == res?.data?.data.role
+      Roles["BUYER"] === res?.data?.data.role
     ) {
       dispatch(loginSuccess(res));
       setAddress(window.ethereum.selectedAddress);
@@ -209,7 +209,7 @@ const Header = () => {
       }
     } else if (
       res?.data?.data?.is_new_user &&
-      Roles["BUYER"] == res?.data?.data?.role
+      Roles["BUYER"] === res?.data?.data?.role
     ) {
       dispatch(loginSuccess(res));
       setAddress(window.ethereum.selectedAddress);
@@ -240,7 +240,7 @@ const Header = () => {
       });
     } else if (
       !res?.data?.data?.is_new_user &&
-      Roles["CREATOR"] == res?.data?.data?.role
+      Roles["CREATOR"] === res?.data?.data?.role
     ) {
       dispatch(loginSuccess(res));
       setAddress(window.ethereum.selectedAddress);
@@ -249,9 +249,9 @@ const Header = () => {
 
   const handleCreate = () => {
     if (window.ethereum.selectedAddress) {
-      if (Roles["CREATOR"] == userRole) {
+      if (Roles["CREATOR"] === userRole) {
         history.push("/create");
-      } else if (Roles["BUYER"] == userRole) {
+      } else if (Roles["BUYER"] === userRole) {
         Swal.fire({
           icon: "info",
           html: "Sign up as a Creator to start a project and upload NFTs",

@@ -83,13 +83,13 @@ const ExploreAll = () => {
             </div>
           </div>
         </div>
-
+        {data?.length > 0 &&
         <input
           autoFocus
           placeholder="Enter your search keyword"
           onChange={(val) => debouncedSearch(val?.target?.value)}
         />
-
+        }
         <div className="row items explore-items h-auto mt-3">
           {loading ? (
             <Loader />

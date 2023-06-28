@@ -41,14 +41,23 @@ const Wallet = () => {
         if (res?.res?.response?.status === 401) {
             history.push('/wallet-connect')
         }
+
         else {
             dispatch(loginSuccess(res?.res))
             sessionStorage.setItem('authToken', res?.res?.data?.data?.auth_token)
-            {res.res.data.data.role == 2 ?(
+            // eslint-disable-next-line no-lone-blocks
+            {res?.res?.data?.data?.role == '2' ?(
 
                     history.push('/all/LatestProjects')
             ):(
-                history.push('/projectlist')
+                <>
+                {res?.res?.data?.data?.role == '3' && res?.res?.data?.data?.is_new_user == true ? (
+                    history.push('/create/organization')
+                ):(
+
+              history.push('/projectlist')
+                )}
+                </>
             )}
             // {userRole.role == 2 && 
 

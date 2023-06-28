@@ -42,15 +42,14 @@ const RefralTransdataTable = (props) => {
     const projects = useSelector(state => {
         return state?.projectdetails?.projects
     })
-    console.log('projects', projects?.data && projects?.data[0].title)
     const HandleProj = (e,) => {
         setProjSlug(e?.currentTarget?.value)
         // if (projSlug != " ") {
-        const slug = projects?.data && projects?.data[0].slug
+        const slug = projects?.data && projects?.data[0]?.slug
         dispatch(ProjectDetail(e?.currentTarget?.value ? e?.currentTarget?.value:slug ))
         setNftslug(" ")
         // }
-        if (nftSlug != " ") {
+        if (nftSlug !== " ") {
 
             dispatch(NftList(nftSlug))
         }
@@ -152,15 +151,15 @@ useEffect(()=>{
                                                 {userdet?.referral_history?.map((items) => {
                                                     return (
                                                         <><tr className='contract-address'>
-                                                            <td ><Link to={`/nftprojdetails/${items.slug}`} >{items.title?.slice(0, 20)}</Link>...</td>
-                                                            <td>#{items.token_id?.slice(0, 2)}</td>
-                                                            <td>{items.price}</td>
+                                                            <td ><Link to={`/nftprojdetails/${items?.slug}`} >{items.title?.slice(0, 20)}</Link>...</td>
+                                                            <td>#{items?.token_id?.slice(0, 2)}</td>
+                                                            <td>{items?.price}</td>
                                                             {/* <td>{items.referral_amount} </td> */}
                                                             <td className='referal'>{items.referral_amount} <img src='../../img/image14.png' /></td>
-                                                            <td><Link to={`/popularcollection/details/${items.collection_slug}`}>{items.collection_name}</Link></td>
-                                                            <td>{items.pay_from?.slice(0, 4)}...{items.pay_from?.slice(35, 44)}</td>
-                                                            <td>{items.pay_to?.slice(0, 4)}...{items.pay_to?.slice(35, 44)}</td>
-                                                            <td><a target="_blank" href={`https://polygonscan.com/tx/${items?.transaction_hash}`} >{items.transaction_hash?.slice(0, 4)}...{items.transaction_hash?.slice(35, 44)}</a></td>
+                                                            <td><Link to={`/popularcollection/details/${items?.collection_slug}`}>{items?.collection_name}</Link></td>
+                                                            <td>{items?.pay_from?.slice(0, 4)}...{items.pay_from?.slice(35, 44)}</td>
+                                                            <td>{items?.pay_to?.slice(0, 4)}...{items.pay_to?.slice(35, 44)}</td>
+                                                            <td><a target="_blank" href={`https://polygonscan.com/tx/${items?.transaction_hash}`} >{items?.transaction_hash?.slice(0, 4)}...{items?.transaction_hash?.slice(35, 44)}</a></td>
                                                         </tr>
                                                         </>
                                                     )

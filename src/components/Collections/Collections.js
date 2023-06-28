@@ -54,13 +54,13 @@ const Collections = () => {
                                         {/* Card Body */}
                                         <div className="card-body mt-4">
                                             {/* <a> */}
-                                            <h5 className="">{item.title.slice(0, 12)} </h5>
+                                            <h5 className="">{item?.title?.slice(0, 12)} </h5>
                                             {/* </a> */}
                                             <div class="align-items-center">
                                                 <div class="d-flex justify-content-center text-align-center gap-5">
                                                     <div class=" align-items-center">
                                                         <div class="d-flex justify-content-center text-align-center gap-5">
-                                                            {item?.nft_data.length == 1 ? (
+                                                            {item?.nft_data.length === 1 ? (
                                                                 <span>Total NFT :</span>
                                                             ) : (
                                                                 <span>Total NFTs :</span>
