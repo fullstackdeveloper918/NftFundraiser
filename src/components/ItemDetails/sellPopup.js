@@ -83,7 +83,7 @@ function SellPopup(props) {
 
         })
     }
-
+console.log(nftdetail,"nftdetail")
     const deployContract = async (type, start_date, end_date, price) => {
         
         try {
@@ -101,7 +101,6 @@ function SellPopup(props) {
                 // const gas = await web3.eth.getGasPrice();
                 // const gas = 5000
 
-
                 const currentGasPrice = await web3.eth.getGasPrice();
 
                 const deployTransaction = MyNFTContract.deploy({
@@ -111,9 +110,9 @@ function SellPopup(props) {
                     from: address,
                     gasLimit: web3.utils.toHex(3000000)
 
-                })
-                deployTransaction
-                    .on('transactionHash', (transactionHash) => {
+                });
+
+                deployTransaction.on('transactionHash', (transactionHash) => {
                         console.log(transactionHash, "transactionHash")
 
                     })
@@ -121,6 +120,7 @@ function SellPopup(props) {
                         console.log(receipt, "reciept")
                     })
                     .on('confirmation', (confNumber, receipt) => {
+                      // console.log(confNumber,"confNumber")
                         console.log(receipt.contractAddress, "confirmRecipet")
 
                         if (confNumber == 1) {
@@ -128,9 +128,9 @@ function SellPopup(props) {
                             // setContractAdd(receipt?.contractAddress)
                             // UpdateContract(id)
                         }
-
                     })
                     .on('error', (error) => {
+                      console.log(error,"error")
                         swal("error", "contract not deployed please try again", "error")
                         setModalShow(false)
                         // console.log(error)
