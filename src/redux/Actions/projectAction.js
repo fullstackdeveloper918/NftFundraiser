@@ -266,7 +266,6 @@ export const getPublicLiveProjects = createAsyncThunk(
 
       return res?.data?.data;
     } catch (e) {
-      console.log(e, "error");
       params.setLoading(false);
       thunkAPI.dispatch(LogsAction(e));
       //
@@ -758,7 +757,6 @@ export const GetMatic = () => async (dispatch) => {
       config
     );
     await dispatch(getMatic(res));
-    console.log("res", res);
   } catch (error) {
     dispatch(LogsAction(error));
     // console.log("error");
@@ -780,7 +778,6 @@ export const getBid = (id) => async (dispatch) => {
     );
     await dispatch(res);
 
-    console.log("res bid", res);
   } catch (e) {
     dispatch(LogsAction(e));
     // console.log("error");
@@ -816,7 +813,6 @@ export const UpdateBId =
           timer: 1500,
         });
       }
-      console.log("res bid", res);
     } catch (e) {
       swal("error", e?.response?.data?.message, "error");
       setLoading(false);

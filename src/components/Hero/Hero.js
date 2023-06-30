@@ -49,7 +49,6 @@ const Hero = ({ type }) => {
   const mostactivityProjects = useSelector((state) => {
     return state?.projectdetails?.getmostProjActivity;
   });
-  console.log('mostactivityProjects', mostactivityProjects)
   useEffect(() => {
     dispatch(
       getPublicLiveProjects({

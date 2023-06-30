@@ -13,7 +13,6 @@ const FunddataTable = (props) => {
     const funddetail = useSelector(state => {
         return state?.fundraiser?.fundraiserdetail
     })
-    console.log(funddetail?.organization_detail?.country, 'fdddetail')
     return (
         <div className='position-relative'>
             <Collapse defaultActiveKey={['1']} onChange={onChange} expandIconPosition={expandIconPosition}>

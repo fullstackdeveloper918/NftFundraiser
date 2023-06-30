@@ -35,7 +35,6 @@ const FundraiserDetail = () => {
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
-    console.log('userdet', userdet)
     const userDetail = userdet.referrer_id
 
     useEffect(() => {

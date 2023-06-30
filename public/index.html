@@ -12,10 +12,7 @@
           "(prefers-color-scheme: dark)"
         ).matches;
 
-        console.log(
-          window.matchMedia("(prefers-color-scheme: dark)"),
-          "prefersDarkMode"
-        );
+      
         if (prefersDarkMode) {
           favicon.href = "img/logo.png";
         } else {

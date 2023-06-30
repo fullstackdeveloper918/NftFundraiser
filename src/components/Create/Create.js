@@ -76,8 +76,6 @@ const Create = ({ current, next, prev }) => {
     return state?.projectdetails?.categories;
   });
 
-  console.log(userdet, "userdet");
-  console.log(country, "country");
   const handleChangeCountry = (event) => {
     // 👇 Get input value from "event"
     const formData = new FormData();

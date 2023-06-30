@@ -121,7 +121,6 @@ console.log(nftdetail,"nftdetail")
                     })
                     .on('confirmation', (confNumber, receipt) => {
                       // console.log(confNumber,"confNumber")
-                        console.log(receipt.contractAddress, "confirmRecipet")
 
                         if (confNumber == 1) {
                             mint(receipt?.contractAddress,type, start_date, end_date, price)
@@ -157,7 +156,6 @@ console.log(nftdetail,"nftdetail")
     }
 
 
-    console.log('mint', props.ismint)
     const OnSubmit = async (data) => {
 
         setModalShow(true)

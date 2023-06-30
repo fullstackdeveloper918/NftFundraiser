@@ -20,7 +20,6 @@ export const PopularCollectionAction = createAsyncThunk(
                 },
             }
             const res = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/getPopularConnection?page=${params.count}&search_keyword=`, config)
-            console.log(res, 'resddd')
             thunkAPI.dispatch(getPopularCollection(res?.data?.data));
             if(params?.location?.pathname === '/allcollections'){
                 params.setLoading(false)

@@ -283,7 +283,6 @@ const UpdateContract = async (collid, contractAddress, setModalShow) => {
     swal("error", "something went wrong", "error")
     // await dispatch(LogsAction(e))
 
-    console.log("error");
   }
 };
 
@@ -508,7 +507,6 @@ export const BuyNft = async ({ contractAddress, tokenId, payFrom, values, platfo
 
         })
         .on('receipt', (receipt) => {
-          console.log(receipt.contractAddress); // 0xf4cb...
         })
         .on('confirmation', (confNumber, receipt) => {
 

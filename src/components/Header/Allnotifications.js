@@ -17,7 +17,6 @@ const AllNotifications = () => {
     const deleteHandler = (id) => {
         dispatch(NotiDelete(id))
     }
-    console.log(nooti, 'noti')
     return (
 
         <section className="item-details-area">

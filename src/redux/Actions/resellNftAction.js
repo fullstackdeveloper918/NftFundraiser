@@ -60,7 +60,6 @@ export const ResellActionDetails = (slug) => async (dispatch) => {
       slug,
       config
     );
-    console.log("resproj", res);
     dispatch(getReselldetails(res));
   } catch (e) {
     dispatch(LogsAction(e));

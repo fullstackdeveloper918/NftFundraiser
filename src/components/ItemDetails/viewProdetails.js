@@ -31,7 +31,6 @@ const ProjDetails = () => {
   const { slug } = useParams();
   const search = useLocation().search;
   const refid = new URLSearchParams(search).get("refid");
-  console.log(refid, "refid");
   const [tok, setTok] = useState("");
   // console.log('tok', tok)
   const dispatch = useDispatch();
@@ -43,13 +42,8 @@ const ProjDetails = () => {
     //
     return state.projectdetails.latestprojectdetails;
   });
-  console.log(
-    "latround",
-    Number(Math.round(latprojdetail.project_count)) *
-      Number(Math.round(matic["matic-network"]?.cad))
-  );
+ 
   const [modalShoww, setModalShoww] = React.useState(false);
-  console.log("latproj", latprojdetail?.nft_data);
   const userdet = useSelector((state) => {
     return state?.user?.userdetail;
   });
@@ -209,7 +203,6 @@ const ProjDetails = () => {
                     const days_difference = Math.ceil(
                       time_difference / (1000 * 60 * 60 * 24)
                     );
-                    console.log("days", days_difference);
                     return (
                       <ul className="m-0 custom_lis pl-0 ">
                         <li>

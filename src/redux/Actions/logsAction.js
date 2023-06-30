@@ -20,7 +20,6 @@ export const LogsAction = (params) => async dispatch => {
             formData, config)
         await (dispatch(res()))
 
-        console.log("logres", res)
 
     } catch (e) {
         console.log(e)
