@@ -22,7 +22,7 @@ const Timer = (props) => {
 
     return (
         <div>
-            {days == 0 &&
+            {days === 0 &&
                 <div className="timer" role="timer">
                     {`${minutes}`.includes('-') ? (
                         <div className="col-12">

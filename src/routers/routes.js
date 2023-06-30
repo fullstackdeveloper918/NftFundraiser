@@ -42,9 +42,13 @@ import AllReraltrans from "../themes/all-refrals";
 import NotFound from "../notFound";
 import Widget from "../components/Explore/widget";
 import Aboutus from "../themes/Aboutus";
+import { useSelector } from "react-redux";
 
 
 const MyRouts = () => {
+  const userdet = useSelector((state) => {
+    return state?.user?.userdetail;
+  });
   return (
     <div>
       <BrowserRouter>

@@ -32,13 +32,13 @@ const ProjNFTS = (props) => {
                                 
                             <div key={`auct_${idx}`} className="col-12 col-sm-6 col-lg-3 item soldout-card">
                                <div className="inner-card">
-                            {item.sold_nft == 1 && 
+                            {item.sold_nft === '1' && 
                             <div className='sold-outbtn'>SOLD OUT</div>  
                             }  
                             <div className="card">
         
                                     <div className="image-over">
-                                        <Link to={item.sold_nft == 0 && `/nftprojdetails/${item.slug}?refid=${props.refid}`}>
+                                        <Link to={item.sold_nft === '0' && `/nftprojdetails/${item.slug}?refid=${props.refid}`}>
                                             {item.extention === 'modal' || item.extention === 'Player' ? (
                                                 <img className="card-img-top" src={item.preview_imag} alt="" />
                                             ) : (

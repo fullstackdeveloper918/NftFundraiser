@@ -115,7 +115,7 @@ const EditNft = (props) => {
         setNFtFileType(nftdetail.extention)
         setPreviewnft(nftdetail.preview_imag)
         setNft_collection_id(nftdetail.collection_id)
-    }, [props.nft_id, props.id, form, nftdetail])
+    }, [props.nft_id, props.id, form, nftdetail,dispatch])
 
     const onFinish = async (values) => {
         try {
@@ -304,11 +304,13 @@ const EditNft = (props) => {
                                                                                         <img
                                                                                             src={source}
                                                                                             className="nft-image"
+                                                                                            alt=''
                                                                                         />
                                                                                     ) : (
                                                                                         <img
                                                                                             src={image}
                                                                                             className="nft-image"
+                                                                                            alt=''
                                                                                         />
                                                                                     )}
                                                                                 </div>
@@ -356,11 +358,13 @@ const EditNft = (props) => {
                                                                                                 <img
                                                                                                     className="preview_image"
                                                                                                     src={previewnft}
+                                                                                                    alt=''
                                                                                                 />
                                                                                             ) : (
                                                                                                 <img
                                                                                                     className="preview_image"
                                                                                                     src={preview}
+                                                                                                    alt=''
                                                                                                 />
                                                                                             )}
                                                                                         </div>
@@ -405,11 +409,15 @@ const EditNft = (props) => {
                                                                                             {!preview ? (
                                                                                                 <img
                                                                                                     className="preview_image"
-                                                                                                    src={previewnft} />
+                                                                                                    src={previewnft}
+                                                                                                    alt=''
+                                                                                                    />
                                                                                             ) : (
                                                                                                 <img
                                                                                                     className="preview_image"
-                                                                                                    src={preview} />
+                                                                                                    src={preview} 
+                                                                                                    alt=''
+                                                                                                    />
                                                                                             )}
                                                                                         </div>
                                                                                     </div>

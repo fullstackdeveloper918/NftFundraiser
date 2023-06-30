@@ -1,6 +1,6 @@
 import { Form } from "antd";
 import Modal from "react-bootstrap/Modal";
-import React, { Fragment, useEffect, useState, useRef } from "react";
+import React, { Fragment, useEffect, useState  } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetCollectionsAction,
@@ -17,17 +17,14 @@ import DModal from "./3dModal";
 import swal from "sweetalert";
 
 const EditNftImage = (props) => {
-  const editor = useRef(null);
   const [nftFileType, setNFtFileType] = useState("Image");
   const [nft, setNft] = useState([]);
   const [nftwidth, setNftwidth] = useState();
-  const [size, setSize] = useState();
   const [nftHeight, setNftheight] = useState();
   const [Pimage, setPimage] = useState();
   const [previewnft, setPreviewnft] = useState();
   const [preview, setPreview] = useState();
   const [source, setSource] = useState();
-  const [modalShowcoll, setModalShowcoll] = React.useState(false);
   const [nft_collection_id, setNft_collection_id] = useState({ 0: "0" });
   const [form] = Form.useForm();
   const [image, setImage] = useState();
@@ -121,7 +118,7 @@ const EditNftImage = (props) => {
     setNFtFileType(nftdetail.extention);
     setPreviewnft(nftdetail.preview_imag);
     setNft_collection_id(nftdetail.collection_id);
-  }, [props.nft_id?.id, form, nftdetail]);
+  }, [props.nft_id?.id, form, nftdetail,dispatch]);
 
   const onFinish = async (values) => {
     try {
@@ -264,6 +261,7 @@ const EditNftImage = (props) => {
                                                 <img
                                                   src={source}
                                                   className="nft-image"
+                                                  alt=""
                                                 />
                                               ) : (
                                                 <>
@@ -290,6 +288,7 @@ const EditNftImage = (props) => {
                                               <img
                                                 src={image}
                                                 className="nft-image"
+                                                alt=""
                                               />
                                             )}
                                           </div>
@@ -337,11 +336,13 @@ const EditNftImage = (props) => {
                                                   <img
                                                     className="preview_image"
                                                     src={previewnft}
+                                                    alt=""
                                                   />
                                                 ) : (
                                                   <img
                                                     className="preview_image"
                                                     src={preview}
+                                                    alt=""
                                                   />
                                                 )}
                                               </div>
@@ -383,11 +384,13 @@ const EditNftImage = (props) => {
                                                   <img
                                                     className="preview_image"
                                                     src={previewnft}
+                                                    alt=""
                                                   />
                                                 ) : (
                                                   <img
                                                     className="preview_image"
                                                     src={preview}
+                                                    alt=""
                                                   />
                                                 )}
                                               </div>

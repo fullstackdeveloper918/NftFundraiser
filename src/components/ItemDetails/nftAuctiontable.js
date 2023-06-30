@@ -2,10 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Collapse } from 'antd';
-import { getBid, NftList, ProjectDetail, ProjectList, UpdateBId } from '../../redux/Actions/projectAction';
-import { useParams } from 'react-router';
+import { getBid, NftList,  UpdateBId } from '../../redux/Actions/projectAction';
 import { Table } from 'react-bootstrap';
-import { Center, Loader } from '@react-three/drei';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 
@@ -17,25 +15,19 @@ const NftAuctiondataTable = (props) => {
     const onChange = (key) => {
         // console.log(key);
     };
-    const params = useParams()
-    const { slug } = useParams()
-    const [bidstatus, setBidStatus] = useState(" ")
     const [expandIconPosition, setExpandIconPosition] = useState('end');
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
     };
-    const projdetail = useSelector(state => {
-        return state?.projectdetails?.latestprojectdetails
-    })
+   
     const nftdetail = useSelector(state => {
         return state.projectdetails.nftlist
 
     })
     useEffect(() => {
-        // 
         dispatch(NftList(props.slug.id))
 
-    }, [props.slug.id])
+    }, [props.slug.id,dispatch])
 
     const acceptHandler = (id) => {
         getBid(props)
@@ -81,8 +73,7 @@ const NftAuctiondataTable = (props) => {
                                     <th>User</th>
                                     <th>Bid Price</th>
                                     <th>Wallet</th>
-                                    {/* <th>To</th> */}
-                                    {/* <th>Transaction</th> */}
+                                  
                                     <th>Action</th>
                                 </tr>
 
@@ -101,10 +92,9 @@ const NftAuctiondataTable = (props) => {
                                                 <td>{item.username}</td>
                                                 <td>{item.amount}</td>
                                                 <td>{item.pay_from?.slice(0, 4)}...{item.pay_from?.slice(35, 44)}</td>
-                                                {/* <td>{item.pay_to?.slice(0, 4)}...{item.pay_to?.slice(35, 44)}</td> */}
-                                                {/* <td>{item.txd_id?.slice(0, 4)}...{item.txd_id?.slice(35, 44)}</td> */}
+                                               
                                                 <td className='Btn_td'>
-                                                    {item.status == 1 ? (
+                                                    {item.status === 1 ? (
 
                                                         <><Button type="submit" className={nftdetail.bid_approved_id !== null ? "btndisabled" : "table-btn "} onClick={() => acceptHandler(item.id)} disabled={nftdetail.bid_approved_id !== null ? true : false}>Accept</Button>
                                                             <Button type="submit" className={nftdetail.bid_approved_id !== null ? "btndisabled" : "table-btn "} onClick={() => rejectHandler(item.id)} disabled={nftdetail.bid_approved_id !== null ? true : false}>Reject</Button></>
@@ -126,7 +116,7 @@ const NftAuctiondataTable = (props) => {
 
                         )}
                     </Table>
-                    {nftdetail?.bids?.length == 0 &&
+                    {nftdetail?.bids?.length === 0 &&
                         <div className='nothing'>
 
                             No matching records found

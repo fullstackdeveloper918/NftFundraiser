@@ -11,7 +11,7 @@ const TermsConditions = () => {
 
     useEffect(() => {
         dispatch(getFooter(dispatch))
-    }, [])
+    }, [dispatch])
     return (
         <section className="item-details-area">
             <div className="container">

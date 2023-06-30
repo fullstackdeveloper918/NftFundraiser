@@ -2,15 +2,15 @@ import Modal from 'react-bootstrap/Modal';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
-import { Controller, set, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import JoditEditor from 'jodit-react';
-import { Form } from 'antd';
+
 import { UpdateOrganizationAction } from '../../../redux/Actions/authAction';
 
 function DescEdit(props) {
     const editor = useRef(null);
 
-    const [form] = Form.useForm()
+   
     const dispatch = useDispatch()
     const userdet = useSelector(state => {
         return state?.user?.userdetail
@@ -29,7 +29,7 @@ function DescEdit(props) {
 
             setDescription(userdet?.organization_detail?.description)
         }
-    }, [userdet])
+    }, [userdet,setValue])
     const OnSubmit = (data) => {
         try {
             const formData = new FormData()
@@ -79,7 +79,6 @@ function DescEdit(props) {
                                         />
                                     }}
                                 />
-                                {/* <textarea value={value} onChange={setDescription}></textarea> */}
 
 
 

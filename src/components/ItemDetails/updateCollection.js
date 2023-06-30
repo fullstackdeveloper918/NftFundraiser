@@ -1,23 +1,17 @@
 // import { getValue } from '@mui/system';
-import React, { Component, useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import React, {  useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 
-import Modal from 'react-bootstrap/Modal';
 import { UpdateCollection } from '../../redux/Actions/projectAction';
 const EditCollection = () => {
 
 
-    const { id } = useParams();
     // console.log(id, "idd")
     const dispatch = useDispatch()
-    const history = useHistory()
 
-    const projdetail = useSelector(state => {
-        // 
-        return state?.projectdetails?.projectdetails
-    })
+    
 
     // console.log(projdetail, "gfgfhghgghhgh")
 

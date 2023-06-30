@@ -1,9 +1,5 @@
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { CreateCollectionAction } from '../../redux/Actions/projectAction';
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import {
     EmailShareButton,
@@ -11,10 +7,7 @@ import {
     FacebookShareButton,
     InstapaperShareButton,
     InstapaperIcon,
-    LineShareButton,
     LinkedinShareButton,
-    PinterestShareButton,
-    RedditShareButton,
     TelegramIcon,
     TelegramShareButton,
     TwitterIcon,
@@ -24,34 +17,15 @@ import {
     LinkedinIcon,
     EmailIcon,
 } from "react-share";
-import {
-    FacebookShareCount,
-    HatenaShareCount,
-    OKShareCount,
-    PinterestShareCount,
-    RedditShareCount,
-    TumblrShareCount,
-    VKShareCount
-} from "react-share";
-import { Tooltip } from 'react-bootstrap';
+
 import { useLocation } from 'react-router';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 function ReferalPopup(props) {
     const location = useLocation();
     const [copy, setCopy] = useState(false)
-    // const [title, setTitle] = useState("");
-    // const [description, setDescription] = useState("");
-    // const [short_url, setShortUrl] = useState("");
-    // const [symbol, setSymbol] = useState("");
-    const dispatch = useDispatch()
-    const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm({});
-    const OnSubmit = (data) => {
-        // dispatch(CreateCollectionAction(data))
-    }
+ 
+  
     const url = window.location.href + `?refid=${props.userRef}`
     const userprojurl = `https://app.karmatica.io/projects/${props.id}` + `?refid=${props.userRef}`
-    console.log(userprojurl)
-    // const Refurl = window.location.href + '/' + props.id + '/' + props.userRef
     return (
         <Modal
             {...props}
@@ -88,28 +62,18 @@ function ReferalPopup(props) {
                         <div className="col-10 p-0">
 
                             <div className="form-group m-0">
-                                {/* <label>Display name</label> */}
                                 <input
                                     type="text"
                                     className="form-control"
                                     name="display_name"
                                     value={location.pathname === `/projnftdetails/${props.id}` ? userprojurl : url}
                                     disabled={window.ethereum?.selectedAddress && sessionStorage.getItem('authToken') ? false : true}
-                                // required
-                                // placeholder="Enter collection name"
-                                // {...register('title')}
-                                // value={title}
-                                // onChange={(e) => {
-
-                                //     setTitle(e.target.value);
-                                // }} 
+                               
                                 />
 
 
                             </div>
-                            {/* <FacebookShareCount url={"shareUrl"}>
-                            {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
-                        </FacebookShareCount> */}
+                         
 
 
                             <hr />
@@ -152,7 +116,7 @@ function ReferalPopup(props) {
                                     </div>
                                 </CopyToClipboard>
                             )}
-                            {copy == true &&
+                            {copy === true &&
                                 <span className='copytext'>Copied!</span>
 
                             }
@@ -164,9 +128,7 @@ function ReferalPopup(props) {
 
                 </form>
             </Modal.Body>
-            {/* <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer> */}
+           
         </Modal>
     );
 }

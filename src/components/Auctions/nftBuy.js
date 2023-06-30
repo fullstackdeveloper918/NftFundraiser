@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
 import { GetNftwol, GetSettings } from '../../redux/Actions/projectAction';
-import Web3 from 'web3';
-import { Button, Collapse, Spin } from 'antd';
+
+import {  Collapse, Spin } from 'antd';
 import { BuyNft } from '../Wallet/interact';
 import { updateReffid } from '../Wallet/interact';
 import { useState } from 'react';
@@ -19,9 +19,7 @@ import swal from 'sweetalert';
 import { Loader } from '@react-three/drei';
 import { Table } from 'react-bootstrap';
 import { LoadingOutlined } from '@ant-design/icons';
-const alchemyKey = "https://polygon-mainnet.g.alchemy.com/v2/bDM_VuUmdoyJSNn3Ky8pZL0vBMAc9BXd";
-// const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
-const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
+import { useHistory } from 'react-router';
 
 const LatprojNftDetails = (props) => {
     const dispatch = useDispatch()
@@ -32,6 +30,7 @@ const LatprojNftDetails = (props) => {
     const [bidmodalShow, setBidModalShow] = React.useState(false);
     const [buymodalShow, setBuyModalShow] = React.useState(false);
     const { Panel } = Collapse;
+    const history = useHistory()
     const [expandIconPosition, setExpandIconPosition] = useState('end');
     const onPositionChange = (newExpandIconPosition) => {
         setExpandIconPosition(newExpandIconPosition);
@@ -61,7 +60,7 @@ const LatprojNftDetails = (props) => {
         }
         dispatch(GetNftwol(id, refid))
         dispatch(GetSettings())
-    }, [id])
+    }, [id,dispatch,refid])
 
 
     const buyHandler = () => {
@@ -70,7 +69,7 @@ const LatprojNftDetails = (props) => {
             contractAddress: latprojnftdetail?.collectionData?.contract_id,
             tokenId: latprojnftdetail.token_id,
             payFrom: latprojnftdetail.pay_from,
-            values: latprojnftdetail?.type == 2 ? latprojnftdetail?.bids[0]?.amount : setValue?.value,
+            values: latprojnftdetail?.type === '2' ? latprojnftdetail?.bids[0]?.amount : setValue?.value,
             sellingCount: latprojnftdetail.selling_count,
             platformFee: ([latprojnftdetail.payment_flow?.karmatica_fee]),
             ownerFee: ([latprojnftdetail.payment_flow?.project_data?.fees]),
@@ -81,7 +80,8 @@ const LatprojNftDetails = (props) => {
             nft_id: latprojnftdetail.id,
             loadingg: setLoading,
             modal: setBuyModalShow,
-            dispatch
+            dispatch,
+            history
         })
     }
     const reffHandler = async () => {
@@ -186,7 +186,7 @@ const LatprojNftDetails = (props) => {
 
 
                                     <div className='eddlbtton flex-wrap d-flex gap-10  align-items-center mt-2'>
-                                        {latprojnftdetail.sold_nft == 1 ? (
+                                        {latprojnftdetail.sold_nft === '1' ? (
 
                                             <button className="d-flex align-items-center justify-content-center sold-outbtn" disabled>SOLD OUT</button>
                                         ) : (
@@ -202,9 +202,9 @@ const LatprojNftDetails = (props) => {
 
                                                 ) : (
                                                     <>
-                                                        {latprojnftdetail.type == 1 ? (
+                                                        {latprojnftdetail.type === '1' ? (
                                                             <>
-                                                                {userdet.role == 3 ? (
+                                                                {userdet.role === '3' ? (
                                                                     <>
                                                                         <button className="btn btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                                                             onClick={() => {
@@ -236,7 +236,7 @@ const LatprojNftDetails = (props) => {
                                                                             onHide={() => setBuyModalShow(false)} /></>
                                                                 ) : (
                                                                     <>
-                                                                        {userdet.role == 3 ? (
+                                                                        {userdet.role === '3' ? (
                                                                             <>
                                                                                 <button className="btn  btn-bordered-white btn-smaller mt-3 d-flex align-items-center justify-content-center py-1 mx-2" style={{ color: '#FFF' }}
                                                                                     onClick={() => swal("warning", "To make a bid for this nft you need to change your creator account to buyer ", "warning")}>Place Bid</button>
@@ -296,7 +296,7 @@ const LatprojNftDetails = (props) => {
                             </h5>
                             <div className='price_nft_detail'>
                                 <div className='nft-price'>
-                                    <img src='../img/image14.png' />
+                                    <img src='../img/image14.png' alt='' />
                                     <span><small>{latprojnftdetail.amount}  / ${latprojnftdetail.amount * Math.round(matic['matic-network']?.cad)} Cdn </small></span>
                                 </div>
 
@@ -347,8 +347,7 @@ const LatprojNftDetails = (props) => {
                                                         <th>User</th>
                                                         <th>Bid Price</th>
                                                         <th>From</th>
-                                                        {/* <th>To</th> */}
-                                                        {/* <th>Transaction</th> */}
+                                                        
                                                         <th>Status</th>
                                                     </tr>
 
@@ -380,7 +379,7 @@ const LatprojNftDetails = (props) => {
 
                                             )}
                                         </Table>
-                                        {latprojnftdetail?.bids?.length == 0 &&
+                                        {latprojnftdetail?.bids?.length === 0 &&
                                             <div className='nothing'>
 
                                                 No matching records found

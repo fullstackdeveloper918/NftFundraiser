@@ -39,11 +39,10 @@ const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [address, setAddress] = useState(null);
-  const [active, setActive] = useState(null);
   const add1 = address?.slice(0, 4).toUpperCase();
   const add2 = address?.slice(35, 44).toUpperCase();
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [role,setRole] = useState('')
   const [api, contextHolder] = notification.useNotification();
   const search = useLocation().search;
 
@@ -68,22 +67,14 @@ const Header = () => {
     return state.user.userToken;
   });
 
-  const close = () => {
-    // console.log(
-    //   "Notification was closed. Either the close button was clicked or duration time elapsed."
-    // );
-  };
-
   const userdet = useSelector((state) => {
     return state?.user?.userdetail;
   });
-  const userauction = useSelector((state) => {
-    return state?.user?.auctionnoti;
-  });
+console.log('user', userdet.statusCode )
 
   useEffect(() => {
     if (sessionStorage.getItem("authToken")) {
-      dispatch(GetUserAction());
+      dispatch(GetUserAction(history));
     }
     getCurrentWalletConnected(dispatch);
     setAddress(getSelectedAddress);
@@ -138,50 +129,20 @@ const Header = () => {
   const [activeOption, setActiveOption] = useState(false);
   toast.configure();
 
-  const openNotification = () => {
-    const key = `open${Date.now()}`;
-    // console.log('key', api)
-    const btn = (
-      <Space>
-        <Button
-          type="link"
-          size="small"
-          className="notification_btn-delete"
-          onClick={() => {
-            notification.destroy(key);
-            notiHandler();
-          }}
-        >
-          Reject
-        </Button>
-        <Link
-          to={`/nftprojdetails/${userauction?.data?.nft_slug}`}
-          onClick={() => notiHandler()}
-        >
-          <Button
-            className="notification_btn-conf"
-            onClick={() => notiHandler()}
-          >
-            Confirm
-          </Button>
-        </Link>
-      </Space>
-    );
-
-    api.open({
-      message: <h4>Reminder</h4>,
-      description: (
-        <h5 style={{ color: "black" }}>You have received a new bid request!</h5>
-      ),
-      btn,
-      // duration: null,
-      key,
-      // onClose: key === key ? false : true,
+ useEffect(()=>{
+  if(location.pathname === '/create' && userdet?.organization_detail === false && userRole === '3'){
+    swal('warning','You do not have orginazation, Please fill the organization details to continue ...','warning').then(function () {
+      window.location = "/create/organization";
     });
-    // }
-  };
+  }
+ },[])
 
   const roleHandler = () => {
+    // if( userdet?.organization_detail === false && userRole === '3'){
+    //   swal('warning','You do not have orginazation, Please fill the organization details to continue ...','warning').then(function () {
+    //     window.location = "/create/organization";
+    //   });
+    // }
     dispatch(ChangeUserRole(history, setLoading));
     setActiveOption(!activeOption);
   };
@@ -189,7 +150,7 @@ const Header = () => {
     const currentLocation = window.location.pathname;
 
     const refid = new URLSearchParams(search).get("refid");
-    const response = await ConnectWallet("BUYER", dispatch);
+    const response = await ConnectWallet("BUYER", dispatch,history);
     const { res } = response;
 
     if (
@@ -494,7 +455,7 @@ const Header = () => {
                           className="ToggleItem"
                           style={{
                             backgroundColor:
-                              userRole == 2 ? "#4528DC" : "transparent",
+                              userRole === '2' ? "#4528DC" : "transparent",
                           }}
                           onClick={() => roleHandler(SwitchOptions.OPTION1)}
                         >
@@ -504,7 +465,7 @@ const Header = () => {
                           className="ToggleItem"
                           style={{
                             backgroundColor:
-                              userRole == 3 ? "#4528DC" : "transparent",
+                              userRole === '3' ? "#4528DC" : "transparent",
                           }}
                           onClick={() => roleHandler(SwitchOptions.OPTION2)}
                         >
@@ -534,7 +495,7 @@ unCheckedChildren={<div onClick={() => roleHandler()}>{userRole == 2 ? 'switch t
                         </Link>
                       </button>
                     </li>
-                    {userRole == 3 && (
+                    {userRole === '3' && (
                       <>
                         <li>
                           <button type="button" class="dropdown-item">
@@ -567,7 +528,7 @@ unCheckedChildren={<div onClick={() => roleHandler()}>{userRole == 2 ? 'switch t
                         </li>
                       </>
                     )}
-                    {userRole == 2 && (
+                    {userRole === '2' && (
                       <li>
                         <button type="button" class="dropdown-item">
                           <Link to="/my/nfts">

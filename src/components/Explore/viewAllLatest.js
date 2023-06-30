@@ -1,12 +1,12 @@
-import React, { Component, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {  useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useParams, useLocation } from "react-router-dom";
 import Loader from "../Loader/loader";
 import {
-  CategoriesAction,
+  
   getPublicLiveProjects,
 } from "../../redux/Actions/projectAction";
-import { Button, Input, Pagination, Spin } from "antd";
+
 import { debounce } from "lodash";
 
 const projectTypesMap = {
@@ -145,10 +145,11 @@ const ExploreAll = () => {
                                     <img
                                       className="mr-1"
                                       src="../img/image14.png"
+                                      alt=""
                                     />
                                     {Math.round(item.price)} MATIC
                                   </span>
-                                  {item?.number_of_nft == 1 ? (
+                                  {item?.number_of_nft === 1 ? (
                                     <span>{item.number_of_nft} NFT</span>
                                   ) : (
                                     <span>{item.number_of_nft} NFTs</span>
@@ -161,7 +162,7 @@ const ExploreAll = () => {
                                     className="btn  btn-smaller mt-3 mb-0"
                                   >
                                     <i className="icon-handbag" />
-                                    {/* <i className="fa-solid fa-sack-dssollar"></i> */}
+                                
                                   </Link>
                                   <Link
                                     to={`/projects/${item.slug}`}

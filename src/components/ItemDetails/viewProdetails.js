@@ -1,31 +1,17 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
-import {
-  DeleteProject,
-  LatestProjectDetail,
-  ProjectDetail,
-} from "../../redux/Actions/projectAction";
-import { getProjectDetail } from "../../redux/Slices/projectSlice";
+import { LatestProjectDetail } from "../../redux/Actions/projectAction";
 import { useState } from "react";
-import dayjs from "dayjs";
-import { BuyNft } from "../Wallet/interact";
 import ProjNFTS from "../Auctions/projectnfts";
 import { Button, ProgressBar } from "react-bootstrap";
 import { GetUserAction } from "../../redux/Actions/authAction";
-import MyVerticallyCenteredModal from "./refralPopup";
-import swal from "sweetalert";
 import Banner from "../Create/editBanner";
-import EditNft from "../Create/editNft";
-import NftdataTable from "../Explore/nftdataTable";
-import latNftdataTable from "./../Explore/latProjNftdata";
 import LatNftdataTable from "./../Explore/latProjNftdata";
 import ProjdataTable from "../Explore/projDetailtable";
 import ReferalPopup from "./refralPopup";
 import ReadMore from "../../readMore";
 import { GetMatic } from "./GetMAtic";
-import FormItem from "antd/es/form/FormItem";
 import { useLocation } from "react-router-dom";
 const ProjDetails = () => {
   const { slug } = useParams();
@@ -37,9 +23,7 @@ const ProjDetails = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [matic, setMatic] = useState("");
   const [modalShowrefer, setModalShowrefer] = React.useState(false);
-  // const [matic, setmatic] = useState('')
   const latprojdetail = useSelector((state) => {
-    //
     return state.projectdetails.latestprojectdetails;
   });
  
@@ -55,11 +39,8 @@ const ProjDetails = () => {
     if (sessionStorage.getItem("authToken")) {
       dispatch(GetUserAction());
     }
-    // if(refid){
-    //     swal("info","Please check your metamask wallet for ","info")
-
-    // }
-  }, [slug]);
+   
+  }, [slug,dispatch]);
 
   return (
     <section className="item-details-area project-nft-si main-proj-detail">
@@ -100,12 +81,9 @@ const ProjDetails = () => {
                   viewBox="0 0 24 24"
                   fill="none"
                   src={latprojdetail?.user_data?.organization_detail?.logo}
+                  alt=""
                 />
-                {/* <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75Z" stroke="" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M12 12C13.2416 12 14.248 10.9926 14.248 9.75C14.248 8.50736 13.2416 7.5 12 7.5C10.7584 7.5 9.75197 8.50736 9.75197 9.75C9.75197 10.9926 10.7584 12 12 12Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M14.9974 14.25C16.6528 14.25 17.9737 15.7453 16.8057 16.9195C15.703 18.0281 13.9431 18.75 12 18.75C10.0569 18.75 8.29702 18.0281 7.19428 16.9195C6.02632 15.7453 7.34722 14.25 9.00262 14.25L14.9974 14.25Z" stroke="#4528dc" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg> */}
+               
                 <span className="cutom_dis">
                   {" "}
                   {
@@ -123,7 +101,6 @@ const ProjDetails = () => {
               <div className="progress_nft ">
                 <div className="progress_main ">
                   <span>
-                    {/* ({Number(latprojdetail.project_count) * Number(matic['matic-network']?.cad)} of {Number(latprojdetail.price) * Number(Math.round(matic['matic-network']?.cad))} MATIC ) */}
                     <span className="nft_price">
                       $
                       {Number(Math.round(latprojdetail.project_count)) *
@@ -134,19 +111,16 @@ const ProjDetails = () => {
                       Cdn Goal
                     </span>
                     <div>
-                      {/* ${Math.round(latprojdetail.project_count)} raised of ${Math.round(latprojdetail.price)} Cdn Goal */}
                       <span className="nft_price">
                         ({Math.round(latprojdetail.project_count)} of{" "}
                         {Math.round(latprojdetail.price)} MATIC){" "}
                       </span>
                     </div>
-                    {/* <span className='nft_price'>{latprojdetail.project_count} raised of {latprojdetail.price} Cdn goal (150 of 758 MATIC)</span><small>  </small> */}
                     <div className="progressbar">
                       <ProgressBar
                         varient="success"
                         now={latprojdetail.project_percentage}
                       />
-                      {/* <span className="progress-bar bg-success" role="progressbar" style={{ width: "70" }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" now={projdetail.project_percentage}> {projdetail.project_percentage}% </span> */}
                     </div>
                     <p className="donation-count">
                       ${latprojdetail.project_count} RAISED

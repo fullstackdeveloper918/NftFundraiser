@@ -1,38 +1,22 @@
-import { Button, Form, Input, } from 'antd';
+import {  Form, Input, } from 'antd';
 import Modal from 'react-bootstrap/Modal';
-import React, { Fragment, useEffect, useState, useRef } from 'react';
+import React, { Fragment, useEffect, useState  } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CreateProjectAction, GetCollectionsAction, NftList, UpdateNft, uploadNFT } from '../../redux/Actions/projectAction';
-import { useFormData } from './Context/context'
-import MyVerticallyCenteredModal from './createCollection';
-import styles from './styles/styles.module.scss'
+import { GetCollectionsAction, NftList, UpdateNft, uploadNFT } from '../../redux/Actions/projectAction';
 import 'antd/lib/form/style/css';
 import 'antd/lib/upload/style/css';
-import { Collapse } from 'antd';
 import 'antd/lib/modal/style/css';
 import 'antd/lib/button/style/css'
 
 import swal from 'sweetalert';
-const getBase64 = (file) =>
-    new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
-    });
-// import ImgCrop from 'antd-img-crop';
+
 const EditNftName = (props) => {
     // 
-    const editor = useRef(null);
     const [nftFileType, setNFtFileType] = useState('Image')
-    const [nft, setNft] = useState()
-    const [nftwidth, setNftwidth] = useState()
-    const [nftHeight, setNftheight] = useState()
+    const [nft] = useState()
     const [Pimage, setPimage] = useState()
     const [previewnft, setPreviewnft] = useState()
-    const [preview, setPreview] = useState()
     const [source, setSource] = useState()
-    const [modalShowcoll, setModalShowcoll] = React.useState(false);
     const [nft_collection_id, setNft_collection_id] = useState({ 0: "0" });
     const [form] = Form.useForm()
     const [image, setImage] = useState()
@@ -45,70 +29,14 @@ const EditNftName = (props) => {
     useEffect(() => {
         dispatch(GetCollectionsAction())
         dispatch(NftList(props?.nft_id?.id))
-    }, [props?.nft_id?.id])
-    const col = useSelector(state => {
-        return state?.projectdetails?.getcollections
-    })
+    }, [props?.nft_id?.id,dispatch])
+  
     const nftdetail = useSelector(state => {
         return state.projectdetails.nftlist
     })
-    const handleUpload = (e) => {
-        const filetype = e.target.files[0].type;
-        var fr = new FileReader();
-        fr.onload = function () {
-            var img = new Image();
-            img.onload = function () {
-                setNftwidth(img.width);
-                setNftheight(img.height);
-            };
-            img.src = fr.result; // is the data URL because called with readAsDataURL
-        };
-        fr.readAsDataURL(e.target.files[0]); // I'm using a <input type="file"> for demonstrating
-        if (e.target.files[0].size > 104857600) {
-            alert("Filesize must 100mb or below");
-        } else {
-            setSource(URL.createObjectURL(e.target.files[0]));
-            setNft(e.target.files[0]);
-            switch (filetype) {
-                case "image/png":
-                case "image/jpg":
-                case "image/gif":
-                case "image/svg":
-                    setNFtFileType("Image");
-                    //   setSourceType("I") 
-                    break;
-                case "audio/mpeg":
-                case "audio/ogg":
-                case "video/mp4":
-                case "video/webm":
-                    setNFtFileType("Player");
-                    break;
-                case "":
-                    setNFtFileType("modal");
-                    break;
-                default:
-                    setNFtFileType("Image");
-            }
-        }
-    };
-    const convertToBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(file);
-            fileReader.onload = () => {
-                resolve(fileReader.result);
-            };
-            fileReader.onerror = (error) => {
-                reject(error);
-            };
-        });
-    };
-    const previewChange = async (e, index) => {
-        const pimage = e.target.files[0]
-        const base64 = await convertToBase64(pimage);
-        setPimage(base64)
-        setPreview(URL.createObjectURL(pimage))
-    };
+ 
+   
+    
     useEffect(() => {
         form.setFieldsValue({
             nfts: [{
@@ -172,9 +100,7 @@ const EditNftName = (props) => {
     ];
     return (
         <div className="main-create" >
-            {/* {loading ? (
-                <Loader />
-            ) : ( */}
+           
             <Modal
                 {...props}
                 size="lg"

@@ -1,38 +1,13 @@
-import React, { Component, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { Nftprice, Nftdeatil } from './nftprice'
 import { useParams } from "react-router";
-import {
-  DeleteProject,
-  GetNftwol,
-  GetSettings,
-  LatestProjectDetail,
-  NftList,
-  ProjectDetail,
-  UpdateCollection,
-} from "../../redux/Actions/projectAction";
-import Web3 from "web3";
-
-import { BuyNft, ConnectWallet } from "../Wallet/interact";
-import { useState } from "react";
 import ReadMore from "../../readMore";
-import FundTransdataTable from "../TopSeller/fundPaymenttable";
-import UserTransdataTable from "../AuthorProfile/userDetails";
-import UserdataTable from "../AuthorProfile/userTransTable";
-import { Button, ProgressBar } from "react-bootstrap";
-import ProjdataTable from "./projDetailtable";
-import LatNftdataTable from "./latProjNftdata";
-import ProjNFTS from "../Auctions/projectnfts";
-import { getPopularCollection } from "../../redux/Slices/popularCollectionSlice";
+
 import { PopularCollectionActionDetails } from "../../redux/Actions/popularAction";
 import CollectionNFTS from "../Collections/collectionNfts";
-const alchemyKey =
-  "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
-const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-const web3 = createAlchemyWeb3(alchemyKey);
-const provider = new Web3.providers.HttpProvider(
-  "https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B"
-);
+
+
 
 const CollectionDetails = (props) => {
   const dispatch = useDispatch();
@@ -41,7 +16,7 @@ const CollectionDetails = (props) => {
 
   useEffect(() => {
     dispatch(PopularCollectionActionDetails(slug));
-  }, [slug]);
+  }, [slug,dispatch]);
   const coll = useSelector((state) => {
     return state?.collection?.collectiondetail;
   });

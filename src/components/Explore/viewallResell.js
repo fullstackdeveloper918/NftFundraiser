@@ -1,21 +1,15 @@
-import React, { Component, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import {
-  CategoriesAction,
-  getPublicLiveProjects,
-} from "../../redux/Actions/projectAction";
+import { Link } from "react-router-dom";
+
 import { ResellAction } from "../../redux/Actions/resellNftAction";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import Loader from "../Loader/loader";
 import { debounce } from "lodash";
 
 const ExploreAllResell = () => {
-  const slug = useParams();
   const dispatch = useDispatch();
-  const nfts = useSelector((state) => {
-    return state?.resell?.resell;
-  });
+ 
   const [count, setCount] = useState(1);
   const location = useLocation();
 
@@ -111,16 +105,13 @@ const ExploreAllResell = () => {
                                     alt=""
                                   />
                                 </Link>
-                                {/* <div className="image-over">
-                                          <img className="card-img-top" src={item.image} alt="" /> */}
+                               
                               </div>
 
                               <div className="card-caption col-12 p-0">
                                 {/* Card Body */}
                                 <div className="card-body">
-                                  {/* <div className="countdown-times ">
-                                          <div className="countdown d-flex justify-content-center" data-date={item.date} />
-                                      </div> */}
+                                 
                                   <a>
                                     <h5 className="mb-0">
                                       {item?.title?.slice(0, 15)}
@@ -128,7 +119,6 @@ const ExploreAllResell = () => {
                                   </a>
                                   <div className="seller d-flex align-items-center my-3">
                                     <span>Owned By</span>
-                                    {/* <img className="avatar-sm rounded-circle" src={item?.user_data?.avatar} alt="" /> */}
 
                                     <a>
                                       <h6 className="ml-2 mb-0">
@@ -136,13 +126,13 @@ const ExploreAllResell = () => {
                                       </h6>
                                     </a>
 
-                                    {/* <span className="ml-2 mb-0">{item.user_data.username}</span> */}
                                   </div>
                                   <div className="card-bottom d-flex justify-content-between nft-price">
                                     <span>
                                       <img
                                         className="mr-1"
                                         src="../../img/image14.png"
+                                        alt=""
                                       />
                                       {Math.round(item?.price)} MATIC
                                     </span>
@@ -220,33 +210,7 @@ const ExploreAllResell = () => {
             </>
           )}
         </div>
-        {/* {nfts?.current_page != nfts?.totalPageCount ? (
-          <>
-            {nfts?.totalPageCount >= 2 && (
-              <div className="morebutton">
-                <a
-                  onClick={(e) => handleIncrement(e)}
-                  className="btn btn-bordered-white"
-                >
-                  Load More
-                </a>
-              </div>
-            )}
-          </>
-        ) : (
-          <>
-            {nfts?.totalPageCount >= 2 && (
-              <div className="morebutton">
-                <a
-                  onClick={(e) => handleDecrement(e)}
-                  className="btn btn-bordered-white"
-                >
-                  Load Previous
-                </a>
-              </div>
-            )}
-          </>
-        )} */}
+        
       </div>
     </section>
   );

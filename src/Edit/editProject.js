@@ -1,68 +1,49 @@
-// import { getValue } from '@mui/system';
 import React, { useEffect, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import {
   CategoriesAction,
   ProjectDetail,
   UpdateProject,
 } from "../redux/Actions/projectAction";
 import { useState } from "react";
-import GeoLocation from "../components/Create/geoLocation";
 import JoditEditor from "jodit-react";
 import { CityList, CountryList, StateList } from "../redux/Actions/authAction";
 
 const EditProject = () => {
   const editor = useRef(null);
   const [country, setCountry] = useState();
-  const [state, setState] = useState();
-  const [city, setCity] = useState();
   const [description, setDescription] = useState();
-  // const [descriptionup, setDescriptionup] = useState();
-  // console.log(descriptionup, 'discup')
+
   const [type, setType] = useState();
   const { id } = useParams();
-  // console.log(id, "idd")
   const dispatch = useDispatch();
-  const history = useHistory();
   const [nftCount, setNFTCount] = useState(1);
 
   const projdetail = useSelector((state) => {
-    //
     return state?.projectdetails?.projectdetails;
   });
-  const dis = projdetail.description;
-  // setDescriptionup(dis)
-  // console.log(dis, 'dis')
-  // console.log(projdetail, "gfgfhghgghhgh")
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-    watch,
     control,
   } = useForm();
 
   useEffect(() => {
     //
     dispatch(ProjectDetail(id));
-  }, [id]);
-  const config = {
-    placeholderText: "Edit Your Content Here!",
-    charCounterCount: false,
-  };
+  }, [id, dispatch]);
+
   const { countries } = useSelector((state) => state.countries);
 
   const states = useSelector((state) => {
-    //
     return state.countries.states;
   });
-  // console.log(first)
 
-  // console.log(states?.data?.data, 'states')
   const cities = useSelector((state) => {
     return state.countries.city;
   });
@@ -84,20 +65,14 @@ const EditProject = () => {
 
       setType(projdetail.type);
       setCountry(projdetail.country);
-      // setState(projdetail.state)
-      // setCity(projdetail.city)
+
       setValue("image", projdetail.image);
-      // const formData = new FormData()
-      // // formData.append('country_id', event?.currentTarget?.value)
-      // formData.append('country_id', projdetail.country)
-      // dispatch(StateList(formData))
     }
-  }, [projdetail]);
+  }, [projdetail, setValue]);
 
   const OnSubmit = (data) => {
     const formData = new FormData();
 
-    // formData.append('image', data.image[0])
     formData.append("title", data.title);
     formData.append("description", description);
     formData.append("state", data.state);
@@ -106,7 +81,7 @@ const EditProject = () => {
     formData.append("address", data.address);
     formData.append("price", data.price);
     formData.append("number_of_nft", data.number_of_nft);
-    if (data?.type == 1) {
+    if (data?.type === 1) {
       formData.append("start_date", "");
       formData.append("end_date", "");
     } else {
@@ -130,50 +105,23 @@ const EditProject = () => {
     //
     return state?.projectdetails?.categories;
   });
-  // console.log(cat, 'cat')
   useEffect(() => {
     dispatch(CategoriesAction());
     dispatch(CountryList());
-    // dispatch(StateList(projdetail.country))
-  }, []);
+  }, [dispatch]);
   const handleChangeCountry = (event) => {
-    //
-    // 👇 Get input value from "event"
     setCountry(event?.currentTarget?.value);
     const formData = new FormData();
-    // formData.append('country_id', event?.currentTarget?.value)
     formData.append("country_id", event?.currentTarget?.value);
     dispatch(StateList(formData));
-
-    // if (country) {
-
-    //
-    // }
   };
   const handleChangeState = (event) => {
-    // 👇 Get input value from "event"
-    // setState(event.currentTarget.value);
     const formData = new FormData();
     formData.append("country_id", country);
     formData.append("state_id", event?.currentTarget?.value);
     dispatch(CityList(formData));
-
-    //
-    // }
   };
   return (
-    // <Modal
-    //     {...props}
-    //     size="lg"
-    //     aria-labelledby="contained-modal"
-    //     centered
-    // >
-    //     <Modal.Header closeButton>
-    //         <Modal.Title id="contained-modal">
-    //             Collection
-    //         </Modal.Title>
-    //     </Modal.Header>
-    //     <Modal.Body>
     <section className="author-area">
       <div className="container">
         <div className="row justify-content-center">
@@ -266,16 +214,6 @@ const EditProject = () => {
                 <div className="col-12">
                   <label>Description</label>
                   <div className="form-group">
-                    {/* <textarea
-                                            type="text"
-                                            className="form-control"
-                                            name="textarea"
-                                            // data-provide="markdown-editable" rows="10"
-                                            placeholder="Description"
-                                            cols={30}
-                                            {...register("description", { required: true })}
-                                            aria-invalid={errors.description ? "true" : "false"}
-                                        /> */}
                     <Controller
                       control={control}
                       name="description"
@@ -285,8 +223,6 @@ const EditProject = () => {
                           <JoditEditor
                             ref={editor}
                             value={value}
-                            // config={config}
-
                             placeholder="start typing"
                             tabIndex={1} // tabIndex of textarea
                             onBlur={(newContent) => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
@@ -295,7 +231,6 @@ const EditProject = () => {
                         );
                       }}
                     />
-                    {/* <textarea value={value} onChange={setDescription}></textarea> */}
 
                     {errors.description?.type === "required" && (
                       <p style={{ color: "red" }} role="alert">
@@ -359,13 +294,8 @@ const EditProject = () => {
                         <select
                           name="state"
                           {...register("state", { required: true })}
-                          //  onChange={handleChangeState}
-
                           value={value}
-                          onChange={
-                            // onChange(selectedOption.currentTarget.value);
-                            handleChangeState
-                          }
+                          onChange={handleChangeState}
                         >
                           aria-invalid={errors?.state ? "true" : "false"}
                           <option
@@ -425,75 +355,10 @@ const EditProject = () => {
                     )}
                   </div>
                 </div>
-                {/* <div className="col-12 col-md-6">
-                                    <div className="form-group">
-                                        <label>Country</label>
-                                        <Controller
-                                            control={control}
-                                            name="country"
-                                            // selected={country}
-                                            render={({ field: { onChange, onBlur, value, ref } }) => (
-                                                // onChange={onChange}
 
-                                                <GeoLocation
-                                                    // locationTitle="Country"
-                                                    isCountry
-                                                    onBlur={onBlur}
-                                                    selected={value}
-                                                    onChange={setCountry}
-                                                    required={true}
-                                                />
-                                            )}
-                                        />
-
-                                    </div>
-                                </div>
-                                <div className="col-12 col-md-6">
-                                    <div className="form-group">
-                                        <label>State or Province</label>
-                                        <Controller
-                                            control={control}
-                                            name="state"
-                                            render={({ field: { onChange, onBlur, value, ref } }) => (
-
-                                                <GeoLocation
-                                                    
-                                                    onChange={setState}
-                                                    geoId={country}
-                                                    onBlur={onBlur}
-                                                    selected={value}
-
-                                               
-                                                />
-                                            )}
-                                        />
-                                       
-                                    </div>
-                                </div>
-                                <div className="col-12 col-md-6">
-                                    <div className="form-group">
-                                        <label>City or Region</label>
-                                        <Controller
-                                            control={control}
-                                            name="city"
-                                            render={({ field: { onChange, onBlur, value, ref } }) => (
-
-                                                <GeoLocation
-                                                  
-                                                    onChange={setCity}
-                                                    geoId={state}
-                                                    onBlur={onBlur}
-                                                    selected={value}
-                                             
-                                                />
-                                            )}
-                                        />
-                                     
-                                    </div>
-                                </div> */}
                 <div className="col-12 col-md-6">
                   <div className="form-group">
-                    {type == 2 ? (
+                    {type === 2 ? (
                       <label>Price</label>
                     ) : (
                       <label>Price per NFT</label>
@@ -532,7 +397,7 @@ const EditProject = () => {
                         className="form-control"
                         name="number_of_nft"
                         defaultValue={1}
-                        disabled={type == 1}
+                        disabled={type === 1}
                         placeholder="Select your number of NFTs (1-10)"
                         min={1}
                         max={10}
@@ -553,7 +418,6 @@ const EditProject = () => {
                         <i className="fa fa-minus" aria-hidden="true"></i>
                       </span>
                     </div>
-                    {/* {errors.number_of_nft?.message && <p>{errors.number_of_nft.message}</p>} */}
                     {errors.number_of_nft?.type === "required" && (
                       <p style={{ color: "red" }} role="alert">
                         Number of NFT is required
@@ -561,7 +425,7 @@ const EditProject = () => {
                     )}
                   </div>
                 </div>
-                {type == 2 && (
+                {type === 2 && (
                   <>
                     <div className="col-12 col-md-6">
                       <div className="form-group">
@@ -631,8 +495,6 @@ const EditProject = () => {
         </div>
       </div>
     </section>
-    //     </Modal.Body>
-    // </Modal>
   );
 };
 

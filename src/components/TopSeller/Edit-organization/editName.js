@@ -1,12 +1,12 @@
 import { Form, Input, } from 'antd';
 import Modal from 'react-bootstrap/Modal';
-import React, { Fragment, useEffect, useState, useRef } from 'react';
+import React, { Fragment, useEffect,   } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import 'antd/lib/modal/style/css';
 import 'antd/lib/button/style/css'
-import swal from 'sweetalert';
+
 import { UpdateOrganizationAction } from '../../../redux/Actions/authAction';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+
 
 const EditName = (props) => {
     const dispatch = useDispatch()
@@ -45,15 +45,13 @@ const EditName = (props) => {
     }
     return (
         <div className="main-create" >
-            {/* {loading ? (
-                <Loader />
-            ) : ( */}
+           
             <Modal
                 {...props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
-            // centered
+           
             >
                 <Modal.Header >
                     <Modal.Title id="contained-modal-title-vcenter">

@@ -1,43 +1,10 @@
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { CreateCollectionAction } from '../../redux/Actions/projectAction';
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import {
-    EmailShareButton,
-    FacebookIcon,
-    FacebookShareButton,
-    InstapaperShareButton,
-    InstapaperIcon,
-    LineShareButton,
-    LinkedinShareButton,
-    PinterestShareButton,
-    RedditShareButton,
-    TelegramIcon,
-    TelegramShareButton,
-    TwitterIcon,
-    TwitterShareButton,
-    WhatsappIcon,
-    WhatsappShareButton,
-    LinkedinIcon,
-    EmailIcon,
-} from "react-share";
-import {
-    FacebookShareCount,
-    HatenaShareCount,
-    OKShareCount,
-    PinterestShareCount,
-    RedditShareCount,
-    TumblrShareCount,
-    VKShareCount
-} from "react-share";
-import { ModalHeader, Tooltip } from 'react-bootstrap';
-import { useLocation } from 'react-router';
+;
+import { ModalHeader } from 'react-bootstrap';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 function WidgetPopup(props) {
-    const location = useLocation();
     const [copy, setCopy] = useState(false)
     
     return (
@@ -83,7 +50,7 @@ function WidgetPopup(props) {
                                     </div>
                                 </CopyToClipboard>
                            
-                            {copy == true &&
+                            {copy === true &&
                                 <span className='copytext'>Copied!</span>
 
                             }
@@ -95,9 +62,7 @@ function WidgetPopup(props) {
 
                 </form>
             </Modal.Body>
-            {/* <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer> */}
+          
         </Modal>
     );
 }

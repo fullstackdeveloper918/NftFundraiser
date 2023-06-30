@@ -1,6 +1,5 @@
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { BidNft } from "../Wallet/interact";
 import { useState } from "react";
 import { Loader } from "@react-three/drei";

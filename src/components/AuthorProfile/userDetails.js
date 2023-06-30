@@ -52,7 +52,7 @@ const UserTransdataTable = (props) => {
                         </tbody>
                     </Table>
                 </Panel>
-                {userdet?.payment_history?.length == 0 &&
+                {userdet?.payment_history?.length === 0 &&
                     <div className='nothing'>
                         No matching records found
                     </div>

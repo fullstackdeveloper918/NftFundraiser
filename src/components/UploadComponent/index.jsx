@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import "../pintura/pintura.css";
 import { openDefaultEditor } from "../pintura/pintura";
 import { Button } from "react-bootstrap";
-import { dataURLtoBlob } from "../../utils/blobfromurl";
 
 const thumb = {
   justifyContent: "center",
@@ -36,18 +35,7 @@ const img = {
   width: "auto",
   height: "100%",
 };
-const thumbButton = {
-  marginRight: "4px",
-  marginBottom: "4px",
-  padding: "6px 12px",
-  background: "#FFFFFF",
-  border: "1px solid #EAEAEA",
-  borderRadius: "4px",
-  fontSize: "14px",
-  fontWeight: "bold",
-  color: "#333333",
-  cursor: "pointer",
-};
+
 const Dropzone = ({ onDrop }) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",

@@ -1,33 +1,27 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   AnnualRevenueList,
   CountryList,
   CreateOrganizationAfterRoleChange,
   HearAboutList,
-  Register,
 } from "../../redux/Actions/authAction";
 import { Controller, useForm } from "react-hook-form";
 
-import { useHistory } from "react-router";
-import { useFormData } from "./Context/context";
-import styles from "./styles/styles.module.scss";
 import { GetSocialMediaIcons } from "../../redux/Actions/projectAction";
 import { useState } from "react";
 import JoditEditor from "jodit-react";
+import { userDetail } from "../../redux/Slices/authSlice";
 
-// import { Widget } from "@uploadcare/react-widget";
-// import FileUpload from "react-material-file-upload";
-// import { uploadcare } from '../lib/uploadcare.min.js';
 const RoleChangeOrganizationdetails = () => {
   const [description, setDescription] = useState();
   const [einNumber, setEinNumber] = useState(0);
   const [fundraisingGoal, setFundraisingGoal] = useState(0);
 
-  const editor = useRef(null);
-
+  const userdet = useSelector((state) => {
+    return state?.user?.userdetail;
+  });
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const { countries } = useSelector((state) => state.countries);
   const {
@@ -40,44 +34,34 @@ const RoleChangeOrganizationdetails = () => {
   });
 
   const OnSubmit = (values) => {
-    //
-    // FormData.append('email', data.email)
-    // FormData.append('password', data.password)
-    // FormData.append('confirm_password', data.confirm_password)
+   
     const formData = new FormData();
     formData.append("banner_image", values.banner_image[0]);
     formData.append("logo", values.logo[0]);
-    formData.append("wallet_id", values.wallet_id);
-    // formData.append('role', data.role)
+    formData.append("wallet_id", userdet.wallet_id);
     formData.append("goal", values.goal);
     formData.append("organization_name", values.organization_name);
     formData.append("url", values.url);
     formData.append("country", values.country);
-    // formData.append('annual_revenue_range', values.annual_revenue_range)
     formData.append("tax_id", values.tax_id);
 
     formData.append("social", values.social);
     formData.append("social_link", values.social_link);
     formData.append("description", description);
-    // formData.append('method_heard_detail', values.method_heard_detail)
 
     dispatch(CreateOrganizationAfterRoleChange(formData, dispatch));
-    // if (formData) {
-    //     swal("Registered!", "You have been registered!", "success");
-    //     history.push('/login')
-    // }
+   
   };
 
   const socialmedia = useSelector((state) => {
     return state?.getSocialmediaIcons?.getsocial;
   });
-  // console.log('social', socialmedia)
   useEffect(() => {
     dispatch(CountryList());
     dispatch(AnnualRevenueList());
     dispatch(HearAboutList());
     dispatch(GetSocialMediaIcons());
-  }, []);
+  }, [dispatch]);
 
   return (
     <section className="author-area">
@@ -90,23 +74,16 @@ const RoleChangeOrganizationdetails = () => {
               <h3 className="mt-3 mb-0"></h3>
               <p></p>
             </div>
-            {/* Item Form */}
-            {/* <div className={formStep === 1 ? styles.showForm : styles.hideForm}> */}
+          
             <form
               onSubmit={handleSubmit(OnSubmit)}
               className="item-form card no-hover"
             >
-              {/* <button
-                                    // className={styles.back}
-                                    onClick={prevFormStep}
-                                    type="button"
-                                >
-                                    back
-                                </button> */}
+           
               <div className="row">
                 <div className="col-md-6 col-12">
                   <div className="form-group number-input mt-3">
-                    <label>Fundraising Goal</label>
+                    <label>Fundraising Goal in Matic (Polygon)</label>
                     <div class="position-relative">
                       <span
                         className="plus_icon"
@@ -159,7 +136,8 @@ const RoleChangeOrganizationdetails = () => {
                       type="text"
                       className="form-control"
                       name="wallet_id"
-                      // defaultValue='1'
+                      defaultValue={userdet.wallet_id}
+                      value={userdet.wallet_id}
                       placeholder="Funding Wallet"
                       {...register("wallet_id", { required: true })}
                       // {...register("email")}
@@ -224,22 +202,7 @@ const RoleChangeOrganizationdetails = () => {
                   </div>
                 </div>
 
-                {/* <div className="col-12">
-                                        <div className="form- group mt-3">
-                                            <label>Description</label>
-                                            <textarea
-                                                type="text"
-                                                className="form-control"
-                                                name="description"
-                                                placeholder="Describe your project"
-
-                                                {...register("description", { required: true })}
-                                                // {...register("email")}
-                                                aria-invalid={errors.description ? "true" : "false"}
-                                            />
-                                            {errors.description?.type === 'required' && <p style={{ color: 'red' }} role="alert">Description is required</p>}
-                                        </div>
-                                    </div> */}
+             
                 <div className="col-12">
                   <div className="form- group mt-3">
                     <label>Description</label>
@@ -247,19 +210,13 @@ const RoleChangeOrganizationdetails = () => {
                       control={control}
                       name="description"
                       defaultValue=""
-                      // {...register("description", { required: true })}
                       rules={{ required: true, min: 150 }}
-                      // rules={{
-                      //     required: true, pattern: {
-
-                      //         message: "Description is required",
-                      //     },
-                      // }}
+                     
                       render={({ field }) => {
                         return (
                           <JoditEditor
                             ref={field.ref}
-                            value={field.value}
+                            value={description}
                             // config={config}
                             aria-invalid={errors.description ? "true" : "false"}
                             placeholder="start typing"
@@ -311,23 +268,10 @@ const RoleChangeOrganizationdetails = () => {
                     )}
                   </div>
                 </div>
-                {/* <div className="col-12">
-                                        <div className="form-group mt-3">
-                                            <select name="annual_revenue_range"
-                                                {...register("annual_revenue_range", { required: true })}>
-                                                {annualRevenue?.data?.data?.map((option, key) => (
-
-                                                    <option key={key.id} value={option.id} >
-                                                        {option.title}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                            {errors.annual_revenue_range?.type === 'required' && <p style={{ color: 'red' }} role="alert">Range name is required</p>}
-                                        </div>
-                                    </div> */}
+               
                 <div className="col-md-6 col-12">
                   <div className="form-group number-input mt-3">
-                    <label>EIN Number/Tax Id</label>
+                    <label>EIN Number/Tax Id (optional)</label>
                     <div class="position-relative">
                       <span
                         className="plus_icon"
@@ -344,9 +288,9 @@ const RoleChangeOrganizationdetails = () => {
                         name="tax_id"
                         min="0"
                         placeholder="EIN Number/Tax Id(optional)"
-                        {...register("tax_id", { required: true })}
+                        {...register("tax_id")}
                         // {...register("email")}
-                        aria-invalid={errors.tax_id ? "true" : "false"}
+                       
                         onChange={(e) => setEinNumber(e.target.value)}
                       />
                       <span
@@ -362,20 +306,16 @@ const RoleChangeOrganizationdetails = () => {
                         <i className="fa fa-minus" aria-hidden="true"></i>
                       </span>
                     </div>
-                    {errors.tax_id?.type === "required" && (
-                      <p style={{ color: "red" }} role="alert">
-                        Id is required
-                      </p>
-                    )}
+                   
                   </div>
                 </div>
                 <div className="col-md-6 col-12">
                   <div className="form-group mt-3">
-                    <label>Social Media (required)</label>
+                    <label>Social Media (optional)</label>
                     <div class="position-relative select-box">
                       <select
                         name="social"
-                        {...register("social", { required: true })}
+                        {...register("social")}
                       >
                         aria-invalid={errors.social ? "true" : "false"}
                         <option
@@ -395,11 +335,7 @@ const RoleChangeOrganizationdetails = () => {
                         ))}
                       </select>
                     </div>
-                    {errors.social?.type === "required" && (
-                      <p style={{ color: "red" }} role="alert">
-                        Social media is required
-                      </p>
-                    )}
+                    
                   </div>
                 </div>
 
@@ -419,28 +355,13 @@ const RoleChangeOrganizationdetails = () => {
                         name="social_link"
                         placeholder="social link(optional) "
                         {...register("social_link")}
-                        // {...register("email")}
-                        // aria-invalid={errors.social_link ? "true" : "false"}
+                     
                       />
                     </div>
-                    {/* {errors.social_link?.type === 'required' && <p style={{ color: 'red' }} role="alert">Social media link is required</p>} */}
                   </div>
                 </div>
 
-                {/* <div className="col-12">
-                                        <div className="form-group mt-3">
-                                            <select name="project"
-                                                {...register("hear_about", { required: true })}>
-                                                {hereAbout?.data?.data?.map((option, key) => (
-
-                                                    <option key={key} value={option.id} >
-                                                        {option.title}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                            {errors.hear_about?.type === 'required' && <p style={{ color: 'red' }} role="alert">Hear about is required</p>}
-                                        </div>
-                                    </div> */}
+              
 
                 <div className="col-md-6 col-12">
                   <div className="form-group mt-3">
@@ -489,25 +410,15 @@ const RoleChangeOrganizationdetails = () => {
                     )}
                   </div>
                 </div>
-                {/* <div className="col-12">
-                                    <div className="form-group mt-3">
-                                        <div className="form-check form-check-inline">
-                                            <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" />
-                                            <label className="form-check-label" htmlFor="inlineRadio1">Remember Me</label>
-                                        </div>
-                                    </div>
-                                </div> */}
+               
                 <div className="col-12">
                   <button className="btn w-100 mt-3 mt-sm-4" type="submit">
                     Create
                   </button>
                 </div>
-                {/* <div className="col-3">
-                                        <button className="btn w-100 mt-3 mt-sm-4" onClick={() => goBack()}>Previous</button>
-                                    </div> */}
+               
               </div>
             </form>
-            {/* </div> */}
           </div>
         </div>
       </div>

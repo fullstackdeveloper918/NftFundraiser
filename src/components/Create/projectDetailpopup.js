@@ -129,7 +129,6 @@ function ProjDetailPopup(props) {
       setValue("state", projdetail.state);
       setValue("country", projdetail.country);
       setValue("city", projdetail.city);
-      setValue("price", projdetail.price);
       setValue("number_of_nft", projdetail.number_of_nft);
       setValue("start_date", projdetail.start_date);
       setValue("end_date", projdetail.end_date);
@@ -155,9 +154,8 @@ function ProjDetailPopup(props) {
     formData.append("country", data.country);
     formData.append("city", data.city);
     formData.append("address", data.address);
-    formData.append("price", data.price);
     formData.append("number_of_nft", data.number_of_nft);
-    if (data?.type == 1) {
+    if (data?.type === '1') {
       formData.append("start_date", "");
       formData.append("end_date", "");
     } else {
@@ -355,28 +353,7 @@ function ProjDetailPopup(props) {
                 )}
               </div>
             </div>
-            <div className="col-12 col-md-6">
-              <div className="form-group">
-                {projdetail.type == 2 ? (
-                  <label>Price</label>
-                ) : (
-                  <label>Price per NFT</label>
-                )}
-                <input
-                  type="text"
-                  className="form-control"
-                  name="price"
-                  placeholder="Price"
-                  {...register("price", { required: true })}
-                  aria-invalid={errors.price ? "true" : "false"}
-                />
-                {errors.price?.type === "required" && (
-                  <p style={{ color: "red" }} role="alert">
-                    Price is required
-                  </p>
-                )}
-              </div>
-            </div>
+          
             <div className="col-12 col-md-6">
               <div className="form-group number-input mt-3">
                 <label>Number of NFTs</label>
@@ -424,7 +401,7 @@ function ProjDetailPopup(props) {
                 )}
               </div>
             </div>
-            {projdetail.type == 2 && (
+            {projdetail.type === '2' && (
               <>
                 <div className="col-12 col-md-6">
                   <div className="form-group">

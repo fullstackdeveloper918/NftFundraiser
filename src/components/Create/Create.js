@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -17,7 +17,6 @@ import {
   GetUserAction,
   StateList,
 } from "../../redux/Actions/authAction";
-import UploadImage from "../../shared/Upload";
 import { dataURLtoBlob } from "../../utils/blobfromurl";
 import UploadComponent from "../UploadComponent";
 
@@ -31,9 +30,7 @@ const Create = ({ current, next, prev }) => {
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState();
   const [loading, setLoading] = useState(false);
-  const [collection_id, setCollectionId] = useState(0);
   const [usertype, setUserType] = useState("1");
-  const [nonft, setNonft] = useState("1");
   const dispatch = useDispatch();
   const history = useHistory();
   const [countryName, setCountryName] = useState(" ");
@@ -42,7 +39,6 @@ const Create = ({ current, next, prev }) => {
     return state?.user?.userdetail;
   });
   const { countries } = useSelector((state) => state.countries);
-  const [cursorState, updateCursorState] = useState({});
   const states = useSelector((state) => {
     return state.countries.states;
   });
@@ -54,14 +50,12 @@ const Create = ({ current, next, prev }) => {
     handleSubmit,
     formState: { errors },
     setValue,
-    watch,
     control,
   } = useForm({
     mode: "all",
   });
 
   const onSubmit = (data) => {
-    // const imageBanner = dataURLtoBlob(image);
     setFormValues({
       ...data,
       description,
@@ -108,7 +102,7 @@ const Create = ({ current, next, prev }) => {
       setValue("state", data.state);
       setValue("city", data.city);
       setValue("description", data.description);
-      setValue("price", data.price);
+      // setValue("price", data.price);
       setValue("type", data.usertype);
       setValue("image", data.imageUri);
       setUserType(data.usertype);
@@ -129,15 +123,7 @@ const Create = ({ current, next, prev }) => {
     dispatch(CityList(formData));
   };
 
-  const handleEditorChange = (value) => {
-    // Check if the editor content is empty
-    if (!value) {
-      // Reset the editor content if it's empty
-      setDescription("");
-    } else {
-      setDescription(value);
-    }
-  };
+
   const handleSubmitDraft = (data) => {
     const imageBanner = dataURLtoBlob(image);
     const formData = new FormData();
@@ -372,7 +358,7 @@ const Create = ({ current, next, prev }) => {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-12">
+          {/* <div className="col-12 col-md-12">
             <div className={`form-group  ${styles.input_group}`}>
               {usertype === 2 ? (
                 <label>Price per NFT (In MATIC tokens)</label>
@@ -416,8 +402,8 @@ const Create = ({ current, next, prev }) => {
                   Price is required
                 </p>
               )}
-            </div>
-            <div className="">
+            </div> */}
+            {/* <div className="">
               <div className="form-group pricing-detail">
                 <p>
                   <span>Price</span> <span>{price ? price : "--"} MATIC</span>
@@ -434,7 +420,6 @@ const Create = ({ current, next, prev }) => {
                     <span>1%</span>
                   </div>
                 </div>
-                {/* <span>Buyer</span><span>1%</span><br /><span>Seller</span><span>1%</span> */}
 
                 <p>
                   <span>You will receive </span>
@@ -443,8 +428,8 @@ const Create = ({ current, next, prev }) => {
                   </span>
                 </p>
               </div>
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
           <div className=" col-12">
             <div className="form-group">
               <label>Banner image</label>

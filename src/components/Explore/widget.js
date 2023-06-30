@@ -1,10 +1,9 @@
-import React, { Component, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
-import { GetNftwol, GetSettings } from '../../redux/Actions/projectAction';
+import { GetNftwol } from '../../redux/Actions/projectAction';
 
 
-import { BuyNft } from '../Wallet/interact';
 
 import { useState } from 'react';
 import DModal from '../Create/3dModal';
@@ -23,18 +22,14 @@ const Widget = () => {
     })
 
 
-    const userdet = useSelector(state => {
-        return state?.user?.userdetail
-    })
 
     useEffect(() => {
         dispatch(GetUserAction())
         dispatch(GetNftwol(slug))
 
-    }, [slug])
+    }, [slug,dispatch])
     const [copy, setCopy] = useState(false)
 
-const location = useLocation()
 
 const userprojurl = `http://localhost:3000/referral/widget/${slug.slug}` + `?refid=${latprojnftdetail?.user_data?.wallet_id}`
     return (
@@ -133,7 +128,7 @@ const userprojurl = `http://localhost:3000/referral/widget/${slug.slug}` + `?ref
                                     </div>
                                 </CopyToClipboard>
                             
-                            {copy == true &&
+                            {copy === true &&
                                 <span className='copytext'>Copied!</span>
 
                             }
@@ -142,11 +137,6 @@ const userprojurl = `http://localhost:3000/referral/widget/${slug.slug}` + `?ref
                         </div>
                             </div>
                         </div>
-
-
-
-
-
 
 
                     </div>

@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getFooter } from '../../redux/Actions/footerAction'
+import React from 'react'
+
 
 const Rewards = () => {
 

@@ -1,12 +1,9 @@
-import React, { Component, useEffect } from "react";
-import axios from "axios";
+import React, {  useEffect } from "react";
 import { getFooter } from "../../redux/Actions/footerAction";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
 import {
-  ConnectWallet,
-  getCurrentWalletConnected,
   Roles,
 } from "../Wallet/interact";
 import Swal from "sweetalert2";
@@ -14,13 +11,10 @@ import Swal from "sweetalert2";
 const Footer = () => {
   const dispatch = useDispatch();
 
-  const footer = useSelector((state) => {
-    return state.footer;
-  });
 
   useEffect(() => {
     dispatch(getFooter(dispatch));
-  }, []);
+  }, [dispatch]);
   const userRole = useSelector((state) => {
     return state.user.userdetail.role;
   });
@@ -31,9 +25,9 @@ const Footer = () => {
   const history = useHistory();
   const handleCreate = () => {
     if (window.ethereum.selectedAddress) {
-      if (Roles["CREATOR"] == userRole) {
+      if (Roles["CREATOR"] === userRole) {
         history.push("/create");
-      } else if (Roles["BUYER"] == userRole) {
+      } else if (Roles["BUYER"] === userRole) {
         Swal.fire({
           icon: "info",
           html: "Sign up as a Creator to start a project and upload NFTs",
@@ -120,7 +114,6 @@ const Footer = () => {
                       About Us
                     </Link>
                   </li>
-                  {/* <li><Link to='/https://www.canopycrypto.io/our-team/'>About Us</Link></li> */}
                   <li>
                     <Link to="/contact">Get Support</Link>
                   </li>

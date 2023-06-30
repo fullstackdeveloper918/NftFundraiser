@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import { useEffect } from "react";
 import Swal from "sweetalert2";
@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link  } from "react-router-dom";
 import {
   GetMostactivityProject,
   getPublicLiveProjects,
@@ -66,16 +66,15 @@ const Hero = ({ type }) => {
         .query({ name: "geolocation" })
         .then(function (result) {
           if (result.state === "granted") {
-            // console.log(result.state);
-            //If granted then you can directly call your function here
+            
             navigator.geolocation.getCurrentPosition(success);
           } else if (result.state === "prompt") {
             navigator.geolocation.getCurrentPosition(success, errors, options);
           } else if (result.state === "denied") {
-            //If denied then you have to show instructions to enable location
+           
           }
           result.onchange = function () {
-            // console.log(result.state);
+          
           };
         });
     } else {
@@ -89,9 +88,9 @@ const Hero = ({ type }) => {
 
   const handleCreate = () => {
     if (window.ethereum.selectedAddress) {
-      if (Roles["CREATOR"] == userRole) {
+      if (Roles["CREATOR"] === userRole) {
         history.push("/create");
-      } else if (Roles["BUYER"] == userRole) {
+      } else if (Roles["BUYER"] === userRole) {
         Swal.fire({
           icon: "info",
           html: "Sign up as a Creator to start a project and upload NFTs",

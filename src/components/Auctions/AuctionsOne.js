@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getPublicLiveProjects } from "../../redux/Actions/projectAction";
 import { useState } from "react";
 import Loader from "../Loader/loader";
@@ -23,7 +23,6 @@ const AuctionsOne = ({ type }) => {
   });
 
   const [selected, setSelected] = React.useState([]);
-  const [position, setPosition] = React.useState(0);
 
   const isItemSelected = (id) => !!selected.find((el) => el === id);
 
@@ -176,10 +175,11 @@ const AuctionsOne = ({ type }) => {
                                     <img
                                       className="mr-1"
                                       src="../img/image14.png"
+                                      alt=""
                                     />
                                     {Math.round(item.price)} MATIC
                                   </span>
-                                  {item?.number_of_nft == 1 ? (
+                                  {item?.number_of_nft === '1' ? (
                                     <span>{item.number_of_nft} NFT</span>
                                   ) : (
                                     <span>{item.number_of_nft} NFTs</span>

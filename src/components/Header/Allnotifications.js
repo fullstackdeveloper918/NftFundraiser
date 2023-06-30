@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AllNoti, GetUserAction, NotiDelete } from '../../redux/Actions/authAction'
-import { getFooter } from '../../redux/Actions/footerAction'
 import moment from "moment";
 const AllNotifications = () => {
     const dispatch = useDispatch()
@@ -13,7 +12,7 @@ const AllNotifications = () => {
     useEffect(() => {
         dispatch(AllNoti())
         dispatch(GetUserAction())
-    }, [])
+    }, [dispatch])
     const deleteHandler = (id) => {
         dispatch(NotiDelete(id))
     }

@@ -1,10 +1,8 @@
-import React, { Component, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation, useParams } from 'react-router';
+import {  useLocation, useParams } from 'react-router';
 import { NftList, ProjectDetail, } from '../../redux/Actions/projectAction';
 import { useState } from 'react';
-import Web3 from 'web3';
-
 import DModal from '../Create/3dModal';
 import NftdataTable from '../Explore/nftdataTable';
 import NftAuctiondataTable from './nftAuctiontable';
@@ -15,14 +13,10 @@ import EditNftImage from '../Create/nftImageeditPopup';
 import { GetMatic } from './GetMAtic';
 import Loader from '../Loader/loader';
 import ReadMore from '../../readMore';
-// const alchemyKey = "https://polygon-mainnet.g.alchemy.com/v2/bDM_VuUmdoyJSNn3Ky8pZL0vBMAc9BXd";
-const alchemyKey = "wss://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B";
-const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-const web3 = createAlchemyWeb3(alchemyKey);
-const provider = new Web3.providers.HttpProvider("https://polygon-mumbai.g.alchemy.com/v2/ZjIVunDzH2DkgiNzLSHe-c04fp9ShA6B");
+
+
 
 const NftDetails = (props) => {
-    const history = useHistory()
     const [nftId, setNftID] = useState();
     const search = useLocation().search;
     const projslug = new URLSearchParams(search).get('project');
@@ -34,10 +28,7 @@ const NftDetails = (props) => {
     const [loading, setLoading] = useState(false)
 
     const slug = useParams();
-    const projdetail = useSelector(state => {
-
-        return state?.projectdetails?.projectdetails
-    })
+   
     const dispatch = useDispatch()
 
     const nftdetail = useSelector(state => {
@@ -58,7 +49,7 @@ const NftDetails = (props) => {
                 <div className="row justify-content-between content_project px-0">
                     <div className="col-12 col-md-4 ">
                         <div className="item-info">
-                            {nftdetail.is_mint == 0 &&
+                            {nftdetail.is_mint === 0 &&
                                 <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
                                     <div >
                                         <div className='position-absolute nft-edit-icon'><i className="fa-solid fa-pen" onClick={(e) => {
@@ -120,7 +111,7 @@ const NftDetails = (props) => {
                         <div className=' card no-hover py-0 mt-2 mb-2 mt-lg-0 mb-lg-0 '>
 
                             <span Class="title_main " style={{ color: '#fff' }}>{nftdetail?.title} </span>
-                            {nftdetail.is_mint == 0 &&
+                            {nftdetail.is_mint === 0 &&
                                 <div className='nft-edit-icon position-absolute mt-2'>
                                     <i className="fa-solid fa-pen " onClick={(e) => {
                                         setNftID(slug)
@@ -162,7 +153,7 @@ const NftDetails = (props) => {
                                         <span> #{nftdetail.token_id?.slice(0,2)}</span>
                                     </ul>
                                 </div>
-                                {nftdetail.is_mint == 0 ? (
+                                {nftdetail.is_mint === 0 ? (
 
                                     <div className='eddlbtton d-flex  align-items-center mt-3'>
 
@@ -178,7 +169,7 @@ const NftDetails = (props) => {
                                     </div>
                                 ) : (
                                     <>
-                                        {nftdetail.sold_nft == 1 ? (
+                                        {nftdetail.sold_nft === 1 ? (
 
                                             <div className='eddlbtton d-flex  align-items-center mt-3'>
 
@@ -213,7 +204,7 @@ const NftDetails = (props) => {
                             </h5>
                             <div className='py-0 mt-2 mb-2 mt-lg-0 mb-lg-0'>
 
-                                {nftdetail?.is_mint == 0 &&
+                                {nftdetail?.is_mint === 0 &&
                                     <div className='nft-edit-icon position-absolute mt-2'>
                                         <i className="fa-solid fa-pen" onClick={(e) => {
                                             setNftID(slug)
@@ -233,7 +224,6 @@ const NftDetails = (props) => {
                                 }
                             </div>
                             <ReadMore data={nftdetail.description} className="nft-detail-nft " />
-                            {/* <p dangerouslySetInnerHTML={{ __html: nftdetail.description }} className="nft-detail-nft " /> */}
                         </div>
                     </div>
 
@@ -245,7 +235,7 @@ const NftDetails = (props) => {
                             </h5>
                             <div className='price_nft_detail'>
                                 <div className='nft-price'>
-                                    <img src='../../img/image14.png' />
+                                    <img src='../../img/image14.png' alt=''/>
                                     <span><small>{nftdetail.amount}  / ${nftdetail.amount * Math.round(matic['matic-network']?.cad)} Cdn </small></span>
 
                                 </div>

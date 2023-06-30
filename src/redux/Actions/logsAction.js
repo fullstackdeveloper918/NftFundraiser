@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
 
 
 export const LogsAction = (params) => async dispatch => {
@@ -11,7 +10,6 @@ export const LogsAction = (params) => async dispatch => {
         // 
         const config = {
             headers: {
-                // 'Content-Type': 'multipart/form-data'
                 'Content-Type': 'application/json',
             },
             transformRequest: formData => formData
@@ -23,8 +21,6 @@ export const LogsAction = (params) => async dispatch => {
 
     } catch (e) {
         console.log(e)
-        // if (e?.response?.data.message) {
-        //     // swal('error', e.response.data.message, 'error')
-        // }
+        
     }
 }

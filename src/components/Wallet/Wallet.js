@@ -1,11 +1,7 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom'
+import React, { useState } from 'react';
 import { ConnectWallet } from './interact';
-import { useDispatch, useSelector } from 'react-redux'
-import { loginSuccess } from '../../redux/Slices/authSlice';
-import { useEffect } from 'react';
-import { GetUserAction } from '../../redux/Actions/authAction';
-import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router';
 
 const data = {
     "preHeading": "Wallet Connect",
@@ -22,50 +18,15 @@ const data = {
 }
 
 const Wallet = () => {
-    // 
     const dispatch = useDispatch()
-    const history = useHistory()
-    // const userRole = useSelector(state => {
-    //     return state?.user?.userdetail?.role
-    // })
-    // useEffect(()=>{
-    //     // if (sessionStorage.getItem('authToken')) {
-
-    //         dispatch(GetUserAction())
-    //     // }
-    // })
+   const [isMetamaskopen, setIsMetamaskopen] = useState("")
+   const history = useHistory()
+   console.log('isMetamaskopen', isMetamaskopen)
   
    
     const handleConnect = async () => {
-        const res = await ConnectWallet("CREATOR", dispatch)
-        if (res?.res?.response?.status === 401) {
-            history.push('/wallet-connect')
-        }
-
-        else {
-            dispatch(loginSuccess(res?.res))
-            sessionStorage.setItem('authToken', res?.res?.data?.data?.auth_token)
-            // eslint-disable-next-line no-lone-blocks
-            {res?.res?.data?.data?.role == '2' ?(
-
-                    history.push('/all/LatestProjects')
-            ):(
-                <>
-                {res?.res?.data?.data?.role == '3' && res?.res?.data?.data?.is_new_user == true ? (
-                    history.push('/create/organization')
-                ):(
-
-              history.push('/projectlist')
-                )}
-                </>
-            )}
-            // {userRole.role == 2 && 
-
-            // }
-            // {userRole.role == 2 && 
-            //         history.push('/projectlist')
-            // }
-        }
+      await ConnectWallet("CREATOR",setIsMetamaskopen, dispatch,history)
+       
     }
 
     return (
@@ -84,7 +45,7 @@ const Wallet = () => {
                 <div className="row justify-content-center items">
                     {data?.walletData?.map((item, idx) => {
                         return (
-                            <div key={`wd_${idx}`} onClick={handleConnect}
+                            <div key={`wd_${idx}`} onClick={()=>handleConnect()}
                                 className="col-12 col-md-6 col-lg-4 item">
                                 {/* Single Wallet */}
                                 <div className="card single-wallet">

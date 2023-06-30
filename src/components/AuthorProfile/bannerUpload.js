@@ -2,8 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import UploadImage from "../../shared/Upload";
-import { dataURLtoBlob } from "../../utils/blobfromurl";
+
 import {
   GetUserAction,
   UpdateProfileAction,
@@ -19,11 +18,10 @@ function BannerUpload(props) {
 
   useEffect(() => {
     dispatch(GetUserAction());
-  }, []);
+  }, [dispatch]);
 
   const submit = () => {
     const formData = new FormData();
-    // const banner_image = dataURLtoBlob(imageSrc);
     formData.append("username", userdet.username);
     formData.append("banner_image", imageSrc);
     dispatch(UpdateProfileAction(formData, props));
@@ -56,10 +54,7 @@ function BannerUpload(props) {
         <>
           <div className="banner_img">
             <div>
-              {/* <UploadImage
-                                imageSrc={imageSrc}
-                                setImageSrc={setImageSrc}
-                            /> */}
+            
               <UploadComponent imageSrc={imageSrc} setImageSrc={setImageSrc} />
             </div>
             <Button onClick={submit} className="btn btn-primary banner-update">

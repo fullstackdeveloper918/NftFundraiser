@@ -5,7 +5,6 @@ import {
   getProjectList,
   createFail,
   publicLiveProjects,
-  deleteProject,
   getLatestProjectDetail,
   getCategoriesList,
   createCollectionSuccess,
@@ -22,7 +21,6 @@ import {
   getMatic,
   getmostprojactivity,
   getbuyednftdetails,
-  publicLiveProjectspagination,
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import swal from "sweetalert";
@@ -30,17 +28,13 @@ import { LogsAction } from "./logsAction";
 
 export const CreateProjectAction =
   (params, setLoading, history) => async (dispatch) => {
-    //
-    // sessionStorage.setItem('auth_token', JSON.stringify(action.payload.dat
-    // const [loading, setLoading] = useState(false)
-    // setLoading(true)
+  
     try {
       const token = sessionStorage.getItem("authToken");
-      //
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
-          // 'Content-Type': 'application/json',
+      
           Authorization: `Bearer ${token}`,
         },
         transformRequest: (formData) => formData,
@@ -50,11 +44,9 @@ export const CreateProjectAction =
         params,
         config
       );
-      // console.log("resproj", res)
       dispatch(createProjectSuccess(res));
 
       if (res.status === 200) {
-        // if (res.data.id == 1) { }
         setLoading(false);
 
         swal({
@@ -90,8 +82,7 @@ export const ProjectDetail = (slug) => async (dispatch) => {
       `${process.env.REACT_APP_BACKEND_API}api/project/details/${slug}`,
       config
     );
-    // console.log(res?.data?.data[0]?.image, 'proj')
-    // console.log('details', res)
+
     dispatch(getProjectDetail(res));
   } catch (e) {
     dispatch(LogsAction(e));
@@ -192,8 +183,7 @@ export const NftList = (slug, setLoading) => async (dispatch) => {
 };
 export const uploadNFT = async (nft, dispatch, setLoading) => {
   try {
-    // const [loading, setLoading] = useState()
-    // setLoading(true)
+
     const token = sessionStorage.getItem("authToken");
     const config = {
       headers: {
@@ -316,7 +306,7 @@ export const UpdateProject = (props, params) => async (dispatch) => {
   }
 };
 
-export const DeleteProject = (id, history) => async (dispatch) => {
+export const DeleteProject = (id) => async (dispatch) => {
   const token = sessionStorage.getItem("authToken");
   try {
     const config = {
@@ -329,10 +319,8 @@ export const DeleteProject = (id, history) => async (dispatch) => {
       `${process.env.REACT_APP_BACKEND_API}api/projects/destroy/${id}`,
       config
     );
-    //
-    // console.log(res.status, 'proj')
-    // await dispatch(deleteProject(res));
-    if (res.status == 200) {
+
+    if (res.status === 200) {
       swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover this project!",
@@ -350,11 +338,7 @@ export const DeleteProject = (id, history) => async (dispatch) => {
           swal("Your project is safe!");
         }
       });
-      // history.push('/projectlist')
-
-      // swal("success", res.data.message, 'success').then(function () {
-      //     window.location = "/projectlist";
-      // });
+      
     }
   } catch (e) {
     dispatch(LogsAction(e));
@@ -375,7 +359,7 @@ export const CategoriesAction = () => async (dispatch) => {
       `${process.env.REACT_APP_BACKEND_API}api/getCategories`,
       config
     );
-    // console.log(res, 'catres')
+   
     dispatch(getCategoriesList(res));
   } catch (e) {
     dispatch(LogsAction(e));
@@ -399,7 +383,6 @@ export const GetCollectionsAction = () => async (dispatch) => {
       `${process.env.REACT_APP_BACKEND_API}api/getCollection`,
       config
     );
-    // console.log('colres', res)
     await dispatch(getCollections(res));
   } catch (e) {
     dispatch(LogsAction(e));
@@ -432,16 +415,12 @@ export const CreateCollectionAction =
         formData,
         config
       );
-      // dispatch(GetCollectionsAction)
       await dispatch(createCollectionSuccess(res));
       if (res?.status === 200) {
         await dispatch(GetCollectionsAction());
         setLoading(false);
         props.onHide(false);
-        // swal("success", 'Collection Created', 'success')
-        // .then(function () {
-        //     onClick={() => props.onHide()}
-        // });
+       
       }
     } catch (e) {
       setLoading(false);
@@ -516,12 +495,7 @@ export const UpdateCollection = (id, params) => async (dispatch) => {
     //
     // console.log(res, 'coll rres')
     await dispatch(getLatestProjectDetail(res));
-    // if (res.status === 200) {
-    //     swal("success", res.data.message, 'success').then(function () {
-    //         window.location = "/projectlist";
-    //     });
-
-    // }
+    
   } catch (e) {
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
@@ -540,16 +514,9 @@ export const GetSettings = () => async (dispatch) => {
       `${process.env.REACT_APP_BACKEND_API}api/getSettings`,
       config
     );
-    //
-    // console.log(res, 'sett rres')
+
     await dispatch(getSettings(res));
 
-    // if (res.status === 200) {
-    //     swal("success", res.data.message, 'success').then(function () {
-    //         window.location = "/projectlist";
-    //     });
-
-    // }
   } catch (e) {
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
@@ -562,12 +529,7 @@ export const GetNftwol =
   ({ slug }, refid) =>
   async (dispatch) => {
     try {
-      // const formData = new FormData()
-      // formData.append('ref_id', refid?refid:'')
-      // if(slug.reffid){
-
-      //     const reff = slug.reffid
-      // }
+    
       let refId = refid ? refid : "null";
       const config = {
         headers: {
@@ -686,10 +648,7 @@ export const UpdateNft = (formData, props, setLoading) => async (dispatch) => {
       dispatch(NftList(props.nft_id?.id));
       dispatch(ProjectDetail(props.id));
       props.onHide(false);
-      // .then(function () {
-      //     window.location = `/ nft / details / ${ props.nft_id?.id } ? project = ${ props.id }`;
-
-      // });
+     
     }
   } catch (e) {
     dispatch(LogsAction(e));
@@ -729,11 +688,7 @@ export const AddNftAction =
           timer: 1500,
         });
         history.push(`/projnftdetails/${slug.id}`);
-        // .then(function () {
-        // dispatch(ProjectDetail(props.id))
-        // dispatch(LatestProjectDetail(params))
-        // window.location = `/ projnftdetails / ${ slug.id }`;
-        // });
+        
       }
     } catch (e) {
       dispatch(LogsAction(e));
@@ -802,7 +757,7 @@ export const UpdateBId =
         config
       );
       // await dispatch(res)
-      if (res.status == 200) {
+      if (res.status === 200) {
         setLoading(false);
         await dispatch(NftList(slug));
         swal({
@@ -880,8 +835,7 @@ export const ResellNft = (params, props, history) => async (dispatch) => {
       params,
       config
     );
-    // await dispatch(res())
-    if (res?.status == 200) {
+    if (res?.status === 200) {
       await dispatch(GetbuyedNftDetails(props.slug));
 
       swal({
@@ -892,11 +846,9 @@ export const ResellNft = (params, props, history) => async (dispatch) => {
         timer: 1500,
       });
       props.onHide(false);
-      // history.push(`/my/nfts-detail/${props.slug?.slug}`)
     }
   } catch (e) {
     dispatch(LogsAction(e));
-    // console.log("error");
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
     }

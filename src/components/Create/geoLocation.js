@@ -3,11 +3,6 @@ import Geonames from "geonames.js";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-const geonames = new Geonames({
-    username: "fullstackdeveloper91",
-    lan: "en",
-    encoding: "JSON"
-});
 
 export default function GeoLocation(props) {
     const { locationTitle, geoId, onChange, isCountry } = props;

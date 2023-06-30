@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AboutUsAction, getFooter } from '../../redux/Actions/footerAction'
+import { AboutUsAction } from '../../redux/Actions/footerAction'
 
 const AboutUs = () => {
     const dispatch = useDispatch()
@@ -13,7 +13,7 @@ const AboutUs = () => {
 
     useEffect(() => {
         dispatch(AboutUsAction())
-    }, [])
+    }, [dispatch])
     return (
         <section className="item-details-area">
             <div className="container">
