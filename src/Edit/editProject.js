@@ -26,7 +26,7 @@ const EditProject = () => {
   // console.log(id, "idd")
   const dispatch = useDispatch();
   const history = useHistory();
-  const [nftCount, setNFTCount] = useState();
+  const [nftCount, setNFTCount] = useState(1);
 
   const projdetail = useSelector((state) => {
     //
@@ -521,7 +521,7 @@ const EditProject = () => {
                       <span
                         className="plus_icon"
                         onClick={() => {
-                          setNFTCount((nftCount || 0) + 1);
+                          setNFTCount(Number(nftCount) + 1);
                         }}
                       >
                         <i className="fa fa-plus" aria-hidden="true"></i>
@@ -543,7 +543,11 @@ const EditProject = () => {
                       <span
                         className="minus_icon"
                         onClick={() => {
-                          if (nftCount > 0) setNFTCount((nftCount || 0) - 1);
+                          if (Number(nftCount) > 1) {
+                            setNFTCount(Number(nftCount) - 1);
+                          } else {
+                            setNFTCount(Number(1));
+                          }
                         }}
                       >
                         <i className="fa fa-minus" aria-hidden="true"></i>

@@ -13,8 +13,7 @@ function ProTypePopup(props) {
   const [country, setCountry] = useState("");
   const [description, setDescription] = useState();
   const dispatch = useDispatch();
-  const [nftCount, setNFTCount] = useState();
-
+  const [nftCount, setNFTCount] = useState(1);
 
   const {
     register,
@@ -197,12 +196,17 @@ function ProTypePopup(props) {
                     })}
                     aria-invalid={errors.number_of_nft ? "true" : "false"}
                     onChange={(e) => {
-                      setNFTCount(e.target.value)}}
+                      setNFTCount(e.target.value);
+                    }}
                   />
                   <span
                     className="minus_icon"
                     onClick={() => {
-                      if (nftCount > 0) setNFTCount(Number(nftCount) - 1);
+                      if (Number(nftCount) > 1) {
+                        setNFTCount(Number(nftCount) - 1);
+                      } else {
+                        setNFTCount(Number(1));
+                      }
                     }}
                   >
                     <i className="fa fa-minus" aria-hidden="true"></i>

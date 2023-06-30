@@ -7,7 +7,7 @@ import { Loader } from "@react-three/drei";
 function BidPopup(props) {
   //
   const [loading, setLoading] = useState(false);
-  const [bidValue, setBidValue] = useState();
+  const [bidValue, setBidValue] = useState(0);
   const {
     register,
     handleSubmit,
@@ -86,7 +86,7 @@ function BidPopup(props) {
                     <span
                       className="plus_icon"
                       onClick={() => {
-                        setBidValue((bidValue || 0) + 1);
+                        setBidValue(Number(bidValue) + 1);
                       }}
                     >
                       <i className="fa fa-plus" aria-hidden="true"></i>
@@ -94,6 +94,7 @@ function BidPopup(props) {
                     <input
                       value={bidValue}
                       type="number"
+                      min="0"
                       placeholder="Enter bid"
                       {...register("amount", { required: true })}
                       aria-invalid={errors.amount ? "true" : "false"}
@@ -102,7 +103,11 @@ function BidPopup(props) {
                     <span
                       className="minus_icon"
                       onClick={() => {
-                        if (bidValue > 0) setBidValue((bidValue || 0) - 1);
+                        if (Number(bidValue) <= 0) {
+                          setBidValue(Number(0));
+                        } else {
+                          setBidValue(Number(bidValue) - 1);
+                        }
                       }}
                     >
                       <i className="fa fa-minus" aria-hidden="true"></i>

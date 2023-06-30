@@ -29,7 +29,6 @@ const Create = ({ current, next, prev }) => {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [price, setPrice] = useState(0);
-  console.log('price', price)
   const [image, setImage] = useState();
   const [loading, setLoading] = useState(false);
   const [collection_id, setCollectionId] = useState(0);
@@ -38,21 +37,18 @@ const Create = ({ current, next, prev }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [countryName, setCountryName] = useState(" ");
+
+  const userdet = useSelector((state) => {
+    return state?.user?.userdetail;
+  });
   const { countries } = useSelector((state) => state.countries);
   const [cursorState, updateCursorState] = useState({});
   const states = useSelector((state) => {
     return state.countries.states;
   });
-  console.log("states", states);
   const cities = useSelector((state) => {
     return state.countries.city;
   });
-  const userdet = useSelector((state) => {
-    return state?.user?.userdetail;
-  });
-  const priceIncrement=()=>{
-    setPrice((prevValue) => prevValue + 1)
-  }
   const {
     register,
     handleSubmit,
@@ -79,10 +75,13 @@ const Create = ({ current, next, prev }) => {
   const cat = useSelector((state) => {
     return state?.projectdetails?.categories;
   });
+
+  console.log(userdet, "userdet");
+  console.log(country, "country");
   const handleChangeCountry = (event) => {
     // 👇 Get input value from "event"
     const formData = new FormData();
-    if (event?.currentTarget?.value) {
+    if (event && event?.currentTarget?.value) {
       setCountry(event?.currentTarget?.value);
       formData.append("country_id", event?.currentTarget?.value);
     } else {
@@ -90,14 +89,15 @@ const Create = ({ current, next, prev }) => {
       setCountry(userdet?.organization_detail?.country_id);
       formData.append("country_id", userdet?.organization_detail?.country_id);
     }
-    dispatch(StateList(formData)); // if (country) {
-    //
-    // }
+    dispatch(StateList(formData));
   };
 
   useEffect(() => {
-    dispatch(GetUserAction());
+    handleChangeCountry();
+  }, [current]);
 
+  useEffect(() => {
+    dispatch(GetUserAction());
     dispatch(GetCollectionsAction());
     dispatch(CategoriesAction());
     dispatch(CountryList());
@@ -258,27 +258,17 @@ const Create = ({ current, next, prev }) => {
               <div className="position-relative select-box">
                 <select
                   name="country"
+                  placeholder="Select your country"
                   {...register("country", { required: true })}
                   onChange={handleChangeCountry}
+                  defaultValue={
+                    countryName
+                      ? countryName
+                      : userdet?.organization_detail?.country_id &&
+                        handleChangeCountry()
+                  }
                 >
                   aria-invalid={errors?.country ? "true" : "false"}
-                  <option
-                    value={
-                      countryName
-                        ? countryName
-                        : userdet?.organization_detail?.country_id
-                    }
-                    defaultChecked={
-                      countryName
-                        ? countryName
-                        : userdet?.organization_detail?.country_id
-                    }
-                  >
-                    {countryName
-                      ? countryName
-                      : userdet?.organization_detail?.country &&
-                        handleChangeCountry()}
-                  </option>
                   {countries?.data?.data?.map((option, key) => (
                     <>
                       <option key={key.id} value={option.id}>
@@ -296,11 +286,9 @@ const Create = ({ current, next, prev }) => {
               <div className="position-relative select-box">
                 <select
                   name="state"
-                  
                   {...register("state")}
                   onChange={handleChangeState}
                   disabled={states?.data?.data?.length === 0}
-                
                 >
                   aria-invalid={errors?.state ? "true" : "false"}
                   <option
@@ -309,7 +297,9 @@ const Create = ({ current, next, prev }) => {
                     selected
                     style={{ color: "#495057" }}
                   >
-                    { states?.data?.data?.length === 0 ? "N/A":'Select your state/province'}
+                    {states?.data?.data?.length === 0
+                      ? "N/A"
+                      : "Select your state/province"}
                   </option>
                   {states?.data?.data?.map((option, key) => (
                     <>
@@ -319,7 +309,6 @@ const Create = ({ current, next, prev }) => {
                     </>
                   ))}
                 </select>
-                
               </div>
             </div>
           </div>
@@ -327,7 +316,11 @@ const Create = ({ current, next, prev }) => {
             <div className="form-group">
               <label>City or Region</label>
               <div className="position-relative select-box">
-                <select name="city" {...register("city")}  disabled={states?.data?.data?.length === 0}>
+                <select
+                  name="city"
+                  {...register("city")}
+                  disabled={states?.data?.data?.length === 0}
+                >
                   aria-invalid={errors?.city ? "true" : "false"}
                   <option
                     value=""
@@ -335,7 +328,9 @@ const Create = ({ current, next, prev }) => {
                     selected
                     style={{ color: "#495057" }}
                   >
-                  { states?.data?.data?.length === 0 ? "N/A" :"Select your city/region"}
+                    {states?.data?.data?.length === 0
+                      ? "N/A"
+                      : "Select your city/region"}
                   </option>
                   {cities?.data?.data?.map((option, key) => (
                     <>
@@ -345,7 +340,6 @@ const Create = ({ current, next, prev }) => {
                     </>
                   ))}
                 </select>
-                
               </div>
             </div>
           </div>
@@ -356,7 +350,6 @@ const Create = ({ current, next, prev }) => {
                 <select
                   name="category_id"
                   {...register("category_id", { required: true })}
-                 
                 >
                   aria-invalid={errors.category_id ? "true" : "false"}
                   <option
@@ -391,9 +384,7 @@ const Create = ({ current, next, prev }) => {
               <div className="position-relative">
                 <span
                   className={styles.plus_icon}
-                  onClick={() => 
-                    setPrice((price) => price + 1)
-                  }
+                  onClick={() => setPrice((price) => Number(price) + 1)}
                 >
                   <i className="fa fa-plus" aria-hidden="true"></i>
                 </span>
@@ -402,6 +393,7 @@ const Create = ({ current, next, prev }) => {
                   type="number"
                   className="form-control"
                   step="0.01"
+                  min="0"
                   name="price"
                   placeholder="Price"
                   {...register("price", { required: true })}
@@ -411,7 +403,11 @@ const Create = ({ current, next, prev }) => {
                 <span
                   className={styles.minus_icon}
                   onClick={() => {
-                    if (price > 0) setPrice(price - 1);
+                    if (Number(price) <= 0) {
+                      setPrice(Number(0));
+                    } else {
+                      setPrice(Number(price) - 1);
+                    }
                   }}
                 >
                   <i className="fa fa-minus" aria-hidden="true"></i>

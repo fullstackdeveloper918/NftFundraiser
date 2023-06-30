@@ -108,36 +108,43 @@ const RoleChangeOrganizationdetails = () => {
                   <div className="form-group number-input mt-3">
                     <label>Fundraising Goal</label>
                     <div class="position-relative">
-                    <span
-                      className="plus_icon"
-                      onClick={() => 
-                        setFundraisingGoal((fundraisingGoal)=> fundraisingGoal + 1)
-                      }
-                    >
-                      <i className="fa fa-plus" aria-hidden="true"></i>
-                    </span>
-                    <input
-                    value={fundraisingGoal}
-                      type="number"
-                      className="form-control"
-                      name="goal"
-                      step="0.01"
-                      placeholder="Fundraising goal (MATIC)"
-                      {...register("goal", {
-                        required: true,
-                      })}
-                      aria-invalid={errors.goal ? "true" : "false"}
-                      onChange={(e) => setFundraisingGoal(e.target.value)}
-                    />
-                     <span
-                      className="minus_icon"
-                      onClick={() => {
-                        if (fundraisingGoal > 0) setFundraisingGoal((fundraisingGoal || 0) - 1);
-                      }}
-                    >
-                      <i className="fa fa-minus" aria-hidden="true"></i>
-                    </span>
-                  </div>
+                      <span
+                        className="plus_icon"
+                        onClick={() =>
+                          setFundraisingGoal(
+                            (fundraisingGoal) => Number(fundraisingGoal) + 1
+                          )
+                        }
+                      >
+                        <i className="fa fa-plus" aria-hidden="true"></i>
+                      </span>
+                      <input
+                        value={fundraisingGoal}
+                        type="number"
+                        className="form-control"
+                        name="goal"
+                        min="0"
+                        step="0.01"
+                        placeholder="Fundraising goal (MATIC)"
+                        {...register("goal", {
+                          required: true,
+                        })}
+                        aria-invalid={errors.goal ? "true" : "false"}
+                        onChange={(e) => setFundraisingGoal(e.target.value)}
+                      />
+                      <span
+                        className="minus_icon"
+                        onClick={() => {
+                          if (Number(fundraisingGoal) <= 0) {
+                            setFundraisingGoal(Number(0));
+                          } else {
+                            setFundraisingGoal(Number(fundraisingGoal) - 1);
+                          }
+                        }}
+                      >
+                        <i className="fa fa-minus" aria-hidden="true"></i>
+                      </span>
+                    </div>
                     {errors.goal && (
                       <p style={{ color: "red" }} role="alert">
                         Fundraising goal is required
@@ -324,7 +331,9 @@ const RoleChangeOrganizationdetails = () => {
                     <div class="position-relative">
                       <span
                         className="plus_icon"
-                        onClick={() => setEinNumber((einNumber)=>einNumber  + 1)}
+                        onClick={() =>
+                          setEinNumber((einNumber) => Number(einNumber) + 1)
+                        }
                       >
                         <i className="fa fa-plus" aria-hidden="true"></i>
                       </span>
@@ -333,6 +342,7 @@ const RoleChangeOrganizationdetails = () => {
                         type="number"
                         className="form-control"
                         name="tax_id"
+                        min="0"
                         placeholder="EIN Number/Tax Id(optional)"
                         {...register("tax_id", { required: true })}
                         // {...register("email")}
@@ -342,7 +352,11 @@ const RoleChangeOrganizationdetails = () => {
                       <span
                         className="minus_icon"
                         onClick={() => {
-                          if (einNumber > 0) setEinNumber((einNumber || 0) - 1);
+                          if (Number(einNumber) <= 0) {
+                            setEinNumber(Number(0));
+                          } else {
+                            setEinNumber(Number(einNumber) - 1);
+                          }
                         }}
                       >
                         <i className="fa fa-minus" aria-hidden="true"></i>
