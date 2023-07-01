@@ -28,6 +28,7 @@ const RoleChangeOrganizationdetails = () => {
     handleSubmit,
     formState: { errors },
     control,
+    setValue,
   } = useForm({
     mode: "all",
   });
@@ -41,7 +42,7 @@ const RoleChangeOrganizationdetails = () => {
     formData.append("organization_name", values.organization_name);
     formData.append("url", values.url);
     formData.append("country", values.country);
-    formData.append("tax_id", values.tax_id);
+    formData.append("tax_id", values.tax_id === "0"? "": values.tax_id );
 
     formData.append("social", values.social);
     formData.append("social_link", values.social_link);
@@ -54,6 +55,7 @@ const RoleChangeOrganizationdetails = () => {
     return state?.getSocialmediaIcons?.getsocial;
   });
   useEffect(() => {
+    setValue("wallet_id", userdet.wallet_id)
     dispatch(CountryList());
     dispatch(AnnualRevenueList());
     dispatch(HearAboutList());
@@ -65,12 +67,8 @@ const RoleChangeOrganizationdetails = () => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12 col-md-9">
-            {/* Intro */}
-            <div className="intro text-center">
-              <span></span>
-              <h3 className="mt-3 mb-0"></h3>
-              <p></p>
-            </div>
+           
+              <h3 className="mt-3 mb-0">Organization Detail</h3>
 
             <form
               onSubmit={handleSubmit(OnSubmit)}
@@ -178,7 +176,7 @@ const RoleChangeOrganizationdetails = () => {
                         required: true,
                         pattern: {
                           value:
-                            /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/,
+                           /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})/,
                         },
                       })}
                       // {...register("email")}

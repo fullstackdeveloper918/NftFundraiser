@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PopularCollectionAction } from '../../redux/Actions/popularAction';
 import { Link } from 'react-router-dom';
+import { Empty } from 'antd';
 
 const Collections = () => {
 
@@ -77,6 +78,12 @@ const Collections = () => {
                             </div>
                         )
                     })}
+                    {coll?.data?.length === 0 && 
+                    
+                     <div className="no-data">
+                      <Empty />
+                    </div>
+}
                 </div >
             </div >
         </section >

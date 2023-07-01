@@ -47,7 +47,7 @@ const NftDetails = (props) => {
         <div className="row justify-content-between content_project px-0">
           <div className="col-12 col-md-4 ">
             <div className="item-info">
-              {nftdetail.is_mint === 0 && (
+              {nftdetail.is_mint === "0" && (
                 <div className="py-0 mt-2 mb-2 mt-lg-0 mb-lg-0">
                   <div>
                     <div className="position-absolute nft-edit-icon">
@@ -100,7 +100,7 @@ const NftDetails = (props) => {
               <span Class="title_main " style={{ color: "#fff" }}>
                 {nftdetail?.title}{" "}
               </span>
-              {nftdetail.is_mint === 0 && (
+              {nftdetail.is_mint === "0" && (
                 <div className="nft-edit-icon position-absolute mt-2">
                   <i
                     className="fa-solid fa-pen "
@@ -125,7 +125,11 @@ const NftDetails = (props) => {
               <div className="card no-hover position-relative">
                 <div className="owner align-items-start">
                   <span className="boldertext w-100">Owned By : </span>
-                  <span>{nftdetail?.user_data?.username}</span>
+                  <span>
+                    {nftdetail?.user_data?.username
+                      ? nftdetail?.user_data?.username
+                      : nftdetail?.user_data?.wallet_id}
+                  </span>
 
                   <a
                     className="owner-meta d-flex align-items-center ml-3"
@@ -137,13 +141,15 @@ const NftDetails = (props) => {
                   <span className="boldertext w-100">Collection Name : </span>
                   <span> {nftdetail?.collectionData?.title}</span>
                 </div>
-                <div className="item-info-list">
-                  <ul className="list-unstyled">
-                    <span class="boldertext">Token :</span>
-                    <span> #{nftdetail.token_id?.slice(0, 2)}</span>
-                  </ul>
-                </div>
-                {nftdetail.is_mint == 0 ? (
+                {nftdetail.token_id && (
+                  <div className="item-info-list">
+                    <ul className="list-unstyled">
+                      <span class="boldertext">Token :</span>
+                      <span> #{nftdetail.token_id?.slice(0, 2)}</span>
+                    </ul>
+                  </div>
+                )}
+                {nftdetail.is_mint === "0" ? (
                   <div className="eddlbtton d-flex  align-items-center mt-3">
                     <>
                       <button
@@ -161,7 +167,7 @@ const NftDetails = (props) => {
                   </div>
                 ) : (
                   <>
-                    {nftdetail.sold_nft == 1 ? (
+                    {nftdetail.sold_nft === "1" ? (
                       <div className="eddlbtton d-flex  align-items-center mt-3">
                         <>
                           <span

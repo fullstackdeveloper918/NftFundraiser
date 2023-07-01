@@ -95,16 +95,17 @@ const ProjdataTable = (props) => {
                                         {/* <td><span>Total NFT's:</span> <span>{latprojdetail?.number_of_nft}</span></td> */}
                                         <td><span>Chain </span> <span>Polygon (Matic)</span></td>
                                         <td><span>Created  </span> <span> {dayjs(latprojdetail?.created_at).format("DD MMM YYYY")} </span></td>
-                                        <td><span>Country </span> <span>{latprojdetail?.country_name?.name}</span></td>
-                                        <td><span>State</span>  <span>{latprojdetail?.state_name?.name}</span> </td>
-                                        <td><span>City</span>  <span>{latprojdetail?.city_name?.name}</span> </td>
+                                        <td><span>Country </span> <span>{latprojdetail?.country_name?.name ? latprojdetail?.country_name?.name : "N/A"}</span></td>
+                                        <td><span>State</span>  <span>{latprojdetail?.state_name?.name ? latprojdetail?.state_name?.name : "N/A"}</span> </td>
+                                        <td><span>City</span>  <span>{latprojdetail?.city_name?.name ? latprojdetail?.city_name?.name :"N/A"}</span> </td>
                                         <td><span>Project Type</span>  <span>{latprojdetail?.type === "1" ? "Single" : 'Campaign'}</span> </td>
-                                        {latprojdetail.type == 2 &&
+                                        {latprojdetail.type === '2' &&
 
                                             <><td><span>Start Date</span>  <span>{latprojdetail?.start_date}</span> </td>
                                                 <td><span>End Date </span> <span>{latprojdetail?.end_date}</span> </td></>
                                         }
-                                        <td><span>Price </span> <span> {latprojdetail?.price} </span> </td></>
+                                        
+                                        </>
                                 ) : (
                                     <>
                                         {location.pathname === `/popularcollection/details/${slug}` ? (
@@ -120,16 +121,15 @@ const ProjdataTable = (props) => {
                                             <>
                                                 <td><span>Chain: </span> <span>Polygon (Matic)</span></td>
                                                 <td><span>Created : </span> <span> {dayjs(projdetail?.created_at).format("DD MMM YYYY")} </span></td>
-                                                <td><span>Country </span> <span>{projdetail.country_name?.name}</span></td>
-                                                <td><span>State</span>  <span>{projdetail.state_name?.name}</span> </td>
-                                                <td><span>City</span>  <span>{projdetail.city_name?.name}</span> </td>
+                                                <td><span>Country </span> <span>{projdetail.country_name?.name ? projdetail.country_name?.name : "N/A"}</span></td>
+                                                <td><span>State</span>  <span>{projdetail.state_name?.name ? projdetail.state_name?.name : "N/A"}</span> </td>
+                                                <td><span>City</span>  <span>{projdetail.city_name?.name ? projdetail.city_name?.name : "N/A"}</span> </td>
                                                 <td><span>Project Type</span>  <span>{projdetail?.type === "1" ? "Single" : 'Campaign'}</span> </td>
-                                                {projdetail.type == 2 &&
+                                                {projdetail.type === '2' &&
 
                                                     <><td><span>Start Date</span>  <span>{projdetail.start_date}</span> </td>
                                                         <td><span>End Date </span> <span>{projdetail.end_date}</span> </td></>
                                                 }
-                                                <td><span>Price </span> <span> {projdetail.price} </span> </td>
                                             </>
                                         )}
                                     </>

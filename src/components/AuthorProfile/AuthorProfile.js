@@ -118,7 +118,7 @@ const AuthorProfile = () => {
                                         </button>
                                         <div>
                                             <br />
-                                            {userdet.role == 3 ? (
+                                            {userdet.role === '3' ? (
                                                 <>You are logged in as a Creator/merchant<br />
                                                     <span>click here to <Link to="/create">create project</Link></span></>
                                             ) : (

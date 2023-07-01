@@ -45,10 +45,10 @@ const NftdataTable = (props) => {
                                 <td>Polygon (Matic)</td>
                             </tr><tr className='contract-address'>
                                     <th >Contract</th>
-                                    <td><a target="_blank" href={`https://polygonscan.com/address/${nftdetail?.collectionData?.contract_id}`} >{nftdetail.collectionData?.contract_id?.slice(0, 5)}.....{nftdetail.collectionData?.contract_id?.slice(39, 42)}</a></td>
+                                    <td>{nftdetail.collectionData?.contract_id ? (<a target="_blank" href={`https://polygonscan.com/address/${nftdetail?.collectionData?.contract_id}`} >{nftdetail.collectionData?.contract_id?.slice(0, 5)}.....{nftdetail.collectionData?.contract_id?.slice(39, 42)}</a>):( "N/A")}</td> 
                                 </tr><tr>
                                     <th>Token ID</th>
-                                    <td>{nftdetail.token_id?.slice(0,2)}</td>
+                                    <td>{nftdetail.token_id?(<>{nftdetail.token_id?.slice(0,2)}</>):("N/A")}</td>
                                 </tr><tr>
                                     <th>Token Standard</th>
                                     <td>ERC721</td>

@@ -99,7 +99,7 @@ const Create = ({ current, next, prev }) => {
  
 
   useEffect(() => {
-    dispatch(GetUserAction());
+    dispatch(GetUserAction(history));
     dispatch(GetCollectionsAction(history));
     dispatch(CategoriesAction());
     dispatch(CountryList());
@@ -205,7 +205,8 @@ const Create = ({ current, next, prev }) => {
                   required: true,
                   pattern: {
                     value:
-                      /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/,
+                    /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})/
+  
                   },
                 })}
                 aria-invalid={errors.address ? "true" : "false"}
@@ -268,6 +269,7 @@ const Create = ({ current, next, prev }) => {
                   }}
                   defaultValue={country}
                 >
+                  <option value={userdet?.organization_detail?.country_id} selected>{countryName}</option>
                   aria-invalid={errors?.country ? "true" : "false"}
                   {countries?.data?.data?.map((option, key) => (
                     <>
@@ -299,7 +301,7 @@ const Create = ({ current, next, prev }) => {
                     selected
                     style={{ color: "#495057" }}
                   >
-                    {states?.data?.data?.length === 0
+                    {states?.data?.data?.length === "0"
                       ? "N/A"
                       : "Select your state/province"}
                   </option>
@@ -332,7 +334,7 @@ const Create = ({ current, next, prev }) => {
                     selected
                     style={{ color: "#495057" }}
                   >
-                    {states?.data?.data?.length === 0
+                    {states?.data?.data?.length === "0"
                       ? "N/A"
                       : "Select your city/region"}
                   </option>

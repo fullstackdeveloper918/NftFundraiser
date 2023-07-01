@@ -189,11 +189,7 @@ export const ConnectWallet = async (
           dispatch(LogsAction(error));
           if (error.code === -32002) {
             setIsMetamaskopen("Mata-mask request already pending");
-            swal(
-              "warning",
-              "Please reject pending previous request's to continue... ",
-              "warning"
-            );
+            swal("warning", "Mata-mask request already pending, permissions needed to continue... ", "warning");
             console.log("Permissions needed to continue.");
           } else {
             setIsMetamaskopen("User rejected the request");
@@ -262,6 +258,7 @@ export const UpdateStatus = async ({
   setModalShow,
   history,
 }) => {
+  
   const token = sessionStorage.getItem("authToken");
   try {
     const formData = new FormData();
@@ -287,6 +284,7 @@ export const UpdateStatus = async ({
       formData,
       config
     );
+
   } catch (error) {
     if (error?.code?.includes("ERR_NETWORK")) {
       sessionStorage.removeItem("authToken");
@@ -376,6 +374,7 @@ export const CreateMetaDataAndMint = async ({
   role,
   history,
 }) => {
+  
   const contract = await new web3.eth.Contract(
     contractABI.abi,
     contractAddress
@@ -392,21 +391,23 @@ export const CreateMetaDataAndMint = async ({
         data: contract.methods.mint(nft_file_content).encodeABI(), //make call to NFT smart contract
       })
       .on("transactionHash", function () {
+        
         setCurrent(1);
       })
       .on("receipt", function (receipt) {
+        
         setCurrent(1);
       })
       .on("confirmation", async (confNumber, receipt) => {
-        if (confNumber === 1) {
-          if (collid !== 1) {
+        if (confNumber == '1') {
+          
             await UpdateContract(
               collid,
               contractAddress,
               setModalShow,
               history
             );
-          }
+          
 
           const tokid = web3.utils.toBN(receipt.logs[0].topics[3]);
 
@@ -436,6 +437,7 @@ export const CreateMetaDataAndMint = async ({
         ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>",
     };
   } catch (error) {
+    
     await dispatch(LogsAction(error));
 
     swal("error", "Metamask is busy, please retry ", "error");

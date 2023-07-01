@@ -6,6 +6,7 @@ import Loader from "../Loader/loader";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
+import { Empty } from "antd";
 
 const Resell = ({ type }) => {
   const [loading, setLoading] = useState(false);
@@ -109,7 +110,10 @@ const Resell = ({ type }) => {
               <Loader height="30px" width="30px" />
             ) : (
               <>
-                <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+                <ScrollMenu
+                  LeftArrow={nfts?.data?.length > 4 && LeftArrow}
+                  RightArrow={nfts?.data?.length > 4 && RightArrow}
+                >
                   {nfts?.data?.map((item, idx) => {
                     return (
                       <div
@@ -191,6 +195,12 @@ const Resell = ({ type }) => {
                       </div>
                     );
                   })}
+
+                  {nfts?.data?.length === 0 && (
+                    <div className="no-data">
+                      <Empty />
+                    </div>
+                  )}
                 </ScrollMenu>
               </>
             )}

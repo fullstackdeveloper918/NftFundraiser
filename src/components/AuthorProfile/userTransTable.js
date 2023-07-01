@@ -26,10 +26,10 @@ const UserdataTable = (props) => {
                     <Table responsive className='nfts_details' >
                         <tbody >
                             <tr>
-                                <td><span>Name </span> <span>{userdet.username}</span></td>
+                                <td><span>Name </span> <span>{userdet.username ? userdet.username :  "N/A" }</span></td>
                                 <td><span>Wallet ID</span>  <span>{userdet.wallet_id}</span></td>
                                 <td><span>Number of Referrals </span> <span>{userdet.referrers}</span></td>
-                                <td><span>Referral Amount </span> <span>{userdet.referral_amount} KARMATICA token</span></td>
+                                <td><span>Referral Amount </span> <span>{userdet.referral_amount} Polygon token</span></td>
                                 <td><span>Fundraised </span> <span>{userdet.total_fundraised} MATIC</span></td>
                             </tr>
                         </tbody>

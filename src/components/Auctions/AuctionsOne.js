@@ -7,6 +7,7 @@ import Loader from "../Loader/loader";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
+import { Empty } from "antd";
 
 const projectTypesMap = {
   LatestProjects: 2,
@@ -126,7 +127,8 @@ const AuctionsOne = ({ type }) => {
               <Loader height="30px" width="30px" />
             ) : (
               <>
-                <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+                <ScrollMenu LeftArrow={liveProjects?.data?.length > 4 && LeftArrow} RightArrow={liveProjects?.data?.length > 4 && RightArrow}>
+                  
                   {liveProjects?.data?.map((item, idx) => {
                     return (
                       <div
@@ -212,6 +214,11 @@ const AuctionsOne = ({ type }) => {
                       </div>
                     );
                   })}
+                  {liveProjects?.data?.length === 0 && 
+                  <div className="no-data">
+                      <Empty />
+                    </div>
+}
                 </ScrollMenu>
               </>
             )}

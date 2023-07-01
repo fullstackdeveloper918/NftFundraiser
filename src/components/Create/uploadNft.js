@@ -121,11 +121,16 @@ const UploadNft = ({ current, prev }) => {
   };
 
   const handleUpload = (e, index) => {
+    
     const filetype = e.target.files[0].type;
     setNFtExtension(filetype);
 
     setNftImage((prevState) => {
-      return [...nftimage, e?.target?.files[0]];
+    
+
+        return [...nftimage, e?.target?.files[0]];
+    
+     
     });
 
     var fr = new FileReader();
@@ -233,7 +238,7 @@ const UploadNft = ({ current, prev }) => {
         formData.append("logitude", log);
 
         formData.append("image", data.image);
-        if (projtype == 1) {
+        if (projtype === "1") {
           // formData.append('preview_imag', "")
           formData.append("number_of_nft", "1");
           formData.append("start_date", "");
@@ -586,6 +591,7 @@ const UploadNft = ({ current, prev }) => {
                                                   src={URL.createObjectURL(
                                                     source[index].file
                                                   )}
+                                                  alt=""
                                                   className="nft-image"
                                                 />
                                               ) : (
@@ -668,7 +674,7 @@ const UploadNft = ({ current, prev }) => {
                                                             src={URL.createObjectURL(
                                                               preview[index]
                                                             )}
-
+                                                            alt=""
                                                             // onChange={setPimage}
                                                           />
                                                         )}
@@ -731,6 +737,7 @@ const UploadNft = ({ current, prev }) => {
                                                             src={URL.createObjectURL(
                                                               preview[index]
                                                             )}
+                                                            alt=""
                                                           />
                                                         )}
                                                     </div>
@@ -754,7 +761,7 @@ const UploadNft = ({ current, prev }) => {
                       <Form.Item>
                         <Tooltip
                           title={
-                            count == 1
+                            count === '1'
                               ? "Switch to Campaign for multiple NFTs"
                               : "Add more NFTs"
                           }
@@ -764,7 +771,7 @@ const UploadNft = ({ current, prev }) => {
                             type="dashed"
                             onClick={(e) => {
                               {
-                                count == 1 && setProjModalShow(true);
+                                count === '1' && setProjModalShow(true);
                               }
 
                               // {

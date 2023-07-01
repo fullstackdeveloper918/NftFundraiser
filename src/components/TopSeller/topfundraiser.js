@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TopFundraiserAction } from '../../redux/Actions/fundraiserAction';
 import { Link } from 'react-router-dom';
+import { Empty } from 'antd';
 
 
 
@@ -62,6 +63,13 @@ const Fundraiser = () => {
                             </div>
                         );
                     })}
+                    {fund?.length === 0 &&
+                  
+                    <div className="no-data">
+                      <Empty />
+                    </div>
+}
+                  
                 </div>
             </div>
         </section>

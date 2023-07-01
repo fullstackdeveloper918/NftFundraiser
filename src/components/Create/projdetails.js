@@ -108,6 +108,7 @@ const ProjNftDetails = () => {
                   height="32px"
                   viewBox="0 0 24 24"
                   fill="none"
+                  alt=""
                 />
                 <span className="cutom_dis">
                   {" "}
@@ -159,7 +160,7 @@ const ProjNftDetails = () => {
                       }`}
                     >
                       <Button
-                        disabled={projdetail?.number_of_pending === 0}
+                        disabled={projdetail?.number_of_pending === '0'}
                         variant="primary"
                         className=" btn  btn-bordered-white m-0"
                       >
@@ -172,7 +173,7 @@ const ProjNftDetails = () => {
                     projdetail?.nft_data.length > 0 &&
                     projdetail?.nft_data[0]?.is_mint === '0' ? (
                       <Button
-                        disabled={projdetail?.number_of_pending === 0}
+                        disabled={projdetail?.number_of_pending === '0'}
                         className=" btn  btn-bordered-white m-0 ml-2"
                         variant="primary"
                         onClick={() => {
@@ -334,7 +335,7 @@ const ProjNftDetails = () => {
               </div>
             </div>
             <div className="row items mt-0 explore-items px-0">
-              {projdetail.number_of_nft !== projdetail?.nft_data?.length && (
+              {projdetail.number_of_nft != projdetail?.nft_data?.length && (
                 <div className="col-12 col-sm-6 col-lg-3 item explore-item">
                   <div className="card no-hover m-0 add-nft ">
                     <div class="image-over relative">

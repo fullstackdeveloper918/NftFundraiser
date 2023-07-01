@@ -25,9 +25,9 @@ const Footer = () => {
   const history = useHistory();
   const handleCreate = () => {
     if (window.ethereum.selectedAddress) {
-      if (Roles["CREATOR"] === userRole) {
+      if (Roles["CREATOR"] == userRole) {
         history.push("/create");
-      } else if (Roles["BUYER"] === userRole) {
+      } else if (Roles["BUYER"] == userRole) {
         Swal.fire({
           icon: "info",
           html: "Sign up as a Creator to start a project and upload NFTs",

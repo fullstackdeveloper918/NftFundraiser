@@ -24,21 +24,15 @@ const FundTransdataTable = () => {
                 <Panel header="Item Activity" key="1">
                     <Table responsive >
                         <thead>
-
-
                             <tr>
-
                                 <th>NFT</th>
                                 <th>Project</th>
                                 <th>Price</th>
                                 <th>From</th>
                                 <th>To</th>
                                 <th>Token</th>
-
                                 <th>Transaction</th>
                             </tr>
-
-
                         </thead>
                         <tbody>
                             {funddetail?.payment_history?.map((items) => {
@@ -51,7 +45,7 @@ const FundTransdataTable = () => {
                                         <td>{items.pay_from.slice(0, 4)}...{items.pay_from.slice(35, 44)}</td>
                                         <td>{items.pay_to.slice(0, 4)}...{items.pay_to.slice(35, 44)}</td>
                                         <td>#{items.token_id?.slice(0,2)}</td>
-                                        <td>{items.txd_id.slice(0, 4)}...{items.txd_id.slice(35, 44)}</td>
+                                        <td>{items.txd_iditems.txd_id.slice(0, 4)}...{items.txd_id.slice(35, 44)}</td>
                                     </tr>
                                 )
                             })}
