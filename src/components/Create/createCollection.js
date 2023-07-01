@@ -7,9 +7,10 @@ import { useForm } from 'react-hook-form';
 import { dataURLtoBlob } from '../../utils/blobfromurl';
 import UploadImage from '../../shared/Upload';
 import { Loader } from '@react-three/drei';
+import { useHistory } from 'react-router-dom';
 
 function MyVerticallyCenteredModal(props) {
-    
+    const history = useHistory();
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -17,7 +18,7 @@ function MyVerticallyCenteredModal(props) {
 
     const OnSubmit = (dat) => {
         const imageBanner = dataURLtoBlob(image)
-        dispatch(CreateCollectionAction({ dat, imageBanner, props, setLoading }))
+        dispatch(CreateCollectionAction({ dat, imageBanner, props, setLoading,history }))
     }
 
     return (

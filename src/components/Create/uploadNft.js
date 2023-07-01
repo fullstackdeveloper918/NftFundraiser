@@ -164,9 +164,7 @@ const UploadNft = ({ current, prev }) => {
           type = "Player";
           break;
         case "":
-          // if (nft?.name?.str.includes(".glb")) {
           type = "modal";
-          // }
           break;
         default:
           type = "Image";
@@ -186,7 +184,7 @@ const UploadNft = ({ current, prev }) => {
   const log = sessionStorage.getItem("longitude");
 
   useEffect(() => {
-    dispatch(GetCollectionsAction());
+    dispatch(GetCollectionsAction(history));
   }, []);
   const nftDescriptionHandler = (index, item) => {
     // setNft_description(event?.currentTarget?.value)
@@ -203,7 +201,7 @@ const UploadNft = ({ current, prev }) => {
     try {
       setLoading(true);
 
-      const imagesRes = await uploadNFT(nftimage, dispatch);
+      const imagesRes = await uploadNFT(nftimage, dispatch,null,history);
 
       const addedImage = imagesRes?.data?.data.map(
         (x) => ipfsBaseUrl + x?.image_hash
@@ -233,7 +231,6 @@ const UploadNft = ({ current, prev }) => {
         }
         formData.append("latitude", lat);
         formData.append("logitude", log);
-        formData.append("price", data.price);
 
         formData.append("image", data.image);
         if (projtype == 1) {

@@ -8,12 +8,14 @@ import {
   UpdateProfileAction,
 } from "../../redux/Actions/authAction";
 import UploadComponent from "../UploadComponent";
+import { useHistory } from "react-router-dom";
 
 function BannerUpload(props) {
   const [imageSrc, setImageSrc] = useState("");
   const userdet = useSelector((state) => {
     return state?.user?.userdetail;
   });
+  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,7 +26,7 @@ function BannerUpload(props) {
     const formData = new FormData();
     formData.append("username", userdet.username);
     formData.append("banner_image", imageSrc);
-    dispatch(UpdateProfileAction(formData, props));
+    dispatch(UpdateProfileAction(formData, props,history));
   };
 
   return (

@@ -6,12 +6,13 @@ import 'antd/lib/modal/style/css';
 import 'antd/lib/button/style/css'
 
 import { UpdateOrganizationAction } from '../../../redux/Actions/authAction';
+import { useHistory } from 'react-router-dom';
 
 
 const EditName = (props) => {
     const dispatch = useDispatch()
     const [form] = Form.useForm()
-
+const history = useHistory();
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
@@ -38,7 +39,7 @@ const EditName = (props) => {
             formData.append('banner_image', "")
             formData.append('description', "")
             formData.append('logo', "")
-            dispatch(UpdateOrganizationAction(formData, userdet?.organization_detail?.id, props, userdet?.user_id))
+            dispatch(UpdateOrganizationAction(formData, userdet?.organization_detail?.id, props, userdet?.user_id,history))
         } catch (error) {
             console.log('error', error)
         }

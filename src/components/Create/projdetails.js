@@ -14,17 +14,16 @@ import ReferalPopup from "../ItemDetails/refralPopup";
 import Swal from "sweetalert2";
 import { Alert, Space } from "antd";
 import ProTypePopup from "./ProjectTypePopup";
+import { useHistory } from "react-router-dom";
 
 const ProjNftDetails = () => {
   const { slug } = useParams();
   const latprojdetail = useSelector((state) => {
     return state.projectdetails.latestprojectdetails;
   });
+  const history = useHistory();
   const [matic, setmatic] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
-  const [modalShowedit, setModalShowedit] = React.useState(false);
-  const [nftId, setNftID] = useState();
-  const [modalShowadd, setModalShowadd] = React.useState(false);
   const [modalShowrefer, setModalShowrefer] = React.useState(false);
   const dispatch = useDispatch();
   const [modalShowDes, setModalShowDes] = React.useState(false);
@@ -36,7 +35,7 @@ const ProjNftDetails = () => {
   useEffect(
     (event) => {
       GetMatic(setmatic);
-      dispatch(ProjectDetail(slug));
+      dispatch(ProjectDetail(slug,history));
     },
     [slug]
   );

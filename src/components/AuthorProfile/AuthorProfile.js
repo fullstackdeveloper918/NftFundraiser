@@ -8,6 +8,7 @@ import UserdataTable from "./userDetails";
 import AvatarUpload from "./avatarUpload";
 import BannerUpload from "./bannerUpload";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const AuthorProfile = () => {
 
@@ -16,6 +17,7 @@ const AuthorProfile = () => {
     const userdet = useSelector(state => {
         return state?.user?.userdetail
     })
+    const history = useHistory();
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
     const dispatch = useDispatch()
 
@@ -36,7 +38,7 @@ const AuthorProfile = () => {
         const formData = new FormData()
         formData.append('username', data.username)
         formData.append('email', data.email)
-        dispatch(UpdateProfileAction(formData))
+        dispatch(UpdateProfileAction(formData,null,history))
     }
 
 

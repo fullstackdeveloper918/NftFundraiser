@@ -10,8 +10,11 @@ import {
 import { useState } from "react";
 import JoditEditor from "jodit-react";
 import { CityList, CountryList, StateList } from "../redux/Actions/authAction";
+import { useHistory } from "react-router-dom";
 
 const EditProject = () => {
+
+  const history = useHistory();
   const editor = useRef(null);
   const [country, setCountry] = useState();
   const [description, setDescription] = useState();
@@ -35,7 +38,7 @@ const EditProject = () => {
 
   useEffect(() => {
     //
-    dispatch(ProjectDetail(id));
+    dispatch(ProjectDetail(id,history));
   }, [id, dispatch]);
 
   const { countries } = useSelector((state) => state.countries);
@@ -91,7 +94,7 @@ const EditProject = () => {
     formData.append("type", data.type);
     formData.append("category_id", data.category_id);
 
-    dispatch(UpdateProject(id, formData));
+    dispatch(UpdateProject(id, formData,history));
   };
 
   const disablePastDate = () => {

@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { BidNft } from "../Wallet/interact";
 import { useState } from "react";
 import { Loader } from "@react-three/drei";
+import { useHistory } from "react-router-dom";
 function BidPopup(props) {
-  //
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [bidValue, setBidValue] = useState(0);
   const {
@@ -13,14 +14,14 @@ function BidPopup(props) {
     formState: { errors },
   } = useForm({});
   const onSubmit = (data) => {
-    //
     BidNft(
       props.id,
       props.projid,
       props.from,
       props.onHide,
       setLoading,
-      data.amount
+      data.amount,
+      history,
     );
   };
   return (

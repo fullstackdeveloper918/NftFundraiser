@@ -15,8 +15,10 @@ import "antd/lib/button/style/css";
 import Loader from "../Loader/loader";
 import DModal from "./3dModal";
 import swal from "sweetalert";
+import { useHistory } from "react-router-dom";
 
 const EditNftImage = (props) => {
+  const history = useHistory();
   const [nftFileType, setNFtFileType] = useState("Image");
   const [nft, setNft] = useState([]);
   const [nftwidth, setNftwidth] = useState();
@@ -101,8 +103,8 @@ const EditNftImage = (props) => {
   };
 
   useEffect(() => {
-    dispatch(GetCollectionsAction());
-    dispatch(NftList(props.nft_id?.id));
+    dispatch(GetCollectionsAction(history));
+    dispatch(NftList(props.nft_id?.id,null,history));
     form.setFieldsValue({
       nfts: [
         {
@@ -124,7 +126,7 @@ const EditNftImage = (props) => {
     try {
       setLoading(true);
       if (source) {
-        const imagesRes = await uploadNFT(nft, dispatch);
+        const imagesRes = await uploadNFT(nft, dispatch,null,history);
         const addedImage = imagesRes?.data?.data.map(
           (x) => ipfsBaseUrl + x?.image_hash
         );
@@ -144,7 +146,7 @@ const EditNftImage = (props) => {
             "description",
             values?.nfts?.map((x) => x.nft_description)
           );
-          dispatch(UpdateNft(formData, props, setLoading));
+          dispatch(UpdateNft(formData, props, setLoading,history));
         } else {
           swal("error!", "Nft not uploaded", "error");
         }
@@ -162,7 +164,7 @@ const EditNftImage = (props) => {
           "description",
           values?.nfts?.map((x) => x.nft_description)
         );
-        dispatch(UpdateNft(formData, props, setLoading));
+        dispatch(UpdateNft(formData, props, setLoading,history));
       }
     } catch (error) {
       swal("error", error, "error");

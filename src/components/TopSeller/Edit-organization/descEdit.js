@@ -6,11 +6,12 @@ import { Controller, useForm } from 'react-hook-form';
 import JoditEditor from 'jodit-react';
 
 import { UpdateOrganizationAction } from '../../../redux/Actions/authAction';
+import { useHistory } from 'react-router-dom';
 
 function DescEdit(props) {
     const editor = useRef(null);
 
-   
+   const history = useHistory();
     const dispatch = useDispatch()
     const userdet = useSelector(state => {
         return state?.user?.userdetail
@@ -37,7 +38,7 @@ function DescEdit(props) {
             formData.append('banner_image', "")
             formData.append('description', description)
             formData.append('logo', "")
-            dispatch(UpdateOrganizationAction(formData, userdet?.organization_detail?.id, props, userdet?.user_id))
+            dispatch(UpdateOrganizationAction(formData, userdet?.organization_detail?.id, props, userdet?.user_id,history))
         } catch (error) {
             console.log('error', error)
         }

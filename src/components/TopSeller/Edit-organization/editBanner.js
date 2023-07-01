@@ -8,12 +8,13 @@ import {
   UpdateOrganizationAction,
 } from "../../../redux/Actions/authAction";
 import UploadComponent from "../../UploadComponent";
+import { useHistory } from "react-router-dom";
 
 const EditBanner = (props) => {
   const dispatch = useDispatch();
   const [imageSrc, setImageSrc] = useState("");
   const [form] = Form.useForm();
-
+const history = useHistory();
   const userdet = useSelector((state) => {
     return state?.user?.userdetail;
   });
@@ -44,7 +45,8 @@ const EditBanner = (props) => {
           formData,
           userdet?.organization_detail?.id,
           props,
-          userdet?.user_id
+          userdet?.user_id,
+          history
         )
       );
     } catch (error) {

@@ -23,11 +23,10 @@ import UploadComponent from "../UploadComponent";
 const Create = ({ current, next, prev }) => {
   const { data, setFormValues } = useFormData();
   const [description, setDescription] = useState();
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState();
 
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  const [price, setPrice] = useState(0);
+  const [state, setState] = useState();
+  const [city, setCity] = useState();
   const [image, setImage] = useState();
   const [loading, setLoading] = useState(false);
   const [usertype, setUserType] = useState("1");
@@ -55,17 +54,6 @@ const Create = ({ current, next, prev }) => {
     mode: "all",
   });
 
-  const onSubmit = (data) => {
-    setFormValues({
-      ...data,
-      description,
-      type: usertype,
-      image: image,
-      imageUri: image,
-    });
-    next();
-  };
-
   const cat = useSelector((state) => {
     return state?.projectdetails?.categories;
   });
@@ -85,28 +73,46 @@ const Create = ({ current, next, prev }) => {
   };
 
   useEffect(() => {
-    handleChangeCountry();
-  }, [current]);
+    if (userdet?.organization_detail) {
+      setCountry(userdet?.organization_detail?.country_id);
+      setValue("country", userdet?.organization_detail?.country_id);
+    }
+  }, [userdet]);
+
+  useEffect(() => {
+    if (country) {
+      const formData = new FormData();
+      formData.append("country_id", country);
+      dispatch(StateList(formData));
+    }
+  }, [country]);
+
+  useEffect(() => {
+    if (country && state) {
+      const formData = new FormData();
+      formData.append("country_id", country);
+      formData.append("state_id", state);
+      dispatch(CityList(formData));
+    }
+  }, [country, state]);
+
+ 
 
   useEffect(() => {
     dispatch(GetUserAction());
-    dispatch(GetCollectionsAction());
+    dispatch(GetCollectionsAction(history));
     dispatch(CategoriesAction());
     dispatch(CountryList());
-    handleChangeCountry();
     if (prev) {
       setValue("title", data.title);
       setValue("address", data.address);
       setValue("category_id", data.category_id);
-      setValue("country", data.country);
       setValue("state", data.state);
       setValue("city", data.city);
       setValue("description", data.description);
-      // setValue("price", data.price);
       setValue("type", data.usertype);
       setValue("image", data.imageUri);
       setUserType(data.usertype);
-      setCountry(data.country);
       setDescription(data.description);
       setImage(data.imageUri);
       setState(data.state);
@@ -123,7 +129,6 @@ const Create = ({ current, next, prev }) => {
     dispatch(CityList(formData));
   };
 
-
   const handleSubmitDraft = (data) => {
     const imageBanner = dataURLtoBlob(image);
     const formData = new FormData();
@@ -138,15 +143,29 @@ const Create = ({ current, next, prev }) => {
     dispatch(CreateProjectAction(formData, setLoading, history));
   };
 
+  const onSubmit = (data) => {
+    setFormValues({
+      ...data,
+      description,
+      country,
+      state,
+      city,
+      type: usertype,
+      image: image,
+      imageUri: image,
+    });
+    next();
+  };
+
   return (
     <div className={current === 0 ? styles.showForm : styles.hideForm}>
       <form
+        noValidate
         onSubmit={handleSubmit(onSubmit)}
         className="item-form card no-hover"
       >
         <div className="row">
           <div className="col-md-6 col-12">
-            {/* {type == 1 && ( */}
             <div className="form-group mt-3">
               <label>Project name</label>
               <input
@@ -244,13 +263,10 @@ const Create = ({ current, next, prev }) => {
                   name="country"
                   placeholder="Select your country"
                   {...register("country", { required: true })}
-                  onChange={handleChangeCountry}
-                  defaultValue={
-                    countryName
-                      ? countryName
-                      : userdet?.organization_detail?.country_id &&
-                        handleChangeCountry()
-                  }
+                  onChange={(e) => {
+                    setCountry(e.target.value);
+                  }}
+                  defaultValue={country}
                 >
                   aria-invalid={errors?.country ? "true" : "false"}
                   {countries?.data?.data?.map((option, key) => (
@@ -271,7 +287,9 @@ const Create = ({ current, next, prev }) => {
                 <select
                   name="state"
                   {...register("state")}
-                  onChange={handleChangeState}
+                  onChange={(e) => {
+                    setState(e.target.value);
+                  }}
                   disabled={states?.data?.data?.length === 0}
                 >
                   aria-invalid={errors?.state ? "true" : "false"}
@@ -304,6 +322,8 @@ const Create = ({ current, next, prev }) => {
                   name="city"
                   {...register("city")}
                   disabled={states?.data?.data?.length === 0}
+                  onChange={(e) => setCity(e.target.value)}
+                  defaultValue={city}
                 >
                   aria-invalid={errors?.city ? "true" : "false"}
                   <option
@@ -358,87 +378,10 @@ const Create = ({ current, next, prev }) => {
               </div>
             </div>
           </div>
-          {/* <div className="col-12 col-md-12">
-            <div className={`form-group  ${styles.input_group}`}>
-              {usertype === 2 ? (
-                <label>Price per NFT (In MATIC tokens)</label>
-              ) : (
-                <label>Price (In MATIC tokens)</label>
-              )}
-              <div className="position-relative">
-                <span
-                  className={styles.plus_icon}
-                  onClick={() => setPrice((price) => Number(price) + 1)}
-                >
-                  <i className="fa fa-plus" aria-hidden="true"></i>
-                </span>
-                <input
-                  value={price}
-                  type="number"
-                  className="form-control"
-                  step="0.01"
-                  min="0"
-                  name="price"
-                  placeholder="Price"
-                  {...register("price", { required: true })}
-                  onChange={(e) => setPrice(e.target.value)}
-                  aria-invalid={errors.price ? "true" : "false"}
-                />
-                <span
-                  className={styles.minus_icon}
-                  onClick={() => {
-                    if (Number(price) <= 0) {
-                      setPrice(Number(0));
-                    } else {
-                      setPrice(Number(price) - 1);
-                    }
-                  }}
-                >
-                  <i className="fa fa-minus" aria-hidden="true"></i>
-                </span>
-              </div>
-              {errors.price?.type === "required" && (
-                <p style={{ color: "red" }} role="alert">
-                  Price is required
-                </p>
-              )}
-            </div> */}
-            {/* <div className="">
-              <div className="form-group pricing-detail">
-                <p>
-                  <span>Price</span> <span>{price ? price : "--"} MATIC</span>
-                </p>
 
-                <div className="fee_contentdiv">
-                  <span className="mainkrmetica_heading">Karmatica Fee</span>
-                  <div className="fee_content">
-                    <span>Buyer</span>
-                    <span>1%</span>
-                  </div>
-                  <div className="fee_content">
-                    <span>Seller</span>
-                    <span>1%</span>
-                  </div>
-                </div>
-
-                <p>
-                  <span>You will receive </span>
-                  <span>
-                    {(98 * price) / 100 ? (98 * price) / 100 : "--"} MATIC
-                  </span>
-                </p>
-              </div>
-            </div> */}
-          {/* </div> */}
           <div className=" col-12">
             <div className="form-group">
               <label>Banner image</label>
-              {/* <UploadImage
-                imageSrc={image}
-                // src={image}
-                initalImag={data.imageUri}
-                setImageSrc={setImage}
-              /> */}
               <UploadComponent imageSrc={image} setImageSrc={setImage} />
               <div>
                 <div className="logo-dis logo-dis-img">

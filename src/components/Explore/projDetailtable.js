@@ -8,12 +8,14 @@ import { ProgressBar, Table } from 'react-bootstrap';
 import ProjDetailPopup from '../Create/projectDetailpopup';
 import dayjs from 'dayjs';
 import { PopularCollectionActionDetails } from '../../redux/Actions/popularAction';
+import { useHistory } from 'react-router-dom';
 const ProjdataTable = (props) => {
     const dispatch = useDispatch()
     const { Panel } = Collapse;
     const onChange = (key) => {
         console.log(key);
     };
+    const history = useHistory();
     const [modalShowproj, setModalShowproj] = React.useState(false);
     const { slug } = useParams()
     const [expandIconPosition, setExpandIconPosition] = useState('end');
@@ -36,7 +38,7 @@ const ProjdataTable = (props) => {
         dispatch(LatestProjectDetail(slug))
         if(sessionStorage.getItem("authToken")){
 
-            dispatch(ProjectDetail(slug))
+            dispatch(ProjectDetail(slug,history))
         }
         dispatch(PopularCollectionActionDetails(props.idx))
     }, [slug])

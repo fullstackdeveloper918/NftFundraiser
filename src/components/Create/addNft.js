@@ -143,14 +143,14 @@ const AddNft = ({ current, prev }) => {
     }
 
     useEffect(() => {
-        dispatch(GetCollectionsAction())
+        dispatch(GetCollectionsAction(history))
         register("nft_description");
     }, [register]);
 
     const onFinish = async (values) => {
         try {
             setLoading(true)
-            const imagesRes = await uploadNFT(nft, dispatch)
+            const imagesRes = await uploadNFT(nft, dispatch,null,history)
             const addedImage = ipfsBaseUrl + imagesRes.data.data[0].image_hash
             var str = addedImage;
             var check = str.includes("https://ipfs.io/ipfs/undefined");

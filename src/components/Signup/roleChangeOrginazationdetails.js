@@ -7,17 +7,16 @@ import {
   HearAboutList,
 } from "../../redux/Actions/authAction";
 import { Controller, useForm } from "react-hook-form";
-
 import { GetSocialMediaIcons } from "../../redux/Actions/projectAction";
 import { useState } from "react";
 import JoditEditor from "jodit-react";
-import { userDetail } from "../../redux/Slices/authSlice";
+import { useHistory } from "react-router-dom";
 
 const RoleChangeOrganizationdetails = () => {
   const [description, setDescription] = useState();
   const [einNumber, setEinNumber] = useState(0);
   const [fundraisingGoal, setFundraisingGoal] = useState(0);
-
+  const history = useHistory();
   const userdet = useSelector((state) => {
     return state?.user?.userdetail;
   });
@@ -34,7 +33,6 @@ const RoleChangeOrganizationdetails = () => {
   });
 
   const OnSubmit = (values) => {
-   
     const formData = new FormData();
     formData.append("banner_image", values.banner_image[0]);
     formData.append("logo", values.logo[0]);
@@ -49,8 +47,7 @@ const RoleChangeOrganizationdetails = () => {
     formData.append("social_link", values.social_link);
     formData.append("description", description);
 
-    dispatch(CreateOrganizationAfterRoleChange(formData, dispatch));
-   
+    dispatch(CreateOrganizationAfterRoleChange(formData, history));
   };
 
   const socialmedia = useSelector((state) => {
@@ -74,12 +71,11 @@ const RoleChangeOrganizationdetails = () => {
               <h3 className="mt-3 mb-0"></h3>
               <p></p>
             </div>
-          
+
             <form
               onSubmit={handleSubmit(OnSubmit)}
               className="item-form card no-hover"
             >
-           
               <div className="row">
                 <div className="col-md-6 col-12">
                   <div className="form-group number-input mt-3">
@@ -202,7 +198,6 @@ const RoleChangeOrganizationdetails = () => {
                   </div>
                 </div>
 
-             
                 <div className="col-12">
                   <div className="form- group mt-3">
                     <label>Description</label>
@@ -211,7 +206,6 @@ const RoleChangeOrganizationdetails = () => {
                       name="description"
                       defaultValue=""
                       rules={{ required: true, min: 150 }}
-                     
                       render={({ field }) => {
                         return (
                           <JoditEditor
@@ -268,7 +262,7 @@ const RoleChangeOrganizationdetails = () => {
                     )}
                   </div>
                 </div>
-               
+
                 <div className="col-md-6 col-12">
                   <div className="form-group number-input mt-3">
                     <label>EIN Number/Tax Id (optional)</label>
@@ -290,7 +284,7 @@ const RoleChangeOrganizationdetails = () => {
                         placeholder="EIN Number/Tax Id(optional)"
                         {...register("tax_id")}
                         // {...register("email")}
-                       
+
                         onChange={(e) => setEinNumber(e.target.value)}
                       />
                       <span
@@ -306,17 +300,13 @@ const RoleChangeOrganizationdetails = () => {
                         <i className="fa fa-minus" aria-hidden="true"></i>
                       </span>
                     </div>
-                   
                   </div>
                 </div>
                 <div className="col-md-6 col-12">
                   <div className="form-group mt-3">
                     <label>Social Media (optional)</label>
                     <div class="position-relative select-box">
-                      <select
-                        name="social"
-                        {...register("social")}
-                      >
+                      <select name="social" {...register("social")}>
                         aria-invalid={errors.social ? "true" : "false"}
                         <option
                           value=""
@@ -335,7 +325,6 @@ const RoleChangeOrganizationdetails = () => {
                         ))}
                       </select>
                     </div>
-                    
                   </div>
                 </div>
 
@@ -355,13 +344,10 @@ const RoleChangeOrganizationdetails = () => {
                         name="social_link"
                         placeholder="social link(optional) "
                         {...register("social_link")}
-                     
                       />
                     </div>
                   </div>
                 </div>
-
-              
 
                 <div className="col-md-6 col-12">
                   <div className="form-group mt-3">
@@ -410,13 +396,12 @@ const RoleChangeOrganizationdetails = () => {
                     )}
                   </div>
                 </div>
-               
+
                 <div className="col-12">
                   <button className="btn w-100 mt-3 mt-sm-4" type="submit">
                     Create
                   </button>
                 </div>
-               
               </div>
             </form>
           </div>

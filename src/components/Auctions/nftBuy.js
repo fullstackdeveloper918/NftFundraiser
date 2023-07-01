@@ -86,7 +86,7 @@ const LatprojNftDetails = (props) => {
     }
     const reffHandler = async () => {
 
-        await updateReffid({ tokenId: latprojnftdetail.token_id, refid, nft_id: latprojnftdetail.id, dispatch })
+        await updateReffid({ tokenId: latprojnftdetail.token_id, refid, nft_id: latprojnftdetail.id, dispatch,history })
         await buyHandler()
     }
     const antIcon = (

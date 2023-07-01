@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { NftList } from "../../redux/Actions/projectAction";
@@ -25,7 +25,7 @@ export const Roles = {
   BUYER: 2,
   CREATOR: 3,
 };
-export const creatorWalletUpdate = async (auth_token) => {
+export const creatorWalletUpdate = async (auth_token, history) => {
   try {
     const formData = new FormData();
 
@@ -45,12 +45,15 @@ export const creatorWalletUpdate = async (auth_token) => {
 
     return response;
   } catch (error) {
+    if (error?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     return error;
   }
 };
 
 export const UpdateWalletAddress = async (role, auth_token = null) => {
-  ;
   try {
     const formData = new FormData();
 
@@ -69,7 +72,6 @@ export const UpdateWalletAddress = async (role, auth_token = null) => {
       formData,
       config
     );
-    ;
     console.log("response", response);
 
     return response;
@@ -86,9 +88,6 @@ export const ConnectWallet = async (
   dispatch,
   history
 ) => {
-  
-
-  ;
   // const chainId = 80001// Polygon Mainnet
   const chainId = 137; // Polygon Mainnet
 
@@ -157,7 +156,6 @@ export const ConnectWallet = async (
             if (res?.status === 401) {
               history.push("/wallet-connect");
             } else {
-              ;
               if (res == undefined) {
                 history.push("/wallet-connect");
               } else {
@@ -181,7 +179,6 @@ export const ConnectWallet = async (
                 }
               }
             }
-            ;
             // return {
             //   ...obj,
             //   res,
@@ -189,11 +186,14 @@ export const ConnectWallet = async (
           }
         })
         .catch((error) => {
-          ;
           dispatch(LogsAction(error));
           if (error.code === -32002) {
             setIsMetamaskopen("Mata-mask request already pending");
-            swal("warning", "Please reject pending previous request's to continue... ", "warning");
+            swal(
+              "warning",
+              "Please reject pending previous request's to continue... ",
+              "warning"
+            );
             console.log("Permissions needed to continue.");
           } else {
             setIsMetamaskopen("User rejected the request");
@@ -260,6 +260,7 @@ export const UpdateStatus = async ({
   pay_to,
   type,
   setModalShow,
+  history,
 }) => {
   const token = sessionStorage.getItem("authToken");
   try {
@@ -281,20 +282,28 @@ export const UpdateStatus = async ({
         Authorization: `Bearer ${token}`,
       },
     };
-    //
     await axios.post(
       `${process.env.REACT_APP_BACKEND_API}api/NftUpdate/${slug}`,
       formData,
       config
     );
   } catch (error) {
+    if (error?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     swal("error", "Please try again", "error");
     setModalShow(false);
     return error;
   }
 };
 
-const UpdateContract = async (collid, contractAddress, setModalShow) => {
+const UpdateContract = async (
+  collid,
+  contractAddress,
+  setModalShow,
+  history
+) => {
   const token = sessionStorage.getItem("authToken");
   try {
     const formData = new FormData();
@@ -307,7 +316,6 @@ const UpdateContract = async (collid, contractAddress, setModalShow) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    //
     await axios.post(
       `${process.env.REACT_APP_BACKEND_API}api/updateContract/${collid}`,
       formData,
@@ -315,9 +323,11 @@ const UpdateContract = async (collid, contractAddress, setModalShow) => {
     );
   } catch (e) {
     setModalShow(false);
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     swal("error", "something went wrong", "error");
-    // await dispatch(LogsAction(e))
-
   }
 };
 
@@ -364,6 +374,7 @@ export const CreateMetaDataAndMint = async ({
   setModalShow,
   dispatch,
   role,
+  history,
 }) => {
   const contract = await new web3.eth.Contract(
     contractABI.abi,
@@ -389,7 +400,12 @@ export const CreateMetaDataAndMint = async ({
       .on("confirmation", async (confNumber, receipt) => {
         if (confNumber === 1) {
           if (collid !== 1) {
-            await UpdateContract(collid, contractAddress, setModalShow);
+            await UpdateContract(
+              collid,
+              contractAddress,
+              setModalShow,
+              history
+            );
           }
 
           const tokid = web3.utils.toBN(receipt.logs[0].topics[3]);
@@ -407,7 +423,7 @@ export const CreateMetaDataAndMint = async ({
             end_date,
           });
           setCurrent(2);
-          await dispatch(NftList(slug.id, setLoading));
+          await dispatch(NftList(slug.id, setLoading, history));
         }
       })
       .on("error", function (error) {
@@ -479,11 +495,11 @@ export const updateReffid = async ({
   nft_id,
   dispatch,
   setPaymentFlow,
+  history,
 }) => {
   const token = sessionStorage.getItem("authToken");
   try {
     const formData = new FormData();
-
     formData.append("token_id", tokenId);
     formData.append("ref_id", refid);
     formData.append("nft_id", nft_id);
@@ -494,29 +510,18 @@ export const updateReffid = async ({
         Authorization: `Bearer ${token}`,
       },
     };
-    //
-    const res = await axios.post(
+
+    await axios.post(
       `${process.env.REACT_APP_BACKEND_API}api/getUserPercentage`,
       formData,
       config
     );
-    // await dispatch(res())
-    // const reffee = sessionStorage.setItem('refamount', res?.data?.data?.referral_fees[0]?.fees)
-    if (res?.status === 200) {
-      // await dispatch(getNftwolDetailsPaymentflow(res))
-      // const data =  Object.entries(res.data.data[0])?.map(x=>x)
-      // (setPaymentFlow(res?.data?.data))
-      //  await dispatch(sessionStorage.setItem('paymentFlow', res?.data?.data))
-    }
-
-    // if (res.status === 200) {
-    // setRefamount(res?.data?.data)
-    // }
   } catch (error) {
+    if (error?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     await dispatch(LogsAction(error));
-
-    //
-    // console.log("error");
   }
 };
 
@@ -538,12 +543,11 @@ export const BuyNft = async ({
   dispatch,
   history,
 }) => {
-  // const flow = JSON.parse(sessionStorage.getItem('paymentFlow') || "[]")
   if (!isMetaMaskInstalled()) {
     swal("oops!", "No wallet found. Please install MetaMask", "error");
   } else {
     if (!window.ethereum?.selectedAddress) {
-      ConnectWallet("BUYER",history);
+      ConnectWallet("BUYER", history);
     }
     try {
       let wallets = [];
@@ -671,6 +675,7 @@ const UpdateBid = async ({
   from,
   onHide,
   setLoading,
+  history,
 }) => {
   const token = sessionStorage.getItem("authToken");
   try {
@@ -700,6 +705,10 @@ const UpdateBid = async ({
       onHide(false);
     }
   } catch (error) {
+    if (error?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     swal("error", error?.response?.data?.message, "error");
     return error;
     //
@@ -707,7 +716,15 @@ const UpdateBid = async ({
   }
 };
 
-export const BidNft = async (id, projid, from, onHide, setLoading, amount) => {
+export const BidNft = async (
+  id,
+  projid,
+  from,
+  onHide,
+  setLoading,
+  amount,
+  history
+) => {
   try {
     setLoading(true);
 
@@ -718,6 +735,7 @@ export const BidNft = async (id, projid, from, onHide, setLoading, amount) => {
       from,
       onHide,
       setLoading,
+      history,
     });
   } catch (error) {
     swal("error", error, "error");

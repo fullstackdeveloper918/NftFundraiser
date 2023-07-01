@@ -28,13 +28,12 @@ import { LogsAction } from "./logsAction";
 
 export const CreateProjectAction =
   (params, setLoading, history) => async (dispatch) => {
-  
     try {
       const token = sessionStorage.getItem("authToken");
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
-      
+
           Authorization: `Bearer ${token}`,
         },
         transformRequest: (formData) => formData,
@@ -60,6 +59,10 @@ export const CreateProjectAction =
         });
       }
     } catch (e) {
+      if (e?.code?.includes("ERR_NETWORK")) {
+        sessionStorage.removeItem("authToken");
+        history.push("/wallet-connect");
+      }
       if (e?.response?.data.message) {
         setLoading(false);
         dispatch(LogsAction(e));
@@ -69,7 +72,7 @@ export const CreateProjectAction =
     }
   };
 
-export const ProjectDetail = (slug) => async (dispatch) => {
+export const ProjectDetail = (slug, history) => async (dispatch) => {
   const token = sessionStorage.getItem("authToken");
   try {
     const config = {
@@ -85,6 +88,10 @@ export const ProjectDetail = (slug) => async (dispatch) => {
 
     dispatch(getProjectDetail(res));
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
@@ -92,8 +99,6 @@ export const ProjectDetail = (slug) => async (dispatch) => {
   }
 };
 export const LatestProjectDetail = (slug) => async (dispatch) => {
-  //
-  //
   try {
     const config = {
       headers: {
@@ -115,6 +120,7 @@ export const LatestProjectDetail = (slug) => async (dispatch) => {
 };
 
 export const ProjectList = (params) => async (dispatch) => {
+  const { history } = params;
   const token = sessionStorage.getItem("authToken");
   if (params?.location?.pathname === "/projectlist") {
     params.setLoading(true);
@@ -145,6 +151,10 @@ export const ProjectList = (params) => async (dispatch) => {
     // setLoading(false)
     return res?.data?.data;
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(e));
     if (params?.location?.pathname === "/projectlist") {
       params.setLoading(false);
@@ -155,7 +165,7 @@ export const ProjectList = (params) => async (dispatch) => {
   }
 };
 
-export const NftList = (slug, setLoading) => async (dispatch) => {
+export const NftList = (slug, setLoading, history) => async (dispatch) => {
   const token = sessionStorage.getItem("authToken");
   // setLoading(true)
   try {
@@ -174,6 +184,10 @@ export const NftList = (slug, setLoading) => async (dispatch) => {
     await dispatch(getNftList(res));
     setLoading(false);
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
@@ -181,9 +195,8 @@ export const NftList = (slug, setLoading) => async (dispatch) => {
     }
   }
 };
-export const uploadNFT = async (nft, dispatch, setLoading) => {
+export const uploadNFT = async (nft, dispatch, setLoading, history) => {
   try {
-
     const token = sessionStorage.getItem("authToken");
     const config = {
       headers: {
@@ -216,6 +229,10 @@ export const uploadNFT = async (nft, dispatch, setLoading) => {
       );
   } catch (error) {
     // setLoading(false)
+    if (error?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(error));
     swal("error", error, "error");
   }
@@ -266,7 +283,7 @@ export const getPublicLiveProjects = createAsyncThunk(
   }
 );
 
-export const UpdateProject = (props, params) => async (dispatch) => {
+export const UpdateProject = (props, params, history) => async (dispatch) => {
   const token = sessionStorage.getItem("authToken");
   try {
     const config = {
@@ -292,13 +309,14 @@ export const UpdateProject = (props, params) => async (dispatch) => {
         buttons: false,
         timer: 1500,
       });
-      dispatch(ProjectDetail(props.id));
-      // .then(function () {
-      // window.location = `/ projnftdetails / ${ props }`;
-      // });
+      dispatch(ProjectDetail(props.id, history));
     }
     props.onHide(false);
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
@@ -306,7 +324,7 @@ export const UpdateProject = (props, params) => async (dispatch) => {
   }
 };
 
-export const DeleteProject = (id) => async (dispatch) => {
+export const DeleteProject = (id, history) => async (dispatch) => {
   const token = sessionStorage.getItem("authToken");
   try {
     const config = {
@@ -338,9 +356,12 @@ export const DeleteProject = (id) => async (dispatch) => {
           swal("Your project is safe!");
         }
       });
-      
     }
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
@@ -359,7 +380,7 @@ export const CategoriesAction = () => async (dispatch) => {
       `${process.env.REACT_APP_BACKEND_API}api/getCategories`,
       config
     );
-   
+
     dispatch(getCategoriesList(res));
   } catch (e) {
     dispatch(LogsAction(e));
@@ -369,7 +390,7 @@ export const CategoriesAction = () => async (dispatch) => {
   }
 };
 
-export const GetCollectionsAction = () => async (dispatch) => {
+export const GetCollectionsAction = (history) => async (dispatch) => {
   const token = sessionStorage.getItem("authToken");
   try {
     const config = {
@@ -385,14 +406,19 @@ export const GetCollectionsAction = () => async (dispatch) => {
     );
     await dispatch(getCollections(res));
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
     }
   }
 };
+
 export const CreateCollectionAction =
-  ({ dat, imageBanner, props, setLoading }) =>
+  ({ dat, imageBanner, props, setLoading, history }) =>
   async (dispatch) => {
     try {
       setLoading(true);
@@ -417,13 +443,16 @@ export const CreateCollectionAction =
       );
       await dispatch(createCollectionSuccess(res));
       if (res?.status === 200) {
-        await dispatch(GetCollectionsAction());
+        await dispatch(GetCollectionsAction(history));
         setLoading(false);
         props.onHide(false);
-       
       }
     } catch (e) {
       setLoading(false);
+      if (e?.code?.includes("ERR_NETWORK")) {
+        sessionStorage.removeItem("authToken");
+        history.push("/wallet-connect");
+      }
       dispatch(LogsAction(e));
       if (e?.response?.data.message) {
         swal("error", e.response.data.message, "error");
@@ -431,7 +460,8 @@ export const CreateCollectionAction =
       }
     }
   };
-export const GetCollectionDetails = (id) => async (dispatch) => {
+
+export const GetCollectionDetails = (id, history) => async (dispatch) => {
   const token = sessionStorage.getItem("authToken");
   try {
     const config = {
@@ -448,6 +478,10 @@ export const GetCollectionDetails = (id) => async (dispatch) => {
 
     await dispatch(getCollectionDetails(res));
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
@@ -476,7 +510,7 @@ export const GetSocialMediaIcons = () => async (dispatch) => {
   }
 };
 
-export const UpdateCollection = (id, params) => async (dispatch) => {
+export const UpdateCollection = (id, params, history) => async (dispatch) => {
   //
   const token = sessionStorage.getItem("authToken");
   try {
@@ -495,8 +529,11 @@ export const UpdateCollection = (id, params) => async (dispatch) => {
     //
     // console.log(res, 'coll rres')
     await dispatch(getLatestProjectDetail(res));
-    
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
@@ -516,7 +553,6 @@ export const GetSettings = () => async (dispatch) => {
     );
 
     await dispatch(getSettings(res));
-
   } catch (e) {
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
@@ -529,7 +565,6 @@ export const GetNftwol =
   ({ slug }, refid) =>
   async (dispatch) => {
     try {
-    
       let refId = refid ? refid : "null";
       const config = {
         headers: {
@@ -551,6 +586,7 @@ export const GetNftwol =
       }
     }
   };
+
 export const GetfundraiserProject = (slug) => async (dispatch) => {
   //
   try {
@@ -574,7 +610,7 @@ export const GetfundraiserProject = (slug) => async (dispatch) => {
   }
 };
 
-export const UpdateBanner = (formData, props) => async (dispatch) => {
+export const UpdateBanner = (formData, props, history) => async (dispatch) => {
   //
   const token = sessionStorage.getItem("authToken");
   try {
@@ -602,7 +638,7 @@ export const UpdateBanner = (formData, props) => async (dispatch) => {
         buttons: false,
         timer: 1500,
       }).then(function () {
-        dispatch(ProjectDetail(props.id));
+        dispatch(ProjectDetail(props.id, history));
         dispatch(LatestProjectDetail(props.id));
 
         // window.location = "/projectlist";
@@ -610,54 +646,61 @@ export const UpdateBanner = (formData, props) => async (dispatch) => {
       props.onHide(false);
     }
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
     }
   }
 };
-export const UpdateNft = (formData, props, setLoading) => async (dispatch) => {
-  //
-  const token = sessionStorage.getItem("authToken");
-  try {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      transformRequest: (formData) => formData,
-    };
-    const res = await axios.post(
-      `${process.env.REACT_APP_BACKEND_API}api/nft/update/${props.id}/${props.nft_id?.id}`,
-      formData,
-      config
-    );
-    //
-    // console.log(res, 'coll rres')
-    await dispatch(nftUpd(res));
+export const UpdateNft =
+  (formData, props, setLoading, history) => async (dispatch) => {
+    const token = sessionStorage.getItem("authToken");
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        transformRequest: (formData) => formData,
+      };
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACKEND_API}api/nft/update/${props.id}/${props.nft_id?.id}`,
+        formData,
+        config
+      );
+      //
+      // console.log(res, 'coll rres')
+      await dispatch(nftUpd(res));
 
-    if (res.status === 200) {
-      swal({
-        title: "success",
-        text: "NFT details updated",
-        icon: "success",
-        buttons: false,
-        timer: 1500,
-      });
-      setLoading(false);
-      dispatch(NftList(props.nft_id?.id));
-      dispatch(ProjectDetail(props.id));
-      props.onHide(false);
-     
+      if (res.status === 200) {
+        swal({
+          title: "success",
+          text: "NFT details updated",
+          icon: "success",
+          buttons: false,
+          timer: 1500,
+        });
+        setLoading(false);
+        dispatch(NftList(props.nft_id?.id, null, history));
+        dispatch(ProjectDetail(props.id, history));
+        props.onHide(false);
+      }
+    } catch (e) {
+      if (e?.code?.includes("ERR_NETWORK")) {
+        sessionStorage.removeItem("authToken");
+        history.push("/wallet-connect");
+      }
+      dispatch(LogsAction(e));
+      if (e?.response?.data.message) {
+        setLoading(false);
+        swal("error", e.response.data.message, "error");
+      }
     }
-  } catch (e) {
-    dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
-      setLoading(false);
-      swal("error", e.response.data.message, "error");
-    }
-  }
-};
+  };
 export const AddNftAction =
   (formData, projid, slug, setLoading, history) => async (dispatch) => {
     const token = sessionStorage.getItem("authToken");
@@ -688,9 +731,12 @@ export const AddNftAction =
           timer: 1500,
         });
         history.push(`/projnftdetails/${slug.id}`);
-        
       }
     } catch (e) {
+      if (e?.code?.includes("ERR_NETWORK")) {
+        sessionStorage.removeItem("authToken");
+        history.push("/wallet-connect");
+      }
       dispatch(LogsAction(e));
       if (e?.response?.data.message) {
         setLoading(false);
@@ -717,8 +763,8 @@ export const GetMatic = () => async (dispatch) => {
     // console.log("error");
   }
 };
-export const getBid = (id) => async (dispatch) => {
-  //
+
+export const getBid = (id, history) => async (dispatch) => {
   try {
     const token = sessionStorage.getItem("authToken");
     const config = {
@@ -732,16 +778,18 @@ export const getBid = (id) => async (dispatch) => {
       config
     );
     await dispatch(res);
-
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(e));
     // console.log("error");
   }
 };
 export const UpdateBId =
-  ({ id, status, setLoading, slug }) =>
+  ({ id, status, setLoading, slug, history }) =>
   async (dispatch) => {
-    //
     setLoading(true);
     try {
       const token = sessionStorage.getItem("authToken");
@@ -756,10 +804,9 @@ export const UpdateBId =
         { status: status },
         config
       );
-      // await dispatch(res)
       if (res.status === 200) {
         setLoading(false);
-        await dispatch(NftList(slug));
+        await dispatch(NftList(slug,null,history));
         swal({
           title: "success",
           text: "success",
@@ -769,6 +816,10 @@ export const UpdateBId =
         });
       }
     } catch (e) {
+      if (e?.code?.includes("ERR_NETWORK")) {
+        sessionStorage.removeItem("authToken");
+        history.push("/wallet-connect");
+      }
       swal("error", e?.response?.data?.message, "error");
       setLoading(false);
       dispatch(LogsAction(e));
@@ -797,7 +848,8 @@ export const GetMostactivityProject = () => async (dispatch) => {
     }
   }
 };
-export const GetbuyedNftDetails = (slug) => async (dispatch) => {
+
+export const GetbuyedNftDetails = (slug, history) => async (dispatch) => {
   const token = sessionStorage.getItem("authToken");
   try {
     const config = {
@@ -814,6 +866,10 @@ export const GetbuyedNftDetails = (slug) => async (dispatch) => {
 
     await dispatch(getbuyednftdetails(res));
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
@@ -836,7 +892,7 @@ export const ResellNft = (params, props, history) => async (dispatch) => {
       config
     );
     if (res?.status === 200) {
-      await dispatch(GetbuyedNftDetails(props.slug));
+      await dispatch(GetbuyedNftDetails(props.slug, history));
 
       swal({
         title: "success",
@@ -848,6 +904,10 @@ export const ResellNft = (params, props, history) => async (dispatch) => {
       props.onHide(false);
     }
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     dispatch(LogsAction(e));
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");

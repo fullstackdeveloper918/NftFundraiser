@@ -8,7 +8,7 @@ import {
   ProjectList,
 } from "../../redux/Actions/projectAction";
 import Loader from "../Loader/loader";
-import { DeleteProject } from "./../../redux/Actions/projectAction";
+
 
 const GetAllFundraiseProjects = (props) => {
   const [loading, setLoading] = useState();

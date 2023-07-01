@@ -6,10 +6,12 @@ import { getBid, NftList,  UpdateBId } from '../../redux/Actions/projectAction';
 import { Table } from 'react-bootstrap';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
+import { useHistory } from 'react-router-dom';
 
 
 const NftAuctiondataTable = (props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const history = useHistory();
     const [loading, setLoading] = useState(false)
     const { Panel } = Collapse;
     const onChange = (key) => {
@@ -25,17 +27,17 @@ const NftAuctiondataTable = (props) => {
 
     })
     useEffect(() => {
-        dispatch(NftList(props.slug.id))
+        dispatch(NftList(props.slug.id,null,history))
 
     }, [props.slug.id,dispatch])
 
     const acceptHandler = (id) => {
-        getBid(props)
-        dispatch(UpdateBId({ id, status: "2", setLoading, slug: props.slug.id }))
+        getBid(props,history)
+        dispatch(UpdateBId({ id, status: "2", setLoading, slug: props.slug.id,history }))
     }
     const rejectHandler = (id) => {
-        getBid(props)
-        dispatch(UpdateBId({ id, status: "3", setLoading, slug: props.slug.id }))
+        getBid(props,history)
+        dispatch(UpdateBId({ id, status: "3", setLoading, slug: props.slug.id,history }))
     }
 
     const antIcon = (

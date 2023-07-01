@@ -44,10 +44,12 @@ import {
   StateList,
 } from "../../redux/Actions/authAction";
 import { useParams } from "react-router";
+import { useHistory } from "react-router-dom";
 
 function ProjDetailPopup(props) {
   const editor = useRef(null);
   const dispatch = useDispatch();
+  const history = useHistory();
   const {
     register,
     handleSubmit,
@@ -164,7 +166,7 @@ function ProjDetailPopup(props) {
     }
     formData.append("type", data.type);
     formData.append("category_id", data.category_id);
-    dispatch(UpdateProject(props, formData));
+    dispatch(UpdateProject(props, formData,history));
   };
 
   return (

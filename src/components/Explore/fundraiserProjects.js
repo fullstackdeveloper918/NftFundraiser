@@ -8,7 +8,7 @@ import { ProjectList } from '../../redux/Actions/projectAction';
 import FundDetail from '../../themes/fund-detail';
 import latprojDetails from '../../themes/latproj-details';
 import Loader from '../Loader/loader';
-import { DeleteProject } from './../../redux/Actions/projectAction';
+
 
 
 const GetAllFundraise = () => {

@@ -7,10 +7,12 @@ import DModal from '../Create/3dModal';
 import SellPopup from '../ItemDetails/sellPopup';
 import NftBuydataTable from './NftBuyData';
 import { GetMatic } from '../ItemDetails/GetMAtic';
+import { useHistory } from 'react-router-dom';
 
 
 const BuyedNftDetails = () => {
    
+    const history = useHistory();
     const [matic, setMatic] = useState('')
     const [sellmodalShow, setSellModalShow] = React.useState(false);
 
@@ -25,7 +27,7 @@ const BuyedNftDetails = () => {
     })
     useEffect(() => {
         (GetMatic(setMatic))
-        dispatch(GetbuyedNftDetails(slug))
+        dispatch(GetbuyedNftDetails(slug,history))
     }, [slug,dispatch])
 
 

@@ -42,20 +42,16 @@ import AllReraltrans from "../themes/all-refrals";
 import NotFound from "../notFound";
 import Widget from "../components/Explore/widget";
 import Aboutus from "../themes/Aboutus";
-import { useSelector } from "react-redux";
 
 
 const MyRouts = () => {
-  const userdet = useSelector((state) => {
-    return state?.user?.userdetail;
-  });
+ 
   return (
     <div>
       <BrowserRouter>
         <ScrollToTop />
         <Switch>
           <Route exact path="/" component={ThemeOne} />
-
           <Route exact path="/explore-1" component={ExploreOne} />
           <PrivateRoute exact path="/projectlist" component={ExploreTwo} />
           <Route exact path="/create/organization" component={createOrganizationafterRoleChange} />

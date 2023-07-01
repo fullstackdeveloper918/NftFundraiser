@@ -15,6 +15,8 @@ import { NftList } from '../../redux/Actions/projectAction';
 import dayjs from 'dayjs';
 import WidgetPopup from './widgetPopup';
 import { set } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
+
 const RefralTransdataTable = (props) => {
     const dispatch = useDispatch()
     const [projSlug, setProjSlug] = useState(" ")
@@ -24,6 +26,7 @@ const RefralTransdataTable = (props) => {
     const onChange = (key) => {
         console.log(key);
     };
+    const history = useHistory();
     const [copy, setCopy] = useState(false)
     const [expandIconPosition, setExpandIconPosition] = useState('end');
     const [widgetModalShow, setWidgetModalShow] = useState(false)
@@ -46,12 +49,12 @@ const RefralTransdataTable = (props) => {
         setProjSlug(e?.currentTarget?.value)
         // if (projSlug != " ") {
         const slug = projects?.data && projects?.data[0]?.slug
-        dispatch(ProjectDetail(e?.currentTarget?.value ? e?.currentTarget?.value:slug ))
+        dispatch(ProjectDetail(e?.currentTarget?.value ? e?.currentTarget?.value:slug,history ))
         setNftslug(" ")
         // }
         if (nftSlug !== " ") {
 
-            dispatch(NftList(nftSlug))
+            dispatch(NftList(nftSlug,null,history))
         }
     }
     // const HandleNFT = (e) => {
@@ -74,7 +77,7 @@ useEffect(()=>{
     const count = 1
    
     useEffect(() => {
-        dispatch(ProjectList({ location, count: count }))
+        dispatch(ProjectList({ location, count: count,history }))
         
     }, [dispatch])
 

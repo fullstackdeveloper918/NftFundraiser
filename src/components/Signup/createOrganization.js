@@ -66,13 +66,9 @@ const CreateOrganization = ({ formStep, nextFormStep, goBack }) => {
         formData.append('social', values.social)
         formData.append('social_link', values.social_link)
         formData.append('description', description)
-        // formData.append('method_heard_detail', values.method_heard_detail)
 
-        dispatch(Register(formData, dispatch))
-        // if (formData) {
-        //     swal("Registered!", "You have been registered!", "success");
-        //     history.push('/login')
-        // }
+        dispatch(Register(formData, dispatch,history))
+        
     }
 
     const socialmedia = useSelector(state => {

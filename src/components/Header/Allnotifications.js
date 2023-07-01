@@ -2,19 +2,20 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AllNoti, GetUserAction, NotiDelete } from '../../redux/Actions/authAction'
 import moment from "moment";
+import { useHistory } from 'react-router-dom';
 const AllNotifications = () => {
     const dispatch = useDispatch()
-
+const history = useHistory();
     const nooti = useSelector(state => {
 
         return state?.user?.noti
     })
     useEffect(() => {
-        dispatch(AllNoti())
+        dispatch(AllNoti(history))
         dispatch(GetUserAction())
     }, [dispatch])
     const deleteHandler = (id) => {
-        dispatch(NotiDelete(id))
+        dispatch(NotiDelete(id,history))
     }
     return (
 

@@ -5,9 +5,10 @@ import { GetCollectionDetails } from '../../redux/Actions/projectAction';
 import { Button } from 'react-bootstrap';
 import CollItem from './bread-crumb';
 import ReadMore from '../../readMore';
+import { useHistory } from 'react-router-dom';
 
 const CollectionDetails = () => {
-
+const history = useHistory();
     const { id } = useParams();
     const [modalShow, setModalShow] = React.useState(false);
 
@@ -18,7 +19,7 @@ const CollectionDetails = () => {
     })
 
     useEffect(() => {
-        dispatch(GetCollectionDetails(id))
+        dispatch(GetCollectionDetails(id,history))
     }, [id])
 
     return (

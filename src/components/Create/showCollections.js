@@ -2,15 +2,17 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { GetCollectionsAction } from '../../redux/Actions/projectAction'
+import { useHistory } from 'react-router-dom';
 
 const ShowCollections = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const history = useHistory();
     const col = useSelector(state => {
         return state?.projectdetails?.getcollections
     })
 
     useEffect(() => {
-        dispatch(GetCollectionsAction())
+        dispatch(GetCollectionsAction(history))
     }, [])
 
     return (

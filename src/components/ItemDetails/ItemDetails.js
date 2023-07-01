@@ -5,8 +5,11 @@ import { Link } from 'react-router-dom';
 import { DeleteProject, ProjectDetail } from '../../redux/Actions/projectAction';
 import { getProjectDetail } from '../../redux/Slices/projectSlice';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const ItemDetails = () => {
+
+    const history = useHistory();
 
     const initData = {
         itemImg: "/img/avtar1.png",
@@ -100,12 +103,12 @@ const ItemDetails = () => {
     })
 
     useEffect(() => {
-        // 
-        dispatch(ProjectDetail(id))
+        
+        dispatch(ProjectDetail(id,history))
     }, [id])
 
     const deleteHandler = (id) => {
-        dispatch(DeleteProject(id))
+        dispatch(DeleteProject(id,history))
     }
 
 

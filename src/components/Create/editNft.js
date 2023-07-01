@@ -10,9 +10,11 @@ import Loader from '../Loader/loader';
 import CollPopup from './createCollection';
 import DModal from './3dModal';
 import swal from 'sweetalert';
+import { useHistory } from 'react-router-dom';
 
 const EditNft = (props) => {
     const editor = useRef(null);
+    const history = useHistory();
     const [nftFileType, setNFtFileType] = useState('Image')
     const [nft, setNft] = useState()
     const [nftwidth, setNftwidth] = useState()
@@ -100,8 +102,8 @@ const EditNft = (props) => {
     };
 
     useEffect(() => {
-        dispatch(GetCollectionsAction())
-        dispatch(NftList(props.nft_id, props.id))
+        dispatch(GetCollectionsAction(history))
+        dispatch(NftList(props.nft_id, props.id,null,history))
         form.setFieldsValue({
             nfts: [{
                 nft_name: nftdetail.title,
@@ -121,7 +123,7 @@ const EditNft = (props) => {
         try {
             setLoading(true)
             if (source) {
-                const nftImagepromises = [uploadNFT(nft)]
+                const nftImagepromises = [uploadNFT(nft,null,null,history)]
                 const imagesRes = await Promise.all(nftImagepromises).then(res => res)
                 const addedImage = imagesRes?.map(x => ipfsBaseUrl + x?.data?.data?.image_hash)
                 var str = addedImage;
@@ -136,7 +138,7 @@ const EditNft = (props) => {
                     formData.append('preview_imag', Pimage)
                     formData.append('extention', nftFileType)
                     formData.append('description', values?.nfts?.map(x => x.nft_description))
-                    dispatch(UpdateNft(formData, props, setLoading))
+                    dispatch(UpdateNft(formData, props, setLoading,history))
                 } else {
                     swal('error!', 'Nft not uploaded', 'error')
                 }
@@ -150,7 +152,7 @@ const EditNft = (props) => {
                 formData.append('preview_imag', previewnft)
                 formData.append('collection_id', nft_collection_id)
                 formData.append('description', values?.nfts?.map(x => x.nft_description))
-                dispatch(UpdateNft(formData, props, setLoading))
+                dispatch(UpdateNft(formData, props, setLoading,history))
             }
         } catch (error) {
         }

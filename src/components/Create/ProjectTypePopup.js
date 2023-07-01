@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CityList, StateList } from "../../redux/Actions/authAction";
 import { UpdateProject } from "../../redux/Actions/projectAction";
+import { useHistory } from "react-router-dom";
 
 function ProTypePopup(props) {
+  const history = useHistory();
   const location = useLocation();
   const [type, setType] = useState();
   const { countries } = useSelector((state) => state.countries);
@@ -79,7 +81,7 @@ function ProTypePopup(props) {
       formData.append("type", "2");
       formData.append("category_id", data.category_id);
 
-      dispatch(UpdateProject(props, formData));
+      dispatch(UpdateProject(props, formData,history));
     }
   };
   const today = new Date();

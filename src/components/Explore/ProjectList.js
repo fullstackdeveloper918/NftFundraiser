@@ -40,6 +40,7 @@ const GetAllProjects = () => {
             location,
             setLoading,
             searchQuery,
+            history
           })
         ).then((res) => {
           setLoading(false);

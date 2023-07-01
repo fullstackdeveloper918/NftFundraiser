@@ -3,19 +3,19 @@ import Modal from "react-bootstrap/Modal";
 import { UpdateBanner } from "../../redux/Actions/projectAction";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import UploadImage from "../../shared/Upload";
-import { dataURLtoBlob } from "../../utils/blobfromurl";
 import UploadComponent from "../UploadComponent";
+import { useHistory } from "react-router-dom";
 
 function Banner(props) {
   const [imageSrc, setImageSrc] = useState("");
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const submit = () => {
     const formData = new FormData();
     // const image = dataURLtoBlob(imageSrc)
     formData.append("image", imageSrc);
-    dispatch(UpdateBanner(formData, props));
+    dispatch(UpdateBanner(formData, props,history));
   };
 
   return (

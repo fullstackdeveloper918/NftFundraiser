@@ -2,18 +2,16 @@
 import React, {  useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 import { UpdateCollection } from '../../redux/Actions/projectAction';
 const EditCollection = () => {
 
 
-    // console.log(id, "idd")
     const dispatch = useDispatch()
 
-    
+    const history = useHistory();
 
-    // console.log(projdetail, "gfgfhghgghhgh")
 
     const { register, handleSubmit, formState: { errors }, setValue, watch, control } = useForm();
     const contractAddress = "0xE915A57e52A1f5a432b15727EA79e2542d435087"
@@ -27,7 +25,7 @@ const EditCollection = () => {
             ]);
         }
 
-        dispatch(UpdateCollection())
+        dispatch(UpdateCollection(_,_,history))
     }, [collupdate]);
 
     return (

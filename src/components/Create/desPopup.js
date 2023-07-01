@@ -5,10 +5,11 @@ import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import JoditEditor from 'jodit-react';
 import { CityList, StateList } from '../../redux/Actions/authAction';
+import { useHistory } from 'react-router-dom';
 
 function DesPopup(props) {
     const editor = useRef(null);
-
+const history = useHistory();
     const [country, setCountry] = useState()
     const [type, setType] = useState()
     const dispatch = useDispatch()
@@ -65,7 +66,7 @@ function DesPopup(props) {
         formData.append('type', data.type)
         formData.append('category_id', data.category_id)
 
-        dispatch(UpdateProject(props, formData))
+        dispatch(UpdateProject(props, formData,history))
     }
 
     return (

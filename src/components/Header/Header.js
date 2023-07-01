@@ -6,7 +6,6 @@ import {
   ChangeUserRole,
   CountSet,
   GetUserAction,
-  GetauctionNoti,
   NotiDelete,
 } from "../../redux/Actions/authAction";
 import swal from "sweetalert";
@@ -114,11 +113,10 @@ console.log('user', userdet.statusCode )
   }
 
   const notiHandler = () => {
-    //
-    dispatch(CountSet());
+    dispatch(CountSet(history));
   };
   const deleteHandler = (id) => {
-    dispatch(NotiDelete(id));
+    dispatch(NotiDelete(id,history));
   };
   const SwitchOptions = [
     {

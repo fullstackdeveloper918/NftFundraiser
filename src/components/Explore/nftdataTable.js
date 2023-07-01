@@ -4,8 +4,10 @@ import { Collapse } from 'antd';
 import { NftList, ProjectDetail, ProjectList } from '../../redux/Actions/projectAction';
 import { useParams } from 'react-router';
 import { Table } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 const NftdataTable = (props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const history = useHistory();
     const { Panel } = Collapse;
     const onChange = (key) => {
         console.log(key);
@@ -22,8 +24,7 @@ const NftdataTable = (props) => {
 
     })
     useEffect(() => {
-        dispatch(NftList(props.slug?.id))
-        // dispatch(ProjectDetail(slug))
+        dispatch(NftList(props.slug?.id,null,history))
     }, [props.slug?.id])
 
     return (

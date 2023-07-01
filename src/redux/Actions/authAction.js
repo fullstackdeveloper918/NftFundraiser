@@ -22,7 +22,7 @@ import { GetfundraiserProject } from "./projectAction";
 
 export const Register = createAsyncThunk(
   "auth/register",
-  async (params, thunkAPI, dispatch) => {
+  async (params, thunkAPI, dispatch,history) => {
     try {
       const token = sessionStorage.getItem("authToken");
       const config = {
@@ -40,7 +40,7 @@ export const Register = createAsyncThunk(
         config
       );
 
-      await creatorWalletUpdate(res?.data?.data?.auth_token);
+      await creatorWalletUpdate(res?.data?.data?.auth_token,history);
 
       thunkAPI.dispatch(loginSuccess(res));
 
@@ -124,14 +124,12 @@ export const GetUserAction = (history) => async (dispatch) => {
       `${process.env.REACT_APP_BACKEND_API}api/getUserDetails`,
       config
     );
-    // if(res.)
-    // console.log('userres', res)
+
     dispatch(userDetail(res));
   } catch (e) {
-    if(e?.code?.includes('ERR_NETWORK')){
-        sessionStorage.removeItem('authToken')
-        history.push('/wallet-connect')
-        
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
     }
     await dispatch(LogsAction(e));
     if (e?.response?.data.message) {
@@ -139,7 +137,7 @@ export const GetUserAction = (history) => async (dispatch) => {
     }
   }
 };
-export const GetauctionNoti = () => async (dispatch) => {
+export const GetauctionNoti = (history) => async (dispatch) => {
   const token = sessionStorage.getItem("authToken");
 
   try {
@@ -157,6 +155,10 @@ export const GetauctionNoti = () => async (dispatch) => {
     // console.log('userres', res)
     dispatch(userAuction(res));
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     await dispatch(LogsAction(e));
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
@@ -164,9 +166,7 @@ export const GetauctionNoti = () => async (dispatch) => {
   }
 };
 
-export const CreateOrganizationAction = (params) => async (dispatch) => {
-  //
-  // sessionStorage.setItem('auth_token', JSON.stringify(action.payload.dat
+export const CreateOrganizationAction = (params,history) => async (dispatch) => {
   try {
     const token = sessionStorage.getItem("authToken");
     const config = {
@@ -186,17 +186,21 @@ export const CreateOrganizationAction = (params) => async (dispatch) => {
 
     dispatch(createOrganizationSuccess(res));
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     await dispatch(LogsAction(e));
     if (e) {
       swal("error", e.response.data.message, "error").then(function () {
-        // dispatch(ProjectDetail(params))
         window.location = "/projectlist";
       });
     }
   }
 };
+
 export const UpdateOrganizationAction =
-  (formData, id, props, userid) => async (dispatch) => {
+  (formData, id, props, userid,history) => async (dispatch) => {
     try {
       const token = sessionStorage.getItem("authToken");
       const config = {
@@ -231,15 +235,20 @@ export const UpdateOrganizationAction =
 
       // dispatch(createOrganizationSuccess(res));
     } catch (e) {
+      if (e?.code?.includes("ERR_NETWORK")) {
+        sessionStorage.removeItem("authToken");
+        history.push("/wallet-connect");
+      }
       await dispatch(LogsAction(e));
       if (e) {
         swal("error", e.response.data.message, "error").then(function () {});
       }
     }
   };
+
 export const CreateOrganizationAfterRoleChange = createAsyncThunk(
   "auth/register",
-  async (params, thunkAPI, dispatch) => {
+  async (params,history, thunkAPI) => {
     //
     try {
       const token = sessionStorage.getItem("authToken");
@@ -258,10 +267,6 @@ export const CreateOrganizationAfterRoleChange = createAsyncThunk(
         config
       );
 
-      // await creatorWalletUpdate(res?.data?.data?.auth_token)
-
-      // thunkAPI.dispatch(loginSuccess(res));
-
       if (res.status === 200) {
         thunkAPI.dispatch(GetUserAction());
         swal("success", res.data.message, "success").then(function () {
@@ -269,6 +274,10 @@ export const CreateOrganizationAfterRoleChange = createAsyncThunk(
         });
       }
     } catch (e) {
+      if (e?.code?.includes("ERR_NETWORK")) {
+        sessionStorage.removeItem("authToken");
+        history.push("/wallet-connect");
+      }
       if (e) {
         swal("error", e?.response?.data?.message, "error");
       }
@@ -375,7 +384,7 @@ export const HearAboutList = () => async (dispatch) => {
   }
 };
 
-export const UpdateProfileAction = (formData, props) => async (dispatch) => {
+export const UpdateProfileAction = (formData, props,history) => async (dispatch) => {
   const token = sessionStorage.getItem("authToken");
   try {
     const config = {
@@ -404,22 +413,22 @@ export const UpdateProfileAction = (formData, props) => async (dispatch) => {
       });
       dispatch(GetUserAction());
       props.onHide(false);
-      // swal("success", "updated", 'success')
-      // .then(function () {
-      // dispatch(ProjectDetail(params))
-      // window.location = "/projectlist";
-      // });
+      
     }
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
+
     await dispatch(LogsAction(e));
     if (e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
     }
   }
 };
-export const CountSet = () => async (dispatch) => {
-  //
-  //
+export const CountSet = (history) => async (dispatch) => {
+  
   const token = sessionStorage.getItem("authToken");
   try {
     const config = {
@@ -432,14 +441,17 @@ export const CountSet = () => async (dispatch) => {
       {},
       config
     );
-    //
-    // await dispatch(res);
+    
 
     if (res.status === 200) {
-      //
+      
       await dispatch(GetUserAction());
     }
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     await dispatch(LogsAction(e));
     if (e?.response?.data?.message) {
       swal("error", e.response.data.message, "error");
@@ -447,7 +459,7 @@ export const CountSet = () => async (dispatch) => {
   }
 };
 
-export const AllNoti = () => async (dispatch) => {
+export const AllNoti = (history) => async (dispatch) => {
   const token = sessionStorage.getItem("authToken");
 
   try {
@@ -463,6 +475,10 @@ export const AllNoti = () => async (dispatch) => {
     //
     await dispatch(allnotification(res));
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     await dispatch(LogsAction(e));
     if (e?.response?.data?.message) {
       swal("error", e.response.data.message, "error");
@@ -470,8 +486,8 @@ export const AllNoti = () => async (dispatch) => {
   }
 };
 
-export const NotiDelete = (id) => async (dispatch) => {
-  //
+export const NotiDelete = (id,history) => async (dispatch) => {
+  
   const token = sessionStorage.getItem("authToken");
   try {
     const config = {
@@ -483,15 +499,18 @@ export const NotiDelete = (id) => async (dispatch) => {
       `${process.env.REACT_APP_BACKEND_API}api/notification/delete/${id}`,
       config
     );
-    //
-    // await dispatch(res);
+   
 
     if (res.status === 200) {
       //
       await dispatch(GetUserAction());
-      await dispatch(AllNoti());
+      await dispatch(AllNoti(history));
     }
   } catch (e) {
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     await dispatch(LogsAction(e));
     if (e?.response?.data?.message) {
       swal("error", e.response.data.message, "error");
@@ -499,7 +518,6 @@ export const NotiDelete = (id) => async (dispatch) => {
   }
 };
 export const ChangeUserRole = (history, setLoading) => async (dispatch) => {
-  ;
   const token = sessionStorage.getItem("authToken");
   setLoading(true);
   try {
@@ -513,7 +531,6 @@ export const ChangeUserRole = (history, setLoading) => async (dispatch) => {
       "",
       config
     );
-    ;
     if (res.status === 200) {
       //
       await dispatch(GetUserAction());
@@ -526,6 +543,10 @@ export const ChangeUserRole = (history, setLoading) => async (dispatch) => {
     }
   } catch (e) {
     setLoading(false);
+    if (e?.code?.includes("ERR_NETWORK")) {
+      sessionStorage.removeItem("authToken");
+      history.push("/wallet-connect");
+    }
     await dispatch(LogsAction(e));
     if (e?.response?.data?.message) {
       swal("error", e.response.data.message, "error");

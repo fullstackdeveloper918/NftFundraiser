@@ -7,6 +7,7 @@ import {
   UpdateProfileAction,
 } from "../../redux/Actions/authAction";
 import UploadComponent from "../UploadComponent";
+import { useHistory } from "react-router-dom";
 
 function AvatarUpload(props) {
   const [imageSrc, setImageSrc] = useState("");
@@ -14,7 +15,7 @@ function AvatarUpload(props) {
     return state?.user?.userdetail;
   });
   const dispatch = useDispatch();
-
+const history = useHistory();
   useEffect(() => {
     dispatch(GetUserAction());
   }, [dispatch]);
@@ -25,7 +26,7 @@ function AvatarUpload(props) {
     
     formData.append("avatar", imageSrc);
     formData.append("username", userdet.username);
-    dispatch(UpdateProfileAction(formData, props));
+    dispatch(UpdateProfileAction(formData, props,history));
   };
   
   return (
