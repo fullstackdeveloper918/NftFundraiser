@@ -127,13 +127,7 @@ console.log('user', userdet.statusCode )
   const [activeOption, setActiveOption] = useState(false);
   toast.configure();
 
- useEffect(()=>{
-  if(location.pathname === '/create' && userdet?.organization_detail === false && userRole === '3'){
-    swal('warning','You do not have orginazation, Please fill the organization details to continue ...','warning').then(function () {
-      window.location = "/create/organization";
-    });
-  }
- },[])
+ 
 
   const roleHandler = () => {
     // if( userdet?.organization_detail === false && userRole === '3'){
@@ -145,10 +139,12 @@ console.log('user', userdet.statusCode )
     setActiveOption(!activeOption);
   };
   const WalletHandler = async () => {
+    
     const currentLocation = window.location.pathname;
 
     const refid = new URLSearchParams(search).get("refid");
     const response = await ConnectWallet("BUYER", dispatch,history);
+    
     const { res } = response;
 
     if (

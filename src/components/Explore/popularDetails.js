@@ -27,7 +27,7 @@ const CollectionDetails = (props) => {
           <span className="p-0 title_main ">{coll?.title}</span>
         </div>
         <div className="row">
-          <div className="col-12 col-lg-8 relative">
+          <div className="col-12 col-lg-12 relative">
             <div className="item-info">
               <div className="item-thumb text-center">
                 <img src={coll?.image} alt="first nft" />
@@ -35,9 +35,9 @@ const CollectionDetails = (props) => {
             </div>
           </div>
 
-          <div className="col-12 col-lg-4 ">
-            <div class="user-description mt-4 mt-sm-0">
-              <h5 className="user_title gap-5">
+          <div className="col-12 col-lg-12 " style={{top:'20px'}}>
+            <div class="user-description mt-4 mt-sm-0"  >
+              <h5 className="user_title gap-5" >
                 <div>
                   <svg
                     width="24px"
@@ -52,7 +52,7 @@ const CollectionDetails = (props) => {
                 </div>
                 <div>Description</div>
               </h5>
-              <ReadMore data={coll?.description} />
+              <ReadMore data={coll?.description} slug={slug} />
             </div>
           </div>
 

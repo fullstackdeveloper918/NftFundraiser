@@ -258,6 +258,7 @@ function SellPopup(props) {
                   type="number"
                   className="form-control"
                   name="price"
+                  min="0"
                   {...register("price", { required: true })}
                   aria-invalid={errors.price ? "true" : "false"}
                 />

@@ -28,7 +28,6 @@ const history = useHistory();
             setValue('state', projdetail.state)
             setValue('country', projdetail.country)
             setValue('city', projdetail.city)
-            setValue("price", projdetail.price)
             setValue("number_of_nft", projdetail.number_of_nft)
             setValue("start_date", projdetail.start_date)
             setValue("end_date", projdetail.end_date)
@@ -54,7 +53,6 @@ const history = useHistory();
         formData.append('country', data.country)
         formData.append('city', data.city)
         formData.append('address', data.address)
-        formData.append('price', data.price)
         formData.append('number_of_nft', data.number_of_nft)
         if (data?.type == 1) {
             formData.append('start_date', '')

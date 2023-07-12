@@ -340,8 +340,6 @@ const LatprojNftDetails = (props) => {
                                                 </div>
                                             ) : (
                                                 <><thead>
-
-
                                                     <tr>
 
                                                         <th>User</th>

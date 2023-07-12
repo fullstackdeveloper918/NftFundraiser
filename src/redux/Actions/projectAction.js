@@ -21,10 +21,12 @@ import {
   getMatic,
   getmostprojactivity,
   getbuyednftdetails,
+  getTitelResponse,
 } from "../Slices/projectSlice";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import swal from "sweetalert";
 import { LogsAction } from "./logsAction";
+import Swal from "sweetalert2";
 
 export const CreateProjectAction =
   (params, setLoading, history) => async (dispatch) => {
@@ -59,11 +61,14 @@ export const CreateProjectAction =
         });
       }
     } catch (e) {
-      if (e?.code?.includes("ERR_NETWORK")) {
+      if (
+        e?.code?.includes("ERR_NETWORK") ||
+        e?.response?.data?.statusCode == 401
+      ) {
         sessionStorage.removeItem("authToken");
         history.push("/wallet-connect");
       }
-      if (e?.response?.data.message) {
+      if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
         setLoading(false);
         dispatch(LogsAction(e));
         swal("error", e.response.data.message, "error");
@@ -88,12 +93,15 @@ export const ProjectDetail = (slug, history) => async (dispatch) => {
 
     dispatch(getProjectDetail(res));
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -151,7 +159,10 @@ export const ProjectList = (params) => async (dispatch) => {
     // setLoading(false)
     return res?.data?.data;
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
@@ -159,7 +170,7 @@ export const ProjectList = (params) => async (dispatch) => {
     if (params?.location?.pathname === "/projectlist") {
       params.setLoading(false);
     }
-    if (e?.response?.data.message) {
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -182,16 +193,19 @@ export const NftList = (slug, setLoading, history) => async (dispatch) => {
 
     // console.log(res, 'proj')
     await dispatch(getNftList(res));
-    setLoading(false);
+    // setLoading(false);
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
-      setLoading(false);
+      // setLoading(false);
     }
   }
 };
@@ -229,12 +243,17 @@ export const uploadNFT = async (nft, dispatch, setLoading, history) => {
       );
   } catch (error) {
     // setLoading(false)
-    if (error?.code?.includes("ERR_NETWORK")) {
+    if (
+      error?.code?.includes("ERR_NETWORK") ||
+      error?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     dispatch(LogsAction(error));
-    swal("error", error, "error");
+    if (error?.response?.data?.statusCode != 401) {
+      swal("error", error, "error");
+    }
   }
 };
 
@@ -313,12 +332,15 @@ export const UpdateProject = (props, params, history) => async (dispatch) => {
     }
     props.onHide(false);
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -339,31 +361,17 @@ export const DeleteProject = (id, history) => async (dispatch) => {
     );
 
     if (res.status === 200) {
-      swal({
-        title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this project!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      }).then((willDelete) => {
-        if (willDelete) {
-          swal("Poof! Your project has been deleted!", {
-            icon: "success",
-          }).then(function () {
-            window.location = "/projectlist";
-          });
-        } else {
-          swal("Your project is safe!");
-        }
-      });
     }
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -406,12 +414,15 @@ export const GetCollectionsAction = (history) => async (dispatch) => {
     );
     await dispatch(getCollections(res));
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -449,12 +460,15 @@ export const CreateCollectionAction =
       }
     } catch (e) {
       setLoading(false);
-      if (e?.code?.includes("ERR_NETWORK")) {
+      if (
+        e?.code?.includes("ERR_NETWORK") ||
+        e?.response?.data?.statusCode == 401
+      ) {
         sessionStorage.removeItem("authToken");
         history.push("/wallet-connect");
       }
       dispatch(LogsAction(e));
-      if (e?.response?.data.message) {
+      if (e?.response?.data?.statusCode != 401 && e?.response?.data.message) {
         swal("error", e.response.data.message, "error");
         dispatch(createFail(e));
       }
@@ -478,12 +492,15 @@ export const GetCollectionDetails = (id, history) => async (dispatch) => {
 
     await dispatch(getCollectionDetails(res));
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -530,12 +547,15 @@ export const UpdateCollection = (id, params, history) => async (dispatch) => {
     // console.log(res, 'coll rres')
     await dispatch(getLatestProjectDetail(res));
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -646,12 +666,15 @@ export const UpdateBanner = (formData, props, history) => async (dispatch) => {
       props.onHide(false);
     }
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -690,12 +713,15 @@ export const UpdateNft =
         props.onHide(false);
       }
     } catch (e) {
-      if (e?.code?.includes("ERR_NETWORK")) {
+      if (
+        e?.code?.includes("ERR_NETWORK") ||
+        e?.response?.data?.statusCode == 401
+      ) {
         sessionStorage.removeItem("authToken");
         history.push("/wallet-connect");
       }
       dispatch(LogsAction(e));
-      if (e?.response?.data.message) {
+      if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
         setLoading(false);
         swal("error", e.response.data.message, "error");
       }
@@ -733,12 +759,15 @@ export const AddNftAction =
         history.push(`/projnftdetails/${slug.id}`);
       }
     } catch (e) {
-      if (e?.code?.includes("ERR_NETWORK")) {
+      if (
+        e?.code?.includes("ERR_NETWORK") ||
+        e?.response?.data?.statusCode == 401
+      ) {
         sessionStorage.removeItem("authToken");
         history.push("/wallet-connect");
       }
       dispatch(LogsAction(e));
-      if (e?.response?.data.message) {
+      if (e?.response?.data?.statusCode != 401 && e?.response?.data.message) {
         setLoading(false);
         swal("error", e.response.data.message, "error");
       }
@@ -779,7 +808,10 @@ export const getBid = (id, history) => async (dispatch) => {
     );
     await dispatch(res);
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
@@ -806,7 +838,7 @@ export const UpdateBId =
       );
       if (res.status === 200) {
         setLoading(false);
-        await dispatch(NftList(slug,null,history));
+        await dispatch(NftList(slug, null, history));
         swal({
           title: "success",
           text: "success",
@@ -816,11 +848,16 @@ export const UpdateBId =
         });
       }
     } catch (e) {
-      if (e?.code?.includes("ERR_NETWORK")) {
+      if (
+        e?.code?.includes("ERR_NETWORK") ||
+        e?.response?.data?.statusCode == 401
+      ) {
         sessionStorage.removeItem("authToken");
         history.push("/wallet-connect");
       }
-      swal("error", e?.response?.data?.message, "error");
+      if (e?.response?.data?.statusCode != 401) {
+        swal("error", e?.response?.data?.message, "error");
+      }
       setLoading(false);
       dispatch(LogsAction(e));
       // console.log("error");
@@ -866,12 +903,15 @@ export const GetbuyedNftDetails = (slug, history) => async (dispatch) => {
 
     await dispatch(getbuyednftdetails(res));
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -904,13 +944,55 @@ export const ResellNft = (params, props, history) => async (dispatch) => {
       props.onHide(false);
     }
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
+    if (e?.response?.data?.statusCode != 401 && e?.response?.data.message) {
       swal("error", e.response.data.message, "error");
     }
   }
 };
+export const checkIsProjectExists =
+  (params, setLoading, setStatus) => async (dispatch) => {
+    // ;
+    try {
+      const formData = new FormData();
+
+      formData.append("title", params);
+      const token = sessionStorage.getItem("authToken");
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+
+          Authorization: `Bearer ${token}`,
+        },
+        transformRequest: (formData) => formData,
+      };
+      // ;
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACKEND_API}api/getProjectName`,
+        formData,
+        config
+      );
+      await (dispatch (getTitelResponse(res)));
+      if (res.status === 200) {
+        setLoading(false);
+        setStatus(res?.data?.data?.status);
+      }
+      // dispatch(createProjectSuccess(res));
+      ;
+    } catch (e) {
+      ;
+      // if (e?.response?.status == 422) {
+      //   console.log("truueee");
+      // } // setLoading(false);
+      dispatch(LogsAction(e));
+      setLoading(false);
+      // swal("error", e?.response?.data?.message, "error");
+    }
+  };

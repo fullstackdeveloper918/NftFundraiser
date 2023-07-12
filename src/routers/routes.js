@@ -54,7 +54,7 @@ const MyRouts = () => {
           <Route exact path="/" component={ThemeOne} />
           <Route exact path="/explore-1" component={ExploreOne} />
           <PrivateRoute exact path="/projectlist" component={ExploreTwo} />
-          <Route exact path="/create/organization" component={createOrganizationafterRoleChange} />
+          <PrivateRoute exact path="/create/organization" component={createOrganizationafterRoleChange} />
           <PrivateRoute exact path="/allnotifications" component={Notifi} />
           <PrivateRoute exact path="/updateproject/:id" component={ProjectUpdate} />
           <Route exact path="/explore-4" component={ExploreFour} />
@@ -67,7 +67,7 @@ const MyRouts = () => {
           <Route exact path="/projects/:slug" component={latprojDetails} />
           <PrivateRoute exact path="/referrals-detail" component={AllReraltrans} />
           <Route exact path="/nftprojdetails/:slug" component={latnftprojDetails} />
-          <Route exact path="/fundraiser/detail/:user_id" component={FundDetail} />
+          <PrivateRoute exact path="/fundraiser/detail/:user_id" component={FundDetail} />
           <Route exact path="/myfundraiser/detail/:user_id" component={FundraiserProjects} />
           <PrivateRoute exact path="/projnftdetails/:slug" component={ProjNft} />
           <Route exact path="/referral/widget/:slug" component={Widget} />

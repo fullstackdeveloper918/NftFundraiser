@@ -11,11 +11,13 @@ import { GetSocialMediaIcons } from "../../redux/Actions/projectAction";
 import { useState } from "react";
 import JoditEditor from "jodit-react";
 import { useHistory } from "react-router-dom";
+import { Loader } from "@react-three/drei";
 
 const RoleChangeOrganizationdetails = () => {
   const [description, setDescription] = useState();
   const [einNumber, setEinNumber] = useState(0);
   const [fundraisingGoal, setFundraisingGoal] = useState(0);
+  const [loading, setLoading] = useState(false)
   const history = useHistory();
   const userdet = useSelector((state) => {
     return state?.user?.userdetail;
@@ -34,6 +36,7 @@ const RoleChangeOrganizationdetails = () => {
   });
 
   const OnSubmit = (values) => {
+    // 
     const formData = new FormData();
     formData.append("banner_image", values.banner_image[0]);
     formData.append("logo", values.logo[0]);
@@ -42,7 +45,7 @@ const RoleChangeOrganizationdetails = () => {
     formData.append("organization_name", values.organization_name);
     formData.append("url", values.url);
     formData.append("country", values.country);
-    formData.append("tax_id", values.tax_id === "0"? "": values.tax_id );
+    formData.append("tax_id", values.tax_id === "0" ? "" : values.tax_id);
 
     formData.append("social", values.social);
     formData.append("social_link", values.social_link);
@@ -54,8 +57,11 @@ const RoleChangeOrganizationdetails = () => {
   const socialmedia = useSelector((state) => {
     return state?.getSocialmediaIcons?.getsocial;
   });
+  useEffect(()=>{
+    setValue("wallet_id", userdet.wallet_id);
+  },[userdet])
   useEffect(() => {
-    setValue("wallet_id", userdet.wallet_id)
+  
     dispatch(CountryList());
     dispatch(AnnualRevenueList());
     dispatch(HearAboutList());
@@ -67,9 +73,11 @@ const RoleChangeOrganizationdetails = () => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12 col-md-9">
-           
-              <h3 className="mt-3 mb-0">Organization Detail</h3>
-
+            <h3 className="mt-3 mb-0">Organization Detail</h3>
+            <br />
+            {loading ? (
+        <Loader />
+      ) : (
             <form
               onSubmit={handleSubmit(OnSubmit)}
               className="item-form card no-hover"
@@ -176,7 +184,7 @@ const RoleChangeOrganizationdetails = () => {
                         required: true,
                         pattern: {
                           value:
-                           /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})/,
+                            /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})/,
                         },
                       })}
                       // {...register("email")}
@@ -402,6 +410,7 @@ const RoleChangeOrganizationdetails = () => {
                 </div>
               </div>
             </form>
+      )}
           </div>
         </div>
       </div>

@@ -24,6 +24,7 @@ const LatNftdataTable = () => {
         return state?.projectdetails?.latestprojectdetails
     })
 
+    console.log('projdetail', projdetail?.project_activity)
     useEffect(() => {
         // 
         dispatch(LatestProjectDetail(slug))
@@ -54,9 +55,7 @@ const LatNftdataTable = () => {
 
                         </thead>
                         <tbody className='img_table'>
-                            {projdetail?.project_activity && projdetail?.project_activity?.length ?
-                                [...new Map(projdetail?.project_activity.map(item =>
-                                    [item["title"], item])).values()].map((item, idx) => {
+                            {projdetail?.project_activity?.map((item, idx) => {
                                         return (
                                             <tr className='contract-address'>
 
@@ -64,18 +63,18 @@ const LatNftdataTable = () => {
                                                     src={item.image}
                                                     className="rounded-circle mr-2"
                                                     alt="Avatar"
-                                                />{item.nft_title.slice(0, 13)}...</td>
-                                                <td className='referal'>{item.price}<img src='../../img/image14.png' /></td>
-                                                <td>{item.pay_from.slice(0, 4)}...{item.pay_from.slice(35, 44)}</td>
-                                                <td>{item.pay_to.slice(0, 4)}...{item.pay_to.slice(35, 44)}</td>
-                                                <td><a target="_blank" href={`https://polygonscan.com/tx/${item?.txd_id}`} >{item.txd_id.slice(0, 4)}...{item.txd_id.slice(35, 44)}</a></td>
+                                                />{item?.nft_title?.slice(0, 13)}...</td>
+                                                <td className='referal'>{item?.price}<img src='../../img/image14.png' /></td>
+                                                <td>{item?.pay_from?.slice(0, 4)}...{item.pay_from?.slice(35, 44)}</td>
+                                                <td>{item?.pay_to?.slice(0, 4)}...{item?.pay_to?.slice(35, 44)}</td>
+                                                <td><a target="_blank" href={`https://polygonscan.com/tx/${item?.txd_id}`} >{item?.txd_id?.slice(0, 4)}...{item?.txd_id?.slice(35, 44)}</a></td>
                                             </tr>
                                         )
-                                    }) :
+                                    }) 
                                 // <div className="col-12 col-sm-12 col-lg-12">
-                                <>
+                                
 
-                                </>
+                                
                             }
                         </tbody>
                         {/* <div className='nothing col-spam-5' colspan="5">
@@ -83,7 +82,7 @@ const LatNftdataTable = () => {
                         </div> */}
                     </Table>
                     <div className='nothing'>
-                        {projdetail?.project_activity == 0 &&
+                        {projdetail?.project_activity === '0' &&
                             <span> No matching records found</span>
                         }
                     </div>

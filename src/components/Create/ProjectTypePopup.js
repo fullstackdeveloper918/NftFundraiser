@@ -8,14 +8,14 @@ import { UpdateProject } from "../../redux/Actions/projectAction";
 import { useHistory } from "react-router-dom";
 
 function ProTypePopup(props) {
+  // 
   const history = useHistory();
   const location = useLocation();
   const [type, setType] = useState();
-  const { countries } = useSelector((state) => state.countries);
   const [country, setCountry] = useState("");
   const [description, setDescription] = useState();
   const dispatch = useDispatch();
-  const [nftCount, setNFTCount] = useState(1);
+  const [nftCount, setNFTCount] = useState();
 
   const {
     register,
@@ -42,7 +42,6 @@ function ProTypePopup(props) {
       setValue("state", projdetail.state);
       setValue("country", projdetail.country);
       setValue("city", projdetail.city);
-      setValue("price", projdetail.price);
       setValue("number_of_nft", projdetail.number_of_nft);
       setValue("start_date", projdetail.start_date);
       setValue("end_date", projdetail.end_date);
@@ -74,7 +73,6 @@ function ProTypePopup(props) {
       formData.append("country", data.country);
       formData.append("city", data.city);
       formData.append("address", data.address);
-      formData.append("price", data.price);
       formData.append("number_of_nft", data.number_of_nft);
       formData.append("start_date", data.start_date);
       formData.append("end_date", data.end_date);
@@ -169,7 +167,7 @@ function ProTypePopup(props) {
               <div className="form-group number-input mt-3">
                 <label>Number of NFTs</label>
                 <div class="position-relative">
-                  <span
+                  {/* <span
                     className="plus_icon"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -181,7 +179,7 @@ function ProTypePopup(props) {
                       aria-hidden="true"
                       style={{ paddingBottom: "2px" }}
                     ></i>
-                  </span>
+                  </span> */}
                   <input
                     value={nftCount}
                     type="number"
@@ -201,7 +199,7 @@ function ProTypePopup(props) {
                       setNFTCount(e.target.value);
                     }}
                   />
-                  <span
+                  {/* <span
                     className="minus_icon"
                     onClick={() => {
                       if (Number(nftCount) > 1) {
@@ -212,7 +210,7 @@ function ProTypePopup(props) {
                     }}
                   >
                     <i className="fa fa-minus" aria-hidden="true"></i>
-                  </span>
+                  </span> */}
                 </div>
                 {errors.number_of_nft?.type === "required" && (
                   <p style={{ color: "red" }} role="alert">

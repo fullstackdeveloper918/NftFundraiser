@@ -105,6 +105,23 @@ const ExploreAllResell = () => {
                                     alt=""
                                   />
                                 </Link>
+                                <div className="d-flex justify-content-between edit-buttons nft-price mt-2">
+                                    <Link
+                                      to={`/nft/resell/details/${item?.slug}`}
+                                      style={{ color: "white" }}
+                                      className="btn  btn-smaller mt-3 mb-0"
+                                    >
+                                      <i className="icon-handbag" />
+                                      {/* <i className="fa-solid fa-sack-dssollar"></i> */}
+                                    </Link>
+                                    <Link
+                                      to={`/nft/resell/details/${item?.slug}`}
+                                      className="btn  btn-smaller mt-3 ml-2 mb-0"
+                                      style={{ color: "white" }}
+                                    >
+                                      <i class="fa-solid fa-share-nodes text-white"></i>
+                                    </Link>
+                                  </div>
                                
                               </div>
 
@@ -142,23 +159,7 @@ const ExploreAllResell = () => {
                                     {/* <span>{item.number_of_nft} NFTs</span> */}
                                     {/* )} */}
                                   </div>
-                                  <div className="d-flex justify-content-between edit-buttons nft-price mt-2">
-                                    <Link
-                                      to={`/nft/resell/details/${item?.slug}`}
-                                      style={{ color: "white" }}
-                                      className="btn  btn-smaller mt-3 mb-0"
-                                    >
-                                      <i className="icon-handbag" />
-                                      {/* <i className="fa-solid fa-sack-dssollar"></i> */}
-                                    </Link>
-                                    <Link
-                                      to={`/nft/resell/details/${item?.slug}`}
-                                      className="btn  btn-smaller mt-3 ml-2 mb-0"
-                                      style={{ color: "white" }}
-                                    >
-                                      <i class="fa-solid fa-share-nodes text-white"></i>
-                                    </Link>
-                                  </div>
+                                 
                                 </div>
                               </div>
                             </div>

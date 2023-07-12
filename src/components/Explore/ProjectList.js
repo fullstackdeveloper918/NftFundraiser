@@ -9,6 +9,7 @@ import { DeleteProject } from "./../../redux/Actions/projectAction";
 import swal from "sweetalert";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { debounce } from "lodash";
+import { Empty } from "antd";
 
 const GetAllProjects = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const GetAllProjects = () => {
             location,
             setLoading,
             searchQuery,
-            history
+            history,
           })
         ).then((res) => {
           setLoading(false);
@@ -60,7 +61,24 @@ const GetAllProjects = () => {
   };
 
   const showDeleteHandler = (id) => {
-    dispatch(DeleteProject(id, history));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        ;
+        dispatch(DeleteProject(id, history));
+        Swal.fire("Deleted!", "Your project has been deleted.", "success").then(function(){
+
+          window.location="/projectlist";
+        })
+      }
+    });
   };
 
   // Debounce function with a delay of 500 milliseconds
@@ -76,8 +94,7 @@ const GetAllProjects = () => {
             <div className="col-12">
               {/* Intro */}
               <div className="text-left mb-4 create_projrct">
-                {/* <span>Explore</span> */}
-                {window.ethereum?.selectedAddress && (
+                {projects?.data?.length !== 0 && (
                   <h3 className="mb-0">My Projects</h3>
                 )}
                 <div>
@@ -91,15 +108,15 @@ const GetAllProjects = () => {
               </div>
             </div>
           </div>
-          {data?.length > 0 &&
-          <input
-            autoFocus
-            placeholder="Enter your search keyword"
-            onChange={(val) => debouncedSearch(val?.target?.value)}
-          />
-          }
+          {data?.length > 7 && (
+            <input
+              autoFocus
+              placeholder="Enter your search keyword"
+              onChange={(val) => debouncedSearch(val?.target?.value)}
+            />
+          )}
           <div className="row items explore-items h-auto mt-3">
-            {loading  ? (
+            {loading ? (
               <Loader />
             ) : (
               <>
@@ -111,7 +128,7 @@ const GetAllProjects = () => {
                         {/* <button onClick={() => showDeleteHandler()}>delete</button> */}
                         <div className="card project_cards">
                           <div className="image-over relative ">
-                            {item.is_nft_mintted !== 1 && (
+                            {item.is_nft_mintted != 1 && (
                               <i
                                 class="fa-sharp fa-solid fa-trash"
                                 onClick={() => showDeleteHandler(item.id)}
@@ -203,6 +220,7 @@ const GetAllProjects = () => {
                   <div className="col-12 col-sm-12 col-lg-12">
                     {window.ethereum?.selectedAddress ? (
                       <h2 className="allproj2">
+                        <Empty />
                         You have no projects yet,{" "}
                         <Link to="/create">create one now</Link>
                       </h2>

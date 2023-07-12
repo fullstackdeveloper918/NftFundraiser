@@ -28,10 +28,11 @@ const ProjNftDetails = () => {
   const dispatch = useDispatch();
   const [modalShowDes, setModalShowDes] = React.useState(false);
   const [projmodalShows, setProjModalShows] = React.useState(false);
+
   const projdetail = useSelector((state) => {
     return state?.projectdetails?.projectdetails;
   });
-
+console.log('projdetail', projdetail)
   useEffect(
     (event) => {
       GetMatic(setmatic);
@@ -49,7 +50,7 @@ const ProjNftDetails = () => {
   return (
     <section className="item-details-area project-nft-si main-proj-detail ">
       <div className="container">
-        {projdetail.type === "1" && (
+        {projdetail.type === "1" && projdetail?.nft_data?.length > 0 && (
           <Space
             direction="vertical"
             style={{
@@ -78,6 +79,20 @@ const ProjNftDetails = () => {
             />
           </Space>
         )}
+        {projdetail.status === "3" && 
+         <Space
+         direction="vertical"
+         style={{
+           width: "100%",
+         }}
+         className="project_type-icon"
+       >
+         <Alert
+         message="You have saved your project as a draft, add NFTs to continue..."
+         type="info"
+         showIcon />
+         </Space>
+        }
         <div className="row justify-content-between p-0">
           <div className="col-12">
             <span className="my-2 p-0 title_main">{projdetail.title}</span>
@@ -365,7 +380,7 @@ const ProjNftDetails = () => {
                           <>
                             <Link
                               to={
-                                x.sold_nft == 0 &&
+                                x.sold_nft === '0' &&
                                 `/nft/details/${x.slug}?project=${slug}`
                               }
                             >
@@ -429,9 +444,10 @@ const ProjNftDetails = () => {
                           <a
                             href="#"
                             className="d-flex justify-content-between align-items-center"
+                            style={{cursor:'false'}}
                           >
                             <h5 className="m-0 pb-2 p-0 text-capitalize">
-                              {x.title.slice(0, 22)}...
+                              {x.title.slice(0, 21)}{x.title.length >20 && '...'}
                             </h5>
                           </a>
                           <div className="d-flex justify-content-between align-items-end mt-1 mb-1 ">

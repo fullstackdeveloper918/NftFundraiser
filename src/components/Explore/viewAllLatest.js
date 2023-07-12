@@ -1,11 +1,8 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useParams, useLocation } from "react-router-dom";
 import Loader from "../Loader/loader";
-import {
-  
-  getPublicLiveProjects,
-} from "../../redux/Actions/projectAction";
+import { getPublicLiveProjects } from "../../redux/Actions/projectAction";
 
 import { debounce } from "lodash";
 
@@ -83,13 +80,13 @@ const ExploreAll = () => {
             </div>
           </div>
         </div>
-        {data?.length > 0 &&
-        <input
-          autoFocus
-          placeholder="Enter your search keyword"
-          onChange={(val) => debouncedSearch(val?.target?.value)}
-        />
-        }
+        {data?.length > 7 && (
+          <input
+            autoFocus
+            placeholder="Enter your search keyword"
+            onChange={(val) => debouncedSearch(val?.target?.value)}
+          />
+        )}
         <div className="row items explore-items h-auto mt-3">
           {loading ? (
             <Loader />
@@ -115,6 +112,22 @@ const ExploreAll = () => {
                               </Link>
                               {/* <div className="image-over">
                                                         <img className="card-img-top" src={item.image} alt="" /> */}
+                              <div className="d-flex justify-content-between edit-buttons nft-price mt-2">
+                                <Link
+                                  to={`/projects/${item.slug}`}
+                                  style={{ color: "white" }}
+                                  className="btn  btn-smaller mt-3 mb-0"
+                                >
+                                  <i className="icon-handbag" />
+                                </Link>
+                                <Link
+                                  to={`/projects/${item.slug}`}
+                                  className="btn  btn-smaller mt-3 ml-2 mb-0"
+                                  style={{ color: "white" }}
+                                >
+                                  <i class="fa-solid fa-share-nodes text-white"></i>
+                                </Link>
+                              </div>
                             </div>
 
                             <div className="card-caption col-12 p-0">
@@ -154,23 +167,6 @@ const ExploreAll = () => {
                                   ) : (
                                     <span>{item.number_of_nft} NFTs</span>
                                   )}
-                                </div>
-                                <div className="d-flex justify-content-between edit-buttons nft-price mt-2">
-                                  <Link
-                                    to={`/projects/${item.slug}`}
-                                    style={{ color: "white" }}
-                                    className="btn  btn-smaller mt-3 mb-0"
-                                  >
-                                    <i className="icon-handbag" />
-                                
-                                  </Link>
-                                  <Link
-                                    to={`/projects/${item.slug}`}
-                                    className="btn  btn-smaller mt-3 ml-2 mb-0"
-                                    style={{ color: "white" }}
-                                  >
-                                    <i class="fa-solid fa-share-nodes text-white"></i>
-                                  </Link>
                                 </div>
                               </div>
                             </div>

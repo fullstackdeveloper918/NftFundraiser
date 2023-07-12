@@ -45,7 +45,10 @@ export const creatorWalletUpdate = async (auth_token, history) => {
 
     return response;
   } catch (error) {
-    if (error?.code?.includes("ERR_NETWORK")) {
+    if (
+      error?.code?.includes("ERR_NETWORK") ||
+      error?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
@@ -84,7 +87,6 @@ export const UpdateWalletAddress = async (role, auth_token = null) => {
 
 export const ConnectWallet = async (
   role,
-  setIsMetamaskopen,
   dispatch,
   history
 ) => {
@@ -186,13 +188,18 @@ export const ConnectWallet = async (
           }
         })
         .catch((error) => {
+          ;
           dispatch(LogsAction(error));
           if (error.code === -32002) {
-            setIsMetamaskopen("Mata-mask request already pending");
-            swal("warning", "Mata-mask request already pending, permissions needed to continue... ", "warning");
+            // setIsMetamaskopen("Mata-mask request already pending");
+            swal(
+              "warning",
+              "Mata-mask request already pending, permissions needed to continue... ",
+              "warning"
+            );
             console.log("Permissions needed to continue.");
           } else {
-            setIsMetamaskopen("User rejected the request");
+            // setIsMetamaskopen("User rejected the request");
             swal("warning", "User rejected the request ", "warning");
           }
         });
@@ -258,7 +265,6 @@ export const UpdateStatus = async ({
   setModalShow,
   history,
 }) => {
-  
   const token = sessionStorage.getItem("authToken");
   try {
     const formData = new FormData();
@@ -284,13 +290,17 @@ export const UpdateStatus = async ({
       formData,
       config
     );
-
   } catch (error) {
-    if (error?.code?.includes("ERR_NETWORK")) {
+    if (
+      error?.code?.includes("ERR_NETWORK") ||
+      error?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
-    swal("error", "Please try again", "error");
+    if (error?.response?.data?.statusCode != 401) {
+      swal("error", "Please try again", "error");
+    }
     setModalShow(false);
     return error;
   }
@@ -321,11 +331,16 @@ const UpdateContract = async (
     );
   } catch (e) {
     setModalShow(false);
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (
+      e?.code?.includes("ERR_NETWORK") ||
+      e?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
-    swal("error", "something went wrong", "error");
+    if (e?.response?.data?.statusCode != 401) {
+      swal("error", "something went wrong", "error");
+    }
   }
 };
 
@@ -374,7 +389,6 @@ export const CreateMetaDataAndMint = async ({
   role,
   history,
 }) => {
-  
   const contract = await new web3.eth.Contract(
     contractABI.abi,
     contractAddress
@@ -391,23 +405,14 @@ export const CreateMetaDataAndMint = async ({
         data: contract.methods.mint(nft_file_content).encodeABI(), //make call to NFT smart contract
       })
       .on("transactionHash", function () {
-        
         setCurrent(1);
       })
       .on("receipt", function (receipt) {
-        
         setCurrent(1);
       })
       .on("confirmation", async (confNumber, receipt) => {
-        if (confNumber == '1') {
-          
-            await UpdateContract(
-              collid,
-              contractAddress,
-              setModalShow,
-              history
-            );
-          
+        if (confNumber == "1") {
+          await UpdateContract(collid, contractAddress, setModalShow, history);
 
           const tokid = web3.utils.toBN(receipt.logs[0].topics[3]);
 
@@ -437,7 +442,6 @@ export const CreateMetaDataAndMint = async ({
         ":white_check_mark: Check out your transaction on Etherscan: <https://ropsten.etherscan.io/tx/>",
     };
   } catch (error) {
-    
     await dispatch(LogsAction(error));
 
     swal("error", "Metamask is busy, please retry ", "error");
@@ -519,7 +523,10 @@ export const updateReffid = async ({
       config
     );
   } catch (error) {
-    if (error?.code?.includes("ERR_NETWORK")) {
+    if (
+      error?.code?.includes("ERR_NETWORK") ||
+      error?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
@@ -612,7 +619,7 @@ export const BuyNft = async ({
         .buyNft(contractAddress, tokenId, memory_clients, memory_amounts)
         .send({
           from: window.ethereum?.selectedAddress,
-          value: web3.utils.toWei(String(totalValue), "ether"),
+          value: web3.utils.toWei('0.03', "ether"),
           gasPrice: web3.utils.toHex(10000000),
           gasLimit: web3.utils.toHex(1000000),
         })
@@ -707,11 +714,17 @@ const UpdateBid = async ({
       onHide(false);
     }
   } catch (error) {
-    if (error?.code?.includes("ERR_NETWORK")) {
+    if (
+      error?.code?.includes("ERR_NETWORK") ||
+      error?.response?.data?.statusCode == 401
+    ) {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
-    swal("error", error?.response?.data?.message, "error");
+    if (error?.response?.data?.statusCode != 401) {
+      swal("error", error?.response?.data?.message, "error");
+    }
+
     return error;
     //
     // console.log("error");

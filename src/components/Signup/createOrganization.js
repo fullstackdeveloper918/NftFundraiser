@@ -184,7 +184,7 @@ const CreateOrganization = ({ formStep, nextFormStep, goBack }) => {
                                                 {...register("url", {
                                                     required: true,
                                                     pattern: {
-                                                        value: /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/,
+                                                        value: /^(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&=&/]*)$/,
 
                                                     }
                                                 })}

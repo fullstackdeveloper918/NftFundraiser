@@ -95,7 +95,7 @@ const ExploreBuyedNfts = () => {
                                                             {/* <span className="ml-2 mb-0">{item.user_data.username}</span> */}
                                                         </div>
                                                         <div className="card-bottom d-flex justify-content-between nft-price">
-                                                            <span><img className="mr-1" src='../img/image14.png' />{Math.round(item.price)} MATIC</span>
+                                                            <span><img className="mr-1" src='../img/image14.png' alt="" />{Math.round(item.price)} MATIC</span>
                                                             {/* {item?.number_of_nft == 1 ? (
                                                                 <span>{item.number_of_nft} NFT</span>
                                                             ) : (

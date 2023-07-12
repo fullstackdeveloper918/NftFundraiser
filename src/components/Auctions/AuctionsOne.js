@@ -4,15 +4,46 @@ import { Link, useLocation } from "react-router-dom";
 import { getPublicLiveProjects } from "../../redux/Actions/projectAction";
 import { useState } from "react";
 import Loader from "../Loader/loader";
-import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
-import "react-horizontal-scrolling-menu/dist/styles.css";
-import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 import { Empty } from "antd";
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const projectTypesMap = {
   LatestProjects: 2,
   RecentCampaigns: 1,
 };
+
+
+
+var settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 4,
+  autoplay:true,
+  slidesToScroll: 1,
+
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
+      },
+    },
+  ],
+};
+
+
+
+
+
+
 const AuctionsOne = ({ type }) => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
@@ -55,47 +86,7 @@ const AuctionsOne = ({ type }) => {
       );
     };
 
-  function LeftArrow() {
-    const { isFirstItemVisible, scrollPrev } =
-      React.useContext(VisibilityContext);
 
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginRight: "10px",
-        }}
-      >
-        <LeftOutlined
-          disabled={isFirstItemVisible}
-          onClick={() => scrollPrev()}
-        />
-      </div>
-    );
-  }
-
-  function RightArrow() {
-    const { isLastItemVisible, scrollNext } =
-      React.useContext(VisibilityContext);
-
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginLeft: "20px",
-        }}
-      >
-        <RightOutlined
-          disabled={isLastItemVisible}
-          onClick={() => scrollNext()}
-        />
-      </div>
-    );
-  }
 
   return (
     <section className="live-auctions-area">
@@ -126,9 +117,12 @@ const AuctionsOne = ({ type }) => {
             {loading ? (
               <Loader height="30px" width="30px" />
             ) : (
-              <>
-                <ScrollMenu LeftArrow={liveProjects?.data?.length > 4 && LeftArrow} RightArrow={liveProjects?.data?.length > 4 && RightArrow}>
-                  
+              <>                                                                                                                              
+                {/* <ScrollMenu
+                  LeftArrow={liveProjects?.data?.length > 4 && LeftArrow}
+                  RightArrow={liveProjects?.data?.length > 4 && RightArrow}
+                > */}
+                 <Slider {...settings}>
                   {liveProjects?.data?.map((item, idx) => {
                     return (
                       <div
@@ -141,6 +135,7 @@ const AuctionsOne = ({ type }) => {
                           maxHeight: "450px",
                           borderRadius: "5px",
                         }}
+                        className="inner-slider-box"
                         tabIndex={0}
                       >
                         <div className="card">
@@ -156,38 +151,7 @@ const AuctionsOne = ({ type }) => {
                                   alt=""
                                 />
                               </Link>
-                            </div>
-                            <div className="card-caption col-12 p-0">
-                              <div className="card-body">
-                                {/* <a> */}
-                                <h5 className="mb-0">
-                                  {item?.title?.slice(0, 34)}...
-                                </h5>
-                                {/* </a> */}
-                                <div className="seller d-flex align-items-center my-3">
-                                  <span>Owned By</span>
-                                  {/* <a> */}
-                                  <h6 className="ml-2 mb-0">
-                                    {item?.user_data.username?.slice(0, 12)}
-                                  </h6>
-                                  {/* </a> */}
-                                </div>
-                                <div className="card-bottom d-flex justify-content-between nft-price">
-                                  <span>
-                                    <img
-                                      className="mr-1"
-                                      src="../img/image14.png"
-                                      alt=""
-                                    />
-                                    {Math.round(item.price)} MATIC
-                                  </span>
-                                  {item?.number_of_nft === '1' ? (
-                                    <span>{item.number_of_nft} NFT</span>
-                                  ) : (
-                                    <span>{item.number_of_nft} NFTs</span>
-                                  )}
-                                </div>
-                                <div className="d-flex justify-content-between edit-buttons nft-price ">
+                              <div className="d-flex justify-content-between edit-buttons nft-price ">
                                   <a
                                     className="btn  btn-smaller mt-3 mb-0"
                                     href={`/projects/${item.slug}`}
@@ -202,24 +166,59 @@ const AuctionsOne = ({ type }) => {
                                     <i class="fa-solid fa-share-nodes text-white"></i>
                                   </a>
                                 </div>
+                            </div>
+                            <div className="card-caption col-12 p-0">
+                              <div className="card-body">
+                                {/* <a> */}
+                                <h5 className="mb-0">
+                                  {item?.title?.slice(0, 34)}{item?.title?.length>34 && "..."}
+                                </h5>
+                                {/* </a> */}
+                                <div className="seller d-flex align-items-center my-3">
+                                  <span>Owned By</span>
+                                  {/* <a> */}
+                                  <h6 className="ml-2 mb-0">
+                                    {`${
+                                      item?.user_data.username
+                                        ? item?.user_data.username?.slice(0, 12)
+                                        : `.....${item?.user_data.wallet_id?.slice(
+                                            35,
+                                            42
+                                          )}`
+                                    }`}
+                                  </h6>
+                                  {/* </a> */}
+                                </div>
+                                <div className="card-bottom d-flex justify-content-between nft-price">
+                                  <span>
+                                    <img
+                                      className="mr-1"
+                                      src="../img/image14.png"
+                                      alt=""
+                                    />
+                                    {Math.round(item.price)} MATIC
+                                  </span>
+                                  {item?.number_of_nft === "1" ? (
+                                    <span>{item.number_of_nft} NFT</span>
+                                  ) : (
+                                    <span>{item.number_of_nft} NFTs</span>
+                                  )}
+                                </div>
+                              
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div
-                          style={{
-                            height: "200px",
-                          }}
-                        />
+                        </div>                     
                       </div>
                     );
                   })}
-                  {liveProjects?.data?.length === 0 && 
-                  <div className="no-data">
+                  {liveProjects?.data?.length === 0 && (
+                    <div className="no-data">
                       <Empty />
                     </div>
-}
-                </ScrollMenu>
+                  )}
+                 </Slider>
+                {/* </ScrollMenu> */}
               </>
             )}
 

@@ -127,13 +127,13 @@ export const GetUserAction = (history) => async (dispatch) => {
 
     dispatch(userDetail(res));
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (e?.code?.includes("ERR_NETWORK") || e?.response?.data?.statusCode == 401)  {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     await dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
-      // swal('error', e.response.data.message, 'error')
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
+      swal('error', e.response.data.message, 'error')
     }
   }
 };
@@ -155,12 +155,12 @@ export const GetauctionNoti = (history) => async (dispatch) => {
     // console.log('userres', res)
     dispatch(userAuction(res));
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (e?.code?.includes("ERR_NETWORK") || e?.response?.data?.statusCode == 401)  {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     await dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -186,12 +186,12 @@ export const CreateOrganizationAction = (params,history) => async (dispatch) => 
 
     dispatch(createOrganizationSuccess(res));
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (e?.code?.includes("ERR_NETWORK") || e?.response?.data?.statusCode == 401)  {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     await dispatch(LogsAction(e));
-    if (e) {
+    if (e && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error").then(function () {
         window.location = "/projectlist";
       });
@@ -235,12 +235,12 @@ export const UpdateOrganizationAction =
 
       // dispatch(createOrganizationSuccess(res));
     } catch (e) {
-      if (e?.code?.includes("ERR_NETWORK")) {
+      if (e?.code?.includes("ERR_NETWORK") || e?.response?.data?.statusCode == 401)  {
         sessionStorage.removeItem("authToken");
         history.push("/wallet-connect");
       }
       await dispatch(LogsAction(e));
-      if (e) {
+      if (e && e?.response?.data?.statusCode != 401) {
         swal("error", e.response.data.message, "error").then(function () {});
       }
     }
@@ -248,8 +248,9 @@ export const UpdateOrganizationAction =
 
 export const CreateOrganizationAfterRoleChange = createAsyncThunk(
   "auth/register",
-  async (params,history, thunkAPI) => {
-    //
+  async (params, thunkAPI,history) => {
+    // setLoading(true)
+    
     try {
       const token = sessionStorage.getItem("authToken");
       const config = {
@@ -269,18 +270,20 @@ export const CreateOrganizationAfterRoleChange = createAsyncThunk(
 
       if (res.status === 200) {
         thunkAPI.dispatch(GetUserAction());
+        // setLoading(false)
         swal("success", res.data.message, "success").then(function () {
           window.location = "/create";
         });
       }
     } catch (e) {
-      if (e?.code?.includes("ERR_NETWORK")) {
+      console.log('erooorrr', e)
+      
+      // setLoading(false)
+      if (e?.code?.includes("ERR_NETWORK") || e?.response?.data?.statusCode == 401 ) {
         sessionStorage.removeItem("authToken");
         history.push("/wallet-connect");
       }
-      if (e) {
-        swal("error", e?.response?.data?.message, "error");
-      }
+      
     }
     //  dispatch(LogsAction(e))
   }
@@ -416,13 +419,13 @@ export const UpdateProfileAction = (formData, props,history) => async (dispatch)
       
     }
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (e?.code?.includes("ERR_NETWORK") || e?.response?.data?.statusCode == 401)  {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
 
     await dispatch(LogsAction(e));
-    if (e?.response?.data.message) {
+    if (e?.response?.data.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -448,12 +451,12 @@ export const CountSet = (history) => async (dispatch) => {
       await dispatch(GetUserAction());
     }
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (e?.code?.includes("ERR_NETWORK") || e?.response?.data?.statusCode == 401)  {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     await dispatch(LogsAction(e));
-    if (e?.response?.data?.message) {
+    if (e?.response?.data?.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -475,12 +478,12 @@ export const AllNoti = (history) => async (dispatch) => {
     //
     await dispatch(allnotification(res));
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (e?.code?.includes("ERR_NETWORK") || e?.response?.data?.statusCode == 401)  {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     await dispatch(LogsAction(e));
-    if (e?.response?.data?.message) {
+    if (e?.response?.data?.message && e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -507,12 +510,12 @@ export const NotiDelete = (id,history) => async (dispatch) => {
       await dispatch(AllNoti(history));
     }
   } catch (e) {
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (e?.code?.includes("ERR_NETWORK") || e?.response?.data?.statusCode == 401)  {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     await dispatch(LogsAction(e));
-    if (e?.response?.data?.message) {
+    if (e?.response?.data?.message &&  e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }
@@ -543,12 +546,12 @@ export const ChangeUserRole = (history, setLoading) => async (dispatch) => {
     }
   } catch (e) {
     setLoading(false);
-    if (e?.code?.includes("ERR_NETWORK")) {
+    if (e?.code?.includes("ERR_NETWORK") || e?.response?.data?.statusCode == 401)  {
       sessionStorage.removeItem("authToken");
       history.push("/wallet-connect");
     }
     await dispatch(LogsAction(e));
-    if (e?.response?.data?.message) {
+    if (e?.response?.data?.message &&  e?.response?.data?.statusCode != 401) {
       swal("error", e.response.data.message, "error");
     }
   }

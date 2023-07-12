@@ -45,7 +45,7 @@ const FundraiserDetail = () => {
     if (userdet?.organization_detail === false && userdet?.role === "3") {
       swal(
         "warning",
-        "You do not have orginazation, Please fill the organization details to continue ...",
+        "Please fill in the organization details to continue...",
         "warning"
       ).then(function () {
         window.location = "/create/organization";

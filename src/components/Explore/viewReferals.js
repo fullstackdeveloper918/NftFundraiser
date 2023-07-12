@@ -59,20 +59,7 @@ const RefralTransdataTable = (props) => {
       dispatch(NftList(nftSlug,null,history));
     }
   };
-  // const HandleNFT = (e) => {
-  //     // setProjSlug(e?.currentTarget?.value)
-  //     // if (projSlug != " ") {
-  //         {projects?.data?.nft_data?.map((key)=>{
 
-  //             set
-  //         })}
-  //         // setNftslug(" ")
-  //     // }
-  //     if (nftSlug != " ") {
-
-  //         dispatch(NftList(nftSlug))
-  //     }
-  // }
   useEffect(() => {
     HandleProj();
   }, [projects]);
@@ -223,7 +210,7 @@ const RefralTransdataTable = (props) => {
                                 {/* <td>{items.referral_amount} </td> */}
                                 <td className="referal">
                                   {items.referral_amount}{" "}
-                                  <img src="../../img/image14.png" />
+                                  <img src="../../img/image14.png" alt=""/>
                                 </td>
                                 <td>
                                   <Link
@@ -256,8 +243,11 @@ const RefralTransdataTable = (props) => {
                       </tbody>
                     </Table>
                     <div className="nothing">
-                      {userdet?.referral_history?.length === '0' && (
-                        <span> No matching records found</span>
+                      {userdet?.referral_history?.length === 0 && (
+                        // <span> No matching records found</span>
+                        <div className="no-data">
+                        <Empty />
+                      </div>
                       )}
                     </div>
                   </Panel>

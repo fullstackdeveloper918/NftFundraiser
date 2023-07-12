@@ -2872,9 +2872,12 @@ h6 {
 .nft-price img {
   width: 30px;
 }
+.image-over {
+  position: relative;
+}
 .edit-buttons {
   position: absolute;
-  top: -230px;
+  top: 0px;
   left: -6px;
   width: 100%;
   justify-content: right !important;
@@ -3667,15 +3670,83 @@ span.minus_icon {
   background-color: white;
   border-radius: 10px;
 }
+.inner-slider-box {
+  padding: 0 15px;
+}
+.inner-slider-box .nft-price span {
+  display: flex;
+  align-items: center;
+}
+.auctions-slides 
+ .slick-dots li {
+    width: 40px;
+    height: 5px;
+    border-radius: 0;
+    background-color: var(--primary-p-color);
+    border: none;
+    opacity: 0.25;
+}
 
+.auctions-slides .slick-dots li.slick-active {
+    background-color: #4528dc;
+    opacity: 1;
+}
+.auctions-slides .slick-dots li button {
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
 
+.auctions-slides .slick-track {
+  display: flex;
+  flex-wrap: wrap;
+}
+.auctions-slides .slick-track .slick-slide > div, .auctions-slides .slick-track .slick-slide > div > div, .auctions-slides .slick-track .slick-slide > div > div .card {height: 100%;}
+.slick-slide
+{
+  height: inherit !important;
+}
+.auctions-slides .slick-dots {
+  bottom: -50px;
+}
+.auctions-slides .slick-arrow {
+  display: none!important;
+}
 
+  .auctions-slides .swiper-container {
+    overflow: inherit;
+}
 
 /* #newww */
+
 .no-data {
-  /* display: flex; */
-  /* justify-content: center; */
-  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.collerror .ant-form-item-control-input {
+  display: none;
+}
+.collerror .ant-form-item-explain-error {
+  margin-top: -15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+.nfterror {
   position: relative;
-  left: 478px;
+  display: flex;
+  bottom: 10%;
+  left: 2%;
+}
+
+.addnftcollerror {
+  position: relative;
+  display: flex;
+  right: 230%;
+}
+
+iframe {
+  pointer-events: auto;
 }

@@ -27,7 +27,7 @@ import { LogsAction } from "../../redux/Actions/logsAction";
 const UploadNft = ({ current, prev }) => {
   const editor = useRef(null);
   const { data, setFormValues } = useFormData();
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState("1");
   const [nft_description, setNft_description] = useState([]);
   const history = useHistory();
   const [modalShow, setModalShow] = React.useState(false);
@@ -35,6 +35,7 @@ const UploadNft = ({ current, prev }) => {
   const [nft_collection_id, setNft_collection_id] = useState({ 0: "1" });
   const [nftFileType, setNFtFileType] = useState();
   const [nftimage, setNftImage] = useState([]);
+  console.log('nftimage', nftimage)
   const [nftwidth, setNftwidth] = useState();
   const [nftHeight, setNftheight] = useState();
   const [size, setSize] = useState();
@@ -43,6 +44,7 @@ const UploadNft = ({ current, prev }) => {
   const [endDate, setEndDate] = useState("");
   const [numberofNfts, setNumberofNfts] = useState("");
   const coll_id = Object.values(nft_collection_id);
+  console.log("coll_id", coll_id);
   const [source, setSource] = useState([]);
   const [sourceType, setSourceType] = useState();
   const [loading, setLoading] = useState(false);
@@ -53,8 +55,11 @@ const UploadNft = ({ current, prev }) => {
   const [projtype, setProjType] = useState("1");
   const [nftName, setNftName] = useState([]);
   const [nftDescription, setNftDescription] = useState([]);
+  const [collectionError, setCollectionError] = useState("");
+  console.log("collectionError", collectionError);
 
   const handleIncrement = () => {
+    
     setCount((prevCount) => prevCount + 1);
   };
 
@@ -89,7 +94,6 @@ const UploadNft = ({ current, prev }) => {
   };
 
   function onHandleClick(index, item) {
-    //
     setNft_collection_id((previ) => {
       previ[index] = item;
       return {
@@ -122,15 +126,14 @@ const UploadNft = ({ current, prev }) => {
 
   const handleUpload = (e, index) => {
     
+    if (coll_id[0] === "0") {
+      setCollectionError("select category");
+    }
     const filetype = e.target.files[0].type;
     setNFtExtension(filetype);
 
     setNftImage((prevState) => {
-    
-
-        return [...nftimage, e?.target?.files[0]];
-    
-     
+      return [ e?.target?.files[0]];
     });
 
     var fr = new FileReader();
@@ -206,7 +209,7 @@ const UploadNft = ({ current, prev }) => {
     try {
       setLoading(true);
 
-      const imagesRes = await uploadNFT(nftimage, dispatch,null,history);
+      const imagesRes = await uploadNFT(nftimage, dispatch, null, history);
 
       const addedImage = imagesRes?.data?.data.map(
         (x) => ipfsBaseUrl + x?.image_hash
@@ -401,6 +404,7 @@ const UploadNft = ({ current, prev }) => {
                                 <img
                                   src={URL.createObjectURL(source[index].file)}
                                   className="images-Collapse"
+                                  alt=""
                                 />
                               </div>
                             ) : (
@@ -412,6 +416,7 @@ const UploadNft = ({ current, prev }) => {
                                     window.URL.createObjectURL(preview[index])
                                   }
                                   className="images-Collapse"
+                                  alt=""
                                 />
                               </div>
                             ),
@@ -482,20 +487,37 @@ const UploadNft = ({ current, prev }) => {
                                 </div>
                               </div>
 
-                              <div className="col-md-1 col-12 nft-remove">
+                              {/* <div className="col-md-1 col-12 nft-remove">
                                 <MinusCircleOutlined
                                   onClick={(e) => {
                                     remove(name);
                                     handleDecrement(e);
                                   }}
                                 />
-                              </div>
+                              </div> */}
                               {/* </div> */}
+
                               <div className="col-12">
                                 <label className="mt-2 mb-3">
                                   Choose Collection
                                 </label>
                               </div>
+                              {coll_id[0] === "0" && (
+                                  <div className="collerror">
+                                    <Form.Item
+                                      // {...restField}
+                                      name={[name, "coll_id"]}
+                                      rules={[
+                                        {
+                                          required:
+                                            coll_id[0] === "0" ? true : false,
+                                          message:
+                                            "select or create collection",
+                                        },
+                                      ]}
+                                    />
+                                  </div>
+                                )}
                               <div className="d-flex flex-wrap gap-10 col-12">
                                 {col?.map((item, idx) => (
                                   <div
@@ -523,6 +545,7 @@ const UploadNft = ({ current, prev }) => {
                                     {/* </Form.Item> */}
                                   </div>
                                 ))}
+
                                 <div className="col-md-6 col-lg-3 col-12">
                                   {/* <div className="col-24"> */}
 
@@ -547,6 +570,9 @@ const UploadNft = ({ current, prev }) => {
                                     </div>
                                   </div>
                                 </div>
+
+                              
+                                {/* {collectionError && collectionError} */}
                                 <div className="col-12">
                                   <div className="col-lg-6 col-12 uploadnftpopup p-0 mb-4">
                                     <label className="mt-3">Upload NFT</label>
@@ -749,6 +775,23 @@ const UploadNft = ({ current, prev }) => {
                                     </div>
                                   </div>
                                 </div>
+                                
+                              {nftimage?.length === 0 && (
+                                  <div className="nfterror">
+                                    <Form.Item
+                                      // {...restField}
+                                      name={[name, "nft_image"]}
+                                      rules={[
+                                        {
+                                          required:
+                                          nftimage?.length === 0  ? true : false,
+                                          message:
+                                            "select NFT",
+                                        },
+                                      ]}
+                                    />
+                                  </div>
+                                )}
                               </div>
                             </div>
                           </Fragment>
@@ -757,11 +800,11 @@ const UploadNft = ({ current, prev }) => {
                     ))}
 
                     {/* {!((data?.number_of_nft === count)) ? */}
-                    {sourceType && (
+                    {/* {sourceType && (
                       <Form.Item>
                         <Tooltip
                           title={
-                            count === '1'
+                            count === "1"
                               ? "Switch to Campaign for multiple NFTs"
                               : "Add more NFTs"
                           }
@@ -771,7 +814,7 @@ const UploadNft = ({ current, prev }) => {
                             type="dashed"
                             onClick={(e) => {
                               {
-                                count === '1' && setProjModalShow(true);
+                                count === "1" && setProjModalShow(true);
                               }
 
                               // {
@@ -796,7 +839,7 @@ const UploadNft = ({ current, prev }) => {
                           </Button>
                         </Tooltip>
                       </Form.Item>
-                    )}
+                    )} */}
                     {/* : null} */}
                   </>
                 </>

@@ -68,7 +68,7 @@ function ProjDetailPopup(props) {
   const states = useSelector((state) => {
     return state.countries.states;
   });
-  const [nftCount, setNFTCount] = useState(1);
+  const [nftCount, setNFTCount] = useState();
 
   useEffect(() => {
     dispatch(CategoriesAction());
@@ -139,6 +139,7 @@ function ProjDetailPopup(props) {
       setType(projdetail.type);
       setCountry(projdetail.country);
       setDescription(projdetail.description);
+      setNFTCount(projdetail.number_of_nft);
       setValue("image", projdetail.image);
       const formData = new FormData();
       formData.append("country_id", projdetail.country);
@@ -157,7 +158,7 @@ function ProjDetailPopup(props) {
     formData.append("city", data.city);
     formData.append("address", data.address);
     formData.append("number_of_nft", data.number_of_nft);
-    if (data?.type === '1') {
+    if (data?.type === "1") {
       formData.append("start_date", "");
       formData.append("end_date", "");
     } else {
@@ -166,7 +167,7 @@ function ProjDetailPopup(props) {
     }
     formData.append("type", data.type);
     formData.append("category_id", data.category_id);
-    dispatch(UpdateProject(props, formData,history));
+    dispatch(UpdateProject(props, formData, history));
   };
 
   return (
@@ -223,9 +224,20 @@ function ProjDetailPopup(props) {
                   className="form-control"
                   name="address"
                   placeholder="Web Address"
-                  {...register("address", { required: true })}
+                  {...register("address", {
+                    required: true,
+                    pattern: {
+                      value:
+                        /^(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&=&/]*)$/,
+                    },
+                  })}
                   aria-invalid={errors.address ? "true" : "false"}
                 />
+                {errors.address && errors.address?.type === "pattern" && (
+                  <p style={{ color: "red" }} role="alert">
+                    Not valid URL
+                  </p>
+                )}
                 {errors.address?.type === "required" && (
                   <p style={{ color: "red" }} role="alert">
                     Address is required
@@ -355,19 +367,20 @@ function ProjDetailPopup(props) {
                 )}
               </div>
             </div>
-          
+
             <div className="col-12 col-md-6">
               <div className="form-group number-input mt-3">
                 <label>Number of NFTs</label>
                 <div class="position-relative">
-                  <span
+                  {/* <span
                     className="plus_icon"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setNFTCount(Number(nftCount) + 1);
                     }}
                   >
                     <i className="fa fa-plus" aria-hidden="true"></i>
-                  </span>
+                  </span> */}
                   <input
                     value={nftCount}
                     type="number"
@@ -382,7 +395,7 @@ function ProjDetailPopup(props) {
                     aria-invalid={errors.number_of_nft ? "true" : "false"}
                     onChange={(e) => setNFTCount(e.target.value)}
                   />
-                  <span
+                  {/* <span
                     className="minus_icon"
                     onClick={() => {
                       if (Number(nftCount) > 1) {
@@ -393,7 +406,7 @@ function ProjDetailPopup(props) {
                     }}
                   >
                     <i className="fa fa-minus" aria-hidden="true"></i>
-                  </span>
+                  </span> */}
                 </div>
                 {/* {errors.number_of_nft?.message && <p>{errors.number_of_nft.message}</p>} */}
                 {errors.number_of_nft?.type === "required" && (
@@ -403,7 +416,7 @@ function ProjDetailPopup(props) {
                 )}
               </div>
             </div>
-            {projdetail.type === '2' && (
+            {projdetail.type === "2" && (
               <>
                 <div className="col-12 col-md-6">
                   <div className="form-group">

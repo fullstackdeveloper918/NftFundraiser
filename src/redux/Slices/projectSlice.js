@@ -16,6 +16,7 @@ const projectSlice = createSlice({
         categories: [],
         collections: [],
         getcollections: [],
+        getTitleRes:[],
         getcollectiondetails: [],
         collectiondetails: [],
         getSocialmediaIcons: [],
@@ -48,6 +49,10 @@ const projectSlice = createSlice({
         getCollections: (state, action) => {
             // 
             state.getcollections = action?.payload?.data?.data;
+        },
+        getTitelResponse: (state, action) => {
+            // 
+            state.getTitleRes = action?.payload?.data?.data;
         },
         getSocialmediaIcons: (state, action) => {
             // 
@@ -167,6 +172,7 @@ export const {
     getNftwolDetails,
     getfundprojdetails,
     Nftres,
+    getTitelResponse,
     updatebanner,
     getmostprojactivity,
     getNftwolDetailsPaymentflow,

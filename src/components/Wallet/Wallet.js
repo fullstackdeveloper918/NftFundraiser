@@ -19,13 +19,11 @@ const data = {
 
 const Wallet = () => {
     const dispatch = useDispatch()
-   const [isMetamaskopen, setIsMetamaskopen] = useState("")
    const history = useHistory()
-   console.log('isMetamaskopen', isMetamaskopen)
   
    
     const handleConnect = async () => {
-      await ConnectWallet("CREATOR",setIsMetamaskopen, dispatch,history)
+      await ConnectWallet("CREATOR", dispatch,history)
        
     }
 
